@@ -32,8 +32,8 @@
 
 - (void)startUpdates
 {
-    data = [NSMutableString stringWithCapacity:3192115]; // 3192000 + 115 bytes for to hours of data and 2 hours overhead
-    [data appendFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
+    data = [NSMutableString stringWithCapacity:191520141]; // 191520000 + 141 bytes for to hours of data and 2 hours overhead (one hour approx. 45mb)
+    [data appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
      @"timestamp",
      @"userAccX",
      @"userAccY",
