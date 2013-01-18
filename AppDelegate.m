@@ -8,10 +8,28 @@
 
 #import "AppDelegate.h"
 
+@interface AppDelegate ()
+{
+    CMMotionManager *motionmanager;
+}
+@end
+
 @implementation AppDelegate
+
+- (CMMotionManager *)sharedManager
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        motionmanager = [[CMMotionManager alloc] init];
+    });
+    return motionmanager;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Disable Idle Timer
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    
     // Override point for customization after application launch.
     return YES;
 }
