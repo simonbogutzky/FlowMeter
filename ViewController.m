@@ -107,10 +107,18 @@
     // Save the data
     NSError *error = nil;
     if([data writeToFile:savePath atomically:YES encoding:NSUTF8StringEncoding error:&error]) {
-        NSLog(@"Saved the data");
-        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Great job!", @"Great job!")
+                                                        message:NSLocalizedString(@"Data has been saved." , @"Data has been saved.")
+                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+                                              otherButtonTitles:nil];
+        [alert show];
     } else {
-        NSLog(@"Did not save the date");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Damn!", @"Damn!")
+                                                        message:NSLocalizedString(@"Data has not been saved." , @"Data has not been saved.")
+                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+                                              otherButtonTitles:nil];
+        [alert show];
+        
         if (error != nil) {
             NSLog(@"Error: %@", error);
         }
