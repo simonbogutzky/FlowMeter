@@ -30,6 +30,14 @@
     // Disable Idle Timer
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
+#define TESTING 1
+#ifdef TESTING
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+#endif
+    
+    // TestFlight takeoff
+    [TestFlight takeOff:@"4de0efd2c948ed804b7286159f49d6e8_ODE3NTYyMDEyLTA0LTE3IDA4OjM0OjQzLjU5MDYyNQ"];
+    
     // Override point for customization after application launch.
     return YES;
 }

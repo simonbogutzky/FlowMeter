@@ -52,7 +52,7 @@
     CMMotionManager *mManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedManager];
     
     // TODO: Check Attitude Reference Frame and set it right
-    NSLog(@"# Attitude Reference Frame: %d", mManager.attitudeReferenceFrame);
+    // NSLog(@"# Attitude Reference Frame: %d", mManager.attitudeReferenceFrame);
     
     if ([mManager isDeviceMotionAvailable] == YES) {
         [mManager setDeviceMotionUpdateInterval:updateInterval];
@@ -96,12 +96,14 @@
     
     // Create a date string of the current date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyyMMdd_HHmmss"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    [dateFormatter setDateFormat:@"HH-mm-ss"];
+    NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
     
     // Create the path, where the data should be saved
     NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *pathComponent = [NSString stringWithFormat:@"%@.csv", dateString];
+    NSString *pathComponent = [NSString stringWithFormat:@"%@-t%@.csv", dateString, timeString];
     NSString *savePath = [rootPath stringByAppendingPathComponent:pathComponent];
     
     // Save the data
@@ -111,6 +113,7 @@
                                                         message:NSLocalizedString(@"Data has been saved." , @"Data has been saved.")
                                                        delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
                                               otherButtonTitles:nil];
+        NSLog(@"# Data has been saved");
         [alert show];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Damn!", @"Damn!")
@@ -120,7 +123,7 @@
         [alert show];
         
         if (error != nil) {
-            NSLog(@"Error: %@", error);
+            NSLog(@"# Error: %@", error);
         }
     }
 }
