@@ -13,6 +13,8 @@
 {
     NSMutableString *data;
     BOOL isCollection;
+    NSInputStream *inputStream;
+    NSOutputStream *outputStream;
 }
 @end
 
@@ -21,6 +23,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initNetworkCommunication];
+    [self sendMessage];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -154,6 +158,34 @@
         [self setScreenBrightnessInPercent:[NSNumber numberWithDouble:0.5]];
     }
     
+}
+
+- (void)sendMessage {
+    NSString *response  = [NSString stringWithFormat:@"iam:%@", @"Simon"];
+    NSData *rdata = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
+	[outputStream write:[rdata bytes] maxLength:[rdata length]];
+	
+    
+    response  = [NSString stringWithFormat:@"msg:%@", @"Hallo, ich bin da"];
+    rdata = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
+	[outputStream write:[rdata bytes] maxLength:[rdata length]];
+}
+
+- (void)initNetworkCommunication {
+    CFReadStreamRef readStream;
+    CFWriteStreamRef writeStream;
+    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"169.254.130.226", 8020, &readStream, &writeStream); 
+    inputStream = (__bridge NSInputStream *)readStream;
+    outputStream = (__bridge NSOutputStream *)writeStream;
+    
+    [inputStream setDelegate:self];
+    [outputStream setDelegate:self];
+    
+    [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    
+    [inputStream open];
+    [outputStream open];
 }
 
 @end
