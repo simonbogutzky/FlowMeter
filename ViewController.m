@@ -49,14 +49,14 @@
      @"attPitch"
      ];
     NSTimeInterval updateInterval = 0.01; // 100hz
-    CMMotionManager *mManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedManager];
+    CMMotionManager *motionManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedMotionManager];
     
     // TODO: Check Attitude Reference Frame and set it right
     // NSLog(@"# Attitude Reference Frame: %d", mManager.attitudeReferenceFrame);
     
-    if ([mManager isDeviceMotionAvailable] == YES) {
-        [mManager setDeviceMotionUpdateInterval:updateInterval];
-        [mManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
+    if ([motionManager isDeviceMotionAvailable] == YES) {
+        [motionManager setDeviceMotionUpdateInterval:updateInterval];
+        [motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
             if (error == nil) {
                 [data appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
                  deviceMotion.timestamp,
@@ -78,17 +78,24 @@
             }
         }];
     }
+    
+    CLLocationManager *locationManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedLocationManager];
+    [locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+    [locationManager startUpdatingLocation];
 }
 
 - (void)stopUpdates
 {
-    CMMotionManager *mManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedManager];
+    CMMotionManager *motionManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedMotionManager];
     
-    if ([mManager isDeviceMotionActive] == YES) {
-        [mManager stopDeviceMotionUpdates];
+    if ([motionManager isDeviceMotionActive] == YES) {
+        [motionManager stopDeviceMotionUpdates];
     }
     
     [self saveData];
+    
+    CLLocationManager *locationManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedLocationManager];
+    [locationManager stopUpdatingLocation];
 }
 
 - (void)saveData
@@ -128,12 +135,6 @@
     }
 }
 
-- (void)setScreenBrightnessInPercent:(NSNumber *)percent
-{
-    UIScreen *mainScreen = [UIScreen mainScreen];
-    mainScreen.brightness = [percent doubleValue];
-}
-
 - (IBAction)startStopCollection:(id)sender
 {
     isCollection = !isCollection;
@@ -143,15 +144,9 @@
     if (isCollection) {
         [startStopCollectionButton setTitle:@"stop" forState:0];
         [self startUpdates];
-        
-        [self performSelector:@selector(setScreenBrightnessInPercent:) withObject:[NSNumber numberWithDouble:0.1] afterDelay:0.5];
-        
     } else {
         [startStopCollectionButton setTitle:@"start" forState:0];
         [self stopUpdates];
-        
-        //TODO: Do it when user touches the screen
-        [self setScreenBrightnessInPercent:[NSNumber numberWithDouble:0.5]];
     }
     
 }
