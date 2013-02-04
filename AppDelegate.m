@@ -10,25 +10,33 @@
 
 @interface AppDelegate ()
 {
-    CMMotionManager *motionmanager;
+    CMMotionManager *motionManager;
+    CLLocationManager *locationManager;
 }
 @end
 
 @implementation AppDelegate
 
-- (CMMotionManager *)sharedManager
+- (CMMotionManager *)sharedMotionManager
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        motionmanager = [[CMMotionManager alloc] init];
+        motionManager = [[CMMotionManager alloc] init];
     });
-    return motionmanager;
+    return motionManager;
+}
+
+- (CLLocationManager *)sharedLocationManager
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        locationManager = [[CLLocationManager alloc] init];
+    });
+    return locationManager;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Disable Idle Timer
-    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
 #define TESTING 1
 #ifdef TESTING
