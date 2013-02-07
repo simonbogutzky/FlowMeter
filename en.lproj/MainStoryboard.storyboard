@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C2034" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,8 +14,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TV8-ty-RU8">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="iXA-aX-8pQ"/>
-                                    <constraint firstAttribute="width" constant="64" id="iYK-go-Awj"/>
+                                    <constraint firstAttribute="height" constant="64" id="Btn-t8-dVh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="start">
@@ -29,13 +28,75 @@
                                     <action selector="startStopCollection:" destination="2" eventType="touchUpInside" id="uAW-1Z-AST"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ou-d5-ofP">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="0jm-na-e4y"/>
+                                    <constraint firstAttribute="width" constant="125" id="7Pn-0a-t92"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="connect">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="connectDisconnect:" destination="2" eventType="touchUpInside" id="oP8-iq-A8e"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KSc-qy-7vq">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="UCT-WJ-Kj4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2" id="NRZ-zV-NnV"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kuJ-dA-V3f">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="193" id="JOe-un-dod"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2" id="Sk1-Da-AqP"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Host" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BvH-HG-qvJ">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Port" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vhz-MA-LaB">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="TV8-ty-RU8" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="AvC-Od-TkD"/>
+                            <constraint firstItem="KSc-qy-7vq" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" type="default" id="2M4-de-Oni"/>
+                            <constraint firstItem="Vhz-MA-LaB" firstAttribute="leading" secondItem="BvH-HG-qvJ" secondAttribute="leading" type="default" id="2gs-hz-630"/>
+                            <constraint firstItem="TV8-ty-RU8" firstAttribute="top" secondItem="0Ou-d5-ofP" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="5Hc-Yp-yaV"/>
+                            <constraint firstItem="kuJ-dA-V3f" firstAttribute="top" secondItem="BvH-HG-qvJ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="73g-KD-MlZ"/>
+                            <constraint firstItem="KSc-qy-7vq" firstAttribute="top" secondItem="kuJ-dA-V3f" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Kcu-eq-7MF"/>
+                            <constraint firstItem="0Ou-d5-ofP" firstAttribute="centerX" secondItem="Vhz-MA-LaB" secondAttribute="centerX" type="default" id="LnT-D0-oFv"/>
+                            <constraint firstItem="TV8-ty-RU8" firstAttribute="trailing" secondItem="0Ou-d5-ofP" secondAttribute="trailing" type="default" id="OQr-CT-F0g"/>
+                            <constraint firstItem="Vhz-MA-LaB" firstAttribute="top" secondItem="KSc-qy-7vq" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="UOP-1e-nQg"/>
+                            <constraint firstItem="KSc-qy-7vq" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="ZB6-X8-BzD"/>
                             <constraint firstAttribute="bottom" secondItem="TV8-ty-RU8" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="dg2-Xr-ZwQ"/>
+                            <constraint firstItem="Vhz-MA-LaB" firstAttribute="centerX" secondItem="KSc-qy-7vq" secondAttribute="centerX" type="default" id="gKM-xC-Kt2"/>
+                            <constraint firstItem="0Ou-d5-ofP" firstAttribute="leading" secondItem="TV8-ty-RU8" secondAttribute="leading" type="default" id="o2j-n7-2TD"/>
+                            <constraint firstItem="BvH-HG-qvJ" firstAttribute="centerX" secondItem="kuJ-dA-V3f" secondAttribute="centerX" type="default" id="zJM-Av-aXG"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="hostInputField" destination="kuJ-dA-V3f" id="Dap-qn-3ED"/>
+                        <outlet property="portInputField" destination="KSc-qy-7vq" id="YeZ-ZK-QgV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
@@ -48,8 +109,10 @@
         <class className="ViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
             <relationships>
+                <relationship kind="action" name="connectDisconnect:"/>
                 <relationship kind="action" name="startStopCollection:"/>
-                <relationship kind="outlet" name="startStopCollectionButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="hostInputField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="portInputField" candidateClass="UITextField"/>
             </relationships>
         </class>
     </classes>
