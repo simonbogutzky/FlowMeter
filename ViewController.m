@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "AppDelegate.h"
+#import "CMDeviceMotion+TransformToReferenceFrame.h"
 
 @interface ViewController ()
 {
@@ -33,11 +34,14 @@
 - (void)startUpdates
 {
     data = [NSMutableString stringWithCapacity:191520141]; // 191520000 + 141 bytes for to hours of data and 2 hours overhead (one hour approx. 45mb)
-    [data appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
+    [data appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
      @"timestamp",
      @"userAccX",
      @"userAccY",
      @"userAccZ",
+     @"userWAccX",
+     @"userWAccY",
+     @"userWAccZ",
      @"gravityX",
      @"gravityY",
      @"gravityZ",
@@ -51,18 +55,18 @@
     NSTimeInterval updateInterval = 0.01; // 100hz
     CMMotionManager *motionManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedMotionManager];
     
-    // TODO: Check Attitude Reference Frame and set it right
-    // NSLog(@"# Attitude Reference Frame: %d", mManager.attitudeReferenceFrame);
-    
     if ([motionManager isDeviceMotionAvailable] == YES) {
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
-        [motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
+        [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
             if (error == nil) {
-                [data appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
+                [data appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
                  deviceMotion.timestamp,
                  deviceMotion.userAcceleration.x,
                  deviceMotion.userAcceleration.y,
                  deviceMotion.userAcceleration.z,
+                 deviceMotion.userAccelerationInReferenceFrame.x,
+                 deviceMotion.userAccelerationInReferenceFrame.y,
+                 deviceMotion.userAccelerationInReferenceFrame.z,
                  deviceMotion.gravity.x,
                  deviceMotion.gravity.y,
                  deviceMotion.gravity.z,
@@ -73,6 +77,7 @@
                  deviceMotion.attitude.roll,
                  deviceMotion.attitude.pitch
                  ];
+                //NSLog(@"%.2f", deviceMotion.attitude.yaw);
             } else {
                 [data appendFormat:@"NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN\n"];
             }
