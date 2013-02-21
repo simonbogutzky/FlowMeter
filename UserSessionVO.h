@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CMDeviceMotion+TransformToReferenceFrame.h"
 
 @interface UserSessionVO : NSObject 
 
@@ -14,14 +15,13 @@
 @property (nonatomic, strong) NSDate *created;
 @property (nonatomic, strong) NSDate *modified;
 @property (nonatomic, strong) NSString *udid;
+@property (nonatomic, strong) NSMutableString *data;
 
 
 - (NSString *)xmlRepresentation;
 - (void)setWithPropertyDictionary:(NSDictionary *)propertyDictionary;
-- (void)seriliazeAsXML;
-- (NSData *)seriliazeAndZipAsXML;
-- (NSString*)textRepresentation;
-- (NSData *)seriliazeAndZipAsText;
-- (void)seriliazeAsText;
+- (void)appendMotionData:(CMDeviceMotion *)deviceMotion;
+- (NSData *)seriliazeAndZip;
+
 
 @end

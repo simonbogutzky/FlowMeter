@@ -16,8 +16,52 @@
 {
 	self = [super init];
 	if (self != nil) {
+        _data = [NSMutableString stringWithCapacity:191520141]; // 191520000 + 141 bytes for to hours of data and 2 hours overhead (one hour approx. 45mb)
+        [_data appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
+         @"timestamp",
+         @"userAccX",
+         @"userAccY",
+         @"userAccZ",
+         @"userWAccX",
+         @"userWAccY",
+         @"userWAccZ",
+         @"gravityX",
+         @"gravityY",
+         @"gravityZ",
+         @"rotRateX",
+         @"rotRateY",
+         @"rotRateZ",
+         @"attYaw",
+         @"attRoll",
+         @"attPitch"
+         ];
 	}
 	return self;
+}
+
+- (void)appendMotionData:(CMDeviceMotion *)deviceMotion {
+    if (deviceMotion != nil) {
+        [_data appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
+         deviceMotion.timestamp,
+         deviceMotion.userAcceleration.x,
+         deviceMotion.userAcceleration.y,
+         deviceMotion.userAcceleration.z,
+         deviceMotion.userAccelerationInReferenceFrame.x,
+         deviceMotion.userAccelerationInReferenceFrame.y,
+         deviceMotion.userAccelerationInReferenceFrame.z,
+         deviceMotion.gravity.x,
+         deviceMotion.gravity.y,
+         deviceMotion.gravity.z,
+         deviceMotion.rotationRate.x,
+         deviceMotion.rotationRate.y,
+         deviceMotion.rotationRate.z,
+         deviceMotion.attitude.yaw,
+         deviceMotion.attitude.roll,
+         deviceMotion.attitude.pitch
+         ];
+    } else {
+        [_data appendFormat:@"NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN\n"];
+    }
 }
 
 - (NSString *)xmlRepresentation
@@ -87,80 +131,29 @@
     }
 }
 
-//--
-
-- (void)seriliazeAsXML
+- (NSData *)seriliazeAndZip
 {
+    // Create a date string of the current date
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    [dateFormatter setDateFormat:@"HH-mm-ss"];
+    NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
     
-//    NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-//    NSString *pathComponent = [NSString stringWithFormat:@"user_session_%06lu.xml", [self.objectId unsignedLongValue]];
-//    NSString *savePath = [rootPath stringByAppendingPathComponent:pathComponent];
-//    [[self xmlRepresentationWithInnerXML:YES] writeToFile:savePath 
-//                 atomically:NO 
-//                   encoding:NSStringEncodingConversionAllowLossy 
-//                      error:nil];
-}
-
-- (NSData *)seriliazeAndZipAsXML
-{
+    // Create the path, where the data should be saved
+    NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString *pathComponent = [NSString stringWithFormat:@"%@-t%@.csv.zip", dateString, timeString];
+    NSString *savePath = [rootPath stringByAppendingPathComponent:pathComponent];
     
-//    NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-//    NSString *pathComponent = [NSString stringWithFormat:@"user_session_%06lu.xml.zip", [self.objectId unsignedLongValue]];
-//    NSString *savePath = [rootPath stringByAppendingPathComponent:pathComponent];
-//    
-//    ZipFile *zipFile = [[ZipFile alloc] initWithFileName:savePath mode:ZipFileModeCreate];
-//    ZipWriteStream *stream = [zipFile writeFileInZipWithName:[NSString stringWithFormat:@"user_session_%06lu.xml", [self.objectId unsignedLongValue]] compressionLevel:ZipCompressionLevelDefault];
-//    
-//    [stream writeData:[[self xmlRepresentationWithInnerXML:YES] dataUsingEncoding:NSUTF8StringEncoding]];
-//    
-//    [stream finishedWriting];
-//    [zipFile close];
-//    
-//    return [[NSFileManager defaultManager] contentsAtPath:savePath];
-}
-
-- (void)seriliazeAsText
-{
-//    NSDateFormatter *formatter;
-//    NSString        *dateString;
-//    
-//    formatter = [[NSDateFormatter alloc] init];
-//    [formatter setDateFormat:@"yyyyMMdd_HHmmss"];
-//    
-//    dateString = [formatter stringFromDate:[NSDate date]]; 
-//    NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-//    NSString *pathComponent = [NSString stringWithFormat:@"%@_%@.txt", dateString, self.description];
-//    NSString *savePath = [rootPath stringByAppendingPathComponent:pathComponent];
-//    [[self xmlRepresentationWithInnerXML:YES] writeToFile:savePath
-//                                               atomically:NO
-//                                                 encoding:NSStringEncodingConversionAllowLossy
-//                                                    error:nil];
-}
-
-- (NSData *)seriliazeAndZipAsText
-{
-//    NSDateFormatter *formatter;
-//    NSString        *dateString;
-//    
-//    formatter = [[NSDateFormatter alloc] init];
-//    [formatter setDateFormat:@"yyyyMMdd_HHmmss"];
-//    
-//    dateString = [formatter stringFromDate:[NSDate date]];
-//    
-//    
-//    NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-//    NSString *pathComponent = [NSString stringWithFormat:@"%@_%@.txt.zip", dateString, self.description];
-//    NSString *savePath = [rootPath stringByAppendingPathComponent:pathComponent];
-//    
-//    ZipFile *zipFile = [[ZipFile alloc] initWithFileName:savePath mode:ZipFileModeCreate];
-//    ZipWriteStream *stream = [zipFile writeFileInZipWithName:[NSString stringWithFormat:@"%@_%@.txt", dateString, self.description] compressionLevel:ZipCompressionLevelDefault];
-//    
-//    [stream writeData:[[self textRepresentation] dataUsingEncoding:NSUTF8StringEncoding]];
-//    
-//    [stream finishedWriting];
-//    [zipFile close];
-//    
-//    return [[NSFileManager defaultManager] contentsAtPath:savePath];
+    // Create ZIP file
+    ZipFile *zipFile = [[ZipFile alloc] initWithFileName:savePath mode:ZipFileModeCreate];
+    ZipWriteStream *stream = [zipFile writeFileInZipWithName:[NSString stringWithFormat:@"%@-t%@.csv", dateString, timeString]compressionLevel:ZipCompressionLevelDefault];
+    [stream writeData:[_data dataUsingEncoding:NSUTF8StringEncoding]];
+    [stream finishedWriting];
+    [zipFile close];
+    
+    // Compressed data
+    return [[NSFileManager defaultManager] contentsAtPath:savePath];
 }
 
 
