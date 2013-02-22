@@ -10,13 +10,33 @@
 #import "Zipfile.h"
 #import "ZipWriteStream.h"
 
+@interface UserSessionVO ()
+{
+    unsigned long dataCount;
+    unsigned int fileCount;
+    UserSessionVO *userSession;
+    NSString *dateString;
+    NSString *timeString;
+}
+@end
+
 @implementation UserSessionVO
 
 - (id)init
 {
 	self = [super init];
 	if (self != nil) {
-        _data = [NSMutableString stringWithCapacity:191520141]; // 191520000 + 141 bytes for to hours of data and 2 hours overhead (one hour approx. 45mb)
+        dataCount = 0;
+        fileCount = 1;
+        
+        // Create a date string of the current date
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        dateString = [dateFormatter stringFromDate:[NSDate date]];
+        [dateFormatter setDateFormat:@"HH-mm-ss"];
+        timeString = [dateFormatter stringFromDate:[NSDate date]];
+        
+        _data = [NSMutableString stringWithCapacity:1048576]; // 191520000 + 141 bytes for to hours of data and 2 hours overhead (one hour approx. 45mb)
         [_data appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
          @"timestamp",
          @"userAccX",
@@ -40,6 +60,11 @@
 }
 
 - (void)appendMotionData:(CMDeviceMotion *)deviceMotion {
+    if (dataCount != 0 && dataCount % 6721 == 0) {
+        [self seriliazeAndZip];
+        _data = [NSMutableString stringWithCapacity:1048576];
+    }
+    
     if (deviceMotion != nil) {
         [_data appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
          deviceMotion.timestamp,
@@ -62,6 +87,8 @@
     } else {
         [_data appendFormat:@"NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN\n"];
     }
+    
+    dataCount++;
 }
 
 - (NSString *)xmlRepresentation
@@ -133,27 +160,24 @@
 
 - (NSData *)seriliazeAndZip
 {
-    // Create a date string of the current date
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-    [dateFormatter setDateFormat:@"HH-mm-ss"];
-    NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
-    
+
     // Create the path, where the data should be saved
     NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *pathComponent = [NSString stringWithFormat:@"%@-t%@.csv.zip", dateString, timeString];
+    NSString *pathComponent = [NSString stringWithFormat:@"%@-t%@-%03d.csv.zip", dateString, timeString, fileCount];
     NSString *savePath = [rootPath stringByAppendingPathComponent:pathComponent];
     
     // Create ZIP file
     ZipFile *zipFile = [[ZipFile alloc] initWithFileName:savePath mode:ZipFileModeCreate];
-    ZipWriteStream *stream = [zipFile writeFileInZipWithName:[NSString stringWithFormat:@"%@-t%@.csv", dateString, timeString]compressionLevel:ZipCompressionLevelDefault];
+    ZipWriteStream *stream = [zipFile writeFileInZipWithName:[NSString stringWithFormat:@"%@-t%@-%03d.csv", dateString, timeString, fileCount] compressionLevel:ZipCompressionLevelDefault];
     [stream writeData:[_data dataUsingEncoding:NSUTF8StringEncoding]];
     [stream finishedWriting];
     [zipFile close];
     
+    fileCount++;
+    
     // Compressed data
     return [[NSFileManager defaultManager] contentsAtPath:savePath];
+    
 }
 
 

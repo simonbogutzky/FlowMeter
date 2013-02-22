@@ -38,7 +38,7 @@
 {
     userSession = [[UserSessionVO alloc] init];
     userSession.udid = [[UIDevice currentDevice] uniqueIdentifier];
-    [self addUserSession];
+//    [self addUserSession];
     
     NSTimeInterval updateInterval = 0.01; // 100hz
     CMMotionManager *motionManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedMotionManager];
