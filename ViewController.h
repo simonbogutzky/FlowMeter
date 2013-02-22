@@ -9,7 +9,10 @@
 #define NSLog(__FORMAT__, ...) TFLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #import <UIKit/UIKit.h>
+#import <WFConnector/WFConnector.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <WFSensorConnectionDelegate>
+
+@property (nonatomic, strong) WFSensorConnection* sensorConnection;
 
 @end

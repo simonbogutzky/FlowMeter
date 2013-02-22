@@ -41,6 +41,12 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
+		<string>external-accessory</string>
+		<string>bluetooth-central</string>
+	</array>
+	<key>UISupportedExternalAccessoryProtocols</key>
+	<array>
+		<string>com.momentumoftechnology.fisica</string>
 	</array>
 </dict>
 </plist>
