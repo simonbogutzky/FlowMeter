@@ -15,12 +15,11 @@
 
 @interface ViewController ()
 {
+    WFHardwareConnector *hardwareConnector;
+    WFSensorConnection *sensorConnection;
     BOOL isCollection;
     UserSessionVO *userSession;
-    
-    WFHardwareConnector* hardwareConnector;
 	WFSensorType_t sensorType;
-    IBOutlet UIButton *connectButton;
 }
 @end
 
@@ -32,44 +31,37 @@
     
     hardwareConnector = [WFHardwareConnector sharedConnector];
     sensorType = WF_SENSORTYPE_HEARTRATE;
-    _sensorConnection = nil;
-	// Do any additional setup after loading the view, typically from a nib.
-    
+    sensorConnection = nil;
     
     // initialize the display based on HW connector and sensor state.
-    if ( hardwareConnector.isCommunicationHWReady )
+    if (hardwareConnector.isCommunicationHWReady)
     {
-        // check for an existing connection to this sensor type.
-        NSArray* connections = [hardwareConnector getSensorConnections:sensorType];
-        WFSensorConnection* sensor = ([connections count]>0) ? (WFSensorConnection*)[connections objectAtIndex:0] : nil;
+        // Check for an existing connection to this sensor type.
+        NSArray *connections = [hardwareConnector getSensorConnections:sensorType];
+        WFSensorConnection *sensor = ([connections count] > 0) ? (WFSensorConnection *) [connections objectAtIndex:0] : nil;
         
-        // if a connection exists, cache it and set the delegate to this
-        // instance (this will allow receiving connection state changes).
-        self.sensorConnection = sensor;
-        if ( sensor )
+        // If a connection exists, cache it and set the delegate to this instance (this will allow receiving connection state changes).
+        sensorConnection = sensor;
+        if (sensor)
         {
-            self.sensorConnection.delegate = self;
+            sensorConnection.delegate = self;
         }
         
-        // update the display.
-        [self checkState];
-//        [self updateData];
-    }
-    else
-    {
-//        [self resetDisplay];
+        // Log status
+        [self logStatus];
     }
     
-    // register for HW connector notifications.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkState) name:WF_NOTIFICATION_HW_CONNECTED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkState) name:WF_NOTIFICATION_HW_DISCONNECTED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkState) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
+    // Register for HW connector notifications.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logStatus) name:WF_NOTIFICATION_HW_CONNECTED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logStatus) name:WF_NOTIFICATION_HW_DISCONNECTED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logStatus) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
+    
+    [self connectSensor];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)startUpdates
@@ -253,117 +245,54 @@
     }
 }
 
-- (IBAction)connectSensorClicked:(id)sender
+- (void)connectSensor
 {
-	// get the current connection status.
-	WFSensorConnectionStatus_t connState = WF_SENSOR_CONNECTION_STATUS_IDLE;
-	if ( _sensorConnection != nil )
+	// Get the current connection status.
+	WFSensorConnectionStatus_t connectionStatus = WF_SENSOR_CONNECTION_STATUS_IDLE;
+	if (sensorConnection != nil)
 	{
-		connState = _sensorConnection.connectionStatus;
+		connectionStatus = sensorConnection.connectionStatus;
 	}
 	
-	// set the button state based on the connection state.
-	switch (connState)
-	{
-		case WF_SENSOR_CONNECTION_STATUS_IDLE:
-		{
-			// create the connection params.
-			WFConnectionParams* params = nil;
-			//
-			// if wildcard search is specified, create empty connection params.
-			if ( NO ) // wildcardSwitch.on
-			{
-				params = [[WFConnectionParams alloc] init];
-				params.sensorType = WF_SENSORTYPE_HEARTRATE;
-            }
+	if(connectionStatus == WF_SENSOR_CONNECTION_STATUS_IDLE) {
+			
+        // Get the connection params
+        WFConnectionParams *params = [hardwareConnector.settings connectionParamsForSensorType:sensorType];
+        if (params != nil) {
             
-            // otherwise, get the params from the stored settings.
-            else
-            {
-                params = [hardwareConnector.settings connectionParamsForSensorType:sensorType];
-            }
-			
-			if ( params != nil)
-			{
-                // set the search timeout.
-                params.searchTimeout = hardwareConnector.settings.searchTimeout;
-                
-                // if the connection request is a wildcard, use proximity search.
-                if ( NO ) // params.isWildcard
-                {
-                    // proximity pairing is available only in the AP2 version of
-                    // the Wahoo fisica hardware.  the proximity search facilitates
-                    // pairing an unknown device when more than one of the device
-                    // type are present.  the range WF_PROXIMITY_RANGE_1 is the
-                    // closest - meaning the device must be very close to the
-                    // fisica key in order to connect.  ranges are relative 1-10.
-                    //
-                    // NOTE:  if the fisica hardware is the AP1 version, the API
-                    // will issue a standard connection request.  this case is the
-                    // same as invoking requestSensorConnection:.
-                    //
-                    // use proximity search.
-                    if ( NO ) // proximitySwitch.on
-                    {
-                        self.sensorConnection = [hardwareConnector requestSensorConnection:params withProximity:WF_PROXIMITY_RANGE_2];
-                    }
-                    //
-                    // use normal search.
-                    else
-                    {
-                        self.sensorConnection = [hardwareConnector requestSensorConnection:params];
-                    }
-                }
-                // otherwise, use normal connection request.
-                else
-                {
-                    self.sensorConnection = [hardwareConnector requestSensorConnection:params];
-                }
-                
-                // set delegate to receive connection status changes.
-                self.sensorConnection.delegate = self;
-			}
-			break;
-		}
-			
-		case WF_SENSOR_CONNECTION_STATUS_CONNECTING:
-		case WF_SENSOR_CONNECTION_STATUS_CONNECTED:
-			// disconnect the sensor.
-			[self.sensorConnection disconnect];
-			break;
-			
-		case WF_SENSOR_CONNECTION_STATUS_DISCONNECTING:
-        case WF_SENSOR_CONNECTION_STATUS_INTERRUPTED:
-			// do nothing.
-			break;
-	}
-	
-	[self checkState];
+            // Set the search timeout
+            params.searchTimeout = hardwareConnector.settings.searchTimeout;
+            sensorConnection = [hardwareConnector requestSensorConnection:params];
+
+            // Set delegate to receive connection status changes
+            sensorConnection.delegate = self;
+        }
+    }
+	[self logStatus];
 }
 
-- (void)checkState
+- (void)logStatus
 {
 	// get the current connection status.
-	WFSensorConnectionStatus_t connState = WF_SENSOR_CONNECTION_STATUS_IDLE;
-	if ( _sensorConnection != nil )
-	{
-		connState = _sensorConnection.connectionStatus;
+	WFSensorConnectionStatus_t connectionStatus = WF_SENSOR_CONNECTION_STATUS_IDLE;
+	if (sensorConnection != nil) {
+		connectionStatus = sensorConnection.connectionStatus;
 	}
 	
 	// set the button state based on the connection state.
-	switch (connState)
+	switch (connectionStatus)
 	{
 		case WF_SENSOR_CONNECTION_STATUS_IDLE:
-			[connectButton setTitle:@"Connect" forState:UIControlStateNormal];
+			NSLog(@"Idle");
 			break;
 		case WF_SENSOR_CONNECTION_STATUS_CONNECTING:
-			[connectButton setTitle:@"Cancel" forState:UIControlStateNormal];
+			NSLog(@"Connecting ...");
 			break;
 		case WF_SENSOR_CONNECTION_STATUS_CONNECTED:
-			[connectButton setTitle:@"Disconnect" forState:UIControlStateNormal];
+			NSLog(@"Connected");
 			break;
 		case WF_SENSOR_CONNECTION_STATUS_DISCONNECTING:
-			[connectButton setTitle:@"Disconnecting..." forState:UIControlStateNormal];
+			NSLog(@"Disconnecting...");
 			break;
         case WF_SENSOR_CONNECTION_STATUS_INTERRUPTED:
             break;
