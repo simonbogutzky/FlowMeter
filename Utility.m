@@ -12,6 +12,7 @@
 
 + (double)quantileWithX:(NSArray *)x prob:(double)prob
 {
+    NSLog(@"%f", [x count] / prob);
     return 0;
 }
 

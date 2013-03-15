@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Utility.h"
 
 @interface AppDelegate ()
 {
@@ -65,6 +66,12 @@
 //    [hardwareConnector setSampleTimerDataCheck:YES];
     
     // Override point for customization after application launch.
+    
+    NSArray *array1 = [[NSArray alloc] initWithObjects:@"1", @"3", @"4", @"5", nil];
+    NSArray *array2 = [[NSArray alloc] initWithObjects:@"1", @"3", @"4", nil];
+    [Utility quantileWithX:array1 prob:0.75];
+    [Utility quantileWithX:array2 prob:0.75];
+    
     return YES;
 }
 							
