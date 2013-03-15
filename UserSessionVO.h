@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSString *udid;
 @property (nonatomic, strong) NSMutableString *data;
 
+@property (nonatomic, strong) NSMutableDictionary *measurements;
+
 
 - (NSString *)xmlRepresentation;
 - (void)setWithPropertyDictionary:(NSDictionary *)propertyDictionary;

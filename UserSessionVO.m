@@ -26,69 +26,88 @@
 {
 	self = [super init];
 	if (self != nil) {
-        dataCount = 0;
-        fileCount = 1;
+//        dataCount = 0;
+//        fileCount = 1;
+//        
+//        // Create a date string of the current date
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+//        dateString = [dateFormatter stringFromDate:[NSDate date]];
+//        [dateFormatter setDateFormat:@"HH-mm-ss"];
+//        timeString = [dateFormatter stringFromDate:[NSDate date]];
+//        
+//        _data = [NSMutableString stringWithCapacity:1048576]; // 191520000 + 141 bytes for to hours of data and 2 hours overhead (one hour approx. 45mb)
+//        [_data appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
+//         @"timestamp",
+//         @"userAccX",
+//         @"userAccY",
+//         @"userAccZ",
+//         @"userWAccX",
+//         @"userWAccY",
+//         @"userWAccZ",
+//         @"gravityX",
+//         @"gravityY",
+//         @"gravityZ",
+//         @"rotRateX",
+//         @"rotRateY",
+//         @"rotRateZ",
+//         @"attYaw",
+//         @"attRoll",
+//         @"attPitch"
+//         ];
         
-        // Create a date string of the current date
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        dateString = [dateFormatter stringFromDate:[NSDate date]];
-        [dateFormatter setDateFormat:@"HH-mm-ss"];
-        timeString = [dateFormatter stringFromDate:[NSDate date]];
+        _measurements = [[NSMutableDictionary alloc] init];
+        [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:8000] forKey:@"timestamp"];
+        [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:8000] forKey:@"rotationRateX"];
         
-        _data = [NSMutableString stringWithCapacity:1048576]; // 191520000 + 141 bytes for to hours of data and 2 hours overhead (one hour approx. 45mb)
-        [_data appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
-         @"timestamp",
-         @"userAccX",
-         @"userAccY",
-         @"userAccZ",
-         @"userWAccX",
-         @"userWAccY",
-         @"userWAccZ",
-         @"gravityX",
-         @"gravityY",
-         @"gravityZ",
-         @"rotRateX",
-         @"rotRateY",
-         @"rotRateZ",
-         @"attYaw",
-         @"attRoll",
-         @"attPitch"
-         ];
 	}
 	return self;
 }
 
 - (void)appendMotionData:(CMDeviceMotion *)deviceMotion {
-    if (dataCount != 0 && dataCount % 6721 == 0) {
-        [self seriliazeAndZip];
-        _data = [NSMutableString stringWithCapacity:1048576];
-    }
+    double timestamp = deviceMotion.timestamp;
+    double rotationRateX = deviceMotion.rotationRate.x;
+    [[_measurements objectForKey:@"timestamp"] addObject:[NSNumber numberWithDouble:timestamp]];
+    [[_measurements objectForKey:@"rotationRateX"] addObject:[NSNumber numberWithDouble:rotationRateX]];
     
-    if (deviceMotion != nil) {
-        [_data appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
-         deviceMotion.timestamp,
-         deviceMotion.userAcceleration.x,
-         deviceMotion.userAcceleration.y,
-         deviceMotion.userAcceleration.z,
-         deviceMotion.userAccelerationInReferenceFrame.x,
-         deviceMotion.userAccelerationInReferenceFrame.y,
-         deviceMotion.userAccelerationInReferenceFrame.z,
-         deviceMotion.gravity.x,
-         deviceMotion.gravity.y,
-         deviceMotion.gravity.z,
-         deviceMotion.rotationRate.x,
-         deviceMotion.rotationRate.y,
-         deviceMotion.rotationRate.z,
-         deviceMotion.attitude.yaw,
-         deviceMotion.attitude.roll,
-         deviceMotion.attitude.pitch
-         ];
+    if (timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue] > 5.0) {
+        NSLog(@"Count: %d", [[_measurements objectForKey:@"rotationRateX"] count]);
     } else {
-        [_data appendFormat:@"NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN\n"];
+        NSLog(@"Timestamp: %f",timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue]);
     }
     
-    dataCount++;
+    
+    
+    
+//    if (dataCount != 0 && dataCount % 6721 == 0) {
+//        [self seriliazeAndZip];
+//        _data = [NSMutableString stringWithCapacity:1048576];
+//    }
+//    
+//    if (deviceMotion != nil) {
+//        [_data appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
+//         deviceMotion.timestamp,
+//         deviceMotion.userAcceleration.x,
+//         deviceMotion.userAcceleration.y,
+//         deviceMotion.userAcceleration.z,
+//         deviceMotion.userAccelerationInReferenceFrame.x,
+//         deviceMotion.userAccelerationInReferenceFrame.y,
+//         deviceMotion.userAccelerationInReferenceFrame.z,
+//         deviceMotion.gravity.x,
+//         deviceMotion.gravity.y,
+//         deviceMotion.gravity.z,
+//         deviceMotion.rotationRate.x,
+//         deviceMotion.rotationRate.y,
+//         deviceMotion.rotationRate.z,
+//         deviceMotion.attitude.yaw,
+//         deviceMotion.attitude.roll,
+//         deviceMotion.attitude.pitch
+//         ];
+//    } else {
+//        [_data appendFormat:@"NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN,NAN\n"];
+//    }
+//    
+//    dataCount++;
 }
 
 - (NSString *)xmlRepresentation

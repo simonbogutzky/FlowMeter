@@ -29,34 +29,36 @@
 {
     [super viewDidLoad];
     
-    hardwareConnector = [WFHardwareConnector sharedConnector];
-    sensorType = WF_SENSORTYPE_HEARTRATE;
-    sensorConnection = nil;
     
-    // initialize the display based on HW connector and sensor state.
-    if (hardwareConnector.isCommunicationHWReady)
-    {
-        // Check for an existing connection to this sensor type.
-        NSArray *connections = [hardwareConnector getSensorConnections:sensorType];
-        WFSensorConnection *sensor = ([connections count] > 0) ? (WFSensorConnection *) [connections objectAtIndex:0] : nil;
-        
-        // If a connection exists, cache it and set the delegate to this instance (this will allow receiving connection state changes).
-        sensorConnection = sensor;
-        if (sensor)
-        {
-            sensorConnection.delegate = self;
-        }
-        
-        // Log status
-        [self logStatus];
-    }
-    
-    // Register for HW connector notifications.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logStatus) name:WF_NOTIFICATION_HW_CONNECTED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logStatus) name:WF_NOTIFICATION_HW_DISCONNECTED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logStatus) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
-    
-    [self connectSensor];
+//TODO: (sb) Not used yet
+//    hardwareConnector = [WFHardwareConnector sharedConnector];
+//    sensorType = WF_SENSORTYPE_HEARTRATE;
+//    sensorConnection = nil;
+//    
+//    // initialize the display based on HW connector and sensor state.
+//    if (hardwareConnector.isCommunicationHWReady)
+//    {
+//        // Check for an existing connection to this sensor type.
+//        NSArray *connections = [hardwareConnector getSensorConnections:sensorType];
+//        WFSensorConnection *sensor = ([connections count] > 0) ? (WFSensorConnection *) [connections objectAtIndex:0] : nil;
+//        
+//        // If a connection exists, cache it and set the delegate to this instance (this will allow receiving connection state changes).
+//        sensorConnection = sensor;
+//        if (sensor)
+//        {
+//            sensorConnection.delegate = self;
+//        }
+//        
+//        // Log status
+//        [self logStatus];
+//    }
+//    
+//    // Register for HW connector notifications.
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logStatus) name:WF_NOTIFICATION_HW_CONNECTED object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logStatus) name:WF_NOTIFICATION_HW_DISCONNECTED object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logStatus) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
+//    
+//    [self connectSensor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,8 +68,11 @@
 
 - (void)startUpdates
 {
+    
     userSession = [[UserSessionVO alloc] init];
-    userSession.udid = [[UIDevice currentDevice] uniqueIdentifier];
+//    userSession.udid = [[UIDevice currentDevice] uniqueIdentifier];
+    
+    
 //    [self addUserSession];
     
     NSTimeInterval updateInterval = 0.01; // 100hz
@@ -77,6 +82,7 @@
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
         [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
             [userSession appendMotionData:deviceMotion];
+//            NSLog(@"Rotation Rate around the x-Axis: %f", deviceMotion.rotationRate.x);
         }];
     }
     
@@ -93,7 +99,7 @@
         [motionManager stopDeviceMotionUpdates];
     }
     
-    [self attachZipFile];
+//    [self attachZipFile];
     
     CLLocationManager *locationManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedLocationManager];
     [locationManager stopUpdatingLocation];
@@ -181,47 +187,47 @@
 
 - (void)attachZipFile
 {
-    void (^completionHandler)(NSURLResponse*, NSData*, NSError*) = ^(NSURLResponse *response, NSData *data, NSError *error) {
-        if ([data length] > 0 && error == nil) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                CXMLDocument *doc = [[CXMLDocument alloc] initWithData:data options:0 error:nil];
-                NSArray *nodes = nil;
-                nodes = [doc nodesForXPath:@"/response/objects/Error/id" error:nil];
-                if ([nodes count] > 0) {
-                    
-                    // Feedback
-                    int errorId = [[[nodes[0] childAtIndex:0] stringValue] intValue];
-                    UIAlertView *alert;
-                    switch (errorId) {
-                        case 5:
-                            alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"User session", @"User session")
-                                                               message:NSLocalizedString(@"User session has not been saved.", @"User session has not been saved.")
-                                                              delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-                                                     otherButtonTitles:nil];
-                            NSLog(@"# User session has not been saved (attach zip file).");
-                            break;
-                        default:
-                            alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                               message:NSLocalizedString(@"Unknown error" , @"Unknown error")
-                                                              delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-                                                     otherButtonTitles:nil];
-                            NSLog(@"# Unknown error (attach zip file)");
-                            break;
-                    }
-                    [alert show];
-                    return;
-                }
-                
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"User session", @"User session")
-                                                                message:NSLocalizedString(@"User session has been saved." , @"User session has been saved.")
-                                                               delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-                                                      otherButtonTitles:nil];
-                [alert show];
-                NSLog(@"# User session has been saved.");
-            });
-        }
-    };
-            
+//    void (^completionHandler)(NSURLResponse*, NSData*, NSError*) = ^(NSURLResponse *response, NSData *data, NSError *error) {
+//        if ([data length] > 0 && error == nil) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                CXMLDocument *doc = [[CXMLDocument alloc] initWithData:data options:0 error:nil];
+//                NSArray *nodes = nil;
+//                nodes = [doc nodesForXPath:@"/response/objects/Error/id" error:nil];
+//                if ([nodes count] > 0) {
+//                    
+//                    // Feedback
+//                    int errorId = [[[nodes[0] childAtIndex:0] stringValue] intValue];
+//                    UIAlertView *alert;
+//                    switch (errorId) {
+//                        case 5:
+//                            alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"User session", @"User session")
+//                                                               message:NSLocalizedString(@"User session has not been saved.", @"User session has not been saved.")
+//                                                              delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+//                                                     otherButtonTitles:nil];
+//                            NSLog(@"# User session has not been saved (attach zip file).");
+//                            break;
+//                        default:
+//                            alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+//                                                               message:NSLocalizedString(@"Unknown error" , @"Unknown error")
+//                                                              delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+//                                                     otherButtonTitles:nil];
+//                            NSLog(@"# Unknown error (attach zip file)");
+//                            break;
+//                    }
+//                    [alert show];
+//                    return;
+//                }
+//                
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"User session", @"User session")
+//                                                                message:NSLocalizedString(@"User session has been saved." , @"User session has been saved.")
+//                                                               delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+//                                                      otherButtonTitles:nil];
+//                [alert show];
+//                NSLog(@"# User session has been saved.");
+//            });
+//        }
+//    };
+    
     // Attach zip file
     NSData *data = [userSession seriliazeAndZip];
     
@@ -234,7 +240,7 @@
         [alert show];
         
         // Server request (attach zip file)
-        Connection *connection = [[Connection alloc] initWithHost:@"http://galow.flow-maschinen.de/"];
+//        Connection *connection = [[Connection alloc] initWithHost:@"http://galow.flow-maschinen.de/"];
 //        [connection aAttachFileWithControllerPath:[NSString stringWithFormat:@"user_sessions/%lu", [userSession.objectId unsignedLongValue]] fileAsData:data contentDispositionName:@"data[UserSession][zip]" contentType:@"application/zip" completionHandler:completionHandler];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Damn!", @"Damn!")
