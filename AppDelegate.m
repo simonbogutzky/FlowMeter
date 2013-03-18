@@ -66,11 +66,10 @@
 //    [hardwareConnector setSampleTimerDataCheck:YES];
     
     // Override point for customization after application launch.
-    
-    NSArray *array1 = [[NSArray alloc] initWithObjects:@"1", @"3", @"4", @"5", nil];
-    NSArray *array2 = [[NSArray alloc] initWithObjects:@"1", @"3", @"4", nil];
-    [Utility quantileWithX:array1 prob:0.75];
-    [Utility quantileWithX:array2 prob:0.75];
+
+    NSArray *array1 = [[NSMutableArray alloc] initWithObjects:@1, @3, @1, @1, @4, @7, @9, @13, @13, @11, nil];
+    NSLog(@"%f", [Utility quantileWithX:array1 prob:0.3]);
+    NSLog(@"%f", [Utility quantileWithX:array1 prob:0.75]);
     
     return YES;
 }
