@@ -18,9 +18,9 @@
 @property (nonatomic, strong) NSMutableString *data;
 
 
-- (NSString *)xmlRepresentation;
-- (void)setWithPropertyDictionary:(NSDictionary *)propertyDictionary;
-- (void)appendMotionData:(CMDeviceMotion *)deviceMotion;
+//- (NSString *)xmlRepresentation;
+//- (void)setWithPropertyDictionary:(NSDictionary *)propertyDictionary;
+- (NSString *)appendMotionData:(CMDeviceMotion *)deviceMotion;
 - (NSData *)seriliazeAndZip;
 
 

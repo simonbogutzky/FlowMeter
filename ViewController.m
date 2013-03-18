@@ -81,8 +81,10 @@
     if ([motionManager isDeviceMotionAvailable] == YES) {
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
         [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
-            [userSession appendMotionData:deviceMotion];
-//            NSLog(@"Rotation Rate around the x-Axis: %f", deviceMotion.rotationRate.x);
+            if ([[userSession appendMotionData:deviceMotion] isEqualToString:@"HS"]) {
+                NSLog(@"Play sound");
+                //TODO: (nh) Play sound
+            }
         }];
     }
     
@@ -99,7 +101,7 @@
         [motionManager stopDeviceMotionUpdates];
     }
     
-//    [self attachZipFile];
+    [self attachZipFile];
     
     CLLocationManager *locationManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedLocationManager];
     [locationManager stopUpdatingLocation];
@@ -166,7 +168,7 @@
                         //  common procedure: dictionary with keys/values from XML node
                         propertyDictionary[[[nodes[0] childAtIndex:counter] name]] = [[nodes[0] childAtIndex:counter] stringValue];
                     }
-                    [userSession setWithPropertyDictionary:propertyDictionary];
+//                    [userSession setWithPropertyDictionary:propertyDictionary];
                 }
             });
         } else {
@@ -182,7 +184,7 @@
     
     // Server request (add user session)
     Connection *connection = [[Connection alloc] initWithHost:@"http://galow.flow-maschinen.de/"];
-    [connection aAddWithControllerPath:@"user_sessions" bodyAsString:[userSession xmlRepresentation] completionHandler:completionHandler];
+//    [connection aAddWithControllerPath:@"user_sessions" bodyAsString:[userSession xmlRepresentation] completionHandler:completionHandler];
 }
 
 - (void)attachZipFile
