@@ -10,6 +10,6 @@
 
 @interface Utility : NSObject
 
-+ (double)quantileWithX:(NSArray *)x prob:(double)prob;
++ (double)quantileFromX:(NSArray *)x prob:(double)prob;
 
 @end

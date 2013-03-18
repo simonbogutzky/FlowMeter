@@ -10,7 +10,7 @@
 
 @implementation Utility
 
-+ (double)quantileWithX:(NSMutableArray *)x prob:(double)prob
++ (double)quantileFromX:(NSMutableArray *)x prob:(double)prob
 {
     // Sort array
     NSSortDescriptor *lowestToHighest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
