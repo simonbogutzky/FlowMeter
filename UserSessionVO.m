@@ -60,6 +60,7 @@
         
         // Create store for fix values
         _storage = [[NSMutableDictionary alloc] init];
+        [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"unfilteredIndicator"];
         [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"filteredIndicator"];
 	}
 	return self;
@@ -110,17 +111,19 @@
         
             // Wait five seconds
             if (timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue] > 5.0) {
-                if (timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue] < 6.0) {
-                    double quantile05 = [Utility quantileFromX:[_measurements objectForKey:@"rotationRateX"] prob:.05];
-                    [_storage setObject:[NSNumber numberWithDouble:quantile05] forKey:@"unfilteredQuantile05"];
-                }
-                [self isPeakFromStorage:_storage withKey:@"unfiltered" x:rotationRateX quantile:[[_storage objectForKey:@"unfilteredQuantile05"] doubleValue]];
-                if ([[_storage objectForKey:@"unfilteredIndicator"] boolValue]) {
-                    if([self isPeakFromStorage:_storage withKey:@"filtered" x:filteredRotationRateX quantile:[[_storage objectForKey:@"unfilteredQuantile05"] doubleValue]]) {
-                        NSLog(@"Is Peak with: %f rad/s over quantile with: %f rad/s", filteredRotationRateX, [[_storage objectForKey:@"unfilteredQuantile05"] doubleValue]);
-                        [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"unfilteredIndicator"];
-                        label = @"HS";
-                    }
+//                if (timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue] < 6.0) {
+                    double quantile06 = [Utility quantileFromX:[_measurements objectForKey:@"rotationRateX"] prob:.06];
+                    [_storage setObject:[NSNumber numberWithDouble:quantile06] forKey:@"unfilteredQuantile06"];
+//                }
+                
+                [self isPeakFromStorage:_storage withKey:@"unfiltered" x:rotationRateX quantile:[[_storage objectForKey:@"unfilteredQuantile06"] doubleValue]];
+                [self isPeakFromStorage:_storage withKey:@"filtered" x:filteredRotationRateX quantile:[[_storage objectForKey:@"unfilteredQuantile06"] doubleValue]];
+                
+                if ([[_storage objectForKey:@"unfilteredIndicator"] boolValue] && [[_storage objectForKey:@"filteredIndicator"] boolValue]) {
+                    NSLog(@"Is Peak with: %f rad/s over quantile with: %f rad/s", filteredRotationRateX, [[_storage objectForKey:@"unfilteredQuantile06"] doubleValue]);
+                    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"unfilteredIndicator"];
+                    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"filteredIndicator"];
+                    label = @"HS";
                 }
             } else {
                 NSLog(@"Timestamp: %f",timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue]);
@@ -165,22 +168,20 @@
     return [[NSFileManager defaultManager] contentsAtPath:savePath];
 }
 
-// Lowpass Butterworth 2. Order Filter with 10Hz corner frequency ("http://www-users.cs.york.ac.uk/~fisher/mkfilter/trad.html")
+// Lowpass Butterworth 2. Order Filter with 5Hz corner frequency ("http://www-users.cs.york.ac.uk/~fisher/mkfilter/trad.html")
 
-#define NZEROS 2
+#define NZEROS 0
 #define NPOLES 2
-#define GAIN   1.482463775e+01
+#define GAIN   1.265241109e+01
 
 static float xv[NZEROS+1], yv[NPOLES+1];
 
 - (double)filterX:(double)x
 {
-    xv[0] = xv[1];
-    xv[1] = xv[2];
-    xv[2] = x / GAIN;
+    xv[0] = x / GAIN;
     yv[0] = yv[1];
     yv[1] = yv[2];
-    yv[2] = (xv[0] + xv[2]) + 2 * xv[1] + ( -0.4128015981 * yv[0]) + (  1.1429805025 * yv[1]);
+    yv[2] = xv[0] + (-0.6412805170 * yv[0]) + (1.5622441979 * yv[1]);
     return yv[2];
 }
 
