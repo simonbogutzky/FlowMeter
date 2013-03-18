@@ -9,6 +9,7 @@
 #import "UserSessionVO.h"
 #import "Zipfile.h"
 #import "ZipWriteStream.h"
+#import "Utility.h"
 
 @interface UserSessionVO ()
 {
@@ -17,6 +18,9 @@
     UserSessionVO *userSession;
     NSString *dateString;
     NSString *timeString;
+    
+    NSMutableDictionary *_measurements;
+    NSMutableDictionary *_store;
 }
 @end
 
@@ -60,24 +64,59 @@
         [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:8000] forKey:@"timestamp"];
         [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:8000] forKey:@"rotationRateX"];
         
+        _store = [[NSMutableDictionary alloc] init];
+        
 	}
 	return self;
 }
 
-- (void)appendMotionData:(CMDeviceMotion *)deviceMotion {
-    double timestamp = deviceMotion.timestamp;
-    double rotationRateX = deviceMotion.rotationRate.x;
-    [[_measurements objectForKey:@"timestamp"] addObject:[NSNumber numberWithDouble:timestamp]];
-    [[_measurements objectForKey:@"rotationRateX"] addObject:[NSNumber numberWithDouble:rotationRateX]];
-    
-    if (timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue] > 5.0) {
-        NSLog(@"Count: %d", [[_measurements objectForKey:@"rotationRateX"] count]);
-    } else {
-        NSLog(@"Timestamp: %f",timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue]);
+
+
+- (void)isPeakWithKey:(NSString *)key object:(id)object quantile:(double)quantile
+{
+    // First measurement
+    if ([_store objectForKey:[NSString stringWithFormat:@"%@PreviousMeasurement", key]] == nil) {
+        [_store setObject:object forKey:[NSString stringWithFormat:@"%@PreviousMeasurement", key]];
+        return;
     }
     
+    // Previous measurement
+    double previousMeasurement = [[_store objectForKey:[NSString stringWithFormat:@"%@PreviousMeasurement", key]] doubleValue];
+    double previousSlope = [[_store objectForKey:[NSString stringWithFormat:@"%@PreviousSlope", key]] doubleValue];
+    double slope = [object doubleValue] - previousMeasurement;
     
+    if (slope * previousSlope < 0 && quantile > previousMeasurement) { // look for sign changes
+        NSLog(@"Is Peak with: %f rad/s over quantile with: %f", [object doubleValue], quantile);
+    }
     
+    // Store current measurement
+    [_store setObject:[NSNumber numberWithDouble:slope] forKey:[NSString stringWithFormat:@"%@PreviousSlope", key]];
+    [_store setObject:object forKey:[NSString stringWithFormat:@"%@PreviousMeasurement", key]];
+}
+
+- (void)appendMotionData:(CMDeviceMotion *)deviceMotion {
+    
+    // Get timestamp
+    double timestamp = deviceMotion.timestamp;
+    
+    if (timestamp > 0) {
+        
+        // Store measurement
+        double rotationRateX = deviceMotion.rotationRate.x;
+        [[_measurements objectForKey:@"timestamp"] addObject:[NSNumber numberWithDouble:timestamp]];
+        [[_measurements objectForKey:@"rotationRateX"] addObject:[NSNumber numberWithDouble:rotationRateX]];
+        
+        // Wait five seconds
+        if (timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue] > 5.0) {
+            if (timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue] < 6.0) {
+                double quantile05 = [Utility quantileFromX:[_measurements objectForKey:@"rotationRateX"] prob:.05];
+                [_store setObject:[NSNumber numberWithDouble:quantile05] forKey:@"unfilteredQuantile05"];
+            }
+            [self isPeakWithKey:@"unfiltered" object:[NSNumber numberWithDouble:rotationRateX] quantile:[[_store objectForKey:@"unfilteredQuantile05"] doubleValue]];
+        } else {
+            NSLog(@"Timestamp: %f",timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue]);
+        }
+    }
     
 //    if (dataCount != 0 && dataCount % 6721 == 0) {
 //        [self seriliazeAndZip];
