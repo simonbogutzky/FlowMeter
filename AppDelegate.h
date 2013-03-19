@@ -16,5 +16,6 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic, readonly) CMMotionManager *sharedMotionManager;
 @property (strong, nonatomic, readonly) CLLocationManager *sharedLocationManager;
+@property (strong, nonatomic, readonly) WFHardwareConnector *sharedHardwareConnector;
 
 @end
