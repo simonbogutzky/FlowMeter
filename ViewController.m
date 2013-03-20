@@ -35,6 +35,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Create user session
+    _userSession = [[UserSessionVO alloc] init];
+    //    userSession.udid = [[UIDevice currentDevice] uniqueIdentifier];
+    //    [self addUserSession];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,12 +52,7 @@
 
 - (void)startUpdates
 {
-    
-    // Create user session
-    _userSession = [[UserSessionVO alloc] init];
-//    userSession.udid = [[UIDevice currentDevice] uniqueIdentifier];
-//    [self addUserSession];
-    
+    [_userSession createMotionStorage];
     
     // Start motion updates
     NSTimeInterval updateInterval = 0.01; // 100hz
@@ -86,7 +86,15 @@
     CLLocationManager *locationManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedLocationManager];
     [locationManager stopUpdatingLocation];
     
-    //    [self attachZipFile];
+    [_userSession seriliazeAndZipMotionData];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Great job!", @"Great job!")
+                                                    message:NSLocalizedString(@"Motion Data has been locally saved." , @"Motion Data has been locally saved.")
+                                                   delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+    NSLog(@"# Motion Data has been locally saved");
 }
 
 #pragma mark -
@@ -121,6 +129,8 @@
 
 - (void)initSensorConnection
 {
+    [_userSession createHrStorage];
+    
     // Register for HW connector notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSensorData) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
     
@@ -178,6 +188,16 @@
     if (_sensorConnection.connectionStatus == WF_SENSOR_CONNECTION_STATUS_CONNECTED || _sensorConnection.connectionStatus == WF_SENSOR_CONNECTION_STATUS_CONNECTING) {
         [_sensorConnection disconnect];
     }
+    
+    [_userSession seriliazeAndZipHrData];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Great job!", @"Great job!")
+                                                    message:NSLocalizedString(@"HR Data has been locally saved." , @"HR Data has been locally saved.")
+                                                   delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+    NSLog(@"# HR Data has been locally saved");
 }
 
 - (void)updateSensorData
@@ -187,14 +207,14 @@
         WFHeartrateData *hrData = [hrConnection getHeartrateData];
         WFHeartrateRawData *hrRawData = [hrConnection getHeartrateRawData];
         if (hrData != nil) {
-            NSLog("---- HR Data ----");
+//            NSLog("---- HR Data ----");
 //???: (sb) Always nil
 //            NSLog("# Beat time: %d", hrData.beatTime);
-            NSLog("# Computed heartrate: %d", hrData.computedHeartrate);
-            NSLog("# Accum beat count: %d", hrData.accumBeatCount);
-            NSLog("# Timestamp: %f", hrData.timestamp);
-            NSLog("# Timestamp overflow: %@", hrData.timestampOverflow ? @"YES" : @"NO");
-            NSLog("# Formatted heartrate: %@", [hrData formattedHeartrate:YES]);
+//            NSLog("# Computed heartrate: %d", hrData.computedHeartrate);
+//            NSLog("# Accum beat count: %d", hrData.accumBeatCount);
+//            NSLog("# Timestamp: %f", hrData.timestamp);
+//            NSLog("# Timestamp overflow: %@", hrData.timestampOverflow ? @"YES" : @"NO");
+//            NSLog("# Formatted heartrate: %@", [hrData formattedHeartrate:YES]);
             
             _bmpLabel.text = [hrData formattedHeartrate:YES];
         }
@@ -213,7 +233,7 @@
         if ([hrData isKindOfClass:[WFBTLEHeartrateData class]]) {
             NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
             for (NSNumber* rrInterval in rrIntervals) {
-                NSLog("---- RR Data ----");
+//                NSLog("---- RR Data ----");
                 NSLog(@"# R-R interval: %1.3f s.", [rrInterval doubleValue]);
             }
         }
@@ -222,12 +242,13 @@
         // will eventually be merged with the existing common data.  for current demo
         // purposes, the battery level is updated directly from this HR view controller.
         if (hrRawData.btleCommonData) {
-            NSLog("---- BTLE Common Data ----");
-            NSLog(@"# Battery level: %@", [NSString stringWithFormat:@"# %u %%", hrRawData.btleCommonData.batteryLevel]);
+//            NSLog("---- BTLE Common Data ----");
+//            NSLog(@"# Battery level: %@", [NSString stringWithFormat:@"# %u %%", hrRawData.btleCommonData.batteryLevel]);
             dispatch_async(dispatch_get_main_queue(), ^{
-                _batteryLevelLabel.text = [NSString stringWithFormat:@"# %u %%", hrRawData.btleCommonData.batteryLevel];
+                _batteryLevelLabel.text = [NSString stringWithFormat:@"%u %%", hrRawData.btleCommonData.batteryLevel];
             });
         }
+        [_userSession appendHrData:hrData];
     }
     else {
         NSLog(@"# n/a");
@@ -274,9 +295,10 @@
     }
 }
 
-#pragma mark -
-#pragma mark - Server connection
-
+//???: (sb) Unused code
+//#pragma mark -
+//#pragma mark - Server connection
+//
 //- (void)addUserSession
 //{
 //    void (^completionHandler)(NSURLResponse*, NSData*, NSError*) = ^(NSURLResponse *response, NSData *data, NSError *error) {
