@@ -48,7 +48,8 @@
         // Configure the hardware connector.
         hardwareConnector = [WFHardwareConnector sharedConnector];
         hardwareConnector.delegate = self;
-        hardwareConnector.sampleRate = 0.5;  // sample rate 500 ms, or 2 Hz.
+        hardwareConnector.sampleRate = 0.01;  // sample rate 1 ms, or 100 Hz.
+        hardwareConnector.settings.searchTimeout = 60;
         
         // Determine support for BTLE
         if (hardwareConnector.hasBTLESupport) {
@@ -66,7 +67,7 @@
 }
 
 #pragma mark -
-#pragma mark - UIApplicationDelegate Implementation
+#pragma mark - UIApplicationDelegate implementation
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -111,7 +112,7 @@
 }
 
 #pragma mark -
-#pragma mark - HardwareConnectorDelegate Implementation
+#pragma mark - HardwareConnectorDelegate implementation
 
 - (void)hardwareConnector:(WFHardwareConnector*)hwConnector connectedSensor:(WFSensorConnection*)connectionInfo
 {
