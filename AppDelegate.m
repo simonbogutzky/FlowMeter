@@ -19,6 +19,9 @@
 
 @implementation AppDelegate
 
+#pragma mark -
+#pragma mark - Singletons
+
 - (CMMotionManager *)sharedMotionManager
 {
     static dispatch_once_t onceToken;
@@ -37,36 +40,47 @@
     return locationManager;
 }
 
+- (WFHardwareConnector *)sharedHardwareConnector
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        // Configure the hardware connector.
+        hardwareConnector = [WFHardwareConnector sharedConnector];
+        hardwareConnector.delegate = self;
+        hardwareConnector.sampleRate = 0.01;  // sample rate 1 ms, or 100 Hz.
+        hardwareConnector.settings.searchTimeout = 60;
+        
+        // Determine support for BTLE
+        if (hardwareConnector.hasBTLESupport) {
+            
+            // Enable BTLE
+            [hardwareConnector enableBTLE:YES];
+        } else {
+            NSLog(@"# Device does not support BTLE");
+        }
+        
+//        // Set HW Connector to call hasData only when new data is available.
+//        [hardwareConnector setSampleTimerDataCheck:YES];
+    });
+    return hardwareConnector;
+}
+
+#pragma mark -
+#pragma mark - UIApplicationDelegate implementation
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-#define TESTING 1
-#ifdef TESTING
+//#define TESTING 1
+//#ifdef TESTING
 //    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-#endif
-    
-    // TestFlight takeoff
+//#endif
+//    
+//    // TestFlight takeoff
 //    [TestFlight takeOff:@"4de0efd2c948ed804b7286159f49d6e8_ODE3NTYyMDEyLTA0LTE3IDA4OjM0OjQzLjU5MDYyNQ"];
     
-    // Configure the hardware connector.
-    hardwareConnector = [WFHardwareConnector sharedConnector];
-    hardwareConnector.delegate = self;
-	hardwareConnector.sampleRate = 0.5;  // sample rate 500 ms, or 2 Hz.
-    
-    // Determine support for BTLE
-    if (hardwareConnector.hasBTLESupport) {
-        
-        // Enable BTLE
-        [hardwareConnector enableBTLE:TRUE];
-    } else {
-        NSLog(@"# Device does not support BTLE");
-    }
-    
-    // Set HW Connector to call hasData only when new data is available.
-//    [hardwareConnector setSampleTimerDataCheck:YES];
-    
     // Override point for customization after application launch.
-    
     return YES;
 }
 							
@@ -98,7 +112,7 @@
 }
 
 #pragma mark -
-#pragma mark - HardwareConnectorDelegate Implementation
+#pragma mark - HardwareConnectorDelegate implementation
 
 - (void)hardwareConnector:(WFHardwareConnector*)hwConnector connectedSensor:(WFSensorConnection*)connectionInfo
 {
@@ -111,27 +125,27 @@
                               connectionParams, @"connectionParams",
                               [NSNumber numberWithBool:bCompleted], @"searchCompleted",
                               nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_DISCOVERED_SENSOR object:nil userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_DISCOVERED_SENSOR object:WF_NOTIFICATION_DISCOVERED_SENSOR userInfo:userInfo];
 }
 
 - (void)hardwareConnector:(WFHardwareConnector*)hwConnector disconnectedSensor:(WFSensorConnection*)connectionInfo
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_SENSOR_DISCONNECTED object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_SENSOR_DISCONNECTED object:WF_NOTIFICATION_SENSOR_DISCONNECTED];
 }
 
 - (void)hardwareConnector:(WFHardwareConnector*)hwConnector stateChanged:(WFHardwareConnectorState_t)currentState
 {
 	BOOL connected = ((currentState & WF_HWCONN_STATE_ACTIVE) || (currentState & WF_HWCONN_STATE_BT40_ENABLED)) ? YES : NO;
 	if (connected) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_HW_CONNECTED object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_HW_CONNECTED object:WF_NOTIFICATION_HW_CONNECTED];
 	} else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_HW_DISCONNECTED object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_HW_DISCONNECTED object:WF_NOTIFICATION_HW_DISCONNECTED];
 	}
 }
 
 - (void)hardwareConnectorHasData
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_SENSOR_HAS_DATA object:WF_NOTIFICATION_SENSOR_HAS_DATA];
 }
 
 @end
