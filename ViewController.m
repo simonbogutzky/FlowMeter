@@ -64,6 +64,7 @@
             if ([[_userSession appendMotionData:deviceMotion] isEqualToString:@"HS"]) {
                 NSLog(@"Play sound");
                 //TODO: (nh) Play sound
+                //TODO: (nh) Add pd
             }
         }];
     }
