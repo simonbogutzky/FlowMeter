@@ -12,6 +12,7 @@
 #import "UserSessionVO.h"
 #import "CXHTMLDocument.h"
 #import "CXMLNode.h"
+#import "PdDispatcher.h"
 
 @interface ViewController ()
 {
@@ -19,6 +20,9 @@
     WFSensorType_t _sensorType;
     BOOL _isCollection;
     UserSessionVO *_userSession;
+    
+    PdDispatcher *_dispatcher;
+    void *_patch;
 }
 
 @property (nonatomic, weak) IBOutlet UIButton *blueHRButton;
@@ -37,11 +41,11 @@
 {
     [super viewDidLoad];
     
-    dispatcher = [[PdDispatcher alloc]init];
-    [PdBase setDelegate:dispatcher];
-    patch = [PdBase openFile:@"tuner.pd"
+    _dispatcher = [[PdDispatcher alloc]init];
+    [PdBase setDelegate:_dispatcher];
+    _patch = [PdBase openFile:@"tuner.pd"
                         path:[[NSBundle mainBundle] resourcePath]];
-    if (!patch) {
+    if (!_patch) {
         NSLog(@"Failed to open patch!"); // Gracefully handle failure...
     }
     
@@ -51,9 +55,13 @@
     //    [self addUserSession];
 }
 
--(void)viewDidUnload {
-    [super viewDidUnload]; [PdBase closeFile:patch]; [PdBase setDelegate:nil];
-}
+//??? (nh) won't be used
+//-(void)viewDidUnload {
+//    [super viewDidUnload];
+//    [PdBase closeFile:_patch];
+//    [PdBase setDelegate:nil];
+//}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -74,9 +82,7 @@
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
         [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
             if ([[_userSession appendMotionData:deviceMotion] isEqualToString:@"HS"]) {
-                NSLog(@"Play sound");
-                //TODO: (nh) Play sound
-                //TODO: (nh) Add pd
+                [self playG:self];
             }
         }];
     }
@@ -137,20 +143,24 @@
     }
 }
 
--(void)playNote:(int)n{
-    [PdBase sendFloat:n toReceiver:@"midinote"];
-    [PdBase sendBangToReceiver:@"trigger"];
-    
-}
-
-- (IBAction)playE:(id)sender{
-    NSLog(@"Playing E");
+- (IBAction)playE:(id)sender
+{
     [self playNote:40];
 }
 
--(IBAction)playG:(id)sender {
-    NSLog(@"Playing G");
+- (IBAction)playG:(id)sender
+{
     [self playNote:55];
+}
+
+#pragma mark - Convenient methods
+#pragma mark - 
+
+- (void)playNote:(int)n
+{
+    [PdBase sendFloat:n toReceiver:@"midinote"];
+    [PdBase sendBangToReceiver:@"trigger"];
+    
 }
 
 #pragma mark -
