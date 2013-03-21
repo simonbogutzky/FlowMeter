@@ -13,9 +13,6 @@
 
 @interface UserSessionVO ()
 {
-    unsigned long _dataCount;
-    unsigned int _fileCount;
-    
     NSMutableDictionary *_measurements;
     NSMutableDictionary *_storage;
 }
@@ -37,33 +34,34 @@
 	return self;
 }
 
-
-
 #pragma mark -
 #pragma mark - Motion methods
 
 - (void)createMotionStorage
 {
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:8000] forKey:@"timestamp"];
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:8000] forKey:@"rotationRateX"];
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:8000] forKey:@"filteredRotationRateX"];
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:8000] forKey:@"label"];
+    [self renewMotionMeasurementStorage];
     
-    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"unfilteredIndicator"];
-    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"filteredIndicator"];
+    // Create a date string of the current date
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    [dateFormatter setDateFormat:@"HH-mm-ss"];
+    NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
     
-    // Counts
-    _dataCount = 0;
-    _fileCount = 1;
+    [_storage setObject:dateString forKey:@"mDateString"];
+    [_storage setObject:timeString forKey:@"mTimeString"];
+    [_storage setObject:@1 forKey:@"mFileCount"];
     
-    // Create data string
-    _data = [NSMutableString stringWithCapacity:1048576]; // 191520000 + 141 bytes for to hours of data and 2 hours overhead (one hour approx. 45mb)
-    [_data appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\"\n",
-     @"timestamp",
-     @"rotationRateX",
-     @"filteredRotationRateX",
-     @"label"
-     ];
+    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mUnfilteredIndicator"];
+    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mFilteredIndicator"];
+}
+
+- (void)renewMotionMeasurementStorage
+{
+    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mTimestamp"];
+    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mRotationRateX"];
+    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mFilteredRotationRateX"];
+    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mLabel"];
 }
 
 - (bool)isPeakFromStorage:(NSMutableDictionary *)storage withKey:(NSString *)key x:(double)x quantile:(double)quantile
@@ -103,73 +101,87 @@
         if (timestamp > 0) {
         
             // Store measurement
-            [[_measurements objectForKey:@"timestamp"] addObject:[NSNumber numberWithDouble:timestamp]];
+            [[_measurements objectForKey:@"mTimestamp"] addObject:[NSNumber numberWithDouble:timestamp]];
             double rotationRateX = deviceMotion.rotationRate.x;
-            [[_measurements objectForKey:@"rotationRateX"] addObject:[NSNumber numberWithDouble:rotationRateX]];
+            [[_measurements objectForKey:@"mRotationRateX"] addObject:[NSNumber numberWithDouble:rotationRateX]];
             double filteredRotationRateX = [self filterX:rotationRateX];
-            [[_measurements objectForKey:@"filteredRotationRateX"] addObject:[NSNumber numberWithDouble:filteredRotationRateX]];
+            [[_measurements objectForKey:@"mFilteredRotationRateX"] addObject:[NSNumber numberWithDouble:filteredRotationRateX]];
         
             // Wait five seconds
-            if (timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue] > 5.0) {
+            if (timestamp - [[[_measurements objectForKey:@"mTimestamp"] objectAtIndex:0] doubleValue] > 5.0) {
 //                if (timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue] < 6.0) {
-                    double quantile06 = [Utility quantileFromX:[_measurements objectForKey:@"rotationRateX"] prob:.06];
-                    [_storage setObject:[NSNumber numberWithDouble:quantile06] forKey:@"unfilteredQuantile06"];
+                    double quantile06 = [Utility quantileFromX:[_measurements objectForKey:@"mRotationRateX"] prob:.06];
+                    [_storage setObject:[NSNumber numberWithDouble:quantile06] forKey:@"mUnfilteredQuantile06"];
 //                }
                 
-                [self isPeakFromStorage:_storage withKey:@"unfiltered" x:rotationRateX quantile:[[_storage objectForKey:@"unfilteredQuantile06"] doubleValue]];
-                [self isPeakFromStorage:_storage withKey:@"filtered" x:filteredRotationRateX quantile:[[_storage objectForKey:@"unfilteredQuantile06"] doubleValue]];
+                [self isPeakFromStorage:_storage withKey:@"mUnfiltered" x:rotationRateX quantile:[[_storage objectForKey:@"mUnfilteredQuantile06"] doubleValue]];
+                [self isPeakFromStorage:_storage withKey:@"mFiltered" x:filteredRotationRateX quantile:[[_storage objectForKey:@"mUnfilteredQuantile06"] doubleValue]];
                 
-                if ([[_storage objectForKey:@"unfilteredIndicator"] boolValue] && [[_storage objectForKey:@"filteredIndicator"] boolValue]) {
-                    NSLog(@"Is Peak with: %f rad/s over quantile with: %f rad/s", filteredRotationRateX, [[_storage objectForKey:@"unfilteredQuantile06"] doubleValue]);
-                    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"unfilteredIndicator"];
-                    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"filteredIndicator"];
+                if ([[_storage objectForKey:@"mUnfilteredIndicator"] boolValue] && [[_storage objectForKey:@"mFilteredIndicator"] boolValue]) {
+                    NSLog(@"Is Peak with: %f rad/s over quantile with: %f rad/s", filteredRotationRateX, [[_storage objectForKey:@"mUnfilteredQuantile06"] doubleValue]);
+                    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mUnfilteredIndicator"];
+                    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mFilteredIndicator"];
                     label = @"HS";
                 }
             } else {
-                NSLog(@"Timestamp: %f",timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue]);
+                NSLog(@"# Timestamp: %f",timestamp - [[[_measurements objectForKey:@"mTimestamp"] objectAtIndex:0] doubleValue]);
             }
-            [[_measurements objectForKey:@"label"] addObject:label];
+            [[_measurements objectForKey:@"mLabel"] addObject:label];
 
             // Save, if needed
-            if (_dataCount != 0 && _dataCount % 6721 == 0) {
+            if([[_measurements objectForKey:@"mTimestamp"] count] % 6000 == 0) {
                 [self seriliazeAndZipMotionData];
-                _data = [NSMutableString stringWithCapacity:1048576];
+                [self renewMotionMeasurementStorage];
             }
-            // Append to data string
-            [_data appendFormat:@"%f,%f,%f,%@\n",
-                timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue],
-                rotationRateX,
-                filteredRotationRateX,
-                label
-             ];
         }
     }
-    _dataCount++;
     return label;
 }
 
 - (NSData *)seriliazeAndZipMotionData
 {
-    // Create a date string of the current date
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-    [dateFormatter setDateFormat:@"HH-mm-ss"];
-    NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
+    NSString *dateString = [_storage objectForKey:@"mDateString"];
+    NSString *timeString = [_storage objectForKey:@"mTimeString"];
+    NSNumber *fileCount = [_storage objectForKey:@"mFileCount"];
     
     // Create the path, where the data should be saved
     NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *pathComponent = [NSString stringWithFormat:@"%@-t%@-%03d.csv.zip", dateString, timeString, _fileCount];
+    NSString *pathComponent = [NSString stringWithFormat:@"%@-t%@-m%03d.csv.zip", dateString, timeString, [fileCount intValue]];
     NSString *savePath = [rootPath stringByAppendingPathComponent:pathComponent];
     
     // Create ZIP file
     ZipFile *zipFile = [[ZipFile alloc] initWithFileName:savePath mode:ZipFileModeCreate];
-    ZipWriteStream *stream = [zipFile writeFileInZipWithName:[NSString stringWithFormat:@"%@-t%@-%03d.csv", dateString, timeString, _fileCount] compressionLevel:ZipCompressionLevelDefault];
-    [stream writeData:[_data dataUsingEncoding:NSUTF8StringEncoding]];
+    ZipWriteStream *stream = [zipFile writeFileInZipWithName:[NSString stringWithFormat:@"%@-t%@-m%03d.csv", dateString, timeString, [fileCount intValue]] compressionLevel:ZipCompressionLevelDefault];
+    
+    // Create data string
+    NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
+    [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\"\n",
+     @"timestamp",
+     @"rotationRateX",
+     @"filteredRotationRateX",
+     @"label"
+     ];
+    
+    // Get first timestamp
+    NSNumber *timestamp = [[_measurements objectForKey:@"mTimestamp"] objectAtIndex:0];
+    
+    for (int i = 0; i < [[_measurements objectForKey:@"mTimestamp"] count]; i++) {
+        
+        // Append to data string
+        [dataString appendFormat:@"%f,%f,%f,%@\n",
+         [[[_measurements objectForKey:@"mTimestamp"] objectAtIndex:i] doubleValue] - [timestamp doubleValue],
+         [[[_measurements objectForKey:@"mRotationRateX"] objectAtIndex:i] doubleValue],
+         [[[_measurements objectForKey:@"mFilteredRotationRateX"] objectAtIndex:i] doubleValue],
+         [[_measurements objectForKey:@"mLabel"] objectAtIndex:i]
+         ];
+    }
+    
+    
+    [stream writeData:[dataString dataUsingEncoding:NSUTF8StringEncoding]];
     [stream finishedWriting];
     [zipFile close];
     
-    _fileCount++;
+    [_storage setObject:[NSNumber numberWithInt:[fileCount intValue] + 1] forKey:@"mFileCount"];
     
     // Compressed data
     return [[NSFileManager defaultManager] contentsAtPath:savePath];
@@ -200,8 +212,25 @@ static float xv[NZEROS+1], yv[NPOLES+1];
 
 - (void)createHrStorage
 {
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:8000] forKey:@"hrTimestamp"];
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:8000] forKey:@"rrIntervals"];
+    [self renewHrMeasurementStorage];
+    
+    // Create a date string of the current date
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    [dateFormatter setDateFormat:@"HH-mm-ss"];
+    NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
+    
+    [_storage setObject:dateString forKey:@"hrDateString"];
+    [_storage setObject:timeString forKey:@"hrTimeString"];
+    [_storage setObject:@1 forKey:@"hrFileCount"];
+    
+}
+
+- (void)renewHrMeasurementStorage
+{
+    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"hrTimestamp"];
+    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"rrIntervals"];
 }
 
 - (void)appendHrData:(WFHeartrateData *)hrData
@@ -210,6 +239,7 @@ static float xv[NZEROS+1], yv[NPOLES+1];
         NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
         for (NSNumber* rrInterval in rrIntervals) {
             [[_measurements objectForKey:@"hrTimestamp"] addObject:[NSNumber numberWithDouble:hrData.timestamp]];
+            [[_measurements objectForKey:@"hr"] addObject:[NSNumber numberWithDouble:hrData.computedHeartrate]];
             [[_measurements objectForKey:@"rrIntervals"] addObject:rrInterval];
         }
     }
@@ -217,20 +247,26 @@ static float xv[NZEROS+1], yv[NPOLES+1];
 
 - (void)seriliazeAndZipHrData
 {
-    // Create a date string of the current date
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-    [dateFormatter setDateFormat:@"HH-mm-ss"];
-    NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
+    NSString *dateString = [_storage objectForKey:@"hrDateString"];
+    NSString *timeString = [_storage objectForKey:@"hrTimeString"];
+    NSNumber *fileCount = [_storage objectForKey:@"hrFileCount"];
     
     // Create the path, where the data should be saved
     NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *pathComponent = [NSString stringWithFormat:@"%@-t%@-hr.txt.zip", dateString, timeString];
+    NSString *pathComponent = [NSString stringWithFormat:@"%@-t%@-hr%03d.csv.zip", dateString, timeString, [fileCount intValue]];
     NSString *savePath = [rootPath stringByAppendingPathComponent:pathComponent];
     
+    // Create ZIP file
+    ZipFile *zipFile = [[ZipFile alloc] initWithFileName:savePath mode:ZipFileModeCreate];
+    ZipWriteStream *stream = [zipFile writeFileInZipWithName:[NSString stringWithFormat:@"%@-t%@-hr%03d.csv", dateString, timeString, [fileCount intValue]] compressionLevel:ZipCompressionLevelDefault];
+    
     // Create data string
-    NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:16000];
+    NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
+    [dataString appendFormat:@"\"%@\",\"%@\",\"%@\"\n",
+     @"timestamp",
+     @"hr",
+     @"rrIntervals"
+     ];
     
     // Get first timestamp
     NSNumber *timestamp = [[_measurements objectForKey:@"hrTimestamp"] objectAtIndex:0];
@@ -238,15 +274,15 @@ static float xv[NZEROS+1], yv[NPOLES+1];
     for (int i = 0; i < [[_measurements objectForKey:@"hrTimestamp"] count]; i++) {
         
         // Append to data string
-        [dataString appendFormat:@"%f\t%f\n",
+        [dataString appendFormat:@"%f,%f,%f\n",
          [[[_measurements objectForKey:@"hrTimestamp"] objectAtIndex:i] doubleValue] - [timestamp doubleValue],
+         [[[_measurements objectForKey:@"hr"] objectAtIndex:i] doubleValue],
          [[[_measurements objectForKey:@"rrIntervals"] objectAtIndex:i] doubleValue]
          ];
     }
     
-    // Create ZIP file
-    ZipFile *zipFile = [[ZipFile alloc] initWithFileName:savePath mode:ZipFileModeCreate];
-    ZipWriteStream *stream = [zipFile writeFileInZipWithName:[NSString stringWithFormat:@"%@-t%@-hr.txt", dateString, timeString] compressionLevel:ZipCompressionLevelDefault];
+    [_storage setObject:[NSNumber numberWithInt:[fileCount intValue] + 1] forKey:@"hrFileCount"];
+    
     [stream writeData:[dataString dataUsingEncoding:NSASCIIStringEncoding]];
     [stream finishedWriting];
     [zipFile close];

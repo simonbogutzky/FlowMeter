@@ -86,16 +86,6 @@
     // Stop location updates
     CLLocationManager *locationManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedLocationManager];
     [locationManager stopUpdatingLocation];
-    
-    [_userSession seriliazeAndZipMotionData];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Great job!", @"Great job!")
-                                                    message:NSLocalizedString(@"Motion Data has been locally saved." , @"Motion Data has been locally saved.")
-                                                   delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-                                          otherButtonTitles:nil];
-    
-    [alert show];
-    NSLog(@"# Motion Data has been locally saved");
 }
 
 #pragma mark -
@@ -113,6 +103,17 @@
     } else {
         [startStopCollectionButton setTitle:@"start" forState:0];
         [self stopUpdates];
+        
+        [_userSession seriliazeAndZipMotionData];
+        [_userSession seriliazeAndZipHrData];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Great job!", @"Great job!")
+                                                        message:NSLocalizedString(@"Data has been locally saved." , @"Data has been locally saved.")
+                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+        NSLog(@"# Data has been locally saved");
     }
 }
 
@@ -189,16 +190,6 @@
     if (_sensorConnection.connectionStatus == WF_SENSOR_CONNECTION_STATUS_CONNECTED || _sensorConnection.connectionStatus == WF_SENSOR_CONNECTION_STATUS_CONNECTING) {
         [_sensorConnection disconnect];
     }
-    
-    [_userSession seriliazeAndZipHrData];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Great job!", @"Great job!")
-                                                    message:NSLocalizedString(@"HR Data has been locally saved." , @"HR Data has been locally saved.")
-                                                   delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-                                          otherButtonTitles:nil];
-    
-    [alert show];
-    NSLog(@"# HR Data has been locally saved");
 }
 
 - (void)updateSensorData
@@ -208,51 +199,20 @@
         WFHeartrateData *hrData = [hrConnection getHeartrateData];
         WFHeartrateRawData *hrRawData = [hrConnection getHeartrateRawData];
         if (hrData != nil) {
-//            NSLog("---- HR Data ----");
-//???: (sb) Always nil
-//            NSLog("# Beat time: %d", hrData.beatTime);
-//            NSLog("# Computed heartrate: %d", hrData.computedHeartrate);
-//            NSLog("# Accum beat count: %d", hrData.accumBeatCount);
-//            NSLog("# Timestamp: %f", hrData.timestamp);
-//            NSLog("# Timestamp overflow: %@", hrData.timestampOverflow ? @"YES" : @"NO");
-//            NSLog("# Formatted heartrate: %@", [hrData formattedHeartrate:YES]);
-            
             _bmpLabel.text = [hrData formattedHeartrate:YES];
-        }
-//???: (sb) Always nil
-//        if (hrRawData) {
-//            NSLog("---- HR Raw Data ----");
-//            NSLog("# R Beat time: %d", hrRawData.beatTime);
-//            NSLog("# R Beat count: %d", hrRawData.beatCount);
-//            NSLog("# R Computed heartrate: %d", hrRawData.computedHeartrate);
-//            NSLog("# R Previous beat time: %d", hrRawData.previousBeatTime);
-//        }
-        
-        // BTLE HR monitors optionally transmit R-R intervals. this demo does not
-        // display R-R values.  however, the following code is included to demonstrate
-        // how to read and parse R-R intervals.
-        if ([hrData isKindOfClass:[WFBTLEHeartrateData class]]) {
-            NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
-            for (NSNumber* rrInterval in rrIntervals) {
-//                NSLog("---- RR Data ----");
-                NSLog(@"# R-R interval: %1.3f s.", [rrInterval doubleValue]);
+            if(_isCollection) {
+                [_userSession appendHrData:hrData];
             }
         }
         
-        // the common data for BTLE sensors is still in beta state.  this data
-        // will eventually be merged with the existing common data.  for current demo
-        // purposes, the battery level is updated directly from this HR view controller.
         if (hrRawData.btleCommonData) {
-//            NSLog("---- BTLE Common Data ----");
-//            NSLog(@"# Battery level: %@", [NSString stringWithFormat:@"# %u %%", hrRawData.btleCommonData.batteryLevel]);
             dispatch_async(dispatch_get_main_queue(), ^{
                 _batteryLevelLabel.text = [NSString stringWithFormat:@"%u %%", hrRawData.btleCommonData.batteryLevel];
             });
         }
-        [_userSession appendHrData:hrData];
+        
     }
     else {
-        NSLog(@"# n/a");
         _bmpLabel.text = @"n/a";
         _batteryLevelLabel.text = @"n/a";
     }
