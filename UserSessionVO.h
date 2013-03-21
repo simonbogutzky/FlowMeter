@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <WFConnector/WFConnector.h>
 #import "CMDeviceMotion+TransformToReferenceFrame.h"
 
 @interface UserSessionVO : NSObject 
@@ -17,11 +18,14 @@
 @property (nonatomic, strong) NSString *udid;
 @property (nonatomic, strong) NSMutableString *data;
 
+- (void)createMotionStorage;
+- (NSString *)appendMotionData:(CMDeviceMotion *)deviceMotion;
+- (NSData *)seriliazeAndZipMotionData;
+- (void)createHrStorage;
+- (void)appendHrData:(WFHeartrateData *)hrData;
+- (void)seriliazeAndZipHrData;
 
 //- (NSString *)xmlRepresentation;
 //- (void)setWithPropertyDictionary:(NSDictionary *)propertyDictionary;
-- (NSString *)appendMotionData:(CMDeviceMotion *)deviceMotion;
-- (NSData *)seriliazeAndZip;
-
 
 @end
