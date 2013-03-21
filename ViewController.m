@@ -35,8 +35,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    dispatcher = [[PdDispatcher alloc]init];
+    [PdBase setDelegate:dispatcher];
+    patch = [PdBase openFile:@"tuner.pd"
+                        path:[[NSBundle mainBundle] resourcePath]];
+    if (!patch) {
+        NSLog(@"Failed to open patch!"); // Gracefully handle failure...
+    }
 }
 
+-(void)viewDidUnload {
+    [super viewDidUnload]; [PdBase closeFile:patch]; [PdBase setDelegate:nil];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

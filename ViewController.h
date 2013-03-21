@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <WFConnector/WFConnector.h>
+#import "PdDispatcher.h"
 
 @interface ViewController : UIViewController <WFSensorConnectionDelegate>
+{
+    PdDispatcher *dispatcher;
+    void *patch;
+
+}
 @end
