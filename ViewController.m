@@ -25,6 +25,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *bmpLabel;
 @property (nonatomic, weak) IBOutlet UILabel *batteryLevelLabel;
 
+
 @end
 
 @implementation ViewController
@@ -125,6 +126,22 @@
     } else {
         [self disconnectSensor];
     }
+}
+
+-(void)playNote:(int)n{
+    [PdBase sendFloat:n toReceiver:@"midinote"];
+    [PdBase sendBangToReceiver:@"trigger"];
+    
+}
+
+- (IBAction)playE:(id)sender{
+    NSLog(@"Playing E");
+    [self playNote:40];
+}
+
+-(IBAction)playG:(id)sender {
+    NSLog(@"Playing G");
+    [self playNote:55];
 }
 
 #pragma mark -
