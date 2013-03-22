@@ -23,6 +23,7 @@
 - (void)createHrStorage;
 - (void)appendHrData:(WFHeartrateData *)hrData;
 - (void)seriliazeAndZipHrData;
+- (int)hrCount;
 
 //- (NSString *)xmlRepresentation;
 //- (void)setWithPropertyDictionary:(NSDictionary *)propertyDictionary;

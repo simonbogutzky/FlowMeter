@@ -288,6 +288,14 @@ static float xv[NZEROS+1], yv[NPOLES+1];
     [zipFile close];
 }
 
+- (int)hrCount
+{
+    if([_measurements objectForKey:@"hrTimestamp"] != nil) {
+        return [[_measurements objectForKey:@"hrTimestamp"] count];
+    }
+    return 0;
+}
+
 //???: (sb) Unused code
 //- (NSString *)xmlRepresentation
 //{

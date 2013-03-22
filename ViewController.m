@@ -105,7 +105,11 @@
         [self stopUpdates];
         
         [_userSession seriliazeAndZipMotionData];
-        [_userSession seriliazeAndZipHrData];
+        
+        if ([_userSession hrCount] != 0)
+        {
+            [_userSession seriliazeAndZipHrData];
+        }
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Great job!", @"Great job!")
                                                         message:NSLocalizedString(@"Data has been locally saved." , @"Data has been locally saved.")
@@ -231,6 +235,8 @@
     switch (connState) {
         case WF_SENSOR_CONNECTION_STATUS_IDLE:
             [_blueHRButton setTitle:@"Connect BlueHR" forState:0];
+            _bmpLabel.text = @"n/a";
+            _batteryLevelLabel.text = @"n/a";
             break;
             
         case WF_SENSOR_CONNECTION_STATUS_CONNECTED:
