@@ -11,9 +11,9 @@
 
 @interface AppDelegate ()
 {
-    CMMotionManager *motionManager;
-    CLLocationManager *locationManager;
-    WFHardwareConnector *hardwareConnector;
+    CMMotionManager *_motionManager;
+    CLLocationManager *_locationManager;
+    WFHardwareConnector *_hardwareConnector;
 }
 @end
 
@@ -26,18 +26,18 @@
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        motionManager = [[CMMotionManager alloc] init];
+        _motionManager = [[CMMotionManager alloc] init];
     });
-    return motionManager;
+    return _motionManager;
 }
 
 - (CLLocationManager *)sharedLocationManager
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        locationManager = [[CLLocationManager alloc] init];
+        _locationManager = [[CLLocationManager alloc] init];
     });
-    return locationManager;
+    return _locationManager;
 }
 
 - (WFHardwareConnector *)sharedHardwareConnector
@@ -46,16 +46,16 @@
     dispatch_once(&onceToken, ^{
         
         // Configure the hardware connector.
-        hardwareConnector = [WFHardwareConnector sharedConnector];
-        hardwareConnector.delegate = self;
-        hardwareConnector.sampleRate = 0.01;  // sample rate 1 ms, or 100 Hz.
-        hardwareConnector.settings.searchTimeout = 60;
+        _hardwareConnector = [WFHardwareConnector sharedConnector];
+        _hardwareConnector.delegate = self;
+        _hardwareConnector.sampleRate = 0.01;  // sample rate 1 ms, or 100 Hz.
+        _hardwareConnector.settings.searchTimeout = 60;
         
         // Determine support for BTLE
-        if (hardwareConnector.hasBTLESupport) {
+        if (_hardwareConnector.hasBTLESupport) {
             
             // Enable BTLE
-            [hardwareConnector enableBTLE:YES];
+            [_hardwareConnector enableBTLE:YES];
         } else {
             NSLog(@"# Device does not support BTLE");
         }
@@ -63,7 +63,7 @@
 //        // Set HW Connector to call hasData only when new data is available.
 //        [hardwareConnector setSampleTimerDataCheck:YES];
     });
-    return hardwareConnector;
+    return _hardwareConnector;
 }
 
 #pragma mark -
