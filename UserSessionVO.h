@@ -16,7 +16,6 @@
 @property (nonatomic, strong) NSDate *created;
 @property (nonatomic, strong) NSDate *modified;
 @property (nonatomic, strong) NSString *udid;
-@property (nonatomic, strong) NSMutableString *data;
 
 - (void)createMotionStorage;
 - (NSString *)appendMotionData:(CMDeviceMotion *)deviceMotion;
@@ -24,6 +23,7 @@
 - (void)createHrStorage;
 - (void)appendHrData:(WFHeartrateData *)hrData;
 - (void)seriliazeAndZipHrData;
+- (int)hrCount;
 
 //- (NSString *)xmlRepresentation;
 //- (void)setWithPropertyDictionary:(NSDictionary *)propertyDictionary;
