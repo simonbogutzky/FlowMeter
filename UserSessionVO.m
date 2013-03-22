@@ -101,7 +101,7 @@
         if (timestamp > 0) {
             
             // Store first timestamp
-            if ([[_measurements objectForKey:@"mTimestamp"] count] == 0) {
+            if ([[_measurements objectForKey:@"mTimestamp"] count] == 0 && [[_storage objectForKey:@"mFileCount"] intValue] == 1) {
                 [_storage setObject:[NSNumber numberWithFloat:timestamp] forKey:@"mTimestamp"];
             }
         
@@ -114,7 +114,7 @@
         
             // Wait five seconds
             if (timestamp - [[_storage objectForKey:@"mTimestamp"] doubleValue] > 5.0) {
-//                if (timestamp - [[_storage objectForKey:@"mTimestamp"] doubleValue] < 6.0) {
+//                if (timestamp - [[_storage objectForKey:@"mTimestamp"] doubleValue] < 6.0) 
                     double quantile06 = [Utility quantileFromX:[_measurements objectForKey:@"mRotationRateX"] prob:.06];
                     [_storage setObject:[NSNumber numberWithDouble:quantile06] forKey:@"mUnfilteredQuantile06"];
 //                }
@@ -246,7 +246,7 @@ static float xv[NZEROS+1], yv[NPOLES+1];
         for (NSNumber* rrInterval in rrIntervals) {
             
             // Store first timestamp
-            if ([[_measurements objectForKey:@"hrTimestamp"] count] == 0) {
+            if ([[_measurements objectForKey:@"hrTimestamp"] count] == 0 && [[_storage objectForKey:@"hrFileCount"] intValue] == 1) {
                 [_storage setObject:[NSNumber numberWithFloat:hrData.timestamp] forKey:@"hrTimestamp"];
             }
             
