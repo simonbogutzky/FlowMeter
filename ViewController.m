@@ -100,6 +100,7 @@
     if (_isCollection) {
         [startStopCollectionButton setTitle:@"stop" forState:0];
         [self startUpdates];
+        [_userSession createHrStorage];
     } else {
         [startStopCollectionButton setTitle:@"start" forState:0];
         [self stopUpdates];
@@ -135,8 +136,6 @@
 
 - (void)initSensorConnection
 {
-    [_userSession createHrStorage];
-    
     // Register for HW connector notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSensorData) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
     

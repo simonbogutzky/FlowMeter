@@ -99,6 +99,11 @@
         // Get timestamp
         double timestamp = deviceMotion.timestamp;
         if (timestamp > 0) {
+            
+            // Store first timestamp
+            if ([[_measurements objectForKey:@"mTimestamp"] count] == 0) {
+                [_storage setObject:[NSNumber numberWithFloat:timestamp] forKey:@"mTimestamp"];
+            }
         
             // Store measurement
             [[_measurements objectForKey:@"mTimestamp"] addObject:[NSNumber numberWithDouble:timestamp]];
@@ -108,8 +113,8 @@
             [[_measurements objectForKey:@"mFilteredRotationRateX"] addObject:[NSNumber numberWithDouble:filteredRotationRateX]];
         
             // Wait five seconds
-            if (timestamp - [[[_measurements objectForKey:@"mTimestamp"] objectAtIndex:0] doubleValue] > 5.0) {
-//                if (timestamp - [[[_measurements objectForKey:@"timestamp"] objectAtIndex:0] doubleValue] < 6.0) {
+            if (timestamp - [[_storage objectForKey:@"mTimestamp"] doubleValue] > 5.0) {
+//                if (timestamp - [[_storage objectForKey:@"mTimestamp"] doubleValue] < 6.0) {
                     double quantile06 = [Utility quantileFromX:[_measurements objectForKey:@"mRotationRateX"] prob:.06];
                     [_storage setObject:[NSNumber numberWithDouble:quantile06] forKey:@"mUnfilteredQuantile06"];
 //                }
@@ -124,12 +129,12 @@
                     label = @"HS";
                 }
             } else {
-                NSLog(@"# Timestamp: %f",timestamp - [[[_measurements objectForKey:@"mTimestamp"] objectAtIndex:0] doubleValue]);
+                NSLog(@"# Timestamp: %f", timestamp - [[_storage objectForKey:@"mTimestamp"] doubleValue]);
             }
             [[_measurements objectForKey:@"mLabel"] addObject:label];
 
             // Save, if needed
-            if([[_measurements objectForKey:@"mTimestamp"] count] % 6000 == 0) {
+            if([[_measurements objectForKey:@"mTimestamp"] count] != 0 && [[_measurements objectForKey:@"mTimestamp"] count] % 6000 == 0) {
                 [self seriliazeAndZipMotionData];
                 [self renewMotionMeasurementStorage];
             }
@@ -163,7 +168,7 @@
      ];
     
     // Get first timestamp
-    NSNumber *timestamp = [[_measurements objectForKey:@"mTimestamp"] objectAtIndex:0];
+    NSNumber *timestamp = [_storage objectForKey:@"mTimestamp"];
     
     for (int i = 0; i < [[_measurements objectForKey:@"mTimestamp"] count]; i++) {
         
@@ -230,6 +235,7 @@ static float xv[NZEROS+1], yv[NPOLES+1];
 - (void)renewHrMeasurementStorage
 {
     [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"hrTimestamp"];
+    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"hr"];
     [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"rrIntervals"];
 }
 
@@ -238,9 +244,21 @@ static float xv[NZEROS+1], yv[NPOLES+1];
     if ([hrData isKindOfClass:[WFBTLEHeartrateData class]]) {
         NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
         for (NSNumber* rrInterval in rrIntervals) {
+            
+            // Store first timestamp
+            if ([[_measurements objectForKey:@"hrTimestamp"] count] == 0) {
+                [_storage setObject:[NSNumber numberWithFloat:hrData.timestamp] forKey:@"hrTimestamp"];
+            }
+            
             [[_measurements objectForKey:@"hrTimestamp"] addObject:[NSNumber numberWithDouble:hrData.timestamp]];
             [[_measurements objectForKey:@"hr"] addObject:[NSNumber numberWithDouble:hrData.computedHeartrate]];
             [[_measurements objectForKey:@"rrIntervals"] addObject:rrInterval];
+            
+            // Save, if needed
+            if([[_measurements objectForKey:@"hrTimestamp"] count] != 0 && [[_measurements objectForKey:@"hrTimestamp"] count] % 6000 == 0) {
+                [self seriliazeAndZipHrData];
+                [self renewHrMeasurementStorage];
+            }
         }
     }
 }
@@ -269,7 +287,7 @@ static float xv[NZEROS+1], yv[NPOLES+1];
      ];
     
     // Get first timestamp
-    NSNumber *timestamp = [[_measurements objectForKey:@"hrTimestamp"] objectAtIndex:0];
+    NSNumber *timestamp = [_storage objectForKey:@"hrTimestamp"];
     
     for (int i = 0; i < [[_measurements objectForKey:@"hrTimestamp"] count]; i++) {
         
