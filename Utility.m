@@ -10,21 +10,23 @@
 
 @implementation Utility
 
-+ (double)quantileFromX:(NSMutableArray *)x prob:(double)prob
++ (double)quantileFromX:(NSArray *)x prob:(double)prob
 {
+    NSMutableArray *x1 = [[NSMutableArray alloc] initWithArray:x];
+    
     // Sort array
     NSSortDescriptor *lowestToHighest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-    [x sortUsingDescriptors:[NSArray arrayWithObject:lowestToHighest]];
+    [x1 sortUsingDescriptors:[NSArray arrayWithObject:lowestToHighest]];
     
     // Formula (see "http://de.wikipedia.org/wiki/Quantil")
-    double np = [x count] * prob;
+    double np = [x1 count] * prob;
     if ([self isInteger:np]) {
         int i1 = np - 1;
         int i2 = np;
-        return 0.5 * ([[x objectAtIndex:i1] doubleValue] + [[x objectAtIndex:i2] doubleValue]);
+        return 0.5 * ([[x1 objectAtIndex:i1] doubleValue] + [[x1 objectAtIndex:i2] doubleValue]);
     }
     int i = ceil(np) - 1;
-    return [[x objectAtIndex:i] doubleValue];
+    return [[x1 objectAtIndex:i] doubleValue];
 }
 
 + (bool)isInteger:(double)k
