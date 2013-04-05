@@ -82,7 +82,7 @@
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
         [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
             if ([[_userSession appendMotionData:deviceMotion] isEqualToString:@"EC"]) {
-                [self playG:self];
+                [self playE:self];
             }
         }];
     }
@@ -151,7 +151,7 @@
 
 - (IBAction)playE:(id)sender
 {
-    [self playNote:40];
+    [self playNote:90];
 }
 
 - (IBAction)playG:(id)sender
