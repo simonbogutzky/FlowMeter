@@ -27,9 +27,6 @@
         
         // Create dictionary for measurements
         _measurements = [[NSMutableDictionary alloc] init];
-        
-        // Create store for fix values
-        _storage = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
@@ -40,6 +37,9 @@
 - (void)createMotionStorage
 {
     [self renewMotionMeasurementStorage];
+    
+    // Create store for fix values
+    _storage = [[NSMutableDictionary alloc] init];
     
     // Create a date string of the current date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -61,6 +61,7 @@
     [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mTimestamp"];
     [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mRotationRateX"];
     [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mFilteredRotationRateX"];
+    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mRotationRateXQuantile06"];
     [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mLabel"];
 }
 
@@ -82,7 +83,7 @@
     [storage setObject:[NSNumber numberWithDouble:x] forKey:[NSString stringWithFormat:@"%@PreviousMeasurement", key]];
     
     // Look for sign changes
-    if (slope * previousSlope < 0 && quantile > previousMeasurement) { 
+    if (slope * previousSlope < 0 && quantile > previousMeasurement) {
         [storage setObject:[NSNumber numberWithBool:YES] forKey:[NSString stringWithFormat:@"%@Indicator", key]];
         return YES;
     }
@@ -95,7 +96,7 @@
     NSString *label = @"";
     
     if (deviceMotion != nil) {
-    
+        
         // Get timestamp
         double timestamp = deviceMotion.timestamp;
         if (timestamp > 0) {
@@ -104,14 +105,14 @@
             if ([[_measurements objectForKey:@"mTimestamp"] count] == 0 && [[_storage objectForKey:@"mFileCount"] intValue] == 1) {
                 [_storage setObject:[NSNumber numberWithFloat:timestamp] forKey:@"mTimestamp"];
             }
-        
+            
             // Store measurement
             [[_measurements objectForKey:@"mTimestamp"] addObject:[NSNumber numberWithDouble:timestamp]];
             double rotationRateX = deviceMotion.rotationRate.x;
             [[_measurements objectForKey:@"mRotationRateX"] addObject:[NSNumber numberWithDouble:rotationRateX]];
             double filteredRotationRateX = [self filterX:rotationRateX];
             [[_measurements objectForKey:@"mFilteredRotationRateX"] addObject:[NSNumber numberWithDouble:filteredRotationRateX]];
-        
+            
             // Wait five seconds
             if (timestamp - [[_storage objectForKey:@"mTimestamp"] doubleValue] > 5.0) {
                 int timestampCount = [[_measurements objectForKey:@"mTimestamp"] count];
@@ -134,7 +135,13 @@
                 NSLog(@"# Timestamp: %f", timestamp - [[_storage objectForKey:@"mTimestamp"] doubleValue]);
             }
             [[_measurements objectForKey:@"mLabel"] addObject:label];
-
+            
+            if ([_storage objectForKey:@"mRotationRateXQuantile06"] != nil) {
+                [[_measurements objectForKey:@"mRotationRateXQuantile06"] addObject:[_storage objectForKey:@"mRotationRateXQuantile06"]];
+            } else {
+                [[_measurements objectForKey:@"mRotationRateXQuantile06"] addObject:@0];
+            }
+            
             // Save, if needed
             if([[_measurements objectForKey:@"mTimestamp"] count] != 0 && [[_measurements objectForKey:@"mTimestamp"] count] % 6000 == 0) {
                 [self seriliazeAndZipMotionData];
@@ -162,10 +169,11 @@
     
     // Create data string
     NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
-    [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\"\n",
+    [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
      @"timestamp",
      @"rotationRateX",
      @"filteredRotationRateX",
+     @"rotationRateXQuantile06",
      @"label"
      ];
     
@@ -175,10 +183,11 @@
     for (int i = 0; i < [[_measurements objectForKey:@"mTimestamp"] count]; i++) {
         
         // Append to data string
-        [dataString appendFormat:@"%f,%f,%f,%@\n",
+        [dataString appendFormat:@"%f,%f,%f,%f,%@\n",
          [[[_measurements objectForKey:@"mTimestamp"] objectAtIndex:i] doubleValue] - [timestamp doubleValue],
          [[[_measurements objectForKey:@"mRotationRateX"] objectAtIndex:i] doubleValue],
          [[[_measurements objectForKey:@"mFilteredRotationRateX"] objectAtIndex:i] doubleValue],
+         [[[_measurements objectForKey:@"mRotationRateXQuantile06"] objectAtIndex:i] doubleValue],
          [[_measurements objectForKey:@"mLabel"] objectAtIndex:i]
          ];
     }
@@ -321,35 +330,35 @@ static float xv[NZEROS+1], yv[NPOLES+1];
 //{
 //	NSMutableString *xml = [NSMutableString stringWithCapacity:32];
 //	[xml appendString:@"<UserSession>"];
-//	
+//
 //	if (_objectId != nil)
 //    {
 //		[xml appendFormat:@"<id>%lu</id>", [_objectId unsignedLongValue]];
 //	}
-//	
+//
 //	if (_created != nil)
 //    {
 //		NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
 //		[outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 //		NSString *createdString = [outputFormatter stringFromDate:_created];
-//		
+//
 //		[xml appendFormat:@"<created>%@</created>", createdString];
 //	}
-//    
+//
 //    if (_modified != nil)
 //    {
 //		NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
 //		[outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 //		NSString *modifiedString = [outputFormatter stringFromDate:_modified];
-//		
+//
 //		[xml appendFormat:@"<modified>%@</modified>", modifiedString];
 //	}
-//    
+//
 //    if (_udid != nil)
 //    {
 //		[xml appendFormat:@"<udid>%@</udid>", _udid];
 //	}
-//	
+//
 //	[xml appendString:@"</UserSession>"];
 //	return xml;
 //}
@@ -359,25 +368,25 @@ static float xv[NZEROS+1], yv[NPOLES+1];
 //    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
 //    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 //    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    
+//
 //    if (propertyDictionary[@"id"] != nil)
 //    {
 //        NSNumber *tempObjectId = @([[numberFormatter numberFromString:propertyDictionary[@"id"]] unsignedLongValue]);
 //        self.objectId = tempObjectId;
 //    }
-//    
+//
 //    if (propertyDictionary[@"created"] != nil)
 //    {
 //        NSDate *createdDate = [dateFormatter dateFromString:propertyDictionary[@"created"]];
 //        self.created = createdDate;
 //    }
-//    
+//
 //    if (propertyDictionary[@"modified"] != nil)
 //    {
 //        NSDate *modifiedDate = [dateFormatter dateFromString:propertyDictionary[@"modified"]];
 //        self.modified = modifiedDate;
 //    }
-//    
+//
 //    if (propertyDictionary[@"udid"] != nil)
 //    {
 //        self.udid = propertyDictionary[@"udid"];
