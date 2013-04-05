@@ -52,8 +52,8 @@
     [_storage setObject:timeString forKey:@"mTimeString"];
     [_storage setObject:@1 forKey:@"mFileCount"];
     
-    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mUnfilteredIndicator"];
-    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mFilteredIndicator"];
+    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mRotationRateXIndicator"];
+    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mFilteredRotationRateXIndicator"];
 }
 
 - (void)renewMotionMeasurementStorage
@@ -116,17 +116,17 @@
             if (timestamp - [[_storage objectForKey:@"mTimestamp"] doubleValue] > 5.0) {
                 int timestampCount = [[_measurements objectForKey:@"mTimestamp"] count];
                 if (timestampCount % 500 == 0) {
-                    double quantile06 = [Utility quantileFromX:[_measurements objectForKey:@"mRotationRateX"] prob:.06];
-                    [_storage setObject:[NSNumber numberWithDouble:quantile06] forKey:@"mUnfilteredQuantile06"];
+                    double rotationRateXQuantile06 = [Utility quantileFromX:[_measurements objectForKey:@"mRotationRateX"] prob:.06];
+                    [_storage setObject:[NSNumber numberWithDouble:rotationRateXQuantile06] forKey:@"mRotationRateXQuantile06"];
                 }
-                if ([_storage objectForKey:@"mUnfilteredQuantile06"] != nil) {
-                    [self isPeakFromStorage:_storage withKey:@"mUnfiltered" x:rotationRateX quantile:[[_storage objectForKey:@"mUnfilteredQuantile06"] doubleValue]];
-                    [self isPeakFromStorage:_storage withKey:@"mFiltered" x:filteredRotationRateX quantile:[[_storage objectForKey:@"mUnfilteredQuantile06"] doubleValue]];
+                if ([_storage objectForKey:@"mRotationRateXQuantile06"] != nil) {
+                    [self isPeakFromStorage:_storage withKey:@"mRotationRateX" x:rotationRateX quantile:[[_storage objectForKey:@"mRotationRateXQuantile06"] doubleValue]];
+                    [self isPeakFromStorage:_storage withKey:@"mFilteredRotationRateX" x:filteredRotationRateX quantile:[[_storage objectForKey:@"mRotationRateXQuantile06"] doubleValue]];
                     
-                    if ([[_storage objectForKey:@"mUnfilteredIndicator"] boolValue] && [[_storage objectForKey:@"mFilteredIndicator"] boolValue]) {
-                        NSLog(@"Is Peak with: %f rad/s over quantile with: %f rad/s", filteredRotationRateX, [[_storage objectForKey:@"mUnfilteredQuantile06"] doubleValue]);
-                        [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mUnfilteredIndicator"];
-                        [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mFilteredIndicator"];
+                    if ([[_storage objectForKey:@"mRotationRateXIndicator"] boolValue] && [[_storage objectForKey:@"mFilteredRotationRateXIndicator"] boolValue]) {
+                        NSLog(@"Is Peak with: %f rad/s over quantile with: %f rad/s", filteredRotationRateX, [[_storage objectForKey:@"mRotationRateXQuantile06"] doubleValue]);
+                        [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mRotationRateXIndicator"];
+                        [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mFilteredRotationRateXIndicator"];
                         label = @"HS";
                     }
                 }
