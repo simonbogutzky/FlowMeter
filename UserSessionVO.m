@@ -127,7 +127,7 @@
                         NSLog(@"Is Peak with: %f rad/s over quantile with: %f rad/s", filteredRotationRateX, [[_storage objectForKey:@"mRotationRateXQuantile06"] doubleValue]);
                         [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mRotationRateXIndicator"];
                         [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mFilteredRotationRateXIndicator"];
-                        label = @"HS";
+                        label = @"EC";
                     }
                 }
             } else {
