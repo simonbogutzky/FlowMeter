@@ -81,7 +81,7 @@
     if ([motionManager isDeviceMotionAvailable] == YES) {
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
         [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
-            if ([[_userSession appendMotionData:deviceMotion] isEqualToString:@"HS"]) {
+            if ([[_userSession appendMotionData:deviceMotion] isEqualToString:@"EC"]) {
                 [self playG:self];
             }
         }];
