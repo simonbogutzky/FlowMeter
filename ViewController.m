@@ -23,6 +23,7 @@
     
     PdDispatcher *_dispatcher;
     void *_patch;
+    int _lastAccumBeatCount;
 }
 
 @property (nonatomic, weak) IBOutlet UIButton *blueHRButton;
@@ -224,6 +225,8 @@
             });
         }
     }
+    
+    _lastAccumBeatCount = 0;
 }
 
 - (void)disconnectSensor
@@ -241,6 +244,29 @@
         WFHeartrateRawData *hrRawData = [hrConnection getHeartrateRawData];
         if (hrData != nil) {
             _bmpLabel.text = [hrData formattedHeartrate:YES];
+            
+            if (_lastAccumBeatCount < hrData.accumBeatCount) {
+                // Sonify beat
+                [self playE:self];
+                
+                _lastAccumBeatCount = hrData.accumBeatCount;
+            }
+            
+            // Debug logs
+            NSLog(@"# beatTime: %d", hrData.beatTime);
+            NSLog(@"# accumBeatCount: %d", hrData.accumBeatCount);
+
+            NSLog(@"# rawBeatTime: %d", hrRawData.beatTime);
+            NSLog(@"# rawAccumBeatCount: %d", hrRawData.beatCount);
+            
+            NSLog(@"# previousBeatTime: %d", hrRawData.previousBeatTime);
+            
+            NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
+            
+            for (NSNumber *rrInterval in rrIntervals) {
+                NSLog(@"# rrInterval: %f", [rrInterval doubleValue]);
+            }
+            
             if(_isCollection) {
                 [_userSession appendHrData:hrData];
             }
