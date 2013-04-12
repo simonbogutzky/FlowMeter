@@ -79,13 +79,13 @@
     }
     
     //Testflight
-#define TESTING 1
-#ifdef TESTING
-    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-#endif
-    
-    // TestFlight takeoff
-    [TestFlight takeOff:@"9a7d3926-e38a-4359-85f6-717248228a37"];
+//#define TESTING 1
+//#ifdef TESTING
+//    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+//#endif
+//    
+//    // TestFlight takeoff
+//    [TestFlight takeOff:@"9a7d3926-e38a-4359-85f6-717248228a37"];
     
     // Override point for customization after application launch.
     return YES;
