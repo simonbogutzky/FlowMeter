@@ -10,8 +10,9 @@
 #import "AppDelegate.h"
 #import "Connection.h"
 #import "UserSessionVO.h"
-#import "CXHTMLDocument.h"
-#import "CXMLNode.h"
+//#import "CXHTMLDocument.h"
+//#import "CXMLNode.h"
+#import "PdDispatcher.h"
 
 @interface ViewController ()
 {
@@ -27,6 +28,10 @@
     BOOL _isCollection;
     BOOL _isConnected;
     UserSessionVO *_userSession;
+    
+    PdDispatcher *_dispatcher;
+    void *_patch;
+    int _lastAccumBeatCount;
 }
 
 @end
@@ -40,11 +45,26 @@
 {
     [super viewDidLoad];
     
+    _dispatcher = [[PdDispatcher alloc]init];
+    [PdBase setDelegate:_dispatcher];
+    _patch = [PdBase openFile:@"tuner.pd"
+                        path:[[NSBundle mainBundle] resourcePath]];
+    if (!_patch) {
+        NSLog(@"Failed to open patch!"); // Gracefully handle failure...
+    }
+    
     // Create user session
     _userSession = [[UserSessionVO alloc] init];
     //    userSession.udid = [[UIDevice currentDevice] uniqueIdentifier];
     //    [self addUserSession];
 }
+
+//??? (nh) won't be used
+//-(void)viewDidUnload {
+//    [super viewDidUnload];
+//    [PdBase closeFile:_patch];
+//    [PdBase setDelegate:nil];
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -70,6 +90,7 @@
                 if (_isConnected) {
                     [self sendMessage:[NSString stringWithFormat:@"/evnt %@;", event]];
                 }
+
             }
         }];
     }
@@ -136,6 +157,26 @@
     }
 }
 
+- (IBAction)playE:(id)sender
+{
+    [self playNote:90];
+}
+
+- (IBAction)playG:(id)sender
+{
+    [self playNote:55];
+}
+
+#pragma mark - Convenient methods
+#pragma mark - 
+
+- (void)playNote:(int)n
+{
+    [PdBase sendFloat:n toReceiver:@"midinote"];
+    [PdBase sendBangToReceiver:@"trigger"];
+    
+}
+
 #pragma mark -
 #pragma mark - Sensor connection
 
@@ -191,6 +232,8 @@
             });
         }
     }
+    
+    _lastAccumBeatCount = 0;
 }
 
 - (void)disconnectSensor
@@ -208,6 +251,29 @@
         WFHeartrateRawData *hrRawData = [hrConnection getHeartrateRawData];
         if (hrData != nil) {
             _bmpLabel.text = [hrData formattedHeartrate:YES];
+            
+            if (_lastAccumBeatCount < hrData.accumBeatCount) {
+                // Sonify beat
+                [self playE:self];
+                
+                _lastAccumBeatCount = hrData.accumBeatCount;
+            }
+            
+            // Debug logs
+            NSLog(@"# beatTime: %d", hrData.beatTime);
+            NSLog(@"# accumBeatCount: %d", hrData.accumBeatCount);
+
+            NSLog(@"# rawBeatTime: %d", hrRawData.beatTime);
+            NSLog(@"# rawAccumBeatCount: %d", hrRawData.beatCount);
+            
+            NSLog(@"# previousBeatTime: %d", hrRawData.previousBeatTime);
+            
+            NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
+            
+            for (NSNumber *rrInterval in rrIntervals) {
+                NSLog(@"# rrInterval: %f", [rrInterval doubleValue]);
+            }
+            
             if(_isCollection) {
                 [_userSession appendHrData:hrData];
             }

@@ -8,12 +8,14 @@
 
 #import "AppDelegate.h"
 #import "Utility.h"
+#import "PdAudioController.h"
 
 @interface AppDelegate ()
 {
     CMMotionManager *_motionManager;
     CLLocationManager *_locationManager;
     WFHardwareConnector *_hardwareConnector;
+    PdAudioController *_audioController;
 }
 @end
 
@@ -71,14 +73,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    _audioController = [[PdAudioController alloc] init];
+    if ([_audioController configureAmbientWithSampleRate:44100 numberChannels:2 mixingEnabled:YES] != PdAudioOK) {
+        NSLog(@"failed to initialize audio components");
+    }
     
-//#define TESTING 1
-//#ifdef TESTING
-//    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-//#endif
-//    
-//    // TestFlight takeoff
-//    [TestFlight takeOff:@"4de0efd2c948ed804b7286159f49d6e8_ODE3NTYyMDEyLTA0LTE3IDA4OjM0OjQzLjU5MDYyNQ"];
+    //Testflight
+#define TESTING 1
+#ifdef TESTING
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+#endif
+    
+    // TestFlight takeoff
+    [TestFlight takeOff:@"4de0efd2c948ed804b7286159f49d6e8_ODE3NTYyMDEyLTA0LTE3IDA4OjM0OjQzLjU5MDYyNQ"];
     
     // Override point for customization after application launch.
     return YES;
@@ -104,6 +111,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    _audioController.active = YES;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
