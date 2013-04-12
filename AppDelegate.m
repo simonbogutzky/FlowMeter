@@ -85,7 +85,7 @@
 #endif
     
     // TestFlight takeoff
-    [TestFlight takeOff:@"4de0efd2c948ed804b7286159f49d6e8_ODE3NTYyMDEyLTA0LTE3IDA4OjM0OjQzLjU5MDYyNQ"];
+    [TestFlight takeOff:@"9a7d3926-e38a-4359-85f6-717248228a37"];
     
     // Override point for customization after application launch.
     return YES;
