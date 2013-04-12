@@ -24,11 +24,11 @@
     PdDispatcher *_dispatcher;
     void *_patch;
     int _lastAccumBeatCount;
+    
+    IBOutlet UIButton *_blueHRButton;
+    IBOutlet UILabel *_bmpLabel;
+    IBOutlet UILabel *_batteryLevelLabel;
 }
-
-@property (nonatomic, weak) IBOutlet UIButton *blueHRButton;
-@property (nonatomic, weak) IBOutlet UILabel *bmpLabel;
-@property (nonatomic, weak) IBOutlet UILabel *batteryLevelLabel;
 
 
 @end
