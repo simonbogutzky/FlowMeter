@@ -77,6 +77,8 @@
     if ([_audioController configureAmbientWithSampleRate:44100 numberChannels:2 mixingEnabled:YES] != PdAudioOK) {
         NSLog(@"failed to initialize audio components");
     }
+    
+    //Testflight
 #define TESTING 1
 #ifdef TESTING
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
