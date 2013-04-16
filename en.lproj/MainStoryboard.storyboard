@@ -131,15 +131,32 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="BlueHRButton" destination="wxk-6h-WUy" id="gw3-Zd-bkJ"/>
-                        <outlet property="batteryLevelLabel" destination="Hn3-gq-RUW" id="vEp-GE-bkU"/>
-                        <outlet property="bmpLabel" destination="trp-AF-0BT" id="hQg-pU-BgB"/>
+                        <outlet property="_batteryLevelLabel" destination="Hn3-gq-RUW" id="B9I-b4-n9X"/>
+                        <outlet property="_blueHRButton" destination="wxk-6h-WUy" id="RhE-HT-mCy"/>
+                        <outlet property="_bmpLabel" destination="trp-AF-0BT" id="c9P-sJ-Hc7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="connectDisconnectSensor:"/>
+                <relationship kind="action" name="playE:"/>
+                <relationship kind="action" name="playG:"/>
+                <relationship kind="action" name="startStopCollection:"/>
+                <relationship kind="outlet" name="_batteryLevelLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_blueHRButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="_bmpLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
