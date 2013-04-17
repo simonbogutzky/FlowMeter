@@ -15,6 +15,8 @@
 {
     NSMutableDictionary *_measurements;
     NSMutableDictionary *_storage;
+    int _recordCount;
+    bool _hasEnoughRecords;
 }
 @end
 
@@ -25,7 +27,7 @@
 	self = [super init];
 	if (self != nil) {
         
-        // Create dictionary for measurements
+        _storage = [[NSMutableDictionary alloc] init];
         _measurements = [[NSMutableDictionary alloc] init];
 	}
 	return self;
@@ -38,9 +40,6 @@
 {
     [self renewMotionMeasurementStorage];
     
-    // Create store for fix values
-    _storage = [[NSMutableDictionary alloc] init];
-    
     // Create a date string of the current date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -52,17 +51,33 @@
     [_storage setObject:timeString forKey:@"mTimeString"];
     [_storage setObject:@1 forKey:@"mFileCount"];
     
+    [_storage setObject:@0 forKey:@"mRotationRateXQuantile"];
+    [_storage setObject:@0 forKey:@"mFilteredRotationRateXQuantile"];
+    [_storage setObject:@0 forKey:@"mFilteredRotationRateX1Quantile"];
+    
     [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mRotationRateXIndicator"];
     [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mFilteredRotationRateXIndicator"];
+    [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mFilteredRotationRateX1Indicator"];
+    
+    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:500] forKey:@"mRotationRateX"];
+    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:500] forKey:@"mFilteredRotationRateX"];
+    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:500] forKey:@"mFilteredRotationRateX1"];
+    
+    _recordCount = 0;
+    _hasEnoughRecords = NO;
+    
 }
 
 - (void)renewMotionMeasurementStorage
 {
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mTimestamp"];
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mRotationRateX"];
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mFilteredRotationRateX"];
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mRotationRateXQuantile06"];
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mLabel"];
+    [_storage setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mTimestamp"];
+    [_storage setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mRotationRateX"];
+    [_storage setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mFilteredRotationRateX"];
+    [_storage setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mFilteredRotationRateX1"];
+    [_storage setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mRotationRateXQuantiles"];
+    [_storage setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mFilteredRotationRateXQuantiles"];
+    [_storage setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mFilteredRotationRateX1Quantiles"];
+    [_storage setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"mLabel"];
 }
 
 - (bool)isPeakFromStorage:(NSMutableDictionary *)storage withKey:(NSString *)key x:(double)x quantile:(double)quantile
@@ -83,7 +98,7 @@
     [storage setObject:[NSNumber numberWithDouble:x] forKey:[NSString stringWithFormat:@"%@PreviousMeasurement", key]];
     
     // Look for sign changes
-    if (slope * previousSlope < 0 && quantile > previousMeasurement) {
+    if (slope * previousSlope < 0 && quantile < previousMeasurement) {
         [storage setObject:[NSNumber numberWithBool:YES] forKey:[NSString stringWithFormat:@"%@Indicator", key]];
         return YES;
     }
@@ -152,6 +167,81 @@
     return label;
 }
 
+- (NSString *)appendMotionData2:(CMDeviceMotion *)deviceMotion
+{
+    
+    NSString *label = @"";
+    if (deviceMotion == nil)
+        return @"";
+    
+    // Store device motion for storage and analysis
+    double timestamp = deviceMotion.timestamp;
+    [[_storage objectForKey:@"mTimestamp"] addObject:[NSNumber numberWithDouble:timestamp]];
+    
+    double rotationRateX = deviceMotion.rotationRate.x;
+    [[_measurements objectForKey:@"mRotationRateX"] addObject:[NSNumber numberWithDouble:rotationRateX]];
+    [[_storage objectForKey:@"mRotationRateX"] addObject:[NSNumber numberWithDouble:rotationRateX]];
+    
+    double filteredRotationRateX = [self filterX:rotationRateX];
+    [[_measurements objectForKey:@"mFilteredRotationRateX"] addObject:[NSNumber numberWithDouble:filteredRotationRateX]];
+    [[_storage objectForKey:@"mFilteredRotationRateX"] addObject:[NSNumber numberWithDouble:filteredRotationRateX]];
+    
+    double filteredRotationRateX1 = [self filterX1:rotationRateX];
+    [[_measurements objectForKey:@"mFilteredRotationRateX1"] addObject:[NSNumber numberWithDouble:filteredRotationRateX1]];
+    [[_storage objectForKey:@"mFilteredRotationRateX1"] addObject:[NSNumber numberWithDouble:filteredRotationRateX1]];
+    
+    // Save Quantiles
+    [[_storage objectForKey:@"mRotationRateXQuantiles"] addObject:[_storage objectForKey:@"mRotationRateXQuantile"]];
+    [[_storage objectForKey:@"mFilteredRotationRateXQuantiles"] addObject:[_storage objectForKey:@"mFilteredRotationRateXQuantile"]];
+    [[_storage objectForKey:@"mFilteredRotationRateX1Quantiles"] addObject:[_storage objectForKey:@"mFilteredRotationRateX1Quantile"]];
+    
+    _recordCount++;
+    if (_recordCount > 499 && _hasEnoughRecords == NO)
+        _hasEnoughRecords = YES;
+    
+    if (_hasEnoughRecords) {
+    
+        // Re-calibration
+        if ([[_measurements objectForKey:@"mRotationRateX"] count] > 499) {
+            double rotationRateXQuantile = [Utility quantileFromX:[_measurements objectForKey:@"mRotationRateX"] prob:.98];
+            double filteredRotationRateXQuantile = [Utility quantileFromX:[_measurements objectForKey:@"mFilteredRotationRateX"] prob:.98];
+            double filteredRotationRateX1Quantile = [Utility quantileFromX:[_measurements objectForKey:@"mFilteredRotationRateX1"] prob:.98];
+            [_storage setObject:[NSNumber numberWithDouble:rotationRateXQuantile] forKey:@"mRotationRateXQuantile"];
+            [_storage setObject:[NSNumber numberWithDouble:filteredRotationRateXQuantile] forKey:@"mFilteredRotationRateXQuantile"];
+            [_storage setObject:[NSNumber numberWithDouble:filteredRotationRateX1Quantile] forKey:@"mFilteredRotationRateX1Quantile"];
+            [[_measurements objectForKey:@"mRotationRateX"] removeObjectsInRange:NSMakeRange(0, 100)];
+            [[_measurements objectForKey:@"mFilteredRotationRateX"] removeObjectsInRange:NSMakeRange(0, 100)];
+            [[_measurements objectForKey:@"mFilteredRotationRateX1"] removeObjectsInRange:NSMakeRange(0, 100)];
+        }
+        
+        // Find peaks and set indicators
+        [self isPeakFromStorage:_storage withKey:@"mRotationRateX" x:rotationRateX quantile:[[_storage objectForKey:@"mRotationRateXQuantile"] doubleValue]];
+        
+        [self isPeakFromStorage:_storage withKey:@"mFilteredRotationRateX" x:filteredRotationRateX quantile:[[_storage objectForKey:@"mFilteredRotationRateXQuantile"] doubleValue]];
+        
+        if ([[_storage objectForKey:@"mRotationRateXIndicator"] boolValue] && [[_storage objectForKey:@"mFilteredRotationRateXIndicator"] boolValue]) {
+            [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mRotationRateXIndicator"];
+        }
+        
+        [self isPeakFromStorage:_storage withKey:@"mFilteredRotationRateX1" x:filteredRotationRateX1 quantile:[[_storage objectForKey:@"mFilteredRotationRateX1Quantile"] doubleValue]];
+        
+        if ([[_storage objectForKey:@"mFilteredRotationRateXIndicator"] boolValue] && [[_storage objectForKey:@"mFilteredRotationRateX1Indicator"] boolValue]) {
+            [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mFilteredRotationRateXIndicator"];
+            [_storage setObject:[NSNumber numberWithBool:NO] forKey:@"mFilteredRotationRateX1Indicator"];
+            label = @"HS";
+        }
+    }
+    [[_storage objectForKey:@"mLabel"] addObject:label];
+    
+    // Save, if needed
+    if([[_storage objectForKey:@"mTimestamp"] count] != 0 && [[_storage objectForKey:@"mTimestamp"] count] % 6000 == 0) {
+        [self seriliazeAndZipMotionData];
+        [self renewMotionMeasurementStorage];
+    }
+    
+    return label;
+}
+
 - (NSData *)seriliazeAndZipMotionData
 {
     NSString *dateString = [_storage objectForKey:@"mDateString"];
@@ -169,26 +259,32 @@
     
     // Create data string
     NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
-    [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
+    [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
      @"timestamp",
      @"rotationRateX",
      @"filteredRotationRateX",
-     @"rotationRateXQuantile06",
+     @"filteredRotationRateX1",
+     @"rotationRateXQuantiles",
+     @"filteredRotationRateXQuantiles",
+     @"filteredRotationRateX1Quantiles",
      @"label"
      ];
     
     // Get first timestamp
-    NSNumber *timestamp = [_storage objectForKey:@"mTimestamp"];
+    NSNumber *timestamp = [[_storage objectForKey:@"mTimestamp"] objectAtIndex:0];
     
-    for (int i = 0; i < [[_measurements objectForKey:@"mTimestamp"] count]; i++) {
+    for (int i = 0; i < [[_storage objectForKey:@"mTimestamp"] count]; i++) {
         
         // Append to data string
-        [dataString appendFormat:@"%f,%f,%f,%f,%@\n",
-         [[[_measurements objectForKey:@"mTimestamp"] objectAtIndex:i] doubleValue] - [timestamp doubleValue],
-         [[[_measurements objectForKey:@"mRotationRateX"] objectAtIndex:i] doubleValue],
-         [[[_measurements objectForKey:@"mFilteredRotationRateX"] objectAtIndex:i] doubleValue],
-         [[[_measurements objectForKey:@"mRotationRateXQuantile06"] objectAtIndex:i] doubleValue],
-         [[_measurements objectForKey:@"mLabel"] objectAtIndex:i]
+        [dataString appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%@\n",
+         [[[_storage objectForKey:@"mTimestamp"] objectAtIndex:i] doubleValue] - [timestamp doubleValue],
+         [[[_storage objectForKey:@"mRotationRateX"] objectAtIndex:i] doubleValue],
+         [[[_storage objectForKey:@"mFilteredRotationRateX"] objectAtIndex:i] doubleValue],
+         [[[_storage objectForKey:@"mFilteredRotationRateX1"] objectAtIndex:i] doubleValue],
+         [[[_storage objectForKey:@"mRotationRateXQuantiles"] objectAtIndex:i] doubleValue],
+         [[[_storage objectForKey:@"mFilteredRotationRateXQuantiles"] objectAtIndex:i] doubleValue],
+         [[[_storage objectForKey:@"mFilteredRotationRateX1Quantiles"] objectAtIndex:i] doubleValue],
+         [[_storage objectForKey:@"mLabel"] objectAtIndex:i]
          ];
     }
     
@@ -223,6 +319,21 @@ static float xv[NZEROS+1], yv[NPOLES+1];
     return yv[2];
 }
 
+// Lowpass Butterworth 2. Order Filter with 7.5Hz corner frequency ("http://www-users.cs.york.ac.uk/~fisher/mkfilter/trad.html")
+
+#define GAIN1   6.283720074e+00
+
+static float xv1[NZEROS+1], yv1[NPOLES+1];
+
+- (double)filterX1:(double)x
+{
+    xv1[0] = x / GAIN1;
+    yv1[0] = yv1[1];
+    yv1[1] = yv1[2];
+    yv1[2] = xv1[0] + (-0.5135373887 * yv1[0]) + (1.3543959903 * yv1[1]);
+    return yv1[2];
+}
+
 #pragma mark -
 #pragma mark - HR methods
 
@@ -245,9 +356,9 @@ static float xv[NZEROS+1], yv[NPOLES+1];
 
 - (void)renewHrMeasurementStorage
 {
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"hrTimestamp"];
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"hr"];
-    [_measurements setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"rrIntervals"];
+    [_storage setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"hrTimestamp"];
+    [_storage setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"hr"];
+    [_storage setObject:[[NSMutableArray alloc] initWithCapacity:6000] forKey:@"rrIntervals"];
 }
 
 - (void)appendHrData:(WFHeartrateData *)hrData
@@ -256,17 +367,12 @@ static float xv[NZEROS+1], yv[NPOLES+1];
         NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
         for (NSNumber* rrInterval in rrIntervals) {
             
-            // Store first timestamp
-            if ([[_measurements objectForKey:@"hrTimestamp"] count] == 0 && [[_storage objectForKey:@"hrFileCount"] intValue] == 1) {
-                [_storage setObject:[NSNumber numberWithFloat:hrData.timestamp] forKey:@"hrTimestamp"];
-            }
-            
-            [[_measurements objectForKey:@"hrTimestamp"] addObject:[NSNumber numberWithDouble:hrData.timestamp]];
-            [[_measurements objectForKey:@"hr"] addObject:[NSNumber numberWithDouble:hrData.computedHeartrate]];
-            [[_measurements objectForKey:@"rrIntervals"] addObject:rrInterval];
+            [[_storage objectForKey:@"hrTimestamp"] addObject:[NSNumber numberWithDouble:hrData.timestamp]];
+            [[_storage objectForKey:@"hr"] addObject:[NSNumber numberWithDouble:hrData.computedHeartrate]];
+            [[_storage objectForKey:@"rrIntervals"] addObject:rrInterval];
             
             // Save, if needed
-            if([[_measurements objectForKey:@"hrTimestamp"] count] != 0 && [[_measurements objectForKey:@"hrTimestamp"] count] % 6000 == 0) {
+            if([[_storage objectForKey:@"hrTimestamp"] count] != 0 && [[_storage objectForKey:@"hrTimestamp"] count] % 6000 == 0) {
                 [self seriliazeAndZipHrData];
                 [self renewHrMeasurementStorage];
             }
@@ -298,15 +404,15 @@ static float xv[NZEROS+1], yv[NPOLES+1];
      ];
     
     // Get first timestamp
-    NSNumber *timestamp = [_storage objectForKey:@"hrTimestamp"];
+    NSNumber *timestamp = [[_storage objectForKey:@"hrTimestamp"] objectAtIndex:0];
     
-    for (int i = 0; i < [[_measurements objectForKey:@"hrTimestamp"] count]; i++) {
+    for (int i = 0; i < [[_storage objectForKey:@"hrTimestamp"] count]; i++) {
         
         // Append to data string
         [dataString appendFormat:@"%f,%f,%f\n",
-         [[[_measurements objectForKey:@"hrTimestamp"] objectAtIndex:i] doubleValue] - [timestamp doubleValue],
-         [[[_measurements objectForKey:@"hr"] objectAtIndex:i] doubleValue],
-         [[[_measurements objectForKey:@"rrIntervals"] objectAtIndex:i] doubleValue]
+         [[[_storage objectForKey:@"hrTimestamp"] objectAtIndex:i] doubleValue] - [timestamp doubleValue],
+         [[[_storage objectForKey:@"hr"] objectAtIndex:i] doubleValue],
+         [[[_storage objectForKey:@"rrIntervals"] objectAtIndex:i] doubleValue]
          ];
     }
     
@@ -319,8 +425,8 @@ static float xv[NZEROS+1], yv[NPOLES+1];
 
 - (int)hrCount
 {
-    if([_measurements objectForKey:@"hrTimestamp"] != nil) {
-        return [[_measurements objectForKey:@"hrTimestamp"] count];
+    if([_storage objectForKey:@"hrTimestamp"] != nil) {
+        return [[_storage objectForKey:@"hrTimestamp"] count];
     }
     return 0;
 }
