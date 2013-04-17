@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "Utility.h"
 #import "PdAudioController.h"
+#import <DropboxSDK/DropboxSDK.h>
 
 @interface AppDelegate ()
 {
@@ -87,6 +88,10 @@
 //    // TestFlight takeoff
 //    [TestFlight takeOff:@"9a7d3926-e38a-4359-85f6-717248228a37"];
     
+    // Dropbox
+    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"tvd64fwxro7ck60" appSecret:@"2azrb93xdsddgx2" root:kDBRootAppFolder];
+    [DBSession setSharedSession:dbSession];
+    
     // Override point for customization after application launch.
     return YES;
 }
@@ -117,6 +122,18 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    if ([[DBSession sharedSession] handleOpenURL:url]) {
+        if ([[DBSession sharedSession] isLinked]) {
+            NSLog(@"App linked successfully!");
+            // At this point you can start making API calls
+        }
+        return YES;
+    }
+    // Add whatever other url handling code your app requires here
+    return NO;
 }
 
 #pragma mark -

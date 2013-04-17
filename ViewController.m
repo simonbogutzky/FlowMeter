@@ -13,6 +13,8 @@
 //#import "CXHTMLDocument.h"
 //#import "CXMLNode.h"
 #import "PdDispatcher.h"
+#import "Reachability.h"
+
 
 @interface ViewController ()
 {
@@ -25,9 +27,13 @@
     void *_patch;
     int _lastAccumBeatCount;
     
+    DBRestClient *_restClient;
+    
     IBOutlet UIButton *_blueHRButton;
     IBOutlet UILabel *_bmpLabel;
     IBOutlet UILabel *_batteryLevelLabel;
+    
+    Reachability *_internetReachable;
 }
 
 
@@ -54,6 +60,9 @@
     _userSession = [[UserSessionVO alloc] init];
     //    userSession.udid = [[UIDevice currentDevice] uniqueIdentifier];
     //    [self addUserSession];
+    
+    [self testInternetConnection];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadFile:) name:@"MotionDataReady" object:nil];
 }
 
 //??? (nh) won't be used
@@ -158,6 +167,7 @@
 - (IBAction)playG:(id)sender
 {
     [self playNote:55];
+    [self didPressLink];
 }
 
 #pragma mark - Convenient methods
@@ -168,6 +178,35 @@
     [PdBase sendFloat:n toReceiver:@"midinote"];
     [PdBase sendBangToReceiver:@"trigger"];
     
+}
+
+// Checks if we have an internet connection or not
+- (void)testInternetConnection
+{
+    _internetReachable = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    // Internet is reachable
+    _internetReachable.reachableBlock = ^(Reachability*reach)
+    {
+        // Update the UI on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Yayyy, we have the interwebs!");
+        });
+    };
+    
+    // Internet is not reachable
+    _internetReachable.unreachableBlock = ^(Reachability*reach)
+    {
+        // Update the UI on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Someone broke the internet :(");
+        });
+    };
+    
+    if([_internetReachable startNotifier])
+        NSLog(@"Internet");
+    else
+        NSLog(@"No Internet");
 }
 
 #pragma mark -
@@ -323,6 +362,49 @@
         default:
             break;
     }
+}
+
+#pragma mark -
+#pragma mark - Dropbox convenient methods
+
+- (void)didPressLink
+{
+    if (![[DBSession sharedSession] isLinked]) {
+        [[DBSession sharedSession] linkFromController:self];
+    }
+}
+
+- (DBRestClient *)restClient {
+    if (!_restClient) {
+        _restClient =
+        [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+        _restClient.delegate = self;
+    }
+    return _restClient;
+}
+
+- (void)uploadFile:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    
+    NSString *localPath = [userInfo objectForKey:@"localPath"];
+    NSString *fileName = [userInfo objectForKey:@"fileName"];
+    NSString *destDir = @"/";
+    
+    [[self restClient] uploadFile:fileName toPath:destDir withParentRev:nil fromPath:localPath];
+}
+
+#pragma mark -
+#pragma mark - DBRestClientDelegate methods
+
+- (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath from:(NSString*)srcPath metadata:(DBMetadata*)metadata
+{
+    NSLog(@"# File uploaded successfully to path: %@", metadata.path);
+}
+
+- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
+{
+    NSLog(@"# File upload failed with error - %@", error);
 }
 
 //???: (sb) Unused code

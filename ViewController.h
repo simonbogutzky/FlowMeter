@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <WFConnector/WFConnector.h>
+#import <DropboxSDK/DropboxSDK.h>
 
-@interface ViewController : UIViewController <WFSensorConnectionDelegate>
+@interface ViewController : UIViewController <WFSensorConnectionDelegate, DBRestClientDelegate>
 
 @end

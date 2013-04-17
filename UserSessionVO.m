@@ -294,6 +294,10 @@
     [zipFile close];
     
     [_storage setObject:[NSNumber numberWithInt:[fileCount intValue] + 1] forKey:@"mFileCount"];
+
+    // Send notification
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[savePath, pathComponent] forKeys:@[@"localPath", @"fileName" ]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataReady" object:self userInfo:userInfo];
     
     // Compressed data
     return [[NSFileManager defaultManager] contentsAtPath:savePath];
