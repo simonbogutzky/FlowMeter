@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <WFConnector/WFConnector.h>
+#import "AbtractSlidingTopViewController.h"
 
-@interface ViewController : UIViewController <WFSensorConnectionDelegate>
+@interface ViewController : AbtractSlidingTopViewController <WFSensorConnectionDelegate>
 
 @end
