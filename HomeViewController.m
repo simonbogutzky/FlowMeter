@@ -250,16 +250,18 @@
                 [self playE:self];
                 
                 _lastAccumBeatCount = hrData.accumBeatCount;
+                
+                NSLog(@"# accumBeatCount: %d", hrData.accumBeatCount);
             }
             
             // Debug logs
-            NSLog(@"# beatTime: %d", hrData.beatTime);
-            NSLog(@"# accumBeatCount: %d", hrData.accumBeatCount);
-
-            NSLog(@"# rawBeatTime: %d", hrRawData.beatTime);
-            NSLog(@"# rawAccumBeatCount: %d", hrRawData.beatCount);
-            
-            NSLog(@"# previousBeatTime: %d", hrRawData.previousBeatTime);
+//            NSLog(@"# beatTime: %d", hrData.beatTime);
+//            NSLog(@"# accumBeatCount: %d", hrData.accumBeatCount);
+//
+//            NSLog(@"# rawBeatTime: %d", hrRawData.beatTime);
+//            NSLog(@"# rawAccumBeatCount: %d", hrRawData.beatCount);
+//            
+//            NSLog(@"# previousBeatTime: %d", hrRawData.previousBeatTime);
             
             NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
             
