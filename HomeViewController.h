@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  HomeViewController.h
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 16.01.13.
@@ -10,6 +10,6 @@
 #import <WFConnector/WFConnector.h>
 #import "AbtractSlidingTopViewController.h"
 
-@interface ViewController : AbtractSlidingTopViewController <WFSensorConnectionDelegate>
+@interface HomeViewController : AbtractSlidingTopViewController <WFSensorConnectionDelegate>
 
 @end

@@ -1,12 +1,12 @@
 //
-//  ViewController.m
+//  HomeViewController.m
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 16.01.13.
 //  Copyright (c) 2013 Simon Bogutzky. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "HomeViewController.h"
 #import "AppDelegate.h"
 #import "Connection.h"
 #import "UserSessionVO.h"
@@ -14,7 +14,7 @@
 //#import "CXMLNode.h"
 #import "PdDispatcher.h"
 
-@interface ViewController ()
+@interface HomeViewController ()
 {
     WFSensorConnection *_sensorConnection;
     WFSensorType_t _sensorType;
@@ -33,7 +33,7 @@
 
 @end
 
-@implementation ViewController
+@implementation HomeViewController
 
 #pragma mark -
 #pragma mark - UIViewControllerDelegate implementation
