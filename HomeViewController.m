@@ -1,12 +1,12 @@
 //
-//  ViewController.m
+//  HomeViewController.m
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 16.01.13.
 //  Copyright (c) 2013 Simon Bogutzky. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "HomeViewController.h"
 #import "AppDelegate.h"
 #import "Connection.h"
 #import "UserSessionVO.h"
@@ -16,7 +16,7 @@
 #import "Reachability.h"
 
 
-@interface ViewController ()
+@interface HomeViewController ()
 {
     WFSensorConnection *_sensorConnection;
     WFSensorType_t _sensorType;
@@ -39,7 +39,7 @@
 
 @end
 
-@implementation ViewController
+@implementation HomeViewController
 
 #pragma mark -
 #pragma mark - UIViewControllerDelegate implementation
@@ -289,16 +289,18 @@
                 [self playE:self];
                 
                 _lastAccumBeatCount = hrData.accumBeatCount;
+                
+                NSLog(@"# accumBeatCount: %d", hrData.accumBeatCount);
             }
             
             // Debug logs
-            NSLog(@"# beatTime: %d", hrData.beatTime);
-            NSLog(@"# accumBeatCount: %d", hrData.accumBeatCount);
-
-            NSLog(@"# rawBeatTime: %d", hrRawData.beatTime);
-            NSLog(@"# rawAccumBeatCount: %d", hrRawData.beatCount);
-            
-            NSLog(@"# previousBeatTime: %d", hrRawData.previousBeatTime);
+//            NSLog(@"# beatTime: %d", hrData.beatTime);
+//            NSLog(@"# accumBeatCount: %d", hrData.accumBeatCount);
+//
+//            NSLog(@"# rawBeatTime: %d", hrRawData.beatTime);
+//            NSLog(@"# rawAccumBeatCount: %d", hrRawData.beatCount);
+//            
+//            NSLog(@"# previousBeatTime: %d", hrRawData.previousBeatTime);
             
             NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
             

@@ -51,7 +51,7 @@
         // Configure the hardware connector.
         _hardwareConnector = [WFHardwareConnector sharedConnector];
         _hardwareConnector.delegate = self;
-        _hardwareConnector.sampleRate = 0.01;  // sample rate 1 ms, or 100 Hz.
+        _hardwareConnector.sampleRate = 0.001;  // sample rate 1 ns, or 1 kHz.
         _hardwareConnector.settings.searchTimeout = 60;
         
         // Determine support for BTLE

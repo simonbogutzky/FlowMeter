@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  HomeViewController.h
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 16.01.13.
@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <WFConnector/WFConnector.h>
 #import <DropboxSDK/DropboxSDK.h>
+#import "AbtractSlidingTopViewController.h"
 
-@interface ViewController : UIViewController <WFSensorConnectionDelegate, DBRestClientDelegate>
+@interface HomeViewController : AbtractSlidingTopViewController <WFSensorConnectionDelegate, DBRestClientDelegate>
 
 @end
