@@ -131,7 +131,7 @@
             // At this point you can start making API calls
         
         } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DB_LINK_CANCELLED object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DB_CONNECTION_CANCELLED object:self];
         }
         return YES;
     }

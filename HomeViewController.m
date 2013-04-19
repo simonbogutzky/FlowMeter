@@ -63,6 +63,9 @@
     
     [self testInternetConnection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadFile:) name:@"MotionDataReady" object:nil];
+    
+    _sensorConnection = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).wfSensorConnection;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSensorData) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
 }
 
 //??? (nh) won't be used
@@ -150,14 +153,7 @@
     }
 }
 
-- (IBAction)connectDisconnectSensor:(id)sender
-{
-    if (_sensorConnection.connectionStatus == WF_SENSOR_CONNECTION_STATUS_IDLE) {
-        [self initSensorConnection];
-    } else {
-        [self disconnectSensor];
-    }
-}
+
 
 - (IBAction)playE:(id)sender
 {
@@ -208,76 +204,12 @@
         NSLog(@"No Internet");
 }
 
-#pragma mark -
-#pragma mark - Sensor connection
 
-- (void)initSensorConnection
-{
-    // Register for HW connector notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSensorData) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
-    
-    WFHardwareConnector *hardwareConnector = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedHardwareConnector];
-    _sensorType = WF_SENSORTYPE_HEARTRATE;
-    _sensorConnection = nil;
-    if (hardwareConnector.isCommunicationHWReady) {
-        
-        // Check for an existing connection to this sensor type
-        NSArray *connections = [hardwareConnector getSensorConnections:_sensorType];
-        WFSensorConnection *sensor = ([connections count] > 0) ? (WFSensorConnection *) [connections objectAtIndex:0] : nil;
-        
-        // If a connection exists, cache it and set the delegate to this instance (this will allow receiving connection state changes)
-        _sensorConnection = sensor;
-        if (sensor) {
-            _sensorConnection.delegate = self;
-        }
-    }
-    [self connectSensor];
-}
-
-- (void)connectSensor
-{
-	// Get the current connection status
-	WFSensorConnectionStatus_t connectionStatus = WF_SENSOR_CONNECTION_STATUS_IDLE;
-	if (_sensorConnection != nil) {
-		connectionStatus = _sensorConnection.connectionStatus;
-	}
-	if(connectionStatus == WF_SENSOR_CONNECTION_STATUS_IDLE) {
-			
-        // Get the connection params
-        WFHardwareConnector *hardwareConnector = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedHardwareConnector];
-        WFConnectionParams *params = [hardwareConnector.settings connectionParamsForSensorType:_sensorType];
-        if (params != nil) {
-            
-            // Set the search timeout
-            params.searchTimeout = hardwareConnector.settings.searchTimeout;
-            
-            
-            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
-            dispatch_async(queue,^{
-                while (_sensorConnection == nil) {
-                    _sensorConnection = [hardwareConnector requestSensorConnection:params];
-                }
-                
-                // Set delegate to receive connection status changes
-                _sensorConnection.delegate = self;
-            });
-        }
-    }
-    
-    _lastAccumBeatCount = 0;
-}
-
-- (void)disconnectSensor
-{
-    if (_sensorConnection.connectionStatus == WF_SENSOR_CONNECTION_STATUS_CONNECTED || _sensorConnection.connectionStatus == WF_SENSOR_CONNECTION_STATUS_CONNECTING) {
-        [_sensorConnection disconnect];
-    }
-}
 
 - (void)updateSensorData
 {
-    if ([_sensorConnection isKindOfClass:[WFHeartrateConnection class]]) {
-        WFHeartrateConnection *hrConnection = (WFHeartrateConnection *)_sensorConnection;
+    if ([((AppDelegate *)[[UIApplication sharedApplication] delegate]).wfSensorConnection isKindOfClass:[WFHeartrateConnection class]]) {
+        WFHeartrateConnection *hrConnection = (WFHeartrateConnection *) ((AppDelegate *)[[UIApplication sharedApplication] delegate]).wfSensorConnection;
         WFHeartrateData *hrData = [hrConnection getHeartrateData];
         WFHeartrateRawData *hrRawData = [hrConnection getHeartrateRawData];
         if (hrData != nil) {
@@ -322,46 +254,6 @@
     else {
         _bmpLabel.text = @"n/a";
         _batteryLevelLabel.text = @"n/a";
-    }
-}
-
-#pragma mark -
-#pragma mark - SensorConnectionDelegate implementation
-
-- (void)connectionDidTimeout:(WFSensorConnection*)connectionInfo
-{
-    NSLog(@"# Timeout of %@", connectionInfo.deviceUUIDString);
-}
-
-- (void)connection:(WFSensorConnection*)connectionInfo stateChanged:(WFSensorConnectionStatus_t)connState
-{
-    switch (connState) {
-        case WF_SENSOR_CONNECTION_STATUS_IDLE:
-            [_blueHRButton setTitle:@"Connect BlueHR" forState:0];
-            _bmpLabel.text = @"n/a";
-            _batteryLevelLabel.text = @"n/a";
-            break;
-            
-        case WF_SENSOR_CONNECTION_STATUS_CONNECTED:
-            [_blueHRButton setTitle:@"Disconnect BlueHR" forState:0];
-            break;
-        
-        case WF_SENSOR_CONNECTION_STATUS_CONNECTING:
-            [_blueHRButton setTitle:@"Connecting ..." forState:0];
-            break;
-            
-        case WF_SENSOR_CONNECTION_STATUS_DISCONNECTING:
-            [_blueHRButton setTitle:@"Disconnecting ..." forState:0];
-            break;
-            
-        case WF_SENSOR_CONNECTION_STATUS_INTERRUPTED: {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Error" message:@"State changed to Interrupted" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-        }
-            break;
-            
-        default:
-            break;
     }
 }
 

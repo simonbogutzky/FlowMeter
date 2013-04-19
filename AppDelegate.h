@@ -17,5 +17,6 @@
 @property (strong, nonatomic, readonly) CMMotionManager *sharedMotionManager;
 @property (strong, nonatomic, readonly) CLLocationManager *sharedLocationManager;
 @property (strong, nonatomic, readonly) WFHardwareConnector *sharedHardwareConnector;
+@property (strong, nonatomic) WFSensorConnection *wfSensorConnection;
 
 @end

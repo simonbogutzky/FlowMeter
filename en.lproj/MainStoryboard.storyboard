@@ -267,25 +267,107 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Dropbox Verbindung" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxS-zW-O3x">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="185" id="I7P-VA-Sqs"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vPw-LP-ebh">
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vPw-LP-ebh">
                                                     <color key="onTintColor" red="0.0" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
-                                                        <action selector="changeDropboxLinkState:" destination="pk8-WG-38E" eventType="valueChanged" id="Tc2-lw-l9j"/>
+                                                        <action selector="changeDbConnectionStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="BZ2-8u-ibb"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="cxS-zW-O3x" firstAttribute="leading" secondItem="zEO-Bl-onT" secondAttribute="leading" constant="30" id="0c6-hi-kWl"/>
-                                            <constraint firstAttribute="trailing" secondItem="vPw-LP-ebh" secondAttribute="trailing" constant="30" id="V4h-KQ-xeM"/>
+                                            <constraint firstItem="cxS-zW-O3x" firstAttribute="leading" secondItem="zEO-Bl-onT" secondAttribute="leading" constant="20" type="default" id="XOG-te-SYW"/>
                                             <constraint firstItem="cxS-zW-O3x" firstAttribute="centerY" secondItem="vPw-LP-ebh" secondAttribute="centerY" type="default" id="bxQ-rA-Cot"/>
+                                            <constraint firstAttribute="trailing" secondItem="vPw-LP-ebh" secondAttribute="trailing" constant="22" id="iTE-94-AfY"/>
                                             <constraint firstItem="vPw-LP-ebh" firstAttribute="top" secondItem="zEO-Bl-onT" secondAttribute="top" constant="9" id="rRv-Ub-WdB"/>
                                         </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Brustgurt" id="Z8M-eD-5Hj">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="TZU-Be-cwz">
+                                        <rect key="frame" x="0.0" y="138" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Verbindung" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTQ-fq-Hpd">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="184" id="7Ix-fk-Rzr"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yt7-N0-sjb">
+                                                    <color key="onTintColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="changeHrSensorConnectionStaus:" destination="pk8-WG-38E" eventType="valueChanged" id="4x8-tZ-r7c"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="yt7-N0-sjb" firstAttribute="centerY" secondItem="TZU-Be-cwz" secondAttribute="centerY" type="default" id="0Y2-n9-a57"/>
+                                            <constraint firstItem="GTQ-fq-Hpd" firstAttribute="centerY" secondItem="yt7-N0-sjb" secondAttribute="centerY" type="default" id="9tC-mO-WN2"/>
+                                            <constraint firstItem="GTQ-fq-Hpd" firstAttribute="leading" secondItem="TZU-Be-cwz" secondAttribute="leading" constant="20" type="default" id="AF3-w1-GVf"/>
+                                            <constraint firstAttribute="trailing" secondItem="yt7-N0-sjb" secondAttribute="trailing" constant="22" id="BUD-Ga-M12"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Wu9-fL-GRv" detailTextLabel="0M0-at-MBm" style="IBUITableViewCellStyleValue1" id="mvE-kV-hk9">
+                                        <rect key="frame" x="0.0" y="183" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wu9-fL-GRv">
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="nicht verbunden" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0M0-at-MBm">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.50196081399917603" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ktR-Hv-4qj" detailTextLabel="TgP-FC-Mtt" style="IBUITableViewCellStyleValue1" id="mL7-5n-gYT">
+                                        <rect key="frame" x="0.0" y="227" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Batterieladung" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ktR-Hv-4qj">
+                                                    <rect key="frame" x="10" y="11" width="120" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="k. A." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TgP-FC-Mtt">
+                                                    <rect key="frame" x="255" y="11" width="35" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -296,7 +378,10 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="_dbConnectionSwitch" destination="vPw-LP-ebh" id="aJ5-zZ-kly"/>
+                        <outlet property="_dbConnectionSwitch" destination="vPw-LP-ebh" id="BnN-Zk-h5H"/>
+                        <outlet property="_hrBatteryLevelLabel" destination="TgP-FC-Mtt" id="5lf-Ae-7BP"/>
+                        <outlet property="_hrConnectionStatusLabel" destination="0M0-at-MBm" id="gj7-QT-d3L"/>
+                        <outlet property="_hrConnectionSwitch" destination="yt7-N0-sjb" id="JBZ-aX-lKd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i7X-cl-ewF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -305,7 +390,7 @@
         </scene>
     </scenes>
     <classes>
-        <class className="AbtractSlidingTopViewController" superclassName="UITableViewController">
+        <class className="AbtractSlidingTopViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AbtractSlidingTopViewController.h"/>
             <relationships>
                 <relationship kind="action" name="revealMenu:"/>
@@ -334,8 +419,12 @@
         <class className="PrefsTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PrefsTableViewController.h"/>
             <relationships>
-                <relationship kind="action" name="changeDropboxLinkState:"/>
+                <relationship kind="action" name="changeDbConnectionStatus:"/>
+                <relationship kind="action" name="changeHrSensorConnectionStaus:"/>
                 <relationship kind="outlet" name="_dbConnectionSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_hrBatteryLevelLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_hrConnectionStatusLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_hrConnectionSwitch" candidateClass="UISwitch"/>
             </relationships>
         </class>
         <class className="PrefsViewController" superclassName="AbtractSlidingTopViewController">
