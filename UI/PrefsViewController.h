@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <DropboxSDK/DropboxSDK.h>
 #import "AbtractSlidingTopViewController.h"
 
 @interface PrefsViewController : AbtractSlidingTopViewController <UITableViewDataSource, UITableViewDelegate>

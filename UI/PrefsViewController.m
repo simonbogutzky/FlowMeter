@@ -9,7 +9,9 @@
 #import "PrefsViewController.h"
 #import "TableViewCheckBoxCell.h"
 
-@interface PrefsViewController ()
+@interface PrefsViewController () {
+    UISwitch *_dbConnectionSwitch;
+}
 
 @end
 
@@ -18,6 +20,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeDBConnection:) name:NOTIFICATION_DB_LINK_CANCELLED object:nil];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -56,8 +60,9 @@
             CellIdentifier = @"prefsItemCheckBoxCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
             ((TableViewCheckBoxCell *) cell).textLabel.text = @"Dropbox Verbindung";
-            UISwitch *onOffSwitch = ((TableViewCheckBoxCell *) cell).onOffSwitch;
-            [onOffSwitch addTarget:self action:@selector(doSomething:) forControlEvents:UIControlEventValueChanged];
+            _dbConnectionSwitch = ((TableViewCheckBoxCell *) cell).onOffSwitch;
+            _dbConnectionSwitch.on = [[DBSession sharedSession] isLinked];
+            [_dbConnectionSwitch addTarget:self action:@selector(changeDropboxLinkState:) forControlEvents:UIControlEventValueChanged];
         }
             break;
         
@@ -126,9 +131,23 @@
 #pragma mark -
 #pragma marl - IBActions
 
-- (IBAction)doSomething:(id)sender
+- (IBAction)changeDropboxLinkState:(id)sender
 {
-    NSLog(@"do something");
+    if (![[DBSession sharedSession] isLinked] && _dbConnectionSwitch.on) {
+        [[DBSession sharedSession] linkFromController:self];
+    }
+    
+    if ([[DBSession sharedSession] isLinked] && !_dbConnectionSwitch.on) {
+        [[DBSession sharedSession] unlinkAll];
+    }
+}
+
+#pragma mark -
+#pragma marl - Notification handler
+
+- (void)changeDBConnection:(NSNotification *)notification
+{
+    _dbConnectionSwitch.on = !_dbConnectionSwitch.on;
 }
 
 @end

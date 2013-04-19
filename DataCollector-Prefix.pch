@@ -22,3 +22,5 @@
 #define WF_NOTIFICATION_SENSOR_CONNECTED       @"WFNotificationSensorConnected"
 #define WF_NOTIFICATION_SENSOR_DISCONNECTED    @"WFNotificationSensorDisconnected"
 #define WF_NOTIFICATION_SENSOR_HAS_DATA        @"WFNotificationSensorHasData"
+
+#define NOTIFICATION_DB_LINK_CANCELLED         @"NotificationDBLinkCancelled"

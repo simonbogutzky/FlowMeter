@@ -127,8 +127,11 @@
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     if ([[DBSession sharedSession] handleOpenURL:url]) {
         if ([[DBSession sharedSession] isLinked]) {
-            NSLog(@"App linked successfully!");
+            NSLog(@"App linked successfully with Dropbox");
             // At this point you can start making API calls
+        
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DB_LINK_CANCELLED object:self];
         }
         return YES;
     }

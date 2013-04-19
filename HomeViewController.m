@@ -167,7 +167,6 @@
 - (IBAction)playG:(id)sender
 {
     [self playNote:55];
-    [self didPressLink];
 }
 
 #pragma mark - Convenient methods
@@ -368,13 +367,6 @@
 
 #pragma mark -
 #pragma mark - Dropbox convenient methods
-
-- (void)didPressLink
-{
-    if (![[DBSession sharedSession] isLinked]) {
-        [[DBSession sharedSession] linkFromController:self];
-    }
-}
 
 - (DBRestClient *)restClient {
     if (!_restClient) {
