@@ -29,9 +29,7 @@
     
     DBRestClient *_restClient;
     
-    IBOutlet UIButton *_blueHRButton;
     IBOutlet UILabel *_bmpLabel;
-    IBOutlet UILabel *_batteryLevelLabel;
     
     Reachability *_internetReachable;
 }
@@ -243,17 +241,9 @@
                 [_userSession appendHrData:hrData];
             }
         }
-        
-        if (hrRawData.btleCommonData) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                _batteryLevelLabel.text = [NSString stringWithFormat:@"%u %%", hrRawData.btleCommonData.batteryLevel];
-            });
-        }
-        
     }
     else {
-        _bmpLabel.text = @"n/a";
-        _batteryLevelLabel.text = @"n/a";
+        _bmpLabel.text = NSLocalizedString(@"k. A.", @"k. A.");
     }
 }
 
