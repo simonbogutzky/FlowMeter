@@ -7,8 +7,6 @@
 //
 
 #import "UserSessionVO.h"
-#import "Zipfile.h"
-#import "ZipWriteStream.h"
 #import "Utility.h"
 
 @interface UserSessionVO ()
@@ -253,10 +251,6 @@
     NSString *pathComponent = [NSString stringWithFormat:@"%@-t%@-m%03d.csv.zip", dateString, timeString, [fileCount intValue]];
     NSString *savePath = [rootPath stringByAppendingPathComponent:pathComponent];
     
-    // Create ZIP file
-    ZipFile *zipFile = [[ZipFile alloc] initWithFileName:savePath mode:ZipFileModeCreate];
-    ZipWriteStream *stream = [zipFile writeFileInZipWithName:[NSString stringWithFormat:@"%@-t%@-m%03d.csv", dateString, timeString, [fileCount intValue]] compressionLevel:ZipCompressionLevelDefault];
-    
     // Create data string
     NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
     [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
@@ -288,10 +282,17 @@
          ];
     }
     
-    
-    [stream writeData:[dataString dataUsingEncoding:NSUTF8StringEncoding]];
-    [stream finishedWriting];
-    [zipFile close];
+    ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL: [NSURL URLWithString:savePath]];
+    [archive updateEntries:
+     @[
+     [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-t%@-m%03d.csv.zip", dateString, timeString, [fileCount intValue]]
+                                     compress:YES
+                                    dataBlock:^(NSError** error)
+      {
+          return [dataString dataUsingEncoding:NSUTF8StringEncoding];
+      }]
+     ]
+                        error:nil];
     
     [_storage setObject:[NSNumber numberWithInt:[fileCount intValue] + 1] forKey:@"mFileCount"];
 
@@ -395,10 +396,6 @@ static float xv1[NZEROS+1], yv1[NPOLES+1];
     NSString *pathComponent = [NSString stringWithFormat:@"%@-t%@-hr%03d.csv.zip", dateString, timeString, [fileCount intValue]];
     NSString *savePath = [rootPath stringByAppendingPathComponent:pathComponent];
     
-    // Create ZIP file
-    ZipFile *zipFile = [[ZipFile alloc] initWithFileName:savePath mode:ZipFileModeCreate];
-    ZipWriteStream *stream = [zipFile writeFileInZipWithName:[NSString stringWithFormat:@"%@-t%@-hr%03d.csv", dateString, timeString, [fileCount intValue]] compressionLevel:ZipCompressionLevelDefault];
-    
     // Create data string
     NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
     [dataString appendFormat:@"\"%@\",\"%@\",\"%@\"\n",
@@ -422,9 +419,17 @@ static float xv1[NZEROS+1], yv1[NPOLES+1];
     
     [_storage setObject:[NSNumber numberWithInt:[fileCount intValue] + 1] forKey:@"hrFileCount"];
     
-    [stream writeData:[dataString dataUsingEncoding:NSASCIIStringEncoding]];
-    [stream finishedWriting];
-    [zipFile close];
+    ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL: [NSURL URLWithString:savePath]];
+    [archive updateEntries:
+     @[
+     [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-t%@-hr%03d.csv", dateString, timeString, [fileCount intValue]]
+                                     compress:YES
+                                    dataBlock:^(NSError** error)
+      {
+          return [dataString dataUsingEncoding:NSUTF8StringEncoding];
+      }]
+     ]
+                     error:nil];
 }
 
 - (int)hrCount
@@ -434,73 +439,5 @@ static float xv1[NZEROS+1], yv1[NPOLES+1];
     }
     return 0;
 }
-
-//???: (sb) Unused code
-//- (NSString *)xmlRepresentation
-//{
-//	NSMutableString *xml = [NSMutableString stringWithCapacity:32];
-//	[xml appendString:@"<UserSession>"];
-//
-//	if (_objectId != nil)
-//    {
-//		[xml appendFormat:@"<id>%lu</id>", [_objectId unsignedLongValue]];
-//	}
-//
-//	if (_created != nil)
-//    {
-//		NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-//		[outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//		NSString *createdString = [outputFormatter stringFromDate:_created];
-//
-//		[xml appendFormat:@"<created>%@</created>", createdString];
-//	}
-//
-//    if (_modified != nil)
-//    {
-//		NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-//		[outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//		NSString *modifiedString = [outputFormatter stringFromDate:_modified];
-//
-//		[xml appendFormat:@"<modified>%@</modified>", modifiedString];
-//	}
-//
-//    if (_udid != nil)
-//    {
-//		[xml appendFormat:@"<udid>%@</udid>", _udid];
-//	}
-//
-//	[xml appendString:@"</UserSession>"];
-//	return xml;
-//}
-//
-//- (void)setWithPropertyDictionary:(NSDictionary *)propertyDictionary
-//{
-//    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//
-//    if (propertyDictionary[@"id"] != nil)
-//    {
-//        NSNumber *tempObjectId = @([[numberFormatter numberFromString:propertyDictionary[@"id"]] unsignedLongValue]);
-//        self.objectId = tempObjectId;
-//    }
-//
-//    if (propertyDictionary[@"created"] != nil)
-//    {
-//        NSDate *createdDate = [dateFormatter dateFromString:propertyDictionary[@"created"]];
-//        self.created = createdDate;
-//    }
-//
-//    if (propertyDictionary[@"modified"] != nil)
-//    {
-//        NSDate *modifiedDate = [dateFormatter dateFromString:propertyDictionary[@"modified"]];
-//        self.modified = modifiedDate;
-//    }
-//
-//    if (propertyDictionary[@"udid"] != nil)
-//    {
-//        self.udid = propertyDictionary[@"udid"];
-//    }
-//}
 
 @end

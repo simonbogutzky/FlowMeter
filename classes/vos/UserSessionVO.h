@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <WFConnector/WFConnector.h>
 #import <CoreMotion/CoreMotion.h>
-//#import "CMDeviceMotion+TransformToReferenceFrame.h"
+#import <zipzap/zipzap.h>
 
 @interface UserSessionVO : NSObject 
 
@@ -26,8 +26,5 @@
 - (void)appendHrData:(WFHeartrateData *)hrData;
 - (void)seriliazeAndZipHrData;
 - (int)hrCount;
-
-//- (NSString *)xmlRepresentation;
-//- (void)setWithPropertyDictionary:(NSDictionary *)propertyDictionary;
 
 @end
