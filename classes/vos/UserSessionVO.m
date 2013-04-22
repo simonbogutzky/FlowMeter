@@ -242,63 +242,66 @@
 
 - (NSData *)seriliazeAndZipMotionData
 {
-    NSString *dateString = [_storage objectForKey:@"mDateString"];
-    NSString *timeString = [_storage objectForKey:@"mTimeString"];
-    NSNumber *fileCount = [_storage objectForKey:@"mFileCount"];
-    
-    // Create the path, where the data should be saved
-    NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *pathComponent = [NSString stringWithFormat:@"%@-t%@-m%03d.csv.zip", dateString, timeString, [fileCount intValue]];
-    NSString *savePath = [rootPath stringByAppendingPathComponent:pathComponent];
-    
-    // Create data string
-    NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
-    [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
-     @"timestamp",
-     @"rotationRateX",
-     @"filteredRotationRateX",
-     @"filteredRotationRateX1",
-     @"rotationRateXQuantiles",
-     @"filteredRotationRateXQuantiles",
-     @"filteredRotationRateX1Quantiles",
-     @"label"
-     ];
-    
-    // Get first timestamp
-    NSNumber *timestamp = [[_storage objectForKey:@"mTimestamp"] objectAtIndex:0];
-    
-    for (int i = 0; i < [[_storage objectForKey:@"mTimestamp"] count]; i++) {
+    NSString *savePath = nil;
+    if ([[_storage objectForKey:@"mTimestamp"] count] != 0) {
+        NSString *dateString = [_storage objectForKey:@"mDateString"];
+        NSString *timeString = [_storage objectForKey:@"mTimeString"];
+        NSNumber *fileCount = [_storage objectForKey:@"mFileCount"];
         
-        // Append to data string
-        [dataString appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%@\n",
-         [[[_storage objectForKey:@"mTimestamp"] objectAtIndex:i] doubleValue] - [timestamp doubleValue],
-         [[[_storage objectForKey:@"mRotationRateX"] objectAtIndex:i] doubleValue],
-         [[[_storage objectForKey:@"mFilteredRotationRateX"] objectAtIndex:i] doubleValue],
-         [[[_storage objectForKey:@"mFilteredRotationRateX1"] objectAtIndex:i] doubleValue],
-         [[[_storage objectForKey:@"mRotationRateXQuantiles"] objectAtIndex:i] doubleValue],
-         [[[_storage objectForKey:@"mFilteredRotationRateXQuantiles"] objectAtIndex:i] doubleValue],
-         [[[_storage objectForKey:@"mFilteredRotationRateX1Quantiles"] objectAtIndex:i] doubleValue],
-         [[_storage objectForKey:@"mLabel"] objectAtIndex:i]
+        // Create the path, where the data should be saved
+        NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        NSString *pathComponent = [NSString stringWithFormat:@"%@-t%@-m%03d.csv.zip", dateString, timeString, [fileCount intValue]];
+        NSString *savePath = [rootPath stringByAppendingPathComponent:pathComponent];
+        
+        // Create data string
+        NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
+        [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
+         @"timestamp",
+         @"rotationRateX",
+         @"filteredRotationRateX",
+         @"filteredRotationRateX1",
+         @"rotationRateXQuantiles",
+         @"filteredRotationRateXQuantiles",
+         @"filteredRotationRateX1Quantiles",
+         @"label"
          ];
+        
+        // Get first timestamp
+        NSNumber *timestamp = [[_storage objectForKey:@"mTimestamp"] objectAtIndex:0];
+        
+        for (int i = 0; i < [[_storage objectForKey:@"mTimestamp"] count]; i++) {
+            
+            // Append to data string
+            [dataString appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%@\n",
+             [[[_storage objectForKey:@"mTimestamp"] objectAtIndex:i] doubleValue] - [timestamp doubleValue],
+             [[[_storage objectForKey:@"mRotationRateX"] objectAtIndex:i] doubleValue],
+             [[[_storage objectForKey:@"mFilteredRotationRateX"] objectAtIndex:i] doubleValue],
+             [[[_storage objectForKey:@"mFilteredRotationRateX1"] objectAtIndex:i] doubleValue],
+             [[[_storage objectForKey:@"mRotationRateXQuantiles"] objectAtIndex:i] doubleValue],
+             [[[_storage objectForKey:@"mFilteredRotationRateXQuantiles"] objectAtIndex:i] doubleValue],
+             [[[_storage objectForKey:@"mFilteredRotationRateX1Quantiles"] objectAtIndex:i] doubleValue],
+             [[_storage objectForKey:@"mLabel"] objectAtIndex:i]
+             ];
+        }
+        
+        ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL: [NSURL URLWithString:savePath]];
+        [archive updateEntries:
+         @[
+         [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-t%@-m%03d.csv.zip", dateString, timeString, [fileCount intValue]]
+                                         compress:YES
+                                        dataBlock:^(NSError** error)
+          {
+              return [dataString dataUsingEncoding:NSUTF8StringEncoding];
+          }]
+         ]
+                         error:nil];
+        
+        [_storage setObject:[NSNumber numberWithInt:[fileCount intValue] + 1] forKey:@"mFileCount"];
+        
+        // Send notification
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[savePath, pathComponent] forKeys:@[@"localPath", @"fileName" ]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataReady" object:self userInfo:userInfo];
     }
-    
-    ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL: [NSURL URLWithString:savePath]];
-    [archive updateEntries:
-     @[
-     [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-t%@-m%03d.csv.zip", dateString, timeString, [fileCount intValue]]
-                                     compress:YES
-                                    dataBlock:^(NSError** error)
-      {
-          return [dataString dataUsingEncoding:NSUTF8StringEncoding];
-      }]
-     ]
-                        error:nil];
-    
-    [_storage setObject:[NSNumber numberWithInt:[fileCount intValue] + 1] forKey:@"mFileCount"];
-
-    // Send notification
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[savePath, pathComponent] forKeys:@[@"localPath", @"fileName" ]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataReady" object:self userInfo:userInfo];
     
     // Compressed data
     return [[NSFileManager defaultManager] contentsAtPath:savePath];

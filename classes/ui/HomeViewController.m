@@ -131,17 +131,14 @@
             [_userSession seriliazeAndZipHrData];
         }
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Great job!", @"Great job!")
-                                                        message:NSLocalizedString(@"Data has been locally saved." , @"Data has been locally saved.")
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
+                                                        message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
                                                        delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
                                               otherButtonTitles:nil];
         
         [alert show];
-        NSLog(@"# Data has been locally saved");
     }
 }
-
-
 
 - (IBAction)playE:(id)sender
 {
