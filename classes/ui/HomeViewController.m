@@ -8,12 +8,12 @@
 
 #import "HomeViewController.h"
 #import "AppDelegate.h"
-#import "Connection.h"
+//#import "Connection.h"
 #import "UserSessionVO.h"
 //#import "CXHTMLDocument.h"
 //#import "CXMLNode.h"
 #import "PdDispatcher.h"
-#import "Reachability.h"
+//#import "Reachability.h"
 
 
 @interface HomeViewController ()
@@ -31,7 +31,7 @@
     
     IBOutlet UILabel *_bmpLabel;
     
-    Reachability *_internetReachable;
+//    Reachability *_internetReachable;
 }
 
 
@@ -59,7 +59,7 @@
     //    userSession.udid = [[UIDevice currentDevice] uniqueIdentifier];
     //    [self addUserSession];
     
-    [self testInternetConnection];
+//    [self testInternetConnection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadFile:) name:@"MotionDataReady" object:nil];
     
     _sensorConnection = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).wfSensorConnection;
@@ -173,34 +173,34 @@
     
 }
 
-// Checks if we have an internet connection or not
-- (void)testInternetConnection
-{
-    _internetReachable = [Reachability reachabilityWithHostname:@"www.google.com"];
-    
-    // Internet is reachable
-    _internetReachable.reachableBlock = ^(Reachability*reach)
-    {
-        // Update the UI on the main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Yayyy, we have the interwebs!");
-        });
-    };
-    
-    // Internet is not reachable
-    _internetReachable.unreachableBlock = ^(Reachability*reach)
-    {
-        // Update the UI on the main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Someone broke the internet :(");
-        });
-    };
-    
-    if([_internetReachable startNotifier])
-        NSLog(@"Internet");
-    else
-        NSLog(@"No Internet");
-}
+//// Checks if we have an internet connection or not
+//- (void)testInternetConnection
+//{
+//    _internetReachable = [Reachability reachabilityWithHostname:@"www.google.com"];
+//    
+//    // Internet is reachable
+//    _internetReachable.reachableBlock = ^(Reachability*reach)
+//    {
+//        // Update the UI on the main thread
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            NSLog(@"Yayyy, we have the interwebs!");
+//        });
+//    };
+//    
+//    // Internet is not reachable
+//    _internetReachable.unreachableBlock = ^(Reachability*reach)
+//    {
+//        // Update the UI on the main thread
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            NSLog(@"Someone broke the internet :(");
+//        });
+//    };
+//    
+//    if([_internetReachable startNotifier])
+//        NSLog(@"Internet");
+//    else
+//        NSLog(@"No Internet");
+//}
 
 
 
@@ -209,7 +209,7 @@
     if ([((AppDelegate *)[[UIApplication sharedApplication] delegate]).wfSensorConnection isKindOfClass:[WFHeartrateConnection class]]) {
         WFHeartrateConnection *hrConnection = (WFHeartrateConnection *) ((AppDelegate *)[[UIApplication sharedApplication] delegate]).wfSensorConnection;
         WFHeartrateData *hrData = [hrConnection getHeartrateData];
-        WFHeartrateRawData *hrRawData = [hrConnection getHeartrateRawData];
+//        WFHeartrateRawData *hrRawData = [hrConnection getHeartrateRawData];
         if (hrData != nil) {
             _bmpLabel.text = [hrData formattedHeartrate:YES];
             

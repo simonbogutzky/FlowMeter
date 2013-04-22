@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <WFConnector/WFConnector.h>
-#import "CMDeviceMotion+TransformToReferenceFrame.h"
+#import <CoreMotion/CoreMotion.h>
+//#import "CMDeviceMotion+TransformToReferenceFrame.h"
 
 @interface UserSessionVO : NSObject 
 
