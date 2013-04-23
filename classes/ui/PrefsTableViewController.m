@@ -33,10 +33,10 @@
         _appDelegate.wfSensorConnection.delegate = self;
     
     _dbConnectionStatusSwitch.on = [[DBSession sharedSession] isLinked];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeDBConnection:) name:NOTIFICATION_DB_CONNECTION_CANCELLED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dBConnectionChanged:) name:NOTIFICATION_DB_CONNECTION_CANCELLED object:nil];
     
     [self setWfSensorConnectionStatus:_appDelegate.wfSensorConnection.connectionStatus];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWfSensorData:) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wfSensorDataUpdated:) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     _motionSoundStatusSwitch.on = [defaults boolForKey:@"motionSoundStatus"];
@@ -215,12 +215,12 @@
 #pragma mark -
 #pragma marl - Notification handler
 
-- (void)changeDBConnection:(NSNotification *)notification
+- (void)dBConnectionChanged:(NSNotification *)notification
 {
     [_dbConnectionStatusSwitch setOn:!_dbConnectionStatusSwitch.on animated:YES];
 }
 
-- (void)updateWfSensorData:(NSNotification *)notification
+- (void)wfSensorDataUpdated:(NSNotification *)notification
 {
     if ([_appDelegate.wfSensorConnection isKindOfClass:[WFHeartrateConnection class]]) {
         WFHeartrateConnection *_hrSensorConnection = (WFHeartrateConnection *) _appDelegate.wfSensorConnection;
