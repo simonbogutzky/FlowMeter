@@ -103,6 +103,8 @@
     return NO;
 }
 
+//TODO: (sb) remove
+
 - (NSString *)appendMotionData:(CMDeviceMotion *)deviceMotion
 {
     // Return value label
@@ -309,6 +311,8 @@
 
 #pragma mark -
 #pragma mark - Filter
+
+//TODO: (sb) Change filter settings
 
 // Lowpass Butterworth 2. Order Filter with 5Hz corner frequency ("http://www-users.cs.york.ac.uk/~fisher/mkfilter/trad.html")
 

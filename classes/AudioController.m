@@ -32,6 +32,8 @@
     return _sharedAudioController;
 }
 
+//TODO: (sb) Set right notes
+
 - (void)playE
 {
     [self playNote:90];
