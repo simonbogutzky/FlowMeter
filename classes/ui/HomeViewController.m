@@ -19,6 +19,8 @@
     WFSensorType_t _sensorType;
     BOOL _isCollection;
     
+    Reachability *_reachability;
+    
     UserSessionVO *_userSession;
     int _lastAccumBeatCount;
     DBRestClient *_restClient;
@@ -42,7 +44,9 @@
     //    userSession.udid = [[UIDevice currentDevice] uniqueIdentifier];
     //    [self addUserSession];
     
-    [self checkWlanConnection];
+    // Allocate a reachability object
+    _reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadFile:) name:@"MotionDataReady" object:nil];
     
     _sensorConnection = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).wfSensorConnection;
@@ -134,41 +138,6 @@
 #pragma mark - Convenient methods
 #pragma mark -
 
-// Checks if we have an wlan connection or not
-- (void)checkWlanConnection
-{
-    // Allocate a reachability object
-    Reachability *reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
-    
-    // Tell the reachability that we do not want to be reachable on 3G/EDGE/CDMA
-    reachability.reachableOnWWAN = NO;
-    
-    // Internet is reachable
-    reachability.reachableBlock = ^(Reachability *reach)
-    {
-        // Update the UI on the main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Yayyy, we have the interwebs!");
-        });
-    };
-    
-    // Internet is not reachable
-    reachability.unreachableBlock = ^(Reachability*reach)
-    {
-        // Update the UI on the main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Someone broke the internet :(");
-        });
-    };
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reachabilityChanged:)
-                                                 name:kReachabilityChangedNotification
-                                               object:nil];
-    
-    [reachability startNotifier];
-}
-
 #pragma mark -
 #pragma marl - Notification handler
 
@@ -207,7 +176,9 @@
 
 - (void)reachabilityChanged:(NSNotification *)notification
 {
-    NSLog(@"# reachabilityChanged");
+    NSLog(@"# reachabilityChanged %@", notification.userInfo);
+    
+    
 }
 
 #pragma mark -
@@ -224,7 +195,7 @@
 
 - (void)uploadFile:(NSNotification *)notification
 {
-    if ([[DBSession sharedSession] isLinked]) {
+    if (_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
         NSDictionary *userInfo = [notification userInfo];
         
         NSString *localPath = [userInfo objectForKey:@"localPath"];
