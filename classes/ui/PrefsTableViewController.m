@@ -91,7 +91,7 @@
 
 - (IBAction)playE:(id)sender
 {
-    [[AudioController sharedAudioController] playG];
+    [[AudioController sharedAudioController] playE];
 }
 
 - (IBAction)changeHrSoundStatus:(id)sender

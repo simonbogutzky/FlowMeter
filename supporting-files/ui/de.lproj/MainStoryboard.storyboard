@@ -373,12 +373,12 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmy-GX-kAw">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="34" id="fNN-IS-fp1"/>
-                                                        <constraint firstAttribute="width" constant="34" id="iU4-l3-KIS"/>
+                                                        <constraint firstAttribute="height" constant="39" id="FXN-7K-sFX"/>
+                                                        <constraint firstAttribute="width" constant="40" id="PIX-Mc-hB2"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="tintColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="1" colorSpace="deviceRGB"/>
-                                                    <state key="normal" title="G">
+                                                    <state key="normal" title="E">
                                                         <color key="titleColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="1" colorSpace="deviceRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -396,9 +396,9 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="qmy-GX-kAw" firstAttribute="centerY" secondItem="wuf-SN-i7X" secondAttribute="centerY" type="default" id="TgK-YU-WQz"/>
-                                            <constraint firstItem="qmy-GX-kAw" firstAttribute="centerY" secondItem="eoq-71-BVL" secondAttribute="centerY" type="default" id="dE2-75-1De"/>
-                                            <constraint firstAttribute="trailing" secondItem="qmy-GX-kAw" secondAttribute="trailing" constant="39" id="j4g-o5-JW6"/>
+                                            <constraint firstItem="qmy-GX-kAw" firstAttribute="top" secondItem="wuf-SN-i7X" secondAttribute="top" constant="2" id="5h0-nx-Kjy"/>
+                                            <constraint firstAttribute="trailing" secondItem="qmy-GX-kAw" secondAttribute="trailing" constant="34" id="VQd-AI-ZHY"/>
+                                            <constraint firstItem="eoq-71-BVL" firstAttribute="centerY" secondItem="wuf-SN-i7X" secondAttribute="centerY" type="default" id="mtI-7r-aqF"/>
                                             <constraint firstItem="eoq-71-BVL" firstAttribute="leading" secondItem="wuf-SN-i7X" secondAttribute="leading" constant="20" type="default" id="uVU-ei-W8S"/>
                                             <constraint firstItem="eoq-71-BVL" firstAttribute="baseline" secondItem="qmy-GX-kAw" secondAttribute="baseline" type="default" id="xYC-bH-rcL"/>
                                         </constraints>
@@ -453,15 +453,10 @@
         <class className="PrefsTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PrefsTableViewController.h"/>
             <relationships>
-                <relationship kind="action" name="changeDbConnectionStatus:"/>
-                <relationship kind="action" name="changeHrSensorConnectionStatus:"/>
-                <relationship kind="action" name="changeHrSoundStatus:"/>
-                <relationship kind="action" name="changeMotionSound:"/>
-                <relationship kind="action" name="playE:"/>
-                <relationship kind="outlet" name="_dbConnectionSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_dbConnectionStatusSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="_hrBatteryLevelLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="_hrConnectionStatusLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="_hrConnectionSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_hrConnectionStatusSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="_hrSoundStatusSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="_motionSoundStatusSwitch" candidateClass="UISwitch"/>
             </relationships>

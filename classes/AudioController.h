@@ -19,6 +19,6 @@
 + (AudioController *)sharedAudioController;
 
 - (void)playE;
-- (void)playG;
+- (void)playB;
 
 @end

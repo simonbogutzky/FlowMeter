@@ -32,16 +32,16 @@
     return _sharedAudioController;
 }
 
-//TODO: (sb) Set right notes
-
 - (void)playE
 {
-    [self playNote:90];
+    // E-string (high)
+    [self playNote:64];
 }
 
-- (void)playG
+- (void)playB
 {
-    [self playNote:55];
+    // B-string
+    [self playNote:59];
 }
 
 - (void)playNote:(int)n
