@@ -70,7 +70,7 @@
     if ([motionManager isDeviceMotionAvailable] == YES) {
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
         [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
-            if ([[_userSession appendMotionData2:deviceMotion] isEqualToString:@"HS"]) {
+            if ([[_userSession appendMotionData:deviceMotion] isEqualToString:@"HS"]) {
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 if ([defaults boolForKey:@"motionSoundStatus"]) {
                     [[AudioController sharedAudioController] playE];

@@ -20,7 +20,6 @@
 
 - (void)createMotionStorage;
 - (NSString *)appendMotionData:(CMDeviceMotion *)deviceMotion;
-- (NSString *)appendMotionData2:(CMDeviceMotion *)deviceMotion;
 - (NSData *)seriliazeAndZipMotionData;
 - (void)createHrStorage;
 - (void)appendHrData:(WFHeartrateData *)hrData;

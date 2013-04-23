@@ -103,7 +103,7 @@
     return NO;
 }
 
-- (NSString *)appendMotionData2:(CMDeviceMotion *)deviceMotion
+- (NSString *)appendMotionData:(CMDeviceMotion *)deviceMotion
 {
     
     NSString *label = @"";
