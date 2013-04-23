@@ -9,7 +9,8 @@
 #import "HomeViewController.h"
 #import "AppDelegate.h"
 #import "UserSessionVO.h"
-#import "PdDispatcher.h"
+#import "AudioController.h"
+
 //#import "Reachability.h"
 
 
@@ -18,17 +19,12 @@
     WFSensorConnection *_sensorConnection;
     WFSensorType_t _sensorType;
     BOOL _isCollection;
+    
     UserSessionVO *_userSession;
-    
-    PdDispatcher *_dispatcher;
-    void *_patch;
     int _lastAccumBeatCount;
-    
     DBRestClient *_restClient;
-    
     IBOutlet UILabel *_bmpLabel;
-    
-//    Reachability *_internetReachable;
+    //    Reachability *_internetReachable;
 }
 
 
@@ -42,14 +38,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    _dispatcher = [[PdDispatcher alloc]init];
-    [PdBase setDelegate:_dispatcher];
-    _patch = [PdBase openFile:@"tuner.pd"
-                        path:[[NSBundle mainBundle] resourcePath]];
-    if (!_patch) {
-        NSLog(@"Failed to open patch!"); // Gracefully handle failure...
-    }
     
     // Create user session
     _userSession = [[UserSessionVO alloc] init];
@@ -83,7 +71,10 @@
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
         [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
             if ([[_userSession appendMotionData2:deviceMotion] isEqualToString:@"HS"]) {
-                [self playE:self];
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                if ([defaults boolForKey:@"motionSoundStatus"]) {
+                    [[AudioController sharedAudioController] playE];
+                }
             }
         }];
     }
@@ -140,25 +131,8 @@
     }
 }
 
-- (IBAction)playE:(id)sender
-{
-    [self playNote:90];
-}
-
-- (IBAction)playG:(id)sender
-{
-    [self playNote:55];
-}
-
 #pragma mark - Convenient methods
-#pragma mark - 
-
-- (void)playNote:(int)n
-{
-    [PdBase sendFloat:n toReceiver:@"midinote"];
-    [PdBase sendBangToReceiver:@"trigger"];
-    
-}
+#pragma mark -
 
 //// Checks if we have an internet connection or not
 //- (void)testInternetConnection
@@ -189,40 +163,28 @@
 //        NSLog(@"No Internet");
 //}
 
-
-
 - (void)updateSensorData
 {
     if ([((AppDelegate *)[[UIApplication sharedApplication] delegate]).wfSensorConnection isKindOfClass:[WFHeartrateConnection class]]) {
         WFHeartrateConnection *hrConnection = (WFHeartrateConnection *) ((AppDelegate *)[[UIApplication sharedApplication] delegate]).wfSensorConnection;
         WFHeartrateData *hrData = [hrConnection getHeartrateData];
-//        WFHeartrateRawData *hrRawData = [hrConnection getHeartrateRawData];
         if (hrData != nil) {
             _bmpLabel.text = [hrData formattedHeartrate:YES];
-            
             if (_lastAccumBeatCount < hrData.accumBeatCount) {
-                // Sonify beat
-                [self playE:self];
                 
+                // Sonify beat
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                if ([defaults boolForKey:@"hrSoundStatus"]) {
+                    [[AudioController sharedAudioController] playE];
+                }
                 _lastAccumBeatCount = hrData.accumBeatCount;
                 
-                NSLog(@"# accumBeatCount: %d", hrData.accumBeatCount);
+//                NSLog(@"# accumBeatCount: %d", hrData.accumBeatCount);
             }
-            
-            // Debug logs
-//            NSLog(@"# beatTime: %d", hrData.beatTime);
-//            NSLog(@"# accumBeatCount: %d", hrData.accumBeatCount);
-//
-//            NSLog(@"# rawBeatTime: %d", hrRawData.beatTime);
-//            NSLog(@"# rawAccumBeatCount: %d", hrRawData.beatCount);
-//            
-//            NSLog(@"# previousBeatTime: %d", hrRawData.previousBeatTime);
-            
-            NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
-            
-            for (NSNumber *rrInterval in rrIntervals) {
-                NSLog(@"# rrInterval: %f", [rrInterval doubleValue]);
-            }
+//            NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
+//            for (NSNumber *rrInterval in rrIntervals) {
+//                NSLog(@"# rrInterval: %f", [rrInterval doubleValue]);
+//            }
             
             if(_isCollection) {
                 [_userSession appendHrData:hrData];

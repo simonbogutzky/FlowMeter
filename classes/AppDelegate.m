@@ -8,15 +8,14 @@
 
 #import "AppDelegate.h"
 #import "Utility.h"
-#import "PdAudioController.h"
 #import <DropboxSDK/DropboxSDK.h>
+#import "AudioController.h"
 
 @interface AppDelegate ()
 {
     CMMotionManager *_motionManager;
     CLLocationManager *_locationManager;
     WFHardwareConnector *_hardwareConnector;
-    PdAudioController *_audioController;
 }
 @end
 
@@ -74,10 +73,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    _audioController = [[PdAudioController alloc] init];
-    if ([_audioController configureAmbientWithSampleRate:44100 numberChannels:2 mixingEnabled:YES] != PdAudioOK) {
-        NSLog(@"failed to initialize audio components");
-    }
+    
     
     //Testflight
 //#define TESTING 1
@@ -116,7 +112,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    _audioController.active = YES;
+    [AudioController sharedAudioController].audioController.active = YES;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

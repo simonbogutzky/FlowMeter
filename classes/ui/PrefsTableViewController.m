@@ -8,12 +8,15 @@
 
 #import "PrefsTableViewController.h"
 #import "AppDelegate.h"
+#import "AudioController.h"
 
 @interface PrefsTableViewController () {
-    IBOutlet UISwitch *_dbConnectionSwitch;
-    IBOutlet UISwitch *_hrConnectionSwitch;
+    IBOutlet UISwitch *_dbConnectionStatusSwitch;
+    IBOutlet UISwitch *_hrConnectionStatusSwitch;
     IBOutlet UILabel *_hrBatteryLevelLabel;
     IBOutlet UILabel *_hrConnectionStatusLabel;
+    IBOutlet UISwitch *_motionSoundStatusSwitch;
+    IBOutlet UISwitch *_hrSoundStatusSwitch;
     AppDelegate *_appDelegate;
     WFSensorType_t _wfSensorType;
 }
@@ -29,11 +32,15 @@
     if (_appDelegate.wfSensorConnection != nil)
         _appDelegate.wfSensorConnection.delegate = self;
     
-    _dbConnectionSwitch.on = [[DBSession sharedSession] isLinked];
+    _dbConnectionStatusSwitch.on = [[DBSession sharedSession] isLinked];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeDBConnection:) name:NOTIFICATION_DB_CONNECTION_CANCELLED object:nil];
     
     [self setWfSensorConnectionStatus:_appDelegate.wfSensorConnection.connectionStatus];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWfSensorData:) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    _motionSoundStatusSwitch.on = [defaults boolForKey:@"motionSoundStatus"];
+    _hrSoundStatusSwitch.on = [defaults boolForKey:@"hrSoundStatus"];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -66,20 +73,39 @@
 
 - (IBAction)changeDbConnectionStatus:(id)sender
 {
-    if (![[DBSession sharedSession] isLinked] && _dbConnectionSwitch.on)
+    if (![[DBSession sharedSession] isLinked] && _dbConnectionStatusSwitch.on)
         [[DBSession sharedSession] linkFromController:self];
     
-    if ([[DBSession sharedSession] isLinked] && !_dbConnectionSwitch.on)
+    if ([[DBSession sharedSession] isLinked] && !_dbConnectionStatusSwitch.on)
         [[DBSession sharedSession] unlinkAll];
 }
 
-- (IBAction)changeHrSensorConnectionStaus:(id)sender
+- (IBAction)changeHrSensorConnectionStatus:(id)sender
 {
-    if (_appDelegate.wfSensorConnection.connectionStatus == WF_SENSOR_CONNECTION_STATUS_IDLE && _hrConnectionSwitch.on)
+    if (_appDelegate.wfSensorConnection.connectionStatus == WF_SENSOR_CONNECTION_STATUS_IDLE && _hrConnectionStatusSwitch.on)
         [self initHrSensorConnection];
     
-    if ((_appDelegate.wfSensorConnection.connectionStatus == WF_SENSOR_CONNECTION_STATUS_CONNECTED || _appDelegate.wfSensorConnection.connectionStatus == WF_SENSOR_CONNECTION_STATUS_CONNECTING) && !_hrConnectionSwitch.on)
+    if ((_appDelegate.wfSensorConnection.connectionStatus == WF_SENSOR_CONNECTION_STATUS_CONNECTED || _appDelegate.wfSensorConnection.connectionStatus == WF_SENSOR_CONNECTION_STATUS_CONNECTING) && !_hrConnectionStatusSwitch.on)
         [self disconnectWfSensor];
+}
+
+- (IBAction)playE:(id)sender
+{
+    [[AudioController sharedAudioController] playG];
+}
+
+- (IBAction)changeHrSoundStatus:(id)sender
+{
+    UISwitch *hrSoundStatusSwitch = sender;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:hrSoundStatusSwitch.on forKey:@"hrSoundStatus"];
+}
+
+- (IBAction)changeMotionSound:(id)sender
+{
+    UISwitch *motionSoundStatusSwitch = sender;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:motionSoundStatusSwitch.on forKey:@"motionSoundStatus"];
 }
 
 #pragma mark -
@@ -124,7 +150,7 @@
             _appDelegate.wfSensorConnection = [hardwareConnector requestSensorConnection:params];
             
             if (_appDelegate.wfSensorConnection == nil)
-                [_hrConnectionSwitch setOn:NO animated:YES];
+                [_hrConnectionStatusSwitch setOn:NO animated:YES];
             else
                 _appDelegate.wfSensorConnection.delegate = self;
         }
@@ -142,23 +168,23 @@
 {
     switch (connectionStatus) {
         case WF_SENSOR_CONNECTION_STATUS_IDLE:
-            [_hrConnectionSwitch setOn:NO animated:YES];
+            [_hrConnectionStatusSwitch setOn:NO animated:YES];
             _hrConnectionStatusLabel.text = NSLocalizedString(@"nicht verbunden", @"nicht verbunden");
             _hrBatteryLevelLabel.text = NSLocalizedString(@"k. A.", @"k. A.");
             break;
             
         case WF_SENSOR_CONNECTION_STATUS_CONNECTED:
-            [_hrConnectionSwitch setOn:YES animated:YES];
+            [_hrConnectionStatusSwitch setOn:YES animated:YES];
             _hrConnectionStatusLabel.text = NSLocalizedString(@"verbunden", @"verbunden");
             break;
             
         case WF_SENSOR_CONNECTION_STATUS_CONNECTING:
-            [_hrConnectionSwitch setOn:YES animated:YES];
+            [_hrConnectionStatusSwitch setOn:YES animated:YES];
             _hrConnectionStatusLabel.text = NSLocalizedString(@"Verbindung wird hergestellt", @"Verbindung wird hergestellt");
             break;
             
         case WF_SENSOR_CONNECTION_STATUS_DISCONNECTING:
-            [_hrConnectionSwitch setOn:NO animated:YES];
+            [_hrConnectionStatusSwitch setOn:NO animated:YES];
             _hrConnectionStatusLabel.text = NSLocalizedString(@"Verbindung wird getrennt", @"Verbindung wird getrennt");
             break;
             
@@ -191,7 +217,7 @@
 
 - (void)changeDBConnection:(NSNotification *)notification
 {
-    [_dbConnectionSwitch setOn:!_dbConnectionSwitch.on animated:YES];
+    [_dbConnectionStatusSwitch setOn:!_dbConnectionStatusSwitch.on animated:YES];
 }
 
 - (void)updateWfSensorData:(NSNotification *)notification

@@ -64,7 +64,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TV8-ty-RU8">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="fOf-pT-58K"/>
+                                    <constraint firstAttribute="width" constant="64" id="Nzq-nF-u66"/>
                                     <constraint firstAttribute="height" constant="64" id="iXA-aX-8pQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -91,45 +91,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sound" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmh-Jx-EWq">
-                                <color key="backgroundColor" red="0.5027334916959707" green="0.89404296875" blue="0.7495796270812195" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="241" id="Py0-IH-zEp"/>
-                                    <constraint firstAttribute="height" constant="54" id="tvJ-jG-N9L"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WAK-50-QuS">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="4Wy-mV-9Va"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="PlayE">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="playE:" destination="2" eventType="touchDown" id="kI5-co-KTD"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vf4-3N-KpY">
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="PlayG">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="playG:" destination="2" eventType="touchDown" id="fu8-y9-XXc"/>
-                                </connections>
-                            </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A0v-RU-kOx">
                                 <color key="tintColor" red="0.0" green="0.56470590829849243" blue="0.67450982332229614" alpha="1" colorSpace="deviceRGB"/>
                                 <items>
@@ -145,22 +106,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="TV8-ty-RU8" firstAttribute="centerX" secondItem="trp-AF-0BT" secondAttribute="centerX" type="default" id="61P-ek-Dbn"/>
-                            <constraint firstItem="wmh-Jx-EWq" firstAttribute="top" secondItem="3" secondAttribute="top" constant="178" id="8gK-ZJ-afP"/>
-                            <constraint firstItem="vf4-3N-KpY" firstAttribute="bottom" secondItem="WAK-50-QuS" secondAttribute="bottom" type="default" id="Hyt-Fx-F6p"/>
+                            <constraint firstItem="TV8-ty-RU8" firstAttribute="centerX" secondItem="trp-AF-0BT" secondAttribute="centerX" type="default" id="AH7-FN-FpA"/>
                             <constraint firstItem="trp-AF-0BT" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Ibf-0g-tIx"/>
-                            <constraint firstItem="WAK-50-QuS" firstAttribute="baseline" secondItem="wmh-Jx-EWq" secondAttribute="baseline" type="default" id="JxI-gA-OVO"/>
                             <constraint firstItem="A0v-RU-kOx" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="K8s-MW-aTo"/>
                             <constraint firstAttribute="trailing" secondItem="trp-AF-0BT" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="LxN-gQ-xSf"/>
-                            <constraint firstItem="WAK-50-QuS" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="94" id="Tki-lj-3kz"/>
+                            <constraint firstItem="trp-AF-0BT" firstAttribute="top" secondItem="3" secondAttribute="top" constant="240" id="W0A-sg-Sf9"/>
                             <constraint firstItem="A0v-RU-kOx" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="aiw-5c-oN7"/>
-                            <constraint firstItem="trp-AF-0BT" firstAttribute="top" secondItem="wmh-Jx-EWq" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="dMJ-wN-cmv"/>
                             <constraint firstAttribute="bottom" secondItem="TV8-ty-RU8" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="dg2-Xr-ZwQ"/>
-                            <constraint firstItem="wmh-Jx-EWq" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="15" id="fo5-UA-ORm"/>
-                            <constraint firstItem="vf4-3N-KpY" firstAttribute="baseline" secondItem="WAK-50-QuS" secondAttribute="baseline" type="default" id="mZE-5Q-ZwH"/>
-                            <constraint firstItem="vf4-3N-KpY" firstAttribute="leading" secondItem="WAK-50-QuS" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="med-9P-QMN"/>
                             <constraint firstItem="A0v-RU-kOx" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="qYh-ex-nuY"/>
-                            <constraint firstItem="WAK-50-QuS" firstAttribute="top" secondItem="3" secondAttribute="top" constant="183" id="wsN-e2-ngL"/>
                         </constraints>
                     </view>
                     <connections>
@@ -278,7 +231,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yt7-N0-sjb">
                                                     <color key="onTintColor" red="0.0" green="0.5647059083" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
-                                                        <action selector="changeHrSensorConnectionStaus:" destination="pk8-WG-38E" eventType="valueChanged" id="4x8-tZ-r7c"/>
+                                                        <action selector="changeHrSensorConnectionStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="eMX-cl-coY"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -337,6 +290,121 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Audio" id="uTp-04-hRx">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="CX7-Nb-dNu">
+                                        <rect key="frame" x="0.0" y="318" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Herzlaute" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1l-gl-AVc">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="184" id="DH9-5Y-PyZ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="IJK-Md-chM">
+                                                    <color key="onTintColor" red="0.0" green="0.5647059083" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
+                                                    <connections>
+                                                        <action selector="changeHrSensorConnectionStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="yRm-dL-Cg8"/>
+                                                        <action selector="changeHrSoundStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="he7-Ox-Ceb"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="V1l-gl-AVc" firstAttribute="leading" secondItem="CX7-Nb-dNu" secondAttribute="leading" constant="20" type="default" id="2cD-Xw-R5Z"/>
+                                            <constraint firstItem="V1l-gl-AVc" firstAttribute="centerY" secondItem="IJK-Md-chM" secondAttribute="centerY" type="default" id="lQT-eO-bCP"/>
+                                            <constraint firstItem="IJK-Md-chM" firstAttribute="centerY" secondItem="CX7-Nb-dNu" secondAttribute="centerY" type="default" id="rOu-aw-3pt"/>
+                                            <constraint firstAttribute="trailing" secondItem="IJK-Md-chM" secondAttribute="trailing" constant="22" id="tbI-kO-B1F"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="9lJ-cI-k7l">
+                                        <rect key="frame" x="0.0" y="363" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Schrittlaute" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRJ-uK-FvP">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="184" id="gNC-wL-7Ac"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ilX-Ln-bru">
+                                                    <color key="onTintColor" red="0.0" green="0.5647059083" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
+                                                    <connections>
+                                                        <action selector="changeHrSensorConnectionStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="wvL-5S-gqN"/>
+                                                        <action selector="changeMotionSound:" destination="pk8-WG-38E" eventType="valueChanged" id="Yj6-ax-q7u"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="gRJ-uK-FvP" firstAttribute="leading" secondItem="9lJ-cI-k7l" secondAttribute="leading" constant="20" type="default" id="AHm-L8-Gyw"/>
+                                            <constraint firstAttribute="trailing" secondItem="ilX-Ln-bru" secondAttribute="trailing" constant="22" id="gsN-AM-t6z"/>
+                                            <constraint firstItem="ilX-Ln-bru" firstAttribute="centerY" secondItem="gRJ-uK-FvP" secondAttribute="centerY" type="default" id="idn-uQ-8we"/>
+                                            <constraint firstItem="ilX-Ln-bru" firstAttribute="top" secondItem="9lJ-cI-k7l" secondAttribute="top" constant="8" id="sa4-P1-Ivm"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wuf-SN-i7X">
+                                        <rect key="frame" x="0.0" y="407" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Testen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoq-71-BVL">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="184" id="Zlx-pj-hUY"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmy-GX-kAw">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="fNN-IS-fp1"/>
+                                                        <constraint firstAttribute="width" constant="34" id="iU4-l3-KIS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <color key="tintColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="1" colorSpace="deviceRGB"/>
+                                                    <state key="normal" title="G">
+                                                        <color key="titleColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="1" colorSpace="deviceRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="selected">
+                                                        <color key="titleColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="1" colorSpace="deviceRGB"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="playE:" destination="pk8-WG-38E" eventType="touchUpInside" id="k73-XP-ap2"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="qmy-GX-kAw" firstAttribute="centerY" secondItem="wuf-SN-i7X" secondAttribute="centerY" type="default" id="TgK-YU-WQz"/>
+                                            <constraint firstItem="qmy-GX-kAw" firstAttribute="centerY" secondItem="eoq-71-BVL" secondAttribute="centerY" type="default" id="dE2-75-1De"/>
+                                            <constraint firstAttribute="trailing" secondItem="qmy-GX-kAw" secondAttribute="trailing" constant="39" id="j4g-o5-JW6"/>
+                                            <constraint firstItem="eoq-71-BVL" firstAttribute="leading" secondItem="wuf-SN-i7X" secondAttribute="leading" constant="20" type="default" id="uVU-ei-W8S"/>
+                                            <constraint firstItem="eoq-71-BVL" firstAttribute="baseline" secondItem="qmy-GX-kAw" secondAttribute="baseline" type="default" id="xYC-bH-rcL"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="pk8-WG-38E" id="DZm-s9-O0x"/>
@@ -344,10 +412,12 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="_dbConnectionSwitch" destination="vPw-LP-ebh" id="BnN-Zk-h5H"/>
+                        <outlet property="_dbConnectionStatusSwitch" destination="vPw-LP-ebh" id="rds-oE-6Qp"/>
                         <outlet property="_hrBatteryLevelLabel" destination="TgP-FC-Mtt" id="5lf-Ae-7BP"/>
                         <outlet property="_hrConnectionStatusLabel" destination="0M0-at-MBm" id="gj7-QT-d3L"/>
-                        <outlet property="_hrConnectionSwitch" destination="yt7-N0-sjb" id="JBZ-aX-lKd"/>
+                        <outlet property="_hrConnectionStatusSwitch" destination="yt7-N0-sjb" id="ffa-mg-EaZ"/>
+                        <outlet property="_hrSoundStatusSwitch" destination="IJK-Md-chM" id="d4z-eW-tzi"/>
+                        <outlet property="_motionSoundStatusSwitch" destination="ilX-Ln-bru" id="Jkl-co-C1K"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i7X-cl-ewF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -368,9 +438,6 @@
         <class className="HomeViewController" superclassName="AbtractSlidingTopViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
             <relationships>
-                <relationship kind="action" name="playE:"/>
-                <relationship kind="action" name="playG:"/>
-                <relationship kind="action" name="startStopCollection:"/>
                 <relationship kind="outlet" name="_bmpLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
@@ -386,10 +453,17 @@
         <class className="PrefsTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PrefsTableViewController.h"/>
             <relationships>
+                <relationship kind="action" name="changeDbConnectionStatus:"/>
+                <relationship kind="action" name="changeHrSensorConnectionStatus:"/>
+                <relationship kind="action" name="changeHrSoundStatus:"/>
+                <relationship kind="action" name="changeMotionSound:"/>
+                <relationship kind="action" name="playE:"/>
                 <relationship kind="outlet" name="_dbConnectionSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="_hrBatteryLevelLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="_hrConnectionStatusLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="_hrConnectionSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_hrSoundStatusSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_motionSoundStatusSwitch" candidateClass="UISwitch"/>
             </relationships>
         </class>
         <class className="PrefsViewController" superclassName="AbtractSlidingTopViewController">
