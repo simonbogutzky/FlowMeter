@@ -11,6 +11,8 @@
 
 @interface AbtractSlidingTopViewController : UIViewController
 
+@property (nonatomic, assign) BOOL sliding;
+
 
 - (IBAction)revealMenu:(id)sender;
 @end

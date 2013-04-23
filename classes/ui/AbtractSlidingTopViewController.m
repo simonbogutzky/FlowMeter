@@ -10,7 +10,9 @@
 #import "ECSlidingViewController.h"
 #import "MenuViewController.h"
 
-@interface AbtractSlidingTopViewController ()
+@interface AbtractSlidingTopViewController () {
+    IBOutlet UIBarButtonItem *menuBarButtomItem;
+}
 
 @end
 
@@ -59,6 +61,17 @@
 - (IBAction)revealMenu:(id)sender
 {
     [self.slidingViewController anchorTopViewTo:ECRight];
+}
+
+- (void)setSliding:(BOOL)sliding
+{
+    menuBarButtomItem.enabled = sliding;
+    if (sliding) {
+        [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+        
+    } else {
+        [self.view removeGestureRecognizer:self.slidingViewController.panGesture];
+    }
 }
 
 @end

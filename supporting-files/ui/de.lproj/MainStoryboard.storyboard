@@ -118,6 +118,7 @@
                     </view>
                     <connections>
                         <outlet property="_bmpLabel" destination="trp-AF-0BT" id="c9P-sJ-Hc7"/>
+                        <outlet property="menuBarButtomItem" destination="Nft-lx-2xl" id="EYv-mW-G8Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -162,6 +163,9 @@
                             <constraint firstItem="12P-f0-Q3K" firstAttribute="leading" secondItem="H0N-cd-lCD" secondAttribute="leading" type="default" id="vug-3k-wfC"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="menuBarButtomItem" destination="984-Ra-PzW" id="1tU-iv-dES"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ZH-t9-Qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -430,6 +434,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AbtractSlidingTopViewController.h"/>
             <relationships>
                 <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="outlet" name="menuBarButtomItem" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
         <class className="ECSlidingViewController" superclassName="UIViewController">

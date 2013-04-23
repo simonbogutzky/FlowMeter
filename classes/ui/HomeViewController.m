@@ -104,6 +104,7 @@
 - (IBAction)startStopCollection:(id)sender
 {
     _isCollection = !_isCollection;
+    self.sliding = !_isCollection;
     
     UIButton *startStopCollectionButton = (UIButton *)sender;
     
