@@ -171,6 +171,35 @@
             </objects>
             <point key="canvasLocation" x="875" y="556"/>
         </scene>
+        <!--Session View Controller-->
+        <scene sceneID="kGv-F9-egz">
+            <objects>
+                <viewController storyboardIdentifier="session" id="cQA-rs-euB" customClass="SessionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EIK-Ze-wrz">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCE-y3-3it">
+                                <color key="tintColor" red="0.0" green="0.5647059083" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
+                                <items>
+                                    <navigationItem title="Läufe" id="529-3m-jUS">
+                                        <barButtonItem key="leftBarButtonItem" title="Menu" id="bo7-Md-wr0"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iCE-y3-3it" firstAttribute="top" secondItem="EIK-Ze-wrz" secondAttribute="top" type="default" id="gzj-2L-1Xm"/>
+                            <constraint firstItem="iCE-y3-3it" firstAttribute="leading" secondItem="EIK-Ze-wrz" secondAttribute="leading" type="default" id="zB1-xN-NVH"/>
+                            <constraint firstItem="iCE-y3-3it" firstAttribute="trailing" secondItem="EIK-Ze-wrz" secondAttribute="trailing" type="default" id="zSu-mb-NVN"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cYw-XL-Pil" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="874" y="1274"/>
+        </scene>
         <!--Prefs Table View Controller-->
         <scene sceneID="sM5-jz-Dgc">
             <objects>
@@ -468,6 +497,9 @@
         </class>
         <class className="PrefsViewController" superclassName="AbtractSlidingTopViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PrefsViewController.h"/>
+        </class>
+        <class className="SessionViewController" superclassName="AbtractSlidingTopViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SessionViewController.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

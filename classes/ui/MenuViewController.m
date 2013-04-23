@@ -24,8 +24,8 @@
 {
     [super viewDidLoad];
     
-    _menuItems = @[@"home", @"prefs"];
-    _menuItemLabels = @[@"Startseite", @"Einstellungen"];
+    _menuItems = @[@"home", @"prefs", @"session"];
+    _menuItemLabels = @[NSLocalizedString(@"Startseite", @"Startseite"), NSLocalizedString(@"Einstellungen", @"Einstellungen"), NSLocalizedString(@"Läufe", @"Läufe")];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
