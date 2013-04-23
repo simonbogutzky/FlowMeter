@@ -118,11 +118,11 @@
     [[_measurements objectForKey:@"mRotationRateX"] addObject:[NSNumber numberWithDouble:rotationRateX]];
     [[_storage objectForKey:@"mRotationRateX"] addObject:[NSNumber numberWithDouble:rotationRateX]];
     
-    double filteredRotationRateX = [self filterX:rotationRateX];
+    double filteredRotationRateX = [self filterX5000mHz:rotationRateX];
     [[_measurements objectForKey:@"mFilteredRotationRateX"] addObject:[NSNumber numberWithDouble:filteredRotationRateX]];
     [[_storage objectForKey:@"mFilteredRotationRateX"] addObject:[NSNumber numberWithDouble:filteredRotationRateX]];
     
-    double filteredRotationRateX1 = [self filterX1:rotationRateX];
+    double filteredRotationRateX1 = [self filterX2500mHz:rotationRateX];
     [[_measurements objectForKey:@"mFilteredRotationRateX1"] addObject:[NSNumber numberWithDouble:filteredRotationRateX1]];
     [[_storage objectForKey:@"mFilteredRotationRateX1"] addObject:[NSNumber numberWithDouble:filteredRotationRateX1]];
     
@@ -140,8 +140,8 @@
         // Re-calibration
         if ([[_measurements objectForKey:@"mRotationRateX"] count] > 499) {
             double rotationRateXQuantile = [Utility quantileFromX:[_measurements objectForKey:@"mRotationRateX"] prob:.98];
-            double filteredRotationRateXQuantile = [Utility quantileFromX:[_measurements objectForKey:@"mFilteredRotationRateX"] prob:.98];
-            double filteredRotationRateX1Quantile = [Utility quantileFromX:[_measurements objectForKey:@"mFilteredRotationRateX1"] prob:.98];
+            double filteredRotationRateXQuantile = [Utility quantileFromX:[_measurements objectForKey:@"mFilteredRotationRateX"] prob:.94];
+            double filteredRotationRateX1Quantile = [Utility quantileFromX:[_measurements objectForKey:@"mFilteredRotationRateX1"] prob:.92];
             [_storage setObject:[NSNumber numberWithDouble:rotationRateXQuantile] forKey:@"mRotationRateXQuantile"];
             [_storage setObject:[NSNumber numberWithDouble:filteredRotationRateXQuantile] forKey:@"mFilteredRotationRateXQuantile"];
             [_storage setObject:[NSNumber numberWithDouble:filteredRotationRateX1Quantile] forKey:@"mFilteredRotationRateX1Quantile"];
@@ -222,10 +222,10 @@
              ];
         }
         
-        ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL: [NSURL URLWithString:savePath]];
+        ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL:[NSURL fileURLWithPath:savePath]];
         [archive updateEntries:
          @[
-         [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-t%@-m%03d.csv.zip", dateString, timeString, [fileCount intValue]]
+         [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-t%@-m%03d.csv", dateString, timeString, [fileCount intValue]]
                                          compress:YES
                                         dataBlock:^(NSError** error)
           {
@@ -254,32 +254,47 @@
 
 #define NZEROS 0
 #define NPOLES 2
-#define GAIN   1.265241109e+01
+#define GAIN5000   1.265241109e+01
 
-static float xv[NZEROS+1], yv[NPOLES+1];
+static float xv5000[NZEROS+1], yv5000[NPOLES+1];
 
-- (double)filterX:(double)x
+- (double)filterX5000mHz:(double)x
 {
-    xv[0] = x / GAIN;
-    yv[0] = yv[1];
-    yv[1] = yv[2];
-    yv[2] = xv[0] + (-0.6412805170 * yv[0]) + (1.5622441979 * yv[1]);
-    return yv[2];
+    xv5000[0] = x / GAIN5000;
+    yv5000[0] = yv5000[1];
+    yv5000[1] = yv5000[2];
+    yv5000[2] = xv5000[0] + (-0.6412805170 * yv5000[0]) + (1.5622441979 * yv5000[1]);
+    return yv5000[2];
 }
 
 // Lowpass Butterworth 2. Order Filter with 7.5Hz corner frequency ("http://www-users.cs.york.ac.uk/~fisher/mkfilter/trad.html")
 
-#define GAIN1   6.283720074e+00
+#define GAIN7500   6.283720074e+00
 
-static float xv1[NZEROS+1], yv1[NPOLES+1];
+static float xv7500[NZEROS+1], yv7500[NPOLES+1];
 
-- (double)filterX1:(double)x
+- (double)filterX7500mHz:(double)x
 {
-    xv1[0] = x / GAIN1;
-    yv1[0] = yv1[1];
-    yv1[1] = yv1[2];
-    yv1[2] = xv1[0] + (-0.5135373887 * yv1[0]) + (1.3543959903 * yv1[1]);
-    return yv1[2];
+    xv7500[0] = x / GAIN7500;
+    yv7500[0] = yv7500[1];
+    yv7500[1] = yv7500[2];
+    yv7500[2] = xv7500[0] + (-0.5135373887 * yv7500[0]) + (1.3543959903 * yv7500[1]);
+    return yv7500[2];
+}
+
+// Lowpass Butterworth 2. Order Filter with 2.5Hz corner frequency ("http://www-users.cs.york.ac.uk/~fisher/mkfilter/trad.html")
+
+#define GAIN2500   4.528955473e+01
+
+static float xv2500[NZEROS+1], yv2500[NPOLES+1];
+
+- (double)filterX2500mHz:(double)x
+{
+    xv2500[0] = x / GAIN2500;
+    yv2500[0] = yv2500[1];
+    yv2500[1] = yv2500[2];
+    yv2500[2] = xv2500[0] + (-0.8007999232 * yv2500[0]) + (1.7787197768 * yv2500[1]);
+    return yv2500[2];
 }
 
 #pragma mark -

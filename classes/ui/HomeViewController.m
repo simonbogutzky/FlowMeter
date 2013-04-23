@@ -122,6 +122,7 @@
             [_userSession seriliazeAndZipHrData];
         }
         
+        // TODO: (sb) Replace feedback
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
                                                         message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
                                                        delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
@@ -210,13 +211,15 @@
 
 - (void)uploadFile:(NSNotification *)notification
 {
-    NSDictionary *userInfo = [notification userInfo];
-    
-    NSString *localPath = [userInfo objectForKey:@"localPath"];
-    NSString *fileName = [userInfo objectForKey:@"fileName"];
-    NSString *destDir = @"/";
-    
-    [[self restClient] uploadFile:fileName toPath:destDir withParentRev:nil fromPath:localPath];
+    if ([[DBSession sharedSession] isLinked]) {
+        NSDictionary *userInfo = [notification userInfo];
+        
+        NSString *localPath = [userInfo objectForKey:@"localPath"];
+        NSString *fileName = [userInfo objectForKey:@"fileName"];
+        NSString *destDir = @"/";
+        
+        [[self restClient] uploadFile:fileName toPath:destDir withParentRev:nil fromPath:localPath];
+    }
 }
 
 #pragma mark -
