@@ -8,7 +8,9 @@
 
 #import "HomeViewController.h"
 #import "AppDelegate.h"
-#import "UserSessionVO.h"
+//#import "UserSessionVO.h"
+#import "Session.h"
+#import "MotionRecord.h"
 #import "AudioController.h"
 
 @interface HomeViewController ()
@@ -17,7 +19,8 @@
     WFSensorType_t _sensorType;
     BOOL _isCollection;
     
-    UserSessionVO *_userSession;
+//    UserSessionVO *_userSession;
+    Session *_session;
     int _lastAccumBeatCount;
     DBRestClient *_restClient;
     IBOutlet UILabel *_bmpLabel;
@@ -39,7 +42,7 @@
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     // Create user session
-    _userSession = [[UserSessionVO alloc] init];
+//    _userSession = [[UserSessionVO alloc] init];
     //    userSession.udid = [[UIDevice currentDevice] uniqueIdentifier];
     //    [self addUserSession];
     
@@ -57,7 +60,7 @@
 
 - (void)startUpdates
 {
-    [_userSession createMotionStorage];
+//    [_userSession createMotionStorage];
     
     // Start motion updates
     NSTimeInterval updateInterval = 0.01; // 100hz
@@ -66,12 +69,17 @@
     if ([motionManager isDeviceMotionAvailable] == YES) {
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
         [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
-            if ([[_userSession appendMotionData:deviceMotion] isEqualToString:@"HS"]) {
-                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                if ([defaults boolForKey:@"motionSoundStatus"]) {
-                    [[AudioController sharedAudioController] playE];
-                }
-            }
+            MotionRecord *motionRecord =[NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
+            motionRecord.timestamp = [NSNumber numberWithDouble:deviceMotion.timestamp];
+            motionRecord.rotationRateX = [NSNumber numberWithDouble:deviceMotion.rotationRate.x];
+            [_session addMotionRecordsObject:motionRecord];
+            
+//            if ([[_userSession appendMotionData:deviceMotion] isEqualToString:@"HS"]) {
+//                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//                if ([defaults boolForKey:@"motionSoundStatus"]) {
+//                    [[AudioController sharedAudioController] playE];
+//                }
+//            }
         }];
     }
     
@@ -105,19 +113,32 @@
     UIButton *startStopCollectionButton = (UIButton *)sender;
     
     if (_isCollection) {
+        
+        _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:_appDelegate.managedObjectContext];
+        
+        // Create a date string of the current date
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+        [dateFormatter setDateFormat:@"HH-mm-ss"];
+        NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
+        _session.filename = [NSString stringWithFormat:@"%@-t%@-m%03d.csv", dateString, timeString, 1];
+        
         [startStopCollectionButton setTitle:@"stop" forState:0];
         [self startUpdates];
-        [_userSession createHrStorage];
+//        [_userSession createHrStorage];
     } else {
         [startStopCollectionButton setTitle:@"start" forState:0];
         [self stopUpdates];
         
-        [_userSession seriliazeAndZipMotionData];
+//        [_userSession seriliazeAndZipMotionData];
+        [_appDelegate saveContext];
+        [_session saveAndZipMotionRecords];
         
-        if ([_userSession hrCount] != 0)
-        {
-            [_userSession seriliazeAndZipHrData];
-        }
+//        if ([_userSession hrCount] != 0)
+//        {
+//            [_userSession seriliazeAndZipHrData];
+//        }
         
         // TODO: (sb) Replace feedback
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
@@ -158,9 +179,9 @@
 //                NSLog(@"# rrInterval: %f", [rrInterval doubleValue]);
 //            }
             
-            if(_isCollection) {
-                [_userSession appendHrData:hrData];
-            }
+//            if(_isCollection) {
+//                [_userSession appendHrData:hrData];
+//            }
         }
     }
     else {

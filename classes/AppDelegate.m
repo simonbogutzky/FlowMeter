@@ -111,7 +111,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [_reachability startNotifier];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadFile:) name:@"MotionDataReady" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(motionDataAvailable:) name:@"MotionDataAvailable" object:nil];
     
     return YES;
 }
@@ -306,7 +306,12 @@
 {
     NSMutableArray *objects = [self fetchUnsyncSessions];
     for (NSManagedObject *object in objects) {
-        [self uploadFile:nil];
+        
+        NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        NSString *filename = [NSString stringWithFormat:@"%@.zip", [object valueForKey:@"filename"]];
+        NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
+        
+        [self uploadFile:filename localPath:localPath];
     }
 }
 
@@ -330,7 +335,6 @@
     if (mutableFetchResults == nil) {
         return nil;
     }
-    NSLog(@"fetch count: %d", [mutableFetchResults count]);
     return mutableFetchResults;
 }
 
@@ -358,26 +362,25 @@
     if (mutableFetchResults == nil || [mutableFetchResults count] == 0) {
         return nil;
     }
-    NSLog(@"fetch count: %d", [mutableFetchResults count]);
     return [mutableFetchResults objectAtIndex:0];
+}
+
+- (void)motionDataAvailable:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSString *localPath = [userInfo objectForKey:@"localPath"];
+    NSString *filename = [userInfo objectForKey:@"filename"];
+    
+    [self uploadFile:filename localPath:localPath];
 }
 
 #pragma mark -
 #pragma mark - Dropbox convenient methods
 
-- (void)uploadFile:(NSNotification *)notification
+- (void)uploadFile:(NSString *)filename localPath:(NSString *)localPath
 {
     if (_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
-//        NSDictionary *userInfo = [notification userInfo];
-        
-//        NSString *localPath = [userInfo objectForKey:@"localPath"];
-//        NSString *fileName = [userInfo objectForKey:@"fileName"];
-        
-        NSString *localPath = [[NSBundle mainBundle] pathForResource:@"Icon" ofType:@"png"];
-        NSString *fileName = @"Icon.png";
         NSString *destDir = @"/";
-        
-        [[self sharedDbRestClient] uploadFile:fileName toPath:destDir withParentRev:nil fromPath:localPath];
+        [[self sharedDbRestClient] uploadFile:filename toPath:destDir withParentRev:nil fromPath:localPath];
     }
 }
 
@@ -390,7 +393,8 @@
     NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" \\(.+\\)" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *filename = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
-    NSLog(@"# Filename: %@", filename);
+    regex = [NSRegularExpression regularExpressionWithPattern:@".zip" options:NSRegularExpressionCaseInsensitive error:&error];
+    filename = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
     [self setSessionSyncedByFilename:filename];
 }
 

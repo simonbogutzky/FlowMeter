@@ -237,8 +237,8 @@
         [_storage setObject:[NSNumber numberWithInt:[fileCount intValue] + 1] forKey:@"mFileCount"];
         
         // Send notification
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[savePath, pathComponent] forKeys:@[@"localPath", @"fileName" ]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataReady" object:self userInfo:userInfo];
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[savePath, pathComponent] forKeys:@[@"localPath", @"filename" ]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:self userInfo:userInfo];
     }
     
     // Compressed data
