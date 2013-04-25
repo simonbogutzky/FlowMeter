@@ -24,8 +24,8 @@
 {
     [super viewDidLoad];
     
-    _menuItems = @[@"home", @"prefs", @"session"];
-    _menuItemLabels = @[NSLocalizedString(@"Startseite", @"Startseite"), NSLocalizedString(@"Einstellungen", @"Einstellungen"), NSLocalizedString(@"Läufe", @"Läufe")];
+    _menuItems = @[@"home", @"session", @"prefs"];
+    _menuItemLabels = @[NSLocalizedString(@"Startseite", @"Startseite"), NSLocalizedString(@"Läufe", @"Läufe"),NSLocalizedString(@"Einstellungen", @"Einstellungen"), ];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -55,7 +55,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 2;
+    return [_menuItems count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

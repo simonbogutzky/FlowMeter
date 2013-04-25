@@ -183,22 +183,68 @@
                                 <color key="tintColor" red="0.0" green="0.5647059083" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
                                 <items>
                                     <navigationItem title="Läufe" id="529-3m-jUS">
-                                        <barButtonItem key="leftBarButtonItem" title="Menu" id="bo7-Md-wr0"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Menu" id="bo7-Md-wr0">
+                                            <connections>
+                                                <action selector="revealMenu:" destination="cQA-rs-euB" id="m09-5b-VeQ"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILA-Jd-6Gj">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="9tQ-ao-a9m" kind="embed" id="co8-XK-DAU"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ILA-Jd-6Gj" firstAttribute="top" secondItem="iCE-y3-3it" secondAttribute="bottom" type="default" id="Cg1-t9-A7W"/>
+                            <constraint firstItem="ILA-Jd-6Gj" firstAttribute="leading" secondItem="EIK-Ze-wrz" secondAttribute="leading" type="default" id="fK2-GR-0nX"/>
+                            <constraint firstItem="ILA-Jd-6Gj" firstAttribute="bottom" secondItem="EIK-Ze-wrz" secondAttribute="bottom" type="default" id="ffS-gV-DXV"/>
                             <constraint firstItem="iCE-y3-3it" firstAttribute="top" secondItem="EIK-Ze-wrz" secondAttribute="top" type="default" id="gzj-2L-1Xm"/>
+                            <constraint firstItem="ILA-Jd-6Gj" firstAttribute="trailing" secondItem="EIK-Ze-wrz" secondAttribute="trailing" type="default" id="u36-YO-JO0"/>
                             <constraint firstItem="iCE-y3-3it" firstAttribute="leading" secondItem="EIK-Ze-wrz" secondAttribute="leading" type="default" id="zB1-xN-NVH"/>
                             <constraint firstItem="iCE-y3-3it" firstAttribute="trailing" secondItem="EIK-Ze-wrz" secondAttribute="trailing" type="default" id="zSu-mb-NVN"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="navigationItem" destination="529-3m-jUS" id="ZvC-IS-eZN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cYw-XL-Pil" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="874" y="1274"/>
+        </scene>
+        <!--Session Table View Controller-->
+        <scene sceneID="9PP-s5-yRx">
+            <objects>
+                <tableViewController id="9tQ-ao-a9m" customClass="SessionTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4NU-bL-Hd7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="FXH-0e-nGC">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9tQ-ao-a9m" id="0Oz-cL-YAw"/>
+                            <outlet property="delegate" destination="9tQ-ao-a9m" id="nNc-zr-oRc"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M6U-EF-lDO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1355" y="1338"/>
         </scene>
         <!--Prefs Table View Controller-->
         <scene sceneID="sM5-jz-Dgc">
@@ -464,6 +510,7 @@
             <relationships>
                 <relationship kind="action" name="revealMenu:"/>
                 <relationship kind="outlet" name="menuBarButtomItem" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="navigationItem" candidateClass="UINavigationItem"/>
             </relationships>
         </class>
         <class className="ECSlidingViewController" superclassName="UIViewController">
@@ -498,8 +545,14 @@
         <class className="PrefsViewController" superclassName="AbtractSlidingTopViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PrefsViewController.h"/>
         </class>
+        <class className="SessionTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SessionTableViewController.h"/>
+        </class>
         <class className="SessionViewController" superclassName="AbtractSlidingTopViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SessionViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

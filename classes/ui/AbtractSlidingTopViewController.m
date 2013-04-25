@@ -12,6 +12,7 @@
 
 @interface AbtractSlidingTopViewController () {
     IBOutlet UIBarButtonItem *menuBarButtomItem;
+    IBOutlet UINavigationItem *navigationItem;
 }
 
 @end

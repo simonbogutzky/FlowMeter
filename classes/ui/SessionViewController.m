@@ -7,6 +7,7 @@
 //
 
 #import "SessionViewController.h"
+#import "SessionTableViewController.h"
 
 @interface SessionViewController ()
 
@@ -24,6 +25,14 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue destinationViewController] isMemberOfClass:[SessionTableViewController class]]) {
+        SessionTableViewController *sessionTableViewController = [segue destinationViewController];
+        sessionTableViewController.navigationItem = self.navigationItem;
+    }
 }
 
 @end

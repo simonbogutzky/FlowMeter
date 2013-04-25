@@ -78,7 +78,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    
     //Testflight
 //#define TESTING 1
 //#ifdef TESTING
