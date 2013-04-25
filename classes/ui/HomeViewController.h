@@ -11,6 +11,6 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "AbtractSlidingTopViewController.h"
 
-@interface HomeViewController : AbtractSlidingTopViewController <DBRestClientDelegate>
+@interface HomeViewController : AbtractSlidingTopViewController
 
 @end

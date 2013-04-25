@@ -46,6 +46,7 @@
     // If appropriate, configure the new managed object.
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
     [newManagedObject setValue:[NSDate date] forKey:@"timestamp"];
+    [newManagedObject setValue:@"Icon.png" forKey:@"filename"];
     
     // Save the context.
     NSError *error = nil;
@@ -55,6 +56,9 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+    
+//    NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[savePath, pathComponent] forKeys:@[@"localPath", @"fileName" ]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataReady" object:self userInfo:nil];
 }
 
 #pragma mark - Table View
@@ -118,7 +122,7 @@
     }
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    // Edit the entity name as appropriate.
+
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
     
@@ -131,9 +135,10 @@
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
+    NSPredicate *isNotSyncedPredicate = [NSPredicate predicateWithFormat:@"isSynced == %@", @0];
+    [fetchRequest setPredicate:isNotSyncedPredicate];
+    
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     

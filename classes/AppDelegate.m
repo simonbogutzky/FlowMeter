@@ -8,14 +8,15 @@
 
 #import "AppDelegate.h"
 #import "Utility.h"
-#import <DropboxSDK/DropboxSDK.h>
 #import "AudioController.h"
+
 
 @interface AppDelegate ()
 {
     CMMotionManager *_motionManager;
     CLLocationManager *_locationManager;
     WFHardwareConnector *_hardwareConnector;
+    DBRestClient *_dbRestClient;
 }
 @end
 
@@ -44,6 +45,16 @@
         _locationManager = [[CLLocationManager alloc] init];
     });
     return _locationManager;
+}
+
+- (DBRestClient *)sharedDbRestClient
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _dbRestClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+        _dbRestClient.delegate = self;
+    });
+    return _dbRestClient;
 }
 
 - (WFHardwareConnector *)sharedHardwareConnector
@@ -92,6 +103,16 @@
     [DBSession setSharedSession:dbSession];
     
     // Override point for customization after application launch.
+    
+    [self syncSessions];
+    
+    // Allocate a reachability object
+    _reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    [_reachability startNotifier];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadFile:) name:@"MotionDataReady" object:nil];
+    
     return YES;
 }
 							
@@ -269,6 +290,113 @@
 - (void)hardwareConnectorHasData
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_SENSOR_HAS_DATA object:WF_NOTIFICATION_SENSOR_HAS_DATA];
+}
+
+#pragma mark - 
+#pragma mark - data sync
+
+- (void)reachabilityChanged:(NSNotification *)notification
+{
+    if(_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
+        [self syncSessions];
+    }
+}
+
+- (void)syncSessions
+{
+    NSMutableArray *objects = [self fetchUnsyncSessions];
+    for (NSManagedObject *object in objects) {
+        [self uploadFile:nil];
+    }
+}
+
+- (NSMutableArray *)fetchUnsyncSessions
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+   
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSPredicate *isNotSyncedPredicate = [NSPredicate predicateWithFormat:@"isSynced == %@", @0];
+    [fetchRequest setPredicate:isNotSyncedPredicate];
+    
+    NSError *error = nil;
+    NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
+    if (mutableFetchResults == nil) {
+        return nil;
+    }
+    NSLog(@"fetch count: %d", [mutableFetchResults count]);
+    return mutableFetchResults;
+}
+
+- (void)setSessionSyncedByFilename:(NSString *)filename
+{
+    NSManagedObject *object = [self fetchUnsyncedSessionByFilename:filename];
+    if (object != nil) {
+        [object setValue:@1 forKey:@"isSynced"];
+        [self saveContext];
+    }
+}
+
+- (NSManagedObject *)fetchUnsyncedSessionByFilename:(NSString *)filename
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *filenamePredicate = [NSPredicate predicateWithFormat:@"filename == %@ && isSynced == %@", filename, @0];
+    [fetchRequest setPredicate:filenamePredicate];
+    
+    NSError *error = nil;
+    NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
+    if (mutableFetchResults == nil || [mutableFetchResults count] == 0) {
+        return nil;
+    }
+    NSLog(@"fetch count: %d", [mutableFetchResults count]);
+    return [mutableFetchResults objectAtIndex:0];
+}
+
+#pragma mark -
+#pragma mark - Dropbox convenient methods
+
+- (void)uploadFile:(NSNotification *)notification
+{
+    if (_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
+//        NSDictionary *userInfo = [notification userInfo];
+        
+//        NSString *localPath = [userInfo objectForKey:@"localPath"];
+//        NSString *fileName = [userInfo objectForKey:@"fileName"];
+        
+        NSString *localPath = [[NSBundle mainBundle] pathForResource:@"Icon" ofType:@"png"];
+        NSString *fileName = @"Icon.png";
+        NSString *destDir = @"/";
+        
+        [[self sharedDbRestClient] uploadFile:fileName toPath:destDir withParentRev:nil fromPath:localPath];
+    }
+}
+
+#pragma mark -
+#pragma mark - DBRestClientDelegate methods
+
+- (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath from:(NSString*)srcPath metadata:(DBMetadata*)metadata
+{
+    NSLog(@"# File uploaded successfully to path: %@", metadata.path);
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" \\(.+\\)" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSString *filename = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
+    NSLog(@"# Filename: %@", filename);
+    [self setSessionSyncedByFilename:filename];
+}
+
+- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
+{
+    NSLog(@"# File upload failed with error - %@", error);
 }
 
 @end

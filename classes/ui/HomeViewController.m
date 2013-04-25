@@ -10,8 +10,6 @@
 #import "AppDelegate.h"
 #import "UserSessionVO.h"
 #import "AudioController.h"
-#import "Reachability.h"
-
 
 @interface HomeViewController ()
 {
@@ -19,14 +17,13 @@
     WFSensorType_t _sensorType;
     BOOL _isCollection;
     
-    Reachability *_reachability;
-    
     UserSessionVO *_userSession;
     int _lastAccumBeatCount;
     DBRestClient *_restClient;
     IBOutlet UILabel *_bmpLabel;
+    
+    AppDelegate *_appDelegate;
 }
-
 
 @end
 
@@ -39,17 +36,14 @@
 {
     [super viewDidLoad];
     
+    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     // Create user session
     _userSession = [[UserSessionVO alloc] init];
     //    userSession.udid = [[UIDevice currentDevice] uniqueIdentifier];
     //    [self addUserSession];
     
-    // Allocate a reachability object
-    _reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadFile:) name:@"MotionDataReady" object:nil];
-    
-    _sensorConnection = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).wfSensorConnection;
+    _sensorConnection = _appDelegate.wfSensorConnection;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wfSensorDataUpdated:) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
 }
 
@@ -67,7 +61,7 @@
     
     // Start motion updates
     NSTimeInterval updateInterval = 0.01; // 100hz
-    CMMotionManager *motionManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedMotionManager];
+    CMMotionManager *motionManager = [_appDelegate sharedMotionManager];
     
     if ([motionManager isDeviceMotionAvailable] == YES) {
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
@@ -82,7 +76,7 @@
     }
     
     // Start location updates
-    CLLocationManager *locationManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedLocationManager];
+    CLLocationManager *locationManager = [_appDelegate sharedLocationManager];
     [locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
     [locationManager startUpdatingLocation];
 }
@@ -90,13 +84,13 @@
 - (void)stopUpdates
 {
     // Stop motion updates
-    CMMotionManager *motionManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedMotionManager];
+    CMMotionManager *motionManager = [_appDelegate sharedMotionManager];
     if ([motionManager isDeviceMotionActive] == YES) {
         [motionManager stopDeviceMotionUpdates];
     }
     
     // Stop location updates
-    CLLocationManager *locationManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sharedLocationManager];
+    CLLocationManager *locationManager = [_appDelegate sharedLocationManager];
     [locationManager stopUpdatingLocation];
 }
 
@@ -143,8 +137,8 @@
 
 - (void)wfSensorDataUpdated:(NSNotification *)notification
 {
-    if ([((AppDelegate *)[[UIApplication sharedApplication] delegate]).wfSensorConnection isKindOfClass:[WFHeartrateConnection class]]) {
-        WFHeartrateConnection *hrConnection = (WFHeartrateConnection *) ((AppDelegate *)[[UIApplication sharedApplication] delegate]).wfSensorConnection;
+    if ([_appDelegate.wfSensorConnection isKindOfClass:[WFHeartrateConnection class]]) {
+        WFHeartrateConnection *hrConnection = (WFHeartrateConnection *) _appDelegate.wfSensorConnection;
         WFHeartrateData *hrData = [hrConnection getHeartrateData];
         if (hrData != nil) {
             _bmpLabel.text = [hrData formattedHeartrate:YES];
@@ -172,51 +166,6 @@
     else {
         _bmpLabel.text = NSLocalizedString(@"k. A.", @"k. A.");
     }
-}
-
-- (void)reachabilityChanged:(NSNotification *)notification
-{
-    NSLog(@"# reachabilityChanged %@", notification.userInfo);
-    
-    
-}
-
-#pragma mark -
-#pragma mark - Dropbox convenient methods
-
-- (DBRestClient *)restClient {
-    if (!_restClient) {
-        _restClient =
-        [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-        _restClient.delegate = self;
-    }
-    return _restClient;
-}
-
-- (void)uploadFile:(NSNotification *)notification
-{
-    if (_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
-        NSDictionary *userInfo = [notification userInfo];
-        
-        NSString *localPath = [userInfo objectForKey:@"localPath"];
-        NSString *fileName = [userInfo objectForKey:@"fileName"];
-        NSString *destDir = @"/";
-        
-        [[self restClient] uploadFile:fileName toPath:destDir withParentRev:nil fromPath:localPath];
-    }
-}
-
-#pragma mark -
-#pragma mark - DBRestClientDelegate methods
-
-- (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath from:(NSString*)srcPath metadata:(DBMetadata*)metadata
-{
-    NSLog(@"# File uploaded successfully to path: %@", metadata.path);
-}
-
-- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
-{
-    NSLog(@"# File upload failed with error - %@", error);
 }
 
 @end
