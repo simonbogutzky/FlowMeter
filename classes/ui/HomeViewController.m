@@ -8,7 +8,6 @@
 
 #import "HomeViewController.h"
 #import "AppDelegate.h"
-//#import "UserSessionVO.h"
 #import "Session.h"
 #import "MotionRecord.h"
 #import "HeartrateRecord.h"
@@ -20,10 +19,10 @@
     WFSensorType_t _sensorType;
     BOOL _isCollection;
     
-//    UserSessionVO *_userSession;
     Session *_session;
     int _lastAccumBeatCount;
     DBRestClient *_restClient;
+    
     IBOutlet UILabel *_bmpLabel;
     
     AppDelegate *_appDelegate;
@@ -42,11 +41,6 @@
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    // Create user session
-//    _userSession = [[UserSessionVO alloc] init];
-    //    userSession.udid = [[UIDevice currentDevice] uniqueIdentifier];
-    //    [self addUserSession];
-    
     _sensorConnection = _appDelegate.wfSensorConnection;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wfSensorDataUpdated:) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
 }
@@ -61,8 +55,6 @@
 
 - (void)startUpdates
 {
-//    [_userSession createMotionStorage];
-    
     // Start motion updates
     NSTimeInterval updateInterval = 0.01; // 100hz
     CMMotionManager *motionManager = [_appDelegate sharedMotionManager];
@@ -132,20 +124,13 @@
         
         [startStopCollectionButton setTitle:@"stop" forState:0];
         [self startUpdates];
-//        [_userSession createHrStorage];
     } else {
         [startStopCollectionButton setTitle:@"start" forState:0];
         [self stopUpdates];
         
-//        [_userSession seriliazeAndZipMotionData];
         [_appDelegate saveContext];
         [_session saveAndZipMotionRecords];
         [_session saveAndZipHeartrateRecords];
-        
-//        if ([_userSession hrCount] != 0)
-//        {
-//            [_userSession seriliazeAndZipHrData];
-//        }
         
         // TODO: (sb) Replace feedback
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
@@ -183,7 +168,7 @@
                     // Create hr record
                     HeartrateRecord *heartrateRecord =[NSEntityDescription insertNewObjectForEntityForName:@"HeartrateRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
                     heartrateRecord.timestamp = [NSNumber numberWithDouble:hrData.timestamp];
-                    heartrateRecord.accumCount = [NSNumber numberWithDouble:hrData.accumBeatCount];
+                    heartrateRecord.accumBeatCount = [NSNumber numberWithDouble:hrData.accumBeatCount];
                     
                     // Add hr record
                     [_session addHeatrateRecordsObject:heartrateRecord];
@@ -191,15 +176,10 @@
                 
                 _lastAccumBeatCount = hrData.accumBeatCount;
                 
-//                NSLog(@"# accumBeatCount: %d", hrData.accumBeatCount);
             }
 //            NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
 //            for (NSNumber *rrInterval in rrIntervals) {
 //                NSLog(@"# rrInterval: %f", [rrInterval doubleValue]);
-//            }
-            
-//            if(_isCollection) {
-//                [_userSession appendHrData:hrData];
 //            }
         }
     }

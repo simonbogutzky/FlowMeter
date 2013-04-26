@@ -99,7 +99,7 @@
             // Append to data string
             [dataString appendFormat:@"%f,%f\n",
              [heartRecord.timestamp doubleValue] - [timestamp doubleValue],
-             [heartRecord.accumCount doubleValue]
+             [heartRecord.accumBeatCount doubleValue]
              ];
         }
         
