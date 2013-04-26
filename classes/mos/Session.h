@@ -33,5 +33,6 @@
 - (void)removeHeatrateRecords:(NSSet *)values;
 
 - (void)saveAndZipMotionRecords;
+- (void)saveAndZipHeartrateRecords;
 
 @end

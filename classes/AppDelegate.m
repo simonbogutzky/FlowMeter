@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "Utility.h"
 #import "AudioController.h"
+#import "Session.h"
 
 
 @interface AppDelegate ()
@@ -111,7 +112,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [_reachability startNotifier];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(motionDataAvailable:) name:@"MotionDataAvailable" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"MotionDataAvailable" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"HeartrateDataAvailable" object:nil];
     
     return YES;
 }
@@ -305,13 +307,20 @@
 - (void)syncSessions
 {
     NSMutableArray *objects = [self fetchUnsyncSessions];
-    for (NSManagedObject *object in objects) {
+    for (Session *session in objects) {
         
         NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *filename = [NSString stringWithFormat:@"%@.zip", [object valueForKey:@"filename"]];
-        NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
+        if ([session.motionRecords count] != 0) {
+            NSString *filename = [NSString stringWithFormat:@"%@-m.csv.zip", [session valueForKey:@"filename"]];
+            NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
+            [self uploadFile:filename localPath:localPath];
+        }
         
-        [self uploadFile:filename localPath:localPath];
+        if ([session.heatrateRecords count] != 0) {
+            NSString *filename = [NSString stringWithFormat:@"%@-hr.csv.zip", [session valueForKey:@"filename"]];
+            NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
+            [self uploadFile:filename localPath:localPath];
+        }
     }
 }
 
@@ -365,7 +374,7 @@
     return [mutableFetchResults objectAtIndex:0];
 }
 
-- (void)motionDataAvailable:(NSNotification *)notification {
+- (void)dataAvailable:(NSNotification *)notification {
     NSDictionary *userInfo = [notification userInfo];
     NSString *localPath = [userInfo objectForKey:@"localPath"];
     NSString *filename = [userInfo objectForKey:@"filename"];
@@ -393,8 +402,9 @@
     NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" \\(.+\\)" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *filename = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
-    regex = [NSRegularExpression regularExpressionWithPattern:@".zip" options:NSRegularExpressionCaseInsensitive error:&error];
-    filename = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"(-m|-hr).csv.zip" options:NSRegularExpressionCaseInsensitive error:&error];
+    filename = [regex stringByReplacingMatchesInString:filename options:0 range:NSMakeRange(0, [filename length]) withTemplate:@""];
+    NSLog(@"# Sync session with filename: %@", filename);
     [self setSessionSyncedByFilename:filename];
 }
 

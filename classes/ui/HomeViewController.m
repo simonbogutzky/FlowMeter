@@ -128,7 +128,7 @@
         NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
         [dateFormatter setDateFormat:@"HH-mm-ss"];
         NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
-        _session.filename = [NSString stringWithFormat:@"%@-t%@-m.csv", dateString, timeString];
+        _session.filename = [NSString stringWithFormat:@"%@-t%@", dateString, timeString];
         
         [startStopCollectionButton setTitle:@"stop" forState:0];
         [self startUpdates];
@@ -140,6 +140,7 @@
 //        [_userSession seriliazeAndZipMotionData];
         [_appDelegate saveContext];
         [_session saveAndZipMotionRecords];
+        [_session saveAndZipHeartrateRecords];
         
 //        if ([_userSession hrCount] != 0)
 //        {
@@ -177,13 +178,16 @@
                     [[AudioController sharedAudioController] playE];
                 }
                 
-                // Create motion record
-                HeartrateRecord *heartrateRecord =[NSEntityDescription insertNewObjectForEntityForName:@"HeartrateRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-                heartrateRecord.accumCount = [NSNumber numberWithDouble:hrData.accumBeatCount];
-                heartrateRecord.timestamp = [NSNumber numberWithDouble:hrData.timestamp];
-                
-                // Add motion record
-                [_session addHeatrateRecordsObject:heartrateRecord];
+                if(_isCollection) {
+                    
+                    // Create hr record
+                    HeartrateRecord *heartrateRecord =[NSEntityDescription insertNewObjectForEntityForName:@"HeartrateRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
+                    heartrateRecord.timestamp = [NSNumber numberWithDouble:hrData.timestamp];
+                    heartrateRecord.accumCount = [NSNumber numberWithDouble:hrData.accumBeatCount];
+                    
+                    // Add hr record
+                    [_session addHeatrateRecordsObject:heartrateRecord];
+                }
                 
                 _lastAccumBeatCount = hrData.accumBeatCount;
                 
