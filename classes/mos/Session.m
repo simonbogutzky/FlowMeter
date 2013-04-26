@@ -7,16 +7,18 @@
 //
 
 #import "Session.h"
+#import "HeartrateRecord.h"
 #import "MotionRecord.h"
 
 #import <zipzap/zipzap.h>
 
 @implementation Session
 
+@dynamic filename;
 @dynamic isSynced;
 @dynamic timestamp;
-@dynamic filename;
 @dynamic motionRecords;
+@dynamic heatrateRecords;
 
 - (void)saveAndZipMotionRecords
 {

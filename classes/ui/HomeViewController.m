@@ -11,6 +11,7 @@
 //#import "UserSessionVO.h"
 #import "Session.h"
 #import "MotionRecord.h"
+#import "HeartrateRecord.h"
 #import "AudioController.h"
 
 @interface HomeViewController ()
@@ -69,16 +70,20 @@
     if ([motionManager isDeviceMotionAvailable] == YES) {
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
         [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
+            
+            // Create motion record
             MotionRecord *motionRecord =[NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
             motionRecord.timestamp = [NSNumber numberWithDouble:deviceMotion.timestamp];
             motionRecord.rotationRateX = [NSNumber numberWithDouble:deviceMotion.rotationRate.x];
+            
+            // Add motion record
             [_session addMotionRecordsObject:motionRecord];
             
 //            if ([[_userSession appendMotionData:deviceMotion] isEqualToString:@"HS"]) {
 //                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //                if ([defaults boolForKey:@"motionSoundStatus"]) {
 //                    [[AudioController sharedAudioController] playE];
-//                }
+//                } 
 //            }
         }];
     }
@@ -115,6 +120,7 @@
     if (_isCollection) {
         
         _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:_appDelegate.managedObjectContext];
+        _session.timestamp = [NSDate date];
         
         // Create a date string of the current date
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -122,7 +128,7 @@
         NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
         [dateFormatter setDateFormat:@"HH-mm-ss"];
         NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
-        _session.filename = [NSString stringWithFormat:@"%@-t%@-m%03d.csv", dateString, timeString, 1];
+        _session.filename = [NSString stringWithFormat:@"%@-t%@-m.csv", dateString, timeString];
         
         [startStopCollectionButton setTitle:@"stop" forState:0];
         [self startUpdates];
@@ -170,6 +176,15 @@
                 if ([defaults boolForKey:@"hrSoundStatus"]) {
                     [[AudioController sharedAudioController] playE];
                 }
+                
+                // Create motion record
+                HeartrateRecord *heartrateRecord =[NSEntityDescription insertNewObjectForEntityForName:@"HeartrateRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
+                heartrateRecord.accumCount = [NSNumber numberWithDouble:hrData.accumBeatCount];
+                heartrateRecord.timestamp = [NSNumber numberWithDouble:hrData.timestamp];
+                
+                // Add motion record
+                [_session addHeatrateRecordsObject:heartrateRecord];
+                
                 _lastAccumBeatCount = hrData.accumBeatCount;
                 
 //                NSLog(@"# accumBeatCount: %d", hrData.accumBeatCount);
