@@ -114,6 +114,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"MotionDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"HeartrateDataAvailable" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"LocationDataAvailable" object:nil];
     
     return YES;
 }
@@ -318,6 +319,12 @@
         
         if ([session.heatrateRecords count] != 0) {
             NSString *filename = [NSString stringWithFormat:@"%@-hr.csv.zip", [session valueForKey:@"filename"]];
+            NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
+            [self uploadFile:filename localPath:localPath];
+        }
+        
+        if ([session.locationRecords count] != 0) {
+            NSString *filename = [NSString stringWithFormat:@"%@-l.csv.zip", [session valueForKey:@"filename"]];
             NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
             [self uploadFile:filename localPath:localPath];
         }

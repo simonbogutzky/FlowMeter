@@ -11,6 +11,7 @@
 #import "Session.h"
 #import "MotionRecord.h"
 #import "HeartrateRecord.h"
+#import "LocationRecord.h"
 #import "AudioController.h"
 
 @interface HomeViewController ()
@@ -83,6 +84,7 @@
     // Start location updates
     CLLocationManager *locationManager = [_appDelegate sharedLocationManager];
     [locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+    locationManager.delegate = self;
     [locationManager startUpdatingLocation];
 }
 
@@ -131,19 +133,34 @@
         [_appDelegate saveContext];
         [_session saveAndZipMotionRecords];
         [_session saveAndZipHeartrateRecords];
+        [_session saveAndZipLocationRecords];
         
         // TODO: (sb) Replace feedback
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
                                                         message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
                                                        delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
                                               otherButtonTitles:nil];
-        
         [alert show];
     }
 }
 
-#pragma mark - Convenient methods
-#pragma mark -
+#pragma mark - 
+#pragma mark - CLLocationManagerDelegate implementation
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    for (CLLocation *location in locations) {
+        
+        // Create location record
+        LocationRecord *locationRecord =[NSEntityDescription insertNewObjectForEntityForName:@"LocationRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
+        locationRecord.timestamp = [NSNumber numberWithDouble:[location.timestamp timeIntervalSince1970]];
+        locationRecord.latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
+        locationRecord.longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
+        
+        // Add location record
+        [_session addLocationRecordsObject:locationRecord];
+    }
+}
 
 #pragma mark -
 #pragma marl - Notification handler

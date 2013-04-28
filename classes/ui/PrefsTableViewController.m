@@ -149,6 +149,8 @@
             params.searchTimeout = hardwareConnector.settings.searchTimeout;
             _appDelegate.wfSensorConnection = [hardwareConnector requestSensorConnection:params];
             
+            connectionStatus = _appDelegate.wfSensorConnection.connectionStatus;
+            [self setWfSensorConnectionStatus:connectionStatus];
             if (_appDelegate.wfSensorConnection == nil)
                 [_hrConnectionStatusSwitch setOn:NO animated:YES];
             else
@@ -205,6 +207,9 @@
 - (void)connectionDidTimeout:(WFSensorConnection*)connectionInfo
 {
     NSLog(@"# Timeout of %@", connectionInfo.deviceUUIDString);
+    [_hrConnectionStatusSwitch setOn:NO animated:YES];
+    _hrConnectionStatusLabel.text = NSLocalizedString(@"nicht verbunden", @"nicht verbunden");
+    _hrBatteryLevelLabel.text = NSLocalizedString(@"k. A.", @"k. A.");
 }
 
 - (void)connection:(WFSensorConnection*)connectionInfo stateChanged:(WFSensorConnectionStatus_t)connectionStatus

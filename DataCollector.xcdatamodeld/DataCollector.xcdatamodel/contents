@@ -5,6 +5,12 @@
         <attribute name="timestamp" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="session" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="heatrateRecords" inverseEntity="Session" syncable="YES"/>
     </entity>
+    <entity name="LocationRecord" representedClassName="LocationRecord" syncable="YES">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="session" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="locationRecords" inverseEntity="Session" syncable="YES"/>
+    </entity>
     <entity name="MotionRecord" representedClassName="MotionRecord" syncable="YES">
         <attribute name="rotationRateX" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Double" syncable="YES"/>
@@ -15,11 +21,13 @@
         <attribute name="isSynced" optional="YES" attributeType="Boolean" defaultValueString="0.0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="heatrateRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HeartrateRecord" inverseName="session" inverseEntity="HeartrateRecord" syncable="YES"/>
+        <relationship name="locationRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocationRecord" inverseName="session" inverseEntity="LocationRecord" syncable="YES"/>
         <relationship name="motionRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MotionRecord" inverseName="session" inverseEntity="MotionRecord" syncable="YES"/>
     </entity>
     <elements>
         <element name="HeartrateRecord" positionX="160" positionY="192" width="128" height="90"/>
         <element name="MotionRecord" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="Session" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Session" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="LocationRecord" positionX="160" positionY="192" width="128" height="105"/>
     </elements>
 </model>

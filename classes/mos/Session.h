@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class HeartrateRecord, MotionRecord;
+@class HeartrateRecord, LocationRecord, MotionRecord;
 
 @interface Session : NSManagedObject
 
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSDate * timestamp;
 @property (nonatomic, retain) NSSet *motionRecords;
 @property (nonatomic, retain) NSSet *heatrateRecords;
+@property (nonatomic, retain) NSSet *locationRecords;
 @end
 
 @interface Session (CoreDataGeneratedAccessors)
@@ -32,7 +33,13 @@
 - (void)addHeatrateRecords:(NSSet *)values;
 - (void)removeHeatrateRecords:(NSSet *)values;
 
+- (void)addLocationRecordsObject:(LocationRecord *)value;
+- (void)removeLocationRecordsObject:(LocationRecord *)value;
+- (void)addLocationRecords:(NSSet *)values;
+- (void)removeLocationRecords:(NSSet *)values;
+
 - (void)saveAndZipMotionRecords;
 - (void)saveAndZipHeartrateRecords;
+- (void)saveAndZipLocationRecords;
 
 @end

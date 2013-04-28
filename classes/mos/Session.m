@@ -8,6 +8,7 @@
 
 #import "Session.h"
 #import "HeartrateRecord.h"
+#import "LocationRecord.h"
 #import "MotionRecord.h"
 
 #import <zipzap/zipzap.h>
@@ -19,6 +20,7 @@
 @dynamic timestamp;
 @dynamic motionRecords;
 @dynamic heatrateRecords;
+@dynamic locationRecords;
 
 - (void)saveAndZipMotionRecords
 {
@@ -47,7 +49,7 @@
             
             // Append to data string
             [dataString appendFormat:@"%f,%f\n",
-             [motionRecord.timestamp doubleValue] - [timestamp doubleValue],
+             [motionRecord.timestamp doubleValue], // - [timestamp doubleValue],
              [motionRecord.rotationRateX doubleValue]
              ];
         }
@@ -94,12 +96,12 @@
         // Get first timestamp
         NSNumber *timestamp = ((HeartrateRecord *)[heatrateRecords objectAtIndex:0]).timestamp;
         
-        for (HeartrateRecord *heartRecord in heatrateRecords) {
+        for (HeartrateRecord *heartrateRecord in heatrateRecords) {
             
             // Append to data string
             [dataString appendFormat:@"%f,%f\n",
-             [heartRecord.timestamp doubleValue] - [timestamp doubleValue],
-             [heartRecord.accumBeatCount doubleValue]
+             [heartrateRecord.timestamp doubleValue], // - [timestamp doubleValue],
+             [heartrateRecord.accumBeatCount doubleValue]
              ];
         }
         
@@ -122,5 +124,57 @@
     }
 }
 
+- (void)saveAndZipLocationRecords
+{
+    if ([self.locationRecords count] != 0) {
+        
+        // Create the path, where the data should be saved
+        NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        NSString *filename = [NSString stringWithFormat:@"%@-l.csv.zip", self.filename];
+        NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
+        
+        // Create data string
+        NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
+        [dataString appendFormat:@"\"%@\",\"%@\",\"%@\"\n",
+         @"timestamp",
+         @"latitude",
+         @"longitude"
+         ];
+        
+        // Sort data
+        NSSortDescriptor *timestampDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
+        NSArray *locationRecords = [self.locationRecords sortedArrayUsingDescriptors:@[timestampDescriptor]];
+        
+        // Get first timestamp
+        NSNumber *timestamp = ((LocationRecord *)[locationRecords objectAtIndex:0]).timestamp;
+        
+        for (LocationRecord *locationRecord in locationRecords) {
+            
+            // Append to data string
+            [dataString appendFormat:@"%f,%f,%f\n",
+             [locationRecord.timestamp doubleValue], // - [timestamp doubleValue],
+             [locationRecord.latitude doubleValue],
+             [locationRecord.longitude doubleValue]
+             ];
+        }
+        
+        // Zip data
+        ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL:[NSURL fileURLWithPath:localPath]];
+        [archive updateEntries:
+         @[
+         [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-l.csv", self.filename]
+                                         compress:YES
+                                        dataBlock:^(NSError** error)
+          {
+              return [dataString dataUsingEncoding:NSUTF8StringEncoding];
+          }]
+         ]
+                         error:nil];
+        
+        // Send notification
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[localPath, filename] forKeys:@[@"localPath", @"filename"]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:self userInfo:userInfo];
+    }
+}
 
 @end

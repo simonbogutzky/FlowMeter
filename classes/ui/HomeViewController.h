@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <WFConnector/WFConnector.h>
 #import <DropboxSDK/DropboxSDK.h>
+#import <CoreLocation/CoreLocation.h>
 #import "AbtractSlidingTopViewController.h"
 
-@interface HomeViewController : AbtractSlidingTopViewController
+@interface HomeViewController : AbtractSlidingTopViewController <CLLocationManagerDelegate>
 
 @end
