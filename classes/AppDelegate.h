@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreMotion/CoreMotion.h>
 #import <CoreLocation/CoreLocation.h>
+#import <AVFoundation/AVFoundation.h>
 #import <WFConnector/WFConnector.h>
 #import <DropboxSDK/DropboxSDK.h>
 #import "Reachability.h"

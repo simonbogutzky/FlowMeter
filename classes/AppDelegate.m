@@ -89,6 +89,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Override point for customization after application launch.
     
     //Testflight
 //#define TESTING 1
@@ -103,18 +104,26 @@
     DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"tvd64fwxro7ck60" appSecret:@"2azrb93xdsddgx2" root:kDBRootAppFolder];
     [DBSession setSharedSession:dbSession];
     
-    // Override point for customization after application launch.
-    
+    // Try to sync unsync sessions
     [self syncSessions];
     
-    // Allocate a reachability object
+    // Allocate a reachability object and register notifier
     _reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [_reachability startNotifier];
     
+    // Observe notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"MotionDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"HeartrateDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"LocationDataAvailable" object:nil];
+    
+    // Audio Session with mixing
+    AudioSessionInitialize(NULL, NULL, NULL, NULL);
+    UInt32 sessionCategory = kAudioSessionCategory_AmbientSound;
+    AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
+    UInt32 allowMixWithOthers = true;
+    AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryMixWithOthers, sizeof(allowMixWithOthers), &allowMixWithOthers);
+    AudioSessionSetActive(true);
     
     return YES;
 }
