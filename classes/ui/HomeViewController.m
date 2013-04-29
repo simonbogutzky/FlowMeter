@@ -27,6 +27,8 @@
     IBOutlet UILabel *_bmpLabel;
     
     AppDelegate *_appDelegate;
+    
+    double startTimestamp;
 }
 
 @end
@@ -56,6 +58,8 @@
 
 - (void)startUpdates
 {
+    startTimestamp = [[NSDate date] timeIntervalSince1970];
+    
     // Start motion updates
     NSTimeInterval updateInterval = 0.01; // 100hz
     CMMotionManager *motionManager = [_appDelegate sharedMotionManager];
@@ -66,7 +70,7 @@
             
             // Create motion record
             MotionRecord *motionRecord =[NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-            motionRecord.timestamp = [NSNumber numberWithDouble:deviceMotion.timestamp];
+            motionRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
             motionRecord.rotationRateX = [NSNumber numberWithDouble:deviceMotion.rotationRate.x];
             
             // Add motion record
@@ -153,7 +157,7 @@
         
         // Create location record
         LocationRecord *locationRecord =[NSEntityDescription insertNewObjectForEntityForName:@"LocationRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-        locationRecord.timestamp = [NSNumber numberWithDouble:[location.timestamp timeIntervalSince1970]];
+        locationRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
         locationRecord.latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
         locationRecord.longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
         
@@ -184,7 +188,7 @@
                     
                     // Create hr record
                     HeartrateRecord *heartrateRecord =[NSEntityDescription insertNewObjectForEntityForName:@"HeartrateRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-                    heartrateRecord.timestamp = [NSNumber numberWithDouble:hrData.timestamp];
+                    heartrateRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
                     heartrateRecord.accumBeatCount = [NSNumber numberWithDouble:hrData.accumBeatCount];
                     
                     // Add hr record

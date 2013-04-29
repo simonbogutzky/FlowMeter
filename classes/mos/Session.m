@@ -42,9 +42,6 @@
         NSSortDescriptor *timestampDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
         NSArray *motionRecords = [self.motionRecords sortedArrayUsingDescriptors:@[timestampDescriptor]];
         
-        // Get first timestamp
-        NSNumber *timestamp = ((MotionRecord *)[motionRecords objectAtIndex:0]).timestamp;
-        
         for (MotionRecord *motionRecord in motionRecords) {
             
             // Append to data string
@@ -92,9 +89,6 @@
         // Sort data
         NSSortDescriptor *timestampDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
         NSArray *heatrateRecords = [self.heatrateRecords sortedArrayUsingDescriptors:@[timestampDescriptor]];
-        
-        // Get first timestamp
-        NSNumber *timestamp = ((HeartrateRecord *)[heatrateRecords objectAtIndex:0]).timestamp;
         
         for (HeartrateRecord *heartrateRecord in heatrateRecords) {
             
@@ -144,9 +138,6 @@
         // Sort data
         NSSortDescriptor *timestampDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
         NSArray *locationRecords = [self.locationRecords sortedArrayUsingDescriptors:@[timestampDescriptor]];
-        
-        // Get first timestamp
-        NSNumber *timestamp = ((LocationRecord *)[locationRecords objectAtIndex:0]).timestamp;
         
         for (LocationRecord *locationRecord in locationRecords) {
             
