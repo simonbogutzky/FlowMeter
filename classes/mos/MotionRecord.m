@@ -20,6 +20,14 @@
 @dynamic gravityY;
 @dynamic gravityZ;
 @dynamic rotationRateX;
+@dynamic rotationRateXFiltered1;
+@dynamic rotationRateXFiltered2;
+@dynamic rotationRateXQuantile;
+@dynamic rotationRateXFiltered1Quantile;
+@dynamic rotationRateXFiltered2Quantile;
+@dynamic rotationRateXSlope;
+@dynamic rotationRateXFiltered1Slope;
+@dynamic rotationRateXFiltered2Slope;
 @dynamic rotationRateY;
 @dynamic rotationRateZ;
 @dynamic attitudePitch;

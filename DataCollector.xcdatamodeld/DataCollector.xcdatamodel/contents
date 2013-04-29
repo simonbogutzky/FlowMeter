@@ -21,6 +21,14 @@
         <attribute name="gravityY" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="gravityZ" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="rotationRateX" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rotationRateXFiltered1" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rotationRateXFiltered1Quantile" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rotationRateXFiltered1Slope" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rotationRateXFiltered2" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rotationRateXFiltered2Quantile" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rotationRateXFiltered2Slope" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rotationRateXQuantile" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rotationRateXSlope" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="rotationRateY" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="rotationRateZ" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Double" syncable="YES"/>
@@ -39,8 +47,8 @@
     </entity>
     <elements>
         <element name="HeartrateRecord" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="LocationRecord" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="MotionRecord" positionX="160" positionY="192" width="128" height="255"/>
-        <element name="Session" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="LocationRecord" positionX="45" positionY="351" width="128" height="135"/>
+        <element name="MotionRecord" positionX="-29" positionY="-48" width="128" height="373"/>
+        <element name="Session" positionX="-272" positionY="225" width="128" height="135"/>
     </elements>
 </model>

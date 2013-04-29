@@ -21,6 +21,14 @@
 @property (nonatomic, retain) NSNumber * gravityY;
 @property (nonatomic, retain) NSNumber * gravityZ;
 @property (nonatomic, retain) NSNumber * rotationRateX;
+@property (nonatomic, retain) NSNumber * rotationRateXFiltered1;
+@property (nonatomic, retain) NSNumber * rotationRateXFiltered2;
+@property (nonatomic, retain) NSNumber * rotationRateXQuantile;
+@property (nonatomic, retain) NSNumber * rotationRateXFiltered1Quantile;
+@property (nonatomic, retain) NSNumber * rotationRateXFiltered2Quantile;
+@property (nonatomic, retain) NSNumber * rotationRateXSlope;
+@property (nonatomic, retain) NSNumber * rotationRateXFiltered1Slope;
+@property (nonatomic, retain) NSNumber * rotationRateXFiltered2Slope;
 @property (nonatomic, retain) NSNumber * rotationRateY;
 @property (nonatomic, retain) NSNumber * rotationRateZ;
 @property (nonatomic, retain) NSNumber * attitudePitch;
