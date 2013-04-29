@@ -420,9 +420,17 @@
 {
     NSLog(@"# File uploaded successfully to path: %@", metadata.path);
     NSError *error = nil;
+   
+    // Delete zip file
+    NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString *localPath = [rootPath stringByAppendingPathComponent:metadata.filename];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:localPath error:&error];
+    
+    // Set data entry synced
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" \\(.+\\)" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *filename = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
-    regex = [NSRegularExpression regularExpressionWithPattern:@"(-m|-hr).csv.zip" options:NSRegularExpressionCaseInsensitive error:&error];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"(-m|-hr).(csv|kml).zip" options:NSRegularExpressionCaseInsensitive error:&error];
     filename = [regex stringByReplacingMatchesInString:filename options:0 range:NSMakeRange(0, [filename length]) withTemplate:@""];
     NSLog(@"# Sync session with filename: %@", filename);
     [self setSessionSyncedByFilename:filename];
