@@ -71,7 +71,18 @@
             // Create motion record
             MotionRecord *motionRecord =[NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
             motionRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
+            motionRecord.userAccelerationX = [NSNumber numberWithDouble:deviceMotion.userAcceleration.x];
+            motionRecord.userAccelerationY = [NSNumber numberWithDouble:deviceMotion.userAcceleration.y];
+            motionRecord.userAccelerationZ = [NSNumber numberWithDouble:deviceMotion.userAcceleration.z];
+            motionRecord.gravityX = [NSNumber numberWithDouble:deviceMotion.gravity.x];
+            motionRecord.gravityY = [NSNumber numberWithDouble:deviceMotion.gravity.y];
+            motionRecord.gravityZ = [NSNumber numberWithDouble:deviceMotion.gravity.z];
             motionRecord.rotationRateX = [NSNumber numberWithDouble:deviceMotion.rotationRate.x];
+            motionRecord.rotationRateY = [NSNumber numberWithDouble:deviceMotion.rotationRate.y];
+            motionRecord.rotationRateZ = [NSNumber numberWithDouble:deviceMotion.rotationRate.z];
+            motionRecord.attitudePitch = [NSNumber numberWithDouble:deviceMotion.attitude.pitch];
+            motionRecord.attitudeYaw = [NSNumber numberWithDouble:deviceMotion.attitude.yaw];
+            motionRecord.attitudeRoll = [NSNumber numberWithDouble:deviceMotion.attitude.roll];
             
             // Add motion record
             [_session addMotionRecordsObject:motionRecord];

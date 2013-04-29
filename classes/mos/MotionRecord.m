@@ -13,7 +13,18 @@
 @implementation MotionRecord
 
 @dynamic timestamp;
+@dynamic userAccelerationX;
+@dynamic userAccelerationY;
+@dynamic userAccelerationZ;
+@dynamic gravityX;
+@dynamic gravityY;
+@dynamic gravityZ;
 @dynamic rotationRateX;
+@dynamic rotationRateY;
+@dynamic rotationRateZ;
+@dynamic attitudePitch;
+@dynamic attitudeYaw;
+@dynamic attitudeRoll;
 @dynamic session;
 
 @end

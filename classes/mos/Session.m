@@ -33,9 +33,20 @@
         
         // Create data string
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
-        [dataString appendFormat:@"\"%@\",\"%@\"\n",
+        [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
          @"timestamp",
-         @"rotationRateX"
+         @"userAccelerationX",
+         @"userAccelerationY",
+         @"userAccelerationZ",
+         @"gravityX",
+         @"gravityY",
+         @"gravityZ",
+         @"rotationRateX",
+         @"rotationRateY",
+         @"rotationRateZ",
+         @"attitudePitch",
+         @"attitudeRoll",
+         @"attitudeYaw"
          ];
         
         // Sort data
@@ -45,9 +56,20 @@
         for (MotionRecord *motionRecord in motionRecords) {
             
             // Append to data string
-            [dataString appendFormat:@"%f,%f\n",
-             [motionRecord.timestamp doubleValue], // - [timestamp doubleValue],
-             [motionRecord.rotationRateX doubleValue]
+            [dataString appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
+             [motionRecord.timestamp doubleValue],
+             [motionRecord.userAccelerationX doubleValue],
+             [motionRecord.userAccelerationY doubleValue],
+             [motionRecord.userAccelerationZ doubleValue],
+             [motionRecord.gravityX doubleValue],
+             [motionRecord.gravityY doubleValue],
+             [motionRecord.gravityZ doubleValue],
+             [motionRecord.rotationRateX doubleValue],
+             [motionRecord.rotationRateY doubleValue],
+             [motionRecord.rotationRateZ doubleValue],
+             [motionRecord.attitudePitch doubleValue],
+             [motionRecord.attitudeRoll doubleValue],
+             [motionRecord.attitudeYaw doubleValue]
              ];
         }
         
@@ -94,7 +116,7 @@
             
             // Append to data string
             [dataString appendFormat:@"%f,%f\n",
-             [heartrateRecord.timestamp doubleValue], // - [timestamp doubleValue],
+             [heartrateRecord.timestamp doubleValue],
              [heartrateRecord.accumBeatCount doubleValue]
              ];
         }
@@ -143,7 +165,7 @@
             
             // Append to data string
             [dataString appendFormat:@"%f,%f,%f\n",
-             [locationRecord.timestamp doubleValue], // - [timestamp doubleValue],
+             [locationRecord.timestamp doubleValue],
              [locationRecord.latitude doubleValue],
              [locationRecord.longitude doubleValue]
              ];
