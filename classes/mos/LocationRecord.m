@@ -12,9 +12,11 @@
 
 @implementation LocationRecord
 
+@dynamic timestamp;
 @dynamic latitude;
 @dynamic longitude;
-@dynamic timestamp;
+@dynamic altitude;
+@dynamic speed;
 @dynamic session;
 
 @end

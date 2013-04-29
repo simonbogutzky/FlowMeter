@@ -171,6 +171,8 @@
         locationRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
         locationRecord.latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
         locationRecord.longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
+        locationRecord.altitude = [NSNumber numberWithDouble:location.altitude];
+        locationRecord.speed = [NSNumber numberWithDouble:location.speed];
         
         // Add location record
         [_session addLocationRecordsObject:locationRecord];

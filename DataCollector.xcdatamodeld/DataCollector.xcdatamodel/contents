@@ -6,8 +6,10 @@
         <relationship name="session" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="heatrateRecords" inverseEntity="Session" syncable="YES"/>
     </entity>
     <entity name="LocationRecord" representedClassName="LocationRecord" syncable="YES">
+        <attribute name="altitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="speed" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="session" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="locationRecords" inverseEntity="Session" syncable="YES"/>
     </entity>
@@ -37,7 +39,7 @@
     </entity>
     <elements>
         <element name="HeartrateRecord" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="LocationRecord" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="LocationRecord" positionX="160" positionY="192" width="128" height="135"/>
         <element name="MotionRecord" positionX="160" positionY="192" width="128" height="255"/>
         <element name="Session" positionX="160" positionY="192" width="128" height="135"/>
     </elements>

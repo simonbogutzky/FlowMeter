@@ -336,6 +336,10 @@
             NSString *filename = [NSString stringWithFormat:@"%@-l.csv.zip", [session valueForKey:@"filename"]];
             NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
             [self uploadFile:filename localPath:localPath];
+            
+            filename = [NSString stringWithFormat:@"%@-l.kml.zip", [session valueForKey:@"filename"]];
+            localPath = [rootPath stringByAppendingPathComponent:filename];
+            [self uploadFile:filename localPath:localPath];
         }
     }
 }
