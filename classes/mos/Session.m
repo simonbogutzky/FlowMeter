@@ -45,7 +45,6 @@
     
     // Look for sign changes
     if (slope * previousSlope < 0 && [[record valueForKey:[NSString stringWithFormat:@"%@Quantile", key]] doubleValue] < previousValue) {
-//        [storage setObject:[NSNumber numberWithBool:YES] forKey:[NSString stringWithFormat:@"%@Indicator", key]];
         return YES;
     }
     return NO;
@@ -53,7 +52,7 @@
 
 - (void)addMotionRecordsObject:(MotionRecord *)value
 {    
-    NSString *label = @"";
+    value.event = @"";
     
     double rotationRateXfiltered1 = [self filterX5000mHz:[value.rotationRateX doubleValue]];
     value.rotationRateXFiltered1 = [NSNumber numberWithDouble:rotationRateXfiltered1];
@@ -67,36 +66,43 @@
         NSMutableArray *rotationRateX = [NSMutableArray arrayWithCapacity:500];
         NSMutableArray *rotationRateXFiltered1 = [NSMutableArray arrayWithCapacity:500];
         NSMutableArray *rotationRateXFiltered2 = [NSMutableArray arrayWithCapacity:500];
-        NSArray *motionRecordSubset = [[[self.motionRecords allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]] objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange([self.motionRecords count] - 500, 500)]];
-        for (MotionRecord *motionRecord in motionRecordSubset) {
+        NSArray *motionRecordSubset1 = [[[self.motionRecords allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO]]] objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 500)]];
+        for (MotionRecord *motionRecord in motionRecordSubset1) {
             [rotationRateX addObject:motionRecord.rotationRateX];
             [rotationRateXFiltered1 addObject:motionRecord.rotationRateXFiltered1];
             [rotationRateXFiltered2 addObject:motionRecord.rotationRateXFiltered2];
         }
         
         // Calculate quantiles
-        double rotationRateXQuantile = [Utility quantileFromX:rotationRateX prob:.98];
+        double rotationRateXQuantile = [Utility quantileFromX:rotationRateX prob:.96];
         double rotationRateXFiltered1Quantile = [Utility quantileFromX:rotationRateXFiltered1 prob:.94];
         double rotationRateXFiltered2Quantile = [Utility quantileFromX:rotationRateXFiltered2 prob:.92];
         value.rotationRateXQuantile = [NSNumber numberWithDouble:rotationRateXQuantile];
         value.rotationRateXFiltered1Quantile = [NSNumber numberWithDouble:rotationRateXFiltered1Quantile];
         value.rotationRateXFiltered2Quantile = [NSNumber numberWithDouble:rotationRateXFiltered2Quantile];
         
-        _indicator1 = [self isPeakInRecords:motionRecordSubset withKey:@"rotationRateX" record:value];
+        value.rotationRateXIndicator = [NSNumber numberWithBool:[self isPeakInRecords:motionRecordSubset1 withKey:@"rotationRateX" record:value]];
+        value.rotationRateXFiltered1Indicator = [NSNumber numberWithBool:[self isPeakInRecords:motionRecordSubset1 withKey:@"rotationRateXFiltered1" record:value]];
+        BOOL rotationRateXFiltered2Indicator = [self isPeakInRecords:motionRecordSubset1 withKey:@"rotationRateXFiltered2" record:value];
+        value.rotationRateXFiltered2Indicator = [NSNumber numberWithBool:rotationRateXFiltered2Indicator];
         
-        if (_indicator1) {
-            _indicator2 = [self isPeakInRecords:motionRecordSubset withKey:@"rotationRateXFiltered1" record:value];
-            _indicator1 = NO;
-        }
-        
-        if (_indicator2) {
-            _indicator3 = [self isPeakInRecords:motionRecordSubset withKey:@"rotationRateXFiltered2" record:value];
-            _indicator2 = NO;
-        }
-        
-        if ( _indicator3) {
-            _indicator3 = NO;
-            label = @"HS";
+        if (rotationRateXFiltered2Indicator) {
+            NSArray *motionRecordSubset2 = [motionRecordSubset1 objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 10)]];
+            BOOL rotationRateXFiltered1Indicator = NO;
+            for (MotionRecord *motionRecord2 in motionRecordSubset2) {
+                if ([motionRecord2.rotationRateXFiltered1Indicator boolValue]) {
+                    rotationRateXFiltered1Indicator = YES;
+                }
+                if(rotationRateXFiltered1Indicator && [motionRecord2.rotationRateXIndicator boolValue]) {
+                    value.event = @"HS";
+                    
+                    // Send notification
+                    NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[value.event] forKeys:@[@"event"]];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
+
+                    break;
+                }
+            }
         }
     }
     
@@ -121,7 +127,7 @@
         
         // Create data string
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
-        [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
+        [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
          @"timestamp",
          @"userAccelerationX",
          @"userAccelerationY",
@@ -132,11 +138,21 @@
          @"rotationRateX",
          @"rotationRateXFiltered1",
          @"rotationRateXFiltered2",
+         @"rotationRateXQuantile",
+         @"rotationRateXFiltered1Quantile",
+         @"rotationRateXFiltered2Quantile",
+         @"rotationRateXSlope",
+         @"rotationRateXFiltered1Slope",
+         @"rotationRateXFiltered2Slope",
+         @"rotationRateXIndicator",
+         @"rotationRateXFiltered1Indicator",
+         @"rotationRateXFiltered2Indicator",
          @"rotationRateY",
          @"rotationRateZ",
          @"attitudePitch",
          @"attitudeRoll",
-         @"attitudeYaw"
+         @"attitudeYaw",
+         @"event"
          ];
         
         // Sort data
@@ -146,7 +162,7 @@
         for (MotionRecord *motionRecord in motionRecords) {
             
             // Append to data string
-            [dataString appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
+            [dataString appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%d,%d,%d,%f,%f,%f,%f,%f,%@\n",
              [motionRecord.timestamp doubleValue],
              [motionRecord.userAccelerationX doubleValue],
              [motionRecord.userAccelerationY doubleValue],
@@ -157,11 +173,21 @@
              [motionRecord.rotationRateX doubleValue],
              [motionRecord.rotationRateXFiltered1 doubleValue],
              [motionRecord.rotationRateXFiltered2 doubleValue],
+             [motionRecord.rotationRateXQuantile doubleValue],
+             [motionRecord.rotationRateXFiltered1Quantile doubleValue],
+             [motionRecord.rotationRateXFiltered2Quantile doubleValue],
+             [motionRecord.rotationRateXSlope doubleValue],
+             [motionRecord.rotationRateXFiltered1Slope doubleValue],
+             [motionRecord.rotationRateXFiltered2Slope doubleValue],
+             [motionRecord.rotationRateXIndicator intValue],
+             [motionRecord.rotationRateXFiltered1Indicator intValue],
+             [motionRecord.rotationRateXFiltered2Indicator intValue],
              [motionRecord.rotationRateY doubleValue],
              [motionRecord.rotationRateZ doubleValue],
              [motionRecord.attitudePitch doubleValue],
              [motionRecord.attitudeRoll doubleValue],
-             [motionRecord.attitudeYaw doubleValue]
+             [motionRecord.attitudeYaw doubleValue],
+             motionRecord.event
              ];
         }
         

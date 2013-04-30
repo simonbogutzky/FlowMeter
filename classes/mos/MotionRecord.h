@@ -29,11 +29,15 @@
 @property (nonatomic, retain) NSNumber * rotationRateXSlope;
 @property (nonatomic, retain) NSNumber * rotationRateXFiltered1Slope;
 @property (nonatomic, retain) NSNumber * rotationRateXFiltered2Slope;
+@property (nonatomic, retain) NSNumber * rotationRateXIndicator;
+@property (nonatomic, retain) NSNumber * rotationRateXFiltered1Indicator;
+@property (nonatomic, retain) NSNumber * rotationRateXFiltered2Indicator;
 @property (nonatomic, retain) NSNumber * rotationRateY;
 @property (nonatomic, retain) NSNumber * rotationRateZ;
 @property (nonatomic, retain) NSNumber * attitudePitch;
 @property (nonatomic, retain) NSNumber * attitudeYaw;
 @property (nonatomic, retain) NSNumber * attitudeRoll;
-@property (nonatomic, retain) Session *session;
+@property (nonatomic, retain) NSString * event;
+@property (nonatomic, retain) Session * session;
 
 @end

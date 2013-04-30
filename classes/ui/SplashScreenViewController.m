@@ -18,15 +18,14 @@
 
 @implementation SplashScreenViewController
 
-
 - (void)viewDidLoad
 {
     [self performSelector:@selector(vanish) withObject:nil afterDelay:0.0];
     [super viewDidLoad];
 }
 
-
-- (void)vanish {
+- (void)vanish
+{
     CATransition* transition = [CATransition animation];
     transition.duration = 1.5;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -36,6 +35,5 @@
     [self.navigationController popViewControllerAnimated:NO];
     [self.navigationController pushViewController:[storyboard instantiateViewControllerWithIdentifier:@"initial"] animated:NO];
 }
-
 
 @end

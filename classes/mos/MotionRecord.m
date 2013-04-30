@@ -28,11 +28,15 @@
 @dynamic rotationRateXSlope;
 @dynamic rotationRateXFiltered1Slope;
 @dynamic rotationRateXFiltered2Slope;
+@dynamic rotationRateXIndicator;
+@dynamic rotationRateXFiltered1Indicator;
+@dynamic rotationRateXFiltered2Indicator;
 @dynamic rotationRateY;
 @dynamic rotationRateZ;
 @dynamic attitudePitch;
 @dynamic attitudeYaw;
 @dynamic attitudeRoll;
+@dynamic event;
 @dynamic session;
 
 @end

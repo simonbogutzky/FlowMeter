@@ -16,9 +16,9 @@
 @property (nonatomic, retain) NSString * filename;
 @property (nonatomic, retain) NSNumber * isSynced;
 @property (nonatomic, retain) NSDate * timestamp;
-@property (nonatomic, retain) NSSet *motionRecords;
-@property (nonatomic, retain) NSSet *heatrateRecords;
-@property (nonatomic, retain) NSSet *locationRecords;
+@property (nonatomic, retain) NSSet * motionRecords;
+@property (nonatomic, retain) NSSet * heatrateRecords;
+@property (nonatomic, retain) NSSet * locationRecords;
 @end
 
 @interface Session (CoreDataGeneratedAccessors)

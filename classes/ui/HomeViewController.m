@@ -46,6 +46,7 @@
     
     _sensorConnection = _appDelegate.wfSensorConnection;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wfSensorDataUpdated:) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gaitEventDetected:) name:@"DetectGaitEvent" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,13 +87,6 @@
             
             // Add motion record
             [_session addMotionRecordsObject:motionRecord];
-            
-//            if ([[_userSession appendMotionData:deviceMotion] isEqualToString:@"HS"]) {
-//                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//                if ([defaults boolForKey:@"motionSoundStatus"]) {
-//                    [[AudioController sharedAudioController] playE];
-//                } 
-//            }
         }];
     }
     
@@ -211,14 +205,25 @@
                 _lastAccumBeatCount = hrData.accumBeatCount;
                 
             }
-//            NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
-//            for (NSNumber *rrInterval in rrIntervals) {
-//                NSLog(@"# rrInterval: %f", [rrInterval doubleValue]);
-//            }
+//          NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
+//          for (NSNumber *rrInterval in rrIntervals) {
+//              NSLog(@"# rrInterval: %f", [rrInterval doubleValue]);
+//          }
         }
     }
     else {
         _bmpLabel.text = NSLocalizedString(@"k. A.", @"k. A.");
+    }
+}
+
+- (void)gaitEventDetected:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    if ([[userInfo valueForKey:@"event"] isEqualToString:@"HS"]) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if ([defaults boolForKey:@"motionSoundStatus"]) {
+            [[AudioController sharedAudioController] playE];
+        }
     }
 }
 
