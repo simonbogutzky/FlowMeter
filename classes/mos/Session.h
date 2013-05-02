@@ -38,6 +38,8 @@
 - (void)addLocationRecords:(NSSet *)values;
 - (void)removeLocationRecords:(NSSet *)values;
 
+- (void)initialize;
+
 - (void)saveAndZipMotionRecords;
 - (void)saveAndZipHeartrateRecords;
 - (void)saveAndZipLocationRecords;

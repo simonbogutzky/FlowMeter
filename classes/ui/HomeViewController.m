@@ -123,15 +123,7 @@
     if (_isCollection) {
         
         _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:_appDelegate.managedObjectContext];
-        _session.timestamp = [NSDate date];
-        
-        // Create a date string of the current date
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-        [dateFormatter setDateFormat:@"HH-mm-ss"];
-        NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
-        _session.filename = [NSString stringWithFormat:@"%@-t%@", dateString, timeString];
+        [_session initialize];
         
         [startStopCollectionButton setTitle:@"stop" forState:0];
         [self startUpdates];

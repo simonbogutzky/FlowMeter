@@ -43,6 +43,16 @@
 
 - (void)initialize
 {
+    self.timestamp = [NSDate date];
+    
+    // Create a date string of the current date
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    [dateFormatter setDateFormat:@"HH-mm-ss"];
+    NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
+    self.filename = [NSString stringWithFormat:@"%@-t%@", dateString, timeString];
+    
     _rotationRateXValues = [NSMutableArray arrayWithCapacity:500];
     _rotationRateXFiltered1Values = [NSMutableArray arrayWithCapacity:500];
     _rotationRateXFiltered2Values = [NSMutableArray arrayWithCapacity:500];
@@ -83,22 +93,28 @@
     double rotationRateX = [value.rotationRateX doubleValue];
     
     // Apply filter
-    double rotationRateXFiltered1 = [self filterX5000mHz:rotationRateX];
-    double rotationRateXFiltered2 = [self filterX2500mHz:rotationRateX];
+    double rotationRateXFiltered1 = [self filterX7500mHz:rotationRateX];
+    double rotationRateXFiltered2 = [self filterX5000mHz:rotationRateX];
     
     // Wait fo five hundred values
     if ([_rotationRateXValues count] > 499) {
-        _phase = 2;
+        if (_phase == 0) {
+            NSLog(@"Initialization");
+        }
+        _phase = 1;
     }
     
     if (_phase != 0) {
         if ([_rotationRateXValues count] > 499) {
+            if (_phase == 1) {
+                NSLog(@"Calibration");
+            }
             _phase = 2;
             
             // Calculate quantiles
-            _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.95];
+            _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.96];
             _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.95];
-            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.95];
+            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.94];
             
             // Remove the first hundred values
             [_rotationRateXValues removeObjectsInRange:NSMakeRange(0, 100)];
@@ -106,32 +122,43 @@
             [_rotationRateXFiltered2Values removeObjectsInRange:NSMakeRange(0, 100)];
             
             // Remove the first hundred slopes
-            [_rotationRateXSlopes removeObjectsInRange:NSMakeRange(0, 100)];
-            [_rotationRateXFiltered1Slopes removeObjectsInRange:NSMakeRange(0, 100)];
-            [_rotationRateXFiltered2Slopes removeObjectsInRange:NSMakeRange(0, 100)];
+//            [_rotationRateXSlopes removeObjectsInRange:NSMakeRange(0, 100)];
+//            [_rotationRateXFiltered1Slopes removeObjectsInRange:NSMakeRange(0, 100)];
+//            [_rotationRateXFiltered2Slopes removeObjectsInRange:NSMakeRange(0, 100)];
         }
         _phase = 1;
         
         if ([self isPeakInValues:_rotationRateXValues withSlopes:_rotationRateXSlopes value:rotationRateX quantile:_rotationRateXQuantile]) {
             _rotationRateXIndicator = YES;
+            _rotationRateXFiltered1Indicator = NO;
             _rotationRateXFiltered2Indicator = NO;
+            NSLog(@"Indicator 1");
         }
         
         if (_rotationRateXIndicator && [self isPeakInValues:_rotationRateXFiltered1Values withSlopes:_rotationRateXFiltered1Slopes value:rotationRateXFiltered1 quantile:_rotationRateXFiltered1Quantile] ) {
-            _rotationRateXFiltered1Indicator = YES;
             _rotationRateXIndicator = NO;
+            _rotationRateXFiltered1Indicator = YES;
+            _rotationRateXFiltered2Indicator = NO;
+            NSLog(@"Indicator 2");
         }
         
         if (_rotationRateXFiltered1Indicator && [self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:_rotationRateXFiltered2Quantile] ) {
-            
+            _rotationRateXIndicator = NO;
+            _rotationRateXFiltered1Indicator = NO;
+            _rotationRateXFiltered2Indicator = YES;
+            NSLog(@"Indicator 3");
+        }
+        
+        if (_rotationRateXFiltered2Indicator) {
             value.event = @"HS";
             
             // Send notification
             NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[value.event] forKeys:@[@"event"]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
             
-            _rotationRateXFiltered2Indicator = YES;
+            _rotationRateXIndicator = NO;
             _rotationRateXFiltered1Indicator = NO;
+            _rotationRateXFiltered2Indicator = NO;
         }
     }
     
@@ -157,7 +184,6 @@
     value.rotationRateXIndicator = [NSNumber numberWithBool:_rotationRateXIndicator];
     value.rotationRateXFiltered1Indicator = [NSNumber numberWithBool:_rotationRateXFiltered1Indicator];
     value.rotationRateXFiltered2Indicator = [NSNumber numberWithBool:_rotationRateXFiltered2Indicator];
-    
     
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
     [self willChangeValueForKey:@"motionRecords"
