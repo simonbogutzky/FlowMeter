@@ -300,9 +300,10 @@
         
         // Create data string
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
-        [dataString appendFormat:@"\"%@\",\"%@\"\n",
+        [dataString appendFormat:@"\"%@\",\"%@\",\"%@\"\n",
          @"timestamp",
-         @"accumBeatCount"
+         @"accumBeatCount",
+         @"heartrate"
          ];
         
         // Sort data
@@ -312,9 +313,10 @@
         for (HeartrateRecord *heartrateRecord in heatrateRecords) {
             
             // Append to data string
-            [dataString appendFormat:@"%f,%f\n",
+            [dataString appendFormat:@"%f,%f,%@\n",
              [heartrateRecord.timestamp doubleValue],
-             [heartrateRecord.accumBeatCount doubleValue]
+             [heartrateRecord.accumBeatCount doubleValue],
+             heartrateRecord.heartrate
              ];
         }
         

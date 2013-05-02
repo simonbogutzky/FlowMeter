@@ -189,6 +189,7 @@
                     HeartrateRecord *heartrateRecord =[NSEntityDescription insertNewObjectForEntityForName:@"HeartrateRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
                     heartrateRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
                     heartrateRecord.accumBeatCount = [NSNumber numberWithDouble:hrData.accumBeatCount];
+                    heartrateRecord.heartrate = [hrData formattedHeartrate:NO];
                     
                     // Add hr record
                     [_session addHeatrateRecordsObject:heartrateRecord];

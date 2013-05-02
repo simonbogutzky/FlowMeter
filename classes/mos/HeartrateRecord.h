@@ -14,6 +14,7 @@
 @interface HeartrateRecord : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * accumBeatCount;
+@property (nonatomic, retain) NSString * heartrate;
 @property (nonatomic, retain) NSNumber * timestamp;
 @property (nonatomic, retain) Session *session;
 

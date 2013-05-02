@@ -13,6 +13,7 @@
 @implementation HeartrateRecord
 
 @dynamic accumBeatCount;
+@dynamic heartrate;
 @dynamic timestamp;
 @dynamic session;
 

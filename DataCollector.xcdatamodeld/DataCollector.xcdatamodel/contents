@@ -2,6 +2,7 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12D78" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="HeartrateRecord" representedClassName="HeartrateRecord" syncable="YES">
         <attribute name="accumBeatCount" optional="YES" attributeType="Integer 64" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="heartrate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="session" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="heatrateRecords" inverseEntity="Session" syncable="YES"/>
     </entity>
@@ -50,7 +51,7 @@
         <relationship name="motionRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MotionRecord" inverseName="session" inverseEntity="MotionRecord" syncable="YES"/>
     </entity>
     <elements>
-        <element name="HeartrateRecord" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="HeartrateRecord" positionX="160" positionY="192" width="128" height="105"/>
         <element name="LocationRecord" positionX="45" positionY="351" width="128" height="135"/>
         <element name="MotionRecord" positionX="-29" positionY="-48" width="128" height="433"/>
         <element name="Session" positionX="-272" positionY="225" width="128" height="135"/>
