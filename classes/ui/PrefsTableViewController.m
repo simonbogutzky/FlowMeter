@@ -238,5 +238,76 @@
     }
 }
 
+//#pragma mark -
+//#pragma mark - TCPConnectionimplementation
+//
+//- (void)sendMessage:(NSString *)msg
+//{
+//    NSString *response  = [NSString stringWithFormat:@"%@", msg];
+//    NSData *rdata = [[NSData alloc] initWithData:[response dataUsingEncoding:NSUTF8StringEncoding]];
+//	[_outputStream write:[rdata bytes] maxLength:[rdata length]];
+//}
+//
+//- (IBAction)connectDisconnect:(id)sender
+//{
+//    if ([_hostInputField.text isEqualToString:@""]) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing host!", @"Missing host!")
+//                                                        message:NSLocalizedString(@"Enter a host." , @"Enter a host.")
+//                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+//                                              otherButtonTitles:nil];
+//        [alert show];
+//        return;
+//    }
+//    
+//    if ([_portInputField.text isEqualToString:@""]) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing port!", @"Missing port!")
+//                                                        message:NSLocalizedString(@"Enter a port." , @"Enter a port.")
+//                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+//                                              otherButtonTitles:nil];
+//        [alert show];
+//        return;
+//    }
+//    
+//    _isConnected = !_isConnected;
+//    
+//    UIButton *connectToHostButton = (UIButton *)sender;
+//    
+//    if (_isConnected) {
+//        [connectToHostButton setTitle:@"disconnect" forState:0];
+//        [self openStreams];
+//    } else {
+//        [connectToHostButton setTitle:@"connect" forState:0];
+//        [self closeStreams];
+//    }
+//}
+//
+//- (void)openStreams
+//{
+//    NSString *host = _hostInputField.text;
+//    NSNumber *port = [NSNumber numberWithInt:[_portInputField.text intValue]];
+//    
+//    CFReadStreamRef readStream;
+//    CFWriteStreamRef writeStream;
+//    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)host, [port intValue], &readStream, &writeStream);
+//    _appDelegate.inputStream = (__bridge NSInputStream *)readStream;
+//    _appDelegate.outputStream = (__bridge NSOutputStream *)writeStream;
+//    
+//    [_appDelegate.inputStream setDelegate:self];
+//    [_appDelegate.outputStream setDelegate:self];
+//    
+//    [_appDelegate.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+//    [_appDelegate.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+//    
+//    [_appDelegate.inputStream open];
+//    [_appDelegate.outputStream open];
+//}
+//
+//- (void)closeStreams
+//{
+//    [_appDelegate.inputStream close];
+//    [_appDelegate.outputStream close];
+//}
+
+
 
 @end

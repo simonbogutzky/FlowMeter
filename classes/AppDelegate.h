@@ -32,4 +32,7 @@
 @property (strong, nonatomic) WFSensorConnection *wfSensorConnection;
 @property (strong, nonatomic, readonly) Reachability *reachability;
 
+@property (strong, nonatomic) NSInputStream *inputStream;
+@property (strong, nonatomic) NSOutputStream *outputStream;
+
 @end
