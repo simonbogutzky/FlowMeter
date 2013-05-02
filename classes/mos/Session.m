@@ -48,9 +48,9 @@
     // Create a date string of the current date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    NSString *dateString = [dateFormatter stringFromDate:self.timestamp];
     [dateFormatter setDateFormat:@"HH-mm-ss"];
-    NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
+    NSString *timeString = [dateFormatter stringFromDate:self.timestamp];
     self.filename = [NSString stringWithFormat:@"%@-t%@", dateString, timeString];
     
     _rotationRateXValues = [NSMutableArray arrayWithCapacity:500];

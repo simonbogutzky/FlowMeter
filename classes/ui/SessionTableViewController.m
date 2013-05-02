@@ -8,6 +8,7 @@
 
 #import "SessionTableViewController.h"
 #import "AppDelegate.h"
+#import "Session.h"
 
 @interface SessionTableViewController () {
     NSFetchedResultsController *_fetchedResultsController;
@@ -111,8 +112,8 @@
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
-    NSPredicate *isNotSyncedPredicate = [NSPredicate predicateWithFormat:@"isSynced == %@", @0];
-    [fetchRequest setPredicate:isNotSyncedPredicate];
+//    NSPredicate *isNotSyncedPredicate = [NSPredicate predicateWithFormat:@"isSynced == %@", @0];
+//    [fetchRequest setPredicate:isNotSyncedPredicate];
     
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     aFetchedResultsController.delegate = self;
@@ -191,8 +192,15 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [[object valueForKey:@"filename"] description], [[object valueForKey:@"isSynced"] boolValue] ? @"YES" : @"NO"];
+    Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:NSLocalizedString(@"dd.MM.yy", @"dd.MM.yy")];
+    NSString *dateString = [dateFormatter stringFromDate:session.timestamp];
+    [dateFormatter setDateFormat:NSLocalizedString(@"HH:mm", @"HH:mm")];
+    NSString *timeString = [dateFormatter stringFromDate:session.timestamp];
+    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ Uhr", @"%@ %@ Uhr"), dateString, timeString];
+    cell.accessoryType = [session.isSynced boolValue] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 }
 
 
