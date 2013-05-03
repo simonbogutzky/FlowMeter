@@ -11,6 +11,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
     #import "TestFlight.h"
 #endif
 
@@ -22,3 +23,5 @@
 #define WF_NOTIFICATION_SENSOR_CONNECTED       @"WFNotificationSensorConnected"
 #define WF_NOTIFICATION_SENSOR_DISCONNECTED    @"WFNotificationSensorDisconnected"
 #define WF_NOTIFICATION_SENSOR_HAS_DATA        @"WFNotificationSensorHasData"
+
+#define NOTIFICATION_DB_CONNECTION_CANCELLED         @"NotificationDBLinkCancelled"
