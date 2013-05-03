@@ -10,6 +10,6 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import <WFConnector/WFConnector.h>
 
-@interface PrefsTableViewController : UITableViewController <WFSensorConnectionDelegate>
+@interface PrefsTableViewController : UITableViewController <WFSensorConnectionDelegate, UITextFieldDelegate>
 
 @end

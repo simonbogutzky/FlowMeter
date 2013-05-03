@@ -13,8 +13,9 @@
 #import <WFConnector/WFConnector.h>
 #import <DropboxSDK/DropboxSDK.h>
 #import "Reachability.h"
+#import "TCPConnectionManager.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, WFHardwareConnectorDelegate, DBRestClientDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, WFHardwareConnectorDelegate, DBRestClientDelegate, NSStreamDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -31,8 +32,6 @@
 @property (strong, nonatomic, readonly) DBRestClient *sharedDbRestClient;
 @property (strong, nonatomic) WFSensorConnection *wfSensorConnection;
 @property (strong, nonatomic, readonly) Reachability *reachability;
-
-@property (strong, nonatomic) NSInputStream *inputStream;
-@property (strong, nonatomic) NSOutputStream *outputStream;
+@property (strong, nonatomic, readonly) TCPConnectionManager *sharedTCPConnectionManager;
 
 @end

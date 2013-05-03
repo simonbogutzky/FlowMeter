@@ -440,8 +440,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="IJK-Md-chM">
                                                     <color key="onTintColor" red="0.0" green="0.5647059083" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
-                                                        <action selector="changeHrSensorConnectionStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="yRm-dL-Cg8"/>
-                                                        <action selector="changeHrSoundStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="he7-Ox-Ceb"/>
+                                                        <action selector="changeHrSoundStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="0Q5-eq-wrF"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -472,7 +471,6 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ilX-Ln-bru">
                                                     <color key="onTintColor" red="0.0" green="0.5647059083" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
-                                                        <action selector="changeHrSensorConnectionStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="wvL-5S-gqN"/>
                                                         <action selector="changeMotionSound:" destination="pk8-WG-38E" eventType="valueChanged" id="Yj6-ax-q7u"/>
                                                     </connections>
                                                 </switch>
@@ -535,6 +533,113 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="TCP-Verbindung" id="JbD-rj-jzI">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="UZo-XD-Zim">
+                                        <rect key="frame" x="0.0" y="498" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Verbindung" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJd-1i-tSy">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="184" id="tL6-4R-mx3"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2Ei-l0-9Ez">
+                                                    <color key="onTintColor" red="0.0" green="0.5647059083" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
+                                                    <connections>
+                                                        <action selector="changeTCPConnectionStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="AhB-cC-RTr"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="2Ei-l0-9Ez" firstAttribute="centerY" secondItem="UZo-XD-Zim" secondAttribute="centerY" type="default" id="6dE-OB-gwZ"/>
+                                            <constraint firstItem="jJd-1i-tSy" firstAttribute="centerY" secondItem="2Ei-l0-9Ez" secondAttribute="centerY" type="default" id="IgP-do-brO"/>
+                                            <constraint firstAttribute="trailing" secondItem="2Ei-l0-9Ez" secondAttribute="trailing" constant="22" id="em6-I8-IfZ"/>
+                                            <constraint firstItem="jJd-1i-tSy" firstAttribute="leading" secondItem="UZo-XD-Zim" secondAttribute="leading" constant="20" type="default" id="hnb-RP-zf9"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="97W-XD-RAQ">
+                                        <rect key="frame" x="0.0" y="543" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Host-IP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlT-QG-K6M">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="184" id="c76-nf-BL2"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="192.168.255.255" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EZy-Cy-QR5">
+                                                    <accessibility key="accessibilityConfiguration" hint="192.168.255.255"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="121" id="MNG-dN-eOa"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="pk8-WG-38E" id="dhW-QA-VxR"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="qlT-QG-K6M" firstAttribute="leading" secondItem="97W-XD-RAQ" secondAttribute="leading" constant="20" type="default" id="BKm-M5-DIL"/>
+                                            <constraint firstAttribute="trailing" secondItem="EZy-Cy-QR5" secondAttribute="trailing" constant="23" id="cCS-A9-KMe"/>
+                                            <constraint firstItem="qlT-QG-K6M" firstAttribute="top" secondItem="97W-XD-RAQ" secondAttribute="top" constant="11" id="pGQ-zF-N64"/>
+                                            <constraint firstItem="EZy-Cy-QR5" firstAttribute="centerY" secondItem="97W-XD-RAQ" secondAttribute="centerY" type="default" id="pcN-Lb-SKo"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="pIY-do-L56">
+                                        <rect key="frame" x="0.0" y="587" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Port" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaR-wu-NnT">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="184" id="bTl-Uv-2Dr"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="8888" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6oA-UQ-j05">
+                                                    <accessibility key="accessibilityConfiguration" hint="8888"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="46" id="f4R-Tk-35I"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="pk8-WG-38E" id="NoH-Yd-7HK"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="6oA-UQ-j05" firstAttribute="bottom" secondItem="GaR-wu-NnT" secondAttribute="bottom" type="default" id="EMw-eX-g1G"/>
+                                            <constraint firstItem="GaR-wu-NnT" firstAttribute="leading" secondItem="pIY-do-L56" secondAttribute="leading" constant="20" type="default" id="Wvy-0o-QAN"/>
+                                            <constraint firstAttribute="trailing" secondItem="6oA-UQ-j05" secondAttribute="trailing" constant="22" id="jRT-Hb-EkW"/>
+                                            <constraint firstItem="GaR-wu-NnT" firstAttribute="centerY" secondItem="pIY-do-L56" secondAttribute="centerY" type="default" id="u6T-x7-X4I"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="pk8-WG-38E" id="DZm-s9-O0x"/>
@@ -548,6 +653,9 @@
                         <outlet property="_hrConnectionStatusSwitch" destination="yt7-N0-sjb" id="ffa-mg-EaZ"/>
                         <outlet property="_hrSoundStatusSwitch" destination="IJK-Md-chM" id="d4z-eW-tzi"/>
                         <outlet property="_motionSoundStatusSwitch" destination="ilX-Ln-bru" id="Jkl-co-C1K"/>
+                        <outlet property="_tcpConnectionStatusSwitch" destination="2Ei-l0-9Ez" id="Yk5-66-00c"/>
+                        <outlet property="_tcpHostTextfield" destination="EZy-Cy-QR5" id="sdc-pC-5xN"/>
+                        <outlet property="_tcpPortTextfield" destination="6oA-UQ-j05" id="rY6-YV-8zS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i7X-cl-ewF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -588,12 +696,21 @@
         <class className="PrefsTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PrefsTableViewController.h"/>
             <relationships>
+                <relationship kind="action" name="changeDbConnectionStatus:"/>
+                <relationship kind="action" name="changeHrSensorConnectionStatus:"/>
+                <relationship kind="action" name="changeHrSoundStatus:"/>
+                <relationship kind="action" name="changeMotionSound:"/>
+                <relationship kind="action" name="changeTCPConnectionStatus:"/>
+                <relationship kind="action" name="playE:"/>
                 <relationship kind="outlet" name="_dbConnectionStatusSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="_hrBatteryLevelLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="_hrConnectionStatusLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="_hrConnectionStatusSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="_hrSoundStatusSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="_motionSoundStatusSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_tcpConnectionStatusSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_tcpHostTextfield" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="_tcpPortTextfield" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="PrefsViewController" superclassName="AbtractSlidingTopViewController">

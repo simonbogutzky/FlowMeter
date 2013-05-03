@@ -99,7 +99,7 @@
     // Wait fo five hundred values
     if ([_rotationRateXValues count] > 499) {
         if (_phase == 0) {
-            NSLog(@"Initialization");
+//            NSLog(@"Initialization");
         }
         _phase = 1;
     }
@@ -107,7 +107,7 @@
     if (_phase != 0) {
         if ([_rotationRateXValues count] > 499) {
             if (_phase == 1) {
-                NSLog(@"Calibration");
+//                NSLog(@"Calibration");
             }
             _phase = 2;
             
@@ -132,21 +132,21 @@
             _rotationRateXIndicator = YES;
             _rotationRateXFiltered1Indicator = NO;
             _rotationRateXFiltered2Indicator = NO;
-            NSLog(@"Indicator 1");
+//            NSLog(@"Indicator 1");
         }
         
         if (_rotationRateXIndicator && [self isPeakInValues:_rotationRateXFiltered1Values withSlopes:_rotationRateXFiltered1Slopes value:rotationRateXFiltered1 quantile:_rotationRateXFiltered1Quantile] ) {
             _rotationRateXIndicator = NO;
             _rotationRateXFiltered1Indicator = YES;
             _rotationRateXFiltered2Indicator = NO;
-            NSLog(@"Indicator 2");
+//            NSLog(@"Indicator 2");
         }
         
         if (_rotationRateXFiltered1Indicator && [self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:_rotationRateXFiltered2Quantile] ) {
             _rotationRateXIndicator = NO;
             _rotationRateXFiltered1Indicator = NO;
             _rotationRateXFiltered2Indicator = YES;
-            NSLog(@"Indicator 3");
+//            NSLog(@"Indicator 3");
         }
         
         if (_rotationRateXFiltered2Indicator) {

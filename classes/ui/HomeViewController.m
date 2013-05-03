@@ -217,6 +217,7 @@
         if ([defaults boolForKey:@"motionSoundStatus"]) {
             [[AudioController sharedAudioController] playE];
         }
+        [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt %@;", [userInfo valueForKey:@"event"]]];
     }
 }
 

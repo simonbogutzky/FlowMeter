@@ -17,6 +17,9 @@
     IBOutlet UILabel *_hrConnectionStatusLabel;
     IBOutlet UISwitch *_motionSoundStatusSwitch;
     IBOutlet UISwitch *_hrSoundStatusSwitch;
+    IBOutlet UISwitch *_tcpConnectionStatusSwitch;
+    IBOutlet UITextField *_tcpHostTextfield;
+    IBOutlet UITextField *_tcpPortTextfield;
     AppDelegate *_appDelegate;
     WFSensorType_t _wfSensorType;
 }
@@ -41,6 +44,10 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     _motionSoundStatusSwitch.on = [defaults boolForKey:@"motionSoundStatus"];
     _hrSoundStatusSwitch.on = [defaults boolForKey:@"hrSoundStatus"];
+    
+    _tcpConnectionStatusSwitch.on = _appDelegate.sharedTCPConnectionManager.isStreamOpen;
+    _tcpHostTextfield.text = [defaults valueForKey:@"tcpHost"];
+    _tcpPortTextfield.text = [defaults valueForKey:@"tcpPort"];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -106,6 +113,38 @@
     UISwitch *motionSoundStatusSwitch = sender;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:motionSoundStatusSwitch.on forKey:@"motionSoundStatus"];
+}
+
+- (IBAction)changeTCPConnectionStatus:(id)sender
+{
+    if (_tcpHostTextfield.text.length != 15) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Fehlende oder fehlerhafte Host-IP", @"Fehlende oder fehlerhafte Host-IP")
+                                                        message:NSLocalizedString(@"Bitte neu eingeben!" , @"Bitte neu eingeben!")
+                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+                                              otherButtonTitles:nil];
+        [alert show];
+        [_tcpConnectionStatusSwitch setOn:NO animated:YES];
+        return;
+    }
+    
+    if (_tcpPortTextfield.text.length != 4) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Fehlende oder fehlerhafte Port", @"Fehlende oder fehlerhafte Port")
+                                                        message:NSLocalizedString(@"Bitte neu eingeben!" , @"Bitte neu eingeben!")
+                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+                                              otherButtonTitles:nil];
+        [alert show];
+        [_tcpConnectionStatusSwitch setOn:NO animated:YES];
+        return;
+    }
+    
+    if (_tcpConnectionStatusSwitch.on) {
+        [_appDelegate.sharedTCPConnectionManager openStreamsWithHost:_tcpHostTextfield.text port:[NSNumber numberWithInt:[_tcpPortTextfield.text intValue]]];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setValue:_tcpHostTextfield.text forKey:@"tcpHost"];
+        [defaults setValue:_tcpPortTextfield.text forKey:@"tcpPort"];
+    } else {
+        [_appDelegate.sharedTCPConnectionManager closeStreams];
+    }
 }
 
 #pragma mark -
@@ -238,76 +277,34 @@
     }
 }
 
-//#pragma mark -
-//#pragma mark - TCPConnectionimplementation
-//
-//- (void)sendMessage:(NSString *)msg
-//{
-//    NSString *response  = [NSString stringWithFormat:@"%@", msg];
-//    NSData *rdata = [[NSData alloc] initWithData:[response dataUsingEncoding:NSUTF8StringEncoding]];
-//	[_outputStream write:[rdata bytes] maxLength:[rdata length]];
-//}
-//
-//- (IBAction)connectDisconnect:(id)sender
-//{
-//    if ([_hostInputField.text isEqualToString:@""]) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing host!", @"Missing host!")
-//                                                        message:NSLocalizedString(@"Enter a host." , @"Enter a host.")
-//                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-//                                              otherButtonTitles:nil];
-//        [alert show];
-//        return;
-//    }
-//    
-//    if ([_portInputField.text isEqualToString:@""]) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing port!", @"Missing port!")
-//                                                        message:NSLocalizedString(@"Enter a port." , @"Enter a port.")
-//                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-//                                              otherButtonTitles:nil];
-//        [alert show];
-//        return;
-//    }
-//    
-//    _isConnected = !_isConnected;
-//    
-//    UIButton *connectToHostButton = (UIButton *)sender;
-//    
-//    if (_isConnected) {
-//        [connectToHostButton setTitle:@"disconnect" forState:0];
-//        [self openStreams];
-//    } else {
-//        [connectToHostButton setTitle:@"connect" forState:0];
-//        [self closeStreams];
-//    }
-//}
-//
-//- (void)openStreams
-//{
-//    NSString *host = _hostInputField.text;
-//    NSNumber *port = [NSNumber numberWithInt:[_portInputField.text intValue]];
-//    
-//    CFReadStreamRef readStream;
-//    CFWriteStreamRef writeStream;
-//    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)host, [port intValue], &readStream, &writeStream);
-//    _appDelegate.inputStream = (__bridge NSInputStream *)readStream;
-//    _appDelegate.outputStream = (__bridge NSOutputStream *)writeStream;
-//    
-//    [_appDelegate.inputStream setDelegate:self];
-//    [_appDelegate.outputStream setDelegate:self];
-//    
-//    [_appDelegate.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-//    [_appDelegate.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-//    
-//    [_appDelegate.inputStream open];
-//    [_appDelegate.outputStream open];
-//}
-//
-//- (void)closeStreams
-//{
-//    [_appDelegate.inputStream close];
-//    [_appDelegate.outputStream close];
-//}
+#pragma mark -
+#pragma mark - UITextfieldDelegate implementation
 
-
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (range.length == 1 && range.location == textField.text.length - 1) {
+        return YES;
+    }
+    
+    if (textField.tag == 1) {
+        if (textField.text.length == 3 || textField.text.length == 7 || textField.text.length == 11) {
+            textField.text = [NSString stringWithFormat:@"%@.", textField.text];
+        }
+        
+        if(textField.text.length > 14) {
+            return NO;
+        }
+    }
+    
+    if (textField.tag == 2) {
+        if(textField.text.length > 3)
+            return NO;
+    }
+    
+    if (range.length != 0  && range.location != textField.text.length) {
+        return NO;
+    }
+    
+    return YES;
+}
 @end

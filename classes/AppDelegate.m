@@ -18,6 +18,7 @@
     CLLocationManager *_locationManager;
     WFHardwareConnector *_hardwareConnector;
     DBRestClient *_dbRestClient;
+    TCPConnectionManager *_tcpConnectionManager;
 }
 @end
 
@@ -82,6 +83,15 @@
 //        [hardwareConnector setSampleTimerDataCheck:YES];
     });
     return _hardwareConnector;
+}
+
+- (TCPConnectionManager *)sharedTCPConnectionManager
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _tcpConnectionManager = [[TCPConnectionManager alloc] initWithDelegate:self];
+    });
+    return _tcpConnectionManager;
 }
 
 #pragma mark -
@@ -439,6 +449,14 @@
 - (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
 {
     NSLog(@"# File upload failed with error - %@", error);
+}
+
+#pragma mark -
+#pragma mark - DBRestClientDelegate methods
+
+- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
+{
+    NSLog(@"# event code: %d", eventCode);
 }
 
 @end
