@@ -533,10 +533,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="JbD-rj-jzI">
+                            <tableViewSection headerTitle="TCP-Verbindung" id="JbD-rj-jzI">
                                 <cells>
-                                    <tableViewCell hidden="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="UZo-XD-Zim">
-                                        <rect key="frame" x="0.0" y="472" width="320" height="45"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="UZo-XD-Zim">
+                                        <rect key="frame" x="0.0" y="498" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -566,8 +566,8 @@
                                             <constraint firstItem="jJd-1i-tSy" firstAttribute="leading" secondItem="UZo-XD-Zim" secondAttribute="leading" constant="20" type="default" id="hnb-RP-zf9"/>
                                         </constraints>
                                     </tableViewCell>
-                                    <tableViewCell hidden="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="97W-XD-RAQ">
-                                        <rect key="frame" x="0.0" y="517" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="97W-XD-RAQ">
+                                        <rect key="frame" x="0.0" y="543" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -602,8 +602,8 @@
                                             <constraint firstItem="EZy-Cy-QR5" firstAttribute="centerY" secondItem="97W-XD-RAQ" secondAttribute="centerY" type="default" id="pcN-Lb-SKo"/>
                                         </constraints>
                                     </tableViewCell>
-                                    <tableViewCell hidden="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="pIY-do-L56">
-                                        <rect key="frame" x="0.0" y="561" width="320" height="45"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="pIY-do-L56">
+                                        <rect key="frame" x="0.0" y="587" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
