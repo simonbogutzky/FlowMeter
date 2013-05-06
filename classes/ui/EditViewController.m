@@ -8,7 +8,10 @@
 
 #import "EditViewController.h"
 
-@interface EditViewController ()
+@interface EditViewController () {
+    IBOutlet UINavigationBar *_navigationBar;
+    IBOutlet UITextField *_textField;
+}
 
 @end
 
@@ -17,7 +20,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    _navigationBar.topItem.title = _propertyName;
+    _textField.text = _propertyValue;
 }
 
 - (void)didReceiveMemoryWarning
@@ -28,6 +32,8 @@
 
 - (IBAction)finisedTouched:(id)sender
 {
+    _propertyValue = _textField.text;
+    NSLog(@"%@", _propertyValue);
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

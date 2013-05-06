@@ -10,4 +10,7 @@
 
 @interface EditViewController : UIViewController
 
+@property (nonatomic, strong) NSString *propertyName;
+@property (nonatomic, strong) NSString *propertyValue;
+
 @end
