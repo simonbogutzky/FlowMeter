@@ -76,14 +76,14 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"editFirstName"]) {
         EditViewController *editViewController = segue.destinationViewController;
-        editViewController.propertyName = NSLocalizedString(@"Vorname", @"Vorname");
-        editViewController.propertyValue = _user.firstName;
+        editViewController.propertyName = @"firstName";
+        editViewController.user = _user;
     }
     
     if ([segue.identifier isEqualToString:@"editLastName"]) {
         EditViewController *editViewController = segue.destinationViewController;
-        editViewController.propertyName = NSLocalizedString(@"Nachname", @"Nachname");
-        editViewController.propertyValue = _user.lastName;
+        editViewController.propertyName = @"lastName";
+        editViewController.user = _user;
     }
 }
 

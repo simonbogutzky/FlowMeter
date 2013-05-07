@@ -7,6 +7,7 @@
 //
 
 #import "EditViewController.h"
+#import "User.h"
 
 @interface EditViewController () {
     IBOutlet UINavigationBar *_navigationBar;
@@ -20,8 +21,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _navigationBar.topItem.title = _propertyName;
-    _textField.text = _propertyValue;
+    _navigationBar.topItem.title = NSLocalizedString(_propertyName, @"Vorname oder Nachname") ;
+    _textField.text = [_user valueForKey:_propertyName];
 }
 
 - (void)didReceiveMemoryWarning
@@ -32,8 +33,8 @@
 
 - (IBAction)finisedTouched:(id)sender
 {
-    _propertyValue = _textField.text;
-    NSLog(@"%@", _propertyValue);
+    [_user setValue:_textField.text forKey:_propertyName];
+    NSLog(@"%@", [_user valueForKey:_propertyName]);
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

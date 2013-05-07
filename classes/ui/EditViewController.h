@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class User;
+
 @interface EditViewController : UIViewController
 
 @property (nonatomic, strong) NSString *propertyName;
-@property (nonatomic, strong) NSString *propertyValue;
+@property (nonatomic, strong) User *user;
 
 @end
