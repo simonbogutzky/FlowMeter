@@ -87,12 +87,12 @@
             _user.firstName = _firstNameTableViewCell.detailTextLabel.text;
             _user.lastName = _lastNameTableViewCell.detailTextLabel.text;
             _user.username = username;
-            _user.isPreviousUser = @1;
+            _user.isActive = @1;
         } else {
             
             // User in the database, but with a different username
             if (![_user.username isEqualToString:username]) {
-                _user.isPreviousUser = @0;
+                _user.isActive = @0;
                 
                 NSPredicate *isUserWithUsernamePredicate = [NSPredicate predicateWithFormat:@"username == %@", username];
                 User *user = [self activeUserWithPredicate:isUserWithUsernamePredicate];
@@ -103,7 +103,7 @@
                     user.lastName = _lastNameTableViewCell.detailTextLabel.text;
                     user.username = _usernameTableViewCell.detailTextLabel.text;
                 }
-                user.isPreviousUser = @1;
+                user.isActive = @1;
             }
         }
         NSError *error = nil;

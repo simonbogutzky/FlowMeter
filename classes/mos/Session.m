@@ -40,6 +40,7 @@
 @dynamic motionRecords;
 @dynamic heatrateRecords;
 @dynamic locationRecords;
+@dynamic user;
 
 - (void)initialize
 {

@@ -7,13 +7,14 @@
 //
 
 #import "User.h"
-
+#import "Session.h"
 
 @implementation User
 
-@dynamic username;
 @dynamic firstName;
+@dynamic isActive;
 @dynamic lastName;
-@dynamic isPreviousUser;
+@dynamic username;
+@dynamic sessions;
 
 @end

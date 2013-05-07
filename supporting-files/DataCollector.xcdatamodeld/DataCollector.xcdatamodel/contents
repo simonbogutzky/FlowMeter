@@ -49,18 +49,20 @@
         <relationship name="heatrateRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HeartrateRecord" inverseName="session" inverseEntity="HeartrateRecord" syncable="YES"/>
         <relationship name="locationRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocationRecord" inverseName="session" inverseEntity="LocationRecord" syncable="YES"/>
         <relationship name="motionRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MotionRecord" inverseName="session" inverseEntity="MotionRecord" syncable="YES"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="sessions" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="isPreviousUser" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="user" inverseEntity="Session" syncable="YES"/>
     </entity>
     <elements>
         <element name="HeartrateRecord" positionX="160" positionY="192" width="128" height="105"/>
         <element name="LocationRecord" positionX="45" positionY="351" width="128" height="135"/>
-        <element name="MotionRecord" positionX="-29" positionY="-48" width="128" height="433"/>
-        <element name="Session" positionX="-272" positionY="225" width="128" height="135"/>
-        <element name="User" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="MotionRecord" positionX="-110" positionY="-1899" width="128" height="433"/>
+        <element name="Session" positionX="-272" positionY="225" width="128" height="148"/>
+        <element name="User" positionX="-45" positionY="72" width="128" height="120"/>
     </elements>
 </model>
