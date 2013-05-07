@@ -327,7 +327,7 @@
                                                     <color key="textColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Simon" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCp-ko-lc8">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCp-ko-lc8">
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -351,7 +351,7 @@
                                                     <color key="textColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Bogutzky" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fh0-aZ-Eld">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fh0-aZ-Eld">
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -377,8 +377,8 @@
                                                     <color key="textColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="simon.bogutzky" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qAo-6n-a9E">
-                                                    <rect key="frame" x="83" y="12" width="115" height="19"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qAo-6n-a9E">
+                                                    <rect key="frame" x="83" y="12" width="41" height="19"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -426,22 +426,22 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VCk-FN-gWn">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VCk-FN-gWn">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="9Ov-93-i2N"/>
+                                    <constraint firstAttribute="height" constant="480" id="hrN-f8-TzY"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="VCk-FN-gWn" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="3sU-Hh-Fpo"/>
-                            <constraint firstItem="VCk-FN-gWn" firstAttribute="top" secondItem="kBz-oe-xH4" secondAttribute="top" constant="67" id="LUA-zD-xRG"/>
-                            <constraint firstItem="VCk-FN-gWn" firstAttribute="leading" secondItem="kBz-oe-xH4" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Vav-LX-1dX"/>
+                            <constraint firstItem="VCk-FN-gWn" firstAttribute="top" secondItem="kBz-oe-xH4" secondAttribute="top" constant="70" id="XW2-f9-04E"/>
                             <constraint firstItem="avb-gt-tLP" firstAttribute="top" secondItem="kBz-oe-xH4" secondAttribute="top" type="default" id="hHk-4s-piO"/>
+                            <constraint firstItem="VCk-FN-gWn" firstAttribute="leading" secondItem="kBz-oe-xH4" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="p0E-DQ-Ng6"/>
                             <constraint firstItem="avb-gt-tLP" firstAttribute="trailing" secondItem="kBz-oe-xH4" secondAttribute="trailing" type="default" id="qFg-UM-si5"/>
+                            <constraint firstAttribute="trailing" secondItem="VCk-FN-gWn" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="sQJ-4o-G6X"/>
                             <constraint firstItem="avb-gt-tLP" firstAttribute="leading" secondItem="kBz-oe-xH4" secondAttribute="leading" type="default" id="uwP-9L-ySo"/>
                         </constraints>
                     </view>
@@ -874,7 +874,6 @@
         <class className="EditViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EditViewController.h"/>
             <relationships>
-                <relationship kind="action" name="finisedTouched:"/>
                 <relationship kind="outlet" name="_navigationBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="_textField" candidateClass="UITextField"/>
             </relationships>

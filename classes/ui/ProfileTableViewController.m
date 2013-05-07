@@ -17,11 +17,15 @@
     IBOutlet UITableViewCell *_firstNameTableViewCell;
     IBOutlet UITableViewCell *_lastNameTableViewCell;
     IBOutlet UITableViewCell *_usernameTableViewCell;
+    NSMutableDictionary *_userDictionary;
+    BOOL _saveContext;
 }
 @end
 
 @implementation ProfileTableViewController
 
+#pragma mark -
+#pragma mark - UIViewControllerDelegate implementation
 
 - (void)viewDidLoad
 {
@@ -34,36 +38,76 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     _managedObjectContext = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).managedObjectContext;
+    _userDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @"", @""] forKeys:@[@"firstName", @"lastName", @"username"]];
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:_managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    NSPredicate *isNotSyncedPredicate = [NSPredicate predicateWithFormat:@"isPreviousUser == %@", @1];
-    [fetchRequest setPredicate:isNotSyncedPredicate];
-    
-    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];
-    if (fetchedObjects == nil) {
-        // Handle the error.
-    }
-    
-    if ([fetchedObjects count] == 0) {
-        _user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:_managedObjectContext];
-    }
+    NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isPreviousUser == %@", @1];
+    _user = [self activeUserWithPredicate:isActivePredicate];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if (_user.firstName != nil) {
-        _firstNameTableViewCell.textLabel.text = _user.firstName;
+    _saveContext = YES;
+    
+    NSString *firstName = [_userDictionary valueForKey:@"firstName"];
+    if (firstName != nil && ![firstName isEqualToString:@""]) {
+        _firstNameTableViewCell.detailTextLabel.text = firstName;
+    } else {
+        if (_user.firstName != nil && ![_user.firstName isEqualToString:@""]) {
+            _firstNameTableViewCell.detailTextLabel.text = _user.firstName;
+            [_userDictionary setValue:_user.firstName forKey:@"firstName"];
+        }
     }
     
-    if (_user.lastName != nil) {
-        _lastNameTableViewCell.textLabel.text = _user.lastName;
+    NSString *lastName = [_userDictionary valueForKey:@"lastName"];
+    if (lastName != nil && ![lastName isEqualToString:@""]) {
+        _lastNameTableViewCell.detailTextLabel.text = lastName;
+    } else {
+        if (_user.lastName != nil && ![_user.lastName isEqualToString:@""]) {
+            _lastNameTableViewCell.detailTextLabel.text = _user.lastName;
+            [_userDictionary setValue:_user.lastName forKey:@"lastName"];
+        }
+    }
+       
+    NSString *cleanedFirstName = [self cleanName:_firstNameTableViewCell.detailTextLabel.text];
+    NSString *cleanedLastName = [self cleanName:_lastNameTableViewCell.detailTextLabel.text];
+    if (![cleanedFirstName isEqualToString:@""] && ![cleanedLastName isEqualToString:@""]) {
+        NSString *username = [NSString stringWithFormat:@"%@.%@", cleanedFirstName, cleanedLastName];
+        [_userDictionary setValue:username forKey:@"username"];
+        _usernameTableViewCell.detailTextLabel.text = username;
+    }
+}
+    
+- (void)viewWillDisappear:(BOOL)animated
+{
+    NSString *username = [_userDictionary valueForKey:@"username"];
+    if (_saveContext && username != nil && ![username isEqualToString:@""]) {
+        
+        // First use of the app. No user in the database.
+        if ((_user.username == nil || [_user.username isEqualToString:@""]) ) {
+            _user.firstName = _firstNameTableViewCell.detailTextLabel.text;
+            _user.lastName = _lastNameTableViewCell.detailTextLabel.text;
+            _user.username = username;
+            _user.isPreviousUser = @1;
+        } else {
+            
+            // User in the database, but with a different username
+            if (![_user.username isEqualToString:username]) {
+                _user.isPreviousUser = @0;
+                
+                NSPredicate *isUserWithUsernamePredicate = [NSPredicate predicateWithFormat:@"username == %@", username];
+                User *user = [self activeUserWithPredicate:isUserWithUsernamePredicate];
+                
+                // User do not exists. Create one.
+                if (user.username == nil || [user.username isEqualToString:@""]) {
+                    user.firstName = _firstNameTableViewCell.detailTextLabel.text;
+                    user.lastName = _lastNameTableViewCell.detailTextLabel.text;
+                    user.username = _usernameTableViewCell.detailTextLabel.text;
+                }
+                user.isPreviousUser = @1;
+            }
+        }
+        NSError *error = nil;
+        [_managedObjectContext save:&error];
     }
 }
 
@@ -73,18 +117,66 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -
+#pragma mark - Segue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"editFirstName"]) {
         EditViewController *editViewController = segue.destinationViewController;
         editViewController.propertyName = @"firstName";
-        editViewController.user = _user;
+        editViewController.propertyDictionary = _userDictionary;
+        [((UITableViewCell *) sender) setSelected:NO animated:YES];
+        _saveContext = NO;
     }
     
     if ([segue.identifier isEqualToString:@"editLastName"]) {
         EditViewController *editViewController = segue.destinationViewController;
         editViewController.propertyName = @"lastName";
-        editViewController.user = _user;
+        editViewController.propertyDictionary = _userDictionary;
+        [((UITableViewCell *) sender) setSelected:NO animated:YES];
+        _saveContext = NO;
     }
+}
+
+#pragma mark -
+#pragma mark - Convient methods
+
+- (User *)activeUserWithPredicate:(NSPredicate *)predicate
+{
+    User *user = nil;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    if (fetchedObjects == nil) {
+        // Handle the error.
+    }
+    
+    if ([fetchedObjects count] == 0) {
+        user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:_managedObjectContext];
+    } else {
+        user = [fetchedObjects objectAtIndex:0];
+    }
+    
+    return user;
+}
+
+- (NSString *)cleanName:(NSString *)name
+{
+    NSString *cleanedName = [name copy];
+    cleanedName = [cleanedName lowercaseString];
+    cleanedName = [cleanedName stringByReplacingOccurrencesOfString:@"ä" withString:@"ae"];
+    cleanedName = [cleanedName stringByReplacingOccurrencesOfString:@"ö" withString:@"oe"];
+    cleanedName = [cleanedName stringByReplacingOccurrencesOfString:@"ü" withString:@"ue"];
+    cleanedName = [cleanedName stringByReplacingOccurrencesOfString:@"ß" withString:@"ss"];
+    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@" -abcdefghijklmnopqrstuvwxyz"] invertedSet];
+    cleanedName = [[cleanedName componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
+     
+    return cleanedName;
 }
 
 @end

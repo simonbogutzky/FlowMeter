@@ -13,6 +13,6 @@
 @interface EditViewController : UIViewController
 
 @property (nonatomic, strong) NSString *propertyName;
-@property (nonatomic, strong) User *user;
+@property (nonatomic, strong) NSDictionary *propertyDictionary;
 
 @end
