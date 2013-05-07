@@ -11,6 +11,7 @@
 #import "LocationRecord.h"
 #import "MotionRecord.h"
 #import "Utility.h"
+#import "User.h"
 
 #import <zipzap/zipzap.h>
 
@@ -207,6 +208,8 @@
         
         // Create data string
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
+        [dataString appendFormat:@"Name: %@ %@\n", self.user.firstName, self.user.lastName];
+        
         [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
          @"timestamp",
          @"userAccelerationX",
@@ -301,6 +304,7 @@
         
         // Create data string
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
+        [dataString appendFormat:@"Name: %@ %@\n", self.user.firstName, self.user.lastName];
         [dataString appendFormat:@"\"%@\",\"%@\",\"%@\"\n",
          @"timestamp",
          @"accumBeatCount",
@@ -352,6 +356,7 @@
         
         // Create data string
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
+        [dataString appendFormat:@"Name: %@ %@\n", self.user.firstName, self.user.lastName];
         [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
          @"timestamp",
          @"latitude",

@@ -19,6 +19,7 @@
     IBOutlet UITableViewCell *_usernameTableViewCell;
     NSMutableDictionary *_userDictionary;
     BOOL _saveContext;
+    AppDelegate *_appDelegate;
 }
 @end
 
@@ -37,11 +38,12 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    _managedObjectContext = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).managedObjectContext;
+    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    _managedObjectContext = _appDelegate.managedObjectContext;
     _userDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @"", @""] forKeys:@[@"firstName", @"lastName", @"username"]];
     
-    NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isPreviousUser == %@", @1];
-    _user = [self activeUserWithPredicate:isActivePredicate];
+    NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
+    _user = [_appDelegate activeUserWithPredicate:isActivePredicate];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -95,7 +97,7 @@
                 _user.isActive = @0;
                 
                 NSPredicate *isUserWithUsernamePredicate = [NSPredicate predicateWithFormat:@"username == %@", username];
-                User *user = [self activeUserWithPredicate:isUserWithUsernamePredicate];
+                User *user = [_appDelegate activeUserWithPredicate:isUserWithUsernamePredicate];
                 
                 // User do not exists. Create one.
                 if (user.username == nil || [user.username isEqualToString:@""]) {
@@ -136,33 +138,6 @@
         [((UITableViewCell *) sender) setSelected:NO animated:YES];
         _saveContext = NO;
     }
-}
-
-#pragma mark -
-#pragma mark - Convient methods
-
-- (User *)activeUserWithPredicate:(NSPredicate *)predicate
-{
-    User *user = nil;
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:_managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    [fetchRequest setPredicate:predicate];
-    
-    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];
-    if (fetchedObjects == nil) {
-        // Handle the error.
-    }
-    
-    if ([fetchedObjects count] == 0) {
-        user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:_managedObjectContext];
-    } else {
-        user = [fetchedObjects objectAtIndex:0];
-    }
-    
-    return user;
 }
 
 - (NSString *)cleanName:(NSString *)name

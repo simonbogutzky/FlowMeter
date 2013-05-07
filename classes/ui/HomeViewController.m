@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "AppDelegate.h"
+#import "User.h"
 #import "Session.h"
 #import "MotionRecord.h"
 #import "HeartrateRecord.h"
@@ -20,6 +21,7 @@
     WFSensorType_t _sensorType;
     BOOL _isCollection;
     
+    User *_user;
     Session *_session;
     int _lastAccumBeatCount;
     DBRestClient *_restClient;
@@ -43,6 +45,8 @@
     [super viewDidLoad];
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
+    _user = [_appDelegate activeUserWithPredicate:isActivePredicate];
     
     _sensorConnection = _appDelegate.wfSensorConnection;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wfSensorDataUpdated:) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
@@ -115,6 +119,17 @@
 
 - (IBAction)startStopCollection:(id)sender
 {
+    if (_user == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Bitte gib deinen Namen an!", @"Bitte gib deinen Namen an!")
+                                                        message:NSLocalizedString(@"Gehe zu Menu > Profil" , @"Gehe zu Menu > Profil")
+                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+        [(UIButton *)sender setEnabled:NO];
+        return;
+    }
+    
     _isCollection = !_isCollection;
     self.sliding = !_isCollection;
     
@@ -123,6 +138,7 @@
     if (_isCollection) {
         
         _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:_appDelegate.managedObjectContext];
+        _session.user = _user;
         [_session initialize];
         
         [startStopCollectionButton setTitle:@"stop" forState:0];
@@ -130,6 +146,8 @@
     } else {
         [startStopCollectionButton setTitle:@"start" forState:0];
         [self stopUpdates];
+        
+        [_user addSessionsObject:_session];
         
         [_appDelegate saveContext];
         [_session saveAndZipMotionRecords];

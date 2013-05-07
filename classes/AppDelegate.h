@@ -15,6 +15,8 @@
 #import "Reachability.h"
 #import "TCPConnectionManager.h"
 
+@class User;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, WFHardwareConnectorDelegate, DBRestClientDelegate, NSStreamDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -25,6 +27,7 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+- (User *)activeUserWithPredicate:(NSPredicate *)predicate;
 
 @property (strong, nonatomic, readonly) CMMotionManager *sharedMotionManager;
 @property (strong, nonatomic, readonly) CLLocationManager *sharedLocationManager;
