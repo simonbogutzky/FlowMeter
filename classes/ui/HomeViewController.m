@@ -119,7 +119,7 @@
 
 - (IBAction)startStopCollection:(id)sender
 {
-    if (_user == nil) {
+    if (![_user.isActive boolValue]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Bitte gib deinen Namen an!", @"Bitte gib deinen Namen an!")
                                                         message:NSLocalizedString(@"Gehe zu Menu > Profil" , @"Gehe zu Menu > Profil")
                                                        delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
@@ -147,19 +147,25 @@
         [startStopCollectionButton setTitle:@"start" forState:0];
         [self stopUpdates];
         
-        [_user addSessionsObject:_session];
+        if ([_session.motionRecords count] != 0) {
         
-        [_appDelegate saveContext];
-        [_session saveAndZipMotionRecords];
-        [_session saveAndZipHeartrateRecords];
-        [_session saveAndZipLocationRecords];
+            [_user addSessionsObject:_session];
         
-        // TODO: (sb) Replace feedback
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
+            [_appDelegate saveContext];
+            [_session saveAndZipMotionRecords];
+            [_session saveAndZipHeartrateRecords];
+            [_session saveAndZipLocationRecords];
+
+        
+            // TODO: (sb) Replace feedback
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
                                                         message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
                                                        delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
                                               otherButtonTitles:nil];
-        [alert show];
+            [alert show];
+        } else {
+            [_appDelegate.managedObjectContext deleteObject:_session];
+        }
     }
 }
 
