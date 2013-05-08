@@ -20,5 +20,6 @@
 
 - (void)playE;
 - (void)playB;
+- (void)playNote:(int)n;
 
 @end

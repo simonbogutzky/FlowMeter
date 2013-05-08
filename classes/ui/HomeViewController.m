@@ -30,7 +30,6 @@
     
     AppDelegate *_appDelegate;
     
-    
     IBOutlet UIView *_counterView;
     IBOutlet UILabel *_counterLabel;
     int _countdown;
@@ -99,6 +98,8 @@
                 
                 // Add motion record
                 [_session addMotionRecordsObject:motionRecord];
+            } else {
+                NSLog(@"# not in");
             }
         }];
     }
@@ -142,7 +143,7 @@
     
     if (!_isCollection) {
         
-        _countdown = 3;
+        _countdown = 5;
         _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
         _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initializeCollection) userInfo:nil repeats:YES];
         _counterView.hidden = NO;
@@ -165,7 +166,6 @@
             [_session saveAndZipHeartrateRecords];
             [_session saveAndZipLocationRecords];
 
-        
             // TODO: (sb) Replace feedback
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
                                                         message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
@@ -193,6 +193,7 @@
         
         _isCollection = !_isCollection;
         self.sliding = !_isCollection;
+        NSLog(@"# Start collecting");
     }
 }
 
@@ -270,8 +271,20 @@
         if ([defaults boolForKey:@"motionSoundStatus"]) {
             [[AudioController sharedAudioController] playE];
         }
-        [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt %@;", [userInfo valueForKey:@"event"]]];
     }
+    
+    if ([[userInfo valueForKey:@"event"] isEqualToString:@"IF"]) {
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        if ([defaults boolForKey:@"motionSoundStatus"]) {
+            [[AudioController sharedAudioController] playNote:90];
+//        }
+    }
+    
+    if ([[userInfo valueForKey:@"event"] isEqualToString:@"CF"]) {
+
+    }
+    
+    [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt %@;", [userInfo valueForKey:@"event"]]];
 }
 
 @end

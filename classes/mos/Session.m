@@ -101,7 +101,11 @@
     // Wait fo five hundred values
     if ([_rotationRateXValues count] > 499) {
         if (_phase == 0) {
-//            NSLog(@"Initialization");
+            NSLog(@"# Initialization");
+            
+            // Send notification
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[@"IF"] forKeys:@[@"event"]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
         }
         _phase = 1;
     }
@@ -109,7 +113,11 @@
     if (_phase != 0) {
         if ([_rotationRateXValues count] > 499) {
             if (_phase == 1) {
-//                NSLog(@"Calibration");
+                NSLog(@"# Calibration");
+                
+                // Send notification
+                NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[@"CF"] forKeys:@[@"event"]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
             }
             _phase = 2;
             
