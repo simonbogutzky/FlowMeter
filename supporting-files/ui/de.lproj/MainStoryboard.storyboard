@@ -150,21 +150,45 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="No8-XL-3qD" userLabel="Counter View">
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfM-7K-tdj" userLabel="Counter Label">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="147" id="QxE-ie-JfM"/>
+                                            <constraint firstAttribute="width" constant="220" id="Wbb-vZ-ETi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="0.75" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstItem="kfM-7K-tdj" firstAttribute="top" secondItem="No8-XL-3qD" secondAttribute="top" constant="129" id="Skd-xK-ln0"/>
+                                    <constraint firstItem="kfM-7K-tdj" firstAttribute="centerX" secondItem="No8-XL-3qD" secondAttribute="centerX" type="default" id="ZHG-4j-F8c"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="No8-XL-3qD" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="3lp-oY-mEw"/>
                             <constraint firstItem="TV8-ty-RU8" firstAttribute="centerX" secondItem="trp-AF-0BT" secondAttribute="centerX" type="default" id="AH7-FN-FpA"/>
                             <constraint firstItem="trp-AF-0BT" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Ibf-0g-tIx"/>
                             <constraint firstItem="A0v-RU-kOx" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="K8s-MW-aTo"/>
                             <constraint firstAttribute="trailing" secondItem="trp-AF-0BT" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="LxN-gQ-xSf"/>
+                            <constraint firstItem="No8-XL-3qD" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="Ver-JZ-h9g"/>
                             <constraint firstItem="trp-AF-0BT" firstAttribute="top" secondItem="3" secondAttribute="top" constant="240" id="W0A-sg-Sf9"/>
                             <constraint firstItem="A0v-RU-kOx" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="aiw-5c-oN7"/>
                             <constraint firstAttribute="bottom" secondItem="TV8-ty-RU8" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="dg2-Xr-ZwQ"/>
+                            <constraint firstItem="No8-XL-3qD" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="q8h-kG-eCz"/>
                             <constraint firstItem="A0v-RU-kOx" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="qYh-ex-nuY"/>
+                            <constraint firstItem="No8-XL-3qD" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="yhg-QJ-IbJ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="_bmpLabel" destination="trp-AF-0BT" id="c9P-sJ-Hc7"/>
+                        <outlet property="_counterLabel" destination="kfM-7K-tdj" id="gO7-2T-bhk"/>
+                        <outlet property="_counterView" destination="No8-XL-3qD" id="gRo-0v-fpk"/>
                         <outlet property="menuBarButtomItem" destination="Nft-lx-2xl" id="EYv-mW-G8Y"/>
                     </connections>
                 </viewController>
@@ -862,6 +886,83 @@
     <resources>
         <image name="Default.png" width="320" height="480"/>
     </resources>
+    <classes>
+        <class className="AbtractSlidingTopViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AbtractSlidingTopViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="outlet" name="menuBarButtomItem" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="navigationItem" candidateClass="UINavigationItem"/>
+            </relationships>
+        </class>
+        <class className="ECSlidingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
+        </class>
+        <class className="EditViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_navigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="_textField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="HomeViewController" superclassName="AbtractSlidingTopViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_bmpLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_counterLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_counterView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="InitialSlidingViewController" superclassName="ECSlidingViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialSlidingViewController.h"/>
+        </class>
+        <class className="MenuViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MenuViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PrefsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PrefsTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_dbConnectionStatusSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_hrBatteryLevelLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_hrConnectionStatusLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="_hrConnectionStatusSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_hrSoundStatusSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_motionSoundStatusSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_tcpConnectionStatusSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_tcpHostTextfield" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="_tcpPortTextfield" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="PrefsViewController" superclassName="AbtractSlidingTopViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PrefsViewController.h"/>
+        </class>
+        <class className="ProfileTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_firstNameTableViewCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="_lastNameTableViewCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="_usernameTableViewCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="ProfileViewController" superclassName="AbtractSlidingTopViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
+        </class>
+        <class className="SessionTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SessionTableViewController.h"/>
+        </class>
+        <class className="SessionViewController" superclassName="AbtractSlidingTopViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SessionViewController.h"/>
+        </class>
+        <class className="SplashScreenViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashScreenViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_launchImage" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

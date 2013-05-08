@@ -30,6 +30,12 @@
     
     AppDelegate *_appDelegate;
     
+    
+    IBOutlet UIView *_counterView;
+    IBOutlet UILabel *_counterLabel;
+    int _countdown;
+    NSTimer *_countdownTimer;
+    
     double startTimestamp;
 }
 
@@ -73,24 +79,27 @@
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
         [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
             
-            // Create motion record
-            MotionRecord *motionRecord =[NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-            motionRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
-            motionRecord.userAccelerationX = [NSNumber numberWithDouble:deviceMotion.userAcceleration.x];
-            motionRecord.userAccelerationY = [NSNumber numberWithDouble:deviceMotion.userAcceleration.y];
-            motionRecord.userAccelerationZ = [NSNumber numberWithDouble:deviceMotion.userAcceleration.z];
-            motionRecord.gravityX = [NSNumber numberWithDouble:deviceMotion.gravity.x];
-            motionRecord.gravityY = [NSNumber numberWithDouble:deviceMotion.gravity.y];
-            motionRecord.gravityZ = [NSNumber numberWithDouble:deviceMotion.gravity.z];
-            motionRecord.rotationRateX = [NSNumber numberWithDouble:deviceMotion.rotationRate.x];
-            motionRecord.rotationRateY = [NSNumber numberWithDouble:deviceMotion.rotationRate.y];
-            motionRecord.rotationRateZ = [NSNumber numberWithDouble:deviceMotion.rotationRate.z];
-            motionRecord.attitudePitch = [NSNumber numberWithDouble:deviceMotion.attitude.pitch];
-            motionRecord.attitudeYaw = [NSNumber numberWithDouble:deviceMotion.attitude.yaw];
-            motionRecord.attitudeRoll = [NSNumber numberWithDouble:deviceMotion.attitude.roll];
-            
-            // Add motion record
-            [_session addMotionRecordsObject:motionRecord];
+            if(_isCollection) {
+                
+                // Create motion record
+                MotionRecord *motionRecord =[NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
+                motionRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
+                motionRecord.userAccelerationX = [NSNumber numberWithDouble:deviceMotion.userAcceleration.x];
+                motionRecord.userAccelerationY = [NSNumber numberWithDouble:deviceMotion.userAcceleration.y];
+                motionRecord.userAccelerationZ = [NSNumber numberWithDouble:deviceMotion.userAcceleration.z];
+                motionRecord.gravityX = [NSNumber numberWithDouble:deviceMotion.gravity.x];
+                motionRecord.gravityY = [NSNumber numberWithDouble:deviceMotion.gravity.y];
+                motionRecord.gravityZ = [NSNumber numberWithDouble:deviceMotion.gravity.z];
+                motionRecord.rotationRateX = [NSNumber numberWithDouble:deviceMotion.rotationRate.x];
+                motionRecord.rotationRateY = [NSNumber numberWithDouble:deviceMotion.rotationRate.y];
+                motionRecord.rotationRateZ = [NSNumber numberWithDouble:deviceMotion.rotationRate.z];
+                motionRecord.attitudePitch = [NSNumber numberWithDouble:deviceMotion.attitude.pitch];
+                motionRecord.attitudeYaw = [NSNumber numberWithDouble:deviceMotion.attitude.yaw];
+                motionRecord.attitudeRoll = [NSNumber numberWithDouble:deviceMotion.attitude.roll];
+                
+                // Add motion record
+                [_session addMotionRecordsObject:motionRecord];
+            }
         }];
     }
     
@@ -119,6 +128,7 @@
 
 - (IBAction)startStopCollection:(id)sender
 {
+    UIButton *startStopCollectionButton = (UIButton *)sender;
     if (![_user.isActive boolValue]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Bitte gib deinen Namen an!", @"Bitte gib deinen Namen an!")
                                                         message:NSLocalizedString(@"Gehe zu Menu > Profil" , @"Gehe zu Menu > Profil")
@@ -126,26 +136,25 @@
                                               otherButtonTitles:nil];
         [alert show];
         
-        [(UIButton *)sender setEnabled:NO];
+        startStopCollectionButton.enabled = NO;
         return;
     }
     
-    _isCollection = !_isCollection;
-    self.sliding = !_isCollection;
-    
-    UIButton *startStopCollectionButton = (UIButton *)sender;
-    
-    if (_isCollection) {
+    if (!_isCollection) {
         
-        _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:_appDelegate.managedObjectContext];
-        _session.user = _user;
-        [_session initialize];
-        
+        _countdown = 3;
+        _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
+        _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initializeCollection) userInfo:nil repeats:YES];
+        _counterView.hidden = NO;
+
         [startStopCollectionButton setTitle:@"stop" forState:0];
         [self startUpdates];
     } else {
         [startStopCollectionButton setTitle:@"start" forState:0];
         [self stopUpdates];
+        
+        _isCollection = !_isCollection;
+        self.sliding = !_isCollection;
         
         if ([_session.motionRecords count] != 0) {
         
@@ -169,23 +178,43 @@
     }
 }
 
+- (void)initializeCollection
+{
+    _countdown--;
+    _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
+    
+    if (_countdown == 0) {
+        [_countdownTimer invalidate];
+        _counterView.hidden = YES;
+        
+        _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:_appDelegate.managedObjectContext];
+        _session.user = _user;
+        [_session initialize];
+        
+        _isCollection = !_isCollection;
+        self.sliding = !_isCollection;
+    }
+}
+
 #pragma mark - 
 #pragma mark - CLLocationManagerDelegate implementation
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    for (CLLocation *location in locations) {
+    if(_isCollection) {
+        for (CLLocation *location in locations) {
         
-        // Create location record
-        LocationRecord *locationRecord =[NSEntityDescription insertNewObjectForEntityForName:@"LocationRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-        locationRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
-        locationRecord.latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
-        locationRecord.longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
-        locationRecord.altitude = [NSNumber numberWithDouble:location.altitude];
-        locationRecord.speed = [NSNumber numberWithDouble:location.speed];
-        
-        // Add location record
-        [_session addLocationRecordsObject:locationRecord];
+            // Create location record
+            LocationRecord *locationRecord =[NSEntityDescription insertNewObjectForEntityForName:@"LocationRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
+            locationRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
+            locationRecord.latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
+            locationRecord.longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
+            locationRecord.altitude = [NSNumber numberWithDouble:location.altitude];
+            locationRecord.speed = [NSNumber numberWithDouble:location.speed];
+            
+            // Add location record
+            [_session addLocationRecordsObject:locationRecord];
+        }
     }
 }
 
