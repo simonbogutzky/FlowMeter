@@ -14,6 +14,7 @@
 #import "HeartrateRecord.h"
 #import "LocationRecord.h"
 #import "AudioController.h"
+#import "MBProgressHUD.h"
 
 @interface HomeViewController ()
 {
@@ -106,7 +107,7 @@
     
     // Start location updates
     CLLocationManager *locationManager = [_appDelegate sharedLocationManager];
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     locationManager.delegate = self;
     [locationManager startUpdatingLocation];
 }
@@ -158,20 +159,23 @@
         self.sliding = !_isCollection;
         
         if ([_session.motionRecords count] != 0) {
-        
             [_user addSessionsObject:_session];
-        
-            [_appDelegate saveContext];
-            [_session saveAndZipMotionRecords];
-            [_session saveAndZipHeartrateRecords];
-            [_session saveAndZipLocationRecords];
-
-            // TODO: (sb) Replace feedback
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
-                                                        message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
-                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-                                              otherButtonTitles:nil];
-            [alert show];
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                [_appDelegate saveContext];
+                [_session saveAndZipMotionRecords];
+                [_session saveAndZipHeartrateRecords];
+                [_session saveAndZipLocationRecords];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
+                                                                    message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
+                                                                   delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+                                                          otherButtonTitles:nil];
+                    [alert show];
+                });
+            });
+            
         } else {
             [_appDelegate.managedObjectContext deleteObject:_session];
         }

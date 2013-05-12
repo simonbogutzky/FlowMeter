@@ -83,7 +83,11 @@
     
     // Look for sign changes
     if (slope * previousSlope < 0 && quantile < previousValue) {
-        return YES;
+        
+        // TODO: Hardcoded value
+        if (value > 1.0) {
+            return YES;
+        }
     }
     return NO;
 }
@@ -99,6 +103,7 @@
     double rotationRateXFiltered2 = [self filterX5000mHz:rotationRateX];
     
     // Wait fo five hundred values
+    // TODO: Hardcoded value
     if ([_rotationRateXValues count] > 499) {
         if (_phase == 0) {
             NSLog(@"# Initialization");
@@ -122,6 +127,7 @@
             _phase = 2;
             
             // Calculate quantiles
+            // TODO: Hardcoded value
             _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.96];
             _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.96];
             _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.96];
