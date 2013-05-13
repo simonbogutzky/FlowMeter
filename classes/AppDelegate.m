@@ -315,7 +315,7 @@
 }
 
 #pragma mark - 
-#pragma mark - data sync
+#pragma mark - Data sync
 
 - (void)reachabilityChanged:(NSNotification *)notification
 {
@@ -457,6 +457,33 @@
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
 {
     NSLog(@"# event code: %d", eventCode);
+}
+
+#pragma mark -
+#pragma mark - Convient methods
+
+- (User *)activeUserWithPredicate:(NSPredicate *)predicate
+{
+    User *user = nil;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    if (fetchedObjects == nil) {
+        // Handle the error.
+    }
+    
+    if ([fetchedObjects count] == 0) {
+        user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:_managedObjectContext];
+    } else {
+        user = [fetchedObjects objectAtIndex:0];
+    }
+    
+    return user;
 }
 
 @end

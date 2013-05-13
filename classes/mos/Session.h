@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class HeartrateRecord, LocationRecord, MotionRecord;
+@class HeartrateRecord, LocationRecord, MotionRecord, User;
 
 @interface Session : NSManagedObject
 
@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSSet * motionRecords;
 @property (nonatomic, retain) NSSet * heatrateRecords;
 @property (nonatomic, retain) NSSet * locationRecords;
+@property (nonatomic, retain) User *user;
 @end
 
 @interface Session (CoreDataGeneratedAccessors)

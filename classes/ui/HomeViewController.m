@@ -8,11 +8,13 @@
 
 #import "HomeViewController.h"
 #import "AppDelegate.h"
+#import "User.h"
 #import "Session.h"
 #import "MotionRecord.h"
 #import "HeartrateRecord.h"
 #import "LocationRecord.h"
 #import "AudioController.h"
+#import "MBProgressHUD.h"
 
 @interface HomeViewController ()
 {
@@ -20,6 +22,7 @@
     WFSensorType_t _sensorType;
     BOOL _isCollection;
     
+    User *_user;
     Session *_session;
     int _lastAccumBeatCount;
     DBRestClient *_restClient;
@@ -27,6 +30,11 @@
     IBOutlet UILabel *_bmpLabel;
     
     AppDelegate *_appDelegate;
+    
+    IBOutlet UIView *_counterView;
+    IBOutlet UILabel *_counterLabel;
+    int _countdown;
+    NSTimer *_countdownTimer;
     
     double startTimestamp;
 }
@@ -43,6 +51,8 @@
     [super viewDidLoad];
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
+    _user = [_appDelegate activeUserWithPredicate:isActivePredicate];
     
     _sensorConnection = _appDelegate.wfSensorConnection;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wfSensorDataUpdated:) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
@@ -69,30 +79,35 @@
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
         [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
             
-            // Create motion record
-            MotionRecord *motionRecord =[NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-            motionRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
-            motionRecord.userAccelerationX = [NSNumber numberWithDouble:deviceMotion.userAcceleration.x];
-            motionRecord.userAccelerationY = [NSNumber numberWithDouble:deviceMotion.userAcceleration.y];
-            motionRecord.userAccelerationZ = [NSNumber numberWithDouble:deviceMotion.userAcceleration.z];
-            motionRecord.gravityX = [NSNumber numberWithDouble:deviceMotion.gravity.x];
-            motionRecord.gravityY = [NSNumber numberWithDouble:deviceMotion.gravity.y];
-            motionRecord.gravityZ = [NSNumber numberWithDouble:deviceMotion.gravity.z];
-            motionRecord.rotationRateX = [NSNumber numberWithDouble:deviceMotion.rotationRate.x];
-            motionRecord.rotationRateY = [NSNumber numberWithDouble:deviceMotion.rotationRate.y];
-            motionRecord.rotationRateZ = [NSNumber numberWithDouble:deviceMotion.rotationRate.z];
-            motionRecord.attitudePitch = [NSNumber numberWithDouble:deviceMotion.attitude.pitch];
-            motionRecord.attitudeYaw = [NSNumber numberWithDouble:deviceMotion.attitude.yaw];
-            motionRecord.attitudeRoll = [NSNumber numberWithDouble:deviceMotion.attitude.roll];
-            
-            // Add motion record
-            [_session addMotionRecordsObject:motionRecord];
+            if(_isCollection) {
+                
+                // Create motion record
+                MotionRecord *motionRecord =[NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
+                motionRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
+                motionRecord.userAccelerationX = [NSNumber numberWithDouble:deviceMotion.userAcceleration.x];
+                motionRecord.userAccelerationY = [NSNumber numberWithDouble:deviceMotion.userAcceleration.y];
+                motionRecord.userAccelerationZ = [NSNumber numberWithDouble:deviceMotion.userAcceleration.z];
+                motionRecord.gravityX = [NSNumber numberWithDouble:deviceMotion.gravity.x];
+                motionRecord.gravityY = [NSNumber numberWithDouble:deviceMotion.gravity.y];
+                motionRecord.gravityZ = [NSNumber numberWithDouble:deviceMotion.gravity.z];
+                motionRecord.rotationRateX = [NSNumber numberWithDouble:deviceMotion.rotationRate.x];
+                motionRecord.rotationRateY = [NSNumber numberWithDouble:deviceMotion.rotationRate.y];
+                motionRecord.rotationRateZ = [NSNumber numberWithDouble:deviceMotion.rotationRate.z];
+                motionRecord.attitudePitch = [NSNumber numberWithDouble:deviceMotion.attitude.pitch];
+                motionRecord.attitudeYaw = [NSNumber numberWithDouble:deviceMotion.attitude.yaw];
+                motionRecord.attitudeRoll = [NSNumber numberWithDouble:deviceMotion.attitude.roll];
+                
+                // Add motion record
+                [_session addMotionRecordsObject:motionRecord];
+            } else {
+                NSLog(@"# not in");
+            }
         }];
     }
     
     // Start location updates
     CLLocationManager *locationManager = [_appDelegate sharedLocationManager];
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     locationManager.delegate = self;
     [locationManager startUpdatingLocation];
 }
@@ -115,33 +130,74 @@
 
 - (IBAction)startStopCollection:(id)sender
 {
-    _isCollection = !_isCollection;
-    self.sliding = !_isCollection;
-    
     UIButton *startStopCollectionButton = (UIButton *)sender;
+    if (![_user.isActive boolValue]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Bitte gib deinen Namen an!", @"Bitte gib deinen Namen an!")
+                                                        message:NSLocalizedString(@"Gehe zu Menu > Profil" , @"Gehe zu Menu > Profil")
+                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+        startStopCollectionButton.enabled = NO;
+        return;
+    }
     
-    if (_isCollection) {
+    if (!_isCollection) {
         
-        _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:_appDelegate.managedObjectContext];
-        [_session initialize];
-        
+        _countdown = 5;
+        _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
+        _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initializeCollection) userInfo:nil repeats:YES];
+        _counterView.hidden = NO;
+
         [startStopCollectionButton setTitle:@"stop" forState:0];
         [self startUpdates];
     } else {
         [startStopCollectionButton setTitle:@"start" forState:0];
         [self stopUpdates];
         
-        [_appDelegate saveContext];
-        [_session saveAndZipMotionRecords];
-        [_session saveAndZipHeartrateRecords];
-        [_session saveAndZipLocationRecords];
+        _isCollection = !_isCollection;
+        self.sliding = !_isCollection;
         
-        // TODO: (sb) Replace feedback
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
-                                                        message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
-                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-                                              otherButtonTitles:nil];
-        [alert show];
+        if ([_session.motionRecords count] != 0) {
+            [_user addSessionsObject:_session];
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                [_appDelegate saveContext];
+                [_session saveAndZipMotionRecords];
+                [_session saveAndZipHeartrateRecords];
+                [_session saveAndZipLocationRecords];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
+                                                                    message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
+                                                                   delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+                                                          otherButtonTitles:nil];
+                    [alert show];
+                });
+            });
+            
+        } else {
+            [_appDelegate.managedObjectContext deleteObject:_session];
+        }
+    }
+}
+
+- (void)initializeCollection
+{
+    _countdown--;
+    _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
+    
+    if (_countdown == 0) {
+        [_countdownTimer invalidate];
+        _counterView.hidden = YES;
+        
+        _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:_appDelegate.managedObjectContext];
+        _session.user = _user;
+        [_session initialize];
+        
+        _isCollection = !_isCollection;
+        self.sliding = !_isCollection;
+        NSLog(@"# Start collecting");
     }
 }
 
@@ -150,18 +206,20 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    for (CLLocation *location in locations) {
+    if(_isCollection) {
+        for (CLLocation *location in locations) {
         
-        // Create location record
-        LocationRecord *locationRecord =[NSEntityDescription insertNewObjectForEntityForName:@"LocationRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-        locationRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
-        locationRecord.latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
-        locationRecord.longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
-        locationRecord.altitude = [NSNumber numberWithDouble:location.altitude];
-        locationRecord.speed = [NSNumber numberWithDouble:location.speed];
-        
-        // Add location record
-        [_session addLocationRecordsObject:locationRecord];
+            // Create location record
+            LocationRecord *locationRecord =[NSEntityDescription insertNewObjectForEntityForName:@"LocationRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
+            locationRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
+            locationRecord.latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
+            locationRecord.longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
+            locationRecord.altitude = [NSNumber numberWithDouble:location.altitude];
+            locationRecord.speed = [NSNumber numberWithDouble:location.speed];
+            
+            // Add location record
+            [_session addLocationRecordsObject:locationRecord];
+        }
     }
 }
 
@@ -217,8 +275,20 @@
         if ([defaults boolForKey:@"motionSoundStatus"]) {
             [[AudioController sharedAudioController] playE];
         }
-        [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt %@;", [userInfo valueForKey:@"event"]]];
     }
+    
+    if ([[userInfo valueForKey:@"event"] isEqualToString:@"IF"]) {
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        if ([defaults boolForKey:@"motionSoundStatus"]) {
+            [[AudioController sharedAudioController] playNote:90];
+//        }
+    }
+    
+    if ([[userInfo valueForKey:@"event"] isEqualToString:@"CF"]) {
+
+    }
+    
+    [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt %@;", [userInfo valueForKey:@"event"]]];
 }
 
 @end

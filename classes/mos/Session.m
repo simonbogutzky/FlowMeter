@@ -11,6 +11,7 @@
 #import "LocationRecord.h"
 #import "MotionRecord.h"
 #import "Utility.h"
+#import "User.h"
 
 #import <zipzap/zipzap.h>
 
@@ -40,6 +41,7 @@
 @dynamic motionRecords;
 @dynamic heatrateRecords;
 @dynamic locationRecords;
+@dynamic user;
 
 - (void)initialize
 {
@@ -81,7 +83,11 @@
     
     // Look for sign changes
     if (slope * previousSlope < 0 && quantile < previousValue) {
-        return YES;
+        
+        // TODO: Hardcoded value
+        if (value > 1.0) {
+            return YES;
+        }
     }
     return NO;
 }
@@ -97,9 +103,14 @@
     double rotationRateXFiltered2 = [self filterX5000mHz:rotationRateX];
     
     // Wait fo five hundred values
+    // TODO: Hardcoded value
     if ([_rotationRateXValues count] > 499) {
         if (_phase == 0) {
-//            NSLog(@"Initialization");
+            NSLog(@"# Initialization");
+            
+            // Send notification
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[@"IF"] forKeys:@[@"event"]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
         }
         _phase = 1;
     }
@@ -107,14 +118,19 @@
     if (_phase != 0) {
         if ([_rotationRateXValues count] > 499) {
             if (_phase == 1) {
-//                NSLog(@"Calibration");
+                NSLog(@"# Calibration");
+                
+                // Send notification
+                NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[@"CF"] forKeys:@[@"event"]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
             }
             _phase = 2;
             
             // Calculate quantiles
+            // TODO: Hardcoded value
             _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.96];
-            _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.95];
-            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.94];
+            _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.96];
+            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.96];
             
             // Remove the first hundred values
             [_rotationRateXValues removeObjectsInRange:NSMakeRange(0, 100)];
@@ -206,6 +222,8 @@
         
         // Create data string
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
+        [dataString appendFormat:@"Name: %@ %@\n", self.user.firstName, self.user.lastName];
+        
         [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
          @"timestamp",
          @"userAccelerationX",
@@ -300,6 +318,7 @@
         
         // Create data string
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
+        [dataString appendFormat:@"Name: %@ %@\n", self.user.firstName, self.user.lastName];
         [dataString appendFormat:@"\"%@\",\"%@\",\"%@\"\n",
          @"timestamp",
          @"accumBeatCount",
@@ -351,6 +370,7 @@
         
         // Create data string
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
+        [dataString appendFormat:@"Name: %@ %@\n", self.user.firstName, self.user.lastName];
         [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
          @"timestamp",
          @"latitude",

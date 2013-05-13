@@ -9,10 +9,13 @@
 #import "SessionTableViewController.h"
 #import "AppDelegate.h"
 #import "Session.h"
+#import "User.h"
 
 @interface SessionTableViewController () {
     NSFetchedResultsController *_fetchedResultsController;
     NSManagedObjectContext *_managedObjectContext;
+    AppDelegate *_appDelegate;
+    User *_user;
 }
 @end
 
@@ -29,7 +32,12 @@
 //    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
 //    self.navigationItem.rightBarButtonItem = addButton;
     
-    _managedObjectContext = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).managedObjectContext;
+    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
+    _user = [_appDelegate activeUserWithPredicate:isActivePredicate];
+    
+    _managedObjectContext = _appDelegate.managedObjectContext;
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,8 +120,8 @@
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
-//    NSPredicate *isNotSyncedPredicate = [NSPredicate predicateWithFormat:@"isSynced == %@", @0];
-//    [fetchRequest setPredicate:isNotSyncedPredicate];
+    NSPredicate *isActiveUserPredicate = [NSPredicate predicateWithFormat:@"user.username == %@", _user.username];
+    [fetchRequest setPredicate:isActiveUserPredicate];
     
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     aFetchedResultsController.delegate = self;
