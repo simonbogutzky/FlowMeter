@@ -99,8 +99,8 @@
     double rotationRateX = [value.rotationRateX doubleValue];
     
     // Apply filter
-    double rotationRateXFiltered1 = [self filterX7500mHz:rotationRateX];
-    double rotationRateXFiltered2 = [self filterX5000mHz:rotationRateX];
+    double rotationRateXFiltered1 = [self filterX5000mHz:rotationRateX];
+    double rotationRateXFiltered2 = [self filterX2500mHz:rotationRateX];
     
     // Wait fo five hundred values
     // TODO: Hardcoded value
@@ -128,9 +128,9 @@
             
             // Calculate quantiles
             // TODO: Hardcoded value
-            _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.96];
-            _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.96];
-            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.96];
+            _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.94];
+            _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.93];
+            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.92];
             
             // Remove the first hundred values
             [_rotationRateXValues removeObjectsInRange:NSMakeRange(0, 100)];
