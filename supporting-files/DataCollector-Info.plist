@@ -48,6 +48,7 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>audio</string>
 		<string>location</string>
 		<string>external-accessory</string>
 		<string>bluetooth-central</string>
