@@ -19,6 +19,8 @@
     WFHardwareConnector *_hardwareConnector;
     DBRestClient *_dbRestClient;
     TCPConnectionManager *_tcpConnectionManager;
+    
+    AVAudioPlayer *_audioPlayer;
 }
 @end
 
@@ -127,13 +129,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"HeartrateDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"LocationDataAvailable" object:nil];
     
-    // Audio Session with mixing
-    AudioSessionInitialize(NULL, NULL, NULL, NULL);
-    UInt32 sessionCategory = kAudioSessionCategory_AmbientSound;
-    AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
-    UInt32 allowMixWithOthers = true;
-    AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryMixWithOthers, sizeof(allowMixWithOthers), &allowMixWithOthers);
-    AudioSessionSetActive(true);
+    // Audio Session with mixing    
+    NSError *setCategoryErr = nil;
+    NSError *activationErr  = nil;
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:&setCategoryErr];
+    [[AVAudioSession sharedInstance] setActive:YES error:&activationErr];
     
     return YES;
 }

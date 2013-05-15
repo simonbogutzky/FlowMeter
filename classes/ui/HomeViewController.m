@@ -37,8 +37,6 @@
     NSTimer *_countdownTimer;
     
     double startTimestamp;
-    
-    AVAudioPlayer *_audioPlayer;
 }
 
 @end
@@ -59,17 +57,6 @@
     _sensorConnection = _appDelegate.wfSensorConnection;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wfSensorDataUpdated:) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gaitEventDetected:) name:@"DetectGaitEvent" object:nil];
-    
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/speeddown.wav", [[NSBundle mainBundle] resourcePath]]];
-    
-    NSError *error;
-    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    _audioPlayer.numberOfLoops = -1;
-    
-    if (_audioPlayer == nil)
-        NSLog(@"%@", error);
-    else
-        [_audioPlayer play];
 }
 
 - (void)didReceiveMemoryWarning
