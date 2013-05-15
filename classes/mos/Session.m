@@ -85,7 +85,7 @@
     if (slope * previousSlope < 0 && quantile > previousValue) {
         
         // TODO: Hardcoded value
-//        if (value > 0.75 && value < 3.0) {
+//        if (value > -3.0 && value < -1.0) {
             return YES;
 //        }
     }
@@ -128,9 +128,9 @@
             
             // Calculate quantiles
             // TODO: Hardcoded value
-            _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.08];
-            _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.12];
-            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.16];
+            _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.06];
+            _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.09];
+            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.12];
             
             // Remove the first hundred values
             [_rotationRateXValues removeObjectsInRange:NSMakeRange(0, 100)];
@@ -146,14 +146,14 @@
 //            NSLog(@"Indicator 1");
         }
         
-        if (_rotationRateXIndicator && [self isPeakInValues:_rotationRateXFiltered1Values withSlopes:_rotationRateXFiltered1Slopes value:rotationRateXFiltered1 quantile:_rotationRateXFiltered1Quantile] ) {
+        if ([self isPeakInValues:_rotationRateXFiltered1Values withSlopes:_rotationRateXFiltered1Slopes value:rotationRateXFiltered1 quantile:_rotationRateXFiltered1Quantile] && _rotationRateXIndicator) {
             _rotationRateXIndicator = NO;
             _rotationRateXFiltered1Indicator = YES;
             _rotationRateXFiltered2Indicator = NO;
 //            NSLog(@"Indicator 2");
         }
         
-        if (_rotationRateXFiltered1Indicator && [self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:_rotationRateXFiltered2Quantile] ) {
+        if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:_rotationRateXFiltered2Quantile] &&_rotationRateXFiltered1Indicator) {
             _rotationRateXIndicator = NO;
             _rotationRateXFiltered1Indicator = NO;
             _rotationRateXFiltered2Indicator = YES;
