@@ -272,6 +272,13 @@
         }
     }
     
+    if ([[userInfo valueForKey:@"event"] isEqualToString:@"TO"]) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if ([defaults boolForKey:@"motionSoundStatus"]) {
+            [[AudioController sharedAudioController] playE];
+        }
+    }
+    
     if ([[userInfo valueForKey:@"event"] isEqualToString:@"IF"]) {
 //        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //        if ([defaults boolForKey:@"motionSoundStatus"]) {
