@@ -15,6 +15,7 @@
 @dynamic accumBeatCount;
 @dynamic heartrate;
 @dynamic timestamp;
+@dynamic rrIntervals;
 @dynamic session;
 
 @end

@@ -319,10 +319,11 @@
         // Create data string
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
         [dataString appendFormat:@"Name: %@ %@\n", self.user.firstName, self.user.lastName];
-        [dataString appendFormat:@"\"%@\",\"%@\",\"%@\"\n",
+        [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\"\n",
          @"timestamp",
          @"accumBeatCount",
-         @"heartrate"
+         @"heartrate",
+         @"rrIntervals"
          ];
         
         // Sort data
@@ -332,10 +333,11 @@
         for (HeartrateRecord *heartrateRecord in heatrateRecords) {
             
             // Append to data string
-            [dataString appendFormat:@"%f,%f,%@\n",
+            [dataString appendFormat:@"%f,%f,%@,%@\n",
              [heartrateRecord.timestamp doubleValue],
              [heartrateRecord.accumBeatCount doubleValue],
-             heartrateRecord.heartrate
+             heartrateRecord.heartrate,
+             heartrateRecord.rrIntervals != nil ? heartrateRecord.rrIntervals : @""
              ];
         }
         
@@ -392,7 +394,6 @@
              [locationRecord.longitude doubleValue],
              [locationRecord.altitude doubleValue],
              [locationRecord.speed doubleValue]
-             
              ];
         }
         

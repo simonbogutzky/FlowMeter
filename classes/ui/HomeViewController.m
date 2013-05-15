@@ -240,26 +240,21 @@
                 if ([defaults boolForKey:@"hrSoundStatus"]) {
                     [[AudioController sharedAudioController] playE];
                 }
-                
-                if(_isCollection) {
-                    
-                    // Create hr record
-                    HeartrateRecord *heartrateRecord =[NSEntityDescription insertNewObjectForEntityForName:@"HeartrateRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-                    heartrateRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
-                    heartrateRecord.accumBeatCount = [NSNumber numberWithDouble:hrData.accumBeatCount];
-                    heartrateRecord.heartrate = [hrData formattedHeartrate:NO];
-                    
-                    // Add hr record
-                    [_session addHeatrateRecordsObject:heartrateRecord];
-                }
-                
-                _lastAccumBeatCount = hrData.accumBeatCount;
-                
             }
-//          NSArray* rrIntervals = [(WFBTLEHeartrateData*)hrData rrIntervals];
-//          for (NSNumber *rrInterval in rrIntervals) {
-//              NSLog(@"# rrInterval: %f", [rrInterval doubleValue]);
-//          }
+            
+            if(_isCollection) {
+                
+                // Create hr record
+                HeartrateRecord *heartrateRecord =[NSEntityDescription insertNewObjectForEntityForName:@"HeartrateRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
+                heartrateRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
+                heartrateRecord.accumBeatCount = [NSNumber numberWithDouble:hrData.accumBeatCount];
+                heartrateRecord.heartrate = [hrData formattedHeartrate:NO];
+                heartrateRecord.rrIntervals = [[(WFBTLEHeartrateData*)hrData rrIntervals] componentsJoinedByString:@" "];
+                
+                // Add hr record
+                [_session addHeatrateRecordsObject:heartrateRecord];
+            }
+            _lastAccumBeatCount = hrData.accumBeatCount;
         }
     }
     else {

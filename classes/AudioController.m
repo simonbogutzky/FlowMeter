@@ -17,7 +17,7 @@
     dispatch_once(&onceToken, ^{
         _sharedAudioController = [[AudioController alloc] init];
         _sharedAudioController.audioController = [[PdAudioController alloc] init];
-        if ([_sharedAudioController.audioController configureAmbientWithSampleRate:44100 numberChannels:2 mixingEnabled:YES] != PdAudioOK) {
+        if ([_sharedAudioController.audioController configurePlaybackWithSampleRate:44100 numberChannels:2 inputEnabled:NO mixingEnabled:YES] != PdAudioOK) {
             NSLog(@"failed to initialize audio components");
         } else {
             _sharedAudioController.dispatcher = [[PdDispatcher alloc]init];
