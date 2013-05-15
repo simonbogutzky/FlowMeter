@@ -85,7 +85,7 @@
     if (slope * previousSlope < 0 && quantile < previousValue) {
         
         // TODO: Hardcoded value
-        if (value > 1.0) {
+        if (value > 0.75 && value < 3.0) {
             return YES;
         }
     }
@@ -128,9 +128,9 @@
             
             // Calculate quantiles
             // TODO: Hardcoded value
-            _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.94];
-            _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.93];
-            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.92];
+            _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.95];
+            _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.925];
+            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.9];
             
             // Remove the first hundred values
             [_rotationRateXValues removeObjectsInRange:NSMakeRange(0, 100)];

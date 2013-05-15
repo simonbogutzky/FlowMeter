@@ -122,7 +122,6 @@
     // Allocate a reachability object and register notifier
     _reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-    [_reachability startNotifier];
     
     // Observe notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"MotionDataAvailable" object:nil];
@@ -159,6 +158,7 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [AudioController sharedAudioController].audioController.active = YES;
+    [_reachability startNotifier];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
