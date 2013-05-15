@@ -288,7 +288,7 @@
 
     }
     
-    [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt %@;", [userInfo valueForKey:@"event"]]];
+    [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt/%@;", [[userInfo valueForKey:@"event"] lowercaseString]]];
 }
 
 @end
