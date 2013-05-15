@@ -82,12 +82,12 @@
     [slopes addObject:[NSNumber numberWithDouble:slope]];
     
     // Look for sign changes
-    if (slope * previousSlope < 0 && quantile < previousValue) {
+    if (slope * previousSlope < 0 && quantile > previousValue) {
         
         // TODO: Hardcoded value
-        if (value > 0.75 && value < 3.0) {
+//        if (value > -3.0 && value < -1.0) {
             return YES;
-        }
+//        }
     }
     return NO;
 }
@@ -99,8 +99,8 @@
     double rotationRateX = [value.rotationRateX doubleValue];
     
     // Apply filter
-    double rotationRateXFiltered1 = [self filterX5000mHz:rotationRateX];
-    double rotationRateXFiltered2 = [self filterX2500mHz:rotationRateX];
+    double rotationRateXFiltered1 = [self filterX3000mHz:rotationRateX];
+    double rotationRateXFiltered2 = [self filterX1500mHz:rotationRateX];
     
     // Wait fo five hundred values
     // TODO: Hardcoded value
@@ -128,19 +128,14 @@
             
             // Calculate quantiles
             // TODO: Hardcoded value
-            _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.95];
-            _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.925];
-            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.9];
+            _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.06];
+            _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.09];
+            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.12];
             
             // Remove the first hundred values
             [_rotationRateXValues removeObjectsInRange:NSMakeRange(0, 100)];
             [_rotationRateXFiltered1Values removeObjectsInRange:NSMakeRange(0, 100)];
             [_rotationRateXFiltered2Values removeObjectsInRange:NSMakeRange(0, 100)];
-            
-            // Remove the first hundred slopes
-//            [_rotationRateXSlopes removeObjectsInRange:NSMakeRange(0, 100)];
-//            [_rotationRateXFiltered1Slopes removeObjectsInRange:NSMakeRange(0, 100)];
-//            [_rotationRateXFiltered2Slopes removeObjectsInRange:NSMakeRange(0, 100)];
         }
         _phase = 1;
         
@@ -151,14 +146,14 @@
 //            NSLog(@"Indicator 1");
         }
         
-        if (_rotationRateXIndicator && [self isPeakInValues:_rotationRateXFiltered1Values withSlopes:_rotationRateXFiltered1Slopes value:rotationRateXFiltered1 quantile:_rotationRateXFiltered1Quantile] ) {
+        if ([self isPeakInValues:_rotationRateXFiltered1Values withSlopes:_rotationRateXFiltered1Slopes value:rotationRateXFiltered1 quantile:_rotationRateXFiltered1Quantile] && _rotationRateXIndicator) {
             _rotationRateXIndicator = NO;
             _rotationRateXFiltered1Indicator = YES;
             _rotationRateXFiltered2Indicator = NO;
 //            NSLog(@"Indicator 2");
         }
         
-        if (_rotationRateXFiltered1Indicator && [self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:_rotationRateXFiltered2Quantile] ) {
+        if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:_rotationRateXFiltered2Quantile] &&_rotationRateXFiltered1Indicator) {
             _rotationRateXIndicator = NO;
             _rotationRateXFiltered1Indicator = NO;
             _rotationRateXFiltered2Indicator = YES;
@@ -166,7 +161,7 @@
         }
         
         if (_rotationRateXFiltered2Indicator) {
-            value.event = @"HS";
+            value.event = @"TO";
             
             // Send notification
             NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[value.event] forKeys:@[@"event"]];
@@ -504,6 +499,36 @@ static float xv2500[NZEROS+1], yv2500[NPOLES+1];
     yv2500[1] = yv2500[2];
     yv2500[2] = xv2500[0] + (-0.8007999232 * yv2500[0]) + (1.7787197768 * yv2500[1]);
     return yv2500[2];
+}
+
+// Lowpass Butterworth 2. Order Filter with 1.5Hz corner frequency ("http://www-users.cs.york.ac.uk/~fisher/mkfilter/trad.html")
+
+#define GAIN1500   1.203373697e+02
+
+static float xv1500[NZEROS+1], yv1500[NPOLES+1];
+
+- (double)filterX1500mHz:(double)x
+{
+    xv1500[0] = x / GAIN1500;
+    yv1500[0] = yv1500[1];
+    yv1500[1] = yv1500[2];
+    yv1500[2] = xv1500[0] + (-0.8752143177 * yv1500[0]) + (1.8669043471 * yv1500[1]);
+    return yv1500[2];
+}
+
+// Lowpass Butterworth 2. Order Filter with 3Hz corner frequency ("http://www-users.cs.york.ac.uk/~fisher/mkfilter/trad.html")
+
+#define GAIN3000   3.215755043e+01
+
+static float xv3000[NZEROS+1], yv3000[NPOLES+1];
+
+- (double)filterX3000mHz:(double)x
+{
+    xv3000[0] = x / GAIN3000;
+    yv3000[0] = yv3000[1];
+    yv3000[1] = yv3000[2];
+    yv3000[2] = xv3000[0] + (-0.7660001018 * yv3000[0]) + (1.7349032059 * yv3000[1]);
+    return yv3000[2];
 }
 
 
