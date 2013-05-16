@@ -7,36 +7,28 @@
 //
 
 #import "MotionRecord.h"
-#import "Session.h"
-
 
 @implementation MotionRecord
 
-@dynamic timestamp;
-@dynamic userAccelerationX;
-@dynamic userAccelerationY;
-@dynamic userAccelerationZ;
-@dynamic gravityX;
-@dynamic gravityY;
-@dynamic gravityZ;
-@dynamic rotationRateX;
-@dynamic rotationRateXFiltered1;
-@dynamic rotationRateXFiltered2;
-@dynamic rotationRateXQuantile;
-@dynamic rotationRateXFiltered1Quantile;
-@dynamic rotationRateXFiltered2Quantile;
-@dynamic rotationRateXSlope;
-@dynamic rotationRateXFiltered1Slope;
-@dynamic rotationRateXFiltered2Slope;
-@dynamic rotationRateXIndicator;
-@dynamic rotationRateXFiltered1Indicator;
-@dynamic rotationRateXFiltered2Indicator;
-@dynamic rotationRateY;
-@dynamic rotationRateZ;
-@dynamic attitudePitch;
-@dynamic attitudeYaw;
-@dynamic attitudeRoll;
-@dynamic event;
-@dynamic session;
+- (id)initWithTimestamp:(double)timestamp deviceMotion:(CMDeviceMotion *)deviceMotion
+{
+    self = [super init];
+    if (self) {
+        self.timestamp = timestamp;
+        self.userAccelerationX = deviceMotion.userAcceleration.x;
+        self.userAccelerationY = deviceMotion.userAcceleration.y;
+        self.userAccelerationZ = deviceMotion.userAcceleration.z;
+        self.gravityX = deviceMotion.gravity.x;
+        self.gravityY = deviceMotion.gravity.y;
+        self.gravityZ = deviceMotion.gravity.z;
+        self.rotationRateX = deviceMotion.rotationRate.x;
+        self.rotationRateY = deviceMotion.rotationRate.y;
+        self.rotationRateZ = deviceMotion.rotationRate.z;
+        self.attitudePitch = deviceMotion.attitude.pitch;
+        self.attitudeRoll = deviceMotion.attitude.roll;
+        self.attitudeYaw = deviceMotion.attitude.yaw;
+    }
+    return self;
+}
 
 @end
