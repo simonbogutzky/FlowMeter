@@ -13,21 +13,16 @@
 
 @interface Session : NSManagedObject
 
-@property (nonatomic, retain) NSString * filename;
-@property (nonatomic, retain) NSNumber * isSynced;
-@property (nonatomic, retain) NSDate * timestamp;
-@property (nonatomic, retain) NSSet * motionRecords;
+@property (nonatomic, retain) NSString *filename;
+@property (nonatomic, retain) NSNumber *isSynced;
+@property (nonatomic, retain) NSDate *timestamp;
+@property (nonatomic, retain) NSMutableArray *motionRecords;
 @property (nonatomic, retain) NSSet * heatrateRecords;
 @property (nonatomic, retain) NSSet * locationRecords;
 @property (nonatomic, retain) User *user;
 @end
 
 @interface Session (CoreDataGeneratedAccessors)
-
-- (void)addMotionRecordsObject:(MotionRecord *)value;
-- (void)removeMotionRecordsObject:(MotionRecord *)value;
-- (void)addMotionRecords:(NSSet *)values;
-- (void)removeMotionRecords:(NSSet *)values;
 
 - (void)addHeatrateRecordsObject:(HeartrateRecord *)value;
 - (void)removeHeatrateRecordsObject:(HeartrateRecord *)value;
@@ -40,6 +35,8 @@
 - (void)removeLocationRecords:(NSSet *)values;
 
 - (void)initialize;
+
+- (void)addDeviceRecord:(MotionRecord *)deviceRecord;
 
 - (void)saveAndZipMotionRecords;
 - (void)saveAndZipHeartrateRecords;
