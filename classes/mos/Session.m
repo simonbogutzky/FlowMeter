@@ -38,10 +38,13 @@
 @dynamic filename;
 @dynamic isSynced;
 @dynamic timestamp;
+@dynamic motionRecordsCount;
+@dynamic locationRecordsCount;
+@dynamic heartrateRecordsCount;
 @dynamic user;
 
 @synthesize motionRecords = _motionRecords;
-@synthesize heatrateRecords = _heatrateRecords;
+@synthesize heartrateRecords = _heartrateRecords;
 @synthesize locationRecords = _locationRecords;
 
 - (void)initialize
@@ -71,7 +74,7 @@
     _phase = 0;
     
     _motionRecords = [NSMutableArray arrayWithCapacity:720000];
-    _heatrateRecords = [NSMutableArray arrayWithCapacity:720000];
+    _heartrateRecords = [NSMutableArray arrayWithCapacity:720000];
     _locationRecords = [NSMutableArray arrayWithCapacity:180000];
 }
 
@@ -207,7 +210,7 @@
 
 - (void)addHeartrateRecord:(HeartrateRecord *)heartrateRecord
 {
-    [_heatrateRecords addObject:heartrateRecord];
+    [_heartrateRecords addObject:heartrateRecord];
 }
 
 - (void)addLocationRecord:(LocationRecord *)locationRecord
@@ -218,6 +221,8 @@
 - (void)saveAndZipMotionRecords
 {
     if ([_motionRecords count] != 0) {
+        
+        self.motionRecordsCount = [NSNumber numberWithInt:[_motionRecords count]];
         
         // Create the path, where the data should be saved
         NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
@@ -309,7 +314,9 @@
 
 - (void)saveAndZipHeartrateRecords
 {
-    if ([_heatrateRecords count] != 0) {
+    if ([_heartrateRecords count] != 0) {
+        
+        self.heartrateRecordsCount = [NSNumber numberWithInt:[_heartrateRecords count]];
         
         // Create the path, where the data should be saved
         NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
@@ -326,7 +333,7 @@
          @"rrIntervals"
          ];
         
-        for (HeartrateRecord *heartrateRecord in _heatrateRecords) {
+        for (HeartrateRecord *heartrateRecord in _heartrateRecords) {
             
             // Append to data string
             [dataString appendFormat:@"%f,%i,%@,%@\n",
@@ -359,6 +366,8 @@
 - (void)saveAndZipLocationRecords
 {
     if ([_locationRecords count] != 0) {
+        
+        self.locationRecordsCount = [NSNumber numberWithInt:[_locationRecords count]];
         
         // Save *.csv
         // Create the path, where the data should be saved
