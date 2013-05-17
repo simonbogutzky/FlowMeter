@@ -38,11 +38,11 @@
 @dynamic filename;
 @dynamic isSynced;
 @dynamic timestamp;
-@dynamic locationRecords;
 @dynamic user;
 
 @synthesize motionRecords = _motionRecords;
 @synthesize heatrateRecords = _heatrateRecords;
+@synthesize locationRecords = _locationRecords;
 
 - (void)initialize
 {
@@ -72,6 +72,7 @@
     
     _motionRecords = [NSMutableArray arrayWithCapacity:720000];
     _heatrateRecords = [NSMutableArray arrayWithCapacity:720000];
+    _locationRecords = [NSMutableArray arrayWithCapacity:180000];
 }
 
 - (bool)isPeakInValues:(NSArray *)values withSlopes:(NSMutableArray*)slopes value:(double)value quantile:(double)quantile
@@ -207,6 +208,11 @@
 - (void)addHeartrateRecord:(HeartrateRecord *)heartrateRecord
 {
     [_heatrateRecords addObject:heartrateRecord];
+}
+
+- (void)addLocationRecord:(LocationRecord *)locationRecord
+{
+    [_locationRecords addObject:locationRecord];
 }
 
 - (void)saveAndZipMotionRecords
@@ -352,7 +358,7 @@
 
 - (void)saveAndZipLocationRecords
 {
-    if ([self.locationRecords count] != 0) {
+    if ([_locationRecords count] != 0) {
         
         // Save *.csv
         // Create the path, where the data should be saved
@@ -379,11 +385,11 @@
             
             // Append to data string
             [dataString appendFormat:@"%f,%f,%f,%f,%f\n",
-             [locationRecord.timestamp doubleValue],
-             [locationRecord.latitude doubleValue],
-             [locationRecord.longitude doubleValue],
-             [locationRecord.altitude doubleValue],
-             [locationRecord.speed doubleValue]
+             locationRecord.timestamp,
+             locationRecord.latitude,
+             locationRecord.longitude,
+             locationRecord.altitude,
+             locationRecord.speed
              ];
         }
         
@@ -411,16 +417,16 @@
         
         // Create data string
         dataString = [[NSMutableString alloc] initWithCapacity:240000];
-        [dataString appendString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document><name>Paths</name><description></description><Style id=\"yellowLineGreenPoly\"><LineStyle><color>7f00ffff</color><width>4</width></LineStyle><PolyStyle><color>7f00ff00</color></PolyStyle></Style><Placemark><name>Absolute Extruded</name><description>Transparent green wall with yellow outlines</description><styleUrl>#yellowLineGreenPoly</styleUrl><LineString><extrude>1</extrude><tessellate>1</tessellate><altitudeMode>absolute</altitudeMode><coordinates>"
+        [dataString appendString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document><name>Paths</name><description></description><Style id=\"yellowLineGreenPoly\"><LineStyle><color>7f00ffff</color><width>8</width></LineStyle><PolyStyle><color>7f00ff00</color></PolyStyle></Style><Placemark><name>Absolute Extruded</name><description>Transparent green wall with yellow outlines</description><styleUrl>#yellowLineGreenPoly</styleUrl><LineString><extrude>2</extrude><tessellate>1</tessellate><altitudeMode>clampToGround</altitudeMode><coordinates>"
          ];
         
         for (LocationRecord *locationRecord in locationRecords) {
             
             // Append to data string
             [dataString appendFormat:@"%f,%f,%f\n",
-             [locationRecord.longitude doubleValue],
-             [locationRecord.latitude doubleValue],
-             [locationRecord.altitude doubleValue]
+             locationRecord.longitude,
+             locationRecord.latitude,
+             locationRecord.altitude
              ];
         }
         

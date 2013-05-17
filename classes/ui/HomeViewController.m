@@ -197,15 +197,10 @@
         for (CLLocation *location in locations) {
         
             // Create location record
-            LocationRecord *locationRecord =[NSEntityDescription insertNewObjectForEntityForName:@"LocationRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-            locationRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
-            locationRecord.latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
-            locationRecord.longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
-            locationRecord.altitude = [NSNumber numberWithDouble:location.altitude];
-            locationRecord.speed = [NSNumber numberWithDouble:location.speed];
+            LocationRecord *locationRecord = [[LocationRecord alloc] initWithTimestamp:[[NSDate date] timeIntervalSince1970] - startTimestamp Location:location];
             
             // Add location record
-            [_session addLocationRecordsObject:locationRecord];
+            [_session addLocationRecord:locationRecord];
         }
     }
 }

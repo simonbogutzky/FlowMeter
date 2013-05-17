@@ -7,16 +7,20 @@
 //
 
 #import "LocationRecord.h"
-#import "Session.h"
-
 
 @implementation LocationRecord
 
-@dynamic timestamp;
-@dynamic latitude;
-@dynamic longitude;
-@dynamic altitude;
-@dynamic speed;
-@dynamic session;
+- (id)initWithTimestamp:(double)timestamp Location:(CLLocation *)location
+{
+    self = [super init];
+    if (self) {
+        self.timestamp = timestamp;
+        self.latitude = location.coordinate.latitude;
+        self.longitude = location.coordinate.longitude;
+        self.altitude = location.altitude;
+        self.speed = location.speed;
+    }
+    return self;
+}
 
 @end
