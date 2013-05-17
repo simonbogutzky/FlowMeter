@@ -19,8 +19,6 @@
     WFHardwareConnector *_hardwareConnector;
     DBRestClient *_dbRestClient;
     TCPConnectionManager *_tcpConnectionManager;
-    
-    AVAudioPlayer *_audioPlayer;
 }
 @end
 
@@ -69,7 +67,7 @@
         // Configure the hardware connector.
         _hardwareConnector = [WFHardwareConnector sharedConnector];
         _hardwareConnector.delegate = self;
-        _hardwareConnector.sampleRate = 0.001;  // sample rate 1 ns, or 1 kHz.
+        _hardwareConnector.sampleRate = 0.01;  // sample rate 10 ns, or 100 Hz.
         _hardwareConnector.settings.searchTimeout = 60;
         
         // Determine support for BTLE
@@ -121,6 +119,7 @@
     
     // Allocate a reachability object and register notifier
     _reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
+    [_reachability startNotifier];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     
     // Observe notifications
@@ -158,7 +157,6 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [AudioController sharedAudioController].audioController.active = YES;
-    [_reachability startNotifier];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -420,6 +418,7 @@
     if (_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
         NSString *destDir = @"/";
         [[self sharedDbRestClient] uploadFile:filename toPath:destDir withParentRev:nil fromPath:localPath];
+        NSLog(@"# %@ %@", localPath, filename);
     }
 }
 
