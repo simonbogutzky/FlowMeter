@@ -7,17 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import <CoreLocation/CoreLocation.h>
 
-@class Session;
+@interface LocationRecord : NSObject
 
-@interface LocationRecord : NSManagedObject
+@property (nonatomic, assign) double timestamp;
+@property (nonatomic, assign) double latitude;
+@property (nonatomic, assign) double longitude;
+@property (nonatomic, assign) double altitude;
+@property (nonatomic, assign) double speed;
 
-@property (nonatomic, retain) NSNumber * timestamp;
-@property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSNumber * altitude;
-@property (nonatomic, retain) NSNumber * speed;
-@property (nonatomic, retain) Session *session;
+- (id)initWithTimestamp:(double)timestamp Location:(CLLocation *)location;
 
 @end

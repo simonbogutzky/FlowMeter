@@ -7,37 +7,36 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import <CoreMotion/CoreMotion.h>
 
-@class Session;
+@interface MotionRecord : NSObject
 
-@interface MotionRecord : NSManagedObject
+@property (nonatomic, assign) double timestamp;
+@property (nonatomic, assign) double userAccelerationX;
+@property (nonatomic, assign) double userAccelerationY;
+@property (nonatomic, assign) double userAccelerationZ;
+@property (nonatomic, assign) double gravityX;
+@property (nonatomic, assign) double gravityY;
+@property (nonatomic, assign) double gravityZ;
+@property (nonatomic, assign) double rotationRateX;
+@property (nonatomic, assign) double rotationRateXFiltered1;
+@property (nonatomic, assign) double rotationRateXFiltered2;
+@property (nonatomic, assign) double rotationRateXQuantile;
+@property (nonatomic, assign) double rotationRateXFiltered1Quantile;
+@property (nonatomic, assign) double rotationRateXFiltered2Quantile;
+@property (nonatomic, assign) double rotationRateXSlope;
+@property (nonatomic, assign) double rotationRateXFiltered1Slope;
+@property (nonatomic, assign) double rotationRateXFiltered2Slope;
+@property (nonatomic, assign) BOOL rotationRateXIndicator;
+@property (nonatomic, assign) BOOL rotationRateXFiltered1Indicator;
+@property (nonatomic, assign) BOOL rotationRateXFiltered2Indicator;
+@property (nonatomic, assign) double rotationRateY;
+@property (nonatomic, assign) double rotationRateZ;
+@property (nonatomic, assign) double attitudePitch;
+@property (nonatomic, assign) double attitudeYaw;
+@property (nonatomic, assign) double attitudeRoll;
+@property (nonatomic, retain) NSString *event;
 
-@property (nonatomic, retain) NSNumber * timestamp;
-@property (nonatomic, retain) NSNumber * userAccelerationX;
-@property (nonatomic, retain) NSNumber * userAccelerationY;
-@property (nonatomic, retain) NSNumber * userAccelerationZ;
-@property (nonatomic, retain) NSNumber * gravityX;
-@property (nonatomic, retain) NSNumber * gravityY;
-@property (nonatomic, retain) NSNumber * gravityZ;
-@property (nonatomic, retain) NSNumber * rotationRateX;
-@property (nonatomic, retain) NSNumber * rotationRateXFiltered1;
-@property (nonatomic, retain) NSNumber * rotationRateXFiltered2;
-@property (nonatomic, retain) NSNumber * rotationRateXQuantile;
-@property (nonatomic, retain) NSNumber * rotationRateXFiltered1Quantile;
-@property (nonatomic, retain) NSNumber * rotationRateXFiltered2Quantile;
-@property (nonatomic, retain) NSNumber * rotationRateXSlope;
-@property (nonatomic, retain) NSNumber * rotationRateXFiltered1Slope;
-@property (nonatomic, retain) NSNumber * rotationRateXFiltered2Slope;
-@property (nonatomic, retain) NSNumber * rotationRateXIndicator;
-@property (nonatomic, retain) NSNumber * rotationRateXFiltered1Indicator;
-@property (nonatomic, retain) NSNumber * rotationRateXFiltered2Indicator;
-@property (nonatomic, retain) NSNumber * rotationRateY;
-@property (nonatomic, retain) NSNumber * rotationRateZ;
-@property (nonatomic, retain) NSNumber * attitudePitch;
-@property (nonatomic, retain) NSNumber * attitudeYaw;
-@property (nonatomic, retain) NSNumber * attitudeRoll;
-@property (nonatomic, retain) NSString * event;
-@property (nonatomic, retain) Session * session;
+- (id)initWithTimestamp:(double)timestamp DeviceMotion:(CMDeviceMotion *)deviceMotion;
 
 @end

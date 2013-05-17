@@ -18,7 +18,7 @@
 @interface Session () {
     NSMutableArray *_rotationRateXValues;
     NSMutableArray *_rotationRateXFiltered1Values;
-    NSMutableArray *_rotationRateXFiltered2Values;;
+    NSMutableArray *_rotationRateXFiltered2Values;
     double _rotationRateXQuantile;
     double _rotationRateXFiltered1Quantile;
     double _rotationRateXFiltered2Quantile;
@@ -38,10 +38,11 @@
 @dynamic filename;
 @dynamic isSynced;
 @dynamic timestamp;
-@dynamic motionRecords;
-@dynamic heatrateRecords;
-@dynamic locationRecords;
 @dynamic user;
+
+@synthesize motionRecords = _motionRecords;
+@synthesize heatrateRecords = _heatrateRecords;
+@synthesize locationRecords = _locationRecords;
 
 - (void)initialize
 {
@@ -68,6 +69,10 @@
     _rotationRateXFiltered1Indicator = NO;
     _rotationRateXFiltered2Indicator = NO;
     _phase = 0;
+    
+    _motionRecords = [NSMutableArray arrayWithCapacity:720000];
+    _heatrateRecords = [NSMutableArray arrayWithCapacity:720000];
+    _locationRecords = [NSMutableArray arrayWithCapacity:180000];
 }
 
 - (bool)isPeakInValues:(NSArray *)values withSlopes:(NSMutableArray*)slopes value:(double)value quantile:(double)quantile
@@ -92,11 +97,10 @@
     return NO;
 }
 
-- (void)addMotionRecordsObject:(MotionRecord *)value
-{    
-    value.event = @"";
-    
-    double rotationRateX = [value.rotationRateX doubleValue];
+- (void)addDeviceRecord:(MotionRecord *)deviceRecord
+{
+    NSString *event = @"";
+    double rotationRateX = deviceRecord.rotationRateX;
     
     // Apply filter
     double rotationRateXFiltered1 = [self filterX3000mHz:rotationRateX];
@@ -143,28 +147,28 @@
             _rotationRateXIndicator = YES;
             _rotationRateXFiltered1Indicator = NO;
             _rotationRateXFiltered2Indicator = NO;
-//            NSLog(@"Indicator 1");
+            //            NSLog(@"Indicator 1");
         }
         
         if ([self isPeakInValues:_rotationRateXFiltered1Values withSlopes:_rotationRateXFiltered1Slopes value:rotationRateXFiltered1 quantile:_rotationRateXFiltered1Quantile] && _rotationRateXIndicator) {
             _rotationRateXIndicator = NO;
             _rotationRateXFiltered1Indicator = YES;
             _rotationRateXFiltered2Indicator = NO;
-//            NSLog(@"Indicator 2");
+            //            NSLog(@"Indicator 2");
         }
         
         if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:_rotationRateXFiltered2Quantile] &&_rotationRateXFiltered1Indicator) {
             _rotationRateXIndicator = NO;
             _rotationRateXFiltered1Indicator = NO;
             _rotationRateXFiltered2Indicator = YES;
-//            NSLog(@"Indicator 3");
+            //            NSLog(@"Indicator 3");
         }
         
         if (_rotationRateXFiltered2Indicator) {
-            value.event = @"TO";
+            event = @"TO";
             
             // Send notification
-            NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[value.event] forKeys:@[@"event"]];
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[event] forKeys:@[@"event"]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
             
             _rotationRateXIndicator = NO;
@@ -177,38 +181,43 @@
     [_rotationRateXFiltered1Values addObject:[NSNumber numberWithDouble:rotationRateXFiltered1]];
     [_rotationRateXFiltered2Values addObject:[NSNumber numberWithDouble:rotationRateXFiltered2]];
     
+    deviceRecord.event = event;
+    
     // Save filtered values
-    value.rotationRateXFiltered1 = [NSNumber numberWithDouble:rotationRateXFiltered1];
-    value.rotationRateXFiltered2 = [NSNumber numberWithDouble:rotationRateXFiltered2];
+    deviceRecord.rotationRateXFiltered1 = rotationRateXFiltered1;
+    deviceRecord.rotationRateXFiltered2 = rotationRateXFiltered2;
     
     // Save quantile
-    value.rotationRateXQuantile = [NSNumber numberWithDouble:_rotationRateXQuantile];
-    value.rotationRateXFiltered1Quantile = [NSNumber numberWithDouble:_rotationRateXFiltered1Quantile];
-    value.rotationRateXFiltered2Quantile = [NSNumber numberWithDouble:_rotationRateXFiltered2Quantile];
+    deviceRecord.rotationRateXQuantile = _rotationRateXQuantile;
+    deviceRecord.rotationRateXFiltered1Quantile = _rotationRateXFiltered1Quantile;
+    deviceRecord.rotationRateXFiltered2Quantile = _rotationRateXFiltered2Quantile;
     
     // Save slopes
-    value.rotationRateXSlope = [_rotationRateXSlopes lastObject];
-    value.rotationRateXFiltered1Slope = [_rotationRateXFiltered1Slopes lastObject];
-    value.rotationRateXFiltered2Slope = [_rotationRateXFiltered2Slopes lastObject];
+    deviceRecord.rotationRateXSlope = [[_rotationRateXSlopes lastObject] doubleValue];
+    deviceRecord.rotationRateXFiltered1Slope = [[_rotationRateXFiltered1Slopes lastObject] doubleValue];
+    deviceRecord.rotationRateXFiltered2Slope = [[_rotationRateXFiltered2Slopes lastObject] doubleValue];
     
     // Save indicators
-    value.rotationRateXIndicator = [NSNumber numberWithBool:_rotationRateXIndicator];
-    value.rotationRateXFiltered1Indicator = [NSNumber numberWithBool:_rotationRateXFiltered1Indicator];
-    value.rotationRateXFiltered2Indicator = [NSNumber numberWithBool:_rotationRateXFiltered2Indicator];
+    deviceRecord.rotationRateXIndicator = _rotationRateXIndicator;
+    deviceRecord.rotationRateXFiltered1Indicator = _rotationRateXFiltered1Indicator;
+    deviceRecord.rotationRateXFiltered2Indicator = _rotationRateXFiltered2Indicator;
     
-    NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
-    [self willChangeValueForKey:@"motionRecords"
-                withSetMutation:NSKeyValueUnionSetMutation
-                   usingObjects:changedObjects];
-    [[self primitiveValueForKey:@"motionRecords"] addObject:value];
-    [self didChangeValueForKey:@"motionRecords"
-               withSetMutation:NSKeyValueUnionSetMutation
-                  usingObjects:changedObjects];
+    [_motionRecords addObject:deviceRecord];
+}
+
+- (void)addHeartrateRecord:(HeartrateRecord *)heartrateRecord
+{
+    [_heatrateRecords addObject:heartrateRecord];
+}
+
+- (void)addLocationRecord:(LocationRecord *)locationRecord
+{
+    [_locationRecords addObject:locationRecord];
 }
 
 - (void)saveAndZipMotionRecords
 {
-    if ([self.motionRecords count] != 0) {
+    if ([_motionRecords count] != 0) {
         
         // Create the path, where the data should be saved
         NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
@@ -247,38 +256,34 @@
          @"event"
          ];
         
-        // Sort data
-        NSSortDescriptor *timestampDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
-        NSArray *motionRecords = [self.motionRecords sortedArrayUsingDescriptors:@[timestampDescriptor]];
-        
-        for (MotionRecord *motionRecord in motionRecords) {
+        for (MotionRecord *motionRecord in _motionRecords) {
             
             // Append to data string
             [dataString appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%d,%d,%d,%f,%f,%f,%f,%f,%@\n",
-             [motionRecord.timestamp doubleValue],
-             [motionRecord.userAccelerationX doubleValue],
-             [motionRecord.userAccelerationY doubleValue],
-             [motionRecord.userAccelerationZ doubleValue],
-             [motionRecord.gravityX doubleValue],
-             [motionRecord.gravityY doubleValue],
-             [motionRecord.gravityZ doubleValue],
-             [motionRecord.rotationRateX doubleValue],
-             [motionRecord.rotationRateXFiltered1 doubleValue],
-             [motionRecord.rotationRateXFiltered2 doubleValue],
-             [motionRecord.rotationRateXQuantile doubleValue],
-             [motionRecord.rotationRateXFiltered1Quantile doubleValue],
-             [motionRecord.rotationRateXFiltered2Quantile doubleValue],
-             [motionRecord.rotationRateXSlope doubleValue],
-             [motionRecord.rotationRateXFiltered1Slope doubleValue],
-             [motionRecord.rotationRateXFiltered2Slope doubleValue],
-             [motionRecord.rotationRateXIndicator intValue],
-             [motionRecord.rotationRateXFiltered1Indicator intValue],
-             [motionRecord.rotationRateXFiltered2Indicator intValue],
-             [motionRecord.rotationRateY doubleValue],
-             [motionRecord.rotationRateZ doubleValue],
-             [motionRecord.attitudePitch doubleValue],
-             [motionRecord.attitudeRoll doubleValue],
-             [motionRecord.attitudeYaw doubleValue],
+             motionRecord.timestamp,
+             motionRecord.userAccelerationX,
+             motionRecord.userAccelerationY,
+             motionRecord.userAccelerationZ,
+             motionRecord.gravityX,
+             motionRecord.gravityY,
+             motionRecord.gravityZ,
+             motionRecord.rotationRateY,
+             motionRecord.rotationRateXFiltered1,
+             motionRecord.rotationRateXFiltered2,
+             motionRecord.rotationRateXQuantile,
+             motionRecord.rotationRateXFiltered1Quantile,
+             motionRecord.rotationRateXFiltered2Quantile,
+             motionRecord.rotationRateXSlope,
+             motionRecord.rotationRateXFiltered1Slope,
+             motionRecord.rotationRateXFiltered2Slope,
+             motionRecord.rotationRateXIndicator,
+             motionRecord.rotationRateXFiltered1Indicator,
+             motionRecord.rotationRateXFiltered2Indicator,
+             motionRecord.rotationRateY,
+             motionRecord.rotationRateZ,
+             motionRecord.attitudePitch,
+             motionRecord.attitudeRoll,
+             motionRecord.attitudeYaw,
              motionRecord.event
              ];
         }
@@ -298,13 +303,13 @@
         
         // Send notification
         NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[localPath, filename] forKeys:@[@"localPath", @"filename"]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:self userInfo:userInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:nil userInfo:userInfo];
     }
 }
 
 - (void)saveAndZipHeartrateRecords
 {
-    if ([self.heatrateRecords count] != 0) {
+    if ([_heatrateRecords count] != 0) {
         
         // Create the path, where the data should be saved
         NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
@@ -321,16 +326,12 @@
          @"rrIntervals"
          ];
         
-        // Sort data
-        NSSortDescriptor *timestampDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
-        NSArray *heatrateRecords = [self.heatrateRecords sortedArrayUsingDescriptors:@[timestampDescriptor]];
-        
-        for (HeartrateRecord *heartrateRecord in heatrateRecords) {
+        for (HeartrateRecord *heartrateRecord in _heatrateRecords) {
             
             // Append to data string
-            [dataString appendFormat:@"%f,%f,%@,%@\n",
-             [heartrateRecord.timestamp doubleValue],
-             [heartrateRecord.accumBeatCount doubleValue],
+            [dataString appendFormat:@"%f,%i,%@,%@\n",
+             heartrateRecord.timestamp,
+             heartrateRecord.accumBeatCount,
              heartrateRecord.heartrate,
              heartrateRecord.rrIntervals != nil ? heartrateRecord.rrIntervals : @""
              ];
@@ -351,13 +352,13 @@
         
         // Send notification
         NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[localPath, filename] forKeys:@[@"localPath", @"filename"]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"HeartrateDataAvailable" object:self userInfo:userInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"HeartrateDataAvailable" object:nil userInfo:userInfo];
     }
 }
 
 - (void)saveAndZipLocationRecords
 {
-    if ([self.locationRecords count] != 0) {
+    if ([_locationRecords count] != 0) {
         
         // Save *.csv
         // Create the path, where the data should be saved
@@ -384,11 +385,11 @@
             
             // Append to data string
             [dataString appendFormat:@"%f,%f,%f,%f,%f\n",
-             [locationRecord.timestamp doubleValue],
-             [locationRecord.latitude doubleValue],
-             [locationRecord.longitude doubleValue],
-             [locationRecord.altitude doubleValue],
-             [locationRecord.speed doubleValue]
+             locationRecord.timestamp,
+             locationRecord.latitude,
+             locationRecord.longitude,
+             locationRecord.altitude,
+             locationRecord.speed
              ];
         }
         
@@ -407,7 +408,7 @@
         
         // Send notification
         NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[localPath, filename] forKeys:@[@"localPath", @"filename"]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:self userInfo:userInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:nil userInfo:userInfo];
         
         // Save *.kml
         // Create the path, where the data should be saved
@@ -416,16 +417,16 @@
         
         // Create data string
         dataString = [[NSMutableString alloc] initWithCapacity:240000];
-        [dataString appendString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document><name>Paths</name><description></description><Style id=\"yellowLineGreenPoly\"><LineStyle><color>7f00ffff</color><width>4</width></LineStyle><PolyStyle><color>7f00ff00</color></PolyStyle></Style><Placemark><name>Absolute Extruded</name><description>Transparent green wall with yellow outlines</description><styleUrl>#yellowLineGreenPoly</styleUrl><LineString><extrude>1</extrude><tessellate>1</tessellate><altitudeMode>absolute</altitudeMode><coordinates>"
+        [dataString appendString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document><name>Paths</name><description></description><Style id=\"yellowLineGreenPoly\"><LineStyle><color>7f00ffff</color><width>8</width></LineStyle><PolyStyle><color>7f00ff00</color></PolyStyle></Style><Placemark><name>Absolute Extruded</name><description>Transparent green wall with yellow outlines</description><styleUrl>#yellowLineGreenPoly</styleUrl><LineString><extrude>2</extrude><tessellate>1</tessellate><altitudeMode>absolute</altitudeMode><coordinates>"
          ];
         
         for (LocationRecord *locationRecord in locationRecords) {
             
             // Append to data string
             [dataString appendFormat:@"%f,%f,%f\n",
-             [locationRecord.longitude doubleValue],
-             [locationRecord.latitude doubleValue],
-             [locationRecord.altitude doubleValue]
+             locationRecord.longitude,
+             locationRecord.latitude,
+             locationRecord.altitude
              ];
         }
         
@@ -447,7 +448,7 @@
         
         // Send notification
         userInfo = [NSDictionary dictionaryWithObjects:@[localPath, filename] forKeys:@[@"localPath", @"filename"]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:self userInfo:userInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:nil userInfo:userInfo];
     }
 }
 

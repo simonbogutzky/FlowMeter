@@ -78,27 +78,14 @@
     if ([motionManager isDeviceMotionAvailable] == YES) {
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
         [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
-            
             if(_isCollection) {
                 
                 // Create motion record
-                MotionRecord *motionRecord =[NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-                motionRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
-                motionRecord.userAccelerationX = [NSNumber numberWithDouble:deviceMotion.userAcceleration.x];
-                motionRecord.userAccelerationY = [NSNumber numberWithDouble:deviceMotion.userAcceleration.y];
-                motionRecord.userAccelerationZ = [NSNumber numberWithDouble:deviceMotion.userAcceleration.z];
-                motionRecord.gravityX = [NSNumber numberWithDouble:deviceMotion.gravity.x];
-                motionRecord.gravityY = [NSNumber numberWithDouble:deviceMotion.gravity.y];
-                motionRecord.gravityZ = [NSNumber numberWithDouble:deviceMotion.gravity.z];
-                motionRecord.rotationRateX = [NSNumber numberWithDouble:deviceMotion.rotationRate.x];
-                motionRecord.rotationRateY = [NSNumber numberWithDouble:deviceMotion.rotationRate.y];
-                motionRecord.rotationRateZ = [NSNumber numberWithDouble:deviceMotion.rotationRate.z];
-                motionRecord.attitudePitch = [NSNumber numberWithDouble:deviceMotion.attitude.pitch];
-                motionRecord.attitudeYaw = [NSNumber numberWithDouble:deviceMotion.attitude.yaw];
-                motionRecord.attitudeRoll = [NSNumber numberWithDouble:deviceMotion.attitude.roll];
-                
+                double timestamp = [[NSDate date] timeIntervalSince1970] - startTimestamp;
+                MotionRecord *motionRecord = [[MotionRecord alloc] initWithTimestamp:timestamp DeviceMotion:deviceMotion];
+ 
                 // Add motion record
-                [_session addMotionRecordsObject:motionRecord];
+                [_session addDeviceRecord:motionRecord];
             } else {
                 NSLog(@"# not in");
             }
@@ -210,15 +197,10 @@
         for (CLLocation *location in locations) {
         
             // Create location record
-            LocationRecord *locationRecord =[NSEntityDescription insertNewObjectForEntityForName:@"LocationRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-            locationRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
-            locationRecord.latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
-            locationRecord.longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
-            locationRecord.altitude = [NSNumber numberWithDouble:location.altitude];
-            locationRecord.speed = [NSNumber numberWithDouble:location.speed];
+            LocationRecord *locationRecord = [[LocationRecord alloc] initWithTimestamp:[[NSDate date] timeIntervalSince1970] - startTimestamp Location:location];
             
             // Add location record
-            [_session addLocationRecordsObject:locationRecord];
+            [_session addLocationRecord:locationRecord];
         }
     }
 }
@@ -245,14 +227,10 @@
             if(_isCollection) {
                 
                 // Create hr record
-                HeartrateRecord *heartrateRecord =[NSEntityDescription insertNewObjectForEntityForName:@"HeartrateRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-                heartrateRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
-                heartrateRecord.accumBeatCount = [NSNumber numberWithDouble:hrData.accumBeatCount];
-                heartrateRecord.heartrate = [hrData formattedHeartrate:NO];
-                heartrateRecord.rrIntervals = [[(WFBTLEHeartrateData*)hrData rrIntervals] componentsJoinedByString:@" "];
+                HeartrateRecord *heartrateRecord = [[HeartrateRecord alloc] initWithTimestamp:[[NSDate date] timeIntervalSince1970] - startTimestamp HeartrateData:hrData];
                 
                 // Add hr record
-                [_session addHeatrateRecordsObject:heartrateRecord];
+                [_session addHeartrateRecord:heartrateRecord];
             }
             _lastAccumBeatCount = hrData.accumBeatCount;
         }

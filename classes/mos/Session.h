@@ -13,33 +13,20 @@
 
 @interface Session : NSManagedObject
 
-@property (nonatomic, retain) NSString * filename;
-@property (nonatomic, retain) NSNumber * isSynced;
-@property (nonatomic, retain) NSDate * timestamp;
-@property (nonatomic, retain) NSSet * motionRecords;
-@property (nonatomic, retain) NSSet * heatrateRecords;
-@property (nonatomic, retain) NSSet * locationRecords;
+@property (nonatomic, retain) NSString *filename;
+@property (nonatomic, retain) NSNumber *isSynced;
+@property (nonatomic, retain) NSDate *timestamp;
 @property (nonatomic, retain) User *user;
-@end
 
-@interface Session (CoreDataGeneratedAccessors)
-
-- (void)addMotionRecordsObject:(MotionRecord *)value;
-- (void)removeMotionRecordsObject:(MotionRecord *)value;
-- (void)addMotionRecords:(NSSet *)values;
-- (void)removeMotionRecords:(NSSet *)values;
-
-- (void)addHeatrateRecordsObject:(HeartrateRecord *)value;
-- (void)removeHeatrateRecordsObject:(HeartrateRecord *)value;
-- (void)addHeatrateRecords:(NSSet *)values;
-- (void)removeHeatrateRecords:(NSSet *)values;
-
-- (void)addLocationRecordsObject:(LocationRecord *)value;
-- (void)removeLocationRecordsObject:(LocationRecord *)value;
-- (void)addLocationRecords:(NSSet *)values;
-- (void)removeLocationRecords:(NSSet *)values;
+@property (nonatomic, retain) NSMutableArray *motionRecords;
+@property (nonatomic, retain) NSMutableArray *heatrateRecords;
+@property (nonatomic, retain) NSMutableArray *locationRecords;
 
 - (void)initialize;
+
+- (void)addDeviceRecord:(MotionRecord *)deviceRecord;
+- (void)addHeartrateRecord:(HeartrateRecord *)heartrateRecord;
+- (void)addLocationRecord:(LocationRecord *)locationRecord;
 
 - (void)saveAndZipMotionRecords;
 - (void)saveAndZipHeartrateRecords;
