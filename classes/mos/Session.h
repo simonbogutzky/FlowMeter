@@ -15,11 +15,14 @@
 
 @property (nonatomic, retain) NSString *filename;
 @property (nonatomic, retain) NSNumber *isSynced;
+@property (nonatomic, retain) NSNumber *motionRecordsCount;
+@property (nonatomic, retain) NSNumber *heartrateRecordsCount;
+@property (nonatomic, retain) NSNumber *locationRecordsCount;
 @property (nonatomic, retain) NSDate *timestamp;
 @property (nonatomic, retain) User *user;
 
 @property (nonatomic, retain) NSMutableArray *motionRecords;
-@property (nonatomic, retain) NSMutableArray *heatrateRecords;
+@property (nonatomic, retain) NSMutableArray *heartrateRecords;
 @property (nonatomic, retain) NSMutableArray *locationRecords;
 
 - (void)initialize;

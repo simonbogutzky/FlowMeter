@@ -328,19 +328,19 @@
     for (Session *session in objects) {
         
         NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        if ([session.motionRecords count] != 0) {
+        if ([session.motionRecordsCount intValue] != 0) {
             NSString *filename = [NSString stringWithFormat:@"%@-m.csv.zip", [session valueForKey:@"filename"]];
             NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
             [self uploadFile:filename localPath:localPath];
         }
         
-        if ([session.heatrateRecords count] != 0) {
+        if ([session.heartrateRecordsCount intValue] != 0) {
             NSString *filename = [NSString stringWithFormat:@"%@-hr.csv.zip", [session valueForKey:@"filename"]];
             NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
             [self uploadFile:filename localPath:localPath];
         }
         
-        if ([session.locationRecords count] != 0) {
+        if ([session.locationRecordsCount intValue] != 0) {
             NSString *filename = [NSString stringWithFormat:@"%@-l.csv.zip", [session valueForKey:@"filename"]];
             NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
             [self uploadFile:filename localPath:localPath];
@@ -407,7 +407,9 @@
     NSString *localPath = [userInfo objectForKey:@"localPath"];
     NSString *filename = [userInfo objectForKey:@"filename"];
     
-    [self uploadFile:filename localPath:localPath];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self uploadFile:filename localPath:localPath];
+    });
 }
 
 #pragma mark -
@@ -418,7 +420,6 @@
     if (_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
         NSString *destDir = @"/";
         [[self sharedDbRestClient] uploadFile:filename toPath:destDir withParentRev:nil fromPath:localPath];
-        NSLog(@"# %@ %@", localPath, filename);
     }
 }
 
