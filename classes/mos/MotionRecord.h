@@ -37,6 +37,6 @@
 @property (nonatomic, assign) double attitudeRoll;
 @property (nonatomic, retain) NSString *event;
 
-- (id)initWithTimestamp:(double)timestamp deviceMotion:(CMDeviceMotion *)deviceMotion;
+- (id)initWithTimestamp:(double)timestamp DeviceMotion:(CMDeviceMotion *)deviceMotion;
 
 @end

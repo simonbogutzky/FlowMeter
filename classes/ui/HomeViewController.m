@@ -82,7 +82,7 @@
                 
                 // Create motion record
                 double timestamp = [[NSDate date] timeIntervalSince1970] - startTimestamp;
-                MotionRecord *motionRecord = [[MotionRecord alloc] initWithTimestamp:timestamp deviceMotion:deviceMotion];
+                MotionRecord *motionRecord = [[MotionRecord alloc] initWithTimestamp:timestamp DeviceMotion:deviceMotion];
  
                 // Add motion record
                 [_session addDeviceRecord:motionRecord];
@@ -232,14 +232,10 @@
             if(_isCollection) {
                 
                 // Create hr record
-                HeartrateRecord *heartrateRecord =[NSEntityDescription insertNewObjectForEntityForName:@"HeartrateRecord" inManagedObjectContext:_appDelegate.managedObjectContext];
-                heartrateRecord.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] - startTimestamp];
-                heartrateRecord.accumBeatCount = [NSNumber numberWithDouble:hrData.accumBeatCount];
-                heartrateRecord.heartrate = [hrData formattedHeartrate:NO];
-                heartrateRecord.rrIntervals = [[(WFBTLEHeartrateData*)hrData rrIntervals] componentsJoinedByString:@" "];
+                HeartrateRecord *heartrateRecord = [[HeartrateRecord alloc] initWithTimestamp:[[NSDate date] timeIntervalSince1970] - startTimestamp HeartrateData:hrData];
                 
                 // Add hr record
-                [_session addHeatrateRecordsObject:heartrateRecord];
+                [_session addHeartrateRecord:heartrateRecord];
             }
             _lastAccumBeatCount = hrData.accumBeatCount;
         }

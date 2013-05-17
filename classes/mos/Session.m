@@ -38,11 +38,11 @@
 @dynamic filename;
 @dynamic isSynced;
 @dynamic timestamp;
-@dynamic heatrateRecords;
 @dynamic locationRecords;
 @dynamic user;
 
 @synthesize motionRecords = _motionRecords;
+@synthesize heatrateRecords = _heatrateRecords;
 
 - (void)initialize
 {
@@ -71,6 +71,7 @@
     _phase = 0;
     
     _motionRecords = [NSMutableArray arrayWithCapacity:720000];
+    _heatrateRecords = [NSMutableArray arrayWithCapacity:720000];
 }
 
 - (bool)isPeakInValues:(NSArray *)values withSlopes:(NSMutableArray*)slopes value:(double)value quantile:(double)quantile
@@ -203,119 +204,10 @@
     [_motionRecords addObject:deviceRecord];
 }
 
-//- (void)addMotionRecordsObject:(MotionRecord *)value
-//{    
-//    value.event = @"";
-//    
-//    double rotationRateX = [value.rotationRateX doubleValue];
-//    
-//    // Apply filter
-//    double rotationRateXFiltered1 = [self filterX3000mHz:rotationRateX];
-//    double rotationRateXFiltered2 = [self filterX1500mHz:rotationRateX];
-//    
-//    // Wait fo five hundred values
-//    // TODO: Hardcoded value
-//    if ([_rotationRateXValues count] > 499) {
-//        if (_phase == 0) {
-//            NSLog(@"# Initialization");
-//            
-//            // Send notification
-//            NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[@"IF"] forKeys:@[@"event"]];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
-//        }
-//        _phase = 1;
-//    }
-//    
-//    if (_phase != 0) {
-//        if ([_rotationRateXValues count] > 499) {
-//            if (_phase == 1) {
-//                NSLog(@"# Calibration");
-//                
-//                // Send notification
-//                NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[@"CF"] forKeys:@[@"event"]];
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
-//            }
-//            _phase = 2;
-//            
-//            // Calculate quantiles
-//            // TODO: Hardcoded value
-//            _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.06];
-//            _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.09];
-//            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.12];
-//            
-//            // Remove the first hundred values
-//            [_rotationRateXValues removeObjectsInRange:NSMakeRange(0, 100)];
-//            [_rotationRateXFiltered1Values removeObjectsInRange:NSMakeRange(0, 100)];
-//            [_rotationRateXFiltered2Values removeObjectsInRange:NSMakeRange(0, 100)];
-//        }
-//        _phase = 1;
-//        
-//        if ([self isPeakInValues:_rotationRateXValues withSlopes:_rotationRateXSlopes value:rotationRateX quantile:_rotationRateXQuantile]) {
-//            _rotationRateXIndicator = YES;
-//            _rotationRateXFiltered1Indicator = NO;
-//            _rotationRateXFiltered2Indicator = NO;
-////            NSLog(@"Indicator 1");
-//        }
-//        
-//        if ([self isPeakInValues:_rotationRateXFiltered1Values withSlopes:_rotationRateXFiltered1Slopes value:rotationRateXFiltered1 quantile:_rotationRateXFiltered1Quantile] && _rotationRateXIndicator) {
-//            _rotationRateXIndicator = NO;
-//            _rotationRateXFiltered1Indicator = YES;
-//            _rotationRateXFiltered2Indicator = NO;
-////            NSLog(@"Indicator 2");
-//        }
-//        
-//        if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:_rotationRateXFiltered2Quantile] &&_rotationRateXFiltered1Indicator) {
-//            _rotationRateXIndicator = NO;
-//            _rotationRateXFiltered1Indicator = NO;
-//            _rotationRateXFiltered2Indicator = YES;
-////            NSLog(@"Indicator 3");
-//        }
-//        
-//        if (_rotationRateXFiltered2Indicator) {
-//            value.event = @"TO";
-//            
-//            // Send notification
-//            NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[value.event] forKeys:@[@"event"]];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
-//            
-//            _rotationRateXIndicator = NO;
-//            _rotationRateXFiltered1Indicator = NO;
-//            _rotationRateXFiltered2Indicator = NO;
-//        }
-//    }
-//    
-//    [_rotationRateXValues addObject:[NSNumber numberWithDouble:rotationRateX]];
-//    [_rotationRateXFiltered1Values addObject:[NSNumber numberWithDouble:rotationRateXFiltered1]];
-//    [_rotationRateXFiltered2Values addObject:[NSNumber numberWithDouble:rotationRateXFiltered2]];
-//    
-//    // Save filtered values
-//    value.rotationRateXFiltered1 = [NSNumber numberWithDouble:rotationRateXFiltered1];
-//    value.rotationRateXFiltered2 = [NSNumber numberWithDouble:rotationRateXFiltered2];
-//    
-//    // Save quantile
-//    value.rotationRateXQuantile = [NSNumber numberWithDouble:_rotationRateXQuantile];
-//    value.rotationRateXFiltered1Quantile = [NSNumber numberWithDouble:_rotationRateXFiltered1Quantile];
-//    value.rotationRateXFiltered2Quantile = [NSNumber numberWithDouble:_rotationRateXFiltered2Quantile];
-//    
-//    // Save slopes
-//    value.rotationRateXSlope = [_rotationRateXSlopes lastObject];
-//    value.rotationRateXFiltered1Slope = [_rotationRateXFiltered1Slopes lastObject];
-//    value.rotationRateXFiltered2Slope = [_rotationRateXFiltered2Slopes lastObject];
-//    
-//    // Save indicators
-//    value.rotationRateXIndicator = [NSNumber numberWithBool:_rotationRateXIndicator];
-//    value.rotationRateXFiltered1Indicator = [NSNumber numberWithBool:_rotationRateXFiltered1Indicator];
-//    value.rotationRateXFiltered2Indicator = [NSNumber numberWithBool:_rotationRateXFiltered2Indicator];
-//    
-//    NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
-//    [self willChangeValueForKey:@"motionRecords"
-//                withSetMutation:NSKeyValueUnionSetMutation
-//                   usingObjects:changedObjects];
-//    [[self primitiveValueForKey:@"motionRecords"] addObject:value];
-//    [self didChangeValueForKey:@"motionRecords"
-//               withSetMutation:NSKeyValueUnionSetMutation
-//                  usingObjects:changedObjects];
-//}
+- (void)addHeartrateRecord:(HeartrateRecord *)heartrateRecord
+{
+    [_heatrateRecords addObject:heartrateRecord];
+}
 
 - (void)saveAndZipMotionRecords
 {
@@ -411,7 +303,7 @@
 
 - (void)saveAndZipHeartrateRecords
 {
-    if ([self.heatrateRecords count] != 0) {
+    if ([_heatrateRecords count] != 0) {
         
         // Create the path, where the data should be saved
         NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
@@ -428,16 +320,12 @@
          @"rrIntervals"
          ];
         
-        // Sort data
-        NSSortDescriptor *timestampDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
-        NSArray *heatrateRecords = [self.heatrateRecords sortedArrayUsingDescriptors:@[timestampDescriptor]];
-        
-        for (HeartrateRecord *heartrateRecord in heatrateRecords) {
+        for (HeartrateRecord *heartrateRecord in _heatrateRecords) {
             
             // Append to data string
-            [dataString appendFormat:@"%f,%f,%@,%@\n",
-             [heartrateRecord.timestamp doubleValue],
-             [heartrateRecord.accumBeatCount doubleValue],
+            [dataString appendFormat:@"%f,%i,%@,%@\n",
+             heartrateRecord.timestamp,
+             heartrateRecord.accumBeatCount,
              heartrateRecord.heartrate,
              heartrateRecord.rrIntervals != nil ? heartrateRecord.rrIntervals : @""
              ];

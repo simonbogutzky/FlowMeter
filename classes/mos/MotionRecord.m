@@ -10,7 +10,7 @@
 
 @implementation MotionRecord
 
-- (id)initWithTimestamp:(double)timestamp deviceMotion:(CMDeviceMotion *)deviceMotion
+- (id)initWithTimestamp:(double)timestamp DeviceMotion:(CMDeviceMotion *)deviceMotion
 {
     self = [super init];
     if (self) {

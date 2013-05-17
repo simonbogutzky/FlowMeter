@@ -7,15 +7,19 @@
 //
 
 #import "HeartrateRecord.h"
-#import "Session.h"
-
 
 @implementation HeartrateRecord
 
-@dynamic accumBeatCount;
-@dynamic heartrate;
-@dynamic timestamp;
-@dynamic rrIntervals;
-@dynamic session;
+- (id)initWithTimestamp:(double)timestamp HeartrateData:(WFHeartrateData *)hrData
+{
+    self = [super init];
+    if (self) {
+        self.timestamp = timestamp;
+        self.accumBeatCount = hrData.accumBeatCount;
+        self.heartrate = [hrData formattedHeartrate:NO];
+        self.rrIntervals = [[(WFBTLEHeartrateData*)hrData rrIntervals] componentsJoinedByString:@" "];
+    }
+    return self;
+}
 
 @end

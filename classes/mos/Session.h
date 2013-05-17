@@ -17,17 +17,12 @@
 @property (nonatomic, retain) NSNumber *isSynced;
 @property (nonatomic, retain) NSDate *timestamp;
 @property (nonatomic, retain) NSMutableArray *motionRecords;
-@property (nonatomic, retain) NSSet * heatrateRecords;
+@property (nonatomic, retain) NSMutableArray *heatrateRecords;
 @property (nonatomic, retain) NSSet * locationRecords;
 @property (nonatomic, retain) User *user;
 @end
 
 @interface Session (CoreDataGeneratedAccessors)
-
-- (void)addHeatrateRecordsObject:(HeartrateRecord *)value;
-- (void)removeHeatrateRecordsObject:(HeartrateRecord *)value;
-- (void)addHeatrateRecords:(NSSet *)values;
-- (void)removeHeatrateRecords:(NSSet *)values;
 
 - (void)addLocationRecordsObject:(LocationRecord *)value;
 - (void)removeLocationRecordsObject:(LocationRecord *)value;
@@ -37,6 +32,7 @@
 - (void)initialize;
 
 - (void)addDeviceRecord:(MotionRecord *)deviceRecord;
+- (void)addHeartrateRecord:(HeartrateRecord *)heartrateRecord;
 
 - (void)saveAndZipMotionRecords;
 - (void)saveAndZipHeartrateRecords;
