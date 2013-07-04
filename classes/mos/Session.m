@@ -272,7 +272,7 @@
              motionRecord.gravityX,
              motionRecord.gravityY,
              motionRecord.gravityZ,
-             motionRecord.rotationRateY,
+             motionRecord.rotationRateX,
              motionRecord.rotationRateXFiltered1,
              motionRecord.rotationRateXFiltered2,
              motionRecord.rotationRateXQuantile,
