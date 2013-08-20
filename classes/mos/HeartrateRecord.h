@@ -14,8 +14,8 @@
 @interface HeartrateRecord : NSObject
 
 @property (nonatomic, assign) int accumBeatCount;
-@property (nonatomic, retain) NSString *heartrate;
-@property (nonatomic, retain) NSString *rrIntervals;
+@property (nonatomic, strong) NSString *heartrate;
+@property (nonatomic, strong) NSString *rrIntervals;
 @property (nonatomic, assign) double timestamp;
 
 - (id)initWithTimestamp:(double)timestamp HeartrateData:(WFHeartrateData *)hrData;

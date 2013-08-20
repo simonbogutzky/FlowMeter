@@ -35,7 +35,7 @@
 @property (nonatomic, assign) double attitudePitch;
 @property (nonatomic, assign) double attitudeYaw;
 @property (nonatomic, assign) double attitudeRoll;
-@property (nonatomic, retain) NSString *event;
+@property (nonatomic, strong) NSString *event;
 
 - (id)initWithTimestamp:(double)timestamp DeviceMotion:(CMDeviceMotion *)deviceMotion;
 

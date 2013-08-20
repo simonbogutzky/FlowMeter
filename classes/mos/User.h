@@ -13,11 +13,11 @@
 
 @interface User : NSManagedObject
 
-@property (nonatomic, retain) NSString * firstName;
-@property (nonatomic, retain) NSNumber * isActive;
-@property (nonatomic, retain) NSString * lastName;
-@property (nonatomic, retain) NSString * username;
-@property (nonatomic, retain) NSSet *sessions;
+@property (nonatomic, strong) NSString * firstName;
+@property (nonatomic, strong) NSNumber * isActive;
+@property (nonatomic, strong) NSString * lastName;
+@property (nonatomic, strong) NSString * username;
+@property (nonatomic, strong) NSSet *sessions;
 @end
 
 @interface User (CoreDataGeneratedAccessors)
