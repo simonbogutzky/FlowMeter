@@ -285,10 +285,8 @@
 - (void)hardwareConnector:(WFHardwareConnector*)hwConnector didDiscoverDevices:(NSSet*)connectionParams searchCompleted:(BOOL)bCompleted
 {
     // Post the sensor type and device params to the notification.
-    NSDictionary* userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                              connectionParams, @"connectionParams",
-                              [NSNumber numberWithBool:bCompleted], @"searchCompleted",
-                              nil];
+    NSDictionary* userInfo = @{@"connectionParams": connectionParams,
+                              @"searchCompleted": @(bCompleted)};
     [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_DISCOVERED_SENSOR object:WF_NOTIFICATION_DISCOVERED_SENSOR userInfo:userInfo];
 }
 
@@ -399,13 +397,13 @@
     if (mutableFetchResults == nil || [mutableFetchResults count] == 0) {
         return nil;
     }
-    return [mutableFetchResults objectAtIndex:0];
+    return mutableFetchResults[0];
 }
 
 - (void)dataAvailable:(NSNotification *)notification {
     NSDictionary *userInfo = [notification userInfo];
-    NSString *localPath = [userInfo objectForKey:@"localPath"];
-    NSString *filename = [userInfo objectForKey:@"filename"];
+    NSString *localPath = userInfo[@"localPath"];
+    NSString *filename = userInfo[@"filename"];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self uploadFile:filename localPath:localPath];
@@ -480,7 +478,7 @@
     if ([fetchedObjects count] == 0) {
         user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:_managedObjectContext];
     } else {
-        user = [fetchedObjects objectAtIndex:0];
+        user = fetchedObjects[0];
     }
     
     return user;

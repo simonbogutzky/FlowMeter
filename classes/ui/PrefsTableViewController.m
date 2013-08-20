@@ -138,7 +138,7 @@
     }
     
     if (_tcpConnectionStatusSwitch.on) {
-        [_appDelegate.sharedTCPConnectionManager openStreamsWithHost:_tcpHostTextfield.text port:[NSNumber numberWithInt:[_tcpPortTextfield.text intValue]]];
+        [_appDelegate.sharedTCPConnectionManager openStreamsWithHost:_tcpHostTextfield.text port:@([_tcpPortTextfield.text intValue])];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setValue:_tcpHostTextfield.text forKey:@"tcpHost"];
         [defaults setValue:_tcpPortTextfield.text forKey:@"tcpPort"];
@@ -159,7 +159,7 @@
         
         // Check for an existing connection to this sensor type
         NSArray *connections = [hardwareConnector getSensorConnections:_wfSensorType];
-        WFSensorConnection *sensorConnection = ([connections count] > 0) ? (WFSensorConnection *) [connections objectAtIndex:0] : nil;
+        WFSensorConnection *sensorConnection = ([connections count] > 0) ? (WFSensorConnection *) connections[0] : nil;
         
         // If a connection exists, cache it and set the delegate to this instance (this will allow receiving connection state changes)
         _appDelegate.wfSensorConnection = sensorConnection;

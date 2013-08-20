@@ -87,7 +87,7 @@
     
     // Calculate
     double slope = value - previousValue;
-    [slopes addObject:[NSNumber numberWithDouble:slope]];
+    [slopes addObject:@(slope)];
     
     // Look for sign changes
     if (slope * previousSlope < 0 && quantile > previousValue) {
@@ -116,7 +116,7 @@
             NSLog(@"# Initialization");
             
             // Send notification
-            NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[@"IF"] forKeys:@[@"event"]];
+            NSDictionary *userInfo = @{@"event": @"IF"};
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
         }
         _phase = 1;
@@ -128,7 +128,7 @@
                 NSLog(@"# Calibration");
                 
                 // Send notification
-                NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[@"CF"] forKeys:@[@"event"]];
+                NSDictionary *userInfo = @{@"event": @"CF"};
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
             }
             _phase = 2;
@@ -171,7 +171,7 @@
             event = @"TO";
             
             // Send notification
-            NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[event] forKeys:@[@"event"]];
+            NSDictionary *userInfo = @{@"event": event};
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
             
             _rotationRateXIndicator = NO;
@@ -180,9 +180,9 @@
         }
     }
     
-    [_rotationRateXValues addObject:[NSNumber numberWithDouble:rotationRateX]];
-    [_rotationRateXFiltered1Values addObject:[NSNumber numberWithDouble:rotationRateXFiltered1]];
-    [_rotationRateXFiltered2Values addObject:[NSNumber numberWithDouble:rotationRateXFiltered2]];
+    [_rotationRateXValues addObject:@(rotationRateX)];
+    [_rotationRateXFiltered1Values addObject:@(rotationRateXFiltered1)];
+    [_rotationRateXFiltered2Values addObject:@(rotationRateXFiltered2)];
     
     deviceRecord.event = event;
     
@@ -307,7 +307,7 @@
                          error:nil];
         
         // Send notification
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[localPath, filename] forKeys:@[@"localPath", @"filename"]];
+        NSDictionary *userInfo = @{@"localPath": localPath, @"filename": filename};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:nil userInfo:userInfo];
     }
 }
@@ -358,7 +358,7 @@
                          error:nil];
         
         // Send notification
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[localPath, filename] forKeys:@[@"localPath", @"filename"]];
+        NSDictionary *userInfo = @{@"localPath": localPath, @"filename": filename};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"HeartrateDataAvailable" object:nil userInfo:userInfo];
     }
 }
@@ -416,7 +416,7 @@
                          error:nil];
         
         // Send notification
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:@[localPath, filename] forKeys:@[@"localPath", @"filename"]];
+        NSDictionary *userInfo = @{@"localPath": localPath, @"filename": filename};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:nil userInfo:userInfo];
         
         // Save *.kml
@@ -456,7 +456,7 @@
                          error:nil];
         
         // Send notification
-        userInfo = [NSDictionary dictionaryWithObjects:@[localPath, filename] forKeys:@[@"localPath", @"filename"]];
+        userInfo = @{@"localPath": localPath, @"filename": filename};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:nil userInfo:userInfo];
     }
 }
