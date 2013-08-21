@@ -16,17 +16,17 @@
     
     // Sort array
     NSSortDescriptor *lowestToHighest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-    [x1 sortUsingDescriptors:[NSArray arrayWithObject:lowestToHighest]];
+    [x1 sortUsingDescriptors:@[lowestToHighest]];
     
     // Formula (see "http://de.wikipedia.org/wiki/Quantil")
     double np = [x1 count] * prob;
     if ([self isInteger:np]) {
         int i1 = np - 1;
         int i2 = np;
-        return 0.5 * ([[x1 objectAtIndex:i1] doubleValue] + [[x1 objectAtIndex:i2] doubleValue]);
+        return 0.5 * ([x1[i1] doubleValue] + [x1[i2] doubleValue]);
     }
     int i = ceil(np) - 1;
-    return [[x1 objectAtIndex:i] doubleValue];
+    return [x1[i] doubleValue];
 }
 
 + (bool)isInteger:(double)k

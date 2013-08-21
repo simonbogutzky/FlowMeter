@@ -63,7 +63,7 @@
     static NSString *CellIdentifier = @"menuItemCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = [_menuItemLabels objectAtIndex:indexPath.row];
+    cell.textLabel.text = _menuItemLabels[indexPath.row];
     
     return cell;
 }
@@ -112,7 +112,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *identifier = [_menuItems objectAtIndex:indexPath.row];
+    NSString *identifier = _menuItems[indexPath.row];
     
     UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
     

@@ -13,17 +13,17 @@
 
 @interface Session : NSManagedObject
 
-@property (nonatomic, retain) NSString *filename;
-@property (nonatomic, retain) NSNumber *isSynced;
-@property (nonatomic, retain) NSNumber *motionRecordsCount;
-@property (nonatomic, retain) NSNumber *heartrateRecordsCount;
-@property (nonatomic, retain) NSNumber *locationRecordsCount;
-@property (nonatomic, retain) NSDate *timestamp;
-@property (nonatomic, retain) User *user;
+@property (nonatomic, strong) NSString *filename;
+@property (nonatomic, strong) NSNumber *isSynced;
+@property (nonatomic, strong) NSNumber *motionRecordsCount;
+@property (nonatomic, strong) NSNumber *heartrateRecordsCount;
+@property (nonatomic, strong) NSNumber *locationRecordsCount;
+@property (nonatomic, strong) NSDate *timestamp;
+@property (nonatomic, strong) User *user;
 
-@property (nonatomic, retain) NSMutableArray *motionRecords;
-@property (nonatomic, retain) NSMutableArray *heartrateRecords;
-@property (nonatomic, retain) NSMutableArray *locationRecords;
+@property (nonatomic, strong) NSMutableArray *motionRecords;
+@property (nonatomic, strong) NSMutableArray *heartrateRecords;
+@property (nonatomic, strong) NSMutableArray *locationRecords;
 
 - (void)initialize;
 
