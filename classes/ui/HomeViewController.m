@@ -131,6 +131,8 @@
     
     if (!_isCollection) {
         
+        [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt/%@;", @"counter-starts"]];
+        
         _countdown = 5;
         _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
         _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initializeCollection) userInfo:nil repeats:YES];
@@ -141,6 +143,8 @@
     } else {
         [startStopCollectionButton setTitle:@"start" forState:0];
         [self stopUpdates];
+        
+        [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt/%@;", @"collecting-ends"]];
         
         _isCollection = !_isCollection;
         self.sliding = !_isCollection;
@@ -175,6 +179,9 @@
     _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
     
     if (_countdown == 0) {
+        
+        [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt/%@;", @"collecting-starts"]];
+        
         [_countdownTimer invalidate];
         _counterView.hidden = YES;
         
@@ -243,12 +250,13 @@
 - (void)gaitEventDetected:(NSNotification *)notification
 {
     NSDictionary *userInfo = notification.userInfo;
-    if ([[userInfo valueForKey:@"event"] isEqualToString:@"HS"]) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if ([defaults boolForKey:@"motionSoundStatus"]) {
-            [[AudioController sharedAudioController] playE];
-        }
-    }
+// unused
+//    if ([[userInfo valueForKey:@"event"] isEqualToString:@"HS"]) {
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        if ([defaults boolForKey:@"motionSoundStatus"]) {
+//            [[AudioController sharedAudioController] playE];
+//        }
+//    }
     
     if ([[userInfo valueForKey:@"event"] isEqualToString:@"TO"]) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -257,18 +265,17 @@
         }
     }
     
-    if ([[userInfo valueForKey:@"event"] isEqualToString:@"IF"]) {
-//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//        if ([defaults boolForKey:@"motionSoundStatus"]) {
+    if ([[userInfo valueForKey:@"event"] isEqualToString:@"initialization-values-collected"]) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if ([defaults boolForKey:@"motionSoundStatus"]) {
             [[AudioController sharedAudioController] playNote:90];
-//        }
+        }
     }
     
-    if ([[userInfo valueForKey:@"event"] isEqualToString:@"CF"]) {
+    if (![[userInfo valueForKey:@"event"] isEqualToString:@"new-calibration-starts"]) {
+        [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt/%@;", [[userInfo valueForKey:@"event"] lowercaseString]]];
+    }
 
-    }
-    
-    [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt/%@;", [[userInfo valueForKey:@"event"] lowercaseString]]];
 }
 
 @end

@@ -99,6 +99,8 @@
 - (IBAction)playE:(id)sender
 {
     [[AudioController sharedAudioController] playE];
+    
+    [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt/%@;", @"test-audio"]];
 }
 
 - (IBAction)changeHrSoundStatus:(id)sender

@@ -93,9 +93,9 @@
     if (slope * previousSlope < 0 && quantile > previousValue) {
         
         // TODO: Hardcoded value
-//        if (value > -3.0 && value < -1.0) {
+        if (value < -0.5) {
             return YES;
-//        }
+        }
     }
     return NO;
 }
@@ -113,10 +113,10 @@
     // TODO: Hardcoded value
     if ([_rotationRateXValues count] > 499) {
         if (_phase == 0) {
-            NSLog(@"# Initialization");
+            NSLog(@"# Initialization values collected");
             
             // Send notification
-            NSDictionary *userInfo = @{@"event": @"IF"};
+            NSDictionary *userInfo = @{@"event": @"initialization-values-collected"};
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
         }
         _phase = 1;
@@ -125,10 +125,10 @@
     if (_phase != 0) {
         if ([_rotationRateXValues count] > 499) {
             if (_phase == 1) {
-                NSLog(@"# Calibration");
+                NSLog(@"# New calibration start");
                 
                 // Send notification
-                NSDictionary *userInfo = @{@"event": @"CF"};
+                NSDictionary *userInfo = @{@"event": @"new-calibration-starts"};
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
             }
             _phase = 2;
