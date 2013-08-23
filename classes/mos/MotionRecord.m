@@ -14,8 +14,8 @@
 {
     self = [super init];
     if (self) {
-        self.timestamp = timestamp;
-        self.sensorTime = deviceMotion.timestamp;
+        self.timestamp = timestamp * 1000;
+        self.sensorTime = deviceMotion.timestamp * 1000;
         self.userAccelerationX = deviceMotion.userAcceleration.x;
         self.userAccelerationY = deviceMotion.userAcceleration.y;
         self.userAccelerationZ = deviceMotion.userAcceleration.z;
