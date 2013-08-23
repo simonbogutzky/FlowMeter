@@ -11,6 +11,7 @@
 
 @interface MotionRecord : NSObject
 
+@property (nonatomic, assign) double sensorTime;
 @property (nonatomic, assign) double timestamp;
 @property (nonatomic, assign) double userAccelerationX;
 @property (nonatomic, assign) double userAccelerationY;

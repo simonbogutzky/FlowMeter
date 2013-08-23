@@ -226,69 +226,36 @@
         
         // Create the path, where the data should be saved
         NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *filename = [NSString stringWithFormat:@"%@-m.csv.zip", self.filename];
+        NSString *filename = [NSString stringWithFormat:@"%@-motion-data.csv.zip", self.filename];
         NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
         
         // Create data string
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
-        [dataString appendFormat:@"Name: %@ %@\n", self.user.firstName, self.user.lastName];
         
-        [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
-         @"timestamp",
-         @"userAccelerationX",
-         @"userAccelerationY",
-         @"userAccelerationZ",
-         @"gravityX",
-         @"gravityY",
-         @"gravityZ",
-         @"rotationRateX",
-         @"rotationRateXFiltered1",
-         @"rotationRateXFiltered2",
-         @"rotationRateXQuantile",
-         @"rotationRateXFiltered1Quantile",
-         @"rotationRateXFiltered2Quantile",
-         @"rotationRateXSlope",
-         @"rotationRateXFiltered1Slope",
-         @"rotationRateXFiltered2Slope",
-         @"rotationRateXIndicator",
-         @"rotationRateXFiltered1Indicator",
-         @"rotationRateXFiltered2Indicator",
-         @"rotationRateY",
-         @"rotationRateZ",
-         @"attitudePitch",
-         @"attitudeRoll",
-         @"attitudeYaw",
-         @"event"
+        [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
+         @"SensorTime",
+         @"AccelX",
+         @"AccelY",
+         @"AccelZ",
+         @"GyroX",
+         @"GyroY",
+         @"GyroZ",
+         @"SystemTime",
+         @"GaitEvent"
          ];
         
         for (MotionRecord *motionRecord in _motionRecords) {
             
             // Append to data string
-            [dataString appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%d,%d,%d,%f,%f,%f,%f,%f,%@\n",
+            [dataString appendFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%@\n",
+             motionRecord.sensorTime,
+             motionRecord.userAccelerationX + motionRecord.gravityX,
+             motionRecord.userAccelerationY + motionRecord.gravityY,
+             motionRecord.userAccelerationZ + motionRecord.gravityZ,
+             motionRecord.rotationRateX * 180 / M_PI,
+             motionRecord.rotationRateY * 180 / M_PI,
+             motionRecord.rotationRateZ * 180 / M_PI,
              motionRecord.timestamp,
-             motionRecord.userAccelerationX,
-             motionRecord.userAccelerationY,
-             motionRecord.userAccelerationZ,
-             motionRecord.gravityX,
-             motionRecord.gravityY,
-             motionRecord.gravityZ,
-             motionRecord.rotationRateX,
-             motionRecord.rotationRateXFiltered1,
-             motionRecord.rotationRateXFiltered2,
-             motionRecord.rotationRateXQuantile,
-             motionRecord.rotationRateXFiltered1Quantile,
-             motionRecord.rotationRateXFiltered2Quantile,
-             motionRecord.rotationRateXSlope,
-             motionRecord.rotationRateXFiltered1Slope,
-             motionRecord.rotationRateXFiltered2Slope,
-             motionRecord.rotationRateXIndicator,
-             motionRecord.rotationRateXFiltered1Indicator,
-             motionRecord.rotationRateXFiltered2Indicator,
-             motionRecord.rotationRateY,
-             motionRecord.rotationRateZ,
-             motionRecord.attitudePitch,
-             motionRecord.attitudeRoll,
-             motionRecord.attitudeYaw,
              motionRecord.event
              ];
         }
@@ -297,7 +264,7 @@
         ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL:[NSURL fileURLWithPath:localPath]];
         [archive updateEntries:
          @[
-         [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-m.csv", self.filename]
+         [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-motion-data.csv", self.filename]
                                          compress:YES
                                         dataBlock:^(NSError** error)
           {

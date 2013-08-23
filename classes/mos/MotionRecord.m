@@ -15,6 +15,7 @@
     self = [super init];
     if (self) {
         self.timestamp = timestamp;
+        self.sensorTime = deviceMotion.timestamp;
         self.userAccelerationX = deviceMotion.userAcceleration.x;
         self.userAccelerationY = deviceMotion.userAcceleration.y;
         self.userAccelerationZ = deviceMotion.userAcceleration.z;
@@ -27,6 +28,7 @@
         self.attitudePitch = deviceMotion.attitude.pitch;
         self.attitudeRoll = deviceMotion.attitude.roll;
         self.attitudeYaw = deviceMotion.attitude.yaw;
+        
     }
     return self;
 }

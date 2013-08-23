@@ -36,7 +36,7 @@
     int _countdown;
     NSTimer *_countdownTimer;
     
-    double startTimestamp;
+//    double startTimestamp;
 }
 
 @end
@@ -69,7 +69,7 @@
 
 - (void)startUpdates
 {
-    startTimestamp = [[NSDate date] timeIntervalSince1970];
+//    startTimestamp = [[NSDate date] timeIntervalSince1970];
     
     // Start motion updates
     NSTimeInterval updateInterval = 0.01; // 100hz
@@ -81,7 +81,7 @@
             if(_isCollection) {
                 
                 // Create motion record
-                double timestamp = [[NSDate date] timeIntervalSince1970] - startTimestamp;
+                double timestamp = [[NSDate date] timeIntervalSince1970]; // - startTimestamp;
                 MotionRecord *motionRecord = [[MotionRecord alloc] initWithTimestamp:timestamp DeviceMotion:deviceMotion];
  
                 // Add motion record
@@ -204,7 +204,7 @@
         for (CLLocation *location in locations) {
         
             // Create location record
-            LocationRecord *locationRecord = [[LocationRecord alloc] initWithTimestamp:[[NSDate date] timeIntervalSince1970] - startTimestamp Location:location];
+            LocationRecord *locationRecord = [[LocationRecord alloc] initWithTimestamp:[[NSDate date] timeIntervalSince1970]  Location:location]; // - startTimestamp
             
             // Add location record
             [_session addLocationRecord:locationRecord];
@@ -234,7 +234,7 @@
             if(_isCollection) {
                 
                 // Create hr record
-                HeartrateRecord *heartrateRecord = [[HeartrateRecord alloc] initWithTimestamp:[[NSDate date] timeIntervalSince1970] - startTimestamp HeartrateData:hrData];
+                HeartrateRecord *heartrateRecord = [[HeartrateRecord alloc] initWithTimestamp:[[NSDate date] timeIntervalSince1970]  HeartrateData:hrData]; // - startTimestamp
                 
                 // Add hr record
                 [_session addHeartrateRecord:heartrateRecord];
