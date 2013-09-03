@@ -16,12 +16,12 @@
     if (self) {
         self.timestamp = timestamp * 1000;
         self.sensorTime = deviceMotion.timestamp * 1000;
-        self.userAccelerationX = deviceMotion.userAcceleration.x;
-        self.userAccelerationY = deviceMotion.userAcceleration.y;
-        self.userAccelerationZ = deviceMotion.userAcceleration.z;
-        self.gravityX = deviceMotion.gravity.x;
-        self.gravityY = deviceMotion.gravity.y;
-        self.gravityZ = deviceMotion.gravity.z;
+        self.userAccelerationX = deviceMotion.userAcceleration.x * -9.81;
+        self.userAccelerationY = deviceMotion.userAcceleration.y * -9.81;
+        self.userAccelerationZ = deviceMotion.userAcceleration.z * -9.81;
+        self.gravityX = deviceMotion.gravity.x * -9.81;
+        self.gravityY = deviceMotion.gravity.y * -9.81;
+        self.gravityZ = deviceMotion.gravity.z * -9.81;
         self.rotationRateX = deviceMotion.rotationRate.x;
         self.rotationRateY = deviceMotion.rotationRate.y;
         self.rotationRateZ = deviceMotion.rotationRate.z;
