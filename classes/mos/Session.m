@@ -105,6 +105,53 @@
     NSString *event = @"";
     double rotationRateX = deviceRecord.rotationRateX;
     
+    double rotationRateXFiltered2 = [self filterX1500mHz:rotationRateX];
+    
+    // Wait fo five hundred values
+    // TODO: Hardcoded value
+    if ([_rotationRateXValues count] > 499) {
+        if (_phase == 0) {
+            NSLog(@"# Initialization values collected");
+            
+            // Send notification
+            NSDictionary *userInfo = @{@"event": @"initialization-values-collected"};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
+        }
+        _phase = 1;
+    }
+    
+    if (_phase != 0) {
+    
+        if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:0.3]) {
+            
+            event = @"TO";
+            
+            // Send notification
+            NSDictionary *userInfo = @{@"event": event};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
+        }
+    }
+    
+    [_rotationRateXValues addObject:@(rotationRateX)];
+    [_rotationRateXFiltered2Values addObject:@(rotationRateXFiltered2)];
+    
+    deviceRecord.event = event;
+    
+    // Save filtered values
+    deviceRecord.rotationRateXFiltered2 = rotationRateXFiltered2;
+    
+    deviceRecord.rotationRateXFiltered2Slope = [[_rotationRateXFiltered2Slopes lastObject] doubleValue];
+    
+    deviceRecord.rotationRateXFiltered2Indicator = _rotationRateXFiltered2Indicator;
+    
+    [_motionRecords addObject:deviceRecord];
+}
+
+- (void)addDeviceRecord2:(MotionRecord *)deviceRecord
+{
+    NSString *event = @"";
+    double rotationRateX = deviceRecord.rotationRateX;
+    
     // Apply filter
     double rotationRateXFiltered1 = [self filterX3000mHz:rotationRateX];
     double rotationRateXFiltered2 = [self filterX1500mHz:rotationRateX];
@@ -207,6 +254,7 @@
     
     [_motionRecords addObject:deviceRecord];
 }
+
 
 - (void)addHeartrateRecord:(HeartrateRecord *)heartrateRecord
 {
