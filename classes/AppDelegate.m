@@ -10,6 +10,7 @@
 #import "Utility.h"
 #import "AudioController.h"
 #import "Session.h"
+#import "User.h"
 
 
 @interface AppDelegate ()
@@ -416,7 +417,10 @@
 - (void)uploadFile:(NSString *)filename localPath:(NSString *)localPath
 {
     if (_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
-        NSString *destDir = @"/";
+        NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
+        User *user = [self activeUserWithPredicate:isActivePredicate];
+        
+        NSString *destDir = [NSString stringWithFormat:@"/%@", user.firstName];
         [[self sharedDbRestClient] uploadFile:filename toPath:destDir withParentRev:nil fromPath:localPath];
     }
 }
