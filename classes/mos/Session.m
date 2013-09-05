@@ -121,8 +121,8 @@
 //    }
 
     if (_phase != 0) {
-    
-        if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:0.3]) {
+        double accelZ = (deviceRecord.gravityZ + deviceRecord.userAccelerationZ) * -9.81;
+        if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:0.3] && accelZ < 3) {
             
             event = @"TO";
             
