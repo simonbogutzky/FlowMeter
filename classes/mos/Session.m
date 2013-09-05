@@ -109,17 +109,17 @@
     
     // Wait fo five hundred values
     // TODO: Hardcoded value
-    if ([_rotationRateXValues count] > 499) {
-        if (_phase == 0) {
-            NSLog(@"# Initialization values collected");
-            
-            // Send notification
-            NSDictionary *userInfo = @{@"event": @"initialization-values-collected"};
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
-        }
+//    if ([_rotationRateXValues count] > 499) {
+//        if (_phase == 0) {
+//            NSLog(@"# Initialization values collected");
+//            
+//            // Send notification
+//            NSDictionary *userInfo = @{@"event": @"initialization-values-collected"};
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
+//        }
         _phase = 1;
-    }
-    
+//    }
+
     if (_phase != 0) {
     
         if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:0.3]) {
