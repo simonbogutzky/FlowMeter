@@ -182,6 +182,9 @@
         
         [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt/%@;", @"collecting-starts"]];
         
+        NSDictionary *userInfo = @{@"event": @"collecting-starts"};
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
+        
         [_countdownTimer invalidate];
         _counterView.hidden = YES;
         
@@ -265,7 +268,7 @@
         }
     }
     
-    if ([[userInfo valueForKey:@"event"] isEqualToString:@"initialization-values-collected"]) {
+    if ([[userInfo valueForKey:@"event"] isEqualToString:@"collecting-starts"]) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if ([defaults boolForKey:@"motionSoundStatus"]) {
             [[AudioController sharedAudioController] playNote:90];
