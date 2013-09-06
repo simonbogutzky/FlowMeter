@@ -110,7 +110,7 @@
     double rotationRateXFiltered2 = [self filterX1500mHz:rotationRateX];
     double accelZ = deviceRecord.gravityZ + deviceRecord.userAccelerationZ;
     
-    if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 lowerBound:-45] && accelZ < 3) {
+    if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 lowerBound:-22.5] && accelZ < 3) {
         event = @"TO";
             
         // Send notification
