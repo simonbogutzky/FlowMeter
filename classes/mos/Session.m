@@ -78,22 +78,25 @@
     _locationRecords = [NSMutableArray arrayWithCapacity:180000];
 }
 
-- (bool)isPeakInValues:(NSArray *)values withSlopes:(NSMutableArray*)slopes value:(double)value quantile:(double)quantile
+- (bool)isPeakInValues:(NSArray *)values withSlopes:(NSMutableArray*)slopes value:(double)value lowerBound:(double)lowerBound
 {
-    
-    // Previous values
+    if ([values count] == 0) {
+        return NO;
+    }
     double previousValue = [[values lastObject] doubleValue];
-    double previousSlope = [[slopes lastObject] doubleValue];
+   
+    double previousSlope = 0;
+    if ([slopes count] != 0) {
+        previousSlope = [[slopes lastObject] doubleValue];
+    }
     
     // Calculate
     double slope = value - previousValue;
-    [slopes addObject:@(slope)];
     
     // Look for sign changes
-    if (slope * previousSlope < 0 && quantile > previousValue) {
-        
-        // TODO: Hardcoded value
-        if (value < -0.5) {
+    if (slope != 0) {
+        [slopes addObject:@(slope)];
+        if (slope * previousSlope < 0 && lowerBound > previousValue) {
             return YES;
         }
     }
@@ -104,44 +107,24 @@
 {
     NSString *event = @"";
     double rotationRateX = deviceRecord.rotationRateX;
-    
     double rotationRateXFiltered2 = [self filterX1500mHz:rotationRateX];
+    double accelZ = (deviceRecord.gravityZ + deviceRecord.userAccelerationZ) * -9.81;
     
-    // Wait fo five hundred values
-    // TODO: Hardcoded value
-//    if ([_rotationRateXValues count] > 499) {
-//        if (_phase == 0) {
-//            NSLog(@"# Initialization values collected");
-//            
-//            // Send notification
-//            NSDictionary *userInfo = @{@"event": @"initialization-values-collected"};
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
-//        }
-        _phase = 1;
-//    }
-
-    if (_phase != 0) {
-        double accelZ = (deviceRecord.gravityZ + deviceRecord.userAccelerationZ) * -9.81;
-        if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:0.3] && accelZ < 3) {
+    if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 lowerBound:-0.3] && accelZ < 3) {
+        event = @"TO";
             
-            event = @"TO";
-            
-            // Send notification
-            NSDictionary *userInfo = @{@"event": event};
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
-        }
+        // Send notification
+        NSDictionary *userInfo = @{@"event": event};
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
     }
     
-    [_rotationRateXValues addObject:@(rotationRateX)];
     [_rotationRateXFiltered2Values addObject:@(rotationRateXFiltered2)];
     
     deviceRecord.event = event;
     
     // Save filtered values
     deviceRecord.rotationRateXFiltered2 = rotationRateXFiltered2;
-    
     deviceRecord.rotationRateXFiltered2Slope = [[_rotationRateXFiltered2Slopes lastObject] doubleValue];
-    
     deviceRecord.rotationRateXFiltered2Indicator = _rotationRateXFiltered2Indicator;
     
     [_motionRecords addObject:deviceRecord];
@@ -193,21 +176,21 @@
         }
         _phase = 1;
         
-        if ([self isPeakInValues:_rotationRateXValues withSlopes:_rotationRateXSlopes value:rotationRateX quantile:_rotationRateXQuantile]) {
+        if ([self isPeakInValues:_rotationRateXValues withSlopes:_rotationRateXSlopes value:rotationRateX lowerBound:_rotationRateXQuantile]) {
             _rotationRateXIndicator = YES;
             _rotationRateXFiltered1Indicator = NO;
             _rotationRateXFiltered2Indicator = NO;
             //            NSLog(@"Indicator 1");
         }
         
-        if ([self isPeakInValues:_rotationRateXFiltered1Values withSlopes:_rotationRateXFiltered1Slopes value:rotationRateXFiltered1 quantile:_rotationRateXFiltered1Quantile] && _rotationRateXIndicator) {
+        if ([self isPeakInValues:_rotationRateXFiltered1Values withSlopes:_rotationRateXFiltered1Slopes value:rotationRateXFiltered1 lowerBound:_rotationRateXFiltered1Quantile] && _rotationRateXIndicator) {
             _rotationRateXIndicator = NO;
             _rotationRateXFiltered1Indicator = YES;
             _rotationRateXFiltered2Indicator = NO;
             //            NSLog(@"Indicator 2");
         }
         
-        if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 quantile:_rotationRateXFiltered2Quantile] &&_rotationRateXFiltered1Indicator) {
+        if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 lowerBound:_rotationRateXFiltered2Quantile] &&_rotationRateXFiltered1Indicator) {
             _rotationRateXIndicator = NO;
             _rotationRateXFiltered1Indicator = NO;
             _rotationRateXFiltered2Indicator = YES;
