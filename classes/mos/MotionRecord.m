@@ -22,9 +22,9 @@
         self.gravityX = deviceMotion.gravity.x * -9.81;
         self.gravityY = deviceMotion.gravity.y * -9.81;
         self.gravityZ = deviceMotion.gravity.z * -9.81;
-        self.rotationRateX = deviceMotion.rotationRate.x;
-        self.rotationRateY = deviceMotion.rotationRate.y;
-        self.rotationRateZ = deviceMotion.rotationRate.z;
+        self.rotationRateX = deviceMotion.rotationRate.x * 180 / M_PI;
+        self.rotationRateY = deviceMotion.rotationRate.y * 180 / M_PI;
+        self.rotationRateZ = deviceMotion.rotationRate.z * 180 / M_PI;
         self.attitudePitch = deviceMotion.attitude.pitch;
         self.attitudeRoll = deviceMotion.attitude.roll;
         self.attitudeYaw = deviceMotion.attitude.yaw;

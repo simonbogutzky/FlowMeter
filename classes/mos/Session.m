@@ -108,9 +108,9 @@
     NSString *event = @"";
     double rotationRateX = deviceRecord.rotationRateX;
     double rotationRateXFiltered2 = [self filterX1500mHz:rotationRateX];
-    double accelZ = (deviceRecord.gravityZ + deviceRecord.userAccelerationZ) * -9.81;
+    double accelZ = deviceRecord.gravityZ + deviceRecord.userAccelerationZ;
     
-    if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 lowerBound:-0.3] && accelZ < 3) {
+    if ([self isPeakInValues:_rotationRateXFiltered2Values withSlopes:_rotationRateXFiltered2Slopes value:rotationRateXFiltered2 lowerBound:-45] && accelZ < 3) {
         event = @"TO";
             
         // Send notification
@@ -283,9 +283,9 @@
              motionRecord.userAccelerationX + motionRecord.gravityX,
              motionRecord.userAccelerationY + motionRecord.gravityY,
              motionRecord.userAccelerationZ + motionRecord.gravityZ,
-             motionRecord.rotationRateX * 180 / M_PI,
-             motionRecord.rotationRateY * 180 / M_PI,
-             motionRecord.rotationRateZ * 180 / M_PI,
+             motionRecord.rotationRateX,
+             motionRecord.rotationRateY,
+             motionRecord.rotationRateZ,
              motionRecord.timestamp,
              motionRecord.event
              ];
