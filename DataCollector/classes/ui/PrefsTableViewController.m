@@ -11,14 +11,6 @@
 
 @interface PrefsTableViewController () {
     IBOutlet UISwitch *_dbConnectionStatusSwitch;
-    IBOutlet UISwitch *_hrConnectionStatusSwitch;
-    IBOutlet UILabel *_hrBatteryLevelLabel;
-    IBOutlet UILabel *_hrConnectionStatusLabel;
-    IBOutlet UISwitch *_motionSoundStatusSwitch;
-    IBOutlet UISwitch *_hrSoundStatusSwitch;
-    IBOutlet UISwitch *_tcpConnectionStatusSwitch;
-    IBOutlet UITextField *_tcpHostTextfield;
-    IBOutlet UITextField *_tcpPortTextfield;
     AppDelegate *_appDelegate;
 }
 
