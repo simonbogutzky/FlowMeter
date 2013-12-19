@@ -11,23 +11,17 @@
 #import "User.h"
 #import "Session.h"
 #import "MotionRecord.h"
-#import "HeartrateRecord.h"
 #import "LocationRecord.h"
-#import "AudioController.h"
 #import "MBProgressHUD.h"
 
 @interface HomeViewController ()
 {
-    WFSensorConnection *_sensorConnection;
-    WFSensorType_t _sensorType;
     BOOL _isCollection;
     
     User *_user;
     Session *_session;
     int _lastAccumBeatCount;
     DBRestClient *_restClient;
-    
-    IBOutlet UILabel *_bmpLabel;
     
     AppDelegate *_appDelegate;
     
@@ -53,10 +47,6 @@
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
     _user = [_appDelegate activeUserWithPredicate:isActivePredicate];
-    
-    _sensorConnection = _appDelegate.wfSensorConnection;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wfSensorDataUpdated:) name:WF_NOTIFICATION_SENSOR_HAS_DATA object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gaitEventDetected:) name:@"DetectGaitEvent" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -146,8 +136,8 @@
         
         [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt/%@;", @"collecting-ends"]];
         
-        _isCollection = !_isCollection;
-        self.sliding = !_isCollection;
+//        _isCollection = !_isCollection;
+//        self.sliding = !_isCollection;
         
         if ([_session.motionRecords count] != 0) {
             [_user addSessionsObject:_session];
@@ -155,7 +145,6 @@
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 [_appDelegate saveContext];
                 [_session saveAndZipMotionRecords];
-                [_session saveAndZipHeartrateRecords];
                 [_session saveAndZipLocationRecords];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -193,7 +182,7 @@
         [_session initialize];
         
         _isCollection = !_isCollection;
-        self.sliding = !_isCollection;
+//        self.sliding = !_isCollection;
         NSLog(@"# Start collecting");
     }
 }
@@ -213,72 +202,6 @@
             [_session addLocationRecord:locationRecord];
         }
     }
-}
-
-#pragma mark -
-#pragma marl - Notification handler
-
-- (void)wfSensorDataUpdated:(NSNotification *)notification
-{
-    if ([_appDelegate.wfSensorConnection isKindOfClass:[WFHeartrateConnection class]]) {
-        WFHeartrateConnection *hrConnection = (WFHeartrateConnection *) _appDelegate.wfSensorConnection;
-        WFHeartrateData *hrData = [hrConnection getHeartrateData];
-        if (hrData != nil) {
-            _bmpLabel.text = [hrData formattedHeartrate:YES];
-            if (_lastAccumBeatCount < hrData.accumBeatCount) {
-                
-                // Sonify beat
-                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                if ([defaults boolForKey:@"hrSoundStatus"]) {
-                    [[AudioController sharedAudioController] playE];
-                }
-            }
-            
-            if(_isCollection) {
-                
-                // Create hr record
-                HeartrateRecord *heartrateRecord = [[HeartrateRecord alloc] initWithTimestamp:[[NSDate date] timeIntervalSince1970]  HeartrateData:hrData]; // - startTimestamp
-                
-                // Add hr record
-                [_session addHeartrateRecord:heartrateRecord];
-            }
-            _lastAccumBeatCount = hrData.accumBeatCount;
-        }
-    }
-    else {
-        _bmpLabel.text = NSLocalizedString(@"k. A.", @"k. A.");
-    }
-}
-
-- (void)gaitEventDetected:(NSNotification *)notification
-{
-    NSDictionary *userInfo = notification.userInfo;
-// unused
-//    if ([[userInfo valueForKey:@"event"] isEqualToString:@"HS"]) {
-//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//        if ([defaults boolForKey:@"motionSoundStatus"]) {
-//            [[AudioController sharedAudioController] playE];
-//        }
-//    }
-    
-    if ([[userInfo valueForKey:@"event"] isEqualToString:@"TO"]) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if ([defaults boolForKey:@"motionSoundStatus"]) {
-            [[AudioController sharedAudioController] playE];
-        }
-    }
-    
-    if ([[userInfo valueForKey:@"event"] isEqualToString:@"collecting-starts"]) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if ([defaults boolForKey:@"motionSoundStatus"]) {
-            [[AudioController sharedAudioController] playNote:90];
-        }
-    }
-    
-    if (![[userInfo valueForKey:@"event"] isEqualToString:@"new-calibration-starts"]) {
-        [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt/%@;", [[userInfo valueForKey:@"event"] lowercaseString]]];
-    }
-
 }
 
 @end

@@ -1,0 +1,12 @@
+[submodule "ECSlidingViewController"]
+	path = ECSlidingViewController
+	url = https://github.com/ECSlidingViewController/ECSlidingViewController.git
+[submodule "MBProgressHUD"]
+	path = MBProgressHUD
+	url = https://github.com/jdg/MBProgressHUD.git
+[submodule "Reachability"]
+	path = Reachability
+	url = https://github.com/tonymillion/Reachability.git
+[submodule "zipzap"]
+	path = zipzap
+	url = https://github.com/pixelglow/zipzap.git

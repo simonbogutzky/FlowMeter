@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Simon Bogutzky. All rights reserved.
 //
 
-#import "AbtractSlidingTopViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface ProfileViewController : AbtractSlidingTopViewController
+@interface ProfileViewController : UIViewController
 
 @end

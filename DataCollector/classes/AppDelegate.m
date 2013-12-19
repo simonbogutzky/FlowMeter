@@ -7,8 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "Utility.h"
-#import "AudioController.h"
 #import "Session.h"
 #import "User.h"
 
@@ -17,7 +15,6 @@
 {
     CMMotionManager *_motionManager;
     CLLocationManager *_locationManager;
-    WFHardwareConnector *_hardwareConnector;
     DBRestClient *_dbRestClient;
     TCPConnectionManager *_tcpConnectionManager;
 }
@@ -60,32 +57,6 @@
     return _dbRestClient;
 }
 
-- (WFHardwareConnector *)sharedHardwareConnector
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        // Configure the hardware connector.
-        _hardwareConnector = [WFHardwareConnector sharedConnector];
-        _hardwareConnector.delegate = self;
-        _hardwareConnector.sampleRate = 0.01;  // sample rate 10 ns, or 100 Hz.
-        _hardwareConnector.settings.searchTimeout = 60;
-        
-        // Determine support for BTLE
-        if (_hardwareConnector.hasBTLESupport) {
-            
-            // Enable BTLE
-            [_hardwareConnector enableBTLE:YES];
-        } else {
-            NSLog(@"# Device does not support BTLE");
-        }
-        
-//        // Set HW Connector to call hasData only when new data is available.
-//        [hardwareConnector setSampleTimerDataCheck:YES];
-    });
-    return _hardwareConnector;
-}
-
 - (TCPConnectionManager *)sharedTCPConnectionManager
 {
     static dispatch_once_t onceToken;
@@ -125,14 +96,13 @@
     
     // Observe notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"MotionDataAvailable" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"HeartrateDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"LocationDataAvailable" object:nil];
     
     // Audio Session with mixing    
-    NSError *setCategoryErr = nil;
-    NSError *activationErr  = nil;
-    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:&setCategoryErr];
-    [[AVAudioSession sharedInstance] setActive:YES error:&activationErr];
+//    NSError *setCategoryErr = nil;
+//    NSError *activationErr  = nil;
+//    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:&setCategoryErr];
+//    [[AVAudioSession sharedInstance] setActive:YES error:&activationErr];
     
     return YES;
 }
@@ -157,7 +127,6 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [AudioController sharedAudioController].audioController.active = YES;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -276,41 +245,6 @@
     return NO;
 }
 
-#pragma mark -
-#pragma mark - HardwareConnectorDelegate implementation
-
-- (void)hardwareConnector:(WFHardwareConnector*)hwConnector connectedSensor:(WFSensorConnection*)connectionInfo
-{
-}
-
-- (void)hardwareConnector:(WFHardwareConnector*)hwConnector didDiscoverDevices:(NSSet*)connectionParams searchCompleted:(BOOL)bCompleted
-{
-    // Post the sensor type and device params to the notification.
-    NSDictionary* userInfo = @{@"connectionParams": connectionParams,
-                              @"searchCompleted": @(bCompleted)};
-    [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_DISCOVERED_SENSOR object:WF_NOTIFICATION_DISCOVERED_SENSOR userInfo:userInfo];
-}
-
-- (void)hardwareConnector:(WFHardwareConnector*)hwConnector disconnectedSensor:(WFSensorConnection*)connectionInfo
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_SENSOR_DISCONNECTED object:WF_NOTIFICATION_SENSOR_DISCONNECTED];
-}
-
-- (void)hardwareConnector:(WFHardwareConnector*)hwConnector stateChanged:(WFHardwareConnectorState_t)currentState
-{
-	BOOL connected = ((currentState & WF_HWCONN_STATE_ACTIVE) || (currentState & WF_HWCONN_STATE_BT40_ENABLED)) ? YES : NO;
-	if (connected) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_HW_CONNECTED object:WF_NOTIFICATION_HW_CONNECTED];
-	} else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_HW_DISCONNECTED object:WF_NOTIFICATION_HW_DISCONNECTED];
-	}
-}
-
-- (void)hardwareConnectorHasData
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:WF_NOTIFICATION_SENSOR_HAS_DATA object:WF_NOTIFICATION_SENSOR_HAS_DATA];
-}
-
 #pragma mark - 
 #pragma mark - Data sync
 
@@ -329,12 +263,6 @@
         NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
         if ([session.motionRecordsCount intValue] != 0) {
             NSString *filename = [NSString stringWithFormat:@"%@-motion-data.csv.zip", [session valueForKey:@"filename"]];
-            NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
-            [self uploadFile:filename localPath:localPath];
-        }
-        
-        if ([session.heartrateRecordsCount intValue] != 0) {
-            NSString *filename = [NSString stringWithFormat:@"%@-hr.csv.zip", [session valueForKey:@"filename"]];
             NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
             [self uploadFile:filename localPath:localPath];
         }

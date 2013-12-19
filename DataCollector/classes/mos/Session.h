@@ -28,11 +28,9 @@
 - (void)initialize;
 
 - (void)addDeviceRecord:(MotionRecord *)deviceRecord;
-- (void)addHeartrateRecord:(HeartrateRecord *)heartrateRecord;
 - (void)addLocationRecord:(LocationRecord *)locationRecord;
 
 - (void)saveAndZipMotionRecords;
-- (void)saveAndZipHeartrateRecords;
 - (void)saveAndZipLocationRecords;
 
 @end

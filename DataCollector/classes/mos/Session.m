@@ -7,10 +7,8 @@
 //
 
 #import "Session.h"
-#import "HeartrateRecord.h"
 #import "LocationRecord.h"
 #import "MotionRecord.h"
-#import "Utility.h"
 #import "User.h"
 
 #import <zipzap/zipzap.h>
@@ -165,9 +163,9 @@
             
             // Calculate quantiles
             // TODO: Hardcoded value
-            _rotationRateXQuantile = [Utility quantileFromX:_rotationRateXValues prob:.06];
-            _rotationRateXFiltered1Quantile = [Utility quantileFromX:_rotationRateXFiltered1Values prob:.09];
-            _rotationRateXFiltered2Quantile = [Utility quantileFromX:_rotationRateXFiltered2Values prob:.12];
+            _rotationRateXQuantile = 0; //[Utility quantileFromX:_rotationRateXValues prob:.06];
+            _rotationRateXFiltered1Quantile = 0; //[Utility quantileFromX:_rotationRateXFiltered1Values prob:.09];
+            _rotationRateXFiltered2Quantile = 0; //[Utility quantileFromX:_rotationRateXFiltered2Values prob:.12];
             
             // Remove the first hundred values
             [_rotationRateXValues removeObjectsInRange:NSMakeRange(0, 100)];
@@ -307,57 +305,6 @@
         // Send notification
         NSDictionary *userInfo = @{@"localPath": localPath, @"filename": filename};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:nil userInfo:userInfo];
-    }
-}
-
-- (void)saveAndZipHeartrateRecords
-{
-    if ([_heartrateRecords count] != 0) {
-        
-        self.heartrateRecordsCount = [NSNumber numberWithInt:[_heartrateRecords count]];
-        
-        // Create the path, where the data should be saved
-        NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *filename = [NSString stringWithFormat:@"%@-hr.csv.zip", self.filename];
-        NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
-        
-        // Create data string
-        NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
-        [dataString appendFormat:@"Name: %@ %@\n", self.user.firstName, self.user.lastName];
-        [dataString appendFormat:@"\"%@\",\"%@\",\"%@\",\"%@\"\n",
-         @"timestamp",
-         @"accumBeatCount",
-         @"heartrate",
-         @"rrIntervals"
-         ];
-        
-        for (HeartrateRecord *heartrateRecord in _heartrateRecords) {
-            
-            // Append to data string
-            [dataString appendFormat:@"%f,%i,%@,%@\n",
-             heartrateRecord.timestamp,
-             heartrateRecord.accumBeatCount,
-             heartrateRecord.heartrate,
-             heartrateRecord.rrIntervals != nil ? heartrateRecord.rrIntervals : @""
-             ];
-        }
-        
-        // Zip data
-        ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL:[NSURL fileURLWithPath:localPath]];
-        [archive updateEntries:
-         @[
-         [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-hr.csv", self.filename]
-                                         compress:YES
-                                        dataBlock:^(NSError** error)
-          {
-              return [dataString dataUsingEncoding:NSUTF8StringEncoding];
-          }]
-         ]
-                         error:nil];
-        
-        // Send notification
-        NSDictionary *userInfo = @{@"localPath": localPath, @"filename": filename};
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"HeartrateDataAvailable" object:nil userInfo:userInfo];
     }
 }
 

@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <DropboxSDK/DropboxSDK.h>
-#import <WFConnector/WFConnector.h>
 
-@interface PrefsTableViewController : UITableViewController <WFSensorConnectionDelegate, UITextFieldDelegate>
+@interface PrefsTableViewController : UITableViewController <UITextFieldDelegate>
 
 @end

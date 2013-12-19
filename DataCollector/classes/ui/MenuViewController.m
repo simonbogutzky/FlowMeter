@@ -33,8 +33,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self.slidingViewController setAnchorRightRevealAmount:280.0f];
-    self.slidingViewController.underLeftWidthLayout = ECFullWidth;
+//    [self.slidingViewController setAnchorRightRevealAmount:280.0f];
+//    self.slidingViewController.underLeftWidthLayout = ECFullWidth;
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,16 +112,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *identifier = _menuItems[indexPath.row];
-    
-    UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
-    
-    [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
-        CGRect frame = self.slidingViewController.topViewController.view.frame;
-        self.slidingViewController.topViewController = newTopViewController;
-        self.slidingViewController.topViewController.view.frame = frame;
-        [self.slidingViewController resetTopView];
-    }];
+//    NSString *identifier = _menuItems[indexPath.row];
+//    
+//    UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
+//    
+//    [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+//        CGRect frame = self.slidingViewController.topViewController.view.frame;
+//        self.slidingViewController.topViewController = newTopViewController;
+//        self.slidingViewController.topViewController.view.frame = frame;
+//        [self.slidingViewController resetTopView];
+//    }];
 }
 
 @end

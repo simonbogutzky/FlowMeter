@@ -10,14 +10,13 @@
 #import <CoreMotion/CoreMotion.h>
 #import <CoreLocation/CoreLocation.h>
 #import <AVFoundation/AVFoundation.h>
-#import <WFConnector/WFConnector.h>
 #import <DropboxSDK/DropboxSDK.h>
 #import "Reachability.h"
 #import "TCPConnectionManager.h"
 
 @class User;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, WFHardwareConnectorDelegate, DBRestClientDelegate, NSStreamDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, DBRestClientDelegate, NSStreamDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -31,9 +30,7 @@
 
 @property (strong, nonatomic, readonly) CMMotionManager *sharedMotionManager;
 @property (strong, nonatomic, readonly) CLLocationManager *sharedLocationManager;
-@property (strong, nonatomic, readonly) WFHardwareConnector *sharedHardwareConnector;
 @property (strong, nonatomic, readonly) DBRestClient *sharedDbRestClient;
-@property (strong, nonatomic) WFSensorConnection *wfSensorConnection;
 @property (strong, nonatomic, readonly) Reachability *reachability;
 @property (strong, nonatomic, readonly) TCPConnectionManager *sharedTCPConnectionManager;
 
