@@ -39,7 +39,6 @@
 		D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionTableViewController.m */; };
 		D3B15FFE172AA8EF00B72D48 /* LocationRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B15FFD172AA8EF00B72D48 /* LocationRecord.m */; };
 		D3B16001172AA91D00B72D48 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B16000172AA91D00B72D48 /* Session.m */; };
-		D3B3DBF717339039001F2830 /* TCPConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DBF617339039001F2830 /* TCPConnectionManager.m */; };
 		D3B3DC091733B93A001F2830 /* DataCollector.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC071733B93A001F2830 /* DataCollector.xcdatamodeld */; };
 		D3B3DC1B1733BC67001F2830 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC1A1733BC67001F2830 /* ProfileViewController.m */; };
 		D3B3DC1E1733BECC001F2830 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC1D1733BECB001F2830 /* ProfileTableViewController.m */; };
@@ -136,8 +135,6 @@
 		D3B15FFD172AA8EF00B72D48 /* LocationRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationRecord.m; path = classes/mos/LocationRecord.m; sourceTree = "<group>"; };
 		D3B15FFF172AA91D00B72D48 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = classes/mos/Session.h; sourceTree = "<group>"; };
 		D3B16000172AA91D00B72D48 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = classes/mos/Session.m; sourceTree = "<group>"; };
-		D3B3DBF517339039001F2830 /* TCPConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCPConnectionManager.h; path = classes/TCPConnectionManager.h; sourceTree = "<group>"; };
-		D3B3DBF617339039001F2830 /* TCPConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCPConnectionManager.m; path = classes/TCPConnectionManager.m; sourceTree = "<group>"; };
 		D3B3DC081733B93A001F2830 /* DataCollector.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCollector.xcdatamodel; sourceTree = "<group>"; };
 		D3B3DC191733BC67001F2830 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = classes/ui/ProfileViewController.h; sourceTree = "<group>"; };
 		D3B3DC1A1733BC67001F2830 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = classes/ui/ProfileViewController.m; sourceTree = "<group>"; };
@@ -288,8 +285,6 @@
 				D34C9D151725044D004C261C /* AppDelegate.m */,
 				D34C9D161725044D004C261C /* main.m */,
 				D3B133F51729582600CEFFC1 /* MOS */,
-				D3B3DBF517339039001F2830 /* TCPConnectionManager.h */,
-				D3B3DBF617339039001F2830 /* TCPConnectionManager.m */,
 				D3C7ADD6171FCCC6000A7D34 /* UI */,
 			);
 			name = Classes;
@@ -576,7 +571,6 @@
 				D3C129081863290300C361CA /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				D304C72E172E7473005CD297 /* MotionRecord.m in Sources */,
 				D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */,
-				D3B3DBF717339039001F2830 /* TCPConnectionManager.m in Sources */,
 				D3B3DC091733B93A001F2830 /* DataCollector.xcdatamodeld in Sources */,
 				D3C1290D1863290300C361CA /* UIViewController+ECSlidingViewController.m in Sources */,
 				D3B3DC1B1733BC67001F2830 /* ProfileViewController.m in Sources */,
@@ -682,8 +676,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/dependent-frameworks\\\"",
-					"/Users/simonbogutzky/Documents/Entwicklung/projekte/hs-bremen/git-repos/data-collector/DropboxSDK",
+					"$(SRCROOT)/DropboxSDK/",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DataCollector/supporting-files/DataCollector-Prefix.pch";
@@ -691,8 +684,7 @@
 				INFOPLIST_FILE = "DataCollector/supporting-files/DataCollector-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/dependent-libraries/TestFlight-SDK\\\"",
-					"/Users/simonbogutzky/Documents/Entwicklung/projekte/hs-bremen/git-repos/data-collector/TestFlightSDK",
+					"$(SRCROOT)/TestFlightSDK",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -706,7 +698,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/dependent-projects/libpd/** $(SRCROOT)/dependent-projects/zipkit";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -719,8 +711,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/dependent-frameworks\\\"",
-					"/Users/simonbogutzky/Documents/Entwicklung/projekte/hs-bremen/git-repos/data-collector/DropboxSDK",
+					"$(SRCROOT)/DropboxSDK/",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DataCollector/supporting-files/DataCollector-Prefix.pch";
@@ -728,8 +719,7 @@
 				INFOPLIST_FILE = "DataCollector/supporting-files/DataCollector-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/dependent-libraries/TestFlight-SDK\\\"",
-					"/Users/simonbogutzky/Documents/Entwicklung/projekte/hs-bremen/git-repos/data-collector/TestFlightSDK",
+					"$(SRCROOT)/TestFlightSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -743,7 +733,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/dependent-projects/libpd/** $(SRCROOT)/dependent-projects/zipkit";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

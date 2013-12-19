@@ -12,7 +12,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <DropboxSDK/DropboxSDK.h>
 #import "Reachability.h"
-#import "TCPConnectionManager.h"
 
 @class User;
 
@@ -32,6 +31,5 @@
 @property (strong, nonatomic, readonly) CLLocationManager *sharedLocationManager;
 @property (strong, nonatomic, readonly) DBRestClient *sharedDbRestClient;
 @property (strong, nonatomic, readonly) Reachability *reachability;
-@property (strong, nonatomic, readonly) TCPConnectionManager *sharedTCPConnectionManager;
 
 @end

@@ -16,7 +16,6 @@
     CMMotionManager *_motionManager;
     CLLocationManager *_locationManager;
     DBRestClient *_dbRestClient;
-    TCPConnectionManager *_tcpConnectionManager;
 }
 @end
 
@@ -55,15 +54,6 @@
         _dbRestClient.delegate = self;
     });
     return _dbRestClient;
-}
-
-- (TCPConnectionManager *)sharedTCPConnectionManager
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _tcpConnectionManager = [[TCPConnectionManager alloc] initWithDelegate:self];
-    });
-    return _tcpConnectionManager;
 }
 
 #pragma mark -

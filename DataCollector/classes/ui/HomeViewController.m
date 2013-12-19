@@ -121,8 +121,6 @@
     
     if (!_isCollection) {
         
-        [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt/%@;", @"counter-starts"]];
-        
         _countdown = 5;
         _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
         _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initializeCollection) userInfo:nil repeats:YES];
@@ -133,8 +131,6 @@
     } else {
         [startStopCollectionButton setTitle:@"start" forState:0];
         [self stopUpdates];
-        
-        [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt/%@;", @"collecting-ends"]];
         
 //        _isCollection = !_isCollection;
 //        self.sliding = !_isCollection;
@@ -168,8 +164,6 @@
     _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
     
     if (_countdown == 0) {
-        
-        [_appDelegate.sharedTCPConnectionManager sendMessage:[NSString stringWithFormat:@"/evnt/%@;", @"collecting-starts"]];
         
         NSDictionary *userInfo = @{@"event": @"collecting-starts"};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];

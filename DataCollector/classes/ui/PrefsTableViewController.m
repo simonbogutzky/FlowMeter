@@ -34,14 +34,6 @@
     _dbConnectionStatusSwitch.on = [[DBSession sharedSession] isLinked];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dBConnectionChanged:) name:NOTIFICATION_DB_CONNECTION_CANCELLED object:nil];
 
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    _motionSoundStatusSwitch.on = [defaults boolForKey:@"motionSoundStatus"];
-    _hrSoundStatusSwitch.on = [defaults boolForKey:@"hrSoundStatus"];
-    
-    _tcpConnectionStatusSwitch.on = _appDelegate.sharedTCPConnectionManager.isStreamOpen;
-    _tcpHostTextfield.text = [defaults valueForKey:@"tcpHost"];
-    _tcpPortTextfield.text = [defaults valueForKey:@"tcpPort"];
-
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -78,52 +70,6 @@
     
     if ([[DBSession sharedSession] isLinked] && !_dbConnectionStatusSwitch.on)
         [[DBSession sharedSession] unlinkAll];
-}
-
-- (IBAction)changeHrSoundStatus:(id)sender
-{
-    UISwitch *hrSoundStatusSwitch = sender;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:hrSoundStatusSwitch.on forKey:@"hrSoundStatus"];
-}
-
-- (IBAction)changeMotionSound:(id)sender
-{
-    UISwitch *motionSoundStatusSwitch = sender;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:motionSoundStatusSwitch.on forKey:@"motionSoundStatus"];
-}
-
-- (IBAction)changeTCPConnectionStatus:(id)sender
-{
-    if (_tcpHostTextfield.text.length != 15) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Fehlende oder fehlerhafte Host-IP", @"Fehlende oder fehlerhafte Host-IP")
-                                                        message:NSLocalizedString(@"Bitte neu eingeben!" , @"Bitte neu eingeben!")
-                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-                                              otherButtonTitles:nil];
-        [alert show];
-        [_tcpConnectionStatusSwitch setOn:NO animated:YES];
-        return;
-    }
-    
-    if (_tcpPortTextfield.text.length != 4) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Fehlende oder fehlerhafte Port", @"Fehlende oder fehlerhafte Port")
-                                                        message:NSLocalizedString(@"Bitte neu eingeben!" , @"Bitte neu eingeben!")
-                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-                                              otherButtonTitles:nil];
-        [alert show];
-        [_tcpConnectionStatusSwitch setOn:NO animated:YES];
-        return;
-    }
-    
-    if (_tcpConnectionStatusSwitch.on) {
-        [_appDelegate.sharedTCPConnectionManager openStreamsWithHost:_tcpHostTextfield.text port:@([_tcpPortTextfield.text intValue])];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setValue:_tcpHostTextfield.text forKey:@"tcpHost"];
-        [defaults setValue:_tcpPortTextfield.text forKey:@"tcpPort"];
-    } else {
-        [_appDelegate.sharedTCPConnectionManager closeStreams];
-    }
 }
 
 #pragma mark -
