@@ -10,8 +10,8 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "Session.h"
-#import "MotionRecord.h"
-#import "LocationRecord.h"
+#import "Motion.h"
+#import "Location.h"
 #import "MBProgressHUD.h"
 
 @interface HomeViewController ()
@@ -72,10 +72,10 @@
                 
                 // Create motion record
                 double timestamp = [[NSDate date] timeIntervalSince1970]; // - startTimestamp;
-                MotionRecord *motionRecord = [[MotionRecord alloc] initWithTimestamp:timestamp DeviceMotion:deviceMotion];
+                Motion *motionRecord = [[Motion alloc] initWithTimestamp:timestamp DeviceMotion:deviceMotion];
  
                 // Add motion record
-                [_session addDeviceRecord:motionRecord];
+                [_session addMotionRecord:motionRecord];
             } else {
                 NSLog(@"# not in");
             }
@@ -190,7 +190,7 @@
         for (CLLocation *location in locations) {
         
             // Create location record
-            LocationRecord *locationRecord = [[LocationRecord alloc] initWithTimestamp:[[NSDate date] timeIntervalSince1970]  Location:location]; // - startTimestamp
+            Location *locationRecord = [[Location alloc] initWithTimestamp:[[NSDate date] timeIntervalSince1970]  Location:location]; // - startTimestamp
             
             // Add location record
             [_session addLocationRecord:locationRecord];

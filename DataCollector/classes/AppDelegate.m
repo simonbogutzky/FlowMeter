@@ -253,16 +253,15 @@
         NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
         if ([session.motionRecordsCount intValue] != 0) {
             NSString *filename = [NSString stringWithFormat:@"%@-motion-data.csv.zip", [session valueForKey:@"filename"]];
-            NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
+            NSString *localPath = [rootPath stringByAppendingPathComponent:[session valueForKey:@"filepath"]];
+            localPath = [rootPath stringByAppendingPathComponent:filename];
+            NSLog(@"%@", localPath);
             [self uploadFile:filename localPath:localPath];
         }
         
         if ([session.locationRecordsCount intValue] != 0) {
-            NSString *filename = [NSString stringWithFormat:@"%@-l.csv.zip", [session valueForKey:@"filename"]];
-            NSString *localPath = [rootPath stringByAppendingPathComponent:filename];
-            [self uploadFile:filename localPath:localPath];
-            
-            filename = [NSString stringWithFormat:@"%@-l.kml.zip", [session valueForKey:@"filename"]];
+            NSString *filename = [NSString stringWithFormat:@"%@-location-data.kml.zip", [session valueForKey:@"filename"]];
+            NSString *localPath = [rootPath stringByAppendingPathComponent:[session valueForKey:@"filepath"]];
             localPath = [rootPath stringByAppendingPathComponent:filename];
             [self uploadFile:filename localPath:localPath];
         }
@@ -324,6 +323,8 @@
     NSString *localPath = userInfo[@"localPath"];
     NSString *filename = userInfo[@"filename"];
     
+    NSLog(@"' %@", localPath);
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self uploadFile:filename localPath:localPath];
     });
@@ -338,7 +339,7 @@
         NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
         User *user = [self activeUserWithPredicate:isActivePredicate];
         
-        NSString *destDir = [NSString stringWithFormat:@"/%@", user.firstName];
+        NSString *destDir = [NSString stringWithFormat:@"/%@", user.username];
         [[self sharedDbRestClient] uploadFile:filename toPath:destDir withParentRev:nil fromPath:localPath];
     }
 }
@@ -360,7 +361,7 @@
     // Set data entry synced
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" \\(.+\\)" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *filename = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
-    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-hr).(csv|kml).zip" options:NSRegularExpressionCaseInsensitive error:&error];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|location-data).(csv|kml).zip" options:NSRegularExpressionCaseInsensitive error:&error];
     filename = [regex stringByReplacingMatchesInString:filename options:0 range:NSMakeRange(0, [filename length]) withTemplate:@""];
     NSLog(@"# Sync session with filename: %@", filename);
     [self setSessionSyncedByFilename:filename];

@@ -15,8 +15,8 @@
     NSManagedObjectContext *_managedObjectContext;
     User *_user;
     IBOutlet UITableViewCell *_firstNameTableViewCell;
-//    IBOutlet UITableViewCell *_lastNameTableViewCell;
-//    IBOutlet UITableViewCell *_usernameTableViewCell;
+    IBOutlet UITableViewCell *_lastNameTableViewCell;
+    IBOutlet UITableViewCell *_usernameTableViewCell;
     NSMutableDictionary *_userDictionary;
     BOOL _saveContext;
     AppDelegate *_appDelegate;
@@ -60,22 +60,22 @@
         }
     }
     
-//    NSString *lastName = [_userDictionary valueForKey:@"lastName"];
-//    if (lastName != nil && ![lastName isEqualToString:@""]) {
-//        _lastNameTableViewCell.detailTextLabel.text = lastName;
-//    } else {
-//        if (_user.lastName != nil && ![_user.lastName isEqualToString:@""]) {
-//            _lastNameTableViewCell.detailTextLabel.text = _user.lastName;
-//            [_userDictionary setValue:_user.lastName forKey:@"lastName"];
-//        }
-//    }
+    NSString *lastName = [_userDictionary valueForKey:@"lastName"];
+    if (lastName != nil && ![lastName isEqualToString:@""]) {
+        _lastNameTableViewCell.detailTextLabel.text = lastName;
+    } else {
+        if (_user.lastName != nil && ![_user.lastName isEqualToString:@""]) {
+            _lastNameTableViewCell.detailTextLabel.text = _user.lastName;
+            [_userDictionary setValue:_user.lastName forKey:@"lastName"];
+        }
+    }
     
     NSString *cleanedFirstName = [self cleanName:_firstNameTableViewCell.detailTextLabel.text];
-//    NSString *cleanedLastName = [self cleanName:_lastNameTableViewCell.detailTextLabel.text];
-    if (![cleanedFirstName isEqualToString:@""]) { // && ![cleanedLastName isEqualToString:@""]) {
+    NSString *cleanedLastName = [self cleanName:_lastNameTableViewCell.detailTextLabel.text];
+    if (![cleanedFirstName isEqualToString:@""] && ![cleanedLastName isEqualToString:@""]) {
         NSString *username = [NSString stringWithFormat:@"%@", cleanedFirstName];
         [_userDictionary setValue:username forKey:@"username"];
-//        _usernameTableViewCell.detailTextLabel.text = username;
+        _usernameTableViewCell.detailTextLabel.text = username;
     }
 }
     
@@ -87,7 +87,7 @@
         // First use of the app. No user in the database.
         if ((_user.username == nil || [_user.username isEqualToString:@""]) ) {
             _user.firstName = _firstNameTableViewCell.detailTextLabel.text;
-//            _user.lastName = _lastNameTableViewCell.detailTextLabel.text;
+            _user.lastName = _lastNameTableViewCell.detailTextLabel.text;
             _user.username = username;
             _user.isActive = @1;
         } else {
@@ -102,8 +102,8 @@
                 // User do not exists. Create one.
                 if (user.username == nil || [user.username isEqualToString:@""]) {
                     user.firstName = _firstNameTableViewCell.detailTextLabel.text;
-//                    user.lastName = _lastNameTableViewCell.detailTextLabel.text;
-//                    user.username = _usernameTableViewCell.detailTextLabel.text;
+                    user.lastName = _lastNameTableViewCell.detailTextLabel.text;
+                    user.username = _usernameTableViewCell.detailTextLabel.text;
                 }
                 user.isActive = @1;
             }
@@ -131,13 +131,13 @@
         _saveContext = NO;
     }
     
-//    if ([segue.identifier isEqualToString:@"editLastName"]) {
-//        EditViewController *editViewController = segue.destinationViewController;
-//        editViewController.propertyName = @"lastName";
-//        editViewController.propertyDictionary = _userDictionary;
-//        [((UITableViewCell *) sender) setSelected:NO animated:YES];
-//        _saveContext = NO;
-//    }
+    if ([segue.identifier isEqualToString:@"editLastName"]) {
+        EditViewController *editViewController = segue.destinationViewController;
+        editViewController.propertyName = @"lastName";
+        editViewController.propertyDictionary = _userDictionary;
+        [((UITableViewCell *) sender) setSelected:NO animated:YES];
+        _saveContext = NO;
+    }
 }
 
 - (NSString *)cleanName:(NSString *)name

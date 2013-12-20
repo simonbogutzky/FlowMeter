@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class HeartrateRecord, LocationRecord, MotionRecord, User;
+@class HeartrateRecord, Location, Motion, User;
 
 @interface Session : NSManagedObject
 
 @property (nonatomic, strong) NSString *filename;
+@property (nonatomic, strong) NSString *filepath;
 @property (nonatomic, strong) NSNumber *isSynced;
 @property (nonatomic, strong) NSNumber *motionRecordsCount;
 @property (nonatomic, strong) NSNumber *locationRecordsCount;
@@ -25,8 +26,8 @@
 
 - (void)initialize;
 
-- (void)addDeviceRecord:(MotionRecord *)deviceRecord;
-- (void)addLocationRecord:(LocationRecord *)locationRecord;
+- (void)addMotionRecord:(Motion *)motionRecord;
+- (void)addLocationRecord:(Location *)locationRecord;
 
 - (void)saveAndZipMotionRecords;
 - (void)saveAndZipLocationRecords;

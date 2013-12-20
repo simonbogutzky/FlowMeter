@@ -1,5 +1,5 @@
 //
-//  LocationRecord.h
+//  Location.h
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 26.04.13.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface LocationRecord : NSObject
+@interface Location : NSObject
 
 @property (nonatomic, assign) double timestamp;
 @property (nonatomic, assign) double latitude;
@@ -18,5 +18,8 @@
 @property (nonatomic, assign) double speed;
 
 - (id)initWithTimestamp:(double)timestamp Location:(CLLocation *)location;
+- (NSString *)kmlDescription;
++ (NSString *)kmlHeader;
++ (NSString *)kmlFooter;
 
 @end
