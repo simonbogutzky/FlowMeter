@@ -254,15 +254,14 @@
         if ([session.motionRecordsCount intValue] != 0) {
             NSString *filename = [NSString stringWithFormat:@"%@-motion-data.csv.zip", [session valueForKey:@"filename"]];
             NSString *localPath = [rootPath stringByAppendingPathComponent:[session valueForKey:@"filepath"]];
-            localPath = [rootPath stringByAppendingPathComponent:filename];
-            NSLog(@"%@", localPath);
+            localPath = [localPath stringByAppendingPathComponent:filename];
             [self uploadFile:filename localPath:localPath];
         }
         
         if ([session.locationRecordsCount intValue] != 0) {
             NSString *filename = [NSString stringWithFormat:@"%@-location-data.kml.zip", [session valueForKey:@"filename"]];
             NSString *localPath = [rootPath stringByAppendingPathComponent:[session valueForKey:@"filepath"]];
-            localPath = [rootPath stringByAppendingPathComponent:filename];
+            localPath = [localPath stringByAppendingPathComponent:filename];
             [self uploadFile:filename localPath:localPath];
         }
     }
@@ -361,7 +360,7 @@
     // Set data entry synced
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" \\(.+\\)" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *filename = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
-    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|location-data).(csv|kml).zip" options:NSRegularExpressionCaseInsensitive error:&error];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data).(csv|kml).zip" options:NSRegularExpressionCaseInsensitive error:&error];
     filename = [regex stringByReplacingMatchesInString:filename options:0 range:NSMakeRange(0, [filename length]) withTemplate:@""];
     NSLog(@"# Sync session with filename: %@", filename);
     [self setSessionSyncedByFilename:filename];

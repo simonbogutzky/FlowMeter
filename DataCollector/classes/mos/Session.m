@@ -90,7 +90,7 @@
         ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL:[NSURL fileURLWithPath:localPath]];
         [archive updateEntries:
          @[
-         [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@/%@-motion-data.csv", self.filepath, self.filename]
+         [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-motion-data.csv", self.filename]
                                          compress:YES
                                         dataBlock:^(NSError** error)
           {
