@@ -14,7 +14,6 @@
 		604CCD9316A6F31000E87194 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604CCD9216A6F31000E87194 /* CoreGraphics.framework */; };
 		60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60AA4F7216A829100026DE8D /* CoreMotion.framework */; };
 		60DFF73816AFE81000D64F7E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 60DFF73716AFE81000D64F7E /* libz.dylib */; };
-		D304C722172E66E7005CD297 /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D304C721172E66E7005CD297 /* SplashScreenViewController.m */; };
 		D304C72E172E7473005CD297 /* Motion.m in Sources */ = {isa = PBXBuildFile; fileRef = D304C72D172E7473005CD297 /* Motion.m */; };
 		D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3383BA91726CE1500AAC993 /* CoreData.framework */; };
 		D3383BB61726D49700AAC993 /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3383BB51726D49700AAC993 /* SessionViewController.m */; };
@@ -96,8 +95,6 @@
 		604CCD9216A6F31000E87194 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		60AA4F7216A829100026DE8D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		60DFF73716AFE81000D64F7E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		D304C720172E66E7005CD297 /* SplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashScreenViewController.h; path = classes/ui/SplashScreenViewController.h; sourceTree = "<group>"; };
-		D304C721172E66E7005CD297 /* SplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplashScreenViewController.m; path = classes/ui/SplashScreenViewController.m; sourceTree = "<group>"; };
 		D304C72D172E7473005CD297 /* Motion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Motion.m; path = classes/mos/Motion.m; sourceTree = "<group>"; };
 		D3383BA91726CE1500AAC993 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D3383BB41726D49600AAC993 /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionViewController.h; path = classes/ui/SessionViewController.h; sourceTree = "<group>"; };
@@ -412,8 +409,6 @@
 				D3A4629E1726E08900D454F7 /* SessionTableViewController.m */,
 				D3383BB41726D49600AAC993 /* SessionViewController.h */,
 				D3383BB51726D49700AAC993 /* SessionViewController.m */,
-				D304C720172E66E7005CD297 /* SplashScreenViewController.h */,
-				D304C721172E66E7005CD297 /* SplashScreenViewController.m */,
 				D3B3DC191733BC67001F2830 /* ProfileViewController.h */,
 				D3B3DC1A1733BC67001F2830 /* ProfileViewController.m */,
 				D3B3DC1C1733BECB001F2830 /* ProfileTableViewController.h */,
@@ -567,7 +562,6 @@
 				D3C129091863290300C361CA /* ECSlidingAnimationController.m in Sources */,
 				D3B15FFE172AA8EF00B72D48 /* Location.m in Sources */,
 				D3B16001172AA91D00B72D48 /* Session.m in Sources */,
-				D304C722172E66E7005CD297 /* SplashScreenViewController.m in Sources */,
 				D3C129081863290300C361CA /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				D304C72E172E7473005CD297 /* Motion.m in Sources */,
 				D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */,
