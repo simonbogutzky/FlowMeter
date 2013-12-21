@@ -202,6 +202,7 @@
                     <connections>
                         <outlet property="_counterLabel" destination="kfM-7K-tdj" id="gO7-2T-bhk"/>
                         <outlet property="_counterView" destination="No8-XL-3qD" id="gRo-0v-fpk"/>
+                        <outlet property="_startStopCollectionButton" destination="TV8-ty-RU8" id="mek-7S-Ehi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -548,19 +549,22 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vPw-LP-ebh">
-                                                    <rect key="frame" x="249" y="9" width="51" height="31"/>
+                                                    <rect key="frame" x="249" y="6" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.5647059083" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
                                                         <action selector="changeDbConnectionStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="BZ2-8u-ibb"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vPw-LP-ebh" firstAttribute="top" secondItem="FUX-c9-3Aq" secondAttribute="top" constant="6" id="D2y-cr-udi"/>
+                                                <constraint firstAttribute="trailing" secondItem="vPw-LP-ebh" secondAttribute="trailing" constant="22" id="aHI-wR-FOr"/>
+                                                <constraint firstAttribute="bottom" secondItem="vPw-LP-ebh" secondAttribute="bottom" constant="6" id="j0V-1w-0c8"/>
+                                                <constraint firstItem="cxS-zW-O3x" firstAttribute="top" secondItem="FUX-c9-3Aq" secondAttribute="top" constant="14" id="q01-uC-Hx0"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <constraints>
-                                            <constraint firstItem="cxS-zW-O3x" firstAttribute="centerY" secondItem="vPw-LP-ebh" secondAttribute="centerY" id="31n-CN-Ux8"/>
-                                            <constraint firstAttribute="trailing" secondItem="vPw-LP-ebh" secondAttribute="trailing" constant="22" id="Teg-PW-vKV"/>
                                             <constraint firstItem="cxS-zW-O3x" firstAttribute="leading" secondItem="zEO-Bl-onT" secondAttribute="leading" constant="20" id="Uo7-mV-GKV"/>
-                                            <constraint firstItem="vPw-LP-ebh" firstAttribute="top" secondItem="zEO-Bl-onT" secondAttribute="top" constant="9" id="u1B-dM-L3b"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
