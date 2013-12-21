@@ -321,9 +321,6 @@
     NSDictionary *userInfo = [notification userInfo];
     NSString *localPath = userInfo[@"localPath"];
     NSString *filename = userInfo[@"filename"];
-    
-    NSLog(@"' %@", localPath);
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self uploadFile:filename localPath:localPath];
     });
@@ -349,11 +346,16 @@
 - (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath from:(NSString*)srcPath metadata:(DBMetadata*)metadata
 {
     NSLog(@"# File uploaded successfully to path: %@", metadata.path);
+    
+    NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
+    User *user = [self activeUserWithPredicate:isActivePredicate];
+    
     NSError *error = nil;
    
     // Delete zip file
     NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *localPath = [rootPath stringByAppendingPathComponent:metadata.filename];
+    NSString *localPath = [rootPath stringByAppendingPathComponent:user.username];
+    localPath = [localPath stringByAppendingPathComponent:metadata.filename];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:localPath error:&error];
     
