@@ -14,11 +14,12 @@
 {
     self = [super init];
     if (self) {
-        self.timestamp = timestamp;
+        self.locationTime = [location.timestamp timeIntervalSince1970];
         self.latitude = location.coordinate.latitude;
         self.longitude = location.coordinate.longitude;
         self.altitude = location.altitude;
         self.speed = location.speed;
+        self.systemTime = timestamp;
     }
     return self;
 }
@@ -41,5 +42,35 @@
 {
     return @"</coordinates></LineString></Placemark></Document></kml>";
 }
+
+- (NSString *)gpxDescription
+{
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.systemTime];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd'T'HH:mm:ss'Z'"];
+    NSString *datetring = [formatter stringFromDate:date];
+    
+    
+    return [NSString stringWithFormat:@"<trkpt lat=\"%f\" lon=\"%f\"><ele>%f</ele><time>%@</time></trkpt>",
+            self.latitude,
+            self.longitude,
+            self.altitude,
+            datetring
+            ];
+}
+
++ (NSString *)gpxHeader
+{
+    return @"<?xml version=\"1.0\"?><gpx version=\"1.0\" creator=\"DataCollector.app\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">";
+}
+
++ (NSString *)gpxFooter
+{
+    return @"</gpx>";
+}
+
+/*
+ 
+*/
 
 @end

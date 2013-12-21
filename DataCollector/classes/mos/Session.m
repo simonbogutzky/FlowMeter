@@ -113,10 +113,10 @@
         
         self.locationRecordsCount = [NSNumber numberWithInt:[_locationRecords count]];
         
-        // Save *.kml
+        // Save *.gpx
         // Create the path, where the data should be saved
         NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *filename = [NSString stringWithFormat:@"%@-location-data.kml.zip", self.filename];
+        NSString *filename = [NSString stringWithFormat:@"%@-location-data.gpx.zip", self.filename];
         NSString *localPath = [rootPath stringByAppendingPathComponent:self.filepath];
         
         if (![[NSFileManager defaultManager] fileExistsAtPath:localPath])
@@ -126,21 +126,28 @@
         
         // Create data string
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
-        [dataString appendString:[Location kmlHeader]];
+        [dataString appendString:[Location gpxHeader]];
         
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[_locationRecords objectAtIndex:0] systemTime]];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"YYYY-MM-dd'T'HH:mm:ss'Z'"];
+        NSString *datetring = [formatter stringFromDate:date];
+        [dataString appendFormat:@"<time>%@</time>", datetring];
+        [dataString appendString:@"<trk>"];
         for (Location *locationRecord in _locationRecords) {
             
             // Append to data string
-            [dataString appendString:[locationRecord kmlDescription]];
+            [dataString appendString:[locationRecord gpxDescription]];
+            
         }
-        
-        [dataString appendString:[Location kmlFooter]];
+        [dataString appendString:@"</trk>"];
+        [dataString appendString:[Location gpxFooter]];
         
         // Zip data
         ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL:[NSURL fileURLWithPath:localPath]];
         [archive updateEntries:
          @[
-         [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-location-data.kml", self.filename]
+         [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-location-data.gpx", self.filename]
                                          compress:YES
                                         dataBlock:^(NSError** error)
           {

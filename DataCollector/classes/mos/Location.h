@@ -11,15 +11,19 @@
 
 @interface Location : NSObject
 
-@property (nonatomic, assign) double timestamp;
+@property (nonatomic, assign) double locationTime;
 @property (nonatomic, assign) double latitude;
 @property (nonatomic, assign) double longitude;
 @property (nonatomic, assign) double altitude;
 @property (nonatomic, assign) double speed;
+@property (nonatomic, assign) double systemTime;
 
 - (id)initWithTimestamp:(double)timestamp Location:(CLLocation *)location;
 - (NSString *)kmlDescription;
 + (NSString *)kmlHeader;
 + (NSString *)kmlFooter;
+- (NSString *)gpxDescription;
++ (NSString *)gpxHeader;
++ (NSString *)gpxFooter;
 
 @end
