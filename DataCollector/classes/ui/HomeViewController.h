@@ -10,6 +10,6 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface HomeViewController : UIViewController <CLLocationManagerDelegate>
+@interface HomeViewController : UIViewController <CLLocationManagerDelegate, UIAlertViewDelegate>
 
 @end

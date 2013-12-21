@@ -27,6 +27,7 @@
     
     IBOutlet UIView *_counterView;
     IBOutlet UILabel *_counterLabel;
+    IBOutlet UIButton *_startStopCollectionButton;
     int _countdown;
     NSTimer *_countdownTimer;
     
@@ -120,6 +121,7 @@
     }
     
     if (!_isCollection) {
+        [[self navigationController] setNavigationBarHidden:YES animated:YES];
         
         _countdown = 5;
         _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
@@ -129,11 +131,8 @@
         [startStopCollectionButton setTitle:@"stop" forState:0];
         [self startUpdates];
     } else {
-        [startStopCollectionButton setTitle:@"start" forState:0];
         [self stopUpdates];
-        
-//        _isCollection = !_isCollection;
-//        self.sliding = !_isCollection;
+        _isCollection = !_isCollection;
         
         if ([_session.motionRecords count] != 0) {
             [_user addSessionsObject:_session];
@@ -153,6 +152,8 @@
             });
             
         } else {
+            [[self navigationController] setNavigationBarHidden:NO animated:YES];
+            [startStopCollectionButton setTitle:@"start" forState:0];
             [_appDelegate.managedObjectContext deleteObject:_session];
         }
     }
@@ -176,7 +177,6 @@
         [_session initialize];
         
         _isCollection = !_isCollection;
-//        self.sliding = !_isCollection;
         NSLog(@"# Start collecting");
     }
 }
@@ -196,6 +196,14 @@
             [_session addLocationRecord:locationRecord];
         }
     }
+}
+
+#pragma mark -
+#pragma mark - UIAlertViewDelegate implementation
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [_startStopCollectionButton setTitle:@"start" forState:0];
 }
 
 @end
