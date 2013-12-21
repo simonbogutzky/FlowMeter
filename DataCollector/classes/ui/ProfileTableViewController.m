@@ -124,7 +124,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"editFirstName"]) {
-        EditViewController *editViewController = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        EditViewController *editViewController = (EditViewController *) navigationController.topViewController;
         editViewController.propertyName = @"firstName";
         editViewController.propertyDictionary = _userDictionary;
         [((UITableViewCell *) sender) setSelected:NO animated:YES];
@@ -132,7 +133,8 @@
     }
     
     if ([segue.identifier isEqualToString:@"editLastName"]) {
-        EditViewController *editViewController = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        EditViewController *editViewController = (EditViewController *) navigationController.topViewController;
         editViewController.propertyName = @"lastName";
         editViewController.propertyDictionary = _userDictionary;
         [((UITableViewCell *) sender) setSelected:NO animated:YES];
