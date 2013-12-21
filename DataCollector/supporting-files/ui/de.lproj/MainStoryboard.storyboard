@@ -395,7 +395,7 @@
                                             <segue destination="RKk-Uf-Ko4" kind="modal" identifier="editLastName" id="sGD-jV-yf9"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="lX2-DD-Hkt" detailTextLabel="iBq-la-LHe" style="IBUITableViewCellStyleValue2" id="2ZV-k7-jl6">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="lX2-DD-Hkt" detailTextLabel="iBq-la-LHe" style="IBUITableViewCellStyleValue2" id="2ZV-k7-jl6">
                                         <rect key="frame" x="0.0" y="143" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2ZV-k7-jl6" id="Xq4-fZ-4wX">
@@ -425,6 +425,9 @@
                             <outlet property="delegate" destination="rvc-y0-Bvq" id="szu-Mn-mIv"/>
                         </connections>
                     </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="RB5-Ih-sYF">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                     <connections>
                         <outlet property="_firstNameTableViewCell" destination="p1m-wM-Kim" id="QsR-Kf-jcw"/>
                         <outlet property="_lastNameTableViewCell" destination="GSh-fI-lot" id="77c-af-6fo"/>

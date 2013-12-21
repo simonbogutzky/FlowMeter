@@ -73,12 +73,12 @@
     NSString *cleanedFirstName = [self cleanName:_firstNameTableViewCell.detailTextLabel.text];
     NSString *cleanedLastName = [self cleanName:_lastNameTableViewCell.detailTextLabel.text];
     if (![cleanedFirstName isEqualToString:@""] && ![cleanedLastName isEqualToString:@""]) {
-        NSString *username = [NSString stringWithFormat:@"%@", cleanedFirstName];
+        NSString *username = [NSString stringWithFormat:@"%@.%@", cleanedFirstName, cleanedLastName];
         [_userDictionary setValue:username forKey:@"username"];
         _usernameTableViewCell.detailTextLabel.text = username;
     }
 }
-    
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     NSString *username = [_userDictionary valueForKey:@"username"];
