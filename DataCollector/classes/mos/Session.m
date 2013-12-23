@@ -99,8 +99,6 @@
          ]
                          error:nil];
         
-        
-        
         // Send notification
         NSDictionary *userInfo = @{@"localPath": localPath, @"filename": filename};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:nil userInfo:userInfo];
@@ -134,12 +132,14 @@
         NSString *datetring = [formatter stringFromDate:date];
         [dataString appendFormat:@"<time>%@</time>", datetring];
         [dataString appendString:@"<trk>"];
+        [dataString appendString:@"<trkseg>"];
         for (Location *locationRecord in _locationRecords) {
             
             // Append to data string
             [dataString appendString:[locationRecord gpxDescription]];
             
         }
+        [dataString appendString:@"</trkseg>"];
         [dataString appendString:@"</trk>"];
         [dataString appendString:[Location gpxFooter]];
         
