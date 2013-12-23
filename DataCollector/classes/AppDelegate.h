@@ -12,6 +12,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <DropboxSDK/DropboxSDK.h>
 #import "Reachability.h"
+#import <HeartRateMonitor/HeartRateMonitor.h>
 
 @class User;
 

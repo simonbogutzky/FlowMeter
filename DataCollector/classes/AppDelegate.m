@@ -63,6 +63,9 @@
 {
     // Override point for customization after application launch.
     
+    HeartRateMonitor *h = [[HeartRateMonitor alloc] init];
+    [h bla];
+    
     //Testflight
 //#define TESTING 1
 //#ifdef TESTING
