@@ -14,6 +14,7 @@
 @interface ProfileTableViewController () {
     NSManagedObjectContext *_managedObjectContext;
     User *_user;
+    IBOutlet UITableView *_tableView;
     IBOutlet UITableViewCell *_firstNameTableViewCell;
     IBOutlet UITableViewCell *_lastNameTableViewCell;
     IBOutlet UITableViewCell *_usernameTableViewCell;
@@ -77,6 +78,7 @@
         [_userDictionary setValue:username forKey:@"username"];
         _usernameTableViewCell.detailTextLabel.text = username;
     }
+    [_tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

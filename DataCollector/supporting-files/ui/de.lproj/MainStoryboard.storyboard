@@ -432,6 +432,7 @@
                     <connections>
                         <outlet property="_firstNameTableViewCell" destination="p1m-wM-Kim" id="QsR-Kf-jcw"/>
                         <outlet property="_lastNameTableViewCell" destination="GSh-fI-lot" id="77c-af-6fo"/>
+                        <outlet property="_tableView" destination="tg2-uC-fGM" id="eKO-3q-V8n"/>
                         <outlet property="_usernameTableViewCell" destination="2ZV-k7-jl6" id="YSN-vg-j4o"/>
                     </connections>
                 </tableViewController>
