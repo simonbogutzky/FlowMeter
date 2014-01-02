@@ -30,6 +30,7 @@
 
 @property (strong, nonatomic, readonly) CMMotionManager *sharedMotionManager;
 @property (strong, nonatomic, readonly) CLLocationManager *sharedLocationManager;
+@property (nonatomic, strong, readonly) HeartRateMonitorManager *heartRateMonitorManager;
 @property (strong, nonatomic, readonly) DBRestClient *sharedDbRestClient;
 @property (strong, nonatomic, readonly) Reachability *reachability;
 

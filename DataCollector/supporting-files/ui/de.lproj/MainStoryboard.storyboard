@@ -210,48 +210,6 @@
             </objects>
             <point key="canvasLocation" x="1578" y="-164"/>
         </scene>
-        <!--Prefs View Controller - Einstellungen-->
-        <scene sceneID="FC2-Vw-QYx">
-            <objects>
-                <viewController id="0pz-8w-o7q" customClass="PrefsViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="EB7-ew-RUY"/>
-                        <viewControllerLayoutGuide type="bottom" id="pty-Sy-a88"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="H0N-cd-lCD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIo-KG-TBb">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="pk8-WG-38E" kind="embed" id="ph2-lL-Ts4"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="pty-Sy-a88" firstAttribute="top" secondItem="gIo-KG-TBb" secondAttribute="bottom" id="RNk-zn-qQT"/>
-                            <constraint firstItem="gIo-KG-TBb" firstAttribute="top" secondItem="H0N-cd-lCD" secondAttribute="top" id="di7-Sv-tUG"/>
-                            <constraint firstAttribute="trailing" secondItem="gIo-KG-TBb" secondAttribute="trailing" id="r6L-Pe-c8c"/>
-                            <constraint firstItem="gIo-KG-TBb" firstAttribute="leading" secondItem="H0N-cd-lCD" secondAttribute="leading" id="v73-Ir-t69"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Einstellungen" id="bRH-TP-Yff">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="8Sh-K0-Wrg">
-                            <color key="tintColor" red="0.094117656350135803" green="0.51372551918029785" blue="0.61176472902297974" alpha="1" colorSpace="deviceRGB"/>
-                            <connections>
-                                <segue destination="ZhJ-4F-VUr" kind="unwind" unwindAction="unwindToMenuViewController:" id="Kew-6a-57E"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4ZH-t9-Qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="ZhJ-4F-VUr" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="1578" y="432"/>
-        </scene>
         <!--Session View Controller - Läufe-->
         <scene sceneID="kGv-F9-egz">
             <objects>
@@ -522,7 +480,7 @@
             </objects>
             <point key="canvasLocation" x="2015" y="1043"/>
         </scene>
-        <!--Prefs Table View Controller-->
+        <!--Prefs Table View Controller - Einstellungen-->
         <scene sceneID="sM5-jz-Dgc">
             <objects>
                 <tableViewController id="pk8-WG-38E" customClass="PrefsTableViewController" sceneMemberID="viewController">
@@ -534,7 +492,7 @@
                             <tableViewSection headerTitle="Verbindung" id="nSS-ym-ztX">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="zEO-Bl-onT">
-                                        <rect key="frame" x="0.0" y="55" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zEO-Bl-onT" id="FUX-c9-3Aq">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -568,6 +526,44 @@
                                             <constraint firstItem="cxS-zW-O3x" firstAttribute="leading" secondItem="zEO-Bl-onT" secondAttribute="leading" constant="20" id="Uo7-mV-GKV"/>
                                         </constraints>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="jbh-Ch-qM2">
+                                        <rect key="frame" x="0.0" y="163" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jbh-Ch-qM2" id="LEW-Mf-iIT">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="HxM Verbindung" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxo-2B-l8I">
+                                                    <rect key="frame" x="20" y="14" width="185" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="185" id="Gkr-oy-YHE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-nl-z8v">
+                                                    <rect key="frame" x="216" y="6" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.0" green="0.5647059083" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
+                                                    <connections>
+                                                        <action selector="discoverHeartMonitorDevice:" destination="pk8-WG-38E" eventType="valueChanged" id="g4H-3Y-BbL"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Igf-nl-z8v" firstAttribute="top" secondItem="LEW-Mf-iIT" secondAttribute="top" constant="6" id="3E6-97-olj"/>
+                                                <constraint firstAttribute="bottom" secondItem="Igf-nl-z8v" secondAttribute="bottom" constant="6" id="TxU-v6-ZrT"/>
+                                                <constraint firstAttribute="trailing" secondItem="Igf-nl-z8v" secondAttribute="trailing" constant="22" id="mnG-zv-gu3"/>
+                                                <constraint firstItem="dxo-2B-l8I" firstAttribute="top" secondItem="LEW-Mf-iIT" secondAttribute="top" constant="14" id="zDK-7A-RPY"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="dxo-2B-l8I" firstAttribute="leading" secondItem="jbh-Ch-qM2" secondAttribute="leading" constant="20" id="mLq-kd-1X5"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="0A1-Tz-Jd0" kind="push" id="ziL-na-nH7"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -576,13 +572,59 @@
                             <outlet property="delegate" destination="pk8-WG-38E" id="8jb-9h-9CO"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Einstellungen" id="cFc-Wy-kcx">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="Mxc-e5-vyG">
+                            <connections>
+                                <segue destination="Rea-cz-R8B" kind="unwind" unwindAction="unwindToMenuViewController:" id="hOr-D9-jMl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="_dbConnectionStatusSwitch" destination="vPw-LP-ebh" id="rds-oE-6Qp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i7X-cl-ewF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Rea-cz-R8B" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2015" y="454"/>
+            <point key="canvasLocation" x="1578" y="440"/>
+        </scene>
+        <!--Heart Rate Monitor Device Table View Controller - HxM Geräte-->
+        <scene sceneID="9G9-DV-8iP">
+            <objects>
+                <tableViewController id="0A1-Tz-Jd0" customClass="HeartRateMonitorDeviceTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1mA-jy-fvL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="heartRateMonitorDeviceNameCell" textLabel="BSX-sb-I5L" style="IBUITableViewCellStyleDefault" id="yjR-1m-vU3">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yjR-1m-vU3" id="lVh-ae-2Up">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BSX-sb-I5L">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="0A1-Tz-Jd0" id="2cE-P9-EJB"/>
+                            <outlet property="delegate" destination="0A1-Tz-Jd0" id="2Bs-FC-wjG"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="HxM Geräte" id="DuS-St-5RM"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PEn-qT-ckJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2015" y="440"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HZE-7k-ip6">
@@ -613,7 +655,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="0pz-8w-o7q" kind="relationship" relationship="rootViewController" id="sUX-M1-f0u"/>
+                        <segue destination="pk8-WG-38E" kind="relationship" relationship="rootViewController" id="dhm-6g-nw2"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O4R-UA-no4" userLabel="First Responder" sceneMemberID="firstResponder"/>

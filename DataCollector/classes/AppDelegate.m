@@ -17,6 +17,7 @@
     CLLocationManager *_locationManager;
     DBRestClient *_dbRestClient;
 }
+
 @end
 
 @implementation AppDelegate
@@ -24,6 +25,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize heartRateMonitorManager = _heartRateMonitorManager;
 
 #pragma mark -
 #pragma mark - Singletons
@@ -56,15 +58,20 @@
     return _dbRestClient;
 }
 
+- (HeartRateMonitorManager *)heartRateMonitorManager {
+    if (!_heartRateMonitorManager) {
+        _heartRateMonitorManager = [[HeartRateMonitorManager alloc] init];
+    }
+    return _heartRateMonitorManager;
+}
+
 #pragma mark -
 #pragma mark - UIApplicationDelegate implementation
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
-    HeartRateMonitor *h = [[HeartRateMonitor alloc] init];
-    [h bla];
+    NSLog(@"%d", self.heartRateMonitorManager.state);
     
     //Testflight
 //#define TESTING 1
