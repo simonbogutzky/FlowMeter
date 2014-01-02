@@ -51,7 +51,7 @@
 
 - (IBAction)changeHxMConnectionStatus:(UISwitch *)sender {
     if (_appDelegate.heartRateMonitorManager.hasConnection && !sender.on) {
-        [_appDelegate.heartRateMonitorManager disconnectHeartRateMonitorDevice:_appDelegate.heartRateMonitorManager.connectedHeartRateMonitorDevice];
+        [_appDelegate.heartRateMonitorManager disconnectHeartRateMonitorDevice];
     }
     sender.enabled = NO;
 }

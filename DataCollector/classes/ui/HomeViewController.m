@@ -88,6 +88,10 @@
     [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     locationManager.delegate = self;
     [locationManager startUpdatingLocation];
+    
+    if (_appDelegate.heartRateMonitorManager.hasConnection) {
+        [_appDelegate.heartRateMonitorManager startMonitoring];
+    }
 }
 
 - (void)stopUpdates
@@ -101,6 +105,10 @@
     // Stop location updates
     CLLocationManager *locationManager = [_appDelegate sharedLocationManager];
     [locationManager stopUpdatingLocation];
+    
+    if (_appDelegate.heartRateMonitorManager.hasConnection) {
+        [_appDelegate.heartRateMonitorManager stopMonitoring];
+    }
 }
 
 #pragma mark -
