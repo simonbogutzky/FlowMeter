@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <DropboxSDK/DropboxSDK.h>
 
-@interface PrefsTableViewController : UITableViewController <UITextFieldDelegate>
+@interface PrefsTableViewController : UITableViewController
 
 @end

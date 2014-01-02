@@ -21,16 +21,9 @@
 
 @implementation SessionTableViewController
 
-@synthesize navigationItem = _nItem;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-//    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    
-//    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-//    self.navigationItem.rightBarButtonItem = addButton;
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -38,12 +31,6 @@
     _user = [_appDelegate activeUserWithPredicate:isActivePredicate];
     
     _managedObjectContext = _appDelegate.managedObjectContext;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table View

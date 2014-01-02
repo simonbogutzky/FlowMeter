@@ -11,6 +11,5 @@
 @interface SessionTableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (weak, nonatomic) UINavigationItem *navigationItem;
 
 @end

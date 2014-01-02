@@ -16,13 +16,11 @@
 		60DFF73816AFE81000D64F7E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 60DFF73716AFE81000D64F7E /* libz.dylib */; };
 		D304C72E172E7473005CD297 /* Motion.m in Sources */ = {isa = PBXBuildFile; fileRef = D304C72D172E7473005CD297 /* Motion.m */; };
 		D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3383BA91726CE1500AAC993 /* CoreData.framework */; };
-		D3383BB61726D49700AAC993 /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3383BB51726D49700AAC993 /* SessionViewController.m */; };
 		D34C9D191725044D004C261C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D151725044D004C261C /* AppDelegate.m */; };
 		D34C9D1A1725044D004C261C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D161725044D004C261C /* main.m */; };
 		D34C9D2917250463004C261C /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D1F17250463004C261C /* HomeViewController.m */; };
 		D34C9D2B17250463004C261C /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D2317250463004C261C /* MenuViewController.m */; };
 		D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D2517250463004C261C /* PrefsTableViewController.m */; };
-		D34C9D2D17250463004C261C /* PrefsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D2717250463004C261C /* PrefsViewController.m */; };
 		D34C9D36172504BA004C261C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D34172504BA004C261C /* Icon.png */; };
 		D34C9D37172504BA004C261C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D35172504BA004C261C /* Icon@2x.png */; };
 		D34C9D3B172504C4004C261C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D38172504C4004C261C /* Default-568h@2x.png */; };
@@ -112,8 +110,6 @@
 		60DFF73716AFE81000D64F7E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D304C72D172E7473005CD297 /* Motion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Motion.m; path = classes/mos/Motion.m; sourceTree = "<group>"; };
 		D3383BA91726CE1500AAC993 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		D3383BB41726D49600AAC993 /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionViewController.h; path = classes/ui/SessionViewController.h; sourceTree = "<group>"; };
-		D3383BB51726D49700AAC993 /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionViewController.m; path = classes/ui/SessionViewController.m; sourceTree = "<group>"; };
 		D34C9D141725044D004C261C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = classes/AppDelegate.h; sourceTree = "<group>"; };
 		D34C9D151725044D004C261C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = classes/AppDelegate.m; sourceTree = "<group>"; };
 		D34C9D161725044D004C261C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = classes/main.m; sourceTree = "<group>"; };
@@ -123,8 +119,6 @@
 		D34C9D2317250463004C261C /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuViewController.m; path = classes/ui/MenuViewController.m; sourceTree = "<group>"; };
 		D34C9D2417250463004C261C /* PrefsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefsTableViewController.h; path = classes/ui/PrefsTableViewController.h; sourceTree = "<group>"; };
 		D34C9D2517250463004C261C /* PrefsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrefsTableViewController.m; path = classes/ui/PrefsTableViewController.m; sourceTree = "<group>"; };
-		D34C9D2617250463004C261C /* PrefsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefsViewController.h; path = classes/ui/PrefsViewController.h; sourceTree = "<group>"; };
-		D34C9D2717250463004C261C /* PrefsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrefsViewController.m; path = classes/ui/PrefsViewController.m; sourceTree = "<group>"; };
 		D34C9D31172504A8004C261C /* DataCollector-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DataCollector-Info.plist"; path = "supporting-files/DataCollector-Info.plist"; sourceTree = "<group>"; };
 		D34C9D32172504A8004C261C /* DataCollector-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DataCollector-Prefix.pch"; path = "supporting-files/DataCollector-Prefix.pch"; sourceTree = "<group>"; };
 		D34C9D34172504BA004C261C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = "supporting-files/images/app-icons/Icon.png"; sourceTree = "<group>"; };
@@ -429,12 +423,8 @@
 				D34C9D2317250463004C261C /* MenuViewController.m */,
 				D34C9D2417250463004C261C /* PrefsTableViewController.h */,
 				D34C9D2517250463004C261C /* PrefsTableViewController.m */,
-				D34C9D2617250463004C261C /* PrefsViewController.h */,
-				D34C9D2717250463004C261C /* PrefsViewController.m */,
 				D3A4629D1726E08900D454F7 /* SessionTableViewController.h */,
 				D3A4629E1726E08900D454F7 /* SessionTableViewController.m */,
-				D3383BB41726D49600AAC993 /* SessionViewController.h */,
-				D3383BB51726D49700AAC993 /* SessionViewController.m */,
 				D3B3DC1C1733BECB001F2830 /* ProfileTableViewController.h */,
 				D3B3DC1D1733BECB001F2830 /* ProfileTableViewController.m */,
 				D37067D51733F41300F86BBD /* EditViewController.h */,
@@ -592,10 +582,8 @@
 				D34C9D2917250463004C261C /* HomeViewController.m in Sources */,
 				D34C9D2B17250463004C261C /* MenuViewController.m in Sources */,
 				D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */,
-				D34C9D2D17250463004C261C /* PrefsViewController.m in Sources */,
 				D3C1290C1863290300C361CA /* ECSlidingViewController.m in Sources */,
 				D3C1291318632A1E00C361CA /* Reachability.m in Sources */,
-				D3383BB61726D49700AAC993 /* SessionViewController.m in Sources */,
 				D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */,
 				D3C129091863290300C361CA /* ECSlidingAnimationController.m in Sources */,
 				D39ADD8B187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.m in Sources */,
