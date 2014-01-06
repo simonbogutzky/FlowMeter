@@ -159,7 +159,7 @@ didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     if (error) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Verbindung wurde wieder getrennt", @"Verbindung wurde wieder getrennt")
                                                             message:[error localizedDescription]
-                                                           delegate:self
+                                                           delegate:nil
                                                   cancelButtonTitle:@"Ok"
                                                   otherButtonTitles:nil];
         [alertView show];
@@ -176,14 +176,10 @@ didFailToConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Fehler beim Verbinden", @"Fehler beim Verbinden")
                                                         message:[error localizedDescription]
-                                                       delegate:self
+                                                       delegate:nil
                                               cancelButtonTitle:@"Ok"
                                               otherButtonTitles:nil];
     [alertView show];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [_appDelegate.heartRateMonitorManager scanForHeartRateMonitorDevice];
 }
 
 @end
