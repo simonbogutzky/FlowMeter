@@ -48,9 +48,7 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>audio</string>
 		<string>location</string>
-		<string>external-accessory</string>
 		<string>bluetooth-central</string>
 	</array>
 	<key>UIFileSharingEnabled</key>
@@ -62,10 +60,6 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
-	</array>
-	<key>UISupportedExternalAccessoryProtocols</key>
-	<array>
-		<string>com.momentumoftechnology.fisica</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

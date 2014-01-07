@@ -555,7 +555,16 @@
                             <outlet property="delegate" destination="0A1-Tz-Jd0" id="2Bs-FC-wjG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="HxM Geräte" id="DuS-St-5RM"/>
+                    <navigationItem key="navigationItem" title="HxM Geräte" id="DuS-St-5RM">
+                        <barButtonItem key="rightBarButtonItem" title="Scan" id="ibw-L0-Seu">
+                            <connections>
+                                <action selector="scan:" destination="0A1-Tz-Jd0" id="xWh-yT-vSX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="scanButton" destination="ibw-L0-Seu" id="9Nh-Z3-ZHA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PEn-qT-ckJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -636,7 +645,6 @@
         <!--Navigation Controller-->
         <scene sceneID="KLG-vc-1F9">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ahS-Of-9Wl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="edit" automaticallyAdjustsScrollViewInsets="NO" id="RKk-Uf-Ko4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wLY-7J-LjY">
@@ -648,6 +656,7 @@
                         <segue destination="wdA-CD-sxA" kind="relationship" relationship="rootViewController" id="AEO-IQ-Z4G"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ahS-Of-9Wl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2091" y="1613"/>
         </scene>
