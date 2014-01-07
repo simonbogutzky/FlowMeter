@@ -33,6 +33,7 @@
     
 //    double startTimestamp;
 }
+@property (weak, nonatomic) IBOutlet UILabel *heartRateLabel;
 
 @end
 
@@ -90,6 +91,7 @@
     [locationManager startUpdatingLocation];
     
     if (_appDelegate.heartRateMonitorManager.hasConnection) {
+        _appDelegate.heartRateMonitorManager.delegate = self;
         [_appDelegate.heartRateMonitorManager startMonitoring];
     }
 }
@@ -107,6 +109,7 @@
     [locationManager stopUpdatingLocation];
     
     if (_appDelegate.heartRateMonitorManager.hasConnection) {
+        self.heartRateLabel.hidden = YES;
         [_appDelegate.heartRateMonitorManager stopMonitoring];
     }
 }
@@ -213,5 +216,14 @@
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [_startStopCollectionButton setTitle:@"start" forState:0];
 }
+
+- (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager didReceiveHeartrateMonitorData:(HeartRateMonitorData *)data fromHeartRateMonitorDevice:(HeartRateMonitorDevice *)device
+{
+    self.heartRateLabel.hidden = NO;
+    if (data.heartRate != -1) {
+        self.heartRateLabel.text = [NSString stringWithFormat:@"%d %@", data.heartRate, data.heartRateUnit];
+    }
+}
+
 
 @end

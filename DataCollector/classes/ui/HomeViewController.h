@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <DropboxSDK/DropboxSDK.h>
 #import <CoreLocation/CoreLocation.h>
+#import <HeartRateMonitor/HeartRateMonitor.h>
 
-@interface HomeViewController : UIViewController <CLLocationManagerDelegate, UIAlertViewDelegate>
+@interface HomeViewController : UIViewController <CLLocationManagerDelegate, UIAlertViewDelegate, HeartRateMonitorManagerDelegate>
 
 @end
