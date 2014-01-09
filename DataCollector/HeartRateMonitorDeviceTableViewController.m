@@ -91,9 +91,9 @@
 
 - (IBAction)scan:(id)sender
 {
-    
     self.scanButton.enabled = NO;
     self.heartRateMonitorDevices = nil;
+    [self.tableView reloadData];
     _appDelegate.heartRateMonitorManager.delegate = self;
     
     NSString *cause = nil;
