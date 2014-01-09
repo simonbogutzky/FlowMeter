@@ -27,10 +27,12 @@
 @dynamic timestamp;
 @dynamic motionRecordsCount;
 @dynamic locationRecordsCount;
+@dynamic heartrateRecordsCount;
 @dynamic user;
 
 @synthesize motionRecords = _motionRecords;
 @synthesize locationRecords = _locationRecords;
+@synthesize heartrateRecords = _heartrateRecords;
 
 - (void)initialize
 {
@@ -47,6 +49,7 @@
     
     _motionRecords = [NSMutableArray arrayWithCapacity:720000];
     _locationRecords = [NSMutableArray arrayWithCapacity:180000];
+    _heartrateRecords = [NSMutableArray arrayWithCapacity:720000];
 }
 
 - (void)addMotionRecord:(Motion *)motionRecord
@@ -59,49 +62,58 @@
     [_locationRecords addObject:locationRecord];
 }
 
+- (void)addHeartrateRecord:(HeartRateMonitorData *)heartrateRecord
+{
+    [_heartrateRecords addObject:heartrateRecord];
+}
+
 - (void)saveAndZipMotionRecords
 {
-    if ([_motionRecords count] != 0) {
+    if ([self.motionRecords count] != 0) {
         
-        self.motionRecordsCount = [NSNumber numberWithInt:[_motionRecords count]];
+        self.motionRecordsCount = [NSNumber numberWithInt:[self.motionRecords count]];
         
-        // Create the path, where the data should be saved
-        NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *filename = [NSString stringWithFormat:@"%@-motion-data.csv.zip", self.filename];
-        NSString *localPath = [rootPath stringByAppendingPathComponent:self.filepath];
-        
-        if (![[NSFileManager defaultManager] fileExistsAtPath:localPath])
-            [[NSFileManager defaultManager] createDirectoryAtPath:localPath withIntermediateDirectories:NO attributes:nil error:nil];
-        
-        localPath = [localPath stringByAppendingPathComponent:filename];
-        
-        // Create data string
+        // Create archive data
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
-        
         [dataString appendString:[Motion csvHeader]];
-        
         for (Motion *motionRecord in _motionRecords) {
-            
-            // Append to data string
             [dataString appendString:[motionRecord csvDescription]];
         }
+        NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
         
-        // Zip data
-        ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL:[NSURL fileURLWithPath:localPath]];
-        [archive updateEntries:
-         @[
-         [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-motion-data.csv", self.filename]
-                                         compress:YES
-                                        dataBlock:^(NSError** error)
-          {
-              return [dataString dataUsingEncoding:NSUTF8StringEncoding];
-          }]
-         ]
-                         error:nil];
+        NSString *archiveName = [self zipData:data withFilename:[NSString stringWithFormat:@"%@-%@", self.filename, @"motion-data.csv"]]; // Date prefix
+        if (archiveName != nil) {
+            
+            // Send notification
+            NSDictionary *userInfo = @{@"archiveName": archiveName};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:nil userInfo:userInfo];
+        }
+    }
+}
+
+- (void)saveAndZipHeartrateRecords
+{
+    if ([_heartrateRecords count] != 0) {
         
-        // Send notification
-        NSDictionary *userInfo = @{@"localPath": localPath, @"filename": filename};
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:nil userInfo:userInfo];
+        self.heartrateRecordsCount = [NSNumber numberWithInt:[_heartrateRecords count]];
+        
+        // Create archive data
+        NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
+        [dataString appendFormat:@"\"%@\"\n", @"rrIntervals"];
+        for (HeartRateMonitorData *heartRateMonitorData in _heartrateRecords) {
+            for (NSNumber *rrIntervall in heartRateMonitorData.rrIntervals) {
+                [dataString appendFormat:@"%d\n", [rrIntervall intValue]];
+            }
+        }
+        NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSString *archiveName = [self zipData:data withFilename:[NSString stringWithFormat:@"%@-%@", self.filename, @"rr-interval-data.csv"]]; // Date prefix
+        if (archiveName != nil) {
+            
+            // Send notification
+            NSDictionary *userInfo = @{@"archiveName": archiveName};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"HeartRateMonitorDataAvailable" object:nil userInfo:userInfo];
+        }
     }
 }
 
@@ -111,18 +123,7 @@
         
         self.locationRecordsCount = [NSNumber numberWithInt:[_locationRecords count]];
         
-        // Save *.gpx
-        // Create the path, where the data should be saved
-        NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *filename = [NSString stringWithFormat:@"%@-location-data.gpx.zip", self.filename];
-        NSString *localPath = [rootPath stringByAppendingPathComponent:self.filepath];
-        
-        if (![[NSFileManager defaultManager] fileExistsAtPath:localPath])
-            [[NSFileManager defaultManager] createDirectoryAtPath:localPath withIntermediateDirectories:NO attributes:nil error:nil];
-        
-        localPath = [localPath stringByAppendingPathComponent:filename];
-        
-        // Create data string
+        // Create  archive data
         NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
         [dataString appendString:[Location gpxHeader]];
         
@@ -143,23 +144,53 @@
         [dataString appendString:@"</trk>"];
         [dataString appendString:[Location gpxFooter]];
         
-        // Zip data
-        ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL:[NSURL fileURLWithPath:localPath]];
-        [archive updateEntries:
-         @[
-         [ZZArchiveEntry archiveEntryWithFileName:[NSString stringWithFormat:@"%@-location-data.gpx", self.filename]
-                                         compress:YES
-                                        dataBlock:^(NSError** error)
-          {
-              return [dataString dataUsingEncoding:NSUTF8StringEncoding];
-          }]
-         ]
-                         error:nil];
+        NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
         
-        // Send notification
-        NSDictionary *userInfo = @{@"localPath": localPath, @"filename": filename};
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:nil userInfo:userInfo];
+        NSString *archiveName = [self zipData:data withFilename:[NSString stringWithFormat:@"%@-%@", self.filename, @"location-data.gpx"]]; // Date prefix
+        if (archiveName != nil) {
+            
+            // Send notification
+            NSDictionary *userInfo = @{@"archiveName": archiveName};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:nil userInfo:userInfo];
+        }
     }
+}
+
+- (NSString *)zipData:(NSData *)data withFilename:(NSString*)filename
+{
+    // Create user root directory
+    NSString *rootDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    rootDirectory = [rootDirectory stringByAppendingPathComponent:self.user.username];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:rootDirectory])
+        [[NSFileManager defaultManager] createDirectoryAtPath:rootDirectory withIntermediateDirectories:NO attributes:nil error:nil];
+    
+    // Create archive entry
+    NSString *entryFileName = [NSString stringWithFormat:@"%@", filename];
+    ZZArchiveEntry *archiveEntry = [ZZArchiveEntry archiveEntryWithFileName:entryFileName
+                                                                   compress:YES
+                                                                  dataBlock:^(NSError** error)
+                                    {
+                                        return data;
+                                    }];
+    NSString *archiveName = nil;
+    if (archiveEntry) {
+        archiveName = [NSString stringWithFormat:@"%@.zip", filename];
+        NSString *archivePath = [rootDirectory stringByAppendingPathComponent:archiveName];
+        
+        ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL:[NSURL fileURLWithPath:archivePath]];
+        NSError *error = nil;
+        [archive updateEntries:@[archiveEntry] error:&error];
+        
+        if (error) {
+            NSLog(@"Error: %@", [error localizedDescription]);
+            return nil;
+        }
+        
+    } else {
+        NSLog(@"Error while creating archive entry: %@", entryFileName);
+        return nil;
+    }
+    return archiveName;
 }
 
 @end

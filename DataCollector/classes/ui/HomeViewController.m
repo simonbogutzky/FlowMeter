@@ -151,6 +151,7 @@
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 [_appDelegate saveContext];
                 [_session saveAndZipMotionRecords];
+                [_session saveAndZipHeartrateRecords];
                 [_session saveAndZipLocationRecords];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -217,13 +218,21 @@
     [_startStopCollectionButton setTitle:@"start" forState:0];
 }
 
+#pragma mark -
+#pragma mark - HeartRateMonitorManagerDelegate implementation
+
 - (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager didReceiveHeartrateMonitorData:(HeartRateMonitorData *)data fromHeartRateMonitorDevice:(HeartRateMonitorDevice *)device
 {
     self.heartRateLabel.hidden = NO;
     if (data.heartRate != -1) {
         self.heartRateLabel.text = [NSString stringWithFormat:@"%d %@", data.heartRate, data.heartRateUnit];
     }
+    
+    if(_isCollection) {
+        
+        // Add hr record
+        [_session addHeartrateRecord:data];
+    }
 }
-
 
 @end

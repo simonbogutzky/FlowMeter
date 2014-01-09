@@ -96,6 +96,7 @@
     
     // Observe notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"MotionDataAvailable" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"HeartRateMonitorDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"LocationDataAvailable" object:nil];
     
     // Audio Session with mixing    
@@ -265,15 +266,23 @@
             NSString *filename = [NSString stringWithFormat:@"%@-motion-data.csv.zip", [session valueForKey:@"filename"]];
             NSString *localPath = [rootPath stringByAppendingPathComponent:[session valueForKey:@"filepath"]];
             localPath = [localPath stringByAppendingPathComponent:filename];
-            [self uploadFile:filename localPath:localPath];
+//            [self uploadFile:filename localPath:localPath];
         }
         
         if ([session.locationRecordsCount intValue] != 0) {
             NSString *filename = [NSString stringWithFormat:@"%@-location-data.gpx.zip", [session valueForKey:@"filename"]];
             NSString *localPath = [rootPath stringByAppendingPathComponent:[session valueForKey:@"filepath"]];
             localPath = [localPath stringByAppendingPathComponent:filename];
-            [self uploadFile:filename localPath:localPath];
+//            [self uploadFile:filename localPath:localPath];
         }
+        
+        if ([session.heartrateRecordsCount intValue] != 0) {
+            NSString *filename = [NSString stringWithFormat:@"%@-rr-interval-data.csv.zip", [session valueForKey:@"filename"]];
+            NSString *localPath = [rootPath stringByAppendingPathComponent:[session valueForKey:@"filepath"]];
+            localPath = [localPath stringByAppendingPathComponent:filename];
+//            [self uploadFile:filename localPath:localPath];
+        }
+
     }
 }
 
@@ -329,24 +338,28 @@
 
 - (void)dataAvailable:(NSNotification *)notification {
     NSDictionary *userInfo = [notification userInfo];
-    NSString *localPath = userInfo[@"localPath"];
-    NSString *filename = userInfo[@"filename"];
+
+    NSString *filename = userInfo[@"archiveName"];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self uploadFile:filename localPath:localPath];
+        [self uploadFile:filename];
     });
 }
 
 #pragma mark -
 #pragma mark - Dropbox convenient methods
 
-- (void)uploadFile:(NSString *)filename localPath:(NSString *)localPath
+- (void)uploadFile:(NSString *)filename
 {
     if (_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
         NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
         User *user = [self activeUserWithPredicate:isActivePredicate];
         
-        NSString *destDir = [NSString stringWithFormat:@"/%@", user.username];
-        [[self sharedDbRestClient] uploadFile:filename toPath:destDir withParentRev:nil fromPath:localPath];
+        NSString *sourcePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        sourcePath = [sourcePath stringByAppendingPathComponent:user.username];
+        sourcePath = [sourcePath stringByAppendingPathComponent:filename];
+        
+        NSString *destinationPath = [NSString stringWithFormat:@"/%@", user.username];
+        [[self sharedDbRestClient] uploadFile:filename toPath:destinationPath withParentRev:nil fromPath:sourcePath];
     }
 }
 
@@ -362,17 +375,17 @@
     
     NSError *error = nil;
    
-    // Delete zip file
+    // Delete archive
     NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *localPath = [rootPath stringByAppendingPathComponent:user.username];
-    localPath = [localPath stringByAppendingPathComponent:metadata.filename];
+    rootPath = [rootPath stringByAppendingPathComponent:user.username];
+    NSString *archivePath = [rootPath stringByAppendingPathComponent:metadata.filename];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:localPath error:&error];
+    [fileManager removeItemAtPath:archivePath error:&error];
     
     // Set data entry synced
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" \\(.+\\)" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *filename = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
-    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data).(csv|gpx).zip" options:NSRegularExpressionCaseInsensitive error:&error];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data|-rr-interval-data).(csv|gpx).zip" options:NSRegularExpressionCaseInsensitive error:&error];
     filename = [regex stringByReplacingMatchesInString:filename options:0 range:NSMakeRange(0, [filename length]) withTemplate:@""];
     NSLog(@"# Sync session with filename: %@", filename);
     [self setSessionSyncedByFilename:filename];

@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <HeartRateMonitor/HeartRateMonitor.h>
 
-@class HeartrateRecord, Location, Motion, User;
+@class Location, Motion, User;
 
 @interface Session : NSManagedObject
 
@@ -17,19 +18,24 @@
 @property (nonatomic, strong) NSString *filepath;
 @property (nonatomic, strong) NSNumber *isSynced;
 @property (nonatomic, strong) NSNumber *motionRecordsCount;
+@property (nonatomic, strong) NSNumber *heartrateRecordsCount;
 @property (nonatomic, strong) NSNumber *locationRecordsCount;
 @property (nonatomic, strong) NSDate *timestamp;
 @property (nonatomic, strong) User *user;
 
 @property (nonatomic, strong) NSMutableArray *motionRecords;
+@property (nonatomic, strong) NSMutableArray *heartrateRecords;
 @property (nonatomic, strong) NSMutableArray *locationRecords;
 
 - (void)initialize;
 
 - (void)addMotionRecord:(Motion *)motionRecord;
 - (void)addLocationRecord:(Location *)locationRecord;
+- (void)addHeartrateRecord:(HeartRateMonitorData *)heartrateRecord;
+
 
 - (void)saveAndZipMotionRecords;
+- (void)saveAndZipHeartrateRecords;
 - (void)saveAndZipLocationRecords;
 
 @end
