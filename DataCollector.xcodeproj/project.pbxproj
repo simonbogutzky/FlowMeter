@@ -15,6 +15,7 @@
 		60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60AA4F7216A829100026DE8D /* CoreMotion.framework */; };
 		60DFF73816AFE81000D64F7E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 60DFF73716AFE81000D64F7E /* libz.dylib */; };
 		D304C72E172E7473005CD297 /* Motion.m in Sources */ = {isa = PBXBuildFile; fileRef = D304C72D172E7473005CD297 /* Motion.m */; };
+		D330863D187ECF1900A7B9DE /* HeartRateMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D330863C187ECF1900A7B9DE /* HeartRateMonitor.framework */; };
 		D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3383BA91726CE1500AAC993 /* CoreData.framework */; };
 		D34C9D191725044D004C261C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D151725044D004C261C /* AppDelegate.m */; };
 		D34C9D1A1725044D004C261C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D161725044D004C261C /* main.m */; };
@@ -28,7 +29,6 @@
 		D34C9D3D172504C4004C261C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D3A172504C4004C261C /* Default@2x.png */; };
 		D34C9D461725051C004C261C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D421725051C004C261C /* InfoPlist.strings */; };
 		D34C9D471725051C004C261C /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D441725051C004C261C /* MainStoryboard.storyboard */; };
-		D368A05618689CAF009AC5BB /* HeartRateMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D368A05018689B19009AC5BB /* HeartRateMonitor.framework */; };
 		D36C44B016D788BE000B8502 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
 		D36C44B216D7898B000B8502 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44B116D7898B000B8502 /* ExternalAccessory.framework */; };
 		D36DC1A8173931E300D84CF4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D36DC1A6173931E200D84CF4 /* Localizable.strings */; };
@@ -62,20 +62,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D368A04F18689B19009AC5BB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D368A04B18689B19009AC5BB /* HeartRateMonitor.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D368A03618689A83009AC5BB;
-			remoteInfo = HeartRateMonitor;
-		};
-		D368A05418689CA4009AC5BB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D368A04B18689B19009AC5BB /* HeartRateMonitor.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D368A03518689A83009AC5BB;
-			remoteInfo = HeartRateMonitor;
-		};
 		D3C1291A18632A9700C361CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D3C1291418632A9600C361CA /* zipzap.xcodeproj */;
@@ -109,6 +95,7 @@
 		60AA4F7216A829100026DE8D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		60DFF73716AFE81000D64F7E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D304C72D172E7473005CD297 /* Motion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Motion.m; path = classes/mos/Motion.m; sourceTree = "<group>"; };
+		D330863C187ECF1900A7B9DE /* HeartRateMonitor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HeartRateMonitor.framework; sourceTree = "<group>"; };
 		D3383BA91726CE1500AAC993 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D34C9D141725044D004C261C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = classes/AppDelegate.h; sourceTree = "<group>"; };
 		D34C9D151725044D004C261C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = classes/AppDelegate.m; sourceTree = "<group>"; };
@@ -128,7 +115,6 @@
 		D34C9D3A172504C4004C261C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "supporting-files/images/launch-images/Default@2x.png"; sourceTree = "<group>"; };
 		D35FEB9D17256B9200D92DEB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "supporting-files/ui/de.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D35FEB9E17256B9200D92DEB /* de */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = de; path = "supporting-files/ui/de.lproj/MainStoryboard.storyboard"; sourceTree = "<group>"; };
-		D368A04B18689B19009AC5BB /* HeartRateMonitor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HeartRateMonitor.xcodeproj; path = "../../../bogutzky/git-repos/HeartRateMonitor/HeartRateMonitor.xcodeproj"; sourceTree = "<group>"; };
 		D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D36C44B116D7898B000B8502 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		D36DC1A7173931E300D84CF4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "DataCollector/supporting-files/ui/de.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -186,7 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D368A05618689CAF009AC5BB /* HeartRateMonitor.framework in Frameworks */,
+				D330863D187ECF1900A7B9DE /* HeartRateMonitor.framework in Frameworks */,
 				D3C1292B1863351E00C361CA /* libzipzap.a in Frameworks */,
 				D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */,
 				D3C7ADCB171EEA8C000A7D34 /* SystemConfiguration.framework in Frameworks */,
@@ -235,6 +221,7 @@
 		604CCD8D16A6F31000E87194 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D330863C187ECF1900A7B9DE /* HeartRateMonitor.framework */,
 				D3C1292918632C9A00C361CA /* DropboxSDK.framework */,
 				4523E19A16F9EE2600761733 /* AudioToolbox.framework */,
 				4523E19B16F9EE2600761733 /* AVFoundation.framework */,
@@ -311,7 +298,6 @@
 		D35FEABC17253FF800D92DEB /* ExternalProjects */ = {
 			isa = PBXGroup;
 			children = (
-				D368A04B18689B19009AC5BB /* HeartRateMonitor.xcodeproj */,
 				D3C1291418632A9600C361CA /* zipzap.xcodeproj */,
 			);
 			name = ExternalProjects;
@@ -360,14 +346,6 @@
 			name = ECSlidingViewController;
 			path = "dependent-classes/ECSlidingViewController/ECSlidingViewController/Vendor/ECSlidingViewController";
 			sourceTree = SOURCE_ROOT;
-		};
-		D368A04C18689B19009AC5BB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D368A05018689B19009AC5BB /* HeartRateMonitor.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
 		};
 		D3B133F51729582600CEFFC1 /* MOS */ = {
 			isa = PBXGroup;
@@ -476,7 +454,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D368A05518689CA4009AC5BB /* PBXTargetDependency */,
 			);
 			name = DataCollector;
 			productName = DataCollector;
@@ -505,10 +482,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = D368A04C18689B19009AC5BB /* Products */;
-					ProjectRef = D368A04B18689B19009AC5BB /* HeartRateMonitor.xcodeproj */;
-				},
-				{
 					ProductGroup = D3C1291518632A9600C361CA /* Products */;
 					ProjectRef = D3C1291418632A9600C361CA /* zipzap.xcodeproj */;
 				},
@@ -521,13 +494,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		D368A05018689B19009AC5BB /* HeartRateMonitor.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework.static;
-			path = HeartRateMonitor.framework;
-			remoteRef = D368A04F18689B19009AC5BB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		D3C1291B18632A9700C361CA /* libzipzap.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -602,14 +568,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D368A05518689CA4009AC5BB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = HeartRateMonitor;
-			targetProxy = D368A05418689CA4009AC5BB /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D34C9D421725051C004C261C /* InfoPlist.strings */ = {
@@ -705,6 +663,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/DropboxSDK/",
+					"/Users/simonbogutzky/Documents/Entwicklung/projekte/hs-bremen/git-repos/data-collector",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/HeartRateMonitor-hgptdpbzlkjpvugduodsnncksyrg/Build/Intermediates/ArchiveIntermediates/HeartRateMonitor/IntermediateBuildFilesPath/UninstalledProducts",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DataCollector/supporting-files/DataCollector-Prefix.pch";
@@ -740,6 +700,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/DropboxSDK/",
+					"/Users/simonbogutzky/Documents/Entwicklung/projekte/hs-bremen/git-repos/data-collector",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/HeartRateMonitor-hgptdpbzlkjpvugduodsnncksyrg/Build/Intermediates/ArchiveIntermediates/HeartRateMonitor/IntermediateBuildFilesPath/UninstalledProducts",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DataCollector/supporting-files/DataCollector-Prefix.pch";
