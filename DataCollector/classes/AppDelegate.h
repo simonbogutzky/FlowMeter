@@ -14,6 +14,8 @@
 #import "Reachability.h"
 #import <HeartRateMonitor/HeartRateMonitor.h>
 
+#define ZIP 0
+
 @class User;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, DBRestClientDelegate, NSStreamDelegate>

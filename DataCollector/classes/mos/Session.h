@@ -14,9 +14,9 @@
 
 @interface Session : NSManagedObject
 
-@property (nonatomic, strong) NSString *filename;
-@property (nonatomic, strong) NSString *filepath;
+@property (nonatomic, strong) NSString *identifier;
 @property (nonatomic, strong) NSNumber *isSynced;
+@property (nonatomic, strong) NSNumber *isZipped;
 @property (nonatomic, strong) NSNumber *motionRecordsCount;
 @property (nonatomic, strong) NSNumber *heartrateRecordsCount;
 @property (nonatomic, strong) NSNumber *locationRecordsCount;
@@ -34,8 +34,8 @@
 - (void)addHeartrateRecord:(HeartRateMonitorData *)heartrateRecord;
 
 
-- (void)storeMotionDataAndZip:(BOOL)zip;
-- (void)storeHeartRateMonitorDataAndZip:(BOOL)zip;
-- (void)storeLocationDataAndZip:(BOOL)zip;
+- (void)storeMotionData;
+- (void)storeHeartRateMonitorData;
+- (void)storeLocationData;
 
 @end

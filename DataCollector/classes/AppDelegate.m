@@ -261,28 +261,22 @@
     NSMutableArray *objects = [self fetchUnsyncSessions];
     for (Session *session in objects) {
         
-        NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        BOOL isZipped = [[session valueForKey:@"isZipped"] boolValue];
+        
         if ([session.motionRecordsCount intValue] != 0) {
-            NSString *filename = [NSString stringWithFormat:@"%@-motion-data.csv.zip", [session valueForKey:@"filename"]];
-            NSString *localPath = [rootPath stringByAppendingPathComponent:[session valueForKey:@"filepath"]];
-            localPath = [localPath stringByAppendingPathComponent:filename];
-//            [self uploadFile:filename localPath:localPath];
+            NSString *filename = [NSString stringWithFormat:@"%@-motion-data.csv%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
+            [self uploadFile:filename];
         }
         
         if ([session.locationRecordsCount intValue] != 0) {
-            NSString *filename = [NSString stringWithFormat:@"%@-location-data.gpx.zip", [session valueForKey:@"filename"]];
-            NSString *localPath = [rootPath stringByAppendingPathComponent:[session valueForKey:@"filepath"]];
-            localPath = [localPath stringByAppendingPathComponent:filename];
-//            [self uploadFile:filename localPath:localPath];
+            NSString *filename = [NSString stringWithFormat:@"%@-location-data.gpx%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
+            [self uploadFile:filename];
         }
         
         if ([session.heartrateRecordsCount intValue] != 0) {
-            NSString *filename = [NSString stringWithFormat:@"%@-rr-interval-data.csv.zip", [session valueForKey:@"filename"]];
-            NSString *localPath = [rootPath stringByAppendingPathComponent:[session valueForKey:@"filepath"]];
-            localPath = [localPath stringByAppendingPathComponent:filename];
-//            [self uploadFile:filename localPath:localPath];
+            NSString *filename = [NSString stringWithFormat:@"%@-rr-interval-data.csv%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
+            [self uploadFile:filename];
         }
-
     }
 }
 
@@ -309,24 +303,24 @@
     return mutableFetchResults;
 }
 
-- (void)setSessionSyncedByFilename:(NSString *)filename
+- (void)setSessionSyncedByIdentifier:(NSString *)identifier
 {
-    NSManagedObject *object = [self fetchUnsyncedSessionByFilename:filename];
+    NSManagedObject *object = [self fetchUnsyncedSessionByIdentifier:identifier];
     if (object != nil) {
         [object setValue:@1 forKey:@"isSynced"];
         [self saveContext];
     }
 }
 
-- (NSManagedObject *)fetchUnsyncedSessionByFilename:(NSString *)filename
+- (NSManagedObject *)fetchUnsyncedSessionByIdentifier:(NSString *)identifier
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate *filenamePredicate = [NSPredicate predicateWithFormat:@"filename == %@ && isSynced == %@", filename, @0];
-    [fetchRequest setPredicate:filenamePredicate];
+    NSPredicate *identifierPredicate = [NSPredicate predicateWithFormat:@"identifier == %@ && isSynced == %@", identifier, @0];
+    [fetchRequest setPredicate:identifierPredicate];
     
     NSError *error = nil;
     NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
@@ -384,11 +378,11 @@
     
     // Set data entry synced
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" \\(.+\\)" options:NSRegularExpressionCaseInsensitive error:&error];
-    NSString *filename = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
-    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data|-rr-interval-data).(csv|gpx)" options:NSRegularExpressionCaseInsensitive error:&error];
-    filename = [regex stringByReplacingMatchesInString:filename options:0 range:NSMakeRange(0, [filename length]) withTemplate:@""];
-    NSLog(@"# Sync session with filename: %@", filename);
-    [self setSessionSyncedByFilename:filename];
+    NSString *identifier = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data|-rr-interval-data).(csv|gpx)(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
+    identifier = [regex stringByReplacingMatchesInString:identifier options:0 range:NSMakeRange(0, [identifier length]) withTemplate:@""];
+    NSLog(@"# Sync session with identifier: %@", identifier);
+    [self setSessionSyncedByIdentifier:identifier];
 }
 
 - (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error

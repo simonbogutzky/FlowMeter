@@ -150,10 +150,9 @@
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 [_appDelegate saveContext];
-                BOOL zip = NO;
-                [_session storeMotionDataAndZip:zip];
-                [_session storeHeartRateMonitorDataAndZip:zip];
-                [_session storeLocationDataAndZip:zip];
+                [_session storeMotionData];
+                [_session storeHeartRateMonitorData];
+                [_session storeLocationData];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
@@ -186,6 +185,7 @@
         _counterView.hidden = YES;
         
         _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:_appDelegate.managedObjectContext];
+        _session.isZipped = [NSNumber numberWithBool:ZIP];
         _session.user = _user;
         [_session initialize];
         

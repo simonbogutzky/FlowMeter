@@ -23,14 +23,15 @@
 
 @implementation Session
 
-@dynamic filename;
-@dynamic filepath;
+@dynamic identifier;
 @dynamic isSynced;
+@dynamic isZipped;
 @dynamic timestamp;
 @dynamic motionRecordsCount;
 @dynamic locationRecordsCount;
 @dynamic heartrateRecordsCount;
 @dynamic user;
+
 
 @synthesize motionRecords = _motionRecords;
 @synthesize locationRecords = _locationRecords;
@@ -46,8 +47,7 @@
     NSString *dateString = [dateFormatter stringFromDate:self.timestamp];
     [dateFormatter setDateFormat:@"HH-mm-ss"];
     NSString *timeString = [dateFormatter stringFromDate:self.timestamp];
-    self.filename = [NSString stringWithFormat:@"%@-t%@", dateString, timeString];
-    self.filepath = [NSString stringWithFormat:@"%@/", self.user.username];
+    self.identifier = [NSString stringWithFormat:@"%@-t%@", dateString, timeString];
     
     _motionRecords = [NSMutableArray arrayWithCapacity:720000];
     _locationRecords = [NSMutableArray arrayWithCapacity:180000];
@@ -69,7 +69,7 @@
     [_heartrateRecords addObject:heartrateRecord];
 }
 
-- (void)storeMotionDataAndZip:(BOOL)zip
+- (void)storeMotionData
 {
     if ([self.motionRecords count] != 0) {
         
@@ -83,9 +83,9 @@
         }
         NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
         
-        NSString *filename = [NSString stringWithFormat:@"%@-%@", self.filename, @"motion-data.csv"]; // Date prefix
+        NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"motion-data.csv"];
         NSString *newFilename;
-        if (zip) {
+        if ([self.isZipped boolValue]) {
             newFilename = [self zipData:data withFilename:filename];
         } else {
             newFilename = [self writeData:data withFilename:filename];
@@ -99,7 +99,7 @@
     }
 }
 
-- (void)storeHeartRateMonitorDataAndZip:(BOOL)zip
+- (void)storeHeartRateMonitorData
 {
     if ([_heartrateRecords count] != 0) {
         
@@ -115,9 +115,9 @@
         }
         NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
         
-        NSString *filename = [NSString stringWithFormat:@"%@-%@", self.filename, @"rr-interval-data.csv"]; // Date prefix
+        NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"rr-interval-data.csv"];
         NSString *newFilename;
-        if (zip) {
+        if ([self.isZipped boolValue]) {
             newFilename = [self zipData:data withFilename:filename];
         } else {
             newFilename = [self writeData:data withFilename:filename];
@@ -131,7 +131,7 @@
     }
 }
 
-- (void)storeLocationDataAndZip:(BOOL)zip
+- (void)storeLocationData
 {
     if ([_locationRecords count] != 0) {
         
@@ -160,9 +160,9 @@
         
         NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
         
-        NSString *filename = [NSString stringWithFormat:@"%@-%@", self.filename, @"location-data.gpx"]; // Date prefix
+        NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"location-data.gpx"];
         NSString *newFilename;
-        if (zip) {
+        if ([self.isZipped boolValue]) {
             newFilename = [self zipData:data withFilename:filename];
         } else {
             newFilename = [self writeData:data withFilename:filename];
