@@ -34,7 +34,7 @@
 - (void)addHeartrateRecord:(HeartRateMonitorData *)heartrateRecord;
 
 
-- (void)storeMotionData;
+- (void)storeMotions:(NSArray *)motions andNotify:(BOOL)notify;
 - (void)storeHeartRateMonitorData;
 - (void)storeLocationData;
 

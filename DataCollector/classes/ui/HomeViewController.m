@@ -150,7 +150,7 @@
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 [_appDelegate saveContext];
-                [_session storeMotionData];
+                [_session storeMotions:nil andNotify:YES];
                 [_session storeHeartRateMonitorData];
                 [_session storeLocationData];
                 dispatch_async(dispatch_get_main_queue(), ^{

@@ -49,14 +49,22 @@
     NSString *timeString = [dateFormatter stringFromDate:self.timestamp];
     self.identifier = [NSString stringWithFormat:@"%@-t%@", dateString, timeString];
     
-    _motionRecords = [NSMutableArray arrayWithCapacity:720000];
-    _locationRecords = [NSMutableArray arrayWithCapacity:180000];
-    _heartrateRecords = [NSMutableArray arrayWithCapacity:720000];
+    _motionRecords = [NSMutableArray arrayWithCapacity:24000];
+    _locationRecords = [NSMutableArray arrayWithCapacity:10000];
+    _heartrateRecords = [NSMutableArray arrayWithCapacity:10800];
 }
 
 - (void)addMotionRecord:(Motion *)motionRecord
 {
-    [_motionRecords addObject:motionRecord];
+        [_motionRecords addObject:motionRecord];
+        
+        if ([_motionRecords count] >= 1000) {
+            NSArray *motions = [NSArray arrayWithArray:_motionRecords];
+            [_motionRecords removeAllObjects];
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                [self storeMotions:motions andNotify:NO];
+            });
+    }
 }
 
 - (void)addLocationRecord:(Location *)locationRecord
@@ -69,33 +77,33 @@
     [_heartrateRecords addObject:heartrateRecord];
 }
 
-- (void)storeMotionData
+- (void)storeMotions:(NSArray *)motions andNotify:(BOOL)notify
 {
-    if ([self.motionRecords count] != 0) {
+    if (motions == nil) {
+        motions = _motionRecords;
+    }
+    
+    self.motionRecordsCount = [NSNumber numberWithInt:[self.motionRecordsCount intValue] + [motions count]];
+
+    // Create archive data
+    NSMutableData *data = [NSMutableData dataWithData:[[Motion csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+    for (Motion *motion in motions) {
+        [data appendData:[[motion csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+    }
+    
+    NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"motion-data.csv"];
+    NSString *newFilename;
+    if ([self.isZipped boolValue]) {
+        newFilename = [self zipData:data withFilename:filename];
+    } else {
+        newFilename = [self writeData:data withFilename:filename];
+    }
+    
+    if (notify) {
         
-        self.motionRecordsCount = [NSNumber numberWithInt:[self.motionRecords count]];
-        
-        // Create archive data
-        NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
-        [dataString appendString:[Motion csvHeader]];
-        for (Motion *motionRecord in _motionRecords) {
-            [dataString appendString:[motionRecord csvDescription]];
-        }
-        NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
-        
-        NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"motion-data.csv"];
-        NSString *newFilename;
-        if ([self.isZipped boolValue]) {
-            newFilename = [self zipData:data withFilename:filename];
-        } else {
-            newFilename = [self writeData:data withFilename:filename];
-        }
-        if (newFilename != nil) {
-            
-            // Send notification
-            NSDictionary *userInfo = @{@"filename": newFilename};
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:nil userInfo:userInfo];
-        }
+        // Send notification
+        NSDictionary *userInfo = @{@"filename": newFilename};
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:nil userInfo:userInfo];
     }
 }
 
@@ -179,9 +187,21 @@
 - (NSString *)writeData:(NSData *)data withFilename:(NSString *)filename
 {
     NSString *filePath = [self.userDirectory stringByAppendingPathComponent:filename];
-    if (![data writeToFile:filePath atomically:YES]) {
-        return nil;
+//    if (![data writeToFile:filePath atomically:YES]) {
+//        return nil;
+//    }
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:filePath])
+    {
+        [fileManager createFileAtPath:filePath contents:nil attributes:nil];
     }
+    
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
+    [fileHandle seekToEndOfFile];
+    [fileHandle writeData:data];
+    [fileHandle closeFile];
+    
     return filename;
 }
 
