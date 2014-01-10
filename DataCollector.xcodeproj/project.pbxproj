@@ -664,7 +664,6 @@
 					"$(inherited)",
 					"$(SRCROOT)/DropboxSDK/",
 					"/Users/simonbogutzky/Documents/Entwicklung/projekte/hs-bremen/git-repos/data-collector",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/HeartRateMonitor-hgptdpbzlkjpvugduodsnncksyrg/Build/Intermediates/ArchiveIntermediates/HeartRateMonitor/IntermediateBuildFilesPath/UninstalledProducts",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DataCollector/supporting-files/DataCollector-Prefix.pch";
@@ -701,7 +700,6 @@
 					"$(inherited)",
 					"$(SRCROOT)/DropboxSDK/",
 					"/Users/simonbogutzky/Documents/Entwicklung/projekte/hs-bremen/git-repos/data-collector",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/HeartRateMonitor-hgptdpbzlkjpvugduodsnncksyrg/Build/Intermediates/ArchiveIntermediates/HeartRateMonitor/IntermediateBuildFilesPath/UninstalledProducts",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DataCollector/supporting-files/DataCollector-Prefix.pch";

@@ -34,8 +34,8 @@
 - (void)addHeartrateRecord:(HeartRateMonitorData *)heartrateRecord;
 
 
-- (void)saveAndZipMotionRecords;
-- (void)saveAndZipHeartrateRecords;
-- (void)saveAndZipLocationRecords;
+- (void)storeMotionDataAndZip:(BOOL)zip;
+- (void)storeHeartRateMonitorDataAndZip:(BOOL)zip;
+- (void)storeLocationDataAndZip:(BOOL)zip;
 
 @end

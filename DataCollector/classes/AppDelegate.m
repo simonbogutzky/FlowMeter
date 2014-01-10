@@ -339,7 +339,7 @@
 - (void)dataAvailable:(NSNotification *)notification {
     NSDictionary *userInfo = [notification userInfo];
 
-    NSString *filename = userInfo[@"archiveName"];
+    NSString *filename = userInfo[@"filename"];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self uploadFile:filename];
     });
@@ -385,7 +385,7 @@
     // Set data entry synced
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" \\(.+\\)" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *filename = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
-    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data|-rr-interval-data).(csv|gpx).zip" options:NSRegularExpressionCaseInsensitive error:&error];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data|-rr-interval-data).(csv|gpx)" options:NSRegularExpressionCaseInsensitive error:&error];
     filename = [regex stringByReplacingMatchesInString:filename options:0 range:NSMakeRange(0, [filename length]) withTemplate:@""];
     NSLog(@"# Sync session with filename: %@", filename);
     [self setSessionSyncedByFilename:filename];

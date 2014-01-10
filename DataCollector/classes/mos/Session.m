@@ -17,6 +17,8 @@
 
 }
 
+@property (nonatomic, strong, readonly) NSString *userDirectory;
+
 @end
 
 @implementation Session
@@ -67,7 +69,7 @@
     [_heartrateRecords addObject:heartrateRecord];
 }
 
-- (void)saveAndZipMotionRecords
+- (void)storeMotionDataAndZip:(BOOL)zip
 {
     if ([self.motionRecords count] != 0) {
         
@@ -81,17 +83,23 @@
         }
         NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
         
-        NSString *archiveName = [self zipData:data withFilename:[NSString stringWithFormat:@"%@-%@", self.filename, @"motion-data.csv"]]; // Date prefix
-        if (archiveName != nil) {
+        NSString *filename = [NSString stringWithFormat:@"%@-%@", self.filename, @"motion-data.csv"]; // Date prefix
+        NSString *newFilename;
+        if (zip) {
+            newFilename = [self zipData:data withFilename:filename];
+        } else {
+            newFilename = [self writeData:data withFilename:filename];
+        }
+        if (newFilename != nil) {
             
             // Send notification
-            NSDictionary *userInfo = @{@"archiveName": archiveName};
+            NSDictionary *userInfo = @{@"filename": newFilename};
             [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:nil userInfo:userInfo];
         }
     }
 }
 
-- (void)saveAndZipHeartrateRecords
+- (void)storeHeartRateMonitorDataAndZip:(BOOL)zip
 {
     if ([_heartrateRecords count] != 0) {
         
@@ -107,17 +115,23 @@
         }
         NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
         
-        NSString *archiveName = [self zipData:data withFilename:[NSString stringWithFormat:@"%@-%@", self.filename, @"rr-interval-data.csv"]]; // Date prefix
-        if (archiveName != nil) {
+        NSString *filename = [NSString stringWithFormat:@"%@-%@", self.filename, @"rr-interval-data.csv"]; // Date prefix
+        NSString *newFilename;
+        if (zip) {
+            newFilename = [self zipData:data withFilename:filename];
+        } else {
+            newFilename = [self writeData:data withFilename:filename];
+        }
+        if (newFilename != nil) {
             
             // Send notification
-            NSDictionary *userInfo = @{@"archiveName": archiveName};
+            NSDictionary *userInfo = @{@"filename": newFilename};
             [[NSNotificationCenter defaultCenter] postNotificationName:@"HeartRateMonitorDataAvailable" object:nil userInfo:userInfo];
         }
     }
 }
 
-- (void)saveAndZipLocationRecords
+- (void)storeLocationDataAndZip:(BOOL)zip
 {
     if ([_locationRecords count] != 0) {
         
@@ -146,23 +160,33 @@
         
         NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
         
-        NSString *archiveName = [self zipData:data withFilename:[NSString stringWithFormat:@"%@-%@", self.filename, @"location-data.gpx"]]; // Date prefix
-        if (archiveName != nil) {
+        NSString *filename = [NSString stringWithFormat:@"%@-%@", self.filename, @"location-data.gpx"]; // Date prefix
+        NSString *newFilename;
+        if (zip) {
+            newFilename = [self zipData:data withFilename:filename];
+        } else {
+            newFilename = [self writeData:data withFilename:filename];
+        }
+        if (newFilename != nil) {
             
             // Send notification
-            NSDictionary *userInfo = @{@"archiveName": archiveName};
+            NSDictionary *userInfo = @{@"filename": newFilename};
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:nil userInfo:userInfo];
         }
     }
 }
 
-- (NSString *)zipData:(NSData *)data withFilename:(NSString*)filename
+- (NSString *)writeData:(NSData *)data withFilename:(NSString *)filename
 {
-    // Create user root directory
-    NSString *rootDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    rootDirectory = [rootDirectory stringByAppendingPathComponent:self.user.username];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:rootDirectory])
-        [[NSFileManager defaultManager] createDirectoryAtPath:rootDirectory withIntermediateDirectories:NO attributes:nil error:nil];
+    NSString *filePath = [self.userDirectory stringByAppendingPathComponent:filename];
+    if (![data writeToFile:filePath atomically:YES]) {
+        return nil;
+    }
+    return filename;
+}
+
+- (NSString *)zipData:(NSData *)data withFilename:(NSString *)filename
+{
     
     // Create archive entry
     NSString *entryFileName = [NSString stringWithFormat:@"%@", filename];
@@ -175,7 +199,7 @@
     NSString *archiveName = nil;
     if (archiveEntry) {
         archiveName = [NSString stringWithFormat:@"%@.zip", filename];
-        NSString *archivePath = [rootDirectory stringByAppendingPathComponent:archiveName];
+        NSString *archivePath = [self.userDirectory stringByAppendingPathComponent:archiveName];
         
         ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL:[NSURL fileURLWithPath:archivePath]];
         NSError *error = nil;
@@ -191,6 +215,17 @@
         return nil;
     }
     return archiveName;
+}
+
+- (NSString *)userDirectory
+{
+    // Create user directory, if need
+    NSString *userDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    userDirectory = [userDirectory stringByAppendingPathComponent:self.user.username];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:userDirectory])
+        [[NSFileManager defaultManager] createDirectoryAtPath:userDirectory withIntermediateDirectories:NO attributes:nil error:nil];
+    
+    return userDirectory;
 }
 
 @end
