@@ -13,11 +13,14 @@
 
 #import <zipzap/zipzap.h>
 
-@interface Session () {
+#define CAPACITY 6000
 
-}
+@interface Session ()
 
 @property (nonatomic, strong, readonly) NSString *userDirectory;
+@property (nonatomic, strong) NSMutableArray *motionData;
+@property (nonatomic, strong) NSMutableArray *locationData;
+@property (nonatomic, strong) NSMutableArray *heartRateMonitorData;
 
 @end
 
@@ -27,15 +30,14 @@
 @dynamic isSynced;
 @dynamic isZipped;
 @dynamic timestamp;
-@dynamic motionRecordsCount;
-@dynamic locationRecordsCount;
-@dynamic heartrateRecordsCount;
+@dynamic motionDataCount;
+@dynamic locationDataCount;
+@dynamic heartRateMonitorDataCount;
 @dynamic user;
 
-
-@synthesize motionRecords = _motionRecords;
-@synthesize locationRecords = _locationRecords;
-@synthesize heartrateRecords = _heartrateRecords;
+@synthesize motionData = _motionData;
+@synthesize locationData = _locationData;
+@synthesize heartRateMonitorData = _heartRateMonitorData;
 
 - (void)initialize
 {
@@ -48,148 +50,181 @@
     [dateFormatter setDateFormat:@"HH-mm-ss"];
     NSString *timeString = [dateFormatter stringFromDate:self.timestamp];
     self.identifier = [NSString stringWithFormat:@"%@-t%@", dateString, timeString];
-    
-    _motionRecords = [NSMutableArray arrayWithCapacity:24000];
-    _locationRecords = [NSMutableArray arrayWithCapacity:10000];
-    _heartrateRecords = [NSMutableArray arrayWithCapacity:10800];
 }
 
-- (void)addMotionRecord:(Motion *)motionRecord
+- (NSString *)userDirectory
 {
-        [_motionRecords addObject:motionRecord];
+    // Create user directory, if need
+    NSString *userDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    userDirectory = [userDirectory stringByAppendingPathComponent:self.user.username];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:userDirectory])
+        [[NSFileManager defaultManager] createDirectoryAtPath:userDirectory withIntermediateDirectories:NO attributes:nil error:nil];
+    
+    return userDirectory;
+}
+
+- (NSMutableArray *)motionData {
+    if (!_motionData) {
+        _motionData = [NSMutableArray arrayWithCapacity:CAPACITY];
+    }
+    return _motionData;
+}
+
+- (NSMutableArray *)locationData {
+    if (!_locationData) {
+        _locationData = [NSMutableArray arrayWithCapacity:CAPACITY];
+    }
+    return _locationData;
+}
+
+- (NSMutableArray *)heartRateMonitorData {
+    if (!_heartRateMonitorData) {
+        _heartRateMonitorData = [NSMutableArray arrayWithCapacity:CAPACITY];
+    }
+    return _heartRateMonitorData;
+}
+
+- (void)addMotionData:(Motion *)motion
+{
+        [self.motionData addObject:motion];
         
-        if ([_motionRecords count] >= 1000) {
-            NSArray *motions = [NSArray arrayWithArray:_motionRecords];
-            [_motionRecords removeAllObjects];
+        if ([self.motionData count] >= CAPACITY) {
+            NSArray *motions = [NSArray arrayWithArray:self.motionData];
+            self.motionData = nil;
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                [self storeMotions:motions andNotify:NO];
+                [self storeMotions:motions];
             });
     }
 }
 
-- (void)addLocationRecord:(Location *)locationRecord
+- (void)addLocationData:(Location *)location
 {
-    [_locationRecords addObject:locationRecord];
+    [self.locationData addObject:location];
+    
+    if ([self.locationData count] >= CAPACITY) {
+        NSArray *locations = [NSArray arrayWithArray:self.locationData];
+        self.locationData = nil;
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [self storeLocations:locations];
+        });
+    }
 }
 
-- (void)addHeartrateRecord:(HeartRateMonitorData *)heartrateRecord
+- (void)addHeartRateMonitorData:(HeartRateMonitorData *)heartRateMonitorData
 {
-    [_heartrateRecords addObject:heartrateRecord];
+    [self.heartRateMonitorData addObject:heartRateMonitorData];
+    
+    if ([self.heartRateMonitorData count] >= CAPACITY) {
+        NSArray *heartRates = [NSArray arrayWithArray:self.heartRateMonitorData];
+        self.heartRateMonitorData = nil;
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [self storeHeartRateMonitorData:heartRates];
+        });
+    }
 }
 
-- (void)storeMotions:(NSArray *)motions andNotify:(BOOL)notify
+- (NSString *)storeMotions
 {
-    if (motions == nil) {
-        motions = _motionRecords;
-    }
-    
-    self.motionRecordsCount = [NSNumber numberWithInt:[self.motionRecordsCount intValue] + [motions count]];
-
-    // Create archive data
-    NSMutableData *data = [NSMutableData dataWithData:[[Motion csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-    for (Motion *motion in motions) {
-        [data appendData:[[motion csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-    }
-    
-    NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"motion-data.csv"];
-    NSString *newFilename;
-    if ([self.isZipped boolValue]) {
-        newFilename = [self zipData:data withFilename:filename];
-    } else {
-        newFilename = [self writeData:data withFilename:filename];
-    }
-    
-    if (notify) {
+    NSString *newFilename = nil;
+    if ([self.motionDataCount intValue] > 0 || [self.motionData count] > 0) {
+        newFilename = [self storeMotions:self.motionData];
         
         // Send notification
         NSDictionary *userInfo = @{@"filename": newFilename};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:nil userInfo:userInfo];
     }
+    return newFilename;
 }
 
-- (void)storeHeartRateMonitorData
+- (NSString *)storeLocations
 {
-    if ([_heartrateRecords count] != 0) {
+    NSString *newFilename = nil;
+    if ([self.locationDataCount intValue] > 0 || [self.locationData count] > 0) {
+        NSString *newFilename = [self storeLocations:self.locationData];
+        newFilename = [self writeData:[[Location gpxFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] withFilename:newFilename];
         
-        self.heartrateRecordsCount = [NSNumber numberWithInt:[_heartrateRecords count]];
-        
-        // Create archive data
-        NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
-        [dataString appendFormat:@"\"%@\"\n", @"rrIntervals"];
-        for (HeartRateMonitorData *heartRateMonitorData in _heartrateRecords) {
-            for (NSNumber *rrIntervall in heartRateMonitorData.rrIntervals) {
-                [dataString appendFormat:@"%d\n", [rrIntervall intValue]];
-            }
-        }
-        NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
-        
-        NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"rr-interval-data.csv"];
-        NSString *newFilename;
-        if ([self.isZipped boolValue]) {
-            newFilename = [self zipData:data withFilename:filename];
-        } else {
-            newFilename = [self writeData:data withFilename:filename];
-        }
-        if (newFilename != nil) {
-            
-            // Send notification
-            NSDictionary *userInfo = @{@"filename": newFilename};
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"HeartRateMonitorDataAvailable" object:nil userInfo:userInfo];
-        }
+        // Send notification
+        NSDictionary *userInfo = @{@"filename": newFilename};
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:nil userInfo:userInfo];
     }
+    return newFilename;
 }
 
-- (void)storeLocationData
+- (NSString *)storeHeartRateMonitorData
 {
-    if ([_locationRecords count] != 0) {
+    NSString *newFilename = nil;
+    if ([self.heartRateMonitorDataCount intValue] > 0 || [self.heartRateMonitorData count] > 0) {
+        newFilename = [self storeHeartRateMonitorData:self.heartRateMonitorData];
         
-        self.locationRecordsCount = [NSNumber numberWithInt:[_locationRecords count]];
-        
-        // Create  archive data
-        NSMutableString *dataString = [[NSMutableString alloc] initWithCapacity:240000];
-        [dataString appendString:[Location gpxHeader]];
-        
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[_locationRecords objectAtIndex:0] systemTime]];
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"YYYY-MM-dd'T'HH:mm:ss'Z'"];
-        NSString *datetring = [formatter stringFromDate:date];
-        [dataString appendFormat:@"<time>%@</time>", datetring];
-        [dataString appendString:@"<trk>"];
-        [dataString appendString:@"<trkseg>"];
-        for (Location *locationRecord in _locationRecords) {
-            
-            // Append to data string
-            [dataString appendString:[locationRecord gpxDescription]];
-            
-        }
-        [dataString appendString:@"</trkseg>"];
-        [dataString appendString:@"</trk>"];
-        [dataString appendString:[Location gpxFooter]];
-        
-        NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
-        
-        NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"location-data.gpx"];
-        NSString *newFilename;
-        if ([self.isZipped boolValue]) {
-            newFilename = [self zipData:data withFilename:filename];
-        } else {
-            newFilename = [self writeData:data withFilename:filename];
-        }
-        if (newFilename != nil) {
-            
-            // Send notification
-            NSDictionary *userInfo = @{@"filename": newFilename};
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:nil userInfo:userInfo];
+        // Send notification
+        NSDictionary *userInfo = @{@"filename": newFilename};
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"HeartRateMonitorDataAvailable" object:nil userInfo:userInfo];
+    }
+    return newFilename;
+}
+
+- (NSString *)storeMotions:(NSArray *)motions
+{
+    // Create archive data
+    NSMutableData *data = [NSMutableData dataWithCapacity:0];
+    
+    if ([self.motionDataCount intValue] == 0) {
+        [data appendData:[[Motion csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+    }
+    
+    self.motionDataCount = [NSNumber numberWithInt:[self.motionDataCount intValue] + [motions count]];
+    
+    for (Motion *motion in motions) {
+        [data appendData:[[motion csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+    }
+    
+    NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"motion-data.csv"];
+    return [self writeData:data withFilename:filename];
+}
+
+- (NSString *)storeLocations:(NSArray *)locations
+{
+    // Create archive data
+    NSMutableData *data = [NSMutableData dataWithCapacity:0];
+    
+    if ([self.motionDataCount intValue] == 0) {
+        [data appendData:[[Location gpxHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+    }
+    
+    self.locationDataCount = [NSNumber numberWithInt:[self.locationDataCount intValue] + [locations count]];
+    
+    for (Location *location in locations) {
+        [data appendData:[[location gpxDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+    }
+    
+    NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"location-data.csv"];
+    return [self writeData:data withFilename:filename];
+}
+
+- (NSString *)storeHeartRateMonitorData:(NSArray *)heartRateMonitorDataArray
+{
+    // Create archive data
+    NSMutableData *data = [NSMutableData dataWithCapacity:0];
+    
+    if ([self.heartRateMonitorDataCount intValue] == 0) {
+        [data appendData:[@"timestamp, rrInterval\n" dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+    }
+    
+    self.heartRateMonitorDataCount = [NSNumber numberWithInt:[self.heartRateMonitorDataCount intValue] + [heartRateMonitorDataArray count]];
+    
+    for (HeartRateMonitorData *heartRateMonitorData in heartRateMonitorDataArray) {
+        for (NSNumber *rrInterval in heartRateMonitorData.rrIntervals) {
+            [data appendData:[[NSString stringWithFormat:@"%f,%d\n", heartRateMonitorData.timestamp, [rrInterval intValue]] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         }
     }
+    
+    NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"rr-interval-data.csv"];
+    return [self writeData:data withFilename:filename];
 }
 
 - (NSString *)writeData:(NSData *)data withFilename:(NSString *)filename
 {
     NSString *filePath = [self.userDirectory stringByAppendingPathComponent:filename];
-//    if (![data writeToFile:filePath atomically:YES]) {
-//        return nil;
-//    }
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:filePath])
@@ -235,17 +270,6 @@
         return nil;
     }
     return archiveName;
-}
-
-- (NSString *)userDirectory
-{
-    // Create user directory, if need
-    NSString *userDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    userDirectory = [userDirectory stringByAppendingPathComponent:self.user.username];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:userDirectory])
-        [[NSFileManager defaultManager] createDirectoryAtPath:userDirectory withIntermediateDirectories:NO attributes:nil error:nil];
-    
-    return userDirectory;
 }
 
 @end

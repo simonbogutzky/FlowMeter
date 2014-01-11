@@ -61,12 +61,12 @@
 
 + (NSString *)gpxHeader
 {
-    return @"<?xml version=\"1.0\"?><gpx version=\"1.0\" creator=\"DataCollector.app\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">";
+    return @"<?xml version=\"1.0\"?><gpx version=\"1.0\" creator=\"DataCollector.app\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\"><trk><trkseg>";
 }
 
 + (NSString *)gpxFooter
 {
-    return @"</gpx>";
+    return @"</trk></trkseg></gpx>";
 }
 
 @end

@@ -263,17 +263,17 @@
         
         BOOL isZipped = [[session valueForKey:@"isZipped"] boolValue];
         
-        if ([session.motionRecordsCount intValue] != 0) {
+        if ([session.motionDataCount intValue] != 0) {
             NSString *filename = [NSString stringWithFormat:@"%@-motion-data.csv%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
             [self uploadFile:filename];
         }
         
-        if ([session.locationRecordsCount intValue] != 0) {
+        if ([session.locationDataCount intValue] != 0) {
             NSString *filename = [NSString stringWithFormat:@"%@-location-data.gpx%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
             [self uploadFile:filename];
         }
         
-        if ([session.heartrateRecordsCount intValue] != 0) {
+        if ([session.heartRateMonitorDataCount intValue] != 0) {
             NSString *filename = [NSString stringWithFormat:@"%@-rr-interval-data.csv%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
             [self uploadFile:filename];
         }

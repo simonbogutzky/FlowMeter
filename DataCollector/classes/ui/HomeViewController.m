@@ -19,7 +19,6 @@
     BOOL _isCollection;
     
     User *_user;
-    Session *_session;
     int _lastAccumBeatCount;
     DBRestClient *_restClient;
     
@@ -33,7 +32,9 @@
     
 //    double startTimestamp;
 }
-@property (weak, nonatomic) IBOutlet UILabel *heartRateLabel;
+
+@property (nonatomic, strong) Session *session;
+@property (nonatomic, weak) IBOutlet UILabel *heartRateLabel;
 
 @end
 
@@ -41,6 +42,16 @@
 
 #pragma mark -
 #pragma mark - UIViewControllerDelegate implementation
+
+- (Session *)session
+{
+    if (!_session) {
+        _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:_appDelegate.managedObjectContext];
+        _session.isZipped = [NSNumber numberWithBool:ZIP];
+        _session.user = _user;
+    }
+    return _session;
+}
 
 - (void)viewDidLoad
 {
@@ -58,7 +69,6 @@
 
 #pragma mark -
 #pragma mark - Convient methods
-
 - (void)startUpdates
 {
 //    startTimestamp = [[NSDate date] timeIntervalSince1970];
@@ -66,6 +76,7 @@
     // Start motion updates
     NSTimeInterval updateInterval = 0.01; // 100hz
     CMMotionManager *motionManager = [_appDelegate sharedMotionManager];
+    
     
     if ([motionManager isDeviceMotionAvailable] == YES) {
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
@@ -77,7 +88,7 @@
                 Motion *motionRecord = [[Motion alloc] initWithTimestamp:timestamp DeviceMotion:deviceMotion];
  
                 // Add motion record
-                [_session addMotionRecord:motionRecord];
+                [self.session addMotionData:motionRecord];
             } else {
                 NSLog(@"# not in");
             }
@@ -145,14 +156,14 @@
         [self stopUpdates];
         _isCollection = !_isCollection;
         
-        if ([_session.motionRecords count] != 0) {
+        if ([self.session.motionDataCount intValue] != 0) {
             [_user addSessionsObject:_session];
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 [_appDelegate saveContext];
-                [_session storeMotions:nil andNotify:YES];
-                [_session storeHeartRateMonitorData];
-                [_session storeLocationData];
+                [self.session storeMotions];
+                [self.session storeHeartRateMonitorData];
+                [self.session storeLocations];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
@@ -166,7 +177,7 @@
         } else {
             [[self navigationController] setNavigationBarHidden:NO animated:YES];
             [startStopCollectionButton setTitle:@"start" forState:0];
-            [_appDelegate.managedObjectContext deleteObject:_session];
+            [_appDelegate.managedObjectContext deleteObject:self.session];
         }
     }
 }
@@ -184,10 +195,7 @@
         [_countdownTimer invalidate];
         _counterView.hidden = YES;
         
-        _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:_appDelegate.managedObjectContext];
-        _session.isZipped = [NSNumber numberWithBool:ZIP];
-        _session.user = _user;
-        [_session initialize];
+        [self.session initialize];
         
         _isCollection = !_isCollection;
         NSLog(@"# Start collecting");
@@ -206,7 +214,7 @@
             Location *locationRecord = [[Location alloc] initWithTimestamp:[[NSDate date] timeIntervalSince1970]  Location:location]; // - startTimestamp
             
             // Add location record
-            [_session addLocationRecord:locationRecord];
+            [self.session addLocationData:locationRecord];
         }
     }
 }
@@ -232,7 +240,7 @@
     if(_isCollection) {
         
         // Add hr record
-        [_session addHeartrateRecord:data];
+        [self.session addHeartRateMonitorData:data];
     }
 }
 

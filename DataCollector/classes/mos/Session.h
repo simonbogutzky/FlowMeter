@@ -14,28 +14,23 @@
 
 @interface Session : NSManagedObject
 
+@property (nonatomic, strong) NSDate *timestamp;
 @property (nonatomic, strong) NSString *identifier;
 @property (nonatomic, strong) NSNumber *isSynced;
 @property (nonatomic, strong) NSNumber *isZipped;
-@property (nonatomic, strong) NSNumber *motionRecordsCount;
-@property (nonatomic, strong) NSNumber *heartrateRecordsCount;
-@property (nonatomic, strong) NSNumber *locationRecordsCount;
-@property (nonatomic, strong) NSDate *timestamp;
+@property (nonatomic, strong) NSNumber *motionDataCount;
+@property (nonatomic, strong) NSNumber *heartRateMonitorDataCount;
+@property (nonatomic, strong) NSNumber *locationDataCount;
 @property (nonatomic, strong) User *user;
-
-@property (nonatomic, strong) NSMutableArray *motionRecords;
-@property (nonatomic, strong) NSMutableArray *heartrateRecords;
-@property (nonatomic, strong) NSMutableArray *locationRecords;
 
 - (void)initialize;
 
-- (void)addMotionRecord:(Motion *)motionRecord;
-- (void)addLocationRecord:(Location *)locationRecord;
-- (void)addHeartrateRecord:(HeartRateMonitorData *)heartrateRecord;
+- (void)addMotionData:(Motion *)motion;
+- (void)addLocationData:(Location *)location;
+- (void)addHeartRateMonitorData:(HeartRateMonitorData *)heartRateMonitorData;
 
-
-- (void)storeMotions:(NSArray *)motions andNotify:(BOOL)notify;
-- (void)storeHeartRateMonitorData;
-- (void)storeLocationData;
+- (NSString *)storeMotions;
+- (NSString *)storeHeartRateMonitorData;
+- (NSString *)storeLocations;
 
 @end
