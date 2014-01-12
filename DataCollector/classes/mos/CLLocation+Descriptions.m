@@ -50,7 +50,7 @@
 
 + (NSString *)gpxFooter
 {
-    return @"</trk></trkseg></gpx>";
+    return @"</trkseg></trk></gpx>";
 }
 
 @end
