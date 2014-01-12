@@ -1,34 +1,20 @@
 //
-//  Location.m
+//  CLLocation+Descriptions.m
 //  DataCollector
 //
-//  Created by Simon Bogutzky on 26.04.13.
-//  Copyright (c) 2013 Simon Bogutzky. All rights reserved.
+//  Created by Simon Bogutzky on 11.01.14.
+//  Copyright (c) 2014 Simon Bogutzky. All rights reserved.
 //
 
-#import "Location.h"
+#import "CLLocation+Descriptions.h"
 
-@implementation Location
-
-- (id)initWithTimestamp:(double)timestamp Location:(CLLocation *)location
-{
-    self = [super init];
-    if (self) {
-        self.locationTime = [location.timestamp timeIntervalSince1970];
-        self.latitude = location.coordinate.latitude;
-        self.longitude = location.coordinate.longitude;
-        self.altitude = location.altitude;
-        self.speed = location.speed;
-        self.systemTime = timestamp;
-    }
-    return self;
-}
+@implementation CLLocation (Descriptions)
 
 - (NSString *)kmlDescription
 {
     return [NSString stringWithFormat:@"%f,%f,%f\n",
-            self.longitude,
-            self.latitude,
+            self.coordinate.longitude,
+            self.coordinate.latitude,
             self.altitude
             ];
 }
@@ -45,17 +31,15 @@
 
 - (NSString *)gpxDescription
 {
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.systemTime];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"YYYY-MM-dd'T'HH:mm:ss'Z'"];
-    NSString *datetring = [formatter stringFromDate:date];
-    
+    NSString *dateString = [formatter stringFromDate:self.timestamp];
     
     return [NSString stringWithFormat:@"<trkpt lat=\"%f\" lon=\"%f\"><ele>%f</ele><time>%@</time></trkpt>",
-            self.latitude,
-            self.longitude,
+            self.coordinate.latitude,
+            self.coordinate.longitude,
             self.altitude,
-            datetring
+            dateString
             ];
 }
 

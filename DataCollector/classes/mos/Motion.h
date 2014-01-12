@@ -11,23 +11,21 @@
 
 @interface Motion : NSObject
 
-@property (nonatomic, assign) double sensorTime;
-@property (nonatomic, assign) double userAccelerationX;
-@property (nonatomic, assign) double userAccelerationY;
-@property (nonatomic, assign) double userAccelerationZ;
-@property (nonatomic, assign) double gravityX;
-@property (nonatomic, assign) double gravityY;
-@property (nonatomic, assign) double gravityZ;
-@property (nonatomic, assign) double rotationRateX;
-@property (nonatomic, assign) double rotationRateXFiltered;
-@property (nonatomic, assign) double rotationRateY;
-@property (nonatomic, assign) double rotationRateZ;
-@property (nonatomic, assign) double attitudePitch;
-@property (nonatomic, assign) double attitudeYaw;
-@property (nonatomic, assign) double attitudeRoll;
-@property (nonatomic, assign) double systemTime;
+@property (nonatomic) double timestamp;
+@property (nonatomic) double userAccelerationX;
+@property (nonatomic) double userAccelerationY;
+@property (nonatomic) double userAccelerationZ;
+@property (nonatomic) double gravityX;
+@property (nonatomic) double gravityY;
+@property (nonatomic) double gravityZ;
+@property (nonatomic) double rotationRateX;
+@property (nonatomic) double rotationRateY;
+@property (nonatomic) double rotationRateZ;
+@property (nonatomic) double attitudePitch;
+@property (nonatomic) double attitudeYaw;
+@property (nonatomic) double attitudeRoll;
 
-- (id)initWithTimestamp:(double)timestamp DeviceMotion:(CMDeviceMotion *)deviceMotion;
+- (id)initWithTimestamp:(double)timestamp deviceMotion:(CMDeviceMotion *)deviceMotion;
 - (NSString *)csvDescription;
 + (NSString *)csvHeader;
 

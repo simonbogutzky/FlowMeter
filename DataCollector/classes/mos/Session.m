@@ -7,7 +7,7 @@
 //
 
 #import "Session.h"
-#import "Location.h"
+#import "CLLocation+Descriptions.h"
 #import "Motion.h"
 #import "User.h"
 
@@ -97,7 +97,7 @@
     }
 }
 
-- (void)addLocationData:(Location *)location
+- (void)addLocationData:(CLLocation *)location
 {
     [self.locationData addObject:location];
     
@@ -126,27 +126,27 @@
 - (NSString *)storeMotions
 {
     NSString *newFilename = nil;
-    if ([self.motionDataCount intValue] > 0 || [self.motionData count] > 0) {
+//    if ([self.motionDataCount intValue] > 0 || [self.motionData count] > 0) {
         newFilename = [self storeMotions:self.motionData];
         
         // Send notification
         NSDictionary *userInfo = @{@"filename": newFilename};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:nil userInfo:userInfo];
-    }
+//    }
     return newFilename;
 }
 
 - (NSString *)storeLocations
 {
     NSString *newFilename = nil;
-    if ([self.locationDataCount intValue] > 0 || [self.locationData count] > 0) {
-        NSString *newFilename = [self storeLocations:self.locationData];
-        newFilename = [self writeData:[[Location gpxFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] withFilename:newFilename];
+//    if ([self.locationDataCount intValue] > 0 || [self.locationData count] > 0) {
+        newFilename = [self storeLocations:self.locationData];
+        newFilename = [self writeData:[[CLLocation gpxFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] withFilename:newFilename];
         
         // Send notification
         NSDictionary *userInfo = @{@"filename": newFilename};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:nil userInfo:userInfo];
-    }
+//    }
     return newFilename;
 }
 
@@ -187,17 +187,17 @@
     // Create archive data
     NSMutableData *data = [NSMutableData dataWithCapacity:0];
     
-    if ([self.motionDataCount intValue] == 0) {
-        [data appendData:[[Location gpxHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+    if ([self.locationDataCount intValue] == 0) {
+        [data appendData:[[CLLocation gpxHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
     }
     
     self.locationDataCount = [NSNumber numberWithInt:[self.locationDataCount intValue] + [locations count]];
     
-    for (Location *location in locations) {
+    for (CLLocation *location in locations) {
         [data appendData:[[location gpxDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
     }
     
-    NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"location-data.csv"];
+    NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"location-data.gpx"];
     return [self writeData:data withFilename:filename];
 }
 

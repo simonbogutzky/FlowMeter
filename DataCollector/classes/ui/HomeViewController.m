@@ -11,7 +11,6 @@
 #import "User.h"
 #import "Session.h"
 #import "Motion.h"
-#import "Location.h"
 #import "MBProgressHUD.h"
 
 @interface HomeViewController ()
@@ -29,8 +28,6 @@
     IBOutlet UIButton *_startStopCollectionButton;
     int _countdown;
     NSTimer *_countdownTimer;
-    
-//    double startTimestamp;
 }
 
 @property (nonatomic, strong) Session *session;
@@ -71,12 +68,9 @@
 #pragma mark - Convient methods
 - (void)startUpdates
 {
-//    startTimestamp = [[NSDate date] timeIntervalSince1970];
-    
     // Start motion updates
     NSTimeInterval updateInterval = 0.01; // 100hz
     CMMotionManager *motionManager = [_appDelegate sharedMotionManager];
-    
     
     if ([motionManager isDeviceMotionAvailable] == YES) {
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
@@ -84,13 +78,11 @@
             if(_isCollection) {
                 
                 // Create motion record
-                double timestamp = [[NSDate date] timeIntervalSince1970]; // - startTimestamp;
-                Motion *motionRecord = [[Motion alloc] initWithTimestamp:timestamp DeviceMotion:deviceMotion];
+                double timestamp = [[NSDate date] timeIntervalSince1970];
+                Motion *motionRecord = [[Motion alloc] initWithTimestamp:timestamp deviceMotion:deviceMotion];
  
                 // Add motion record
                 [self.session addMotionData:motionRecord];
-            } else {
-                NSLog(@"# not in");
             }
         }];
     }
@@ -156,7 +148,7 @@
         [self stopUpdates];
         _isCollection = !_isCollection;
         
-        if ([self.session.motionDataCount intValue] != 0) {
+//        if ([self.session.motionDataCount intValue] != 0) {
             [_user addSessionsObject:_session];
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -174,11 +166,11 @@
                 });
             });
             
-        } else {
-            [[self navigationController] setNavigationBarHidden:NO animated:YES];
-            [startStopCollectionButton setTitle:@"start" forState:0];
-            [_appDelegate.managedObjectContext deleteObject:self.session];
-        }
+//        } else {
+//            [[self navigationController] setNavigationBarHidden:NO animated:YES];
+//            [startStopCollectionButton setTitle:@"start" forState:0];
+//            [_appDelegate.managedObjectContext deleteObject:self.session];
+//        }
     }
 }
 
@@ -209,12 +201,9 @@
 {
     if(_isCollection) {
         for (CLLocation *location in locations) {
-        
-            // Create location record
-            Location *locationRecord = [[Location alloc] initWithTimestamp:[[NSDate date] timeIntervalSince1970]  Location:location]; // - startTimestamp
             
             // Add location record
-            [self.session addLocationData:locationRecord];
+            [self.session addLocationData:location];
         }
     }
 }

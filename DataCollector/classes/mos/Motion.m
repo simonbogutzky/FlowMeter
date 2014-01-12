@@ -10,11 +10,11 @@
 
 @implementation Motion
 
-- (id)initWithTimestamp:(double)timestamp DeviceMotion:(CMDeviceMotion *)deviceMotion
+- (id)initWithTimestamp:(double)timestamp deviceMotion:(CMDeviceMotion *)deviceMotion
 {
     self = [super init];
     if (self) {
-        self.sensorTime = deviceMotion.timestamp * 1000;
+        self.timestamp = timestamp;
         self.userAccelerationX = deviceMotion.userAcceleration.x * -9.81;
         self.userAccelerationY = deviceMotion.userAcceleration.y * -9.81;
         self.userAccelerationZ = deviceMotion.userAcceleration.z * -9.81;
@@ -27,15 +27,14 @@
         self.attitudePitch = deviceMotion.attitude.pitch * 180 / M_PI;
         self.attitudeRoll = deviceMotion.attitude.roll * 180 / M_PI;
         self.attitudeYaw = deviceMotion.attitude.yaw * 180 / M_PI;
-        self.systemTime = timestamp * 1000;
     }
     return self;
 }
 
 - (NSString *)csvDescription
 {
-    return [NSString stringWithFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
-                self.sensorTime,
+    return [NSString stringWithFormat:@"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
+                self.timestamp,
                 self.userAccelerationX,
                 self.userAccelerationY,
                 self.userAccelerationZ,
@@ -47,29 +46,13 @@
                 self.rotationRateZ,
                 self.attitudeYaw,
                 self.attitudeRoll,
-                self.attitudePitch,
-                self.systemTime
+                self.attitudePitch
             ];
 }
 
 + (NSString *)csvHeader
 {
-    return [NSString stringWithFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\n",
-                @"SensorTime",
-                @"UserAccelerationX",
-                @"UserAccelerationY",
-                @"UserAccelerationZ",
-                @"GravityX",
-                @"GravityY",
-                @"GravityZ",
-                @"RotationRateX",
-                @"RotationRateY",
-                @"RotationRateZ",
-                @"AttitudeYaw",
-                @"AttitudeRoll",
-                @"AttitudePitch",
-                @"SystemTime"
-            ];
+    return @"\"timestamp\",\"UserAccelerationX\",\"UserAccelerationY\",\"UserAccelerationZ\",\"GravityX\",\"GravityY\",\"GravityZ\",\"RotationRateX\",\"RotationRateY\",\"RotationRateZ\",\"AttitudeYaw\",\"AttitudeRoll\",\"AttitudePitch\"\n";
 }
 
 @end

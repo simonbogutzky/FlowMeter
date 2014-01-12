@@ -15,6 +15,7 @@
 		60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60AA4F7216A829100026DE8D /* CoreMotion.framework */; };
 		60DFF73816AFE81000D64F7E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 60DFF73716AFE81000D64F7E /* libz.dylib */; };
 		D304C72E172E7473005CD297 /* Motion.m in Sources */ = {isa = PBXBuildFile; fileRef = D304C72D172E7473005CD297 /* Motion.m */; };
+		D323CEF21881AC42003C25C5 /* CLLocation+Descriptions.m in Sources */ = {isa = PBXBuildFile; fileRef = D323CEF11881AC42003C25C5 /* CLLocation+Descriptions.m */; };
 		D330863D187ECF1900A7B9DE /* HeartRateMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D330863C187ECF1900A7B9DE /* HeartRateMonitor.framework */; };
 		D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3383BA91726CE1500AAC993 /* CoreData.framework */; };
 		D34C9D191725044D004C261C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D151725044D004C261C /* AppDelegate.m */; };
@@ -36,7 +37,6 @@
 		D38A216D16BFF9F80075D093 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38A216C16BFF9F80075D093 /* CoreLocation.framework */; };
 		D39ADD8B187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39ADD8A187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.m */; };
 		D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionTableViewController.m */; };
-		D3B15FFE172AA8EF00B72D48 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B15FFD172AA8EF00B72D48 /* Location.m */; };
 		D3B16001172AA91D00B72D48 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B16000172AA91D00B72D48 /* Session.m */; };
 		D3B3DC091733B93A001F2830 /* DataCollector.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC071733B93A001F2830 /* DataCollector.xcdatamodeld */; };
 		D3B3DC1E1733BECC001F2830 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC1D1733BECB001F2830 /* ProfileTableViewController.m */; };
@@ -95,6 +95,8 @@
 		60AA4F7216A829100026DE8D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		60DFF73716AFE81000D64F7E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D304C72D172E7473005CD297 /* Motion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Motion.m; path = classes/mos/Motion.m; sourceTree = "<group>"; };
+		D323CEF01881AC42003C25C5 /* CLLocation+Descriptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLLocation+Descriptions.h"; path = "classes/mos/CLLocation+Descriptions.h"; sourceTree = "<group>"; };
+		D323CEF11881AC42003C25C5 /* CLLocation+Descriptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLLocation+Descriptions.m"; path = "classes/mos/CLLocation+Descriptions.m"; sourceTree = "<group>"; };
 		D330863C187ECF1900A7B9DE /* HeartRateMonitor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HeartRateMonitor.framework; sourceTree = "<group>"; };
 		D3383BA91726CE1500AAC993 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D34C9D141725044D004C261C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = classes/AppDelegate.h; sourceTree = "<group>"; };
@@ -126,8 +128,6 @@
 		D3A4629D1726E08900D454F7 /* SessionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionTableViewController.h; path = classes/ui/SessionTableViewController.h; sourceTree = "<group>"; };
 		D3A4629E1726E08900D454F7 /* SessionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionTableViewController.m; path = classes/ui/SessionTableViewController.m; sourceTree = "<group>"; };
 		D3B133FC17295CD400CEFFC1 /* Motion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Motion.h; path = classes/mos/Motion.h; sourceTree = "<group>"; };
-		D3B15FFC172AA8EF00B72D48 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = classes/mos/Location.h; sourceTree = "<group>"; };
-		D3B15FFD172AA8EF00B72D48 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = classes/mos/Location.m; sourceTree = "<group>"; };
 		D3B15FFF172AA91D00B72D48 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = classes/mos/Session.h; sourceTree = "<group>"; };
 		D3B16000172AA91D00B72D48 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = classes/mos/Session.m; sourceTree = "<group>"; };
 		D3B3DC081733B93A001F2830 /* DataCollector.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCollector.xcdatamodel; sourceTree = "<group>"; };
@@ -350,8 +350,8 @@
 		D3B133F51729582600CEFFC1 /* MOS */ = {
 			isa = PBXGroup;
 			children = (
-				D3B15FFC172AA8EF00B72D48 /* Location.h */,
-				D3B15FFD172AA8EF00B72D48 /* Location.m */,
+				D323CEF01881AC42003C25C5 /* CLLocation+Descriptions.h */,
+				D323CEF11881AC42003C25C5 /* CLLocation+Descriptions.m */,
 				D3B133FC17295CD400CEFFC1 /* Motion.h */,
 				D304C72D172E7473005CD297 /* Motion.m */,
 				D3B15FFF172AA91D00B72D48 /* Session.h */,
@@ -553,10 +553,10 @@
 				D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */,
 				D3C129091863290300C361CA /* ECSlidingAnimationController.m in Sources */,
 				D39ADD8B187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.m in Sources */,
-				D3B15FFE172AA8EF00B72D48 /* Location.m in Sources */,
 				D3B16001172AA91D00B72D48 /* Session.m in Sources */,
 				D3C129081863290300C361CA /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				D304C72E172E7473005CD297 /* Motion.m in Sources */,
+				D323CEF21881AC42003C25C5 /* CLLocation+Descriptions.m in Sources */,
 				D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */,
 				D3B3DC091733B93A001F2830 /* DataCollector.xcdatamodeld in Sources */,
 				D3C1290D1863290300C361CA /* UIViewController+ECSlidingViewController.m in Sources */,
