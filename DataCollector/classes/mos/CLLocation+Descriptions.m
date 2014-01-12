@@ -53,4 +53,19 @@
     return @"</trkseg></trk></gpx>";
 }
 
++ (NSString *)csvHeader
+{
+    return @"\"Timestamp\",\"Latitude\",\"Longitude\",\"Attitude\"\n";
+}
+
+- (NSString * )csvDescription
+{
+    return [NSString stringWithFormat:@"%f,%f,%f,%f\n",
+            [self.timestamp timeIntervalSince1970],
+            self.coordinate.latitude,
+            self.coordinate.longitude,
+            self.altitude
+            ];
+}
+
 @end

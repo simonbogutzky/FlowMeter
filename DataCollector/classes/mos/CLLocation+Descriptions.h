@@ -16,5 +16,7 @@
 - (NSString *)gpxDescription;
 + (NSString *)gpxHeader;
 + (NSString *)gpxFooter;
+- (NSString *)csvDescription;
++ (NSString *)csvHeader;
 
 @end

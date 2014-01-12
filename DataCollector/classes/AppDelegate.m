@@ -369,7 +369,7 @@
     
     NSError *error = nil;
    
-    // Delete archive
+    // Delete file
     NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     rootPath = [rootPath stringByAppendingPathComponent:user.username];
     NSString *archivePath = [rootPath stringByAppendingPathComponent:metadata.filename];
@@ -379,7 +379,7 @@
     // Set data entry synced
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" \\(.+\\)" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *identifier = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
-    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data|-rr-interval-data).(csv|gpx)(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data|-rr-interval-data).(csv|gpx|kml)(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
     identifier = [regex stringByReplacingMatchesInString:identifier options:0 range:NSMakeRange(0, [identifier length]) withTemplate:@""];
     NSLog(@"# Sync session with identifier: %@", identifier);
     [self setSessionSyncedByIdentifier:identifier];

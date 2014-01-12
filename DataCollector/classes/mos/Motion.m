@@ -52,7 +52,7 @@
 
 + (NSString *)csvHeader
 {
-    return @"\"timestamp\",\"UserAccelerationX\",\"UserAccelerationY\",\"UserAccelerationZ\",\"GravityX\",\"GravityY\",\"GravityZ\",\"RotationRateX\",\"RotationRateY\",\"RotationRateZ\",\"AttitudeYaw\",\"AttitudeRoll\",\"AttitudePitch\"\n";
+    return @"\"Timestamp\",\"UserAccelerationX\",\"UserAccelerationY\",\"UserAccelerationZ\",\"GravityX\",\"GravityY\",\"GravityZ\",\"RotationRateX\",\"RotationRateY\",\"RotationRateZ\",\"AttitudeYaw\",\"AttitudeRoll\",\"AttitudePitch\"\n";
 }
 
 @end

@@ -147,7 +147,27 @@
     NSString *newFilename = nil;
 //    if ([self.locationDataCount intValue] > 0 || [self.locationData count] > 0) {
         newFilename = [self storeLocations:self.locationData];
-        newFilename = [self writeData:[[CLLocation gpxFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] withFilename:newFilename];
+    
+    switch (LOCATION_EXT) {
+        case 0:
+            newFilename = [self writeData:[[CLLocation gpxFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] withFilename:newFilename];
+            break;
+            
+        case 1:
+            newFilename = [self writeData:[[CLLocation kmlFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] withFilename:newFilename];
+            break;
+        
+        case 2:
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+        if ([self.isZipped boolValue]) {
+            newFilename = [self zipFileWithFilename:newFilename];
+        }
         
         // Send notification
         NSDictionary *userInfo = @{@"filename": newFilename};
@@ -198,16 +218,64 @@
     NSMutableData *data = [NSMutableData dataWithCapacity:0];
     
     if ([self.locationDataCount intValue] == 0) {
-        [data appendData:[[CLLocation gpxHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        switch (LOCATION_EXT) {
+            case 0:
+                [data appendData:[[CLLocation gpxHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+                break;
+                
+            case 1:
+                [data appendData:[[CLLocation kmlHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+                break;
+                
+            case 2:
+                [data appendData:[[CLLocation csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+                break;
+                
+            default:
+                break;
+        }
     }
     
     self.locationDataCount = [NSNumber numberWithInt:[self.locationDataCount intValue] + [locations count]];
     
     for (CLLocation *location in locations) {
-        [data appendData:[[location gpxDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        switch (LOCATION_EXT) {
+            case 0:
+                [data appendData:[[location gpxDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+                break;
+                
+            case 1:
+                [data appendData:[[location kmlDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+                break;
+                
+            case 2:
+                [data appendData:[[location csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+                break;
+                
+            default:
+                break;
+        }
     }
     
-    NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"location-data.gpx"];
+    NSString *filename = nil;
+    switch (LOCATION_EXT) {
+        case 0:
+            filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"location-data.gpx"];;
+            break;
+            
+        case 1:
+            filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"location-data.kml"];
+            break;
+            
+        case 2:
+            filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"location-data.csv"];
+            break;
+            
+        default:
+            break;
+    }
+    
     return [self writeData:data withFilename:filename];
 }
 
@@ -217,7 +285,7 @@
     NSMutableData *data = [NSMutableData dataWithCapacity:0];
     
     if ([self.heartRateMonitorDataCount intValue] == 0) {
-        [data appendData:[@"timestamp, rrInterval\n" dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        [data appendData:[@"Timestamp, RRInterval\n" dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
     }
     
     self.heartRateMonitorDataCount = [NSNumber numberWithInt:[self.heartRateMonitorDataCount intValue] + [heartRateMonitorDataArray count]];
