@@ -86,14 +86,14 @@
 
 - (void)addMotionData:(Motion *)motion
 {
-        [self.motionData addObject:motion];
+    [self.motionData addObject:motion];
         
-        if ([self.motionData count] >= CAPACITY) {
-            NSArray *motions = [NSArray arrayWithArray:self.motionData];
-            self.motionData = nil;
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                [self storeMotions:motions];
-            });
+    if ([self.motionData count] >= CAPACITY) {
+        NSArray *motions = [NSArray arrayWithArray:self.motionData];
+        self.motionData = nil;
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [self storeMotions:motions];
+        });
     }
 }
 
