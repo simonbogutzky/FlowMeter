@@ -11,9 +11,11 @@
 #import "Motion.h"
 #import "User.h"
 
-#import <zipzap/zipzap.h>
+#import "ZipKit/ZKDefs.h"
+#import "ZipKit/ZKDataArchive.h"
 
 #define CAPACITY 6000
+#define LOCATION_EXT 2
 
 @interface Session ()
 
@@ -128,7 +130,11 @@
     NSString *newFilename = nil;
 //    if ([self.motionDataCount intValue] > 0 || [self.motionData count] > 0) {
         newFilename = [self storeMotions:self.motionData];
-        
+    
+        if ([self.isZipped boolValue]) {
+            newFilename = [self zipFileWithFilename:newFilename];
+        }
+    
         // Send notification
         NSDictionary *userInfo = @{@"filename": newFilename};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:nil userInfo:userInfo];
@@ -155,6 +161,10 @@
     NSString *newFilename = nil;
     if ([self.heartRateMonitorDataCount intValue] > 0 || [self.heartRateMonitorData count] > 0) {
         newFilename = [self storeHeartRateMonitorData:self.heartRateMonitorData];
+        
+        if ([self.isZipped boolValue]) {
+            newFilename = [self zipFileWithFilename:newFilename];
+        }
         
         // Send notification
         NSDictionary *userInfo = @{@"filename": newFilename};
@@ -240,36 +250,29 @@
     return filename;
 }
 
-- (NSString *)zipData:(NSData *)data withFilename:(NSString *)filename
+- (NSString *)zipFileWithFilename:(NSString *)filename
 {
+    NSString *userDirectory = self.userDirectory;
+    NSString *filePath = [userDirectory stringByAppendingPathComponent:filename];
+    NSString *achiveName = [NSString stringWithFormat:@"%@.zip", filename];
+    NSString *achivePath = [userDirectory stringByAppendingPathComponent:achiveName];
+
+    // Create archive
+    ZKDataArchive *archive = [ZKDataArchive new];
     
-    // Create archive entry
-    NSString *entryFileName = [NSString stringWithFormat:@"%@", filename];
-    ZZArchiveEntry *archiveEntry = [ZZArchiveEntry archiveEntryWithFileName:entryFileName
-                                                                   compress:YES
-                                                                  dataBlock:^(NSError** error)
-                                    {
-                                        return data;
-                                    }];
-    NSString *archiveName = nil;
-    if (archiveEntry) {
-        archiveName = [NSString stringWithFormat:@"%@.zip", filename];
-        NSString *archivePath = [self.userDirectory stringByAppendingPathComponent:archiveName];
-        
-        ZZMutableArchive *archive = [ZZMutableArchive archiveWithContentsOfURL:[NSURL fileURLWithPath:archivePath]];
-        NSError *error = nil;
-        [archive updateEntries:@[archiveEntry] error:&error];
-        
-        if (error) {
-            NSLog(@"Error: %@", [error localizedDescription]);
-            return nil;
+    if ([archive deflateFile:filePath relativeToPath:userDirectory usingResourceFork:NO] == zkSucceeded) {
+        if ([archive.data writeToFile:achivePath atomically:YES]) {
+            
+            NSError *error = nil;
+            
+            // Delete file
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            [fileManager removeItemAtPath:filePath error:&error];
+            
+            return achiveName;
         }
-        
-    } else {
-        NSLog(@"Error while creating archive entry: %@", entryFileName);
-        return nil;
     }
-    return archiveName;
+    return filename;
 }
 
 @end

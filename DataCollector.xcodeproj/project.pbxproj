@@ -35,6 +35,7 @@
 		D36DC1A8173931E300D84CF4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D36DC1A6173931E200D84CF4 /* Localizable.strings */; };
 		D37067D71733F41300F86BBD /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37067D61733F41300F86BBD /* EditViewController.m */; };
 		D38A216D16BFF9F80075D093 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38A216C16BFF9F80075D093 /* CoreLocation.framework */; };
+		D39747B11882CC7B00CFF3DF /* libtouchzipkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D39747AE1882CC6400CFF3DF /* libtouchzipkit.a */; };
 		D39ADD8B187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39ADD8A187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.m */; };
 		D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionTableViewController.m */; };
 		D3B16001172AA91D00B72D48 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B16000172AA91D00B72D48 /* Session.m */; };
@@ -52,7 +53,6 @@
 		D3C1292718632B4B00C361CA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D3C1292118632B4B00C361CA /* README.md */; };
 		D3C1292818632B4B00C361CA /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = D3C1292218632B4B00C361CA /* release_notes.md */; };
 		D3C1292A18632C9A00C361CA /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C1292918632C9A00C361CA /* DropboxSDK.framework */; };
-		D3C1292B1863351E00C361CA /* libzipzap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C1291D18632A9700C361CA /* libzipzap.a */; };
 		D3C7ADC0171ED660000A7D34 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADBF171ED660000A7D34 /* Security.framework */; };
 		D3C7ADC2171ED66A000A7D34 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADC1171ED66A000A7D34 /* QuartzCore.framework */; };
 		D3C7ADC9171EEA44000A7D34 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */; };
@@ -62,26 +62,33 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D3C1291A18632A9700C361CA /* PBXContainerItemProxy */ = {
+		D39747A91882CC6400CFF3DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D3C1291418632A9600C361CA /* zipzap.xcodeproj */;
+			containerPortal = D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D899CF82162C5EC100112F49;
-			remoteInfo = "zipzap (OS X)";
+			remoteGlobalIDString = CB6F09CE174838FC00F91524;
+			remoteInfo = ZipKit;
 		};
-		D3C1291C18632A9700C361CA /* PBXContainerItemProxy */ = {
+		D39747AB1882CC6400CFF3DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D3C1291418632A9600C361CA /* zipzap.xcodeproj */;
+			containerPortal = D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D899CFB0162C5EEB00112F49;
-			remoteInfo = "zipzap (iOS)";
+			remoteGlobalIDString = CB6F0A4617483E5000F91524;
+			remoteInfo = zipkit;
 		};
-		D3C1291E18632A9700C361CA /* PBXContainerItemProxy */ = {
+		D39747AD1882CC6400CFF3DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D3C1291418632A9600C361CA /* zipzap.xcodeproj */;
+			containerPortal = D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D899CF96162C5EC100112F49;
-			remoteInfo = zipzapTests;
+			remoteGlobalIDString = CB6F0A9817484BDE00F91524;
+			remoteInfo = touchzipkit;
+		};
+		D39747AF1882CC7000CFF3DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CB6F0A9717484BDE00F91524;
+			remoteInfo = touchzipkit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -123,6 +130,7 @@
 		D37067D51733F41300F86BBD /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewController.h; path = classes/ui/EditViewController.h; sourceTree = "<group>"; };
 		D37067D61733F41300F86BBD /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewController.m; path = classes/ui/EditViewController.m; sourceTree = "<group>"; };
 		D38A216C16BFF9F80075D093 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZipKit.xcodeproj; path = ZipKit/ZipKit.xcodeproj; sourceTree = "<group>"; };
 		D39ADD89187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorDeviceTableViewController.h; sourceTree = "<group>"; };
 		D39ADD8A187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorDeviceTableViewController.m; sourceTree = "<group>"; };
 		D3A4629D1726E08900D454F7 /* SessionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionTableViewController.h; path = classes/ui/SessionTableViewController.h; sourceTree = "<group>"; };
@@ -150,7 +158,6 @@
 		D3C1290F1863296A00C361CA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		D3C1291118632A1E00C361CA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = SOURCE_ROOT; };
 		D3C1291218632A1E00C361CA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = SOURCE_ROOT; };
-		D3C1291418632A9600C361CA /* zipzap.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zipzap.xcodeproj; path = zipzap/zipzap.xcodeproj; sourceTree = "<group>"; };
 		D3C1292018632B4B00C361CA /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = TestFlightSDK/libTestFlight.a; sourceTree = SOURCE_ROOT; };
 		D3C1292118632B4B00C361CA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = TestFlightSDK/README.md; sourceTree = SOURCE_ROOT; };
 		D3C1292218632B4B00C361CA /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = release_notes.md; path = TestFlightSDK/release_notes.md; sourceTree = SOURCE_ROOT; };
@@ -172,8 +179,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D39747B11882CC7B00CFF3DF /* libtouchzipkit.a in Frameworks */,
 				D330863D187ECF1900A7B9DE /* HeartRateMonitor.framework in Frameworks */,
-				D3C1292B1863351E00C361CA /* libzipzap.a in Frameworks */,
 				D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */,
 				D3C7ADCB171EEA8C000A7D34 /* SystemConfiguration.framework in Frameworks */,
 				D3C7ADC9171EEA44000A7D34 /* CFNetwork.framework in Frameworks */,
@@ -298,7 +305,7 @@
 		D35FEABC17253FF800D92DEB /* ExternalProjects */ = {
 			isa = PBXGroup;
 			children = (
-				D3C1291418632A9600C361CA /* zipzap.xcodeproj */,
+				D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */,
 			);
 			name = ExternalProjects;
 			sourceTree = "<group>";
@@ -347,6 +354,16 @@
 			path = "dependent-classes/ECSlidingViewController/ECSlidingViewController/Vendor/ECSlidingViewController";
 			sourceTree = SOURCE_ROOT;
 		};
+		D39747A41882CC6400CFF3DF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D39747AA1882CC6400CFF3DF /* ZipKit.framework */,
+				D39747AC1882CC6400CFF3DF /* libzipkit.a */,
+				D39747AE1882CC6400CFF3DF /* libtouchzipkit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D3B133F51729582600CEFFC1 /* MOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -360,16 +377,6 @@
 				D3CD10CF173942D800166E62 /* User.m */,
 			);
 			name = MOS;
-			sourceTree = "<group>";
-		};
-		D3C1291518632A9600C361CA /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D3C1291B18632A9700C361CA /* libzipzap.a */,
-				D3C1291D18632A9700C361CA /* libzipzap.a */,
-				D3C1291F18632A9700C361CA /* zipzapTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		D3C6CA0616D4EFC0007C7EF8 /* Libraries */ = {
@@ -454,6 +461,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D39747B01882CC7000CFF3DF /* PBXTargetDependency */,
 			);
 			name = DataCollector;
 			productName = DataCollector;
@@ -482,8 +490,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = D3C1291518632A9600C361CA /* Products */;
-					ProjectRef = D3C1291418632A9600C361CA /* zipzap.xcodeproj */;
+					ProductGroup = D39747A41882CC6400CFF3DF /* Products */;
+					ProjectRef = D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -494,25 +502,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		D3C1291B18632A9700C361CA /* libzipzap.a */ = {
+		D39747AA1882CC6400CFF3DF /* ZipKit.framework */ = {
 			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libzipzap.a;
-			remoteRef = D3C1291A18632A9700C361CA /* PBXContainerItemProxy */;
+			fileType = wrapper.framework;
+			path = ZipKit.framework;
+			remoteRef = D39747A91882CC6400CFF3DF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D3C1291D18632A9700C361CA /* libzipzap.a */ = {
+		D39747AC1882CC6400CFF3DF /* libzipkit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libzipzap.a;
-			remoteRef = D3C1291C18632A9700C361CA /* PBXContainerItemProxy */;
+			path = libzipkit.a;
+			remoteRef = D39747AB1882CC6400CFF3DF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D3C1291F18632A9700C361CA /* zipzapTests.xctest */ = {
+		D39747AE1882CC6400CFF3DF /* libtouchzipkit.a */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = zipzapTests.xctest;
-			remoteRef = D3C1291E18632A9700C361CA /* PBXContainerItemProxy */;
+			fileType = archive.ar;
+			path = libtouchzipkit.a;
+			remoteRef = D39747AD1882CC6400CFF3DF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -568,6 +576,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D39747B01882CC7000CFF3DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = touchzipkit;
+			targetProxy = D39747AF1882CC7000CFF3DF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D34C9D421725051C004C261C /* InfoPlist.strings */ = {
@@ -685,7 +701,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = ./ZipKit;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -721,7 +737,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = ./ZipKit;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

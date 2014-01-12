@@ -7,6 +7,6 @@
 [submodule "Reachability"]
 	path = Reachability
 	url = https://github.com/tonymillion/Reachability.git
-[submodule "zipzap"]
-	path = zipzap
-	url = https://github.com/pixelglow/zipzap.git
+[submodule "ZipKit"]
+	path = ZipKit
+	url = https://github.com/kolpanic/ZipKit.git
