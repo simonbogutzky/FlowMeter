@@ -233,4 +233,17 @@
     }
 }
 
+- (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
+didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
+                          error:(NSError *)error
+{
+    [manager connectHeartRateMonitorDevice:(HeartRateMonitorDevice *)heartRateMonitorDevice];
+}
+
+- (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
+didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
+{
+    [manager startMonitoring];
+}
+
 @end
