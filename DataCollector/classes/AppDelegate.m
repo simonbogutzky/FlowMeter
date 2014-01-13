@@ -73,8 +73,6 @@
     // Override point for customization after application launch.
     NSLog(@"%d", self.heartRateMonitorManager.state);
     
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
     // TestFlight takeoff
 //    [TestFlight takeOff:@"f73deffe-10d8-4f69-a5dd-096197db5a7e"];
     
@@ -359,6 +357,7 @@
         
         NSString *destinationPath = [NSString stringWithFormat:@"/%@", user.username];
         [[self sharedDbRestClient] uploadFile:filename toPath:destinationPath withParentRev:nil fromPath:sourcePath];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     }
 }
 
@@ -408,6 +407,7 @@
     if ([session.motionDataIsSynced boolValue] && [session.locationDataIsSynced boolValue] && [session.heartRateMonitorDataIsSynced boolValue]) {
         NSLog(@"# Sync session with identifier: %@", identifier);
         [self syncSession:session];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }
     
     [self saveContext];
