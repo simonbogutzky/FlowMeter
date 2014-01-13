@@ -263,17 +263,17 @@
         
         BOOL isZipped = [[session valueForKey:@"isZipped"] boolValue];
         
-        if ([session.motionDataCount intValue] != 0) {
+        if ([session.motionDataCount intValue] != 0 && ![session.motionDataIsSynced boolValue]) {
             NSString *filename = [NSString stringWithFormat:@"%@-motion-data.csv%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
             [self uploadFile:filename];
         }
         
-        if ([session.locationDataCount intValue] != 0) {
+        if ([session.locationDataCount intValue] != 0 && ![session.locationDataIsSynced boolValue]) {
             NSString *filename = [NSString stringWithFormat:@"%@-location-data.gpx%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
             [self uploadFile:filename];
         }
         
-        if ([session.heartRateMonitorDataCount intValue] != 0) {
+        if ([session.heartRateMonitorDataCount intValue] != 0 && ![session.heartRateMonitorDataIsSynced boolValue]) {
             NSString *filename = [NSString stringWithFormat:@"%@-rr-interval-data.csv%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
             [self uploadFile:filename];
         }
@@ -303,12 +303,19 @@
     return mutableFetchResults;
 }
 
-- (void)setSessionSyncedByIdentifier:(NSString *)identifier
+- (Session *)setDataSyncedByIdentifier:(NSString *)identifier andKey:(NSString *)key
 {
-    NSManagedObject *object = [self fetchUnsyncedSessionByIdentifier:identifier];
-    if (object != nil) {
-        [object setValue:@1 forKey:@"isSynced"];
-        [self saveContext];
+    Session *session = (Session *)[self fetchUnsyncedSessionByIdentifier:identifier];
+    if (session != nil) {
+        [session setValue:@1 forKey:key];
+    }
+    return session;
+}
+
+- (void)syncSession:(Session *)session
+{
+    if (session != nil) {
+        [session setValue:@1 forKey:@"isSynced"];
     }
 }
 
@@ -376,13 +383,36 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:archivePath error:&error];
     
+    
     // Set data entry synced
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" \\(.+\\)" options:NSRegularExpressionCaseInsensitive error:&error];
-    NSString *identifier = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
+    NSString *temp = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
+    
     regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data|-rr-interval-data).(csv|gpx|kml)(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
-    identifier = [regex stringByReplacingMatchesInString:identifier options:0 range:NSMakeRange(0, [identifier length]) withTemplate:@""];
-    NSLog(@"# Sync session with identifier: %@", identifier);
-    [self setSessionSyncedByIdentifier:identifier];
+    NSString *identifier = [regex stringByReplacingMatchesInString:temp options:0 range:NSMakeRange(0, [temp length]) withTemplate:@""];
+    
+    Session *session = nil;
+    regex = [NSRegularExpression regularExpressionWithPattern:@"-motion-data.csv(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
+    if ([regex numberOfMatchesInString:temp options:0 range:NSMakeRange(0, [temp length])] > 0) {
+        session = [self setDataSyncedByIdentifier:identifier andKey:@"motionDataIsSynced"];
+    }
+    
+    regex = [NSRegularExpression regularExpressionWithPattern:@"-location-data.(csv|gpx|kml)(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
+    if ([regex numberOfMatchesInString:temp options:0 range:NSMakeRange(0, [temp length])] > 0) {
+        session = [self setDataSyncedByIdentifier:identifier andKey:@"locationDataIsSynced"];
+    }
+    
+    regex = [NSRegularExpression regularExpressionWithPattern:@"-rr-interval-data.csv(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
+    if ([regex numberOfMatchesInString:temp options:0 range:NSMakeRange(0, [temp length])] > 0) {
+        session = [self setDataSyncedByIdentifier:identifier andKey:@"heartRateMonitorDataIsSynced"];
+    }
+    
+    if ([session.motionDataIsSynced boolValue] && [session.locationDataIsSynced boolValue] && [session.heartRateMonitorDataIsSynced boolValue]) {
+        NSLog(@"# Sync session with identifier: %@", identifier);
+        [self syncSession:session];
+    }
+    
+    [self saveContext];
 }
 
 - (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error

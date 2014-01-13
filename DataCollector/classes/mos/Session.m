@@ -35,6 +35,9 @@
 @dynamic motionDataCount;
 @dynamic locationDataCount;
 @dynamic heartRateMonitorDataCount;
+@dynamic motionDataIsSynced;
+@dynamic locationDataIsSynced;
+@dynamic heartRateMonitorDataIsSynced;
 @dynamic user;
 
 @synthesize motionData = _motionData;
@@ -128,63 +131,72 @@
 - (NSString *)storeMotions
 {
     NSString *newFilename = nil;
-//    if ([self.motionDataCount intValue] > 0 || [self.motionData count] > 0) {
+    self.motionDataIsSynced = [NSNumber numberWithBool:YES];
+    if ([self.motionDataCount intValue] > 0 || [self.motionData count] > 0) {
         newFilename = [self storeMotions:self.motionData];
     
         if ([self.isZipped boolValue]) {
             newFilename = [self zipFileWithFilename:newFilename];
         }
+        
+        self.motionDataIsSynced = [NSNumber numberWithBool:NO];
     
         // Send notification
         NSDictionary *userInfo = @{@"filename": newFilename};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MotionDataAvailable" object:nil userInfo:userInfo];
-//    }
+    }
     return newFilename;
 }
 
 - (NSString *)storeLocations
 {
     NSString *newFilename = nil;
-//    if ([self.locationDataCount intValue] > 0 || [self.locationData count] > 0) {
+    self.locationDataIsSynced = [NSNumber numberWithBool:YES];
+    if ([self.locationDataCount intValue] > 0 || [self.locationData count] > 0) {
         newFilename = [self storeLocations:self.locationData];
     
-    switch (LOCATION_EXT) {
-        case 0:
-            newFilename = [self writeData:[[CLLocation gpxFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] withFilename:newFilename];
-            break;
-            
-        case 1:
-            newFilename = [self writeData:[[CLLocation kmlFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] withFilename:newFilename];
-            break;
-        
-        case 2:
-            break;
-            
-        default:
-            break;
-    }
+        switch (LOCATION_EXT) {
+            case 0:
+                newFilename = [self writeData:[[CLLocation gpxFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] withFilename:newFilename];
+                break;
+                
+            case 1:
+                newFilename = [self writeData:[[CLLocation kmlFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] withFilename:newFilename];
+                break;
+                
+            case 2:
+                break;
+                
+            default:
+                break;
+        }
     
     
         if ([self.isZipped boolValue]) {
             newFilename = [self zipFileWithFilename:newFilename];
         }
         
+        self.locationDataIsSynced = [NSNumber numberWithBool:NO];
+        
         // Send notification
         NSDictionary *userInfo = @{@"filename": newFilename};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationDataAvailable" object:nil userInfo:userInfo];
-//    }
+    }
     return newFilename;
 }
 
 - (NSString *)storeHeartRateMonitorData
 {
     NSString *newFilename = nil;
+    self.heartRateMonitorDataIsSynced = [NSNumber numberWithBool:YES];
     if ([self.heartRateMonitorDataCount intValue] > 0 || [self.heartRateMonitorData count] > 0) {
         newFilename = [self storeHeartRateMonitorData:self.heartRateMonitorData];
         
         if ([self.isZipped boolValue]) {
             newFilename = [self zipFileWithFilename:newFilename];
         }
+        
+        self.heartRateMonitorDataIsSynced = [NSNumber numberWithBool:NO];
         
         // Send notification
         NSDictionary *userInfo = @{@"filename": newFilename};

@@ -21,6 +21,9 @@
 @property (nonatomic, strong) NSNumber *motionDataCount;
 @property (nonatomic, strong) NSNumber *heartRateMonitorDataCount;
 @property (nonatomic, strong) NSNumber *locationDataCount;
+@property (nonatomic, strong) NSNumber *motionDataIsSynced;
+@property (nonatomic, strong) NSNumber *heartRateMonitorDataIsSynced;
+@property (nonatomic, strong) NSNumber *locationDataIsSynced;
 @property (nonatomic, strong) User *user;
 
 - (void)initialize;
