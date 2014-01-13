@@ -81,6 +81,7 @@
 //    
 //    // TestFlight takeoff
 //    [TestFlight takeOff:@"9a7d3926-e38a-4359-85f6-717248228a37"];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     // Dropbox
     DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"tvd64fwxro7ck60" appSecret:@"2azrb93xdsddgx2" root:kDBRootAppFolder];
