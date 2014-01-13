@@ -73,18 +73,15 @@
     // Override point for customization after application launch.
     NSLog(@"%d", self.heartRateMonitorManager.state);
     
-    //Testflight
-//#define TESTING 1
-//#ifdef TESTING
-//    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-//#endif
-//    
-//    // TestFlight takeoff
-//    [TestFlight takeOff:@"9a7d3926-e38a-4359-85f6-717248228a37"];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    // TestFlight takeoff
+//    [TestFlight takeOff:@"f73deffe-10d8-4f69-a5dd-096197db5a7e"];
     
     // Dropbox
     DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"tvd64fwxro7ck60" appSecret:@"2azrb93xdsddgx2" root:kDBRootAppFolder];
+//    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"e0j2mxziwyk196j" appSecret:@"9n3zo6omw06kgd2" root:kDBRootAppFolder];
+    
     [DBSession setSharedSession:dbSession];
     
     // Try to sync unsync sessions
