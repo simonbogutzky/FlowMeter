@@ -14,7 +14,7 @@
 #import "Reachability.h"
 #import <HeartRateMonitor/HeartRateMonitor.h>
 
-#define ZIP 0
+#define ZIP 1
 
 @class User;
 
