@@ -82,9 +82,6 @@
     
     [DBSession setSharedSession:dbSession];
     
-    // Try to sync unsync sessions
-    [self syncSessions];
-    
     // Allocate a reachability object and register notifier
     _reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
     [_reachability startNotifier];
@@ -335,11 +332,8 @@
 
 - (void)dataAvailable:(NSNotification *)notification {
     NSDictionary *userInfo = [notification userInfo];
-
     NSString *filename = userInfo[@"filename"];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self uploadFile:filename];
-    });
+    [self uploadFile:filename];
 }
 
 #pragma mark -
@@ -416,6 +410,12 @@
 - (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
 {
     NSLog(@"# File upload failed with error - %@", error);
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+- (void)restClient:(DBRestClient*)client uploadProgress:(CGFloat)progress forFile:(NSString*)destPath from:(NSString*)srcPath
+{
+    NSLog(@"# Progress - %f", progress);
 }
 
 #pragma mark -
@@ -434,18 +434,18 @@
     User *user = nil;
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:_managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
     [fetchRequest setPredicate:predicate];
     
-    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
     if (fetchedObjects == nil) {
         // Handle the error.
     }
     
     if ([fetchedObjects count] == 0) {
-        user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:_managedObjectContext];
+        user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:self.managedObjectContext];
     } else {
         user = fetchedObjects[0];
     }
