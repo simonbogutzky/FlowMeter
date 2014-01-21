@@ -9,10 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreMotion/CoreMotion.h>
 #import <CoreLocation/CoreLocation.h>
-#import <AVFoundation/AVFoundation.h>
+#import <HeartRateMonitor/HeartRateMonitor.h>
 #import <DropboxSDK/DropboxSDK.h>
 #import "Reachability.h"
-#import <HeartRateMonitor/HeartRateMonitor.h>
 
 #define ZIP 1
 
@@ -21,19 +20,14 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, DBRestClientDelegate, NSStreamDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (readonly, strong, nonatomic) CMMotionManager *motionManager;
+@property (readonly, strong, nonatomic) CLLocationManager *locationManager;
+@property (readonly, strong, nonatomic) HeartRateMonitorManager *heartRateMonitorManager;
 
 - (void)saveContext;
-- (NSURL *)applicationDocumentsDirectory;
 - (User *)activeUserWithPredicate:(NSPredicate *)predicate;
-
-@property (strong, nonatomic, readonly) CMMotionManager *sharedMotionManager;
-@property (strong, nonatomic, readonly) CLLocationManager *sharedLocationManager;
-@property (nonatomic, strong, readonly) HeartRateMonitorManager *heartRateMonitorManager;
-@property (strong, nonatomic, readonly) DBRestClient *sharedDbRestClient;
-@property (strong, nonatomic, readonly) Reachability *reachability;
 
 @end

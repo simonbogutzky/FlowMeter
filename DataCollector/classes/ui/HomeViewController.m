@@ -70,7 +70,7 @@
 {
     // Start motion updates
     NSTimeInterval updateInterval = 0.01; // 100hz
-    CMMotionManager *motionManager = [_appDelegate sharedMotionManager];
+    CMMotionManager *motionManager = _appDelegate.motionManager;
     
     if ([motionManager isDeviceMotionAvailable] == YES) {
         [motionManager setDeviceMotionUpdateInterval:updateInterval];
@@ -88,7 +88,7 @@
     }
     
     // Start location updates
-    CLLocationManager *locationManager = [_appDelegate sharedLocationManager];
+    CLLocationManager *locationManager = _appDelegate.locationManager;
     [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     locationManager.delegate = self;
     [locationManager startUpdatingLocation];
@@ -102,13 +102,13 @@
 - (void)stopUpdates
 {
     // Stop motion updates
-    CMMotionManager *motionManager = [_appDelegate sharedMotionManager];
+    CMMotionManager *motionManager = _appDelegate.motionManager;
     if ([motionManager isDeviceMotionActive] == YES) {
         [motionManager stopDeviceMotionUpdates];
     }
     
     // Stop location updates
-    CLLocationManager *locationManager = [_appDelegate sharedLocationManager];
+    CLLocationManager *locationManager = _appDelegate.locationManager;
     [locationManager stopUpdatingLocation];
     
     if (_appDelegate.heartRateMonitorManager.hasConnection) {

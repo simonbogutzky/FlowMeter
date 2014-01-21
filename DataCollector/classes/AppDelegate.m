@@ -10,14 +10,9 @@
 #import "Session.h"
 #import "User.h"
 
-
 @interface AppDelegate ()
-{
-    CMMotionManager *_motionManager;
-    CLLocationManager *_locationManager;
-    DBRestClient *_dbRestClient;
-}
-
+@property (strong, nonatomic, readonly) DBRestClient *dbRestClient;
+@property (strong, nonatomic, readonly) Reachability *reachability;
 @end
 
 @implementation AppDelegate
@@ -25,37 +20,28 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize motionManager = _motionManager;
+@synthesize locationManager = _locationManager;
 @synthesize heartRateMonitorManager = _heartRateMonitorManager;
+@synthesize dbRestClient = _dbRestClient;
 
 #pragma mark -
-#pragma mark - Singletons
+#pragma mark - Getter (Lazy-Instantiation)
 
-- (CMMotionManager *)sharedMotionManager
+- (CMMotionManager *)motionManager
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    if (!_motionManager) {
         _motionManager = [[CMMotionManager alloc] init];
-    });
+    }
     return _motionManager;
 }
 
-- (CLLocationManager *)sharedLocationManager
+- (CLLocationManager *)locationManager
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    if (!_locationManager) {
         _locationManager = [[CLLocationManager alloc] init];
-    });
+    }
     return _locationManager;
-}
-
-- (DBRestClient *)sharedDbRestClient
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _dbRestClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-        _dbRestClient.delegate = self;
-    });
-    return _dbRestClient;
 }
 
 - (HeartRateMonitorManager *)heartRateMonitorManager {
@@ -65,13 +51,24 @@
     return _heartRateMonitorManager;
 }
 
+- (DBRestClient *)dbRestClient
+{
+    if (!_dbRestClient) {
+        _dbRestClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+        _dbRestClient.delegate = self;
+    }
+    return _dbRestClient;
+}
+
 #pragma mark -
 #pragma mark - UIApplicationDelegate implementation
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    NSLog(@"%d", self.heartRateMonitorManager.state);
+    
+    
+    NSLog(@"# HeartRateMonitor State: %d", self.heartRateMonitorManager.state);
     
     // TestFlight takeoff
 //    [TestFlight takeOff:@"f73deffe-10d8-4f69-a5dd-096197db5a7e"];
@@ -79,7 +76,6 @@
     // Dropbox
     DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"tvd64fwxro7ck60" appSecret:@"2azrb93xdsddgx2" root:kDBRootAppFolder];
 //    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"e0j2mxziwyk196j" appSecret:@"9n3zo6omw06kgd2" root:kDBRootAppFolder];
-    
     [DBSession setSharedSession:dbSession];
     
     // Allocate a reachability object and register notifier
@@ -91,12 +87,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"MotionDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"HeartRateMonitorDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"LocationDataAvailable" object:nil];
-    
-    // Audio Session with mixing    
-//    NSError *setCategoryErr = nil;
-//    NSError *activationErr  = nil;
-//    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:&setCategoryErr];
-//    [[AVAudioSession sharedInstance] setActive:YES error:&activationErr];
     
     return YES;
 }
@@ -350,7 +340,7 @@
         sourcePath = [sourcePath stringByAppendingPathComponent:filename];
         
         NSString *destinationPath = [NSString stringWithFormat:@"/%@", user.username];
-        [[self sharedDbRestClient] uploadFile:filename toPath:destinationPath withParentRev:nil fromPath:sourcePath];
+        [self.dbRestClient uploadFile:filename toPath:destinationPath withParentRev:nil fromPath:sourcePath];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     }
 }
