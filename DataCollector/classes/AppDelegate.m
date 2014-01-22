@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "Session.h"
 #import "User.h"
+#import "LikertScaleViewController.h"
 
 @interface AppDelegate ()
 @property (strong, nonatomic, readonly) DBRestClient *dbRestClient;
@@ -87,6 +88,40 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"MotionDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"HeartRateMonitorDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"LocationDataAvailable" object:nil];
+    
+    if ([self.window.rootViewController isMemberOfClass:[LikertScaleViewController class]]) {
+        LikertScaleViewController *likertScaleViewController = (LikertScaleViewController *) self.window.rootViewController;
+        likertScaleViewController.itemLabelTexts = @[
+                                                     @"Ich fühle mich optimal beansprucht.",
+                                                     @"Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt.",
+                                                     @"Ich merke gar nicht, wie die Zeit vergeht.",
+                                                     @"Ich habe keine Mühe, mich zu konzentrieren.",
+                                                     @"Mein Kopf ist völlig klar.",
+                                                     @"Ich bin ganz vertieft in das, was ich gerade mache.",
+                                                     @"Die richtigen Gedanken/Bewegungen kommen wie von selbst.",
+                                                     @"Ich weiß bei jedem Schritt, was ich zu tun habe.",
+                                                     @"Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben.",
+                                                     @"Ich bin völlig selbstvergessen.",
+                                                     @"Es steht etwas für mich Wichtiges auf dem Spiel.",
+                                                     @"Ich darf jetzt keine Fehler machen.",
+                                                     @"Ich mache mir Sorgen über einen Misserfolg."
+                                                     ];
+        likertScaleViewController.itemSegments = @[
+                                                  @7,
+                                                  @7,
+                                                  @7,
+                                                  @7,
+                                                  @7,
+                                                  @7,
+                                                  @7,
+                                                  @7,
+                                                  @7,
+                                                  @7,
+                                                  @7,
+                                                  @7,
+                                                  @7
+                                                   ];
+    }
     
     return YES;
 }

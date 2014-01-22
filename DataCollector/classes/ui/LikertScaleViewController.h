@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface LikertScaleViewController : UIViewController
-
+@property (strong, nonatomic) NSArray *itemLabelTexts;
+@property (strong, nonatomic) NSArray *itemSegments;
 @end

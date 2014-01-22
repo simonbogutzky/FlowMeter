@@ -661,10 +661,6 @@
                                     <segment title=""/>
                                     <segment title=""/>
                                     <segment title=""/>
-                                    <segment title=""/>
-                                    <segment title=""/>
-                                    <segment title=""/>
-                                    <segment title=""/>
                                 </segments>
                             </segmentedControl>
                         </subviews>
@@ -688,6 +684,13 @@
                         </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <connections>
+                        <outlet property="itemLabel" destination="bjO-rZ-Nvg" id="a8j-lG-h1e"/>
+                        <outlet property="likertScaleSegmentedControl" destination="hVz-ks-vjB" id="Kut-tJ-Iog"/>
+                        <outletCollection property="likertScaleLabels" destination="1d2-E2-RwK" id="eUw-Rr-Llo"/>
+                        <outletCollection property="likertScaleLabels" destination="f4Y-Br-TSS" id="M6F-FQ-UIs"/>
+                        <outletCollection property="likertScaleLabels" destination="1X8-td-6f1" id="2Pb-aP-w8W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gP9-lo-bzk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
