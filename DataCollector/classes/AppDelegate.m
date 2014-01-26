@@ -108,6 +108,7 @@
                                                      ];
         likertScaleViewController.itemSegments = @[
                                                   @7,
+                                                  @10,
                                                   @7,
                                                   @7,
                                                   @7,
@@ -118,8 +119,7 @@
                                                   @7,
                                                   @7,
                                                   @7,
-                                                  @7,
-                                                  @7
+                                                  @10
                                                    ];
     }
     

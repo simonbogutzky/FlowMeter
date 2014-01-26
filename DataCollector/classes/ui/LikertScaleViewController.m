@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *itemLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *likertScaleSegmentedControl;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *likertScaleLabels;
+@property (nonatomic) int itemIndex;
 @end
 
 @implementation LikertScaleViewController
@@ -39,16 +40,40 @@
     return _itemSegments;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	
     self.itemLabel.text = [self.itemLabelTexts objectAtIndex:0];
-    for (int i = 4; i <= [[self.itemSegments objectAtIndex:0] intValue]; i++) {
-        [self.likertScaleSegmentedControl insertSegmentWithTitle:@"" atIndex:i animated:NO];
+    [self setSegmentsForItemIndex:0];
+}
+
+- (void)setSegmentsForItemIndex:(NSInteger)itemIndex {
+    
+    if ([[self.itemSegments objectAtIndex:itemIndex] intValue] < self.likertScaleSegmentedControl.numberOfSegments) {
+        for (int i = 0; i < self.likertScaleSegmentedControl.numberOfSegments; i++) {
+            if (i >= [[self.itemSegments objectAtIndex:itemIndex] intValue] - 1) {
+                [self.likertScaleSegmentedControl removeSegmentAtIndex:i - 1 animated:YES];
+            }
+        }
+    }
+    
+    if ([[self.itemSegments objectAtIndex:itemIndex] intValue] > self.likertScaleSegmentedControl.numberOfSegments) {
+        for (int i = self.likertScaleSegmentedControl.numberOfSegments + 1; i <= [[self.itemSegments objectAtIndex:itemIndex] intValue]; i++) {
+            [self.likertScaleSegmentedControl insertSegmentWithTitle:@"" atIndex:i animated:YES];
+        }
     }
 }
 
+- (IBAction)displayNextItem:(id)sender {
+    self.itemIndex++;
+    if (self.itemIndex < [self.itemLabelTexts count]) {
+        self.itemLabel.text = [self.itemLabelTexts objectAtIndex:self.itemIndex];
+        
+        [self setSegmentsForItemIndex:self.itemIndex];
+    }
+    
+    [self.likertScaleSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+}
 
 @end
