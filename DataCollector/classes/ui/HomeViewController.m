@@ -139,20 +139,14 @@
     
     if (!_isCollection) {
         [[self navigationController] setNavigationBarHidden:YES animated:YES];
-        
-        _countdown = 5;
-        _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
-        _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initializeCollection) userInfo:nil repeats:YES];
-        _counterView.hidden = NO;
-
-        [startStopCollectionButton setTitle:@"stop" forState:0];
-        [self startUpdates];
+            [startStopCollectionButton setTitle:@"stop" forState:0];
+        [self showFlowShortScale];
     } else {
         [self stopUpdates];
         _isCollection = !_isCollection;
         
 //        if ([self.session.motionDataCount intValue] != 0) {
-            [_user addSessionsObject:_session];
+            [_user addSessionsObject:self.session];
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 [_appDelegate saveContext];
@@ -258,6 +252,15 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     if (_isCollection) {
         AudioServicesPlaySystemSound(1007);
         [self presentViewController:[self flowShortScaleViewControllerFromStoryboard] animated:YES completion:nil];
+    } else {
+        [self presentViewController:[self flowShortScaleViewControllerFromStoryboard] animated:YES completion:^{
+            _countdown = 5;
+            _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
+            _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initializeCollection) userInfo:nil repeats:YES];
+            _counterView.hidden = NO;
+            
+            [self startUpdates];
+        }];
     }
 }
 
