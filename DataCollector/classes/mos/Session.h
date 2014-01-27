@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import <HeartRateMonitor/HeartRateMonitor.h>
 
-@class CLLocation, Motion, User;
+@class CLLocation, Motion, User, SubjectiveResponses;
 
 @interface Session : NSManagedObject
 
@@ -21,9 +21,11 @@
 @property (nonatomic, strong) NSNumber *motionDataCount;
 @property (nonatomic, strong) NSNumber *heartRateMonitorDataCount;
 @property (nonatomic, strong) NSNumber *locationDataCount;
+@property (nonatomic, strong) NSNumber *subjectiveResponseDataCount;
 @property (nonatomic, strong) NSNumber *motionDataIsSynced;
 @property (nonatomic, strong) NSNumber *heartRateMonitorDataIsSynced;
 @property (nonatomic, strong) NSNumber *locationDataIsSynced;
+@property (nonatomic, strong) NSNumber *subjectiveResponseDataIsSynced;
 @property (nonatomic, strong) User *user;
 
 - (void)initialize;
@@ -31,9 +33,11 @@
 - (void)addMotionData:(Motion *)motion;
 - (void)addLocationData:(CLLocation *)location;
 - (void)addHeartRateMonitorData:(HeartRateMonitorData *)heartRateMonitorData;
+- (void)addSubjectiveResponseData:(SubjectiveResponses *)subjectiveResponses;
 
 - (NSString *)storeMotions;
 - (NSString *)storeHeartRateMonitorData;
 - (NSString *)storeLocations;
+- (NSString *)storeSubjectiveResponseData;
 
 @end

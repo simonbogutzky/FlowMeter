@@ -10,8 +10,11 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "Session.h"
+#import "SubjectiveResponses.h"
 #import "Motion.h"
 #import "MBProgressHUD.h"
+#import "LikertScaleViewController.h"
+#import <AudioToolbox/AudioServices.h>
 
 @interface HomeViewController ()
 {
@@ -156,6 +159,7 @@
                 [self.session storeMotions];
                 [self.session storeHeartRateMonitorData];
                 [self.session storeLocations];
+                [self.session storeSubjectiveResponseData];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
@@ -244,6 +248,79 @@ didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 {
     [manager startMonitoring];
+}
+
+#pragma mark -
+#pragma mark - Flow-Kurzskala 
+
+- (void)showFlowShortScale
+{
+    if (_isCollection) {
+        AudioServicesPlaySystemSound(1007);
+        [self presentViewController:[self flowShortScaleViewControllerFromStoryboard] animated:YES completion:nil];
+    }
+}
+
+- (LikertScaleViewController *)flowShortScaleViewControllerFromStoryboard
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    LikertScaleViewController *flowShortScaleViewController = (LikertScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"LikertScale"];
+    
+    flowShortScaleViewController.delegate = self;
+    
+    flowShortScaleViewController.itemLabelTexts = @[
+                                                     @"Ich fühle mich optimal beansprucht.",
+                                                     @"Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt.",
+                                                     @"Ich merke gar nicht, wie die Zeit vergeht.",
+                                                     @"Ich habe keine Mühe, mich zu konzentrieren.",
+                                                     @"Mein Kopf ist völlig klar.",
+                                                     @"Ich bin ganz vertieft in das, was ich gerade mache.",
+                                                     @"Die richtigen Gedanken/Bewegungen kommen wie von selbst.",
+                                                     @"Ich weiß bei jedem Schritt, was ich zu tun habe.",
+                                                     @"Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben.",
+                                                     @"Ich bin völlig selbstvergessen.",
+                                                     @"Es steht etwas für mich Wichtiges auf dem Spiel.",
+                                                     @"Ich darf jetzt keine Fehler machen.",
+                                                     @"Ich mache mir Sorgen über einen Misserfolg.",
+                                                     @"Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit...",
+                                                     @"Ich denke, meine Fähigkeiten auf diesem Gebiet sind...",
+                                                     @"Für mich persönlich sind die jetzigen Anforderungen..."
+                                                     ];
+     flowShortScaleViewController.itemSegments = @[
+                                                   @7,
+                                                   @7,
+                                                   @7,
+                                                   @7,
+                                                   @7,
+                                                   @7,
+                                                   @7,
+                                                   @7,
+                                                   @7,
+                                                   @7,
+                                                   @7,
+                                                   @7,
+                                                   @7,
+                                                   @9,
+                                                   @9,
+                                                   @9
+                                                   ];
+
+    return flowShortScaleViewController;
+}
+
+- (void)likertScaleViewController:(LikertScaleViewController *)viewController didFinishWithResponses:(NSArray *)responses atTimestamp:(double)timestamp
+{
+    [viewController dismissViewControllerAnimated:YES
+                                       completion:^{
+                                           ;
+                                       }];
+    
+   SubjectiveResponses *subjectiveResponses = [[SubjectiveResponses alloc] initWithTimestamp:timestamp itemResponses:responses];
+    [self.session addSubjectiveResponseData:subjectiveResponses];
+    
+    if (_isCollection) {
+        [self performSelector:@selector(showFlowShortScale) withObject:nil afterDelay:15 * 60];
+    }
 }
 
 @end

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LikertScaleViewControllerDelegate.h"
 
 @interface LikertScaleViewController : UIViewController
 @property (strong, nonatomic) NSArray *itemLabelTexts;
 @property (strong, nonatomic) NSArray *itemSegments;
+@property (weak, nonatomic) id <LikertScaleViewControllerDelegate> delegate;
 @end

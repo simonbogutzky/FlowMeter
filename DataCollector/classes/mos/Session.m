@@ -9,6 +9,7 @@
 #import "Session.h"
 #import "CLLocation+Descriptions.h"
 #import "Motion.h"
+#import "SubjectiveResponses.h"
 #import "User.h"
 
 #import "ZipKit/ZKDefs.h"
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) NSMutableArray *motionData;
 @property (nonatomic, strong) NSMutableArray *locationData;
 @property (nonatomic, strong) NSMutableArray *heartRateMonitorData;
+@property (nonatomic, strong) NSMutableArray *subjectiveResponseData;
 
 @end
 
@@ -38,11 +40,14 @@
 @dynamic motionDataIsSynced;
 @dynamic locationDataIsSynced;
 @dynamic heartRateMonitorDataIsSynced;
+@dynamic subjectiveResponseDataCount;
+@dynamic subjectiveResponseDataIsSynced;
 @dynamic user;
 
 @synthesize motionData = _motionData;
 @synthesize locationData = _locationData;
 @synthesize heartRateMonitorData = _heartRateMonitorData;
+@synthesize subjectiveResponseData = _subjectiveResponseData;
 
 - (void)initialize
 {
@@ -89,6 +94,13 @@
     return _heartRateMonitorData;
 }
 
+- (NSMutableArray *)subjectiveResponseData {
+    if (!_subjectiveResponseData ) {
+        _subjectiveResponseData  = [NSMutableArray arrayWithCapacity:CAPACITY];
+    }
+    return _subjectiveResponseData;
+}
+
 - (void)addMotionData:(Motion *)motion
 {
     [self.motionData addObject:motion];
@@ -124,6 +136,19 @@
         self.heartRateMonitorData = nil;
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             [self storeHeartRateMonitorData:heartRates];
+        });
+    }
+}
+
+- (void)addSubjectiveResponseData:(SubjectiveResponses *)subjectiveResponses
+{
+    [self.subjectiveResponseData addObject:subjectiveResponses];
+    
+    if ([self.subjectiveResponseData count] >= CAPACITY) {
+        NSArray *sResponses = [NSArray arrayWithArray:self.subjectiveResponseData];
+        self.subjectiveResponseData = nil;
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [self storeSubjectiveResponseData:sResponses];
         });
     }
 }
@@ -201,6 +226,26 @@
         // Send notification
         NSDictionary *userInfo = @{@"filename": newFilename};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"HeartRateMonitorDataAvailable" object:nil userInfo:userInfo];
+    }
+    return newFilename;
+}
+
+- (NSString *)storeSubjectiveResponseData
+{
+    NSString *newFilename = nil;
+    self.subjectiveResponseDataIsSynced = [NSNumber numberWithBool:YES];
+    if ([self.subjectiveResponseDataCount intValue] > 0 || [self.subjectiveResponseData count] > 0) {
+        newFilename = [self storeSubjectiveResponseData:self.subjectiveResponseData];
+        
+        if ([self.isZipped boolValue]) {
+            newFilename = [self zipFileWithFilename:newFilename];
+        }
+        
+        self.subjectiveResponseDataIsSynced = [NSNumber numberWithBool:NO];
+        
+        // Send notification
+        NSDictionary *userInfo = @{@"filename": newFilename};
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SubjectiveResponseDataAvailable" object:nil userInfo:userInfo];
     }
     return newFilename;
 }
@@ -309,6 +354,25 @@
     }
     
     NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"rr-interval-data.csv"];
+    return [self writeData:data withFilename:filename];
+}
+
+- (NSString *)storeSubjectiveResponseData:(NSArray *)subjectiveResponseDataArray
+{
+    // Create archive data
+    NSMutableData *data = [NSMutableData dataWithCapacity:0];
+    
+    if ([self.subjectiveResponseDataCount intValue] == 0) {
+        [data appendData:[[[subjectiveResponseDataArray lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+    }
+    
+    self.subjectiveResponseDataCount = [NSNumber numberWithInt:[self.subjectiveResponseDataCount intValue] + [subjectiveResponseDataArray count]];
+    
+    for (SubjectiveResponses *subjectiveResponses in subjectiveResponseDataArray) {
+        [data appendData:[[subjectiveResponses csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+    }
+    
+    NSString *filename = [NSString stringWithFormat:@"%@-%@", self.identifier, @"subjective-response-data.csv"];
     return [self writeData:data withFilename:filename];
 }
 

@@ -10,7 +10,8 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import <CoreLocation/CoreLocation.h>
 #import <HeartRateMonitor/HeartRateMonitor.h>
+#import "LikertScaleViewControllerDelegate.h"
 
-@interface HomeViewController : UIViewController <CLLocationManagerDelegate, UIAlertViewDelegate, HeartRateMonitorManagerDelegate>
+@interface HomeViewController : UIViewController <CLLocationManagerDelegate, UIAlertViewDelegate, HeartRateMonitorManagerDelegate, LikertScaleViewControllerDelegate>
 
 @end
