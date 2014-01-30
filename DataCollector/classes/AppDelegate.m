@@ -69,7 +69,7 @@
     // Override point for customization after application launch.
     
     
-    NSLog(@"# HeartRateMonitor State: %d", self.heartRateMonitorManager.state);
+    NSLog(@"# HeartRateMonitor State: %ld", self.heartRateMonitorManager.state);
     
     // TestFlight takeoff
 //    [TestFlight takeOff:@"f73deffe-10d8-4f69-a5dd-096197db5a7e"];
@@ -88,6 +88,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"MotionDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"HeartRateMonitorDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"LocationDataAvailable" object:nil];
+    
+    // Audio Session with mixing
+    NSError *setCategoryErr = nil;
+    NSError *activationErr  = nil;
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:&setCategoryErr];
+    [[AVAudioSession sharedInstance] setActive:YES error:&activationErr];
     
     return YES;
 }
@@ -414,7 +420,7 @@
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
 {
-    NSLog(@"# event code: %d", eventCode);
+    NSLog(@"# event code: %lu", eventCode);
 }
 
 #pragma mark -
