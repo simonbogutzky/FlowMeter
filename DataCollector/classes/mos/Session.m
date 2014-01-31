@@ -108,7 +108,7 @@
     if ([self.motionData count] >= CAPACITY) {
         NSArray *motions = [NSArray arrayWithArray:self.motionData];
         self.motionData = nil;
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [self storeMotions:motions];
         });
     }
@@ -121,7 +121,7 @@
     if ([self.locationData count] >= CAPACITY) {
         NSArray *locations = [NSArray arrayWithArray:self.locationData];
         self.locationData = nil;
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [self storeLocations:locations];
         });
     }
@@ -134,7 +134,7 @@
     if ([self.heartRateMonitorData count] >= CAPACITY) {
         NSArray *heartRates = [NSArray arrayWithArray:self.heartRateMonitorData];
         self.heartRateMonitorData = nil;
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [self storeHeartRateMonitorData:heartRates];
         });
     }
@@ -147,7 +147,7 @@
     if ([self.subjectiveResponseData count] >= CAPACITY) {
         NSArray *sResponses = [NSArray arrayWithArray:self.subjectiveResponseData];
         self.subjectiveResponseData = nil;
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [self storeSubjectiveResponseData:sResponses];
         });
     }

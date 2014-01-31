@@ -68,7 +68,7 @@
     [_appDelegate.heartRateMonitorManager stopScanning];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         HeartRateMonitorDevice *heartRateMonitorDevice = [self.heartRateMonitorDevices objectAtIndex:indexPath.row];
         [_appDelegate.heartRateMonitorManager connectHeartRateMonitorDevice:heartRateMonitorDevice];
