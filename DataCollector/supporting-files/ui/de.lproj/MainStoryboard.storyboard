@@ -690,6 +690,9 @@
                     <connections>
                         <outlet property="itemLabel" destination="bjO-rZ-Nvg" id="a8j-lG-h1e"/>
                         <outlet property="likertScaleSegmentedControl" destination="hVz-ks-vjB" id="9Ec-Zh-9oQ"/>
+                        <outlet property="scaleLabel1" destination="1X8-td-6f1" id="sw3-Ig-MsY"/>
+                        <outlet property="scaleLabel2" destination="f4Y-Br-TSS" id="qri-ZB-KEM"/>
+                        <outlet property="scaleLabel3" destination="1d2-E2-RwK" id="ByZ-fh-NvE"/>
                         <outletCollection property="likertScaleLabels" destination="1d2-E2-RwK" id="eUw-Rr-Llo"/>
                         <outletCollection property="likertScaleLabels" destination="f4Y-Br-TSS" id="M6F-FQ-UIs"/>
                         <outletCollection property="likertScaleLabels" destination="1X8-td-6f1" id="2Pb-aP-w8W"/>

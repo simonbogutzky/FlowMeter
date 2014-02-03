@@ -12,5 +12,6 @@
 @interface LikertScaleViewController : UIViewController
 @property (strong, nonatomic) NSArray *itemLabelTexts;
 @property (strong, nonatomic) NSArray *itemSegments;
+@property (strong, nonatomic) NSArray *scaleLabels;
 @property (weak, nonatomic) id <LikertScaleViewControllerDelegate> delegate;
 @end

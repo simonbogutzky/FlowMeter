@@ -12,6 +12,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *itemLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *likertScaleSegmentedControl;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *likertScaleLabels;
+@property (weak, nonatomic) IBOutlet UILabel *scaleLabel3;
+@property (weak, nonatomic) IBOutlet UILabel *scaleLabel2;
+@property (weak, nonatomic) IBOutlet UILabel *scaleLabel1;
 @property (nonatomic) int itemIndex;
 @property (nonatomic) double timestamp;
 @property (strong, nonatomic) NSMutableArray *itemResponses;
@@ -42,6 +45,14 @@
     return _itemSegments;
 }
 
+- (NSArray *)scaleLabels
+{
+    if (!_scaleLabels) {
+        _scaleLabels = @[@[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"]];
+    }
+    return _scaleLabels;
+}
+
 - (NSMutableArray *)itemResponses
 {
     if (!_itemResponses) {
@@ -56,6 +67,9 @@
 	
     self.itemLabel.text = [self.itemLabelTexts objectAtIndex:0];
     [self setSegmentsForItemIndex:0];
+    self.scaleLabel1.text = [[self.scaleLabels objectAtIndex:0] objectAtIndex:0];
+    self.scaleLabel2.text = [[self.scaleLabels objectAtIndex:0] objectAtIndex:1];
+    self.scaleLabel3.text = [[self.scaleLabels objectAtIndex:0] objectAtIndex:2];
     self.timestamp = [[NSDate date] timeIntervalSince1970];
 }
 
@@ -84,6 +98,9 @@
     self.itemIndex++;
     if (self.itemIndex < [self.itemLabelTexts count]) {
         self.itemLabel.text = [self.itemLabelTexts objectAtIndex:self.itemIndex];
+        self.scaleLabel1.text = [[self.scaleLabels objectAtIndex:self.itemIndex] objectAtIndex:0];
+        self.scaleLabel2.text = [[self.scaleLabels objectAtIndex:self.itemIndex] objectAtIndex:1];
+        self.scaleLabel3.text = [[self.scaleLabels objectAtIndex:self.itemIndex] objectAtIndex:2];
         
         [self setSegmentsForItemIndex:self.itemIndex];
         [self.likertScaleSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];

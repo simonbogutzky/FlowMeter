@@ -307,6 +307,24 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                                                    @9,
                                                    @9
                                                    ];
+    flowShortScaleViewController.scaleLabels = @[
+                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
+                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
+                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
+                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
+                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
+                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
+                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
+                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
+                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
+                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
+                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
+                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
+                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
+                                                  @[@"leicht", @"", @"schwer"],
+                                                  @[@"niedrig", @"", @"hoch"],
+                                                  @[@"zu gering",@"gerade richtig", @"zu hoch"]
+                                                  ];
 
     return flowShortScaleViewController;
 }
