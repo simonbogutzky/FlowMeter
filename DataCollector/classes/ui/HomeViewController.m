@@ -148,7 +148,7 @@
 //        if ([self.session.motionDataCount intValue] != 0) {
             [_user addSessionsObject:self.session];
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [_appDelegate saveContext];
                 [self.session storeMotions];
                 [self.session storeHeartRateMonitorData];

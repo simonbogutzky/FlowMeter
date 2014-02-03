@@ -11,6 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <HeartRateMonitor/HeartRateMonitor.h>
 #import <DropboxSDK/DropboxSDK.h>
+#import <AVFoundation/AVAudioSession.h>
 #import "Reachability.h"
 
 #define ZIP 1
