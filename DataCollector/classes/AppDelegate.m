@@ -334,10 +334,12 @@
 }
 
 - (void)dataAvailable:(NSNotification *)notification {
-    [self saveContext];
-    NSDictionary *userInfo = [notification userInfo];
-    NSString *filename = userInfo[@"filename"];
-    [self uploadFile:filename];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self saveContext];
+        NSDictionary *userInfo = [notification userInfo];
+        NSString *filename = userInfo[@"filename"];
+        [self uploadFile:filename];
+    });
 }
 
 #pragma mark -
@@ -345,20 +347,18 @@
 
 - (void)uploadFile:(NSString *)filename
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
-            NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
-            User *user = [self activeUserWithPredicate:isActivePredicate];
-            
-            NSString *sourcePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-            sourcePath = [sourcePath stringByAppendingPathComponent:user.username];
-            sourcePath = [sourcePath stringByAppendingPathComponent:filename];
-            
-            NSString *destinationPath = [NSString stringWithFormat:@"/%@", user.username];
-            [self.dbRestClient uploadFile:filename toPath:destinationPath withParentRev:nil fromPath:sourcePath];
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        }
-    });
+    if (_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
+        NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
+        User *user = [self activeUserWithPredicate:isActivePredicate];
+        
+        NSString *sourcePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        sourcePath = [sourcePath stringByAppendingPathComponent:user.username];
+        sourcePath = [sourcePath stringByAppendingPathComponent:filename];
+        
+        NSString *destinationPath = [NSString stringWithFormat:@"/%@", user.username];
+        [self.dbRestClient uploadFile:filename toPath:destinationPath withParentRev:nil fromPath:sourcePath];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    }
 }
 
 #pragma mark -
