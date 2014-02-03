@@ -149,7 +149,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TV8-ty-RU8">
                                 <rect key="frame" x="128" y="396" width="64" height="152"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="tQG-f1-tQC"/>
+                                    <constraint firstAttribute="width" constant="64" id="sJ1-u1-Oly"/>
                                 </constraints>
                                 <color key="tintColor" red="0.062745101749897003" green="0.46666669845581055" blue="0.55686277151107788" alpha="1" colorSpace="deviceRGB"/>
                                 <state key="normal" title="start">
@@ -179,17 +179,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="uLq-37-zr6" secondAttribute="trailing" constant="20" id="0ks-k9-Ok9"/>
-                            <constraint firstAttribute="trailing" secondItem="No8-XL-3qD" secondAttribute="trailing" id="5AE-ds-hun"/>
-                            <constraint firstItem="No8-XL-3qD" firstAttribute="top" secondItem="3" secondAttribute="top" id="Jnj-JD-FT9"/>
-                            <constraint firstAttribute="bottom" secondItem="No8-XL-3qD" secondAttribute="bottom" id="NUX-YN-IdG"/>
-                            <constraint firstItem="TV8-ty-RU8" firstAttribute="top" secondItem="Whr-Xy-ju9" secondAttribute="bottom" constant="332" id="T1w-QM-VJo"/>
-                            <constraint firstItem="TV8-ty-RU8" firstAttribute="centerX" secondItem="No8-XL-3qD" secondAttribute="centerX" id="Wzc-xe-cVU"/>
-                            <constraint firstAttribute="bottom" secondItem="TV8-ty-RU8" secondAttribute="bottom" constant="20" symbolic="YES" id="Xdg-ik-ek4"/>
-                            <constraint firstAttribute="centerX" secondItem="kfM-7K-tdj" secondAttribute="centerX" id="cfu-jH-B7d"/>
-                            <constraint firstAttribute="centerY" secondItem="kfM-7K-tdj" secondAttribute="centerY" id="dJN-bJ-apT"/>
-                            <constraint firstItem="uLq-37-zr6" firstAttribute="top" secondItem="Whr-Xy-ju9" secondAttribute="bottom" constant="20" id="uzS-Qo-ig2"/>
-                            <constraint firstItem="No8-XL-3qD" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="y5J-kN-HWj"/>
+                            <constraint firstItem="No8-XL-3qD" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="3gB-eq-qRi"/>
+                            <constraint firstItem="TV8-ty-RU8" firstAttribute="top" secondItem="kfM-7K-tdj" secondAttribute="bottom" constant="52" id="44I-mc-9sB"/>
+                            <constraint firstAttribute="trailing" secondItem="No8-XL-3qD" secondAttribute="trailing" id="9u9-sS-ogQ"/>
+                            <constraint firstAttribute="bottom" secondItem="TV8-ty-RU8" secondAttribute="bottom" constant="20" symbolic="YES" id="d95-UZ-et1"/>
+                            <constraint firstItem="uLq-37-zr6" firstAttribute="top" secondItem="Whr-Xy-ju9" secondAttribute="bottom" constant="20" id="gOv-3F-dMY"/>
+                            <constraint firstItem="kfM-7K-tdj" firstAttribute="centerX" secondItem="TV8-ty-RU8" secondAttribute="centerX" id="iUe-xT-IhZ"/>
+                            <constraint firstAttribute="bottom" secondItem="No8-XL-3qD" secondAttribute="bottom" id="n0J-Wg-tWF"/>
+                            <constraint firstItem="No8-XL-3qD" firstAttribute="centerY" secondItem="kfM-7K-tdj" secondAttribute="centerY" id="o8D-Jd-iZH"/>
+                            <constraint firstItem="No8-XL-3qD" firstAttribute="top" secondItem="3" secondAttribute="top" id="rvz-dy-vpI"/>
+                            <constraint firstItem="kfM-7K-tdj" firstAttribute="centerX" secondItem="No8-XL-3qD" secondAttribute="centerX" id="tDh-ar-Z9X"/>
+                            <constraint firstAttribute="trailing" secondItem="uLq-37-zr6" secondAttribute="trailing" constant="20" symbolic="YES" id="uKp-R4-72c"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Startseite" id="hQZ-pK-huO">

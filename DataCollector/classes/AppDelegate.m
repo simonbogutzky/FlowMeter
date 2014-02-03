@@ -88,6 +88,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"MotionDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"HeartRateMonitorDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"LocationDataAvailable" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"SubjectiveResponseDataAvailable" object:nil];
     
     // Audio Session with mixing
     NSError *setCategoryErr = nil;
@@ -259,12 +260,17 @@
         }
         
         if ([session.locationDataCount intValue] != 0 && ![session.locationDataIsSynced boolValue]) {
-            NSString *filename = [NSString stringWithFormat:@"%@-location-data.gpx%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
+            NSString *filename = [NSString stringWithFormat:@"%@-location-data.csv%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
             [self uploadFile:filename];
         }
         
         if ([session.heartRateMonitorDataCount intValue] != 0 && ![session.heartRateMonitorDataIsSynced boolValue]) {
             NSString *filename = [NSString stringWithFormat:@"%@-rr-interval-data.csv%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
+            [self uploadFile:filename];
+        }
+        
+        if ([session.subjectiveResponseDataCount intValue] != 0 && ![session.subjectiveResponseDataIsSynced boolValue]) {
+            NSString *filename = [NSString stringWithFormat:@"%@-subjective-response-data.csv%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
             [self uploadFile:filename];
         }
     }
@@ -328,6 +334,7 @@
 }
 
 - (void)dataAvailable:(NSNotification *)notification {
+    [self saveContext];
     NSDictionary *userInfo = [notification userInfo];
     NSString *filename = userInfo[@"filename"];
     [self uploadFile:filename];
@@ -338,18 +345,20 @@
 
 - (void)uploadFile:(NSString *)filename
 {
-    if (_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
-        NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
-        User *user = [self activeUserWithPredicate:isActivePredicate];
-        
-        NSString *sourcePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        sourcePath = [sourcePath stringByAppendingPathComponent:user.username];
-        sourcePath = [sourcePath stringByAppendingPathComponent:filename];
-        
-        NSString *destinationPath = [NSString stringWithFormat:@"/%@", user.username];
-        [self.dbRestClient uploadFile:filename toPath:destinationPath withParentRev:nil fromPath:sourcePath];
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
+            NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
+            User *user = [self activeUserWithPredicate:isActivePredicate];
+            
+            NSString *sourcePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+            sourcePath = [sourcePath stringByAppendingPathComponent:user.username];
+            sourcePath = [sourcePath stringByAppendingPathComponent:filename];
+            
+            NSString *destinationPath = [NSString stringWithFormat:@"/%@", user.username];
+            [self.dbRestClient uploadFile:filename toPath:destinationPath withParentRev:nil fromPath:sourcePath];
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        }
+    });
 }
 
 #pragma mark -
@@ -376,7 +385,7 @@
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" \\(.+\\)" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *temp = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
     
-    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data|-rr-interval-data).(csv|gpx|kml)(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data|-rr-interval-data|-subjective-response-data).(csv|gpx|kml)(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *identifier = [regex stringByReplacingMatchesInString:temp options:0 range:NSMakeRange(0, [temp length]) withTemplate:@""];
     
     Session *session = nil;
@@ -395,7 +404,12 @@
         session = [self setDataSyncedByIdentifier:identifier andKey:@"heartRateMonitorDataIsSynced"];
     }
     
-    if ([session.motionDataIsSynced boolValue] && [session.locationDataIsSynced boolValue] && [session.heartRateMonitorDataIsSynced boolValue]) {
+    regex = [NSRegularExpression regularExpressionWithPattern:@"-subjective-response-data.csv(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
+    if ([regex numberOfMatchesInString:temp options:0 range:NSMakeRange(0, [temp length])] > 0) {
+        session = [self setDataSyncedByIdentifier:identifier andKey:@"subjectiveResponseDataIsSynced"];
+    }
+    
+    if ([session.motionDataIsSynced boolValue] && [session.locationDataIsSynced boolValue] && [session.heartRateMonitorDataIsSynced boolValue] && [session.subjectiveResponseDataIsSynced boolValue]) {
         NSLog(@"# Sync session with identifier: %@", identifier);
         [self syncSession:session];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
