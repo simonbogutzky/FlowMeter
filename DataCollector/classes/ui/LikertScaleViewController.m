@@ -93,7 +93,7 @@
 }
 
 - (IBAction)displayNextItem:(id)sender {
-    [self.itemResponses addObject:[NSNumber numberWithInt:self.likertScaleSegmentedControl.selectedSegmentIndex]];
+    [self.itemResponses addObject:[NSNumber numberWithInt:self.likertScaleSegmentedControl.selectedSegmentIndex + 1]];
     
     self.itemIndex++;
     if (self.itemIndex < [self.itemLabelTexts count]) {
