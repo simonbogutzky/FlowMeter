@@ -36,6 +36,7 @@
 @property (nonatomic, strong) Session *session;
 @property (nonatomic, weak) IBOutlet UILabel *heartRateLabel;
 @property (nonatomic, assign) BOOL isLastSubjektiveResponse;
+@property (nonatomic, strong) NSTimer *subjektiveResponseTimer;
 
 @end
 
@@ -147,6 +148,7 @@
         _isCollection = !_isCollection;
         self.isLastSubjektiveResponse = YES;
         [self showFlowShortScale];
+        [self.subjektiveResponseTimer invalidate];
     }
 }
 
@@ -307,7 +309,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     [self.session addSubjectiveResponseData:subjectiveResponses];
     
     if (_isCollection) {
-        [self performSelector:@selector(showFlowShortScale) withObject:nil afterDelay:15 * 60];
+        self.subjektiveResponseTimer = [NSTimer scheduledTimerWithTimeInterval:15 * 60 target:self selector:@selector(showFlowShortScale) userInfo:nil repeats:NO];
     } else {
         if (self.isLastSubjektiveResponse) {
             [_user addSessionsObject:self.session];
@@ -328,6 +330,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
             });
             self.isLastSubjektiveResponse = NO;
         } else {
+            self.subjektiveResponseTimer = [NSTimer scheduledTimerWithTimeInterval:15 * 60 target:self selector:@selector(showFlowShortScale) userInfo:nil repeats:NO];
             _countdown = 5;
             _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
             _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initializeCollection) userInfo:nil repeats:YES];
