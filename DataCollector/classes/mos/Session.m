@@ -156,7 +156,6 @@
 - (NSString *)storeMotions
 {
     NSString *newFilename = nil;
-    self.motionDataIsSynced = [NSNumber numberWithBool:YES];
     if ([self.motionDataCount intValue] > 0 || [self.motionData count] > 0) {
         newFilename = [self storeMotions:self.motionData];
     
@@ -176,7 +175,6 @@
 - (NSString *)storeLocations
 {
     NSString *newFilename = nil;
-    self.locationDataIsSynced = [NSNumber numberWithBool:YES];
     if ([self.locationDataCount intValue] > 0 || [self.locationData count] > 0) {
         newFilename = [self storeLocations:self.locationData];
     
@@ -213,7 +211,6 @@
 - (NSString *)storeHeartRateMonitorData
 {
     NSString *newFilename = nil;
-    self.heartRateMonitorDataIsSynced = [NSNumber numberWithBool:YES];
     if ([self.heartRateMonitorDataCount intValue] > 0 || [self.heartRateMonitorData count] > 0) {
         newFilename = [self storeHeartRateMonitorData:self.heartRateMonitorData];
         
@@ -233,7 +230,6 @@
 - (NSString *)storeSubjectiveResponseData
 {
     NSString *newFilename = nil;
-    self.subjectiveResponseDataIsSynced = [NSNumber numberWithBool:YES];
     if ([self.subjectiveResponseDataCount intValue] > 0 || [self.subjectiveResponseData count] > 0) {
         newFilename = [self storeSubjectiveResponseData:self.subjectiveResponseData];
         
