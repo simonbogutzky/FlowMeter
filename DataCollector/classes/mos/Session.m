@@ -103,53 +103,61 @@
 
 - (void)addMotionData:(Motion *)motion
 {
-    [self.motionData addObject:motion];
+    if (motion.timestamp > 0) {
+        [self.motionData addObject:motion];
         
-    if ([self.motionData count] >= CAPACITY) {
-        NSArray *motions = [NSArray arrayWithArray:self.motionData];
-        self.motionData = nil;
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [self storeMotions:motions];
-        });
+        if ([self.motionData count] >= CAPACITY) {
+            NSArray *motions = [NSArray arrayWithArray:self.motionData];
+            self.motionData = nil;
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self storeMotions:motions];
+            });
+        }
     }
 }
 
 - (void)addLocationData:(CLLocation *)location
 {
-    [self.locationData addObject:location];
-    
-    if ([self.locationData count] >= CAPACITY) {
-        NSArray *locations = [NSArray arrayWithArray:self.locationData];
-        self.locationData = nil;
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [self storeLocations:locations];
-        });
+    if ([location.timestamp timeIntervalSince1970] > 0) {
+        [self.locationData addObject:location];
+        
+        if ([self.locationData count] >= CAPACITY) {
+            NSArray *locations = [NSArray arrayWithArray:self.locationData];
+            self.locationData = nil;
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self storeLocations:locations];
+            });
+        }
     }
 }
 
 - (void)addHeartRateMonitorData:(HeartRateMonitorData *)heartRateMonitorData
 {
-    [self.heartRateMonitorData addObject:heartRateMonitorData];
-    
-    if ([self.heartRateMonitorData count] >= CAPACITY) {
-        NSArray *heartRates = [NSArray arrayWithArray:self.heartRateMonitorData];
-        self.heartRateMonitorData = nil;
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [self storeHeartRateMonitorData:heartRates];
-        });
+    if (heartRateMonitorData.timestamp > 0) {
+        [self.heartRateMonitorData addObject:heartRateMonitorData];
+        
+        if ([self.heartRateMonitorData count] >= CAPACITY) {
+            NSArray *heartRates = [NSArray arrayWithArray:self.heartRateMonitorData];
+            self.heartRateMonitorData = nil;
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self storeHeartRateMonitorData:heartRates];
+            });
+        }
     }
 }
 
 - (void)addSubjectiveResponseData:(SubjectiveResponses *)subjectiveResponses
 {
-    [self.subjectiveResponseData addObject:subjectiveResponses];
-    
-    if ([self.subjectiveResponseData count] >= CAPACITY) {
-        NSArray *sResponses = [NSArray arrayWithArray:self.subjectiveResponseData];
-        self.subjectiveResponseData = nil;
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [self storeSubjectiveResponseData:sResponses];
-        });
+    if (subjectiveResponses.timestamp > 0) {
+        [self.subjectiveResponseData addObject:subjectiveResponses];
+        
+        if ([self.subjectiveResponseData count] >= CAPACITY) {
+            NSArray *sResponses = [NSArray arrayWithArray:self.subjectiveResponseData];
+            self.subjectiveResponseData = nil;
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self storeSubjectiveResponseData:sResponses];
+            });
+        }
     }
 }
 
@@ -255,7 +263,7 @@
         [data appendData:[[Motion csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
     }
     
-    self.motionDataCount = [NSNumber numberWithInt:[self.motionDataCount intValue] + [motions count]];
+    self.motionDataCount = [NSNumber numberWithUnsignedLong:[self.motionDataCount intValue] + [motions count]];
     
     for (Motion *motion in motions) {
         [data appendData:[[motion csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
@@ -290,7 +298,7 @@
         }
     }
     
-    self.locationDataCount = [NSNumber numberWithInt:[self.locationDataCount intValue] + [locations count]];
+    self.locationDataCount = [NSNumber numberWithUnsignedLong:[self.locationDataCount intValue] + [locations count]];
     
     for (CLLocation *location in locations) {
         switch (LOCATION_EXT) {
@@ -341,7 +349,7 @@
         [data appendData:[@"Timestamp, RRInterval\n" dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
     }
     
-    self.heartRateMonitorDataCount = [NSNumber numberWithInt:[self.heartRateMonitorDataCount intValue] + [heartRateMonitorDataArray count]];
+    self.heartRateMonitorDataCount = [NSNumber numberWithUnsignedLong:[self.heartRateMonitorDataCount intValue] + [heartRateMonitorDataArray count]];
     
     for (HeartRateMonitorData *heartRateMonitorData in heartRateMonitorDataArray) {
         for (NSNumber *rrInterval in heartRateMonitorData.rrIntervals) {
@@ -362,7 +370,7 @@
         [data appendData:[[[subjectiveResponseDataArray lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
     }
     
-    self.subjectiveResponseDataCount = [NSNumber numberWithInt:[self.subjectiveResponseDataCount intValue] + [subjectiveResponseDataArray count]];
+    self.subjectiveResponseDataCount = [NSNumber numberWithUnsignedLong:[self.subjectiveResponseDataCount intValue] + [subjectiveResponseDataArray count]];
     
     for (SubjectiveResponses *subjectiveResponses in subjectiveResponseDataArray) {
         [data appendData:[[subjectiveResponses csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
