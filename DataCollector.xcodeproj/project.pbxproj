@@ -688,8 +688,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Simon Bogutzky (3G74VT8VX3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Bogutzky (3G74VT8VX3)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/DropboxSDK/",
@@ -713,8 +713,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "CB162622-1682-4C4A-A749-6E811676F9E4";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CB162622-1682-4C4A-A749-6E811676F9E4";
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;
 				WRAPPER_EXTENSION = app;
 			};
@@ -724,8 +724,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: out there/ communication (8936XLC29N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: out there/ communication (8936XLC29N)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/DropboxSDK/",
@@ -749,8 +749,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "E41DFEB0-CAAF-401E-9787-36B4557BA3D8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E41DFEB0-CAAF-401E-9787-36B4557BA3D8";
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;
 				WRAPPER_EXTENSION = app;
 			};
