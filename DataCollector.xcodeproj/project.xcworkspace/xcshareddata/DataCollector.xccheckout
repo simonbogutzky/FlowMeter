@@ -10,6 +10,8 @@
 	<string>DataCollector</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>0E24E541-73A4-4A59-922F-529F255BCF85</key>
+		<string>https://github.com/kolpanic/ZipKit.git</string>
 		<key>FD76D6AE-9E0E-458C-B202-6DBA286E7BBB</key>
 		<string>https://bitbucket.org/sbogutzky/data-collector.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>DataCollector.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>0E24E541-73A4-4A59-922F-529F255BCF85</key>
+		<string>../../ZipKit</string>
 		<key>FD76D6AE-9E0E-458C-B202-6DBA286E7BBB</key>
 		<string>../..</string>
 	</dict>
@@ -35,6 +39,14 @@
 			<string>FD76D6AE-9E0E-458C-B202-6DBA286E7BBB</string>
 			<key>IDESourceControlWCCName</key>
 			<string>data-collector</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0E24E541-73A4-4A59-922F-529F255BCF85</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ZipKit</string>
 		</dict>
 	</array>
 </dict>
