@@ -186,8 +186,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4523E19D16F9EE2600761733 /* AVFoundation.framework in Frameworks */,
 				60DFF73816AFE81000D64F7E /* libz.dylib in Frameworks */,
+				4523E19D16F9EE2600761733 /* AVFoundation.framework in Frameworks */,
 				D39747B11882CC7B00CFF3DF /* libtouchzipkit.a in Frameworks */,
 				D330863D187ECF1900A7B9DE /* HeartRateMonitor.framework in Frameworks */,
 				D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */,
@@ -692,8 +692,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Bogutzky (3G74VT8VX3)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/DropboxSDK/",
-					"/Users/simonbogutzky/Documents/Entwicklung/projekte/hs-bremen/git-repos/data-collector",
+					"$(SRCROOT)/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DataCollector/supporting-files/DataCollector-Prefix.pch";
@@ -728,8 +727,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: out there/ communication (8936XLC29N)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/DropboxSDK/",
-					"/Users/simonbogutzky/Documents/Entwicklung/projekte/hs-bremen/git-repos/data-collector",
+					"$(SRCROOT)/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DataCollector/supporting-files/DataCollector-Prefix.pch";
