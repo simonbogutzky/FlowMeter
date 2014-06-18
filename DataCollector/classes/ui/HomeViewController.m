@@ -215,7 +215,7 @@
 didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                           error:(NSError *)error
 {
-    [manager connectHeartRateMonitorDevice:(HeartRateMonitorDevice *)heartRateMonitorDevice];
+    AudioServicesPlaySystemSound(1073);
 }
 
 - (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
