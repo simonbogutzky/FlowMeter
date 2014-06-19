@@ -59,6 +59,11 @@
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [restClient release];
+    restClient = nil;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         return toInterfaceOrientation == UIInterfaceOrientationPortrait;
@@ -160,7 +165,7 @@
         } else {
             // Find a random photo that is not the current photo
             do {
-                srandom(time(NULL));
+                srandom((unsigned int)time(NULL));
                 NSInteger index =  random() % [photoPaths count];
                 photoPath = [photoPaths objectAtIndex:index];
             } while ([photoPath isEqual:currentPhotoPath]);

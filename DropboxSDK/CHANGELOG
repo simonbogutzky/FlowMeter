@@ -4,6 +4,14 @@ Upgrade instructions
 3. Follow the installation instructions from the README to install the
    newest version of the SDK
 
+Changes from 1.3.10 to 1.3.11
+- Fix 404s on page transitions during authentication on iOS
+- Upgrade project files for use with XCode 5.1
+
+Changes from 1.3.9 to 1.3.10
+- Stricter validation of server certificates on HTTP requests
+- Fix an issue in DBRoulette sample when switching between users
+
 Changes from 1.3.8 to 1.3.9
 - You will *not* believe the 64 bit support in this version
 
