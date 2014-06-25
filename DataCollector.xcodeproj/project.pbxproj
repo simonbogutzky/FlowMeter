@@ -249,13 +249,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				604CCD9116A6F31000E87194 /* Foundation.framework in Frameworks */,
+				D3C7ADC9171EEA44000A7D34 /* CFNetwork.framework in Frameworks */,
 				60DFF73816AFE81000D64F7E /* libz.dylib in Frameworks */,
 				4523E19D16F9EE2600761733 /* AVFoundation.framework in Frameworks */,
 				D39747B11882CC7B00CFF3DF /* libtouchzipkit.a in Frameworks */,
 				D330863D187ECF1900A7B9DE /* HeartRateMonitor.framework in Frameworks */,
 				D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */,
 				D3C7ADCB171EEA8C000A7D34 /* SystemConfiguration.framework in Frameworks */,
-				D3C7ADC9171EEA44000A7D34 /* CFNetwork.framework in Frameworks */,
 				D3C7ADC2171ED66A000A7D34 /* QuartzCore.framework in Frameworks */,
 				D3C7ADC0171ED660000A7D34 /* Security.framework in Frameworks */,
 				4523E19C16F9EE2600761733 /* AudioToolbox.framework in Frameworks */,
@@ -268,7 +269,6 @@
 				D31AA2C51951FD19004ACB8D /* HeartRateMonitor.framework in Frameworks */,
 				60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */,
 				604CCD8F16A6F31000E87194 /* UIKit.framework in Frameworks */,
-				604CCD9116A6F31000E87194 /* Foundation.framework in Frameworks */,
 				604CCD9316A6F31000E87194 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
