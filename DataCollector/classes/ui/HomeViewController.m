@@ -159,9 +159,6 @@
     
     if (_countdown == 0) {
         
-        NSDictionary *userInfo = @{@"event": @"collecting-starts"};
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"DetectGaitEvent" object:self userInfo:userInfo];
-        
         [_countdownTimer invalidate];
         _counterView.hidden = YES;
         
