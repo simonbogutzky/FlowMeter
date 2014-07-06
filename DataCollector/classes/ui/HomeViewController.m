@@ -142,7 +142,12 @@
     if (!_isCollection) {
         [[self navigationController] setNavigationBarHidden:YES animated:YES];
             [startStopCollectionButton setTitle:@"stop" forState:0];
-        [self showFlowShortScale];
+        _countdown = 5;
+        _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
+        _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initializeCollection) userInfo:nil repeats:YES];
+        _counterView.hidden = NO;
+        
+        [self startUpdates];
     } else {
         [self stopUpdates];
         _isCollection = !_isCollection;
@@ -327,13 +332,6 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
             });
             self.isLastSubjektiveResponse = NO;
         } else {
-            self.subjektiveResponseTimer = [NSTimer scheduledTimerWithTimeInterval:15 * 60 target:self selector:@selector(showFlowShortScale) userInfo:nil repeats:NO];
-            _countdown = 5;
-            _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
-            _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initializeCollection) userInfo:nil repeats:YES];
-            _counterView.hidden = NO;
-            
-            [self startUpdates];
         }
     }
 }
