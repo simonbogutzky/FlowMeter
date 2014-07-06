@@ -142,6 +142,12 @@
     if (!_isCollection) {
         [[self navigationController] setNavigationBarHidden:YES animated:YES];
             [startStopCollectionButton setTitle:@"stop" forState:0];
+        
+        
+        if (_appDelegate.fssEnqueryStatus) {
+            self.subjektiveResponseTimer = [NSTimer scheduledTimerWithTimeInterval:15 * 60 target:self selector:@selector(showFlowShortScale) userInfo:nil repeats:NO];
+        }
+        
         _countdown = 5;
         _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
         _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initializeCollection) userInfo:nil repeats:YES];
@@ -151,9 +157,14 @@
     } else {
         [self stopUpdates];
         _isCollection = !_isCollection;
-        self.isLastSubjektiveResponse = YES;
-        [self showFlowShortScale];
-        [self.subjektiveResponseTimer invalidate];
+        
+        if (_appDelegate.fssEnqueryStatus) {
+            self.isLastSubjektiveResponse = YES;
+            [self showFlowShortScale];
+            [self.subjektiveResponseTimer invalidate];
+        } else {
+            [self storeData];
+        }
     }
 }
 
@@ -314,26 +325,30 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
         self.subjektiveResponseTimer = [NSTimer scheduledTimerWithTimeInterval:15 * 60 target:self selector:@selector(showFlowShortScale) userInfo:nil repeats:NO];
     } else {
         if (self.isLastSubjektiveResponse) {
-            [_user addSessionsObject:self.session];
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [self.session storeMotions];
-                [self.session storeHeartRateMonitorData];
-                [self.session storeLocations];
-                [self.session storeSubjectiveResponseData];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
-                                                                    message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
-                                                                   delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-                                                          otherButtonTitles:nil];
-                    [alert show];
-                });
-            });
+            [self storeData];
             self.isLastSubjektiveResponse = NO;
-        } else {
         }
     }
+}
+
+- (void)storeData
+{
+    [_user addSessionsObject:self.session];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.session storeMotions];
+        [self.session storeHeartRateMonitorData];
+        [self.session storeLocations];
+        [self.session storeSubjectiveResponseData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
+                                                            message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
+                                                           delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
+                                                  otherButtonTitles:nil];
+            [alert show];
+        });
+    });
 }
 
 @end
