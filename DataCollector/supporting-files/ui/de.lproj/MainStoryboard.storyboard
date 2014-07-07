@@ -144,6 +144,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBd-iU-TgT">
+                                <rect key="frame" x="20" y="84" width="120" height="21"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TV8-ty-RU8">
                                 <rect key="frame" x="128" y="396" width="64" height="152"/>
                                 <constraints>
@@ -203,6 +208,7 @@
                         <outlet property="_counterView" destination="No8-XL-3qD" id="gRo-0v-fpk"/>
                         <outlet property="_startStopCollectionButton" destination="TV8-ty-RU8" id="mek-7S-Ehi"/>
                         <outlet property="heartRateLabel" destination="uLq-37-zr6" id="kg6-ul-S1A"/>
+                        <outlet property="stopWatchLabel" destination="JBd-iU-TgT" id="pAF-Qq-XWc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
