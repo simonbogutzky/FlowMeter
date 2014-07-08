@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="i1e-ga-Cft">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <scenes>
@@ -156,7 +157,7 @@
                                 </constraints>
                                 <color key="tintColor" red="0.062745101749897003" green="0.46666669845581055" blue="0.55686277151107788" alpha="1" colorSpace="deviceRGB"/>
                                 <state key="normal" title="start">
-                                    <color key="titleColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleColor" red="0.0078431377190000002" green="0.72941178080000002" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="disabled">
@@ -171,7 +172,7 @@
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="No8-XL-3qD" userLabel="Counter View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="0.75" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.011764707040000001" green="0.69019609689999994" blue="0.0039215688589999999" alpha="0.75" colorSpace="deviceRGB"/>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfM-7K-tdj" userLabel="Counter Label">
                                 <rect key="frame" x="132" y="224" width="56" height="120"/>
@@ -197,7 +198,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Startseite" id="hQZ-pK-huO">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="U0b-9h-g3Q">
-                            <color key="tintColor" red="0.094117656350135803" green="0.51372551918029785" blue="0.61176472902297974" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <segue destination="Clp-K7-Gjl" kind="unwind" unwindAction="unwindToMenuViewController:" id="wbs-K4-hsn"/>
                             </connections>
@@ -237,7 +237,7 @@
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Vorname" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eVL-tz-LRT">
                                                     <rect key="frame" x="15" y="16" width="91" height="15"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                                    <color key="textColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" red="0.011764707040000001" green="0.69019609689999994" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aCp-ko-lc8">
@@ -262,7 +262,7 @@
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Nachname" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FSk-e8-a6O">
                                                     <rect key="frame" x="15" y="16" width="91" height="15"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                                    <color key="textColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" red="0.011764707040000001" green="0.69019609689999994" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RUz-Hr-4go">
@@ -287,7 +287,7 @@
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Benutzername" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lX2-DD-Hkt">
                                                     <rect key="frame" x="15" y="16" width="91" height="15"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                                    <color key="textColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" red="0.011764707040000001" green="0.69019609689999994" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iBq-la-LHe">
@@ -448,7 +448,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vPw-LP-ebh">
                                                     <rect key="frame" x="213" y="6" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.0" green="0.5647059083" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="onTintColor" red="0.011764707040000001" green="0.69019609689999994" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
                                                         <action selector="changeDbConnectionStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="BZ2-8u-ibb"/>
                                                     </connections>
@@ -483,7 +483,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-nl-z8v">
                                                     <rect key="frame" x="213" y="4" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.0" green="0.5647059083" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="onTintColor" red="0.011764707040000001" green="0.69019609689999994" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
                                                         <action selector="changeHxMConnectionStatus:" destination="pk8-WG-38E" eventType="touchUpInside" id="pPO-3a-4gU"/>
                                                     </connections>
@@ -525,7 +525,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cHa-dD-ilI">
                                                     <rect key="frame" x="213" y="6" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.0" green="0.5647059083" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="onTintColor" red="0.0078431377190000002" green="0.72941178080000002" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
                                                         <action selector="changeDbConnectionStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="fRa-iD-SBZ"/>
                                                         <action selector="changeFSSInqueryStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="K9d-2Y-DKo"/>
@@ -805,5 +805,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="sGD-jV-yf9"/>
     </inferredMetricsTieBreakers>
-    <color key="tintColor" red="0.094117656350135803" green="0.51372551918029785" blue="0.61176472902297974" alpha="1" colorSpace="deviceRGB"/>
+    <color key="tintColor" red="0.011764707043766975" green="0.69019609689712524" blue="0.0039215688593685627" alpha="1" colorSpace="deviceRGB"/>
 </document>
