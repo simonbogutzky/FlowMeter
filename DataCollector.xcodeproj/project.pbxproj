@@ -43,14 +43,14 @@
 		D34C9D3B172504C4004C261C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D38172504C4004C261C /* Default-568h@2x.png */; };
 		D34C9D3C172504C4004C261C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D39172504C4004C261C /* Default.png */; };
 		D34C9D3D172504C4004C261C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D3A172504C4004C261C /* Default@2x.png */; };
-		D34C9D461725051C004C261C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D421725051C004C261C /* InfoPlist.strings */; };
-		D34C9D471725051C004C261C /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D441725051C004C261C /* MainStoryboard.storyboard */; };
 		D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */; };
 		D36C44B016D788BE000B8502 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
 		D36C44B216D7898B000B8502 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44B116D7898B000B8502 /* ExternalAccessory.framework */; };
-		D36DC1A8173931E300D84CF4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D36DC1A6173931E200D84CF4 /* Localizable.strings */; };
 		D37067D71733F41300F86BBD /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37067D61733F41300F86BBD /* EditViewController.m */; };
 		D38A216D16BFF9F80075D093 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38A216C16BFF9F80075D093 /* CoreLocation.framework */; };
+		D38FBDBA196C1DC000C63681 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB4196C1DC000C63681 /* InfoPlist.strings */; };
+		D38FBDBB196C1DC000C63681 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB6196C1DC000C63681 /* Localizable.strings */; };
+		D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */; };
 		D39747B11882CC7B00CFF3DF /* libtouchzipkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D39747AE1882CC6400CFF3DF /* libtouchzipkit.a */; };
 		D39ADD8B187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39ADD8A187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.m */; };
 		D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionTableViewController.m */; };
@@ -192,14 +192,16 @@
 		D34C9D3A172504C4004C261C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "supporting-files/images/launch-images/Default@2x.png"; sourceTree = "<group>"; };
 		D35ABC0E188EC2AE00BD1D2D /* LikertScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewController.h; path = classes/ui/LikertScaleViewController.h; sourceTree = "<group>"; };
 		D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LikertScaleViewController.m; path = classes/ui/LikertScaleViewController.m; sourceTree = "<group>"; };
-		D35FEB9D17256B9200D92DEB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "supporting-files/ui/de.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		D35FEB9E17256B9200D92DEB /* de */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = de; path = "supporting-files/ui/de.lproj/MainStoryboard.storyboard"; sourceTree = "<group>"; };
 		D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D36C44B116D7898B000B8502 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
-		D36DC1A7173931E300D84CF4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "DataCollector/supporting-files/ui/de.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D37067D51733F41300F86BBD /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewController.h; path = classes/ui/EditViewController.h; sourceTree = "<group>"; };
 		D37067D61733F41300F86BBD /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewController.m; path = classes/ui/EditViewController.m; sourceTree = "<group>"; };
 		D38A216C16BFF9F80075D093 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D38FBDB5196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D38FBDB7196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D38FBDB9196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = de; path = de.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		D38FBDBD196C1DF500C63681 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		D38FBDBE196C1DFC00C63681 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZipKit.xcodeproj; path = ZipKit/ZipKit.xcodeproj; sourceTree = "<group>"; };
 		D39ADD89187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorDeviceTableViewController.h; sourceTree = "<group>"; };
 		D39ADD8A187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorDeviceTableViewController.m; sourceTree = "<group>"; };
@@ -428,9 +430,9 @@
 		D34C9D3E172504D7004C261C /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				D36DC1A6173931E200D84CF4 /* Localizable.strings */,
-				D34C9D421725051C004C261C /* InfoPlist.strings */,
-				D34C9D441725051C004C261C /* MainStoryboard.storyboard */,
+				D38FBDB4196C1DC000C63681 /* InfoPlist.strings */,
+				D38FBDB6196C1DC000C63681 /* Localizable.strings */,
+				D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -739,15 +741,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D34C9D36172504BA004C261C /* Icon.png in Resources */,
+				D38FBDBA196C1DC000C63681 /* InfoPlist.strings in Resources */,
 				D34C9D37172504BA004C261C /* Icon@2x.png in Resources */,
 				D3C1292718632B4B00C361CA /* README.md in Resources */,
+				D38FBDBB196C1DC000C63681 /* Localizable.strings in Resources */,
 				D34C9D3B172504C4004C261C /* Default-568h@2x.png in Resources */,
+				D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */,
 				D3C1292818632B4B00C361CA /* release_notes.md in Resources */,
 				D34C9D3C172504C4004C261C /* Default.png in Resources */,
 				D34C9D3D172504C4004C261C /* Default@2x.png in Resources */,
-				D34C9D461725051C004C261C /* InfoPlist.strings in Resources */,
-				D34C9D471725051C004C261C /* MainStoryboard.storyboard in Resources */,
-				D36DC1A8173931E300D84CF4 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,29 +845,30 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D34C9D421725051C004C261C /* InfoPlist.strings */ = {
+		D38FBDB4196C1DC000C63681 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D35FEB9D17256B9200D92DEB /* de */,
+				D38FBDB5196C1DC000C63681 /* de */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		D34C9D441725051C004C261C /* MainStoryboard.storyboard */ = {
+		D38FBDB6196C1DC000C63681 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D35FEB9E17256B9200D92DEB /* de */,
-			);
-			name = MainStoryboard.storyboard;
-			sourceTree = "<group>";
-		};
-		D36DC1A6173931E200D84CF4 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D36DC1A7173931E300D84CF4 /* de */,
+				D38FBDB7196C1DC000C63681 /* de */,
+				D38FBDBE196C1DFC00C63681 /* en */,
 			);
 			name = Localizable.strings;
-			path = ..;
+			sourceTree = "<group>";
+		};
+		D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D38FBDB9196C1DC000C63681 /* de */,
+				D38FBDBD196C1DF500C63681 /* en */,
+			);
+			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
