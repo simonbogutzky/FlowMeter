@@ -10,73 +10,168 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "Session.h"
-#import "SubjectiveResponses.h"
-#import "Motion.h"
+#import "SelfReport.h"
+//#import "Motion.h"
 #import "MBProgressHUD.h"
 #import "LikertScaleViewController.h"
 #import <AudioToolbox/AudioServices.h>
 
 @interface HomeViewController ()
-{
-    BOOL _isCollection;
-    
-    User *_user;
-    int _lastAccumBeatCount;
-    DBRestClient *_restClient;
-    
-    AppDelegate *_appDelegate;
-    
-    IBOutlet UIView *_counterView;
-    IBOutlet UILabel *_counterLabel;
-    IBOutlet UIButton *_startStopCollectionButton;
-    int _countdown;
-    NSTimer *_countdownTimer;
-}
 
+@property (nonatomic, strong) AppDelegate *appDelegate;
+@property (nonatomic, strong) User *user;
 @property (nonatomic, strong) Session *session;
-@property (nonatomic, weak) IBOutlet UILabel *heartRateLabel;
-@property (nonatomic, assign) BOOL isLastSubjektiveResponse;
-@property (nonatomic, strong) NSTimer *subjektiveResponseTimer;
-@property (weak, nonatomic) IBOutlet UILabel *stopWatchLabel;
-@property (strong, nonatomic) NSDate *startDate; // Stores the date of the click on the start button
-@property (strong, nonatomic) NSTimer *stopWatchTimer; // Store the timer that fires
 
+@property (nonatomic, strong) NSTimer *selfReportTimer;
+@property (nonatomic, strong) NSTimer *startCountdownTimer;
+@property (nonatomic, strong) NSTimer *stopWatchTimer;
+@property (nonatomic, strong) NSDate *stopWatchStartDate;
+
+@property (nonatomic) BOOL isCollecting;
+@property (nonatomic) BOOL isLastSelfReport;
+@property (nonatomic) int startCountdown;
+
+@property (nonatomic, weak) IBOutlet UIView *startCountdownView;
+@property (nonatomic, weak) IBOutlet UILabel *startCountdownLabel;
+@property (nonatomic, weak) IBOutlet UILabel *stopWatchLabel;
+@property (nonatomic, weak) IBOutlet UIButton *startStopButton;
+@property (nonatomic, weak) IBOutlet UILabel *heartRateLabel;
 
 @end
 
 @implementation HomeViewController
 
 #pragma mark -
-#pragma mark - UIViewControllerDelegate implementation
+#pragma mark - Getter
+
+- (AppDelegate *)appDelegate
+{
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+- (User *)user
+{
+    if (!_user) {
+        NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
+        _user = [self.appDelegate activeUserWithPredicate:isActivePredicate];
+    }
+    return _user;
+}
 
 - (Session *)session
 {
     if (!_session) {
-        _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:_appDelegate.managedObjectContext];
+        _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:self.appDelegate.managedObjectContext];
         _session.isZipped = [NSNumber numberWithBool:ZIP];
         _session.user = _user;
     }
     return _session;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
-    _user = [_appDelegate activeUserWithPredicate:isActivePredicate];
-}
+#pragma mark -
+#pragma mark - IBActions
 
-- (void)didReceiveMemoryWarning
+- (IBAction)startStopTouchUpInside:(UIButton *)sender
 {
-    [super didReceiveMemoryWarning];
+    if (![self.user.isActive boolValue]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Bitte gib deinen Namen an! *", @"Bitte gib deinen Namen an!")
+                                                        message:NSLocalizedString(@"Gehe zu Menu > Profil *" , @"Gehe zu Menu > Profil")
+                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok *", @"Ok")
+                                              otherButtonTitles:nil];
+        [alert show];
+        sender.enabled = NO;
+        return;
+    }
+    
+    if (!self.isCollecting) {
+        
+        // Hide navigation bar
+        [[self navigationController] setNavigationBarHidden:YES animated:YES];
+        
+        // Rename button title
+        [sender setTitle:NSLocalizedString(@"Stop *", @"Stoppe Aufnahme") forState:0];
+        
+        // Start sensor updates
+        [self startSensorUpdates];
+        
+        // Start start countdown
+        // TODO: Sekunden auslagern
+        [self startStartCounterWithInterval:5];
+        
+    } else {
+        self.isCollecting = !self.isCollecting;
+        [self stopSensorUpdates];
+        
+        if (self.appDelegate.flowShortScaleIsSelected) {
+            [self.selfReportTimer invalidate];
+            self.isLastSelfReport = YES;
+            
+            [self showSelfReport];
+        } else {
+            [self storeData];
+        }
+        
+    }
 }
 
 #pragma mark -
 #pragma mark - Convient methods
-- (void)startUpdates
+
+- (void)startStartCounterWithInterval:(int)seconds
 {
+    self.startCountdown = seconds;
+    self.startCountdownLabel.text = [NSString stringWithFormat:@"%d", self.startCountdown];
+    self.startCountdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                                target:self
+                                                              selector:@selector(updateStartCountdown)
+                                                              userInfo:nil repeats:YES];
+    self.startCountdownView.hidden = NO;
+}
+
+- (void)updateStartCountdown
+{
+    self.startCountdown--;
+    self.startCountdownLabel.text = [NSString stringWithFormat:@"%i", self.startCountdown];
+    if (self.startCountdown == 0) {
+        [self.startCountdownTimer invalidate];
+        self.startCountdownView.hidden = YES;
+        
+        [self startCollecting];
+    }
+}
+
+- (void)startStopWatch
+{
+    self.stopWatchStartDate = [NSDate date];
+    self.stopWatchLabel.text = @"00:00:00";
+    self.stopWatchLabel.hidden = NO;
+    self.stopWatchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
+                                                           target:self
+                                                         selector:@selector(updateStopWatch)
+                                                         userInfo:nil
+                                                          repeats:YES];
+}
+
+- (void)updateStopWatch
+{
+    // Create date from the elapsed time
+    NSDate *currentDate = [NSDate date];
+    NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:self.stopWatchStartDate];
+    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    
+    // Create a date formatter
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
+    
+    // Format the elapsed time and set it to the label
+    NSString *timeString = [dateFormatter stringFromDate:timerDate];
+    self.stopWatchLabel.text = timeString;
+}
+
+- (void)startSensorUpdates
+{
+    /*
     // Start motion updates
     NSTimeInterval updateInterval = 0.01; // 100hz
     CMMotionManager *motionManager = _appDelegate.motionManager;
@@ -101,15 +196,18 @@
     [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     locationManager.delegate = self;
     [locationManager startUpdatingLocation];
+     */
     
-    if (_appDelegate.heartRateMonitorManager.hasConnection) {
-        _appDelegate.heartRateMonitorManager.delegate = self;
-        [_appDelegate.heartRateMonitorManager startMonitoring];
+    // Start heart rate monitor updates
+    if (self.appDelegate.heartRateMonitorManager.hasConnection) {
+        self.appDelegate.heartRateMonitorManager.delegate = self;
+        [self.appDelegate.heartRateMonitorManager startMonitoring];
     }
 }
 
-- (void)stopUpdates
+- (void)stopSensorUpdates
 {
+    /*
     // Stop motion updates
     CMMotionManager *motionManager = _appDelegate.motionManager;
     if ([motionManager isDeviceMotionActive] == YES) {
@@ -119,100 +217,49 @@
     // Stop location updates
     CLLocationManager *locationManager = _appDelegate.locationManager;
     [locationManager stopUpdatingLocation];
+     */
     
-    if (_appDelegate.heartRateMonitorManager.hasConnection) {
+    // Stop heart rate monitor updates
+    if (self.appDelegate.heartRateMonitorManager.hasConnection) {
         self.heartRateLabel.hidden = YES;
-        [_appDelegate.heartRateMonitorManager stopMonitoring];
+        [self.appDelegate.heartRateMonitorManager stopMonitoring];
     }
 }
 
-#pragma mark -
-#pragma mark - IBActions
-
-- (IBAction)startStopCollection:(id)sender
+- (void)startCollecting
 {
-    UIButton *startStopCollectionButton = (UIButton *)sender;
-    if (![_user.isActive boolValue]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Bitte gib deinen Namen an!", @"Bitte gib deinen Namen an!")
-                                                        message:NSLocalizedString(@"Gehe zu Menu > Profil" , @"Gehe zu Menu > Profil")
-                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-                                              otherButtonTitles:nil];
-        [alert show];
-        
-        startStopCollectionButton.enabled = NO;
-        return;
-    }
+    NSLog(@"# Start collecting");
+    [self.session initialize];
+    self.isCollecting = !self.isCollecting;
     
-    if (!_isCollection) {
-        [[self navigationController] setNavigationBarHidden:YES animated:YES];
-            [startStopCollectionButton setTitle:@"stop" forState:0];
-        
-        
-        if (_appDelegate.fssEnqueryStatus) {
-            self.subjektiveResponseTimer = [NSTimer scheduledTimerWithTimeInterval:15 * 60 target:self selector:@selector(showFlowShortScale) userInfo:nil repeats:NO];
-        }
-        
-        _countdown = 5;
-        _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
-        _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(initializeCollection) userInfo:nil repeats:YES];
-        _counterView.hidden = NO;
-        
-        [self startUpdates];
-    } else {
-        [self stopUpdates];
-        _isCollection = !_isCollection;
-        
-        if (_appDelegate.fssEnqueryStatus) {
-            self.isLastSubjektiveResponse = YES;
-            [self showFlowShortScale];
-            [self.subjektiveResponseTimer invalidate];
-        } else {
-            [self storeData];
-        }
-        self.stopWatchLabel.hidden = YES;
-    }
-}
-
-- (void)initializeCollection
-{
-    _countdown--;
-    _counterLabel.text = [NSString stringWithFormat:@"%i", _countdown];
+    [self startStopWatch];
     
-    if (_countdown == 0) {
-        
-        self.startDate = [NSDate date];
-        
-        // Create the stop watch timer that fires every 100 ms
-        self.stopWatchLabel.hidden = NO;
-        self.stopWatchLabel.text = @"00:00:00";
-        self.stopWatchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
-                                                               target:self
-                                                             selector:@selector(updateTimer)
-                                                             userInfo:nil
-                                                              repeats:YES];
-        
-        [_countdownTimer invalidate];
-        _counterView.hidden = YES;
-        
-        [self.session initialize];
-        
-        _isCollection = !_isCollection;
-        NSLog(@"# Start collecting");
+    if (self.appDelegate.flowShortScaleIsSelected) {
+        //TODO: Minuten auslagern
+        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:1 * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     }
 }
 
-#pragma mark - 
-#pragma mark - CLLocationManagerDelegate implementation
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+- (void)storeData
 {
-    if(_isCollection) {
-        for (CLLocation *location in locations) {
-            
-            // Add location record
-            [self.session addLocationData:location];
-        }
-    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.user addSessionsObject:self.session];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //        [self.session storeMotions];
+        //        [self.session storeLocations];
+        [self.session storeHeartRateMonitorData];
+        //TODO: Session 
+        [self.session storeSubjectiveResponseData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit! *", @"Gute Arbeit!")
+                                                            message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert. *" , @"Deine Daten wurden lokal gespeichert.")
+                                                           delegate:self cancelButtonTitle:NSLocalizedString(@"Ok *", @"Bestätigung: Ok")
+                                                  otherButtonTitles:nil];
+            [alert show];
+        });
+    });
 }
 
 #pragma mark -
@@ -220,7 +267,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    [_startStopCollectionButton setTitle:@"start" forState:0];
+    [self.startStopButton setTitle:NSLocalizedString(@"Start *", "Starte Aufnahme") forState:0];
 }
 
 #pragma mark -
@@ -233,7 +280,7 @@
         self.heartRateLabel.text = [NSString stringWithFormat:@"%d %@", data.heartRate, data.heartRateUnit];
     }
     
-    if(_isCollection) {
+    if(self.isCollecting) {
         
         // Add hr record
         [self.session addHeartRateMonitorData:data];
@@ -245,6 +292,7 @@ didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                           error:(NSError *)error
 {
     AudioServicesPlaySystemSound(1073);
+    self.heartRateLabel.text = NSLocalizedString(@"Getrennt *", "HR Monitor wurde getrennt");
 }
 
 - (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
@@ -253,13 +301,56 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     [manager startMonitoring];
 }
 
-#pragma mark -
-#pragma mark - Flow-Kurzskala 
+/*
+ #pragma mark -
+ #pragma mark - CLLocationManagerDelegate implementation
+ 
+ - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+ {
+ if(_isCollecting) {
+ for (CLLocation *location in locations) {
+ 
+ // Add location record
+ [self.session addLocationData:location];
+ }
+ }
+ }
+ */
 
-- (void)showFlowShortScale
+#pragma mark -
+#pragma mark - LikertScaleViewControllerDelegate implementation
+
+- (void)likertScaleViewController:(LikertScaleViewController *)viewController didFinishWithResponses:(NSArray *)responses atTimestamp:(double)timestamp
+{
+    [viewController dismissViewControllerAnimated:YES
+                                       completion:^{
+                                           ;
+                                       }];
+    
+    SelfReport *selfReport = [[SelfReport alloc] initWithTimestamp:timestamp itemResponses:responses];
+    [self.session addSubjectiveResponseData:selfReport];
+    
+    if (self.isCollecting) {
+        //TODO: Minuten auslagern
+        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:15 * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
+    } else {
+        if (self.isLastSelfReport) {
+            [self storeData];
+            self.isLastSelfReport = NO;
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark - Self-reports
+
+- (void)showSelfReport
 {
     AudioServicesPlaySystemSound(1007);
-    [self presentViewController:[self flowShortScaleViewControllerFromStoryboard] animated:YES completion:nil];
+    
+    if (self.appDelegate.flowShortScaleIsSelected) {
+        [self presentViewController:[self flowShortScaleViewControllerFromStoryboard] animated:YES completion:nil];
+    }
 }
 
 - (LikertScaleViewController *)flowShortScaleViewControllerFromStoryboard
@@ -270,22 +361,22 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     flowShortScaleViewController.delegate = self;
     
     flowShortScaleViewController.itemLabelTexts = @[
-                                                     @"Ich fühle mich optimal beansprucht.",
-                                                     @"Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt.",
-                                                     @"Ich merke gar nicht, wie die Zeit vergeht.",
-                                                     @"Ich habe keine Mühe, mich zu konzentrieren.",
-                                                     @"Mein Kopf ist völlig klar.",
-                                                     @"Ich bin ganz vertieft in das, was ich gerade mache.",
-                                                     @"Die richtigen Gedanken/Bewegungen kommen wie von selbst.",
-                                                     @"Ich weiß bei jedem Schritt, was ich zu tun habe.",
-                                                     @"Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben.",
-                                                     @"Ich bin völlig selbstvergessen.",
-                                                     @"Es steht etwas für mich Wichtiges auf dem Spiel.",
-                                                     @"Ich darf jetzt keine Fehler machen.",
-                                                     @"Ich mache mir Sorgen über einen Misserfolg.",
-                                                     @"Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit...",
-                                                     @"Ich denke, meine Fähigkeiten auf diesem Gebiet sind...",
-                                                     @"Für mich persönlich sind die jetzigen Anforderungen..."
+                                                     NSLocalizedString(@"Ich fühle mich optimal beansprucht. *", @"Ich fühle mich optimal beansprucht."),
+                                                     NSLocalizedString(@"Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt. *", @"Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt."),
+                                                     NSLocalizedString(@"Ich merke gar nicht, wie die Zeit vergeht. *", @"Ich merke gar nicht, wie die Zeit vergeht."),
+                                                     NSLocalizedString(@"Ich habe keine Mühe, mich zu konzentrieren. *", @"Ich habe keine Mühe, mich zu konzentrieren."),
+                                                     NSLocalizedString(@"Mein Kopf ist völlig klar. *", @"Mein Kopf ist völlig klar."),
+                                                     NSLocalizedString(@"Ich bin ganz vertieft in das, was ich gerade mache. *", @"Ich bin ganz vertieft in das, was ich gerade mache."),
+                                                     NSLocalizedString(@"Die richtigen Gedanken/Bewegungen kommen wie von selbst. *", @"Die richtigen Gedanken/Bewegungen kommen wie von selbst."),
+                                                     NSLocalizedString(@"Ich weiß bei jedem Schritt, was ich zu tun habe. *", @"Ich weiß bei jedem Schritt, was ich zu tun habe."),
+                                                     NSLocalizedString(@"Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben. *", @"Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben."),
+                                                     NSLocalizedString(@"Ich bin völlig selbstvergessen. *", @"Ich bin völlig selbstvergessen."),
+                                                     NSLocalizedString(@"Es steht etwas für mich Wichtiges auf dem Spiel. *", @"Es steht etwas für mich Wichtiges auf dem Spiel."),
+                                                     NSLocalizedString(@"Ich darf jetzt keine Fehler machen. *", @"Ich darf jetzt keine Fehler machen."),
+                                                     NSLocalizedString(@"Ich mache mir Sorgen über einen Misserfolg. *", @"Ich mache mir Sorgen über einen Misserfolg."),
+                                                     NSLocalizedString(@"Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit... *", @"Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit..."),
+                                                     NSLocalizedString(@"Ich denke, meine Fähigkeiten auf diesem Gebiet sind... *", @"Ich denke, meine Fähigkeiten auf diesem Gebiet sind..."),
+                                                     NSLocalizedString(@"Für mich persönlich sind die jetzigen Anforderungen... *", @"Für mich persönlich sind die jetzigen Anforderungen...")
                                                      ];
      flowShortScaleViewController.itemSegments = @[
                                                    @7,
@@ -306,82 +397,25 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                                                    @9
                                                    ];
     flowShortScaleViewController.scaleLabels = @[
-                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
-                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
-                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
-                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
-                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
-                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
-                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
-                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
-                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
-                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
-                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
-                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
-                                                  @[@"Trifft nicht zu", @"teils-teils", @"Trifft zu"],
-                                                  @[@"leicht", @"", @"schwer"],
-                                                  @[@"niedrig", @"", @"hoch"],
-                                                  @[@"zu gering",@"gerade richtig", @"zu hoch"]
+                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"leicht *", @"Schwierigkeit: leicht"), @"", NSLocalizedString(@"schwer *", @"Schwierigkeit: schwer")],
+                                                  @[NSLocalizedString(@"niedrig *", @"Fähigkeiten: niedrig"), @"", NSLocalizedString(@"hoch *", @"Fähigkeiten: hoch")],
+                                                  @[NSLocalizedString(@"zu gering *", @"Beanspruchung: zu gering"), NSLocalizedString(@"gerade richtig *", @"Beanspruchung: gerade richtig"), NSLocalizedString(@"zu hoch *", @"Beanspruchung: zu hoch")]
                                                   ];
 
     return flowShortScaleViewController;
-}
-
-- (void)likertScaleViewController:(LikertScaleViewController *)viewController didFinishWithResponses:(NSArray *)responses atTimestamp:(double)timestamp
-{
-    [viewController dismissViewControllerAnimated:YES
-                                       completion:^{
-                                           ;
-                                       }];
-    
-   SubjectiveResponses *subjectiveResponses = [[SubjectiveResponses alloc] initWithTimestamp:timestamp itemResponses:responses];
-    [self.session addSubjectiveResponseData:subjectiveResponses];
-    
-    if (_isCollection) {
-        self.subjektiveResponseTimer = [NSTimer scheduledTimerWithTimeInterval:15 * 60 target:self selector:@selector(showFlowShortScale) userInfo:nil repeats:NO];
-    } else {
-        if (self.isLastSubjektiveResponse) {
-            [self storeData];
-            self.isLastSubjektiveResponse = NO;
-        }
-    }
-}
-
-- (void)storeData
-{
-    [_user addSessionsObject:self.session];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self.session storeMotions];
-        [self.session storeHeartRateMonitorData];
-        [self.session storeLocations];
-        [self.session storeSubjectiveResponseData];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
-                                                            message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
-                                                           delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok")
-                                                  otherButtonTitles:nil];
-            [alert show];
-        });
-    });
-}
-
-- (void)updateTimer
-{
-    // Create date from the elapsed time
-    NSDate *currentDate = [NSDate date];
-    NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:self.startDate];
-    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-    
-    // Create a date formatter
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm:ss"];
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    
-    // Format the elapsed time and set it to the label
-    NSString *timeString = [dateFormatter stringFromDate:timerDate];
-    self.stopWatchLabel.text = timeString;
 }
 
 @end

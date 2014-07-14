@@ -29,7 +29,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dBConnectionChanged:) name:NOTIFICATION_DB_CONNECTION_CANCELLED object:nil];
     
-    self.fssInqueryStatusSwitch.on = _appDelegate.fssEnqueryStatus;
+    self.fssInqueryStatusSwitch.on = _appDelegate.flowShortScaleIsSelected;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -60,7 +60,7 @@
 }
 
 - (IBAction)changeFSSInqueryStatus:(UISwitch *)sender {
-    _appDelegate.fssEnqueryStatus = sender.on;
+    _appDelegate.flowShortScaleIsSelected = sender.on;
 }
 
 

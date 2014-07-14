@@ -27,7 +27,7 @@
 @property (readonly, strong, nonatomic) CMMotionManager *motionManager;
 @property (readonly, strong, nonatomic) CLLocationManager *locationManager;
 @property (readonly, strong, nonatomic) HeartRateMonitorManager *heartRateMonitorManager;
-@property (nonatomic) BOOL fssEnqueryStatus;
+@property (nonatomic) BOOL flowShortScaleIsSelected;
 
 - (void)saveContext;
 - (User *)activeUserWithPredicate:(NSPredicate *)predicate;

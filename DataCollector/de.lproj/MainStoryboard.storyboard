@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="i1e-ga-Cft">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="i1e-ga-Cft">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <scenes>
@@ -141,11 +140,14 @@
                         <subviews>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120 BPM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uLq-37-zr6">
                                 <rect key="frame" x="232" y="84" width="68" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="Q8V-fO-0bk"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBd-iU-TgT">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBd-iU-TgT">
                                 <rect key="frame" x="20" y="84" width="120" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="highlightedColor"/>
@@ -153,47 +155,54 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TV8-ty-RU8">
                                 <rect key="frame" x="128" y="396" width="64" height="152"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="sJ1-u1-Oly"/>
+                                    <constraint firstAttribute="width" constant="64" id="HmS-vu-tJQ"/>
+                                    <constraint firstAttribute="height" constant="152" id="aVF-gb-kaI"/>
                                 </constraints>
-                                <color key="tintColor" red="0.062745101749897003" green="0.46666669845581055" blue="0.55686277151107788" alpha="1" colorSpace="deviceRGB"/>
-                                <state key="normal" title="start">
+                                <state key="normal" title="Start">
                                     <color key="titleColor" red="0.0078431377190000002" green="0.72941178080000002" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="disabled">
                                     <color key="titleColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected">
-                                    <color key="titleColor" red="0.062745101749897003" green="0.46666669845581055" blue="0.55686277151107788" alpha="1" colorSpace="deviceRGB"/>
-                                </state>
                                 <connections>
-                                    <action selector="startStopCollection:" destination="2" eventType="touchUpInside" id="uAW-1Z-AST"/>
+                                    <action selector="startStopTouchUpInside:" destination="2" eventType="touchUpInside" id="xM6-Mq-b3x"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="No8-XL-3qD" userLabel="Counter View">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="No8-XL-3qD" userLabel="Start Countdown View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfM-7K-tdj" userLabel="Start Countdown Label">
+                                        <rect key="frame" x="132" y="224" width="56" height="120"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="7ww-ZU-chg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="100"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" red="0.011764707040000001" green="0.69019609689999994" blue="0.0039215688589999999" alpha="0.75" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstItem="kfM-7K-tdj" firstAttribute="centerY" secondItem="No8-XL-3qD" secondAttribute="centerY" id="L18-dm-wqf"/>
+                                    <constraint firstItem="kfM-7K-tdj" firstAttribute="centerX" secondItem="No8-XL-3qD" secondAttribute="centerX" id="ZXD-kT-YKW"/>
+                                </constraints>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfM-7K-tdj" userLabel="Counter Label">
-                                <rect key="frame" x="132" y="224" width="56" height="120"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="No8-XL-3qD" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="3gB-eq-qRi"/>
-                            <constraint firstItem="TV8-ty-RU8" firstAttribute="top" secondItem="kfM-7K-tdj" secondAttribute="bottom" constant="52" id="44I-mc-9sB"/>
-                            <constraint firstAttribute="trailing" secondItem="No8-XL-3qD" secondAttribute="trailing" id="9u9-sS-ogQ"/>
-                            <constraint firstAttribute="bottom" secondItem="TV8-ty-RU8" secondAttribute="bottom" constant="20" symbolic="YES" id="d95-UZ-et1"/>
-                            <constraint firstItem="uLq-37-zr6" firstAttribute="top" secondItem="Whr-Xy-ju9" secondAttribute="bottom" constant="20" id="gOv-3F-dMY"/>
-                            <constraint firstItem="kfM-7K-tdj" firstAttribute="centerX" secondItem="TV8-ty-RU8" secondAttribute="centerX" id="iUe-xT-IhZ"/>
-                            <constraint firstAttribute="bottom" secondItem="No8-XL-3qD" secondAttribute="bottom" id="n0J-Wg-tWF"/>
-                            <constraint firstItem="No8-XL-3qD" firstAttribute="centerY" secondItem="kfM-7K-tdj" secondAttribute="centerY" id="o8D-Jd-iZH"/>
-                            <constraint firstItem="No8-XL-3qD" firstAttribute="top" secondItem="3" secondAttribute="top" id="rvz-dy-vpI"/>
-                            <constraint firstItem="kfM-7K-tdj" firstAttribute="centerX" secondItem="No8-XL-3qD" secondAttribute="centerX" id="tDh-ar-Z9X"/>
-                            <constraint firstAttribute="trailing" secondItem="uLq-37-zr6" secondAttribute="trailing" constant="20" symbolic="YES" id="uKp-R4-72c"/>
+                            <constraint firstItem="JBd-iU-TgT" firstAttribute="top" secondItem="Whr-Xy-ju9" secondAttribute="bottom" constant="20" id="0NS-xw-6gq"/>
+                            <constraint firstAttribute="bottom" secondItem="TV8-ty-RU8" secondAttribute="bottom" constant="20" symbolic="YES" id="12b-zh-Gjf"/>
+                            <constraint firstAttribute="trailing" secondItem="uLq-37-zr6" secondAttribute="trailing" constant="20" symbolic="YES" id="1FP-ZZ-3QH"/>
+                            <constraint firstItem="JBd-iU-TgT" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="7kp-xS-MEd"/>
+                            <constraint firstItem="No8-XL-3qD" firstAttribute="top" secondItem="3" secondAttribute="top" id="Cdd-fC-3XM"/>
+                            <constraint firstItem="uLq-37-zr6" firstAttribute="top" secondItem="JBd-iU-TgT" secondAttribute="top" id="NNh-7c-H5h"/>
+                            <constraint firstItem="No8-XL-3qD" firstAttribute="centerX" secondItem="TV8-ty-RU8" secondAttribute="centerX" id="Sow-RO-d0U"/>
+                            <constraint firstAttribute="trailing" secondItem="No8-XL-3qD" secondAttribute="trailing" id="dBO-Fx-2jP"/>
+                            <constraint firstAttribute="bottom" secondItem="No8-XL-3qD" secondAttribute="bottom" id="rZb-se-uvu"/>
+                            <constraint firstItem="uLq-37-zr6" firstAttribute="leading" secondItem="JBd-iU-TgT" secondAttribute="trailing" constant="92" id="rx5-Gb-DK6"/>
+                            <constraint firstItem="No8-XL-3qD" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="vTY-iz-6aZ"/>
+                            <constraint firstItem="uLq-37-zr6" firstAttribute="centerY" secondItem="JBd-iU-TgT" secondAttribute="centerY" id="yTL-oa-mHR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Startseite" id="hQZ-pK-huO">
@@ -204,10 +213,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="_counterLabel" destination="kfM-7K-tdj" id="gO7-2T-bhk"/>
-                        <outlet property="_counterView" destination="No8-XL-3qD" id="gRo-0v-fpk"/>
-                        <outlet property="_startStopCollectionButton" destination="TV8-ty-RU8" id="mek-7S-Ehi"/>
                         <outlet property="heartRateLabel" destination="uLq-37-zr6" id="kg6-ul-S1A"/>
+                        <outlet property="startCountdownLabel" destination="kfM-7K-tdj" id="WdL-Kk-NuL"/>
+                        <outlet property="startCountdownView" destination="No8-XL-3qD" id="III-MM-nmc"/>
+                        <outlet property="startStopButton" destination="TV8-ty-RU8" id="aEw-MC-R4o"/>
                         <outlet property="stopWatchLabel" destination="JBd-iU-TgT" id="pAF-Qq-XWc"/>
                     </connections>
                 </viewController>
@@ -505,7 +514,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Abfragen" id="mty-KT-zbm">
+                            <tableViewSection headerTitle="Selbsteinschätzung" id="mty-KT-zbm">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wL0-lH-2nf">
                                         <rect key="frame" x="0.0" y="119" width="320" height="44"/>

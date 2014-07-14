@@ -9,7 +9,7 @@
 #import "Session.h"
 #import "CLLocation+Descriptions.h"
 #import "Motion.h"
-#import "SubjectiveResponses.h"
+#import "SelfReport.h"
 #import "User.h"
 
 #import "ZipKit/ZKDefs.h"
@@ -146,7 +146,7 @@
     }
 }
 
-- (void)addSubjectiveResponseData:(SubjectiveResponses *)subjectiveResponses
+- (void)addSubjectiveResponseData:(SelfReport *)subjectiveResponses
 {
     if (subjectiveResponses.timestamp > 0) {
         [self.subjectiveResponseData addObject:subjectiveResponses];
@@ -372,7 +372,7 @@
     
     self.subjectiveResponseDataCount = [NSNumber numberWithUnsignedLong:[self.subjectiveResponseDataCount intValue] + [subjectiveResponseDataArray count]];
     
-    for (SubjectiveResponses *subjectiveResponses in subjectiveResponseDataArray) {
+    for (SelfReport *subjectiveResponses in subjectiveResponseDataArray) {
         [data appendData:[[subjectiveResponses csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
     }
     

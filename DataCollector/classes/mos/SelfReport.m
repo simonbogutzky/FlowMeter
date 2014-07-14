@@ -1,14 +1,14 @@
 //
-//  SubjectiveResponses.m
+//  SelfReport.m
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 27.01.14.
 //  Copyright (c) 2014 Simon Bogutzky. All rights reserved.
 //
 
-#import "SubjectiveResponses.h"
+#import "SelfReport.h"
 
-@implementation SubjectiveResponses
+@implementation SelfReport
 
 - (id)initWithTimestamp:(double)timestamp itemResponses:(NSArray *)itemResponses
 {

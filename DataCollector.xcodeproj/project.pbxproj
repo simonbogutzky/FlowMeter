@@ -29,7 +29,7 @@
 		D31AA2E11951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2D91951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D31AA2E31951FDE5004ACB8D /* HeartRateMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2E21951FDE5004ACB8D /* HeartRateMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D31AA2E41951FEC1004ACB8D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
-		D31FCC6718968CB0006F18A0 /* SubjectiveResponses.m in Sources */ = {isa = PBXBuildFile; fileRef = D31FCC6618968CB0006F18A0 /* SubjectiveResponses.m */; };
+		D31FCC6718968CB0006F18A0 /* SelfReport.m in Sources */ = {isa = PBXBuildFile; fileRef = D31FCC6618968CB0006F18A0 /* SelfReport.m */; };
 		D323CEF21881AC42003C25C5 /* CLLocation+Descriptions.m in Sources */ = {isa = PBXBuildFile; fileRef = D323CEF11881AC42003C25C5 /* CLLocation+Descriptions.m */; };
 		D330863D187ECF1900A7B9DE /* HeartRateMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D330863C187ECF1900A7B9DE /* HeartRateMonitor.framework */; };
 		D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3383BA91726CE1500AAC993 /* CoreData.framework */; };
@@ -168,8 +168,8 @@
 		D31AA2D91951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorManagerDelegate.h; sourceTree = "<group>"; };
 		D31AA2E21951FDE5004ACB8D /* HeartRateMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitor.h; sourceTree = "<group>"; };
 		D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewControllerDelegate.h; path = classes/ui/LikertScaleViewControllerDelegate.h; sourceTree = "<group>"; };
-		D31FCC6518968CB0006F18A0 /* SubjectiveResponses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubjectiveResponses.h; path = classes/mos/SubjectiveResponses.h; sourceTree = "<group>"; };
-		D31FCC6618968CB0006F18A0 /* SubjectiveResponses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubjectiveResponses.m; path = classes/mos/SubjectiveResponses.m; sourceTree = "<group>"; };
+		D31FCC6518968CB0006F18A0 /* SelfReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelfReport.h; path = classes/mos/SelfReport.h; sourceTree = "<group>"; };
+		D31FCC6618968CB0006F18A0 /* SelfReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelfReport.m; path = classes/mos/SelfReport.m; sourceTree = "<group>"; };
 		D323CEF01881AC42003C25C5 /* CLLocation+Descriptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLLocation+Descriptions.h"; path = "classes/mos/CLLocation+Descriptions.h"; sourceTree = "<group>"; };
 		D323CEF11881AC42003C25C5 /* CLLocation+Descriptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLLocation+Descriptions.m"; path = "classes/mos/CLLocation+Descriptions.m"; sourceTree = "<group>"; };
 		D330863C187ECF1900A7B9DE /* HeartRateMonitor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HeartRateMonitor.framework; sourceTree = "<group>"; };
@@ -200,7 +200,6 @@
 		D38FBDB5196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D38FBDB7196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D38FBDB9196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = de; path = de.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		D38FBDBD196C1DF500C63681 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		D38FBDBE196C1DFC00C63681 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZipKit.xcodeproj; path = ZipKit/ZipKit.xcodeproj; sourceTree = "<group>"; };
 		D39ADD89187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorDeviceTableViewController.h; sourceTree = "<group>"; };
@@ -510,8 +509,8 @@
 				D3B16000172AA91D00B72D48 /* Session.m */,
 				D3CD10CE173942D800166E62 /* User.h */,
 				D3CD10CF173942D800166E62 /* User.m */,
-				D31FCC6518968CB0006F18A0 /* SubjectiveResponses.h */,
-				D31FCC6618968CB0006F18A0 /* SubjectiveResponses.m */,
+				D31FCC6518968CB0006F18A0 /* SelfReport.h */,
+				D31FCC6618968CB0006F18A0 /* SelfReport.m */,
 			);
 			name = MOS;
 			sourceTree = "<group>";
@@ -780,7 +779,7 @@
 				D34C9D2917250463004C261C /* HomeViewController.m in Sources */,
 				D34C9D2B17250463004C261C /* MenuViewController.m in Sources */,
 				D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */,
-				D31FCC6718968CB0006F18A0 /* SubjectiveResponses.m in Sources */,
+				D31FCC6718968CB0006F18A0 /* SelfReport.m in Sources */,
 				D3C1290C1863290300C361CA /* ECSlidingViewController.m in Sources */,
 				D3C1291318632A1E00C361CA /* Reachability.m in Sources */,
 				D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */,
@@ -866,7 +865,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				D38FBDB9196C1DC000C63681 /* de */,
-				D38FBDBD196C1DF500C63681 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";

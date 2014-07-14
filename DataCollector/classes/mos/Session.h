@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import <HeartRateMonitor/HeartRateMonitor.h>
 
-@class CLLocation, Motion, User, SubjectiveResponses;
+@class CLLocation, Motion, User, SelfReport;
 
 @interface Session : NSManagedObject
 
@@ -33,7 +33,7 @@
 - (void)addMotionData:(Motion *)motion;
 - (void)addLocationData:(CLLocation *)location;
 - (void)addHeartRateMonitorData:(HeartRateMonitorData *)heartRateMonitorData;
-- (void)addSubjectiveResponseData:(SubjectiveResponses *)subjectiveResponses;
+- (void)addSubjectiveResponseData:(SelfReport *)subjectiveResponses;
 
 - (NSString *)storeMotions;
 - (NSString *)storeHeartRateMonitorData;

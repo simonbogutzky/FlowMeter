@@ -1,5 +1,5 @@
 //
-//  SubjectiveResponses.h
+//  SelfReport.h
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 27.01.14.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SubjectiveResponses : NSObject
+@interface SelfReport : NSObject
 
 @property (nonatomic) double timestamp;
 @property (strong, nonatomic) NSArray *responses;
