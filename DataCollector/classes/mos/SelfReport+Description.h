@@ -10,10 +10,6 @@
 
 @interface SelfReport (Description)
 
-@property (nonatomic) double timestamp;
-@property (strong, nonatomic) NSArray *responses;
-
-- (id)initWithTimestamp:(double)timestamp itemResponses:(NSArray *)itemResponses;
 - (NSString *)csvDescription;
 - (NSString *)csvHeader;
 

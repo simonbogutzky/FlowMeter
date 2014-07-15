@@ -9,7 +9,7 @@
 #import "SessionTableViewController.h"
 #import "AppDelegate.h"
 #import "Session.h"
-#import "User.h"
+#import "SelfReport+Description.h"
 
 @interface SessionTableViewController () {
     NSFetchedResultsController *_fetchedResultsController;
@@ -79,6 +79,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Session *session = [_fetchedResultsController objectAtIndexPath:indexPath];
+    NSLog(@"Anzahl der Self-reports: %d", [session.selfReports count]);
+    
+    if ([session.selfReports count] > 0) {
+        NSArray *selfReports = [session.selfReports sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
+        
+        NSLog(@"%@", [(SelfReport *)[selfReports objectAtIndex:0] csvHeader]);
+        for (SelfReport *selfReport in selfReports) {
+            NSLog(@"%@", [selfReport csvDescription]);
+        }
+    }
 }
 
 #pragma mark - Fetched results controller

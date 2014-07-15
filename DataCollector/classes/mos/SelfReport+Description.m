@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Simon Bogutzky. All rights reserved.
 //
 
-#import "SelfReport.h"
+#import "SelfReport+Description.h"
 
 @implementation SelfReport (Description)
 
 - (NSString *)csvDescription
 {
-    return [NSString stringWithFormat:@"%f,%@\n",
+    return [NSString stringWithFormat:@"%.0f,%@\n",
             [self.date timeIntervalSince1970],
             self.responses
             ];
@@ -23,7 +23,7 @@
     NSMutableString *header = [NSMutableString stringWithString:@"\"Timestamp\","];
     
     for (int i = 1; i <= [self.numberOfItems intValue]; i++) {
-        [header appendFormat:@"\"Item %d\",", i + 1];
+        [header appendFormat:@"\"Item %d\",", i];
     }
     return header;
 }
