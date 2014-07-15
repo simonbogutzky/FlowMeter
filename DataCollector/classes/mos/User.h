@@ -2,8 +2,8 @@
 //  User.h
 //  DataCollector
 //
-//  Created by Simon Bogutzky on 06.05.13.
-//  Copyright (c) 2013 Simon Bogutzky. All rights reserved.
+//  Created by Simon Bogutzky on 15.07.14.
+//  Copyright (c) 2014 Simon Bogutzky. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,11 +13,9 @@
 
 @interface User : NSManagedObject
 
-@property (nonatomic, strong) NSString * firstName;
-@property (nonatomic, strong) NSNumber * isActive;
-@property (nonatomic, strong) NSString * lastName;
-@property (nonatomic, strong) NSString * username;
-@property (nonatomic, strong) NSSet *sessions;
+@property (nonatomic, retain) NSString * firstName;
+@property (nonatomic, retain) NSString * lastName;
+@property (nonatomic, retain) NSSet *sessions;
 @end
 
 @interface User (CoreDataGeneratedAccessors)

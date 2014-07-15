@@ -29,7 +29,7 @@
 		D31AA2E11951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2D91951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D31AA2E31951FDE5004ACB8D /* HeartRateMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2E21951FDE5004ACB8D /* HeartRateMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D31AA2E41951FEC1004ACB8D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
-		D31FCC6718968CB0006F18A0 /* SelfReport.m in Sources */ = {isa = PBXBuildFile; fileRef = D31FCC6618968CB0006F18A0 /* SelfReport.m */; };
+		D31FCC6718968CB0006F18A0 /* SelfReport+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D31FCC6618968CB0006F18A0 /* SelfReport+Description.m */; };
 		D323CEF21881AC42003C25C5 /* CLLocation+Descriptions.m in Sources */ = {isa = PBXBuildFile; fileRef = D323CEF11881AC42003C25C5 /* CLLocation+Descriptions.m */; };
 		D330863D187ECF1900A7B9DE /* HeartRateMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D330863C187ECF1900A7B9DE /* HeartRateMonitor.framework */; };
 		D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3383BA91726CE1500AAC993 /* CoreData.framework */; };
@@ -47,6 +47,9 @@
 		D36C44B016D788BE000B8502 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
 		D36C44B216D7898B000B8502 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44B116D7898B000B8502 /* ExternalAccessory.framework */; };
 		D37067D71733F41300F86BBD /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37067D61733F41300F86BBD /* EditViewController.m */; };
+		D381799A19757D8A0085C377 /* SelfReport.m in Sources */ = {isa = PBXBuildFile; fileRef = D381799919757D8A0085C377 /* SelfReport.m */; };
+		D381799D19757DB80085C377 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D381799C19757DB80085C377 /* User.m */; };
+		D38179A019757DB80085C377 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = D381799F19757DB80085C377 /* Session.m */; };
 		D38A216D16BFF9F80075D093 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38A216C16BFF9F80075D093 /* CoreLocation.framework */; };
 		D38FBDBA196C1DC000C63681 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB4196C1DC000C63681 /* InfoPlist.strings */; };
 		D38FBDBB196C1DC000C63681 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB6196C1DC000C63681 /* Localizable.strings */; };
@@ -54,7 +57,6 @@
 		D39747B11882CC7B00CFF3DF /* libtouchzipkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D39747AE1882CC6400CFF3DF /* libtouchzipkit.a */; };
 		D39ADD8B187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39ADD8A187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.m */; };
 		D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionTableViewController.m */; };
-		D3B16001172AA91D00B72D48 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B16000172AA91D00B72D48 /* Session.m */; };
 		D3B3DC091733B93A001F2830 /* DataCollector.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC071733B93A001F2830 /* DataCollector.xcdatamodeld */; };
 		D3B3DC1E1733BECC001F2830 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC1D1733BECB001F2830 /* ProfileTableViewController.m */; };
 		D3C129081863290300C361CA /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C128FC1863290300C361CA /* ECPercentDrivenInteractiveTransition.m */; };
@@ -73,7 +75,6 @@
 		D3C7ADC2171ED66A000A7D34 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADC1171ED66A000A7D34 /* QuartzCore.framework */; };
 		D3C7ADC9171EEA44000A7D34 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */; };
 		D3C7ADCB171EEA8C000A7D34 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADCA171EEA8C000A7D34 /* SystemConfiguration.framework */; };
-		D3CD10D0173942D800166E62 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D3CD10CF173942D800166E62 /* User.m */; };
 		D3DA4A7716DCCB0300ECBE4B /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DA4A7616DCCB0300ECBE4B /* GLKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -168,8 +169,8 @@
 		D31AA2D91951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorManagerDelegate.h; sourceTree = "<group>"; };
 		D31AA2E21951FDE5004ACB8D /* HeartRateMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitor.h; sourceTree = "<group>"; };
 		D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewControllerDelegate.h; path = classes/ui/LikertScaleViewControllerDelegate.h; sourceTree = "<group>"; };
-		D31FCC6518968CB0006F18A0 /* SelfReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelfReport.h; path = classes/mos/SelfReport.h; sourceTree = "<group>"; };
-		D31FCC6618968CB0006F18A0 /* SelfReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelfReport.m; path = classes/mos/SelfReport.m; sourceTree = "<group>"; };
+		D31FCC6518968CB0006F18A0 /* SelfReport+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SelfReport+Description.h"; path = "classes/mos/SelfReport+Description.h"; sourceTree = "<group>"; };
+		D31FCC6618968CB0006F18A0 /* SelfReport+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SelfReport+Description.m"; path = "classes/mos/SelfReport+Description.m"; sourceTree = "<group>"; };
 		D323CEF01881AC42003C25C5 /* CLLocation+Descriptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLLocation+Descriptions.h"; path = "classes/mos/CLLocation+Descriptions.h"; sourceTree = "<group>"; };
 		D323CEF11881AC42003C25C5 /* CLLocation+Descriptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLLocation+Descriptions.m"; path = "classes/mos/CLLocation+Descriptions.m"; sourceTree = "<group>"; };
 		D330863C187ECF1900A7B9DE /* HeartRateMonitor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HeartRateMonitor.framework; sourceTree = "<group>"; };
@@ -196,6 +197,12 @@
 		D36C44B116D7898B000B8502 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		D37067D51733F41300F86BBD /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewController.h; path = classes/ui/EditViewController.h; sourceTree = "<group>"; };
 		D37067D61733F41300F86BBD /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewController.m; path = classes/ui/EditViewController.m; sourceTree = "<group>"; };
+		D381799819757D8A0085C377 /* SelfReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelfReport.h; path = classes/mos/SelfReport.h; sourceTree = "<group>"; };
+		D381799919757D8A0085C377 /* SelfReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelfReport.m; path = classes/mos/SelfReport.m; sourceTree = "<group>"; };
+		D381799B19757DB80085C377 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = classes/mos/User.h; sourceTree = "<group>"; };
+		D381799C19757DB80085C377 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = classes/mos/User.m; sourceTree = "<group>"; };
+		D381799E19757DB80085C377 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = classes/mos/Session.h; sourceTree = "<group>"; };
+		D381799F19757DB80085C377 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = classes/mos/Session.m; sourceTree = "<group>"; };
 		D38A216C16BFF9F80075D093 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D38FBDB5196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D38FBDB7196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -207,8 +214,6 @@
 		D3A4629D1726E08900D454F7 /* SessionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionTableViewController.h; path = classes/ui/SessionTableViewController.h; sourceTree = "<group>"; };
 		D3A4629E1726E08900D454F7 /* SessionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionTableViewController.m; path = classes/ui/SessionTableViewController.m; sourceTree = "<group>"; };
 		D3B133FC17295CD400CEFFC1 /* Motion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Motion.h; path = classes/mos/Motion.h; sourceTree = "<group>"; };
-		D3B15FFF172AA91D00B72D48 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = classes/mos/Session.h; sourceTree = "<group>"; };
-		D3B16000172AA91D00B72D48 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = classes/mos/Session.m; sourceTree = "<group>"; };
 		D3B3DC081733B93A001F2830 /* DataCollector.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCollector.xcdatamodel; sourceTree = "<group>"; };
 		D3B3DC1C1733BECB001F2830 /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileTableViewController.h; path = classes/ui/ProfileTableViewController.h; sourceTree = "<group>"; };
 		D3B3DC1D1733BECB001F2830 /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileTableViewController.m; path = classes/ui/ProfileTableViewController.m; sourceTree = "<group>"; };
@@ -240,8 +245,6 @@
 		D3C7ADC1171ED66A000A7D34 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D3C7ADCA171EEA8C000A7D34 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		D3CD10CE173942D800166E62 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = classes/mos/User.h; sourceTree = "<group>"; };
-		D3CD10CF173942D800166E62 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = classes/mos/User.m; sourceTree = "<group>"; };
 		D3DA4A7616DCCB0300ECBE4B /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -420,7 +423,7 @@
 				D34C9D141725044D004C261C /* AppDelegate.h */,
 				D34C9D151725044D004C261C /* AppDelegate.m */,
 				D34C9D161725044D004C261C /* main.m */,
-				D3B133F51729582600CEFFC1 /* MOS */,
+				D3B133F51729582600CEFFC1 /* Model */,
 				D3C7ADD6171FCCC6000A7D34 /* UI */,
 			);
 			name = Classes;
@@ -488,6 +491,17 @@
 			path = "dependent-classes/ECSlidingViewController/ECSlidingViewController/Vendor/ECSlidingViewController";
 			sourceTree = SOURCE_ROOT;
 		};
+		D381798F19756B910085C377 /* _old */ = {
+			isa = PBXGroup;
+			children = (
+				D323CEF01881AC42003C25C5 /* CLLocation+Descriptions.h */,
+				D323CEF11881AC42003C25C5 /* CLLocation+Descriptions.m */,
+				D3B133FC17295CD400CEFFC1 /* Motion.h */,
+				D304C72D172E7473005CD297 /* Motion.m */,
+			);
+			name = _old;
+			sourceTree = "<group>";
+		};
 		D39747A41882CC6400CFF3DF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,21 +512,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D3B133F51729582600CEFFC1 /* MOS */ = {
+		D3B133F51729582600CEFFC1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D323CEF01881AC42003C25C5 /* CLLocation+Descriptions.h */,
-				D323CEF11881AC42003C25C5 /* CLLocation+Descriptions.m */,
-				D3B133FC17295CD400CEFFC1 /* Motion.h */,
-				D304C72D172E7473005CD297 /* Motion.m */,
-				D3B15FFF172AA91D00B72D48 /* Session.h */,
-				D3B16000172AA91D00B72D48 /* Session.m */,
-				D3CD10CE173942D800166E62 /* User.h */,
-				D3CD10CF173942D800166E62 /* User.m */,
-				D31FCC6518968CB0006F18A0 /* SelfReport.h */,
-				D31FCC6618968CB0006F18A0 /* SelfReport.m */,
+				D381799E19757DB80085C377 /* Session.h */,
+				D381799F19757DB80085C377 /* Session.m */,
+				D381799B19757DB80085C377 /* User.h */,
+				D381799C19757DB80085C377 /* User.m */,
+				D381799819757D8A0085C377 /* SelfReport.h */,
+				D381799919757D8A0085C377 /* SelfReport.m */,
+				D31FCC6518968CB0006F18A0 /* SelfReport+Description.h */,
+				D31FCC6618968CB0006F18A0 /* SelfReport+Description.m */,
+				D381798F19756B910085C377 /* _old */,
 			);
-			name = MOS;
+			name = Model;
 			sourceTree = "<group>";
 		};
 		D3C6CA0616D4EFC0007C7EF8 /* Libraries */ = {
@@ -773,21 +786,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D381799D19757DB80085C377 /* User.m in Sources */,
 				D34C9D191725044D004C261C /* AppDelegate.m in Sources */,
 				D34C9D1A1725044D004C261C /* main.m in Sources */,
 				D3C1290B1863290300C361CA /* ECSlidingSegue.m in Sources */,
 				D34C9D2917250463004C261C /* HomeViewController.m in Sources */,
 				D34C9D2B17250463004C261C /* MenuViewController.m in Sources */,
 				D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */,
-				D31FCC6718968CB0006F18A0 /* SelfReport.m in Sources */,
+				D31FCC6718968CB0006F18A0 /* SelfReport+Description.m in Sources */,
 				D3C1290C1863290300C361CA /* ECSlidingViewController.m in Sources */,
+				D381799A19757D8A0085C377 /* SelfReport.m in Sources */,
 				D3C1291318632A1E00C361CA /* Reachability.m in Sources */,
 				D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */,
 				D3C129091863290300C361CA /* ECSlidingAnimationController.m in Sources */,
 				D39ADD8B187558F70032FC53 /* HeartRateMonitorDeviceTableViewController.m in Sources */,
-				D3B16001172AA91D00B72D48 /* Session.m in Sources */,
 				D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */,
 				D3C129081863290300C361CA /* ECPercentDrivenInteractiveTransition.m in Sources */,
+				D38179A019757DB80085C377 /* Session.m in Sources */,
 				D304C72E172E7473005CD297 /* Motion.m in Sources */,
 				D323CEF21881AC42003C25C5 /* CLLocation+Descriptions.m in Sources */,
 				D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */,
@@ -796,7 +811,6 @@
 				D3B3DC1E1733BECC001F2830 /* ProfileTableViewController.m in Sources */,
 				D3C1290A1863290300C361CA /* ECSlidingInteractiveTransition.m in Sources */,
 				D37067D71733F41300F86BBD /* EditViewController.m in Sources */,
-				D3CD10D0173942D800166E62 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

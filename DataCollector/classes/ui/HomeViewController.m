@@ -16,10 +16,14 @@
 #import "LikertScaleViewController.h"
 #import <AudioToolbox/AudioServices.h>
 
+// TODO: Sekunden in Einstellungen auslagern
+#define START_COUNTDOWN_SECONDS 5
+//TODO: Minuten in Einstellungen auslagern
+#define SELF_REPORT_INTERVAL 1
+
 @interface HomeViewController ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
-@property (nonatomic, strong) User *user;
 @property (nonatomic, strong) Session *session;
 
 @property (nonatomic, strong) NSTimer *selfReportTimer;
@@ -49,21 +53,10 @@
     return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
-- (User *)user
-{
-    if (!_user) {
-        NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
-        _user = [self.appDelegate activeUserWithPredicate:isActivePredicate];
-    }
-    return _user;
-}
-
 - (Session *)session
 {
     if (!_session) {
         _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:self.appDelegate.managedObjectContext];
-        _session.isZipped = [NSNumber numberWithBool:ZIP];
-        _session.user = _user;
     }
     return _session;
 }
@@ -73,15 +66,15 @@
 
 - (IBAction)startStopTouchUpInside:(UIButton *)sender
 {
-    if (![self.user.isActive boolValue]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Bitte gib deinen Namen an! *", @"Bitte gib deinen Namen an!")
-                                                        message:NSLocalizedString(@"Gehe zu Menu > Profil *" , @"Gehe zu Menu > Profil")
-                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok *", @"Ok")
-                                              otherButtonTitles:nil];
-        [alert show];
-        sender.enabled = NO;
-        return;
-    }
+//    if (![self.user.isActive boolValue]) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Bitte gib deinen Namen an! *", @"Bitte gib deinen Namen an!")
+//                                                        message:NSLocalizedString(@"Gehe zu Menu > Profil *" , @"Gehe zu Menu > Profil")
+//                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok *", @"Ok")
+//                                              otherButtonTitles:nil];
+//        [alert show];
+//        sender.enabled = NO;
+//        return;
+//    }
     
     if (!self.isCollecting) {
         
@@ -95,12 +88,12 @@
         [self startSensorUpdates];
         
         // Start start countdown
-        // TODO: Sekunden auslagern
-        [self startStartCounterWithInterval:5];
+        [self startStartCounterWithInterval:START_COUNTDOWN_SECONDS];
         
     } else {
         self.isCollecting = !self.isCollecting;
         [self stopSensorUpdates];
+        [self.stopWatchTimer invalidate];
         
         if (self.appDelegate.flowShortScaleIsSelected) {
             [self.selfReportTimer invalidate];
@@ -108,7 +101,7 @@
             
             [self showSelfReport];
         } else {
-            [self storeData];
+            [self saveData];
         }
         
     }
@@ -229,28 +222,22 @@
 - (void)startCollecting
 {
     NSLog(@"# Start collecting");
-    [self.session initialize];
+    //[self.session initialize];
+    self.session.date = [NSDate date];
     self.isCollecting = !self.isCollecting;
     
     [self startStopWatch];
     
     if (self.appDelegate.flowShortScaleIsSelected) {
-        //TODO: Minuten auslagern
-        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:1 * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
+        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:SELF_REPORT_INTERVAL * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     }
 }
 
-- (void)storeData
+- (void)saveData
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.user addSessionsObject:self.session];
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        //        [self.session storeMotions];
-        //        [self.session storeLocations];
-        [self.session storeHeartRateMonitorData];
-        //TODO: Session 
-        [self.session storeSubjectiveResponseData];
+        [self.appDelegate saveContext];
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit! *", @"Gute Arbeit!")
@@ -283,7 +270,7 @@
     if(self.isCollecting) {
         
         // Add hr record
-        [self.session addHeartRateMonitorData:data];
+        //[self.session addHeartRateMonitorData:data];
     }
 }
 
@@ -320,22 +307,24 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 #pragma mark -
 #pragma mark - LikertScaleViewControllerDelegate implementation
 
-- (void)likertScaleViewController:(LikertScaleViewController *)viewController didFinishWithResponses:(NSArray *)responses atTimestamp:(double)timestamp
+- (void)likertScaleViewController:(LikertScaleViewController *)viewController didFinishWithResponses:(NSArray *)responses atDate:(NSDate *)date
 {
     [viewController dismissViewControllerAnimated:YES
                                        completion:^{
                                            ;
                                        }];
     
-    SelfReport *selfReport = [[SelfReport alloc] initWithTimestamp:timestamp itemResponses:responses];
-    [self.session addSubjectiveResponseData:selfReport];
+    SelfReport *selfReport = [NSEntityDescription insertNewObjectForEntityForName:@"SelfReport" inManagedObjectContext:self.appDelegate.managedObjectContext];
+    selfReport.date = [NSDate date];
+    selfReport.numberOfItems = [NSNumber numberWithInt:[responses count]];
+    selfReport.responses = [responses componentsJoinedByString:@","];
+    [self.session addSelfReportsObject:selfReport];
     
     if (self.isCollecting) {
-        //TODO: Minuten auslagern
-        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:15 * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
+        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:SELF_REPORT_INTERVAL * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     } else {
         if (self.isLastSelfReport) {
-            [self storeData];
+            [self saveData];
             self.isLastSelfReport = NO;
         }
     }

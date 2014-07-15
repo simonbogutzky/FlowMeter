@@ -14,8 +14,6 @@
 #import <AVFoundation/AVAudioSession.h>
 #import "Reachability.h"
 
-#define ZIP 1
-
 @class User;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, DBRestClientDelegate, NSStreamDelegate>
@@ -30,6 +28,5 @@
 @property (nonatomic) BOOL flowShortScaleIsSelected;
 
 - (void)saveContext;
-- (User *)activeUserWithPredicate:(NSPredicate *)predicate;
 
 @end

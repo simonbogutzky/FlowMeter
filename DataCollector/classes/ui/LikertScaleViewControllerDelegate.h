@@ -14,5 +14,5 @@
 
 @optional
 
-- (void)likertScaleViewController:(LikertScaleViewController *)viewController didFinishWithResponses:(NSArray *)responses atTimestamp:(double)timestamp;
+- (void)likertScaleViewController:(LikertScaleViewController *)viewController didFinishWithResponses:(NSArray *)responses atDate:(NSDate *)date;
 @end

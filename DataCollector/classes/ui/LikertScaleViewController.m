@@ -16,8 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *scaleLabel2;
 @property (weak, nonatomic) IBOutlet UILabel *scaleLabel1;
 @property (nonatomic) int itemIndex;
-@property (nonatomic) double timestamp;
-@property (strong, nonatomic) NSMutableArray *itemResponses;
+@property (strong, nonatomic) NSDate *date;
+@property (strong, nonatomic) NSMutableArray *responses;
 @end
 
 @implementation LikertScaleViewController
@@ -53,12 +53,12 @@
     return _scaleLabels;
 }
 
-- (NSMutableArray *)itemResponses
+- (NSMutableArray *)responses
 {
-    if (!_itemResponses) {
-        _itemResponses = [[NSMutableArray alloc] initWithCapacity:[_itemLabelTexts count]];
+    if (!_responses) {
+        _responses = [[NSMutableArray alloc] initWithCapacity:[_itemLabelTexts count]];
     }
-    return _itemResponses;
+    return _responses;
 }
 
 - (void)viewDidLoad
@@ -70,7 +70,7 @@
     self.scaleLabel1.text = [[self.scaleLabels objectAtIndex:0] objectAtIndex:0];
     self.scaleLabel2.text = [[self.scaleLabels objectAtIndex:0] objectAtIndex:1];
     self.scaleLabel3.text = [[self.scaleLabels objectAtIndex:0] objectAtIndex:2];
-    self.timestamp = [[NSDate date] timeIntervalSince1970];
+    self.date = [NSDate date];
 }
 
 - (void)setSegmentsForItemIndex:(NSInteger)itemIndex {
@@ -93,7 +93,7 @@
 }
 
 - (IBAction)displayNextItem:(id)sender {
-    [self.itemResponses addObject:[NSNumber numberWithInt:self.likertScaleSegmentedControl.selectedSegmentIndex + 1]];
+    [self.responses addObject:[NSNumber numberWithInt:self.likertScaleSegmentedControl.selectedSegmentIndex + 1]];
     
     self.itemIndex++;
     if (self.itemIndex < [self.itemLabelTexts count]) {
@@ -105,8 +105,8 @@
         [self setSegmentsForItemIndex:self.itemIndex];
         [self.likertScaleSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
     } else {
-        if ([self.delegate respondsToSelector:@selector(likertScaleViewController:didFinishWithResponses:atTimestamp:)]) {
-            [self.delegate likertScaleViewController:self didFinishWithResponses:self.itemResponses atTimestamp:self.timestamp];
+        if ([self.delegate respondsToSelector:@selector(likertScaleViewController:didFinishWithResponses:atDate:)]) {
+            [self.delegate likertScaleViewController:self didFinishWithResponses:self.responses atDate:self.date];
         }
     }
     

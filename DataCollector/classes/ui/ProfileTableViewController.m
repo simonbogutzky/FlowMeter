@@ -17,7 +17,7 @@
     IBOutlet UITableView *_tableView;
     IBOutlet UITableViewCell *_firstNameTableViewCell;
     IBOutlet UITableViewCell *_lastNameTableViewCell;
-    IBOutlet UITableViewCell *_usernameTableViewCell;
+    IBOutlet UITableViewCell *_activityTableViewCell;
     NSMutableDictionary *_userDictionary;
     BOOL _saveContext;
     AppDelegate *_appDelegate;
@@ -42,9 +42,6 @@
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _managedObjectContext = _appDelegate.managedObjectContext;
     _userDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @"", @""] forKeys:@[@"firstName", @"lastName", @"username"]];
-    
-    NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
-    _user = [_appDelegate activeUserWithPredicate:isActivePredicate];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -71,54 +68,14 @@
         }
     }
     
-    NSString *cleanedFirstName = [self cleanName:_firstNameTableViewCell.detailTextLabel.text];
-    NSString *cleanedLastName = [self cleanName:_lastNameTableViewCell.detailTextLabel.text];
-    if (![cleanedFirstName isEqualToString:@""] && ![cleanedLastName isEqualToString:@""]) {
-        NSString *username = [NSString stringWithFormat:@"%@_%@", cleanedFirstName, cleanedLastName];
-        [_userDictionary setValue:username forKey:@"username"];
-        _usernameTableViewCell.detailTextLabel.text = username;
-    }
+//    NSString *cleanedFirstName = [self cleanName:_firstNameTableViewCell.detailTextLabel.text];
+//    NSString *cleanedLastName = [self cleanName:_lastNameTableViewCell.detailTextLabel.text];
+//    if (![cleanedFirstName isEqualToString:@""] && ![cleanedLastName isEqualToString:@""]) {
+//        NSString *username = [NSString stringWithFormat:@"%@_%@", cleanedFirstName, cleanedLastName];
+//        [_userDictionary setValue:username forKey:@"username"];
+//        _usernameTableViewCell.detailTextLabel.text = username;
+//    }
     [_tableView reloadData];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    NSString *username = [_userDictionary valueForKey:@"username"];
-    if (_saveContext && username != nil && ![username isEqualToString:@""]) {
-        
-        // First use of the app. No user in the database.
-        if ((_user.username == nil || [_user.username isEqualToString:@""]) ) {
-            _user.firstName = _firstNameTableViewCell.detailTextLabel.text;
-            _user.lastName = _lastNameTableViewCell.detailTextLabel.text;
-            _user.username = username;
-            _user.isActive = @1;
-        } else {
-            
-            // User in the database, but with a different username
-            if (![_user.username isEqualToString:username]) {
-                _user.isActive = @0;
-                
-                NSPredicate *isUserWithUsernamePredicate = [NSPredicate predicateWithFormat:@"username == %@", username];
-                User *user = [_appDelegate activeUserWithPredicate:isUserWithUsernamePredicate];
-                
-                // User do not exists. Create one.
-                if (user.username == nil || [user.username isEqualToString:@""]) {
-                    user.firstName = _firstNameTableViewCell.detailTextLabel.text;
-                    user.lastName = _lastNameTableViewCell.detailTextLabel.text;
-                    user.username = _usernameTableViewCell.detailTextLabel.text;
-                }
-                user.isActive = @1;
-            }
-        }
-        NSError *error = nil;
-        [_managedObjectContext save:&error];
-    }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark -

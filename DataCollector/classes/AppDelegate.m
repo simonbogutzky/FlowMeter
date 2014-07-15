@@ -88,7 +88,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"MotionDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"HeartRateMonitorDataAvailable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"LocationDataAvailable" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"SubjectiveResponseDataAvailable" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataAvailable:) name:@"SelfReportsAvailable" object:nil];
     
     // Audio Session with mixing
     NSError *setCategoryErr = nil;
@@ -252,27 +252,25 @@
     NSMutableArray *objects = [self fetchUnsyncSessions];
     for (Session *session in objects) {
         
-        BOOL isZipped = [[session valueForKey:@"isZipped"] boolValue];
+//        if ([session.motionDataCount intValue] != 0 && ![session.motionDataIsSynced boolValue]) {
+//            NSString *filename = [NSString stringWithFormat:@"%@-motion-data.csv.zip", [session valueForKey:@"dateTimeString"]];
+//            [self uploadFile:filename];
+//        }
         
-        if ([session.motionDataCount intValue] != 0 && ![session.motionDataIsSynced boolValue]) {
-            NSString *filename = [NSString stringWithFormat:@"%@-motion-data.csv%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
-            [self uploadFile:filename];
-        }
+//        if ([session.locationDataCount intValue] != 0 && ![session.locationDataIsSynced boolValue]) {
+//            NSString *filename = [NSString stringWithFormat:@"%@-location-data.csv.zip", [session valueForKey:@"dateTimeString"]];
+//            [self uploadFile:filename];
+//        }
         
-        if ([session.locationDataCount intValue] != 0 && ![session.locationDataIsSynced boolValue]) {
-            NSString *filename = [NSString stringWithFormat:@"%@-location-data.csv%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
-            [self uploadFile:filename];
-        }
+//        if ([session.heartRateMonitorDataCount intValue] != 0 && ![session.heartRateMonitorDataIsSynced boolValue]) {
+//            NSString *filename = [NSString stringWithFormat:@"%@-rr-interval-data.csv.zip", [session valueForKey:@"dateTimeString"]];
+//            [self uploadFile:filename];
+//        }
         
-        if ([session.heartRateMonitorDataCount intValue] != 0 && ![session.heartRateMonitorDataIsSynced boolValue]) {
-            NSString *filename = [NSString stringWithFormat:@"%@-rr-interval-data.csv%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
-            [self uploadFile:filename];
-        }
-        
-        if ([session.subjectiveResponseDataCount intValue] != 0 && ![session.subjectiveResponseDataIsSynced boolValue]) {
-            NSString *filename = [NSString stringWithFormat:@"%@-subjective-response-data.csv%@", [session valueForKey:@"identifier"], isZipped ? @".zip" : @""];
-            [self uploadFile:filename];
-        }
+//        if ([session.selfReportCount intValue] != 0 && ![session.selfReportsAreSynced boolValue]) {
+//            NSString *filename = [NSString stringWithFormat:@"%@-subjective-response-data.csv.zip", [session valueForKey:@"dateTimeString"]];
+//            [self uploadFile:filename];
+//        }
     }
 }
 
@@ -299,31 +297,24 @@
     return mutableFetchResults;
 }
 
-- (Session *)setDataSyncedByIdentifier:(NSString *)identifier andKey:(NSString *)key
+- (Session *)setDataSyncedByDateTimeString:(NSString *)dateTimeString andKey:(NSString *)key
 {
-    Session *session = (Session *)[self fetchUnsyncedSessionByIdentifier:identifier];
+    Session *session = (Session *)[self fetchUnsyncedSessionByDateTimeString:dateTimeString];
     if (session != nil) {
         [session setValue:@1 forKey:key];
     }
     return session;
 }
 
-- (void)syncSession:(Session *)session
-{
-    if (session != nil) {
-        [session setValue:@1 forKey:@"isSynced"];
-    }
-}
-
-- (NSManagedObject *)fetchUnsyncedSessionByIdentifier:(NSString *)identifier
+- (NSManagedObject *)fetchUnsyncedSessionByDateTimeString:(NSString *)dateTimeString
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate *identifierPredicate = [NSPredicate predicateWithFormat:@"identifier == %@ && isSynced == %@", identifier, @0];
-    [fetchRequest setPredicate:identifierPredicate];
+    NSPredicate *dateTimeStringPredicate = [NSPredicate predicateWithFormat:@"dateTimeString == %@ && isSynced == %@", dateTimeString, @0];
+    [fetchRequest setPredicate:dateTimeStringPredicate];
     
     NSError *error = nil;
     NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
@@ -348,14 +339,11 @@
 - (void)uploadFile:(NSString *)filename
 {
     if (_reachability.isReachableViaWiFi && [[DBSession sharedSession] isLinked]) {
-        NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
-        User *user = [self activeUserWithPredicate:isActivePredicate];
         
         NSString *sourcePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        sourcePath = [sourcePath stringByAppendingPathComponent:user.username];
         sourcePath = [sourcePath stringByAppendingPathComponent:filename];
         
-        NSString *destinationPath = [NSString stringWithFormat:@"/%@", user.username];
+        NSString *destinationPath = @"/";
         [self.dbRestClient uploadFile:filename toPath:destinationPath withParentRev:nil fromPath:sourcePath];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     }
@@ -368,14 +356,10 @@
 {
     NSLog(@"# File uploaded successfully to path: %@", metadata.path);
     
-    NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
-    User *user = [self activeUserWithPredicate:isActivePredicate];
-    
     NSError *error = nil;
    
     // Delete file
     NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    rootPath = [rootPath stringByAppendingPathComponent:user.username];
     NSString *archivePath = [rootPath stringByAppendingPathComponent:metadata.filename];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:archivePath error:&error];
@@ -385,35 +369,36 @@
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" \\(.+\\)" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *temp = [regex stringByReplacingMatchesInString:metadata.filename options:0 range:NSMakeRange(0, [metadata.filename length]) withTemplate:@""];
     
-    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data|-rr-interval-data|-subjective-response-data).(csv|gpx|kml)(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
-    NSString *identifier = [regex stringByReplacingMatchesInString:temp options:0 range:NSMakeRange(0, [temp length]) withTemplate:@""];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"(-motion-data|-location-data|-rr-interval-data|-subjective-response-data).(csv|gpx|kml).zip" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSString *dateTimeString = [regex stringByReplacingMatchesInString:temp options:0 range:NSMakeRange(0, [temp length]) withTemplate:@""];
     
     Session *session = nil;
-    regex = [NSRegularExpression regularExpressionWithPattern:@"-motion-data.csv(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"-motion-data.csv.zip" options:NSRegularExpressionCaseInsensitive error:&error];
     if ([regex numberOfMatchesInString:temp options:0 range:NSMakeRange(0, [temp length])] > 0) {
-        session = [self setDataSyncedByIdentifier:identifier andKey:@"motionDataIsSynced"];
+        session = [self setDataSyncedByDateTimeString:dateTimeString andKey:@"motionDataIsSynced"];
     }
     
-    regex = [NSRegularExpression regularExpressionWithPattern:@"-location-data.(csv|gpx|kml)(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"-location-data.(csv|gpx|kml).zip" options:NSRegularExpressionCaseInsensitive error:&error];
     if ([regex numberOfMatchesInString:temp options:0 range:NSMakeRange(0, [temp length])] > 0) {
-        session = [self setDataSyncedByIdentifier:identifier andKey:@"locationDataIsSynced"];
+        session = [self setDataSyncedByDateTimeString:dateTimeString andKey:@"locationDataIsSynced"];
     }
     
-    regex = [NSRegularExpression regularExpressionWithPattern:@"-rr-interval-data.csv(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"-rr-interval-data.csv.zip" options:NSRegularExpressionCaseInsensitive error:&error];
     if ([regex numberOfMatchesInString:temp options:0 range:NSMakeRange(0, [temp length])] > 0) {
-        session = [self setDataSyncedByIdentifier:identifier andKey:@"heartRateMonitorDataIsSynced"];
+        session = [self setDataSyncedByDateTimeString:dateTimeString andKey:@"heartRateMonitorDataIsSynced"];
     }
     
-    regex = [NSRegularExpression regularExpressionWithPattern:@"-subjective-response-data.csv(.zip)?" options:NSRegularExpressionCaseInsensitive error:&error];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"-self-reports.csv.zip" options:NSRegularExpressionCaseInsensitive error:&error];
     if ([regex numberOfMatchesInString:temp options:0 range:NSMakeRange(0, [temp length])] > 0) {
-        session = [self setDataSyncedByIdentifier:identifier andKey:@"subjectiveResponseDataIsSynced"];
+        session = [self setDataSyncedByDateTimeString:dateTimeString andKey:@"selfReportsAreSynced"];
     }
     
-    if ([session.motionDataIsSynced boolValue] && [session.locationDataIsSynced boolValue] && [session.heartRateMonitorDataIsSynced boolValue] && [session.subjectiveResponseDataIsSynced boolValue]) {
-        NSLog(@"# Sync session with identifier: %@", identifier);
-        [self syncSession:session];
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    }
+    //[session.motionDataIsSynced boolValue] && [session.locationDataIsSynced boolValue] &&
+    
+//    if ([session.heartRateMonitorDataIsSynced boolValue] && [session.selfReportsAreSynced boolValue]) {
+//        NSLog(@"# Sync session with dateTimeString: %@", dateTimeString);
+//        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//    }
     
     [self saveContext];
 }
@@ -437,31 +422,5 @@
     NSLog(@"# event code: %u", eventCode);
 }
 
-#pragma mark -
-#pragma mark - Convient methods
-
-- (User *)activeUserWithPredicate:(NSPredicate *)predicate
-{
-    User *user = nil;
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    [fetchRequest setPredicate:predicate];
-    
-    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
-    if (fetchedObjects == nil) {
-        // Handle the error.
-    }
-    
-    if ([fetchedObjects count] == 0) {
-        user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:self.managedObjectContext];
-    } else {
-        user = fetchedObjects[0];
-    }
-    
-    return user;
-}
 
 @end

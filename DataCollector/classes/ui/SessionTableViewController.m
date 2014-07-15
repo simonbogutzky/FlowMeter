@@ -15,7 +15,6 @@
     NSFetchedResultsController *_fetchedResultsController;
     NSManagedObjectContext *_managedObjectContext;
     AppDelegate *_appDelegate;
-    User *_user;
 }
 @end
 
@@ -26,9 +25,6 @@
     [super viewDidLoad];
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    NSPredicate *isActivePredicate = [NSPredicate predicateWithFormat:@"isActive == %@", @1];
-    _user = [_appDelegate activeUserWithPredicate:isActivePredicate];
     
     _managedObjectContext = _appDelegate.managedObjectContext;
 }
@@ -102,13 +98,10 @@
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    NSPredicate *isActiveUserPredicate = [NSPredicate predicateWithFormat:@"user.username == %@", _user.username];
-    [fetchRequest setPredicate:isActiveUserPredicate];
     
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     aFetchedResultsController.delegate = self;
@@ -191,11 +184,11 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:NSLocalizedString(@"dd.MM.yy", @"dd.MM.yy")];
-    NSString *dateString = [dateFormatter stringFromDate:session.timestamp];
+    NSString *dateString = [dateFormatter stringFromDate:session.date];
     [dateFormatter setDateFormat:NSLocalizedString(@"HH:mm", @"HH:mm")];
-    NSString *timeString = [dateFormatter stringFromDate:session.timestamp];
+    NSString *timeString = [dateFormatter stringFromDate:session.date];
     cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ Uhr", @"%@ %@ Uhr"), dateString, timeString];
-    cell.accessoryType = [session.isSynced boolValue] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+//    cell.accessoryType = [session.selfReportsAreSynced boolValue] && [session.heartRateMonitorDataIsSynced boolValue] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 }
 
 

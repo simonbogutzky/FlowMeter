@@ -2,42 +2,28 @@
 //  Session.h
 //  DataCollector
 //
-//  Created by Simon Bogutzky on 25.04.13.
-//  Copyright (c) 2013 Simon Bogutzky. All rights reserved.
+//  Created by Simon Bogutzky on 15.07.14.
+//  Copyright (c) 2014 Simon Bogutzky. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import <HeartRateMonitor/HeartRateMonitor.h>
 
-@class CLLocation, Motion, User, SelfReport;
+@class SelfReport, User;
 
 @interface Session : NSManagedObject
 
-@property (nonatomic, strong) NSDate *timestamp;
-@property (nonatomic, strong) NSString *identifier;
-@property (nonatomic, strong) NSNumber *isSynced;
-@property (nonatomic, strong) NSNumber *isZipped;
-@property (nonatomic, strong) NSNumber *motionDataCount;
-@property (nonatomic, strong) NSNumber *heartRateMonitorDataCount;
-@property (nonatomic, strong) NSNumber *locationDataCount;
-@property (nonatomic, strong) NSNumber *subjectiveResponseDataCount;
-@property (nonatomic, strong) NSNumber *motionDataIsSynced;
-@property (nonatomic, strong) NSNumber *heartRateMonitorDataIsSynced;
-@property (nonatomic, strong) NSNumber *locationDataIsSynced;
-@property (nonatomic, strong) NSNumber *subjectiveResponseDataIsSynced;
-@property (nonatomic, strong) User *user;
+@property (nonatomic, retain) NSDate * date;
+@property (nonatomic, retain) NSString * activity;
+@property (nonatomic, retain) User *user;
+@property (nonatomic, retain) NSSet *selfReports;
+@end
 
-- (void)initialize;
+@interface Session (CoreDataGeneratedAccessors)
 
-- (void)addMotionData:(Motion *)motion;
-- (void)addLocationData:(CLLocation *)location;
-- (void)addHeartRateMonitorData:(HeartRateMonitorData *)heartRateMonitorData;
-- (void)addSubjectiveResponseData:(SelfReport *)subjectiveResponses;
-
-- (NSString *)storeMotions;
-- (NSString *)storeHeartRateMonitorData;
-- (NSString *)storeLocations;
-- (NSString *)storeSubjectiveResponseData;
+- (void)addSelfReportsObject:(SelfReport *)value;
+- (void)removeSelfReportsObject:(SelfReport *)value;
+- (void)addSelfReports:(NSSet *)values;
+- (void)removeSelfReports:(NSSet *)values;
 
 @end
