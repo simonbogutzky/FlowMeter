@@ -16,6 +16,8 @@
     NSManagedObjectContext *_managedObjectContext;
     AppDelegate *_appDelegate;
 }
+
+@property (nonatomic, strong) Session *selectedSession;
 @end
 
 @implementation SessionTableViewController
@@ -79,9 +81,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Session *session = [_fetchedResultsController objectAtIndexPath:indexPath];
-    NSLog(@"Anzahl der Self-reports: %d", [session.selfReports count]);
-    NSLog(@"%@", [session writeOutSelfReports]);
+    self.selectedSession = [_fetchedResultsController objectAtIndexPath:indexPath];
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Optionen *", @"Optionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen *", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern *", @"Datei auf dem Gerät speichern"), nil];
+    [actionSheet showInView:self.view];
 }
 
 #pragma mark - Fetched results controller
@@ -192,6 +195,24 @@
     NSString *timeString = [dateFormatter stringFromDate:session.date];
     cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ Uhr", @"%@ %@ Uhr"), dateString, timeString];
 //    cell.accessoryType = [session.selfReportsAreSynced boolValue] && [session.heartRateMonitorDataIsSynced boolValue] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+}
+
+#pragma mark -
+#pragma mark - UIAlertSheetDelegate implementation
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"%d", buttonIndex);
+    
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"Anzahl der Self-reports: %d", [self.selectedSession.selfReports count]);
+            NSLog(@"%@", [self.selectedSession writeOutSelfReports]);
+            break;
+            
+        default:
+            break;
+    }
 }
 
 
