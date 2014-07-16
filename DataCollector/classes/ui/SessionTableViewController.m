@@ -8,7 +8,7 @@
 
 #import "SessionTableViewController.h"
 #import "AppDelegate.h"
-#import "Session.h"
+#import "Session+OutStream.h"
 #import "SelfReport+Description.h"
 
 @interface SessionTableViewController () {
@@ -81,15 +81,7 @@
 {
     Session *session = [_fetchedResultsController objectAtIndexPath:indexPath];
     NSLog(@"Anzahl der Self-reports: %d", [session.selfReports count]);
-    
-    if ([session.selfReports count] > 0) {
-        NSArray *selfReports = [session.selfReports sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
-        
-        NSLog(@"%@", [(SelfReport *)[selfReports objectAtIndex:0] csvHeader]);
-        for (SelfReport *selfReport in selfReports) {
-            NSLog(@"%@", [selfReport csvDescription]);
-        }
-    }
+    NSLog(@"%@", [session writeOutSelfReports]);
 }
 
 #pragma mark - Fetched results controller

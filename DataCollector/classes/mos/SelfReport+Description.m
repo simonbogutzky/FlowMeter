@@ -23,7 +23,11 @@
     NSMutableString *header = [NSMutableString stringWithString:@"\"Timestamp\","];
     
     for (int i = 1; i <= [self.numberOfItems intValue]; i++) {
-        [header appendFormat:@"\"Item %d\",", i];
+        if (i == [self.numberOfItems intValue]) {
+            [header appendFormat:@"\"Item %d\"\n", i];
+        } else {
+            [header appendFormat:@"\"Item %d\",", i];
+        }
     }
     return header;
 }

@@ -76,6 +76,7 @@
 		D3C7ADC9171EEA44000A7D34 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */; };
 		D3C7ADCB171EEA8C000A7D34 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADCA171EEA8C000A7D34 /* SystemConfiguration.framework */; };
 		D3DA4A7716DCCB0300ECBE4B /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DA4A7616DCCB0300ECBE4B /* GLKit.framework */; };
+		D3F3224D197650C200B439A8 /* Session+OutStream.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F3224C197650C200B439A8 /* Session+OutStream.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -246,6 +247,8 @@
 		D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D3C7ADCA171EEA8C000A7D34 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D3DA4A7616DCCB0300ECBE4B /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		D3F3224B197650C200B439A8 /* Session+OutStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Session+OutStream.h"; path = "classes/mos/Session+OutStream.h"; sourceTree = "<group>"; };
+		D3F3224C197650C200B439A8 /* Session+OutStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Session+OutStream.m"; path = "classes/mos/Session+OutStream.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -517,6 +520,8 @@
 			children = (
 				D381799E19757DB80085C377 /* Session.h */,
 				D381799F19757DB80085C377 /* Session.m */,
+				D3F3224B197650C200B439A8 /* Session+OutStream.h */,
+				D3F3224C197650C200B439A8 /* Session+OutStream.m */,
 				D381799B19757DB80085C377 /* User.h */,
 				D381799C19757DB80085C377 /* User.m */,
 				D381799819757D8A0085C377 /* SelfReport.h */,
@@ -791,6 +796,7 @@
 				D34C9D1A1725044D004C261C /* main.m in Sources */,
 				D3C1290B1863290300C361CA /* ECSlidingSegue.m in Sources */,
 				D34C9D2917250463004C261C /* HomeViewController.m in Sources */,
+				D3F3224D197650C200B439A8 /* Session+OutStream.m in Sources */,
 				D34C9D2B17250463004C261C /* MenuViewController.m in Sources */,
 				D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */,
 				D31FCC6718968CB0006F18A0 /* SelfReport+Description.m in Sources */,

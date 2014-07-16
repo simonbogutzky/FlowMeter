@@ -13,8 +13,8 @@
 
 @interface Session : NSManagedObject
 
-@property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) NSString * activity;
+@property (nonatomic, retain) NSDate *date;
+@property (nonatomic, retain) NSString *activity;
 @property (nonatomic, retain) User *user;
 @property (nonatomic, retain) NSSet *selfReports;
 @end
