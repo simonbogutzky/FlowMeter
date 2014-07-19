@@ -3,12 +3,14 @@
     <entity name="SelfReport" representedClassName="SelfReport" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="numberOfItems" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="questionnaire" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="responses" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="selfReports" inverseEntity="Session" syncable="YES"/>
     </entity>
     <entity name="Session" representedClassName="Session" syncable="YES">
         <attribute name="activity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="selfReports" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SelfReport" inverseName="session" inverseEntity="SelfReport" syncable="YES"/>
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="sessions" inverseEntity="User" syncable="YES"/>
     </entity>
@@ -18,8 +20,8 @@
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="user" inverseEntity="Session" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Session" positionX="223" positionY="-261" width="128" height="103"/>
+        <element name="SelfReport" positionX="403" positionY="-126" width="128" height="120"/>
+        <element name="Session" positionX="223" positionY="-261" width="128" height="118"/>
         <element name="User" positionX="43" positionY="-223" width="128" height="88"/>
-        <element name="SelfReport" positionX="403" positionY="-126" width="128" height="103"/>
     </elements>
 </model>

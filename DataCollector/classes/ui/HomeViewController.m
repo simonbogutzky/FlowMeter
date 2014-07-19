@@ -93,6 +93,9 @@
     } else {
         self.isCollecting = !self.isCollecting;
         [self stopSensorUpdates];
+        
+        self.session.duration = [NSNumber numberWithDouble:[self stopWatchTimeInterval]];
+        
         [self.stopWatchTimer invalidate];
         
         if (self.appDelegate.flowShortScaleIsSelected) {
@@ -147,10 +150,7 @@
 
 - (void)updateStopWatch
 {
-    // Create date from the elapsed time
-    NSDate *currentDate = [NSDate date];
-    NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:self.stopWatchStartDate];
-    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:[self stopWatchTimeInterval]];
     
     // Create a date formatter
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -160,6 +160,13 @@
     // Format the elapsed time and set it to the label
     NSString *timeString = [dateFormatter stringFromDate:timerDate];
     self.stopWatchLabel.text = timeString;
+}
+
+- (NSTimeInterval)stopWatchTimeInterval
+{
+    // Create date from the elapsed time
+    NSDate *currentDate = [NSDate date];
+    return [currentDate timeIntervalSinceDate:self.stopWatchStartDate];
 }
 
 - (void)startSensorUpdates

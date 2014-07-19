@@ -17,5 +17,6 @@
 @dynamic activity;
 @dynamic user;
 @dynamic selfReports;
+@dynamic duration;
 
 @end

@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString *activity;
 @property (nonatomic, retain) User *user;
 @property (nonatomic, retain) NSSet *selfReports;
+@property (nonatomic, retain) NSNumber *duration;
 @end
 
 @interface Session (CoreDataGeneratedAccessors)
