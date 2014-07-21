@@ -15,20 +15,6 @@
 
 @implementation MenuViewController
 
-#pragma mark -
-#pragma mark - UIViewControllerDelegate implementation
-
-- (void)viewDidLoad
-{
-
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
-
 - (IBAction)unwindToMenuViewController:(UIStoryboardSegue *)segue {
     
 }
