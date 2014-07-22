@@ -43,9 +43,6 @@
 		D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D2517250463004C261C /* PrefsTableViewController.m */; };
 		D34C9D36172504BA004C261C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D34172504BA004C261C /* Icon.png */; };
 		D34C9D37172504BA004C261C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D35172504BA004C261C /* Icon@2x.png */; };
-		D34C9D3B172504C4004C261C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D38172504C4004C261C /* Default-568h@2x.png */; };
-		D34C9D3C172504C4004C261C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D39172504C4004C261C /* Default.png */; };
-		D34C9D3D172504C4004C261C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D3A172504C4004C261C /* Default@2x.png */; };
 		D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */; };
 		D36C44B016D788BE000B8502 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
 		D36C44B216D7898B000B8502 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44B116D7898B000B8502 /* ExternalAccessory.framework */; };
@@ -194,9 +191,6 @@
 		D34C9D32172504A8004C261C /* DataCollector-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DataCollector-Prefix.pch"; path = "supporting-files/DataCollector-Prefix.pch"; sourceTree = "<group>"; };
 		D34C9D34172504BA004C261C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = "supporting-files/images/app-icons/Icon.png"; sourceTree = "<group>"; };
 		D34C9D35172504BA004C261C /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "supporting-files/images/app-icons/Icon@2x.png"; sourceTree = "<group>"; };
-		D34C9D38172504C4004C261C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "supporting-files/images/launch-images/Default-568h@2x.png"; sourceTree = "<group>"; };
-		D34C9D39172504C4004C261C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = "supporting-files/images/launch-images/Default.png"; sourceTree = "<group>"; };
-		D34C9D3A172504C4004C261C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "supporting-files/images/launch-images/Default@2x.png"; sourceTree = "<group>"; };
 		D35ABC0E188EC2AE00BD1D2D /* LikertScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewController.h; path = classes/ui/LikertScaleViewController.h; sourceTree = "<group>"; };
 		D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LikertScaleViewController.m; path = classes/ui/LikertScaleViewController.m; sourceTree = "<group>"; };
 		D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -424,9 +418,6 @@
 		D34C9D0B17250145004C261C /* LaunchImages */ = {
 			isa = PBXGroup;
 			children = (
-				D34C9D38172504C4004C261C /* Default-568h@2x.png */,
-				D34C9D39172504C4004C261C /* Default.png */,
-				D34C9D3A172504C4004C261C /* Default@2x.png */,
 			);
 			name = LaunchImages;
 			sourceTree = "<group>";
@@ -744,11 +735,8 @@
 				D34C9D37172504BA004C261C /* Icon@2x.png in Resources */,
 				D3C1292718632B4B00C361CA /* README.md in Resources */,
 				D38FBDBB196C1DC000C63681 /* Localizable.strings in Resources */,
-				D34C9D3B172504C4004C261C /* Default-568h@2x.png in Resources */,
 				D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */,
 				D3C1292818632B4B00C361CA /* release_notes.md in Resources */,
-				D34C9D3C172504C4004C261C /* Default.png in Resources */,
-				D34C9D3D172504C4004C261C /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
