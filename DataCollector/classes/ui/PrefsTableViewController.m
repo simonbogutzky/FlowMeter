@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *dbConnectionStatusSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *hxmConnectionStatusSwitch;
 @property (weak, nonatomic) IBOutlet UITableViewCell *hxmTableViewCell;
-@property (weak, nonatomic) IBOutlet UISwitch *fssInqueryStatusSwitch;
+
 
 @end
 
@@ -28,8 +28,6 @@
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dBConnectionChanged:) name:NOTIFICATION_DB_CONNECTION_CANCELLED object:nil];
-    
-    self.fssInqueryStatusSwitch.on = _appDelegate.flowShortScaleIsSelected;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -57,10 +55,6 @@
         [_appDelegate.heartRateMonitorManager disconnectHeartRateMonitorDevice];
     }
     sender.enabled = NO;
-}
-
-- (IBAction)changeFSSInqueryStatus:(UISwitch *)sender {
-    _appDelegate.flowShortScaleIsSelected = sender.on;
 }
 
 

@@ -20,6 +20,8 @@
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UITableViewCell *firstNameTableViewCell;
 @property (nonatomic, weak) IBOutlet UITableViewCell *lastNameTableViewCell;
+@property (nonatomic, weak) IBOutlet UITableViewCell *activityTableViewCell;
+@property (nonatomic, weak) IBOutlet UISwitch *flowShortScaleStatusSwitch;
 @end
 
 @implementation SessionPrefsTableViewController
@@ -47,7 +49,9 @@
 {
     [super viewDidLoad];
     
-    self.sessionDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @""] forKeys:@[@"firstName", @"lastName"]];
+    self.sessionDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @"", @""] forKeys:@[@"firstName", @"lastName", @"activity"]];
+    
+    self.flowShortScaleStatusSwitch.on = self.appDelegate.flowShortScaleIsSelected;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,7 +66,19 @@
         self.lastNameTableViewCell.detailTextLabel.text = lastName;
     }
     
+    NSString *activity = [self.sessionDictionary valueForKey:@"activity"];
+    if (activity != nil && ![activity isEqualToString:@""]) {
+        self.activityTableViewCell.detailTextLabel.text = activity;
+    }
+    
     [self.tableView reloadData];
+}
+
+#pragma mark -
+#pragma marl - IBActions
+
+- (IBAction)changeFlowShowScaleStatus:(UISwitch *)sender {
+    self.appDelegate.flowShortScaleIsSelected = sender.on;
 }
 
 #pragma mark -
@@ -81,6 +97,14 @@
         UINavigationController *navigationController = segue.destinationViewController;
         EditViewController *editViewController = (EditViewController *) navigationController.topViewController;
         editViewController.propertyName = @"lastName";
+        editViewController.propertyDictionary = self.sessionDictionary;
+        [((UITableViewCell *) sender) setSelected:NO animated:YES];
+    }
+    
+    if ([segue.identifier isEqualToString:@"editActivity"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        EditViewController *editViewController = (EditViewController *) navigationController.topViewController;
+        editViewController.propertyName = @"activity";
         editViewController.propertyDictionary = self.sessionDictionary;
         [((UITableViewCell *) sender) setSelected:NO animated:YES];
     }
