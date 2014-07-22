@@ -238,10 +238,10 @@
             </objects>
             <point key="canvasLocation" x="1486" y="-164"/>
         </scene>
-        <!--Profile Table View Controller - Laufeinstellungen-->
+        <!--Session Prefs Table View Controller - Laufeinstellungen-->
         <scene sceneID="akl-ge-5bM">
             <objects>
-                <tableViewController id="rvc-y0-Bvq" customClass="ProfileTableViewController" sceneMemberID="viewController">
+                <tableViewController id="rvc-y0-Bvq" customClass="SessionPrefsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="tg2-uC-fGM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

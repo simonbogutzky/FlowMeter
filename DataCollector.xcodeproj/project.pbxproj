@@ -57,7 +57,7 @@
 		D39747B11882CC7B00CFF3DF /* libtouchzipkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D39747AE1882CC6400CFF3DF /* libtouchzipkit.a */; };
 		D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionTableViewController.m */; };
 		D3B3DC091733B93A001F2830 /* DataCollector.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC071733B93A001F2830 /* DataCollector.xcdatamodeld */; };
-		D3B3DC1E1733BECC001F2830 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC1D1733BECB001F2830 /* ProfileTableViewController.m */; };
+		D3B3DC1E1733BECC001F2830 /* SessionPrefsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC1D1733BECB001F2830 /* SessionPrefsTableViewController.m */; };
 		D3C129081863290300C361CA /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C128FC1863290300C361CA /* ECPercentDrivenInteractiveTransition.m */; };
 		D3C129091863290300C361CA /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C128FE1863290300C361CA /* ECSlidingAnimationController.m */; };
 		D3C1290A1863290300C361CA /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C129011863290300C361CA /* ECSlidingInteractiveTransition.m */; };
@@ -212,8 +212,8 @@
 		D3A4629D1726E08900D454F7 /* SessionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionTableViewController.h; path = classes/ui/SessionTableViewController.h; sourceTree = "<group>"; };
 		D3A4629E1726E08900D454F7 /* SessionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionTableViewController.m; path = classes/ui/SessionTableViewController.m; sourceTree = "<group>"; };
 		D3B3DC081733B93A001F2830 /* DataCollector.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCollector.xcdatamodel; sourceTree = "<group>"; };
-		D3B3DC1C1733BECB001F2830 /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileTableViewController.h; path = classes/ui/ProfileTableViewController.h; sourceTree = "<group>"; };
-		D3B3DC1D1733BECB001F2830 /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileTableViewController.m; path = classes/ui/ProfileTableViewController.m; sourceTree = "<group>"; };
+		D3B3DC1C1733BECB001F2830 /* SessionPrefsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionPrefsTableViewController.h; path = classes/ui/SessionPrefsTableViewController.h; sourceTree = "<group>"; };
+		D3B3DC1D1733BECB001F2830 /* SessionPrefsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionPrefsTableViewController.m; path = classes/ui/SessionPrefsTableViewController.m; sourceTree = "<group>"; };
 		D3C128FB1863290300C361CA /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECPercentDrivenInteractiveTransition.h; path = ECSlidingViewController/ECSlidingViewController/ECPercentDrivenInteractiveTransition.h; sourceTree = SOURCE_ROOT; };
 		D3C128FC1863290300C361CA /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECPercentDrivenInteractiveTransition.m; path = ECSlidingViewController/ECSlidingViewController/ECPercentDrivenInteractiveTransition.m; sourceTree = SOURCE_ROOT; };
 		D3C128FD1863290300C361CA /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingAnimationController.h; path = ECSlidingViewController/ECSlidingViewController/ECSlidingAnimationController.h; sourceTree = SOURCE_ROOT; };
@@ -551,8 +551,8 @@
 				D34C9D2317250463004C261C /* MenuViewController.m */,
 				D34C9D2417250463004C261C /* PrefsTableViewController.h */,
 				D34C9D2517250463004C261C /* PrefsTableViewController.m */,
-				D3B3DC1C1733BECB001F2830 /* ProfileTableViewController.h */,
-				D3B3DC1D1733BECB001F2830 /* ProfileTableViewController.m */,
+				D3B3DC1C1733BECB001F2830 /* SessionPrefsTableViewController.h */,
+				D3B3DC1D1733BECB001F2830 /* SessionPrefsTableViewController.m */,
 				D3A4629D1726E08900D454F7 /* SessionTableViewController.h */,
 				D3A4629E1726E08900D454F7 /* SessionTableViewController.m */,
 			);
@@ -793,7 +793,7 @@
 				D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */,
 				D3B3DC091733B93A001F2830 /* DataCollector.xcdatamodeld in Sources */,
 				D3C1290D1863290300C361CA /* UIViewController+ECSlidingViewController.m in Sources */,
-				D3B3DC1E1733BECC001F2830 /* ProfileTableViewController.m in Sources */,
+				D3B3DC1E1733BECC001F2830 /* SessionPrefsTableViewController.m in Sources */,
 				D329ACEA197A98F400B144B5 /* SelfReport.m in Sources */,
 				D3C1290A1863290300C361CA /* ECSlidingInteractiveTransition.m in Sources */,
 				D37067D71733F41300F86BBD /* EditViewController.m in Sources */,

@@ -1,17 +1,17 @@
 //
-//  ProfileTableViewController.m
+//  SessionPrefsTableViewController.m
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 03.05.13.
 //  Copyright (c) 2013 Simon Bogutzky. All rights reserved.
 //
 
-#import "ProfileTableViewController.h"
+#import "SessionPrefsTableViewController.h"
 #import "EditViewController.h"
 #import "AppDelegate.h"
 #import "User.h"
 
-@interface ProfileTableViewController () {
+@interface SessionPrefsTableViewController () {
     NSManagedObjectContext *_managedObjectContext;
     User *_user;
     IBOutlet UITableView *_tableView;
@@ -24,7 +24,7 @@
 }
 @end
 
-@implementation ProfileTableViewController
+@implementation SessionPrefsTableViewController
 
 #pragma mark -
 #pragma mark - UIViewControllerDelegate implementation

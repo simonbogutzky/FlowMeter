@@ -1,5 +1,5 @@
 //
-//  ProfileTableViewController.h
+//  SessionPrefsTableViewController.h
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 03.05.13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProfileTableViewController : UITableViewController
+@interface SessionPrefsTableViewController : UITableViewController
 
 @end
