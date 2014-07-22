@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class User;
-
 @interface EditViewController : UIViewController
 
 @property (nonatomic, strong) NSString *propertyName;

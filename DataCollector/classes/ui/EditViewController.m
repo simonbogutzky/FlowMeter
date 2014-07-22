@@ -9,10 +9,9 @@
 #import "EditViewController.h"
 #import "User.h"
 
-@interface EditViewController () {
-    IBOutlet UINavigationBar *_navigationBar;
-    IBOutlet UITextField *_textField;
-}
+@interface EditViewController ()
+
+@property (nonatomic, weak) IBOutlet UITextField *textField;
 
 @end
 
@@ -24,14 +23,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _navigationBar.topItem.title = NSLocalizedString(_propertyName, @"Vorname oder Nachname") ;
-    _textField.text = [_propertyDictionary valueForKey:_propertyName];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.navigationController.navigationBar.topItem.title = NSLocalizedString(self.propertyName, @"Vorname oder Nachname") ;
+    self.textField.text = [self.propertyDictionary valueForKey:self.propertyName];
 }
 
 #pragma mark -
@@ -39,7 +32,7 @@
 
 - (IBAction)finisedTouched:(id)sender
 {
-    [_propertyDictionary setValue:_textField.text forKey:_propertyName];
+    [self.propertyDictionary setValue:self.textField.text forKey:self.propertyName];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

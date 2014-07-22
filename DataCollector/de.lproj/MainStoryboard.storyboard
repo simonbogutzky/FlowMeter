@@ -299,28 +299,6 @@
                                             <segue destination="RKk-Uf-Ko4" kind="modal" identifier="editLastName" id="sGD-jV-yf9"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="lX2-DD-Hkt" detailTextLabel="iBq-la-LHe" style="IBUITableViewCellStyleValue2" id="2ZV-k7-jl6">
-                                        <rect key="frame" x="0.0" y="207" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2ZV-k7-jl6" id="Xq4-fZ-4wX">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Benutzername" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lX2-DD-Hkt">
-                                                    <rect key="frame" x="15" y="16" width="91" height="15"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                                    <color key="textColor" red="0.011764707040000001" green="0.69019609689999994" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iBq-la-LHe">
-                                                    <rect key="frame" x="112" y="13" width="41" height="18"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -340,9 +318,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
-                        <outlet property="_firstNameTableViewCell" destination="p1m-wM-Kim" id="QsR-Kf-jcw"/>
-                        <outlet property="_lastNameTableViewCell" destination="GSh-fI-lot" id="77c-af-6fo"/>
-                        <outlet property="_tableView" destination="tg2-uC-fGM" id="eKO-3q-V8n"/>
+                        <outlet property="firstNameTableViewCell" destination="p1m-wM-Kim" id="Jft-y9-Hlq"/>
+                        <outlet property="lastNameTableViewCell" destination="GSh-fI-lot" id="ISK-mZ-fYg"/>
+                        <outlet property="tableView" destination="tg2-uC-fGM" id="kYg-kx-OAy"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ha9-3c-T2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -388,7 +366,7 @@
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="_textField" destination="VCk-FN-gWn" id="e8l-Na-GSj"/>
+                        <outlet property="textField" destination="VCk-FN-gWn" id="jVR-iA-ODL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5c-xw-h9R" userLabel="First Responder" sceneMemberID="firstResponder"/>

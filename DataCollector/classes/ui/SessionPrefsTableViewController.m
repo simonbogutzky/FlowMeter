@@ -9,22 +9,36 @@
 #import "SessionPrefsTableViewController.h"
 #import "EditViewController.h"
 #import "AppDelegate.h"
-#import "User.h"
+#import "Session.h"
 
-@interface SessionPrefsTableViewController () {
-    NSManagedObjectContext *_managedObjectContext;
-    User *_user;
-    IBOutlet UITableView *_tableView;
-    IBOutlet UITableViewCell *_firstNameTableViewCell;
-    IBOutlet UITableViewCell *_lastNameTableViewCell;
-    IBOutlet UITableViewCell *_activityTableViewCell;
-    NSMutableDictionary *_userDictionary;
-    BOOL _saveContext;
-    AppDelegate *_appDelegate;
-}
+@interface SessionPrefsTableViewController ()
+
+@property (nonatomic, strong) AppDelegate *appDelegate;
+@property (nonatomic, strong) Session *session;
+@property (nonatomic, strong) NSMutableDictionary *sessionDictionary;
+
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UITableViewCell *firstNameTableViewCell;
+@property (nonatomic, weak) IBOutlet UITableViewCell *lastNameTableViewCell;
 @end
 
 @implementation SessionPrefsTableViewController
+
+#pragma mark -
+#pragma mark - Getter
+
+- (AppDelegate *)appDelegate
+{
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+- (Session *)session
+{
+    if (!_session) {
+        _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:self.appDelegate.managedObjectContext];
+    }
+    return _session;
+}
 
 #pragma mark -
 #pragma mark - UIViewControllerDelegate implementation
@@ -32,50 +46,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    _managedObjectContext = _appDelegate.managedObjectContext;
-    _userDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @"", @""] forKeys:@[@"firstName", @"lastName", @"username"]];
+    self.sessionDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @""] forKeys:@[@"firstName", @"lastName"]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    _saveContext = YES;
-    
-    NSString *firstName = [_userDictionary valueForKey:@"firstName"];
+    NSString *firstName = [self.sessionDictionary valueForKey:@"firstName"];
     if (firstName != nil && ![firstName isEqualToString:@""]) {
-        _firstNameTableViewCell.detailTextLabel.text = firstName;
-    } else {
-        if (_user.firstName != nil && ![_user.firstName isEqualToString:@""]) {
-            _firstNameTableViewCell.detailTextLabel.text = _user.firstName;
-            [_userDictionary setValue:_user.firstName forKey:@"firstName"];
-        }
+        self.firstNameTableViewCell.detailTextLabel.text = firstName;
     }
     
-    NSString *lastName = [_userDictionary valueForKey:@"lastName"];
+    NSString *lastName = [self.sessionDictionary valueForKey:@"lastName"];
     if (lastName != nil && ![lastName isEqualToString:@""]) {
-        _lastNameTableViewCell.detailTextLabel.text = lastName;
-    } else {
-        if (_user.lastName != nil && ![_user.lastName isEqualToString:@""]) {
-            _lastNameTableViewCell.detailTextLabel.text = _user.lastName;
-            [_userDictionary setValue:_user.lastName forKey:@"lastName"];
-        }
+        self.lastNameTableViewCell.detailTextLabel.text = lastName;
     }
     
-//    NSString *cleanedFirstName = [self cleanName:_firstNameTableViewCell.detailTextLabel.text];
-//    NSString *cleanedLastName = [self cleanName:_lastNameTableViewCell.detailTextLabel.text];
-//    if (![cleanedFirstName isEqualToString:@""] && ![cleanedLastName isEqualToString:@""]) {
-//        NSString *username = [NSString stringWithFormat:@"%@_%@", cleanedFirstName, cleanedLastName];
-//        [_userDictionary setValue:username forKey:@"username"];
-//        _usernameTableViewCell.detailTextLabel.text = username;
-//    }
-    [_tableView reloadData];
+    [self.tableView reloadData];
 }
 
 #pragma mark -
@@ -86,33 +73,17 @@
         UINavigationController *navigationController = segue.destinationViewController;
         EditViewController *editViewController = (EditViewController *) navigationController.topViewController;
         editViewController.propertyName = @"firstName";
-        editViewController.propertyDictionary = _userDictionary;
+        editViewController.propertyDictionary = self.sessionDictionary;
         [((UITableViewCell *) sender) setSelected:NO animated:YES];
-        _saveContext = NO;
     }
     
     if ([segue.identifier isEqualToString:@"editLastName"]) {
         UINavigationController *navigationController = segue.destinationViewController;
         EditViewController *editViewController = (EditViewController *) navigationController.topViewController;
         editViewController.propertyName = @"lastName";
-        editViewController.propertyDictionary = _userDictionary;
+        editViewController.propertyDictionary = self.sessionDictionary;
         [((UITableViewCell *) sender) setSelected:NO animated:YES];
-        _saveContext = NO;
     }
-}
-
-- (NSString *)cleanName:(NSString *)name
-{
-    NSString *cleanedName = [name copy];
-    cleanedName = [cleanedName lowercaseString];
-    cleanedName = [cleanedName stringByReplacingOccurrencesOfString:@"ä" withString:@"ae"];
-    cleanedName = [cleanedName stringByReplacingOccurrencesOfString:@"ö" withString:@"oe"];
-    cleanedName = [cleanedName stringByReplacingOccurrencesOfString:@"ü" withString:@"ue"];
-    cleanedName = [cleanedName stringByReplacingOccurrencesOfString:@"ß" withString:@"ss"];
-    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@" -abcdefghijklmnopqrstuvwxyz"] invertedSet];
-    cleanedName = [[cleanedName componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
-     
-    return cleanedName;
 }
 
 @end
