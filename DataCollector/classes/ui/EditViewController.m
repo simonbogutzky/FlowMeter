@@ -23,7 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBar.topItem.title = NSLocalizedString(self.propertyName, @"Vorname oder Nachname") ;
+    self.navigationController.navigationBar.topItem.title = NSLocalizedString(self.propertyName, @"Vorname oder Nachname oder Aktivität") ;
     self.textField.text = [self.propertyDictionary valueForKey:self.propertyName];
 }
 

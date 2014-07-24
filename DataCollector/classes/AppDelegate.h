@@ -19,16 +19,12 @@ typedef enum : NSUInteger {
     flowShortScale,
 } questionnaire;
 
-@class User;
-
 @interface AppDelegate : UIResponder <UIApplicationDelegate, DBRestClientDelegate, NSStreamDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (readonly, strong, nonatomic) CMMotionManager *motionManager;
-@property (readonly, strong, nonatomic) CLLocationManager *locationManager;
 @property (readonly, strong, nonatomic) HeartRateMonitorManager *heartRateMonitorManager;
 
 - (void)saveContext;

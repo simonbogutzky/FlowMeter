@@ -1,17 +1,16 @@
 //
-//  HomeViewController.m
+//  SessionStarViewController.m
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 16.01.13.
 //  Copyright (c) 2013 Simon Bogutzky. All rights reserved.
 //
 
-#import "HomeViewController.h"
+#import "SessionStartViewController.h"
 #import "AppDelegate.h"
 #import "User.h"
 #import "Session.h"
 #import "SelfReport.h"
-//#import "Motion.h"
 #import "MBProgressHUD.h"
 #import "LikertScaleViewController.h"
 #import <AudioToolbox/AudioServices.h>
@@ -21,7 +20,7 @@
 //TODO: Minuten in Einstellungen auslagern
 #define SELF_REPORT_INTERVAL 1
 
-@interface HomeViewController ()
+@interface SessionStartViewController ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) Session *session;
@@ -43,7 +42,7 @@
 
 @end
 
-@implementation HomeViewController
+@implementation SessionStartViewController
 
 #pragma mark -
 #pragma mark - Getter
@@ -186,33 +185,6 @@
 
 - (void)startSensorUpdates
 {
-    /*
-    // Start motion updates
-    NSTimeInterval updateInterval = 0.01; // 100hz
-    CMMotionManager *motionManager = _appDelegate.motionManager;
-    
-    if ([motionManager isDeviceMotionAvailable] == YES) {
-        [motionManager setDeviceMotionUpdateInterval:updateInterval];
-        [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical toQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *deviceMotion, NSError *error) {
-            if(_isCollection) {
-                
-                // Create motion record
-                double timestamp = [[NSDate date] timeIntervalSince1970];
-                Motion *motionRecord = [[Motion alloc] initWithTimestamp:timestamp deviceMotion:deviceMotion];
- 
-                // Add motion record
-                [self.session addMotionData:motionRecord];
-            }
-        }];
-    }
-    
-    // Start location updates
-    CLLocationManager *locationManager = _appDelegate.locationManager;
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    locationManager.delegate = self;
-    [locationManager startUpdatingLocation];
-     */
-    
     // Start heart rate monitor updates
     if (self.appDelegate.heartRateMonitorManager.hasConnection) {
         self.appDelegate.heartRateMonitorManager.delegate = self;
@@ -222,18 +194,6 @@
 
 - (void)stopSensorUpdates
 {
-    /*
-    // Stop motion updates
-    CMMotionManager *motionManager = _appDelegate.motionManager;
-    if ([motionManager isDeviceMotionActive] == YES) {
-        [motionManager stopDeviceMotionUpdates];
-    }
-    
-    // Stop location updates
-    CLLocationManager *locationManager = _appDelegate.locationManager;
-    [locationManager stopUpdatingLocation];
-     */
-    
     // Stop heart rate monitor updates
     if (self.appDelegate.heartRateMonitorManager.hasConnection) {
         self.heartRateLabel.hidden = YES;
@@ -331,22 +291,6 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 {
     [manager startMonitoring];
 }
-
-/*
- #pragma mark -
- #pragma mark - CLLocationManagerDelegate implementation
- 
- - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
- {
- if(_isCollecting) {
- for (CLLocation *location in locations) {
- 
- // Add location record
- [self.session addLocationData:location];
- }
- }
- }
- */
 
 #pragma mark -
 #pragma mark - LikertScaleViewControllerDelegate implementation

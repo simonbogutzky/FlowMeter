@@ -8,7 +8,7 @@
 
 #import "SessionPrefsTableViewController.h"
 #import "EditViewController.h"
-#import "HomeViewController.h"
+#import "SessionStartViewController.h"
 #import "AppDelegate.h"
 #import "Session.h"
 
@@ -104,8 +104,8 @@
     }
     
     if ([segue.identifier isEqualToString:@"startSession"]) {
-        HomeViewController *homeViewController = (HomeViewController *) segue.destinationViewController;
-        homeViewController.sessionDictionary = self.sessionDictionary;
+        SessionStartViewController *sessionStartViewController = (SessionStartViewController *) segue.destinationViewController;
+        sessionStartViewController.sessionDictionary = self.sessionDictionary;
     }
 }
 

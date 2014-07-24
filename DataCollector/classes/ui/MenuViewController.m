@@ -8,9 +8,7 @@
 
 #import "MenuViewController.h"
 
-@interface MenuViewController () {
-    
-}
+@interface MenuViewController ()
 @end
 
 @implementation MenuViewController
