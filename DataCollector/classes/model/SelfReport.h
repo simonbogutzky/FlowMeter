@@ -14,8 +14,6 @@
 @interface SelfReport : NSManagedObject
 
 @property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) NSString * questionnaire;
-@property (nonatomic, retain) NSNumber * numberOfItems;
 @property (nonatomic, retain) NSString * responses;
 @property (nonatomic, retain) Session *session;
 

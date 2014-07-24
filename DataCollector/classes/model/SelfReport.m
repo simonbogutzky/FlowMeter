@@ -13,8 +13,6 @@
 @implementation SelfReport
 
 @dynamic date;
-@dynamic questionnaire;
-@dynamic numberOfItems;
 @dynamic responses;
 @dynamic session;
 

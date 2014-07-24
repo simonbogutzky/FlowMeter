@@ -14,4 +14,6 @@
 
 @interface HomeViewController : UIViewController <CLLocationManagerDelegate, UIAlertViewDelegate, HeartRateMonitorManagerDelegate, LikertScaleViewControllerDelegate>
 
+@property (nonatomic, strong) NSDictionary *sessionDictionary;
+
 @end

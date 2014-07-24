@@ -8,13 +8,13 @@
 
 #import "SessionPrefsTableViewController.h"
 #import "EditViewController.h"
+#import "HomeViewController.h"
 #import "AppDelegate.h"
 #import "Session.h"
 
 @interface SessionPrefsTableViewController ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
-@property (nonatomic, strong) Session *session;
 @property (nonatomic, strong) NSMutableDictionary *sessionDictionary;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -34,14 +34,6 @@
     return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
-- (Session *)session
-{
-    if (!_session) {
-        _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:self.appDelegate.managedObjectContext];
-    }
-    return _session;
-}
-
 #pragma mark -
 #pragma mark - UIViewControllerDelegate implementation
 
@@ -49,9 +41,7 @@
 {
     [super viewDidLoad];
     
-    self.sessionDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @"", @""] forKeys:@[@"firstName", @"lastName", @"activity"]];
-    
-    self.flowShortScaleStatusSwitch.on = self.appDelegate.flowShortScaleIsSelected;
+    self.sessionDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @"", @"", @0] forKeys:@[@"firstName", @"lastName", @"activity", @"questionnaire"]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -78,7 +68,11 @@
 #pragma marl - IBActions
 
 - (IBAction)changeFlowShowScaleStatus:(UISwitch *)sender {
-    self.appDelegate.flowShortScaleIsSelected = sender.on;
+    if (sender.on) {
+        [self.sessionDictionary setObject:[NSNumber numberWithInt:flowShortScale] forKey:@"questionnaire"];
+    } else {
+        [self.sessionDictionary setObject:[NSNumber numberWithInt:none] forKey:@"questionnaire"];
+    }
 }
 
 #pragma mark -
@@ -107,6 +101,11 @@
         editViewController.propertyName = @"activity";
         editViewController.propertyDictionary = self.sessionDictionary;
         [((UITableViewCell *) sender) setSelected:NO animated:YES];
+    }
+    
+    if ([segue.identifier isEqualToString:@"startSession"]) {
+        HomeViewController *homeViewController = (HomeViewController *) segue.destinationViewController;
+        homeViewController.sessionDictionary = self.sessionDictionary;
     }
 }
 

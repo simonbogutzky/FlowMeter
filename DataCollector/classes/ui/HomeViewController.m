@@ -16,7 +16,7 @@
 #import "LikertScaleViewController.h"
 #import <AudioToolbox/AudioServices.h>
 
-// TODO: Sekunden in Einstellungen auslagern
+//TODO: Sekunden in Einstellungen auslagern
 #define START_COUNTDOWN_SECONDS 5
 //TODO: Minuten in Einstellungen auslagern
 #define SELF_REPORT_INTERVAL 1
@@ -61,20 +61,35 @@
     return _session;
 }
 
+- (User *)getUserWithPredicate:(NSPredicate *)predicate
+{
+    User *user = nil;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:self.appDelegate.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *fetchedObjects = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    if (fetchedObjects == nil) {
+        // Handle the error.
+    }
+    
+    if ([fetchedObjects count] == 0) {
+        user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:self.appDelegate.managedObjectContext];
+    } else {
+        user = fetchedObjects[0];
+    }
+    
+    return user;
+}
+
 #pragma mark -
 #pragma mark - IBActions
 
 - (IBAction)startStopTouchUpInside:(UIButton *)sender
 {
-//    if (![self.user.isActive boolValue]) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Bitte gib deinen Namen an! *", @"Bitte gib deinen Namen an!")
-//                                                        message:NSLocalizedString(@"Gehe zu Menu > Profil *" , @"Gehe zu Menu > Profil")
-//                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"Ok *", @"Ok")
-//                                              otherButtonTitles:nil];
-//        [alert show];
-//        sender.enabled = NO;
-//        return;
-//    }
     
     if (!self.isCollecting) {
         
@@ -98,7 +113,7 @@
         
         [self.stopWatchTimer invalidate];
         
-        if (self.appDelegate.flowShortScaleIsSelected) {
+        if ([[self.sessionDictionary objectForKey:@"questionnaire"] intValue] == flowShortScale) {
             [self.selfReportTimer invalidate];
             self.isLastSelfReport = YES;
             
@@ -229,13 +244,35 @@
 - (void)startCollecting
 {
     NSLog(@"# Start collecting");
-    //[self.session initialize];
     self.session.date = [NSDate date];
+    
+    NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"(firstName == %@) AND (lastName == %@) ", [self.sessionDictionary objectForKey:@"firstName"], [self.sessionDictionary objectForKey:@"lastName"]];
+    User *user = [self getUserWithPredicate:userPredicate];
+    
+    if (user.firstName == nil && user.lastName == nil) {
+        user.firstName = [self.sessionDictionary objectForKey:@"firstName"];
+        user.lastName = [self.sessionDictionary objectForKey:@"lastName"];
+    }
+    
+    
+    self.session.user = user;
+    self.session.activity = [self.sessionDictionary objectForKey:@"activity"];
+    switch ([[self.sessionDictionary objectForKey:@"questionnaire"] intValue]) {
+        case flowShortScale:
+            self.session.questionnaire = NSLocalizedString(@"Flow-Kurzskala *", @"Flow-Kurzskala");
+            self.session.numberOfItems = [NSNumber numberWithInt:16];
+            break;
+            
+        default:
+            break;
+    }
+    
+    
     self.isCollecting = !self.isCollecting;
     
     [self startStopWatch];
     
-    if (self.appDelegate.flowShortScaleIsSelected) {
+    if ([[self.sessionDictionary objectForKey:@"questionnaire"] intValue] == flowShortScale) {
         self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:SELF_REPORT_INTERVAL * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     }
 }
@@ -323,7 +360,6 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     
     SelfReport *selfReport = [NSEntityDescription insertNewObjectForEntityForName:@"SelfReport" inManagedObjectContext:self.appDelegate.managedObjectContext];
     selfReport.date = [NSDate date];
-    selfReport.numberOfItems = [NSNumber numberWithInt:[responses count]];
     selfReport.responses = [responses componentsJoinedByString:@","];
     [self.session addSelfReportsObject:selfReport];
     
@@ -344,7 +380,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 {
     AudioServicesPlaySystemSound(1007);
     
-    if (self.appDelegate.flowShortScaleIsSelected) {
+    if ([[self.sessionDictionary objectForKey:@"questionnaire"] intValue] == flowShortScale) {
         [self presentViewController:[self flowShortScaleViewControllerFromStoryboard] animated:YES completion:nil];
     }
 }

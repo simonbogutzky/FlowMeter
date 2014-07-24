@@ -8,6 +8,7 @@
 
 #import "SelfReport+Description.h"
 #import "Session.h"
+#import "User.h"
 
 @implementation SelfReport (Description)
 
@@ -31,10 +32,10 @@
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
     NSString *durationString = [dateFormatter stringFromDate:date];
     
-    NSMutableString *header = [NSMutableString stringWithFormat:@"%@:\t\t%@\n%@:\t\t%@\n%@:\t\t%@\n%@:\t%@\n%@:\t\t%@\n%@:\t%@\n\n\"%@\",", NSLocalizedString(@"Datum *", @"Datum"), dateString, NSLocalizedString(@"Beginn *", @"Beginn"), timeString, NSLocalizedString(@"Dauer *", @"Dauer"), durationString, NSLocalizedString(@"Aktivität *", @"Aktivität"), @"Laufen", NSLocalizedString(@"Person *", @"Person"), @"Simon Bogutzky", NSLocalizedString(@"Fragebogen *", @"Fragebogen"), @"Flow-Kurzskala", NSLocalizedString(@"Zeitstempel *", @"Zeitstempel")];
+    NSMutableString *header = [NSMutableString stringWithFormat:@"%@:\t\t%@\n%@:\t\t%@\n%@:\t\t%@\n%@:\t%@\n%@:\t\t%@\n%@:\t%@\n\n\"%@\",", NSLocalizedString(@"Datum *", @"Datum"), dateString, NSLocalizedString(@"Beginn *", @"Beginn"), timeString, NSLocalizedString(@"Dauer *", @"Dauer"), durationString, NSLocalizedString(@"Aktivität *", @"Aktivität"), self.session.activity, NSLocalizedString(@"Person *", @"Person"), [NSString stringWithFormat:@"%@ %@", self.session.user.firstName, self.session.user.lastName], NSLocalizedString(@"Fragebogen *", @"Fragebogen"), self.session.questionnaire, NSLocalizedString(@"Zeitstempel *", @"Zeitstempel")];
     
-    for (int i = 1; i <= [self.numberOfItems intValue]; i++) {
-        if (i == [self.numberOfItems intValue]) {
+    for (int i = 1; i <= [self.session.numberOfItems intValue]; i++) {
+        if (i == [self.session.numberOfItems intValue]) {
             [header appendFormat:@"\"%@ %d\"\n", NSLocalizedString(@"Item *", @"Item"), i];
         } else {
             [header appendFormat:@"\"%@ %d\",", NSLocalizedString(@"Item *", @"Item"), i];

@@ -10,7 +10,6 @@
 #import "SelfReport.h"
 #import "User.h"
 
-
 @implementation Session
 
 @dynamic date;
@@ -18,5 +17,8 @@
 @dynamic user;
 @dynamic selfReports;
 @dynamic duration;
+@dynamic questionnaire;
+@dynamic numberOfItems;
+
 
 @end

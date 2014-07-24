@@ -14,6 +14,11 @@
 #import <AVFoundation/AVAudioSession.h>
 #import "Reachability.h"
 
+typedef enum : NSUInteger {
+    none,
+    flowShortScale,
+} questionnaire;
+
 @class User;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, DBRestClientDelegate, NSStreamDelegate>
@@ -25,7 +30,6 @@
 @property (readonly, strong, nonatomic) CMMotionManager *motionManager;
 @property (readonly, strong, nonatomic) CLLocationManager *locationManager;
 @property (readonly, strong, nonatomic) HeartRateMonitorManager *heartRateMonitorManager;
-@property (nonatomic) BOOL flowShortScaleIsSelected;
 
 - (void)saveContext;
 

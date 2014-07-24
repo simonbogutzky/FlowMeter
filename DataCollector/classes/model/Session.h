@@ -18,6 +18,8 @@
 @property (nonatomic, retain) User *user;
 @property (nonatomic, retain) NSSet *selfReports;
 @property (nonatomic, retain) NSNumber *duration;
+@property (nonatomic, retain) NSString *questionnaire;
+@property (nonatomic, retain) NSNumber *numberOfItems;
 @end
 
 @interface Session (CoreDataGeneratedAccessors)
