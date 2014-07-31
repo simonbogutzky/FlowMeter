@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="i1e-ga-Cft">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Initial Sliding View Controller-->
@@ -112,7 +112,7 @@
         <!--Lauf-->
         <scene sceneID="5">
             <objects>
-                <viewController id="2" customClass="SessionStartViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Session" id="2" customClass="SessionStartViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Whr-Xy-ju9"/>
                         <viewControllerLayoutGuide type="bottom" id="HrJ-cN-hIc"/>
@@ -149,10 +149,10 @@
                                     <color key="titleColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="startStopTouchUpInside:" destination="2" eventType="touchUpInside" id="xM6-Mq-b3x"/>
+                                    <action selector="stopEndTouchUpInside:" destination="2" eventType="touchUpInside" id="6ns-E1-A2V"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="No8-XL-3qD" userLabel="Start Countdown View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="No8-XL-3qD" userLabel="Start Countdown View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfM-7K-tdj" userLabel="Start Countdown Label">
@@ -174,18 +174,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="JBd-iU-TgT" firstAttribute="top" secondItem="Whr-Xy-ju9" secondAttribute="bottom" constant="20" id="0NS-xw-6gq"/>
                             <constraint firstAttribute="bottom" secondItem="TV8-ty-RU8" secondAttribute="bottom" constant="20" symbolic="YES" id="12b-zh-Gjf"/>
                             <constraint firstAttribute="trailing" secondItem="uLq-37-zr6" secondAttribute="trailing" constant="20" symbolic="YES" id="1FP-ZZ-3QH"/>
-                            <constraint firstItem="JBd-iU-TgT" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="7kp-xS-MEd"/>
+                            <constraint firstItem="JBd-iU-TgT" firstAttribute="centerY" secondItem="uLq-37-zr6" secondAttribute="centerY" id="2Co-5l-Ugy"/>
+                            <constraint firstItem="JBd-iU-TgT" firstAttribute="firstBaseline" secondItem="uLq-37-zr6" secondAttribute="firstBaseline" id="3WF-fM-cjV"/>
                             <constraint firstItem="No8-XL-3qD" firstAttribute="top" secondItem="3" secondAttribute="top" id="Cdd-fC-3XM"/>
-                            <constraint firstItem="uLq-37-zr6" firstAttribute="top" secondItem="JBd-iU-TgT" secondAttribute="top" id="NNh-7c-H5h"/>
+                            <constraint firstItem="uLq-37-zr6" firstAttribute="leading" secondItem="JBd-iU-TgT" secondAttribute="trailing" constant="92" id="MJI-QX-pcR"/>
                             <constraint firstItem="No8-XL-3qD" firstAttribute="centerX" secondItem="TV8-ty-RU8" secondAttribute="centerX" id="Sow-RO-d0U"/>
                             <constraint firstAttribute="trailing" secondItem="No8-XL-3qD" secondAttribute="trailing" id="dBO-Fx-2jP"/>
                             <constraint firstAttribute="bottom" secondItem="No8-XL-3qD" secondAttribute="bottom" id="rZb-se-uvu"/>
-                            <constraint firstItem="uLq-37-zr6" firstAttribute="leading" secondItem="JBd-iU-TgT" secondAttribute="trailing" constant="92" id="rx5-Gb-DK6"/>
+                            <constraint firstItem="JBd-iU-TgT" firstAttribute="top" secondItem="Whr-Xy-ju9" secondAttribute="bottom" constant="64" id="vCw-kg-QsL"/>
                             <constraint firstItem="No8-XL-3qD" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="vTY-iz-6aZ"/>
-                            <constraint firstItem="uLq-37-zr6" firstAttribute="centerY" secondItem="JBd-iU-TgT" secondAttribute="centerY" id="yTL-oa-mHR"/>
+                            <constraint firstItem="JBd-iU-TgT" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="yNb-QK-9qa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Lauf" id="hQZ-pK-huO">
@@ -246,6 +246,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="JFU-mY-0n3">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMI-il-cAu">
+                                    <rect key="frame" x="20" y="7" width="280" height="30"/>
+                                    <state key="normal" title="Start">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <segue destination="2" kind="modal" modalTransitionStyle="flipHorizontal" id="Bmc-GI-UEe"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <sections>
                             <tableViewSection headerTitle="Benutzer" id="Z2W-lZ-ckF">
                                 <cells>
@@ -373,13 +389,7 @@
                             <outlet property="delegate" destination="rvc-y0-Bvq" id="szu-Mn-mIv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Laufeinstellungen" id="xMI-jY-74u">
-                        <barButtonItem key="rightBarButtonItem" title="Start" id="ms9-e0-gEN">
-                            <connections>
-                                <segue destination="2" kind="push" identifier="startSession" id="SAu-S5-doY"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Laufeinstellungen" id="xMI-jY-74u"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="RB5-Ih-sYF">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
@@ -414,7 +424,10 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="doneTouched:" destination="wdA-CD-sxA" eventType="editingDidEndOnExit" id="sxY-b1-4ex"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -426,9 +439,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="bearbeiten" id="3IC-dB-72B">
-                        <barButtonItem key="rightBarButtonItem" title="fertig" id="NIg-71-mrk">
+                        <barButtonItem key="leftBarButtonItem" title="Abbrechen" id="NIg-71-mrk">
                             <connections>
-                                <action selector="finisedTouched:" destination="wdA-CD-sxA" id="tw0-lp-Lsm"/>
+                                <action selector="cancelTouched:" destination="wdA-CD-sxA" id="T2B-x6-0yT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -547,7 +560,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-nl-z8v">
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-nl-z8v">
                                                     <rect key="frame" x="213" y="4" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.011764707040000001" green="0.69019609689999994" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
@@ -558,7 +571,7 @@
                                             <constraints>
                                                 <constraint firstItem="Igf-nl-z8v" firstAttribute="top" secondItem="LEW-Mf-iIT" secondAttribute="top" constant="4" id="3E6-97-olj"/>
                                                 <constraint firstAttribute="bottom" secondItem="Igf-nl-z8v" secondAttribute="bottom" constant="8" id="TxU-v6-ZrT"/>
-                                                <constraint firstAttribute="trailing" secondItem="Igf-nl-z8v" secondAttribute="trailing" constant="32" id="mnG-zv-gu3"/>
+                                                <constraint firstAttribute="trailing" secondItem="Igf-nl-z8v" secondAttribute="trailing" constant="25" id="mnG-zv-gu3"/>
                                                 <constraint firstItem="dxo-2B-l8I" firstAttribute="top" secondItem="LEW-Mf-iIT" secondAttribute="top" constant="14" id="zDK-7A-RPY"/>
                                             </constraints>
                                         </tableViewCellContentView>

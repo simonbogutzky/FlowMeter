@@ -85,25 +85,35 @@
 }
 
 #pragma mark -
+#pragma mark - UIViewControllerDelegate implementation
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Hide navigation bar
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
+    // Rename button title
+    [self.startStopButton setTitle:NSLocalizedString(@"Stop *", @"Stoppe Aufnahme") forState:0];
+    
+    // Start sensor updates
+    [self startSensorUpdates];
+    
+    // Start start countdown
+    [self startStartCounterWithInterval:START_COUNTDOWN_SECONDS];
+}
+
+#pragma mark -
 #pragma mark - IBActions
 
-- (IBAction)startStopTouchUpInside:(UIButton *)sender
+- (IBAction)stopEndTouchUpInside:(UIButton *)sender
 {
     
     if (!self.isCollecting) {
+        [self dismissViewControllerAnimated:YES completion:^{
         
-        // Hide navigation bar
-        [[self navigationController] setNavigationBarHidden:YES animated:YES];
-        
-        // Rename button title
-        [sender setTitle:NSLocalizedString(@"Stop *", @"Stoppe Aufnahme") forState:0];
-        
-        // Start sensor updates
-        [self startSensorUpdates];
-        
-        // Start start countdown
-        [self startStartCounterWithInterval:START_COUNTDOWN_SECONDS];
-        
+        }];
     } else {
         self.isCollecting = !self.isCollecting;
         [self stopSensorUpdates];
