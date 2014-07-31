@@ -1,12 +1,12 @@
 //
-//  SessionStarViewController.m
+//  SessionViewController.m
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 16.01.13.
 //  Copyright (c) 2013 Simon Bogutzky. All rights reserved.
 //
 
-#import "SessionStartViewController.h"
+#import "SessionViewController.h"
 #import "AppDelegate.h"
 #import "User.h"
 #import "Session.h"
@@ -20,7 +20,7 @@
 //TODO: Minuten in Einstellungen auslagern
 #define SELF_REPORT_INTERVAL 1
 
-@interface SessionStartViewController ()
+@interface SessionViewController ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) Session *session;
@@ -42,7 +42,7 @@
 
 @end
 
-@implementation SessionStartViewController
+@implementation SessionViewController
 
 #pragma mark -
 #pragma mark - Getter

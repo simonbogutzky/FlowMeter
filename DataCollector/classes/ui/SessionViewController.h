@@ -1,5 +1,5 @@
 //
-//  SessionStarViewController.h
+//  SessionViewController.h
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 16.01.13.
@@ -10,7 +10,7 @@
 #import <HeartRateMonitor/HeartRateMonitor.h>
 #import "LikertScaleViewControllerDelegate.h"
 
-@interface SessionStartViewController : UIViewController <UIAlertViewDelegate, HeartRateMonitorManagerDelegate, LikertScaleViewControllerDelegate>
+@interface SessionViewController : UIViewController <UIAlertViewDelegate, HeartRateMonitorManagerDelegate, LikertScaleViewControllerDelegate>
 
 @property (nonatomic, strong) NSDictionary *sessionDictionary;
 

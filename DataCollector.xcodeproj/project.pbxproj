@@ -38,7 +38,7 @@
 		D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3383BA91726CE1500AAC993 /* CoreData.framework */; };
 		D34C9D191725044D004C261C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D151725044D004C261C /* AppDelegate.m */; };
 		D34C9D1A1725044D004C261C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D161725044D004C261C /* main.m */; };
-		D34C9D2917250463004C261C /* SessionStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D1F17250463004C261C /* SessionStartViewController.m */; };
+		D34C9D2917250463004C261C /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D1F17250463004C261C /* SessionViewController.m */; };
 		D34C9D2B17250463004C261C /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D2317250463004C261C /* MenuViewController.m */; };
 		D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D2517250463004C261C /* PrefsTableViewController.m */; };
 		D34C9D36172504BA004C261C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D34172504BA004C261C /* Icon.png */; };
@@ -182,8 +182,8 @@
 		D34C9D141725044D004C261C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = classes/AppDelegate.h; sourceTree = "<group>"; };
 		D34C9D151725044D004C261C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = classes/AppDelegate.m; sourceTree = "<group>"; };
 		D34C9D161725044D004C261C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = classes/main.m; sourceTree = "<group>"; };
-		D34C9D1E17250463004C261C /* SessionStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionStartViewController.h; path = classes/ui/SessionStartViewController.h; sourceTree = "<group>"; };
-		D34C9D1F17250463004C261C /* SessionStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionStartViewController.m; path = classes/ui/SessionStartViewController.m; sourceTree = "<group>"; };
+		D34C9D1E17250463004C261C /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionViewController.h; path = classes/ui/SessionViewController.h; sourceTree = "<group>"; };
+		D34C9D1F17250463004C261C /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionViewController.m; path = classes/ui/SessionViewController.m; sourceTree = "<group>"; };
 		D34C9D2217250463004C261C /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuViewController.h; path = classes/ui/MenuViewController.h; sourceTree = "<group>"; };
 		D34C9D2317250463004C261C /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuViewController.m; path = classes/ui/MenuViewController.m; sourceTree = "<group>"; };
 		D34C9D2417250463004C261C /* PrefsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefsTableViewController.h; path = classes/ui/PrefsTableViewController.h; sourceTree = "<group>"; };
@@ -538,8 +538,8 @@
 				D3B3DC1D1733BECB001F2830 /* SessionPrefsTableViewController.m */,
 				D37067D51733F41300F86BBD /* EditViewController.h */,
 				D37067D61733F41300F86BBD /* EditViewController.m */,
-				D34C9D1E17250463004C261C /* SessionStartViewController.h */,
-				D34C9D1F17250463004C261C /* SessionStartViewController.m */,
+				D34C9D1E17250463004C261C /* SessionViewController.h */,
+				D34C9D1F17250463004C261C /* SessionViewController.m */,
 				D35ABC0E188EC2AE00BD1D2D /* LikertScaleViewController.h */,
 				D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */,
 				D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */,
@@ -771,7 +771,7 @@
 				D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */,
 				D3C1290B1863290300C361CA /* ECSlidingSegue.m in Sources */,
 				D329ACEC197A98F400B144B5 /* Session.m in Sources */,
-				D34C9D2917250463004C261C /* SessionStartViewController.m in Sources */,
+				D34C9D2917250463004C261C /* SessionViewController.m in Sources */,
 				D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */,
 				D329ACEE197A98F400B144B5 /* User.m in Sources */,
 				D34C9D2B17250463004C261C /* MenuViewController.m in Sources */,

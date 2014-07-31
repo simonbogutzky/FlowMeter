@@ -112,7 +112,7 @@
         <!--Lauf-->
         <scene sceneID="5">
             <objects>
-                <viewController storyboardIdentifier="Session" id="2" customClass="SessionStartViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Session" id="2" customClass="SessionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Whr-Xy-ju9"/>
                         <viewControllerLayoutGuide type="bottom" id="HrJ-cN-hIc"/>

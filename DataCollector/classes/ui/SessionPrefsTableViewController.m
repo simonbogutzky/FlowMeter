@@ -8,7 +8,7 @@
 
 #import "SessionPrefsTableViewController.h"
 #import "EditViewController.h"
-#import "SessionStartViewController.h"
+#import "SessionViewController.h"
 #import "AppDelegate.h"
 #import "Session.h"
 
@@ -79,7 +79,7 @@
 
 - (IBAction)startTouched:(id)sender
 {
-    SessionStartViewController *sessionStartViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Session"];
+    SessionViewController *sessionStartViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Session"];
     [UIView beginAnimations:@"flipping view" context:nil];
     [UIView setAnimationDuration:0.75];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:YES];
@@ -116,7 +116,7 @@
     }
     
     if ([segue.identifier isEqualToString:@"startSession"]) {
-        SessionStartViewController *sessionStartViewController = (SessionStartViewController *) segue.destinationViewController;
+        SessionViewController *sessionStartViewController = (SessionViewController *) segue.destinationViewController;
         sessionStartViewController.sessionDictionary = self.sessionDictionary;
     }
 }
