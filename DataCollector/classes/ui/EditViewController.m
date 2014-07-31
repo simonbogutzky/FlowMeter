@@ -30,10 +30,18 @@
 #pragma mark -
 #pragma mark - IBActions
 
-- (IBAction)finisedTouched:(id)sender
+- (IBAction)doneTouched:(id)sender
 {
     [self.propertyDictionary setValue:self.textField.text forKey:self.propertyName];
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self resignFirstResponder];
 }
+
+- (IBAction)cancelTouched:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self resignFirstResponder];
+}
+
 
 @end
