@@ -42,6 +42,8 @@
     [super viewDidLoad];
     
     self.sessionDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @"", @"", @0] forKeys:@[@"firstName", @"lastName", @"activity", @"questionnaire"]];
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor yellowColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -73,6 +75,16 @@
     } else {
         [self.sessionDictionary setObject:[NSNumber numberWithInt:none] forKey:@"questionnaire"];
     }
+}
+
+- (IBAction)startTouched:(id)sender
+{
+    SessionStartViewController *sessionStartViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Session"];
+    [UIView beginAnimations:@"flipping view" context:nil];
+    [UIView setAnimationDuration:0.75];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:YES];
+    [self.navigationController pushViewController:sessionStartViewController animated:NO];
+    [UIView commitAnimations];
 }
 
 #pragma mark -
