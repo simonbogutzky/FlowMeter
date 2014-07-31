@@ -28,5 +28,5 @@ typedef enum : NSUInteger {
 @property (readonly, strong, nonatomic) HeartRateMonitorManager *heartRateMonitorManager;
 
 - (void)saveContext;
-
+- (NSString *)userDirectory;
 @end

@@ -41,7 +41,7 @@
 {
     [super viewDidLoad];
     
-    self.sessionDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @"", @"", @0] forKeys:@[@"firstName", @"lastName", @"activity", @"questionnaire"]];
+    self.sessionDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @"", @"", [NSNumber numberWithInt:flowShortScale]] forKeys:@[@"firstName", @"lastName", @"activity", @"questionnaire"]];
     
     [self.navigationController.navigationBar setBarTintColor:[UIColor yellowColor]];
 }

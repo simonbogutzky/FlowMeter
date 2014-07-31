@@ -11,5 +11,6 @@
 @interface Session (OutStream)
 
 - (NSString *)writeOutSelfReports;
+- (NSString *)zipSelfReports;
 
 @end

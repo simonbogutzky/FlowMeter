@@ -188,6 +188,14 @@
 }
 
 #pragma mark -
+#pragma mark - Convient methods
+
+- (NSString *)userDirectory
+{
+    return  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+}
+
+#pragma mark -
 #pragma mark - DBRestClientDelegate methods
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {

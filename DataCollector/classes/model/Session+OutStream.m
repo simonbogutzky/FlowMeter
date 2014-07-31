@@ -8,6 +8,7 @@
 
 #import "Session+OutStream.h"
 #import "SelfReport+Description.h"
+#import "ZipKit/ZipKit.h"
 
 @implementation Session (OutStream)
 
@@ -38,6 +39,13 @@
     return @"";
 }
 
+- (NSString *)zipSelfReports
+{
+    NSString *filename = [self writeOutSelfReports];
+    filename = [self zipFileWithFilename:filename];
+    return filename;
+}
+
 #pragma mark -
 #pragma mark - Convient methods
 
@@ -64,6 +72,31 @@
     [fileHandle writeData:data];
     [fileHandle closeFile];
     
+    return filename;
+}
+
+- (NSString *)zipFileWithFilename:(NSString *)filename
+{
+    NSString *userDirectory = self.userDirectory;
+    NSString *filePath = [userDirectory stringByAppendingPathComponent:filename];
+    NSString *achiveName = [NSString stringWithFormat:@"%@.zip", filename];
+    NSString *achivePath = [userDirectory stringByAppendingPathComponent:achiveName];
+    
+    // Create archive
+    ZKDataArchive *archive = [ZKDataArchive new];
+    
+    if ([archive deflateFile:filePath relativeToPath:userDirectory usingResourceFork:NO] == zkSucceeded) {
+        if ([archive.data writeToFile:achivePath atomically:YES]) {
+            
+            NSError *error = nil;
+            
+            // Delete file
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            [fileManager removeItemAtPath:filePath error:&error];
+            
+            return achiveName;
+        }
+    }
     return filename;
 }
 

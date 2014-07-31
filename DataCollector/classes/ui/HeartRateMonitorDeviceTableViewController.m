@@ -105,34 +105,34 @@
             break;
             
         case HeartRateMonitorManagerStatePoweredOff: {
-            cause = NSLocalizedString(@"Überprüfe, ob Bluetooth eingeschlatet ist", @"Überprüfe, ob Bluetooth eingeschlatet ist");
+            cause = NSLocalizedString(@"* Überprüfe, ob Bluetooth eingeschlatet ist", @"Überprüfe, ob Bluetooth eingeschlatet ist");
             
         }
             break;
         case HeartRateMonitorManagerStateResetting: {
-            cause = NSLocalizedString(@"Bluetooth Manager wird gerade zurückgesetzt", @"Bluetooth Manager wird gerade zurückgesetzt");
+            cause = NSLocalizedString(@"* Bluetooth Manager wird gerade zurückgesetzt", @"Bluetooth Manager wird gerade zurückgesetzt");
             
         }
             break;
         case HeartRateMonitorManagerStateUnauthorized: {
-            cause = NSLocalizedString(@"Überprüfe deine Sicherheitseinstellungen", @"Überprüfe deine Sicherheitseinstellungen");
+            cause = NSLocalizedString(@"* Überprüfe deine Sicherheitseinstellungen", @"Überprüfe deine Sicherheitseinstellungen");
             
         }
             break;
         case HeartRateMonitorManagerStateUnknown: {
-            cause = NSLocalizedString(@"Ein unbekannter Fehler ist aufgetreten", @"Ein unbekannter Fehler ist aufgetreten");
+            cause = NSLocalizedString(@"* Ein unbekannter Fehler ist aufgetreten", @"Ein unbekannter Fehler ist aufgetreten");
             
         }
             break;
         case HeartRateMonitorManagerStateUnsupported: {
-            cause = NSLocalizedString(@"Gerät unterstützt kein Bluetooth LE", @"Gerät unterstützt kein Bluetooth LE");
+            cause = NSLocalizedString(@"* Gerät unterstützt kein Bluetooth LE", @"Gerät unterstützt kein Bluetooth LE");
             
         }
             break;
     }
     
     if (_appDelegate.heartRateMonitorManager.state != HeartRateMonitorManagerStatePoweredOn) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Keine Verbindung möglich", @"Keine Verbindung möglich")
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"* Keine Verbindung möglich", @"Keine Verbindung möglich")
                                                             message:cause
                                                            delegate:nil
                                                   cancelButtonTitle:@"Ok"
@@ -170,7 +170,7 @@ didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     });
     
     if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Verbindung wurde wieder getrennt", @"Verbindung wurde wieder getrennt")
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"* Verbindung wurde wieder getrennt", @"Verbindung wurde wieder getrennt")
                                                             message:[error localizedDescription]
                                                            delegate:nil
                                                   cancelButtonTitle:@"Ok"
@@ -187,7 +187,7 @@ didFailToConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     });
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Fehler beim Verbinden", @"Fehler beim Verbinden")
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"* Fehler beim Verbinden", @"Fehler beim Verbinden")
                                                         message:[error localizedDescription]
                                                        delegate:nil
                                               cancelButtonTitle:@"Ok"

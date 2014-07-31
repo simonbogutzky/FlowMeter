@@ -214,6 +214,7 @@
 - (void)startCollecting
 {
     NSLog(@"# Start collecting");
+    self.heartRateLabel.hidden = NO;
     self.session.date = [NSDate date];
     
     NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"(firstName == %@) AND (lastName == %@) ", [self.sessionDictionary objectForKey:@"firstName"], [self.sessionDictionary objectForKey:@"lastName"]];
@@ -268,7 +269,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    [self.startStopButton setTitle:NSLocalizedString(@"Start *", "Starte Aufnahme") forState:0];
+    [self.startStopButton setTitle:NSLocalizedString(@"Zurück *", "Zurück zu den Laufeinstellungen") forState:0];
 }
 
 #pragma mark -
@@ -276,14 +277,13 @@
 
 - (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager didReceiveHeartrateMonitorData:(HeartRateMonitorData *)data fromHeartRateMonitorDevice:(HeartRateMonitorDevice *)device
 {
-    self.heartRateLabel.hidden = NO;
     if (data.heartRate != -1) {
         self.heartRateLabel.text = [NSString stringWithFormat:@"%d %@", data.heartRate, data.heartRateUnit];
     }
     
     if(self.isCollecting) {
         
-        // Add hr record
+        //TODO: Speicherung
         //[self.session addHeartRateMonitorData:data];
     }
 }

@@ -13,22 +13,20 @@
 
 @interface SessionTableViewController () {
     NSFetchedResultsController *_fetchedResultsController;
-    NSManagedObjectContext *_managedObjectContext;
-    AppDelegate *_appDelegate;
 }
 
+@property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) Session *selectedSession;
 @end
 
 @implementation SessionTableViewController
 
-- (void)viewDidLoad
+#pragma mark -
+#pragma mark - Getter
+
+- (AppDelegate *)appDelegate
 {
-    [super viewDidLoad];
-    
-    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    _managedObjectContext = _appDelegate.managedObjectContext;
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 #pragma mark - Table View
@@ -82,9 +80,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectedSession = [_fetchedResultsController objectAtIndexPath:indexPath];
+    if ([[DBSession sharedSession] isLinked]) {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Optionen *", @"Optionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen *", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern *", @"Datei auf dem Gerät speichern"), NSLocalizedString(@"In die Dropbox laden *", @"Datei in die Dropbox laden"), nil];
+        [actionSheet showInView:self.view];
+    } else {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Optionen *", @"Optionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen *", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern *", @"Datei auf dem Gerät speichern"), nil];
+        [actionSheet showInView:self.view];
+    }
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Optionen *", @"Optionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen *", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern *", @"Datei auf dem Gerät speichern"), nil];
-    [actionSheet showInView:self.view];
 }
 
 #pragma mark - Fetched results controller
@@ -97,7 +100,7 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:_managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:self.appDelegate.managedObjectContext];
     [fetchRequest setEntity:entity];
     
     // Set the batch size to a suitable number.
@@ -109,7 +112,7 @@
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.appDelegate.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
@@ -206,13 +209,68 @@
     
     switch (buttonIndex) {
         case 0:
-            NSLog(@"Anzahl der Self-reports: %d", [self.selectedSession.selfReports count]);
-            NSLog(@"%@", [self.selectedSession writeOutSelfReports]);
+            NSLog(@"### Anzahl der Self-reports: %d", [self.selectedSession.selfReports count]);
+            NSLog(@"### %@", [self.selectedSession writeOutSelfReports]);
+            break;
+            
+        case 1: {
+            NSLog(@"### Anzahl der Self-reports: %d", [self.selectedSession.selfReports count]);
+            NSString *filename = [self.selectedSession zipSelfReports];
+            [self uploadFileToDropbox:filename];
+        }
             break;
             
         default:
             break;
     }
+}
+
+#pragma mark -
+#pragma mark - Dropbox convenient methods
+
+- (void)uploadFileToDropbox:(NSString *)filename
+{
+//    if (_reachability.isReachableViaWiFi) {
+    
+    NSString *sourcePath = [self.appDelegate.userDirectory stringByAppendingPathComponent:filename];
+        
+        NSString *destinationPath = @"/";
+        [self.appDelegate.dbRestClient uploadFile:filename toPath:destinationPath withParentRev:nil fromPath:sourcePath];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+//    }
+}
+
+#pragma mark -
+#pragma mark - DBRestClientDelegate methods
+
+- (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath from:(NSString*)srcPath metadata:(DBMetadata*)metadata
+{
+    NSLog(@"# File uploaded successfully to path: %@", metadata.path);
+    
+    NSError *error = nil;
+    
+    // Delete file
+    NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString *archivePath = [rootPath stringByAppendingPathComponent:metadata.filename];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:archivePath error:&error];
+    
+}
+
+- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
+{
+    NSLog(@"# File upload failed with error - %@", error);
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+- (void)restClient:(DBRestClient*)client uploadProgress:(CGFloat)progress forFile:(NSString*)destPath from:(NSString*)srcPath
+{
+    NSLog(@"# Progress - %f", progress);
+}
+
+- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
+{
+    NSLog(@"# event code: %u", eventCode);
 }
 
 
