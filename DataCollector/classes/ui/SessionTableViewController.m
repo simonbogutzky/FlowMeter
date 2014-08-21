@@ -207,8 +207,6 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"%ld", (long)buttonIndex);
-    
     switch (buttonIndex) {
         case 0:
             NSLog(@"### Anzahl der Self-reports: %lu", (unsigned long)[self.selectedSession.selfReports count]);
@@ -216,22 +214,24 @@
             break;
             
         case 1: {
-            NSLog(@"### Anzahl der Self-reports: %lu", (unsigned long)[self.selectedSession.selfReports count]);
-            if (self.appDelegate.reachability.isReachable) {
-                if (self.appDelegate.reachability.isReachableViaWiFi) {
-                    NSString *filename = [self.selectedSession zipSelfReports];
-                    [self uploadFileToDropbox:filename];
+            if ([[DBSession sharedSession] isLinked]) {
+                NSLog(@"### Anzahl der Self-reports: %lu", (unsigned long)[self.selectedSession.selfReports count]);
+                if (self.appDelegate.reachability.isReachable) {
+                    if (self.appDelegate.reachability.isReachableViaWiFi) {
+                        NSString *filename = [self.selectedSession zipSelfReports];
+                        [self uploadFileToDropbox:filename];
+                    } else {
+                        self.filename = [self.selectedSession zipSelfReports];
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information *", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen? *", @"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen *", @"Abbrechen") otherButtonTitles:NSLocalizedString(@"Ok *", @"Ok"), nil];
+                        [alertView show];
+                    }
                 } else {
-                    self.filename = [self.selectedSession zipSelfReports];
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information *", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen? *", @"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen *", @"Abbrechen") otherButtonTitles:NSLocalizedString(@"Ok *", @"Ok"), nil];
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information *", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine Internetverbindung *", @"Du hast zurzeit keine Internetverbindung") delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok *", @"Ok") otherButtonTitles:nil];
                     [alertView show];
                 }
-            } else {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information *", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine Internetverbindung *", @"Du hast zurzeit keine Internetverbindung") delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok *", @"Ok") otherButtonTitles:nil];
-                [alertView show];
-            }
+             }
         }
-            break;
+        break;
             
         default:
             break;
