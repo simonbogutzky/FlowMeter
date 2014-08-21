@@ -12,7 +12,6 @@
 #import "LikertScaleViewController.h"
 
 @interface AppDelegate ()
-@property (strong, nonatomic, readonly) DBRestClient *dbRestClient;
 @end
 
 @implementation AppDelegate
@@ -22,6 +21,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize heartRateMonitorManager = _heartRateMonitorManager;
 @synthesize dbRestClient = _dbRestClient;
+@synthesize reachability = _reachability;
 
 #pragma mark -
 #pragma mark - Getter (Lazy-Instantiation)
@@ -40,6 +40,14 @@
         _dbRestClient.delegate = self;
     }
     return _dbRestClient;
+}
+
+- (Reachability *)reachability
+{
+    if (!_reachability) {
+        _reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
+    }
+    return _reachability;
 }
 
 #pragma mark -

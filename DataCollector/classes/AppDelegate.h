@@ -26,6 +26,8 @@ typedef enum : NSUInteger {
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) HeartRateMonitorManager *heartRateMonitorManager;
+@property (readonly, strong, nonatomic) DBRestClient *dbRestClient;
+@property (readonly, strong, nonatomic) Reachability *reachability;
 
 - (void)saveContext;
 - (NSString *)userDirectory;
