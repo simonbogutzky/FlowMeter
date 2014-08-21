@@ -35,14 +35,13 @@
 		D329ACED197A98F400B144B5 /* Session+OutStream.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE7197A98F400B144B5 /* Session+OutStream.m */; };
 		D329ACEE197A98F400B144B5 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE9197A98F400B144B5 /* User.m */; };
 		D330863D187ECF1900A7B9DE /* HeartRateMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D330863C187ECF1900A7B9DE /* HeartRateMonitor.framework */; };
+		D335030919A5D89B008CC93A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D335030819A5D89B008CC93A /* Images.xcassets */; };
 		D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3383BA91726CE1500AAC993 /* CoreData.framework */; };
 		D34C9D191725044D004C261C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D151725044D004C261C /* AppDelegate.m */; };
 		D34C9D1A1725044D004C261C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D161725044D004C261C /* main.m */; };
 		D34C9D2917250463004C261C /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D1F17250463004C261C /* SessionViewController.m */; };
 		D34C9D2B17250463004C261C /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D2317250463004C261C /* MenuViewController.m */; };
 		D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D2517250463004C261C /* PrefsTableViewController.m */; };
-		D34C9D36172504BA004C261C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D34172504BA004C261C /* Icon.png */; };
-		D34C9D37172504BA004C261C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D34C9D35172504BA004C261C /* Icon@2x.png */; };
 		D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */; };
 		D36C44B016D788BE000B8502 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
 		D36C44B216D7898B000B8502 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44B116D7898B000B8502 /* ExternalAccessory.framework */; };
@@ -67,7 +66,6 @@
 		D3C1292718632B4B00C361CA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D3C1292118632B4B00C361CA /* README.md */; };
 		D3C1292818632B4B00C361CA /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = D3C1292218632B4B00C361CA /* release_notes.md */; };
 		D3C1292A18632C9A00C361CA /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C1292918632C9A00C361CA /* DropboxSDK.framework */; };
-		D3C17547197EABCB00F66F34 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C17546197EABCB00F66F34 /* Default-568h@2x.png */; };
 		D3C7ADC0171ED660000A7D34 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADBF171ED660000A7D34 /* Security.framework */; };
 		D3C7ADC2171ED66A000A7D34 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADC1171ED66A000A7D34 /* QuartzCore.framework */; };
 		D3C7ADC9171EEA44000A7D34 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */; };
@@ -178,6 +176,7 @@
 		D329ACE8197A98F400B144B5 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = classes/model/User.h; sourceTree = "<group>"; };
 		D329ACE9197A98F400B144B5 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = classes/model/User.m; sourceTree = "<group>"; };
 		D330863C187ECF1900A7B9DE /* HeartRateMonitor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HeartRateMonitor.framework; sourceTree = "<group>"; };
+		D335030819A5D89B008CC93A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D3383BA91726CE1500AAC993 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D34C9D141725044D004C261C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = classes/AppDelegate.h; sourceTree = "<group>"; };
 		D34C9D151725044D004C261C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = classes/AppDelegate.m; sourceTree = "<group>"; };
@@ -190,8 +189,6 @@
 		D34C9D2517250463004C261C /* PrefsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrefsTableViewController.m; path = classes/ui/PrefsTableViewController.m; sourceTree = "<group>"; };
 		D34C9D31172504A8004C261C /* DataCollector-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DataCollector-Info.plist"; path = "supporting-files/DataCollector-Info.plist"; sourceTree = "<group>"; };
 		D34C9D32172504A8004C261C /* DataCollector-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DataCollector-Prefix.pch"; path = "supporting-files/DataCollector-Prefix.pch"; sourceTree = "<group>"; };
-		D34C9D34172504BA004C261C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = "supporting-files/images/app-icons/Icon.png"; sourceTree = "<group>"; };
-		D34C9D35172504BA004C261C /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "supporting-files/images/app-icons/Icon@2x.png"; sourceTree = "<group>"; };
 		D35ABC0E188EC2AE00BD1D2D /* LikertScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewController.h; path = classes/ui/LikertScaleViewController.h; sourceTree = "<group>"; };
 		D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LikertScaleViewController.m; path = classes/ui/LikertScaleViewController.m; sourceTree = "<group>"; };
 		D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -233,7 +230,6 @@
 		D3C1292418632B4B00C361CA /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+AsyncLogging.h"; path = "TestFlightSDK/TestFlight+AsyncLogging.h"; sourceTree = SOURCE_ROOT; };
 		D3C1292518632B4B00C361CA /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+ManualSessions.h"; path = "TestFlightSDK/TestFlight+ManualSessions.h"; sourceTree = SOURCE_ROOT; };
 		D3C1292918632C9A00C361CA /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = DropboxSDK/DropboxSDK.framework; sourceTree = "<group>"; };
-		D3C17546197EABCB00F66F34 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D3C7ADBF171ED660000A7D34 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D3C7ADC1171ED66A000A7D34 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -292,7 +288,6 @@
 		604CCD7F16A6F31000E87194 = {
 			isa = PBXGroup;
 			children = (
-				D3C17546197EABCB00F66F34 /* Default-568h@2x.png */,
 				604CCD9416A6F31000E87194 /* DataCollector */,
 				D3C7ADCD171FCA86000A7D34 /* ExternalClasses */,
 				D35FEABC17253FF800D92DEB /* ExternalProjects */,
@@ -342,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				D34C9D1217250407004C261C /* Classes */,
+				D335030819A5D89B008CC93A /* Images.xcassets */,
 				604CCD9516A6F31000E87194 /* Supporting Files */,
 			);
 			path = DataCollector;
@@ -353,7 +349,6 @@
 				D34C9D31172504A8004C261C /* DataCollector-Info.plist */,
 				D34C9D32172504A8004C261C /* DataCollector-Prefix.pch */,
 				D3B3DC071733B93A001F2830 /* DataCollector.xcdatamodeld */,
-				D3DD07F31723B55500B1E094 /* Images */,
 				D34C9D3E172504D7004C261C /* UI */,
 			);
 			name = "Supporting Files";
@@ -416,13 +411,6 @@
 				D329ACE9197A98F400B144B5 /* User.m */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		D34C9D0B17250145004C261C /* LaunchImages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = LaunchImages;
 			sourceTree = "<group>";
 		};
 		D34C9D1217250407004C261C /* Classes */ = {
@@ -551,24 +539,6 @@
 				D329ACDD197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m */,
 			);
 			name = UI;
-			sourceTree = "<group>";
-		};
-		D3DD07F31723B55500B1E094 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				D34C9D0B17250145004C261C /* LaunchImages */,
-				D3DD07F51723B56200B1E094 /* AppIcons */,
-			);
-			name = Images;
-			sourceTree = "<group>";
-		};
-		D3DD07F51723B56200B1E094 /* AppIcons */ = {
-			isa = PBXGroup;
-			children = (
-				D34C9D34172504BA004C261C /* Icon.png */,
-				D34C9D35172504BA004C261C /* Icon@2x.png */,
-			);
-			name = AppIcons;
 			sourceTree = "<group>";
 		};
 		D3DF0A65173F9A4C00643E5A /* MBProgressHUD */ = {
@@ -733,12 +703,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D34C9D36172504BA004C261C /* Icon.png in Resources */,
+				D335030919A5D89B008CC93A /* Images.xcassets in Resources */,
 				D38FBDBA196C1DC000C63681 /* InfoPlist.strings in Resources */,
-				D34C9D37172504BA004C261C /* Icon@2x.png in Resources */,
 				D3C1292718632B4B00C361CA /* README.md in Resources */,
 				D38FBDBB196C1DC000C63681 /* Localizable.strings in Resources */,
-				D3C17547197EABCB00F66F34 /* Default-568h@2x.png in Resources */,
 				D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */,
 				D3C1292818632B4B00C361CA /* release_notes.md in Resources */,
 			);
@@ -887,7 +855,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "EAA3826B-AA94-4FC6-B6F2-4055C6BCB89F";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EAA3826B-AA94-4FC6-B6F2-4055C6BCB89F";
@@ -911,7 +879,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "56D52E2A-03F1-4933-A3E6-04187FB93BD9";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56D52E2A-03F1-4933-A3E6-04187FB93BD9";
@@ -923,6 +891,8 @@
 		604CCDAF16A6F31100E87194 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -934,6 +904,7 @@
 				GCC_PREFIX_HEADER = "DataCollector/supporting-files/DataCollector-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "DataCollector/supporting-files/DataCollector-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -949,8 +920,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0FA58C0F-43E9-47C1-8244-19E52E12EBC7";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0FA58C0F-43E9-47C1-8244-19E52E12EBC7";
+				PROVISIONING_PROFILE = "69C6AAC0-37DB-41B0-BE1B-3F30AC354677";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "69C6AAC0-37DB-41B0-BE1B-3F30AC354677";
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;
 				WRAPPER_EXTENSION = app;
 			};
@@ -959,6 +930,8 @@
 		604CCDB016A6F31100E87194 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -970,6 +943,7 @@
 				GCC_PREFIX_HEADER = "DataCollector/supporting-files/DataCollector-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "DataCollector/supporting-files/DataCollector-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -985,8 +959,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0FA58C0F-43E9-47C1-8244-19E52E12EBC7";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0FA58C0F-43E9-47C1-8244-19E52E12EBC7";
+				PROVISIONING_PROFILE = "69C6AAC0-37DB-41B0-BE1B-3F30AC354677";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "69C6AAC0-37DB-41B0-BE1B-3F30AC354677";
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;
 				WRAPPER_EXTENSION = app;
 			};
