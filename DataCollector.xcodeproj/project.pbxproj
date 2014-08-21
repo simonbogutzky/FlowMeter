@@ -337,7 +337,6 @@
 			isa = PBXGroup;
 			children = (
 				D34C9D1217250407004C261C /* Classes */,
-				D335030819A5D89B008CC93A /* Images.xcassets */,
 				604CCD9516A6F31000E87194 /* Supporting Files */,
 			);
 			path = DataCollector;
@@ -346,9 +345,7 @@
 		604CCD9516A6F31000E87194 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D34C9D31172504A8004C261C /* DataCollector-Info.plist */,
-				D34C9D32172504A8004C261C /* DataCollector-Prefix.pch */,
-				D3B3DC071733B93A001F2830 /* DataCollector.xcdatamodeld */,
+				D31C4BCA19A619DE0017AA5A /* Model */,
 				D34C9D3E172504D7004C261C /* UI */,
 			);
 			name = "Supporting Files";
@@ -396,6 +393,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D31C4BCA19A619DE0017AA5A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D34C9D31172504A8004C261C /* DataCollector-Info.plist */,
+				D34C9D32172504A8004C261C /* DataCollector-Prefix.pch */,
+				D3B3DC071733B93A001F2830 /* DataCollector.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		D329ACDF197A98CC00B144B5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,10 +423,10 @@
 		D34C9D1217250407004C261C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D329ACDF197A98CC00B144B5 /* Model */,
+				D34C9D161725044D004C261C /* main.m */,
 				D34C9D141725044D004C261C /* AppDelegate.h */,
 				D34C9D151725044D004C261C /* AppDelegate.m */,
-				D34C9D161725044D004C261C /* main.m */,
+				D329ACDF197A98CC00B144B5 /* Model */,
 				D3C7ADD6171FCCC6000A7D34 /* UI */,
 			);
 			name = Classes;
@@ -428,6 +435,7 @@
 		D34C9D3E172504D7004C261C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D335030819A5D89B008CC93A /* Images.xcassets */,
 				D38FBDB4196C1DC000C63681 /* InfoPlist.strings */,
 				D38FBDB6196C1DC000C63681 /* Localizable.strings */,
 				D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */,
@@ -520,23 +528,23 @@
 		D3C7ADD6171FCCC6000A7D34 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				D34C9D2217250463004C261C /* MenuViewController.h */,
-				D34C9D2317250463004C261C /* MenuViewController.m */,
-				D3B3DC1C1733BECB001F2830 /* SessionPrefsTableViewController.h */,
-				D3B3DC1D1733BECB001F2830 /* SessionPrefsTableViewController.m */,
 				D37067D51733F41300F86BBD /* EditViewController.h */,
 				D37067D61733F41300F86BBD /* EditViewController.m */,
-				D34C9D1E17250463004C261C /* SessionViewController.h */,
-				D34C9D1F17250463004C261C /* SessionViewController.m */,
+				D329ACDC197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.h */,
+				D329ACDD197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m */,
 				D35ABC0E188EC2AE00BD1D2D /* LikertScaleViewController.h */,
 				D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */,
 				D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */,
+				D34C9D2217250463004C261C /* MenuViewController.h */,
+				D34C9D2317250463004C261C /* MenuViewController.m */,
 				D34C9D2417250463004C261C /* PrefsTableViewController.h */,
 				D34C9D2517250463004C261C /* PrefsTableViewController.m */,
+				D3B3DC1C1733BECB001F2830 /* SessionPrefsTableViewController.h */,
+				D3B3DC1D1733BECB001F2830 /* SessionPrefsTableViewController.m */,
 				D3A4629D1726E08900D454F7 /* SessionTableViewController.h */,
 				D3A4629E1726E08900D454F7 /* SessionTableViewController.m */,
-				D329ACDC197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.h */,
-				D329ACDD197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m */,
+				D34C9D1E17250463004C261C /* SessionViewController.h */,
+				D34C9D1F17250463004C261C /* SessionViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
