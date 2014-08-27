@@ -8,6 +8,7 @@
 
 #import "Session+OutStream.h"
 #import "SelfReport+Description.h"
+#import "HeartRateRecord+Description.h"
 #import "ZipKit/ZipKit.h"
 
 @implementation Session (OutStream)
@@ -34,6 +35,40 @@
         NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
         [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
         NSString *filename = [NSString stringWithFormat:@"%@-%@",[dateTimeFormatter stringFromDate:self.date], @"self-reports.csv"];
+        return [self writeData:data withFilename:filename];
+    }
+    return @"";
+}
+
+- (NSString *)zipHeartRateRecords
+{
+    NSString *filename = [self writeOutHeartRateRecords];
+    filename = [self zipFileWithFilename:filename];
+    return filename;
+}
+
+- (NSString *)writeOutHeartRateRecords
+{
+    if ([self.heartRateRecords count] > 0) {
+        
+        // Create archive data
+        NSMutableData *data = [NSMutableData dataWithCapacity:0];
+        
+        // Order by date
+        NSArray *heartRateRecords = [self.heartRateRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timeInterval" ascending:YES]]];
+        
+        // Append header
+        [data appendData:[[[heartRateRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        // Append data
+        for (HeartRateRecord *heartRateRecord in heartRateRecords) {
+            [data appendData:[[heartRateRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        }
+        
+        // Write in file with filename
+        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
+        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
+        NSString *filename = [NSString stringWithFormat:@"%@-%@",[dateTimeFormatter stringFromDate:self.date], @"heart-rate-records.csv"];
         return [self writeData:data withFilename:filename];
     }
     return @"";

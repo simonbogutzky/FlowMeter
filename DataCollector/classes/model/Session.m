@@ -16,6 +16,7 @@
 @dynamic activity;
 @dynamic user;
 @dynamic selfReports;
+@dynamic heartRateRecords;
 @dynamic duration;
 @dynamic questionnaire;
 @dynamic numberOfItems;

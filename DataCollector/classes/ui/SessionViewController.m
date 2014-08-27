@@ -11,6 +11,7 @@
 #import "User.h"
 #import "Session.h"
 #import "SelfReport.h"
+#import "HeartRateRecord.h"
 #import "MBProgressHUD.h"
 #import "LikertScaleViewController.h"
 #import <AudioToolbox/AudioServices.h>
@@ -33,6 +34,7 @@
 @property (nonatomic) BOOL isCollecting;
 @property (nonatomic) BOOL isLastSelfReport;
 @property (nonatomic) int startCountdown;
+@property (nonatomic) NSTimeInterval lastTimeInterval;
 
 @property (nonatomic, weak) IBOutlet UIView *startCountdownView;
 @property (nonatomic, weak) IBOutlet UILabel *startCountdownLabel;
@@ -283,8 +285,14 @@
     
     if(self.isCollecting) {
         
-        //TODO: Speicherung
-        //[self.session addHeartRateMonitorData:data];
+        HeartRateRecord *heartRateRecord = [NSEntityDescription insertNewObjectForEntityForName:@"HeartRateRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
+        
+        for (NSNumber *rrInterval in data.rrIntervals) {
+            
+            self.lastTimeInterval = self.lastTimeInterval + [rrInterval doubleValue];
+            heartRateRecord.timeInterval = [NSNumber numberWithDouble:self.lastTimeInterval];
+            [self.session addHeartRateRecordsObject:heartRateRecord];
+        }
     }
 }
 
@@ -299,6 +307,7 @@ didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 - (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
 didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 {
+    self.lastTimeInterval = 0.0;
     [manager startMonitoring];
 }
 

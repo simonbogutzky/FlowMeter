@@ -12,5 +12,7 @@
 
 - (NSString *)writeOutSelfReports;
 - (NSString *)zipSelfReports;
+- (NSString *)writeOutHeartRateRecords;
+- (NSString *)zipHeartRateRecords;
 
 @end

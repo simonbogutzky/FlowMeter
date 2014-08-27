@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6208.6" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6220.8" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="HeartRateRecord" representedClassName="HeartRateRecord" syncable="YES">
+        <attribute name="timeInterval" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="heartRateRecords" inverseEntity="Session" syncable="YES"/>
+    </entity>
     <entity name="SelfReport" representedClassName="SelfReport" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="responses" optional="YES" attributeType="String" syncable="YES"/>
@@ -11,6 +15,7 @@
         <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="numberOfItems" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="questionnaire" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="heartRateRecords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HeartRateRecord" inverseName="session" inverseEntity="HeartRateRecord" syncable="YES"/>
         <relationship name="selfReports" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SelfReport" inverseName="session" inverseEntity="SelfReport" syncable="YES"/>
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="sessions" inverseEntity="User" syncable="YES"/>
     </entity>
@@ -21,7 +26,8 @@
     </entity>
     <elements>
         <element name="SelfReport" positionX="403" positionY="-126" width="128" height="90"/>
-        <element name="Session" positionX="223" positionY="-261" width="128" height="150"/>
+        <element name="Session" positionX="223" positionY="-261" width="128" height="163"/>
         <element name="User" positionX="43" positionY="-223" width="128" height="88"/>
+        <element name="HeartRateRecord" positionX="430" positionY="-252" width="128" height="73"/>
     </elements>
 </model>
