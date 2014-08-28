@@ -56,12 +56,6 @@
 		D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionTableViewController.m */; };
 		D3B3DC091733B93A001F2830 /* DataCollector.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC071733B93A001F2830 /* DataCollector.xcdatamodeld */; };
 		D3B3DC1E1733BECC001F2830 /* SessionPrefsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC1D1733BECB001F2830 /* SessionPrefsTableViewController.m */; };
-		D3C129081863290300C361CA /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C128FC1863290300C361CA /* ECPercentDrivenInteractiveTransition.m */; };
-		D3C129091863290300C361CA /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C128FE1863290300C361CA /* ECSlidingAnimationController.m */; };
-		D3C1290A1863290300C361CA /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C129011863290300C361CA /* ECSlidingInteractiveTransition.m */; };
-		D3C1290B1863290300C361CA /* ECSlidingSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C129031863290300C361CA /* ECSlidingSegue.m */; };
-		D3C1290C1863290300C361CA /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C129051863290300C361CA /* ECSlidingViewController.m */; };
-		D3C1290D1863290300C361CA /* UIViewController+ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C129071863290300C361CA /* UIViewController+ECSlidingViewController.m */; };
 		D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1290F1863296A00C361CA /* MBProgressHUD.m */; };
 		D3C1291318632A1E00C361CA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1291218632A1E00C361CA /* Reachability.m */; };
 		D3C1292618632B4B00C361CA /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C1292018632B4B00C361CA /* libTestFlight.a */; };
@@ -213,19 +207,6 @@
 		D3B3DC081733B93A001F2830 /* DataCollector.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCollector.xcdatamodel; sourceTree = "<group>"; };
 		D3B3DC1C1733BECB001F2830 /* SessionPrefsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionPrefsTableViewController.h; path = classes/ui/SessionPrefsTableViewController.h; sourceTree = "<group>"; };
 		D3B3DC1D1733BECB001F2830 /* SessionPrefsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionPrefsTableViewController.m; path = classes/ui/SessionPrefsTableViewController.m; sourceTree = "<group>"; };
-		D3C128FB1863290300C361CA /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECPercentDrivenInteractiveTransition.h; path = ECSlidingViewController/ECSlidingViewController/ECPercentDrivenInteractiveTransition.h; sourceTree = SOURCE_ROOT; };
-		D3C128FC1863290300C361CA /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECPercentDrivenInteractiveTransition.m; path = ECSlidingViewController/ECSlidingViewController/ECPercentDrivenInteractiveTransition.m; sourceTree = SOURCE_ROOT; };
-		D3C128FD1863290300C361CA /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingAnimationController.h; path = ECSlidingViewController/ECSlidingViewController/ECSlidingAnimationController.h; sourceTree = SOURCE_ROOT; };
-		D3C128FE1863290300C361CA /* ECSlidingAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSlidingAnimationController.m; path = ECSlidingViewController/ECSlidingViewController/ECSlidingAnimationController.m; sourceTree = SOURCE_ROOT; };
-		D3C128FF1863290300C361CA /* ECSlidingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingConstants.h; path = ECSlidingViewController/ECSlidingViewController/ECSlidingConstants.h; sourceTree = SOURCE_ROOT; };
-		D3C129001863290300C361CA /* ECSlidingInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingInteractiveTransition.h; path = ECSlidingViewController/ECSlidingViewController/ECSlidingInteractiveTransition.h; sourceTree = SOURCE_ROOT; };
-		D3C129011863290300C361CA /* ECSlidingInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSlidingInteractiveTransition.m; path = ECSlidingViewController/ECSlidingViewController/ECSlidingInteractiveTransition.m; sourceTree = SOURCE_ROOT; };
-		D3C129021863290300C361CA /* ECSlidingSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingSegue.h; path = ECSlidingViewController/ECSlidingViewController/ECSlidingSegue.h; sourceTree = SOURCE_ROOT; };
-		D3C129031863290300C361CA /* ECSlidingSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSlidingSegue.m; path = ECSlidingViewController/ECSlidingViewController/ECSlidingSegue.m; sourceTree = SOURCE_ROOT; };
-		D3C129041863290300C361CA /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingViewController.h; path = ECSlidingViewController/ECSlidingViewController/ECSlidingViewController.h; sourceTree = SOURCE_ROOT; };
-		D3C129051863290300C361CA /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSlidingViewController.m; path = ECSlidingViewController/ECSlidingViewController/ECSlidingViewController.m; sourceTree = SOURCE_ROOT; };
-		D3C129061863290300C361CA /* UIViewController+ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+ECSlidingViewController.h"; path = "ECSlidingViewController/ECSlidingViewController/UIViewController+ECSlidingViewController.h"; sourceTree = SOURCE_ROOT; };
-		D3C129071863290300C361CA /* UIViewController+ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+ECSlidingViewController.m"; path = "ECSlidingViewController/ECSlidingViewController/UIViewController+ECSlidingViewController.m"; sourceTree = SOURCE_ROOT; };
 		D3C1290E1863296A00C361CA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
 		D3C1290F1863296A00C361CA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		D3C1291118632A1E00C361CA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = SOURCE_ROOT; };
@@ -486,27 +467,6 @@
 			name = Reachability;
 			sourceTree = "<group>";
 		};
-		D35FEB8E1725675E00D92DEB /* ECSlidingViewController */ = {
-			isa = PBXGroup;
-			children = (
-				D3C128FB1863290300C361CA /* ECPercentDrivenInteractiveTransition.h */,
-				D3C128FC1863290300C361CA /* ECPercentDrivenInteractiveTransition.m */,
-				D3C128FD1863290300C361CA /* ECSlidingAnimationController.h */,
-				D3C128FE1863290300C361CA /* ECSlidingAnimationController.m */,
-				D3C128FF1863290300C361CA /* ECSlidingConstants.h */,
-				D3C129001863290300C361CA /* ECSlidingInteractiveTransition.h */,
-				D3C129011863290300C361CA /* ECSlidingInteractiveTransition.m */,
-				D3C129021863290300C361CA /* ECSlidingSegue.h */,
-				D3C129031863290300C361CA /* ECSlidingSegue.m */,
-				D3C129041863290300C361CA /* ECSlidingViewController.h */,
-				D3C129051863290300C361CA /* ECSlidingViewController.m */,
-				D3C129061863290300C361CA /* UIViewController+ECSlidingViewController.h */,
-				D3C129071863290300C361CA /* UIViewController+ECSlidingViewController.m */,
-			);
-			name = ECSlidingViewController;
-			path = "dependent-classes/ECSlidingViewController/ECSlidingViewController/Vendor/ECSlidingViewController";
-			sourceTree = SOURCE_ROOT;
-		};
 		D39747A41882CC6400CFF3DF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,7 +489,6 @@
 		D3C7ADCD171FCA86000A7D34 /* ExternalClasses */ = {
 			isa = PBXGroup;
 			children = (
-				D35FEB8E1725675E00D92DEB /* ECSlidingViewController */,
 				D3DF0A65173F9A4C00643E5A /* MBProgressHUD */,
 				D35FEAE91725415000D92DEB /* Reachability */,
 			);
@@ -757,7 +716,6 @@
 				D34C9D191725044D004C261C /* AppDelegate.m in Sources */,
 				D34C9D1A1725044D004C261C /* main.m in Sources */,
 				D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */,
-				D3C1290B1863290300C361CA /* ECSlidingSegue.m in Sources */,
 				D329ACEC197A98F400B144B5 /* Session.m in Sources */,
 				D34C9D2917250463004C261C /* SessionViewController.m in Sources */,
 				D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */,
@@ -766,18 +724,13 @@
 				D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */,
 				D34C9D2B17250463004C261C /* MenuViewController.m in Sources */,
 				D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */,
-				D3C1290C1863290300C361CA /* ECSlidingViewController.m in Sources */,
 				D3C1291318632A1E00C361CA /* Reachability.m in Sources */,
 				D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */,
-				D3C129091863290300C361CA /* ECSlidingAnimationController.m in Sources */,
 				D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */,
-				D3C129081863290300C361CA /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */,
 				D3B3DC091733B93A001F2830 /* DataCollector.xcdatamodeld in Sources */,
-				D3C1290D1863290300C361CA /* UIViewController+ECSlidingViewController.m in Sources */,
 				D3B3DC1E1733BECC001F2830 /* SessionPrefsTableViewController.m in Sources */,
 				D329ACEA197A98F400B144B5 /* SelfReport.m in Sources */,
-				D3C1290A1863290300C361CA /* ECSlidingInteractiveTransition.m in Sources */,
 				D37067D71733F41300F86BBD /* EditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

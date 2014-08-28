@@ -20,6 +20,8 @@
 		<string>https://github.com/kolpanic/ZipKit.git</string>
 		<key>FAC44F63CB4568E6F9161B59257F8C81F11493B3</key>
 		<string>https://bitbucket.org/sbogutzky/data-collector-ios.git</string>
+		<key>FD76D6AE-9E0E-458C-B202-6DBA286E7BBB</key>
+		<string>https://bitbucket.org/sbogutzky/data-collector.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>DataCollector.xcodeproj</string>
@@ -35,6 +37,8 @@
 		<string>../..ZipKit</string>
 		<key>FAC44F63CB4568E6F9161B59257F8C81F11493B3</key>
 		<string>../..</string>
+		<key>FD76D6AE-9E0E-458C-B202-6DBA286E7BBB</key>
+		<string>../../../data-collector</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/sbogutzky/data-collector-ios.git</string>
@@ -44,6 +48,14 @@
 	<string>FAC44F63CB4568E6F9161B59257F8C81F11493B3</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FD76D6AE-9E0E-458C-B202-6DBA286E7BBB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>data-collector</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
@@ -90,7 +102,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>940F78D5F98A404F0CE03A452F2871238905218C</string>
 			<key>IDESourceControlWCCName</key>
-			<string>ZipKit</string>
+			<string>data-collector-iosZipKit</string>
 		</dict>
 	</array>
 </dict>
