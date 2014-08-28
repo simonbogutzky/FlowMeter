@@ -305,7 +305,7 @@
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
 {
-    NSLog(@"# event code: %lu", eventCode);
+    NSLog(@"# event code: %u", eventCode);
 }
 
 - (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata
