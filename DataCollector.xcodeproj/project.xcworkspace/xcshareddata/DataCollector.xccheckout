@@ -14,14 +14,10 @@
 		<string>https://github.com/jdg/MBProgressHUD.git</string>
 		<key>7070BA961BCA286ED2393408B1E3D78393C99B33</key>
 		<string>https://github.com/tonymillion/Reachability.git</string>
-		<key>76E548526FAF70820B7AF0F84870DEDBF665712E</key>
-		<string>https://github.com/ECSlidingViewController/ECSlidingViewController.git</string>
 		<key>940F78D5F98A404F0CE03A452F2871238905218C</key>
 		<string>https://github.com/kolpanic/ZipKit.git</string>
 		<key>FAC44F63CB4568E6F9161B59257F8C81F11493B3</key>
 		<string>https://bitbucket.org/sbogutzky/data-collector-ios.git</string>
-		<key>FD76D6AE-9E0E-458C-B202-6DBA286E7BBB</key>
-		<string>https://bitbucket.org/sbogutzky/data-collector.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>DataCollector.xcodeproj</string>
@@ -31,14 +27,10 @@
 		<string>../..MBProgressHUD</string>
 		<key>7070BA961BCA286ED2393408B1E3D78393C99B33</key>
 		<string>../..Reachability</string>
-		<key>76E548526FAF70820B7AF0F84870DEDBF665712E</key>
-		<string>../..ECSlidingViewController</string>
 		<key>940F78D5F98A404F0CE03A452F2871238905218C</key>
 		<string>../..ZipKit</string>
 		<key>FAC44F63CB4568E6F9161B59257F8C81F11493B3</key>
 		<string>../..</string>
-		<key>FD76D6AE-9E0E-458C-B202-6DBA286E7BBB</key>
-		<string>../../../data-collector</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/sbogutzky/data-collector-ios.git</string>
@@ -52,25 +44,9 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>FD76D6AE-9E0E-458C-B202-6DBA286E7BBB</string>
-			<key>IDESourceControlWCCName</key>
-			<string>data-collector</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>FAC44F63CB4568E6F9161B59257F8C81F11493B3</string>
 			<key>IDESourceControlWCCName</key>
 			<string>data-collector-ios</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>76E548526FAF70820B7AF0F84870DEDBF665712E</string>
-			<key>IDESourceControlWCCName</key>
-			<string>data-collector-iosECSlidingViewController</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
