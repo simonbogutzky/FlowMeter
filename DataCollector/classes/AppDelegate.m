@@ -58,7 +58,7 @@
     // Override point for customization after application launch.
     
     
-    NSLog(@"# HeartRateMonitor State: %d", self.heartRateMonitorManager.state);
+    NSLog(@"# HeartRateMonitor State: %ld", self.heartRateMonitorManager.state);
     
     // TestFlight takeoff
 //    [TestFlight takeOff:@"f73deffe-10d8-4f69-a5dd-096197db5a7e"];

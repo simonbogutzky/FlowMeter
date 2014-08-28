@@ -48,6 +48,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     NSString *firstName = [self.sessionDictionary valueForKey:@"firstName"];
     if (firstName != nil && ![firstName isEqualToString:@""]) {
         self.firstNameTableViewCell.detailTextLabel.text = firstName;

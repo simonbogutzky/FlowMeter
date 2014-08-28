@@ -76,9 +76,9 @@
 - (void)setSegmentsForItemIndex:(NSInteger)itemIndex {
     
     if ([[self.itemSegments objectAtIndex:itemIndex] intValue] < self.likertScaleSegmentedControl.numberOfSegments) {
-        int currentSegmentCount = self.likertScaleSegmentedControl.numberOfSegments;
-        int newSegmentCount = [[self.itemSegments objectAtIndex:itemIndex] intValue];
-        int removeCount = currentSegmentCount - newSegmentCount;
+        NSUInteger currentSegmentCount = self.likertScaleSegmentedControl.numberOfSegments;
+        NSUInteger newSegmentCount = [[self.itemSegments objectAtIndex:itemIndex] intValue];
+        NSUInteger removeCount = currentSegmentCount - newSegmentCount;
         
         for (int i = 0; i < removeCount; i++) {
             [self.likertScaleSegmentedControl removeSegmentAtIndex:newSegmentCount animated:YES];
@@ -86,14 +86,14 @@
     }
     
     if ([[self.itemSegments objectAtIndex:itemIndex] intValue] > self.likertScaleSegmentedControl.numberOfSegments) {
-        for (int i = self.likertScaleSegmentedControl.numberOfSegments + 1; i <= [[self.itemSegments objectAtIndex:itemIndex] intValue]; i++) {
+        for (NSUInteger i = self.likertScaleSegmentedControl.numberOfSegments + 1; i <= [[self.itemSegments objectAtIndex:itemIndex] intValue]; i++) {
             [self.likertScaleSegmentedControl insertSegmentWithTitle:@"" atIndex:i animated:YES];
         }
     }
 }
 
 - (IBAction)displayNextItem:(id)sender {
-    [self.responses addObject:[NSNumber numberWithInt:self.likertScaleSegmentedControl.selectedSegmentIndex + 1]];
+    [self.responses addObject:[NSNumber numberWithLong:self.likertScaleSegmentedControl.selectedSegmentIndex + 1]];
     
     self.itemIndex++;
     if (self.itemIndex < [self.itemLabelTexts count]) {
