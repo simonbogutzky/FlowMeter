@@ -1,19 +1,18 @@
 //
-//  User.m
+//  Activity.m
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 29.08.14.
 //  Copyright (c) 2014 Simon Bogutzky. All rights reserved.
 //
 
-#import "User.h"
+#import "Activity.h"
 #import "Session.h"
 
 
-@implementation User
+@implementation Activity
 
-@dynamic firstName;
-@dynamic lastName;
+@dynamic name;
 @dynamic sessions;
 
 @end

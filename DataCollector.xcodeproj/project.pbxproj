@@ -29,11 +29,8 @@
 		D31AA2E31951FDE5004ACB8D /* HeartRateMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2E21951FDE5004ACB8D /* HeartRateMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D31AA2E41951FEC1004ACB8D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
 		D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACDD197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m */; };
-		D329ACEA197A98F400B144B5 /* SelfReport.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE1197A98F400B144B5 /* SelfReport.m */; };
 		D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE3197A98F400B144B5 /* SelfReport+Description.m */; };
-		D329ACEC197A98F400B144B5 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE5197A98F400B144B5 /* Session.m */; };
 		D329ACED197A98F400B144B5 /* Session+OutStream.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE7197A98F400B144B5 /* Session+OutStream.m */; };
-		D329ACEE197A98F400B144B5 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE9197A98F400B144B5 /* User.m */; };
 		D330863D187ECF1900A7B9DE /* HeartRateMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D330863C187ECF1900A7B9DE /* HeartRateMonitor.framework */; };
 		D335030919A5D89B008CC93A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D335030819A5D89B008CC93A /* Images.xcassets */; };
 		D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3383BA91726CE1500AAC993 /* CoreData.framework */; };
@@ -50,8 +47,12 @@
 		D38FBDBA196C1DC000C63681 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB4196C1DC000C63681 /* InfoPlist.strings */; };
 		D38FBDBB196C1DC000C63681 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB6196C1DC000C63681 /* Localizable.strings */; };
 		D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */; };
+		D39736C819B0C11D005D643D /* SelfReport.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736C719B0C11D005D643D /* SelfReport.m */; };
+		D39736CB19B0C11E005D643D /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736CA19B0C11E005D643D /* Activity.m */; };
+		D39736CE19B0C11E005D643D /* HeartRateRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736CD19B0C11E005D643D /* HeartRateRecord.m */; };
+		D39736D119B0C11E005D643D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736D019B0C11E005D643D /* User.m */; };
+		D39736D419B0C11E005D643D /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736D319B0C11E005D643D /* Session.m */; };
 		D39747B11882CC7B00CFF3DF /* libtouchzipkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D39747AE1882CC6400CFF3DF /* libtouchzipkit.a */; };
-		D398FAEB19AB4072003DB0CA /* HeartRateRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = D398FAEA19AB4072003DB0CA /* HeartRateRecord.m */; };
 		D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */; };
 		D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionTableViewController.m */; };
 		D3B3DC091733B93A001F2830 /* DataCollector.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC071733B93A001F2830 /* DataCollector.xcdatamodeld */; };
@@ -161,16 +162,10 @@
 		D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewControllerDelegate.h; path = classes/ui/LikertScaleViewControllerDelegate.h; sourceTree = "<group>"; };
 		D329ACDC197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeartRateMonitorDeviceTableViewController.h; path = classes/ui/HeartRateMonitorDeviceTableViewController.h; sourceTree = "<group>"; };
 		D329ACDD197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeartRateMonitorDeviceTableViewController.m; path = classes/ui/HeartRateMonitorDeviceTableViewController.m; sourceTree = "<group>"; };
-		D329ACE0197A98F400B144B5 /* SelfReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelfReport.h; path = classes/model/SelfReport.h; sourceTree = "<group>"; };
-		D329ACE1197A98F400B144B5 /* SelfReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelfReport.m; path = classes/model/SelfReport.m; sourceTree = "<group>"; };
 		D329ACE2197A98F400B144B5 /* SelfReport+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SelfReport+Description.h"; path = "classes/model/SelfReport+Description.h"; sourceTree = "<group>"; };
 		D329ACE3197A98F400B144B5 /* SelfReport+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SelfReport+Description.m"; path = "classes/model/SelfReport+Description.m"; sourceTree = "<group>"; };
-		D329ACE4197A98F400B144B5 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = classes/model/Session.h; sourceTree = "<group>"; };
-		D329ACE5197A98F400B144B5 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = classes/model/Session.m; sourceTree = "<group>"; };
 		D329ACE6197A98F400B144B5 /* Session+OutStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Session+OutStream.h"; path = "classes/model/Session+OutStream.h"; sourceTree = "<group>"; };
 		D329ACE7197A98F400B144B5 /* Session+OutStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Session+OutStream.m"; path = "classes/model/Session+OutStream.m"; sourceTree = "<group>"; };
-		D329ACE8197A98F400B144B5 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = classes/model/User.h; sourceTree = "<group>"; };
-		D329ACE9197A98F400B144B5 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = classes/model/User.m; sourceTree = "<group>"; };
 		D330863C187ECF1900A7B9DE /* HeartRateMonitor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HeartRateMonitor.framework; sourceTree = "<group>"; };
 		D335030819A5D89B008CC93A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D3383BA91726CE1500AAC993 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -196,10 +191,18 @@
 		D38FBDB7196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D38FBDB9196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = de; path = de.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		D38FBDBE196C1DFC00C63681 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D39736C619B0C11D005D643D /* SelfReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelfReport.h; path = classes/model/SelfReport.h; sourceTree = "<group>"; };
+		D39736C719B0C11D005D643D /* SelfReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelfReport.m; path = classes/model/SelfReport.m; sourceTree = "<group>"; };
+		D39736C919B0C11E005D643D /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Activity.h; path = classes/model/Activity.h; sourceTree = "<group>"; };
+		D39736CA19B0C11E005D643D /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Activity.m; path = classes/model/Activity.m; sourceTree = "<group>"; };
+		D39736CC19B0C11E005D643D /* HeartRateRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeartRateRecord.h; path = classes/model/HeartRateRecord.h; sourceTree = "<group>"; };
+		D39736CD19B0C11E005D643D /* HeartRateRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeartRateRecord.m; path = classes/model/HeartRateRecord.m; sourceTree = "<group>"; };
+		D39736CF19B0C11E005D643D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = classes/model/User.h; sourceTree = "<group>"; };
+		D39736D019B0C11E005D643D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = classes/model/User.m; sourceTree = "<group>"; };
+		D39736D219B0C11E005D643D /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = classes/model/Session.h; sourceTree = "<group>"; };
+		D39736D319B0C11E005D643D /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = classes/model/Session.m; sourceTree = "<group>"; };
 		D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZipKit.xcodeproj; path = ZipKit/ZipKit.xcodeproj; sourceTree = "<group>"; };
 		D398FAE619AB4072003DB0CA /* DataCollector-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DataCollector-Bridging-Header.h"; sourceTree = "<group>"; };
-		D398FAE919AB4072003DB0CA /* HeartRateRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeartRateRecord.h; path = classes/model/HeartRateRecord.h; sourceTree = "<group>"; };
-		D398FAEA19AB4072003DB0CA /* HeartRateRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeartRateRecord.m; path = classes/model/HeartRateRecord.m; sourceTree = "<group>"; };
 		D398FAEF19AB5B52003DB0CA /* HeartRateRecord+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "HeartRateRecord+Description.h"; path = "classes/model/HeartRateRecord+Description.h"; sourceTree = "<group>"; };
 		D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HeartRateRecord+Description.m"; path = "classes/model/HeartRateRecord+Description.m"; sourceTree = "<group>"; };
 		D3A4629D1726E08900D454F7 /* SessionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionTableViewController.h; path = classes/ui/SessionTableViewController.h; sourceTree = "<group>"; };
@@ -395,20 +398,22 @@
 		D329ACDF197A98CC00B144B5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D398FAE919AB4072003DB0CA /* HeartRateRecord.h */,
-				D398FAEA19AB4072003DB0CA /* HeartRateRecord.m */,
+				D39736C919B0C11E005D643D /* Activity.h */,
+				D39736CA19B0C11E005D643D /* Activity.m */,
+				D39736CC19B0C11E005D643D /* HeartRateRecord.h */,
+				D39736CD19B0C11E005D643D /* HeartRateRecord.m */,
 				D398FAEF19AB5B52003DB0CA /* HeartRateRecord+Description.h */,
 				D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */,
-				D329ACE0197A98F400B144B5 /* SelfReport.h */,
-				D329ACE1197A98F400B144B5 /* SelfReport.m */,
+				D39736C619B0C11D005D643D /* SelfReport.h */,
+				D39736C719B0C11D005D643D /* SelfReport.m */,
 				D329ACE2197A98F400B144B5 /* SelfReport+Description.h */,
 				D329ACE3197A98F400B144B5 /* SelfReport+Description.m */,
-				D329ACE4197A98F400B144B5 /* Session.h */,
-				D329ACE5197A98F400B144B5 /* Session.m */,
+				D39736D219B0C11E005D643D /* Session.h */,
+				D39736D319B0C11E005D643D /* Session.m */,
 				D329ACE6197A98F400B144B5 /* Session+OutStream.h */,
 				D329ACE7197A98F400B144B5 /* Session+OutStream.m */,
-				D329ACE8197A98F400B144B5 /* User.h */,
-				D329ACE9197A98F400B144B5 /* User.m */,
+				D39736CF19B0C11E005D643D /* User.h */,
+				D39736D019B0C11E005D643D /* User.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -712,26 +717,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D39736D119B0C11E005D643D /* User.m in Sources */,
 				D329ACED197A98F400B144B5 /* Session+OutStream.m in Sources */,
 				D34C9D191725044D004C261C /* AppDelegate.m in Sources */,
 				D34C9D1A1725044D004C261C /* main.m in Sources */,
 				D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */,
-				D329ACEC197A98F400B144B5 /* Session.m in Sources */,
 				D34C9D2917250463004C261C /* SessionViewController.m in Sources */,
 				D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */,
-				D329ACEE197A98F400B144B5 /* User.m in Sources */,
-				D398FAEB19AB4072003DB0CA /* HeartRateRecord.m in Sources */,
 				D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */,
 				D34C9D2B17250463004C261C /* MenuViewController.m in Sources */,
 				D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */,
 				D3C1291318632A1E00C361CA /* Reachability.m in Sources */,
+				D39736CB19B0C11E005D643D /* Activity.m in Sources */,
+				D39736CE19B0C11E005D643D /* HeartRateRecord.m in Sources */,
 				D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */,
 				D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */,
 				D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */,
 				D3B3DC091733B93A001F2830 /* DataCollector.xcdatamodeld in Sources */,
 				D3B3DC1E1733BECC001F2830 /* SessionPrefsTableViewController.m in Sources */,
-				D329ACEA197A98F400B144B5 /* SelfReport.m in Sources */,
+				D39736C819B0C11D005D643D /* SelfReport.m in Sources */,
 				D37067D71733F41300F86BBD /* EditViewController.m in Sources */,
+				D39736D419B0C11E005D643D /* Session.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -897,8 +903,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6e355772-2bfc-45f1-9bae-26e10ae28d24";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6e355772-2bfc-45f1-9bae-26e10ae28d24";
+				PROVISIONING_PROFILE = "69C6AAC0-37DB-41B0-BE1B-3F30AC354677";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "69C6AAC0-37DB-41B0-BE1B-3F30AC354677";
 				SWIFT_OBJC_BRIDGING_HEADER = "DataCollector/DataCollector-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;

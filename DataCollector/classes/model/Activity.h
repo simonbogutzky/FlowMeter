@@ -1,5 +1,5 @@
 //
-//  HeartRateRecord.h
+//  Activity.h
 //  DataCollector
 //
 //  Created by Simon Bogutzky on 29.08.14.
@@ -11,9 +11,9 @@
 
 @class Session;
 
-@interface HeartRateRecord : NSManagedObject
+@interface Activity : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * timeInterval;
-@property (nonatomic, retain) Session *session;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) Session *sessions;
 
 @end

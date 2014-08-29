@@ -229,11 +229,10 @@
     
     
     self.session.user = user;
-    self.session.activity = [self.sessionDictionary objectForKey:@"activity"];
+    //TODO: Find or add activity
+    //self.session.activity = [self.sessionDictionary objectForKey:@"activity"];
     switch ([[self.sessionDictionary objectForKey:@"questionnaire"] intValue]) {
         case flowShortScale:
-            self.session.questionnaire = NSLocalizedString(@"Flow-Kurzskala *", @"Flow-Kurzskala");
-            self.session.numberOfItems = [NSNumber numberWithInt:16];
             break;
             
         default:
@@ -323,7 +322,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     
     SelfReport *selfReport = [NSEntityDescription insertNewObjectForEntityForName:@"SelfReport" inManagedObjectContext:self.appDelegate.managedObjectContext];
     selfReport.date = [NSDate date];
-    selfReport.responses = [responses componentsJoinedByString:@","];
+    // selfReport.responses = [responses componentsJoinedByString:@","];
     [self.session addSelfReportsObject:selfReport];
     
     if (self.isCollecting) {
