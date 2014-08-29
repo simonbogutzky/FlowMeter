@@ -31,6 +31,8 @@
 @property (nonatomic, strong) NSTimer *stopWatchTimer;
 @property (nonatomic, strong) NSDate *stopWatchStartDate;
 
+@property (nonatomic, strong) NSDate *startSelfReportDate;
+
 @property (nonatomic) BOOL isCollecting;
 @property (nonatomic) BOOL isLastSelfReport;
 @property (nonatomic) int startCountdown;
@@ -218,6 +220,7 @@
     NSLog(@"# Start collecting");
     self.heartRateLabel.hidden = NO;
     self.session.date = [NSDate date];
+    self.startSelfReportDate = nil;
     
     NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"(firstName == %@) AND (lastName == %@) ", [self.sessionDictionary objectForKey:@"firstName"], [self.sessionDictionary objectForKey:@"lastName"]];
     User *user = [self getUserWithPredicate:userPredicate];
@@ -229,7 +232,7 @@
     
     
     self.session.user = user;
-    //TODO: Find or add activity
+    //TODO: Aktivität suchen oder hinzufügen
     //self.session.activity = [self.sessionDictionary objectForKey:@"activity"];
     switch ([[self.sessionDictionary objectForKey:@"questionnaire"] intValue]) {
         case flowShortScale:
@@ -321,8 +324,20 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                                        }];
     
     SelfReport *selfReport = [NSEntityDescription insertNewObjectForEntityForName:@"SelfReport" inManagedObjectContext:self.appDelegate.managedObjectContext];
-    selfReport.date = [NSDate date];
-    // selfReport.responses = [responses componentsJoinedByString:@","];
+    selfReport.date = self.startSelfReportDate;
+    selfReport.duration = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSinceDate:self.startSelfReportDate]];
+    NSDictionary *flowShortScaleFactors = [self calculateFlowShortScaleFactorsFromResponses:responses];
+    selfReport.flow = [flowShortScaleFactors objectForKey:@"flow"];
+    selfReport.flowSD = [flowShortScaleFactors objectForKey:@"flowSD"];
+    selfReport.fluency = [flowShortScaleFactors objectForKey:@"fluency"];
+    selfReport.fluencySD = [flowShortScaleFactors objectForKey:@"fluencySD"];
+    selfReport.absorption = [flowShortScaleFactors objectForKey:@"absorption"];
+    selfReport.absorptionSD = [flowShortScaleFactors objectForKey:@"absorptionSD"];
+    selfReport.anxiety = [flowShortScaleFactors objectForKey:@"anxiety"];
+    selfReport.anxietySD = [flowShortScaleFactors objectForKey:@"anxietySD"];
+    selfReport.fit = [flowShortScaleFactors objectForKey:@"fit"];
+    selfReport.fitSD = [flowShortScaleFactors objectForKey:@"fitSD"];
+    
     [self.session addSelfReportsObject:selfReport];
     
     if (self.isCollecting) {
@@ -340,6 +355,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 
 - (void)showSelfReport
 {
+    self.startSelfReportDate = [NSDate date];
     AudioServicesPlaySystemSound(1007);
     
     if ([[self.sessionDictionary objectForKey:@"questionnaire"] intValue] == flowShortScale) {
@@ -410,6 +426,30 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                                                   ];
 
     return flowShortScaleViewController;
+}
+
+- (NSDictionary *)calculateFlowShortScaleFactorsFromResponses:(NSArray *)responses
+{
+    NSArray *flowItems = @[[responses objectAtIndex:0], [responses objectAtIndex:1], [responses objectAtIndex:2], [responses objectAtIndex:3], [responses objectAtIndex:4], [responses objectAtIndex:5], [responses objectAtIndex:6], [responses objectAtIndex:7], [responses objectAtIndex:8], [responses objectAtIndex:9]];
+    NSArray *fluencyItems = @[[responses objectAtIndex:7], [responses objectAtIndex:6], [responses objectAtIndex:8], [responses objectAtIndex:3], [responses objectAtIndex:4], [responses objectAtIndex:1]];
+    NSArray *absorptionItems = @[[responses objectAtIndex:5], [responses objectAtIndex:0], [responses objectAtIndex:9], [responses objectAtIndex:2]];
+    NSArray *anxietyItems = @[[responses objectAtIndex:10], [responses objectAtIndex:11], [responses objectAtIndex:12]];
+    NSArray *fitItems = @[[responses objectAtIndex:13], [responses objectAtIndex:14], [responses objectAtIndex:15]];
+    
+    
+    return @{@"flow" : [self meanFromNumbers:flowItems], @"flowSD" : [self sdFromNumbers:flowItems], @"fluency" : [self meanFromNumbers:fluencyItems], @"fluencySD" : [self sdFromNumbers:fluencyItems], @"absorption" : [self meanFromNumbers:absorptionItems], @"absorptionSD" : [self sdFromNumbers:flowItems], @"anxiety" : [self meanFromNumbers:anxietyItems], @"anxietySD" : [self sdFromNumbers:anxietyItems], @"fit" : [self meanFromNumbers:fitItems], @"fitSD" : [self sdFromNumbers:fitItems]};
+}
+
+- (NSNumber *)meanFromNumbers:(NSArray *)numbers
+{
+    NSExpression *expression = [NSExpression expressionForFunction:@"average:" arguments:@[[NSExpression expressionForConstantValue:numbers]]];
+    return [expression expressionValueWithObject:nil context:nil];
+}
+
+- (NSNumber *)sdFromNumbers:(NSArray *)numbers
+{
+    NSExpression *expression = [NSExpression expressionForFunction:@"stddev:" arguments:@[[NSExpression expressionForConstantValue:numbers]]];
+    return [expression expressionValueWithObject:nil context:nil];
 }
 
 @end

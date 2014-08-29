@@ -14,7 +14,7 @@
         <attribute name="anxiety" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="anxietySD" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="fit" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="fitSD" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="flow" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -31,7 +31,7 @@
         <attribute name="averageFlow" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="averageFluency" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="selfReportCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="sessions" inverseEntity="Activity" syncable="YES"/>
         <relationship name="heartRateRecords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HeartRateRecord" inverseName="session" inverseEntity="HeartRateRecord" syncable="YES"/>
