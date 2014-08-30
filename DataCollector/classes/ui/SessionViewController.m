@@ -32,6 +32,12 @@
 @property (nonatomic, strong) NSDate *stopWatchStartDate;
 
 @property (nonatomic, strong) NSDate *startSelfReportDate;
+@property (nonatomic) int selfReportCount;
+@property (nonatomic) float absorptionSum;
+@property (nonatomic) float anxietySum;
+@property (nonatomic) float fitSum;
+@property (nonatomic) float flowSum;
+@property (nonatomic) float fluencySum;
 
 @property (nonatomic) BOOL isCollecting;
 @property (nonatomic) BOOL isLastSelfReport;
@@ -221,6 +227,12 @@
     self.heartRateLabel.hidden = NO;
     self.session.date = [NSDate date];
     self.startSelfReportDate = nil;
+    self.selfReportCount = 0;
+    self.flowSum = 0.0;
+    self.fluencySum = 0.0;
+    self.absorptionSum = 0.0;
+    self.anxietySum = 0.0;
+    self.fitSum = 0.0;
     
     NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"(firstName == %@) AND (lastName == %@) ", [self.sessionDictionary objectForKey:@"firstName"], [self.sessionDictionary objectForKey:@"lastName"]];
     User *user = [self getUserWithPredicate:userPredicate];
@@ -255,6 +267,12 @@
 - (void)saveData
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.session.selfReportCount = [NSNumber numberWithInt:self.selfReportCount];
+    self.session.averageAbsorption = [NSNumber numberWithFloat:self.absorptionSum / self.selfReportCount];
+    self.session.averageAnxiety = [NSNumber numberWithFloat:self.anxietySum / self.selfReportCount];
+    self.session.averageFit = [NSNumber numberWithFloat:self.fitSum / self.selfReportCount];
+    self.session.averageFlow = [NSNumber numberWithFloat:self.flowSum / self.selfReportCount];
+    self.session.averageFluency= [NSNumber numberWithFloat:self.fluencySum / self.selfReportCount];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self.appDelegate saveContext];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -337,6 +355,13 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     selfReport.anxietySD = [flowShortScaleFactors objectForKey:@"anxietySD"];
     selfReport.fit = [flowShortScaleFactors objectForKey:@"fit"];
     selfReport.fitSD = [flowShortScaleFactors objectForKey:@"fitSD"];
+    
+    self.selfReportCount++;
+    self.flowSum += [selfReport.flow floatValue];
+    self.fluencySum += [selfReport.fluency floatValue];
+    self.absorptionSum += [selfReport.absorption floatValue];
+    self.anxietySum += [selfReport.anxiety floatValue];
+    self.fitSum += [selfReport.fit floatValue];
     
     [self.session addSelfReportsObject:selfReport];
     
