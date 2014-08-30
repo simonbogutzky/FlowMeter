@@ -31,7 +31,7 @@
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
     NSString *durationString = [dateFormatter stringFromDate:date];
     
-    NSMutableString *header = [NSMutableString stringWithFormat:@"%@:\t\t%@\n%@:\t\t%@\n%@:\t\t%@\n%@:\t%@\n%@:\t\t%@\n\n\"%@\"\n", NSLocalizedString(@"Datum *", @"Datum"), dateString, NSLocalizedString(@"Beginn *", @"Beginn"), timeString, NSLocalizedString(@"Dauer *", @"Dauer"), durationString, NSLocalizedString(@"Aktivität *", @"Aktivität"), self.session.activity, NSLocalizedString(@"Person *", @"Person"), [NSString stringWithFormat:@"%@ %@", self.session.user.firstName, self.session.user.lastName], NSLocalizedString(@"Zeitstempel *", @"Zeitstempel")];
+    NSMutableString *header = [NSMutableString stringWithFormat:@"%@:\t\t%@\n%@:\t\t%@\n%@:\t\t%@\n%@:\t%@\n%@:\t\t%@\n\n\"%@\"\n", NSLocalizedString(@"Datum", @"Datum"), dateString, NSLocalizedString(@"Beginn", @"Beginn"), timeString, NSLocalizedString(@"Dauer", @"Dauer"), durationString, NSLocalizedString(@"Aktivität", @"Aktivität"), self.session.activity, NSLocalizedString(@"Person", @"Person"), [NSString stringWithFormat:@"%@ %@", self.session.user.firstName, self.session.user.lastName], NSLocalizedString(@"Zeitstempel", @"Zeitstempel")];
     return header;
 }
 

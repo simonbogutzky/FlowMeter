@@ -83,10 +83,10 @@
 {
     self.selectedSession = [_fetchedResultsController objectAtIndexPath:indexPath];
     if ([[DBSession sharedSession] isLinked]) {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Optionen *", @"Optionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen *", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern *", @"Datei auf dem Gerät speichern"), NSLocalizedString(@"In die Dropbox laden *", @"Datei in die Dropbox laden"), nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Optionen", @"Optionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern", @"Datei auf dem Gerät speichern"), NSLocalizedString(@"In die Dropbox laden", @"Datei in die Dropbox laden"), nil];
         [actionSheet showInView:self.view];
     } else {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Optionen *", @"Optionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen *", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern *", @"Datei auf dem Gerät speichern"), nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Optionen", @"Optionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern", @"Datei auf dem Gerät speichern"), nil];
         [actionSheet showInView:self.view];
     }
     
@@ -225,11 +225,11 @@
                         [self uploadFileToDropbox:filename];
                     } else {
                         self.filename = [self.selectedSession zipSelfReports];
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information *", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen? *", @"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen *", @"Abbrechen") otherButtonTitles:NSLocalizedString(@"Ok *", @"Ok"), nil];
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?", @"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") otherButtonTitles:NSLocalizedString(@"Ok", @"Ok"), nil];
                         [alertView show];
                     }
                 } else {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information *", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine Internetverbindung *", @"Du hast zurzeit keine Internetverbindung") delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok *", @"Ok") otherButtonTitles:nil];
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine Internetverbindung", @"Du hast zurzeit keine Internetverbindung") delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok") otherButtonTitles:nil];
                     [alertView show];
                 }
              }

@@ -105,7 +105,7 @@
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
     // Rename button title
-    [self.startStopButton setTitle:NSLocalizedString(@"Stop *", @"Stoppe Aufnahme") forState:0];
+    [self.startStopButton setTitle:NSLocalizedString(@"Stop", @"Stoppe Aufnahme") forState:0];
     
     // Start sensor updates
     [self startSensorUpdates];
@@ -277,9 +277,9 @@
         [self.appDelegate saveContext];
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit! *", @"Gute Arbeit!")
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
                                                             message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert. *" , @"Deine Daten wurden lokal gespeichert.")
-                                                           delegate:self cancelButtonTitle:NSLocalizedString(@"Ok *", @"Bestätigung: Ok")
+                                                           delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"Bestätigung: Ok")
                                                   otherButtonTitles:nil];
             [alert show];
         });
@@ -291,7 +291,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    [self.startStopButton setTitle:NSLocalizedString(@"Zurück *", "Zurück zu den Laufeinstellungen") forState:0];
+    [self.startStopButton setTitle:NSLocalizedString(@"Zurück", "Zurück zu den Laufeinstellungen") forState:0];
 }
 
 #pragma mark -
@@ -321,7 +321,7 @@ didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                           error:(NSError *)error
 {
     AudioServicesPlaySystemSound(1073);
-    self.heartRateLabel.text = NSLocalizedString(@"Getrennt *", "HR Monitor wurde getrennt");
+    self.heartRateLabel.text = NSLocalizedString(@"Getrennt", "HR Monitor wurde getrennt");
 }
 
 - (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
@@ -396,22 +396,22 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     flowShortScaleViewController.delegate = self;
     
     flowShortScaleViewController.itemLabelTexts = @[
-                                                     NSLocalizedString(@"Ich fühle mich optimal beansprucht. *", @"Ich fühle mich optimal beansprucht."),
-                                                     NSLocalizedString(@"Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt. *", @"Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt."),
-                                                     NSLocalizedString(@"Ich merke gar nicht, wie die Zeit vergeht. *", @"Ich merke gar nicht, wie die Zeit vergeht."),
-                                                     NSLocalizedString(@"Ich habe keine Mühe, mich zu konzentrieren. *", @"Ich habe keine Mühe, mich zu konzentrieren."),
-                                                     NSLocalizedString(@"Mein Kopf ist völlig klar. *", @"Mein Kopf ist völlig klar."),
-                                                     NSLocalizedString(@"Ich bin ganz vertieft in das, was ich gerade mache. *", @"Ich bin ganz vertieft in das, was ich gerade mache."),
-                                                     NSLocalizedString(@"Die richtigen Gedanken/Bewegungen kommen wie von selbst. *", @"Die richtigen Gedanken/Bewegungen kommen wie von selbst."),
-                                                     NSLocalizedString(@"Ich weiß bei jedem Schritt, was ich zu tun habe. *", @"Ich weiß bei jedem Schritt, was ich zu tun habe."),
-                                                     NSLocalizedString(@"Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben. *", @"Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben."),
-                                                     NSLocalizedString(@"Ich bin völlig selbstvergessen. *", @"Ich bin völlig selbstvergessen."),
-                                                     NSLocalizedString(@"Es steht etwas für mich Wichtiges auf dem Spiel. *", @"Es steht etwas für mich Wichtiges auf dem Spiel."),
-                                                     NSLocalizedString(@"Ich darf jetzt keine Fehler machen. *", @"Ich darf jetzt keine Fehler machen."),
-                                                     NSLocalizedString(@"Ich mache mir Sorgen über einen Misserfolg. *", @"Ich mache mir Sorgen über einen Misserfolg."),
-                                                     NSLocalizedString(@"Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit... *", @"Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit..."),
-                                                     NSLocalizedString(@"Ich denke, meine Fähigkeiten auf diesem Gebiet sind... *", @"Ich denke, meine Fähigkeiten auf diesem Gebiet sind..."),
-                                                     NSLocalizedString(@"Für mich persönlich sind die jetzigen Anforderungen... *", @"Für mich persönlich sind die jetzigen Anforderungen...")
+                                                     NSLocalizedString(@"Ich fühle mich optimal beansprucht.", @"Ich fühle mich optimal beansprucht."),
+                                                     NSLocalizedString(@"Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt.", @"Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt."),
+                                                     NSLocalizedString(@"Ich merke gar nicht, wie die Zeit vergeht.", @"Ich merke gar nicht, wie die Zeit vergeht."),
+                                                     NSLocalizedString(@"Ich habe keine Mühe, mich zu konzentrieren.", @"Ich habe keine Mühe, mich zu konzentrieren."),
+                                                     NSLocalizedString(@"Mein Kopf ist völlig klar.", @"Mein Kopf ist völlig klar."),
+                                                     NSLocalizedString(@"Ich bin ganz vertieft in das, was ich gerade mache.", @"Ich bin ganz vertieft in das, was ich gerade mache."),
+                                                     NSLocalizedString(@"Die richtigen Gedanken/Bewegungen kommen wie von selbst.", @"Die richtigen Gedanken/Bewegungen kommen wie von selbst."),
+                                                     NSLocalizedString(@"Ich weiß bei jedem Schritt, was ich zu tun habe.", @"Ich weiß bei jedem Schritt, was ich zu tun habe."),
+                                                     NSLocalizedString(@"Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben.", @"Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben."),
+                                                     NSLocalizedString(@"Ich bin völlig selbstvergessen.", @"Ich bin völlig selbstvergessen."),
+                                                     NSLocalizedString(@"Es steht etwas für mich Wichtiges auf dem Spiel.", @"Es steht etwas für mich Wichtiges auf dem Spiel."),
+                                                     NSLocalizedString(@"Ich darf jetzt keine Fehler machen.", @"Ich darf jetzt keine Fehler machen."),
+                                                     NSLocalizedString(@"Ich mache mir Sorgen über einen Misserfolg.", @"Ich mache mir Sorgen über einen Misserfolg."),
+                                                     NSLocalizedString(@"Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit...", @"Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit..."),
+                                                     NSLocalizedString(@"Ich denke, meine Fähigkeiten auf diesem Gebiet sind...", @"Ich denke, meine Fähigkeiten auf diesem Gebiet sind..."),
+                                                     NSLocalizedString(@"Für mich persönlich sind die jetzigen Anforderungen...", @"Für mich persönlich sind die jetzigen Anforderungen...")
                                                      ];
      flowShortScaleViewController.itemSegments = @[
                                                    @7,
@@ -432,22 +432,22 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                                                    @9
                                                    ];
     flowShortScaleViewController.scaleLabels = @[
-                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
-                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
-                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
-                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
-                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
-                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
-                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
-                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
-                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
-                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
-                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
-                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
-                                                  @[NSLocalizedString(@"Trifft nicht zu *", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils *", @"teils-teils"), NSLocalizedString(@"Trifft zu *", @"Trifft zu")],
-                                                  @[NSLocalizedString(@"leicht *", @"Schwierigkeit: leicht"), @"", NSLocalizedString(@"schwer *", @"Schwierigkeit: schwer")],
-                                                  @[NSLocalizedString(@"niedrig *", @"Fähigkeiten: niedrig"), @"", NSLocalizedString(@"hoch *", @"Fähigkeiten: hoch")],
-                                                  @[NSLocalizedString(@"zu gering *", @"Beanspruchung: zu gering"), NSLocalizedString(@"gerade richtig *", @"Beanspruchung: gerade richtig"), NSLocalizedString(@"zu hoch *", @"Beanspruchung: zu hoch")]
+                                                  @[NSLocalizedString(@"Trifft nicht zu", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils", @"teils-teils"), NSLocalizedString(@"Trifft zu", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils", @"teils-teils"), NSLocalizedString(@"Trifft zu", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils", @"teils-teils"), NSLocalizedString(@"Trifft zu", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils", @"teils-teils"), NSLocalizedString(@"Trifft zu", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils", @"teils-teils"), NSLocalizedString(@"Trifft zu", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils", @"teils-teils"), NSLocalizedString(@"Trifft zu", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils", @"teils-teils"), NSLocalizedString(@"Trifft zu", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils", @"teils-teils"), NSLocalizedString(@"Trifft zu", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils", @"teils-teils"), NSLocalizedString(@"Trifft zu", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils", @"teils-teils"), NSLocalizedString(@"Trifft zu", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils", @"teils-teils"), NSLocalizedString(@"Trifft zu", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils", @"teils-teils"), NSLocalizedString(@"Trifft zu", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"Trifft nicht zu", @"Trifft nicht zu"), NSLocalizedString(@"teils-teils", @"teils-teils"), NSLocalizedString(@"Trifft zu", @"Trifft zu")],
+                                                  @[NSLocalizedString(@"leicht", @"Schwierigkeit: leicht"), @"", NSLocalizedString(@"schwer", @"Schwierigkeit: schwer")],
+                                                  @[NSLocalizedString(@"niedrig", @"Fähigkeiten: niedrig"), @"", NSLocalizedString(@"hoch", @"Fähigkeiten: hoch")],
+                                                  @[NSLocalizedString(@"zu gering", @"Beanspruchung: zu gering"), NSLocalizedString(@"gerade richtig", @"Beanspruchung: gerade richtig"), NSLocalizedString(@"zu hoch", @"Beanspruchung: zu hoch")]
                                                   ];
 
     return flowShortScaleViewController;
