@@ -180,6 +180,7 @@
 		D34C9D2517250463004C261C /* PrefsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrefsTableViewController.m; path = classes/ui/PrefsTableViewController.m; sourceTree = "<group>"; };
 		D34C9D31172504A8004C261C /* DataCollector-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DataCollector-Info.plist"; path = "supporting-files/DataCollector-Info.plist"; sourceTree = "<group>"; };
 		D34C9D32172504A8004C261C /* DataCollector-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DataCollector-Prefix.pch"; path = "supporting-files/DataCollector-Prefix.pch"; sourceTree = "<group>"; };
+		D35462EE19B21AEE006B2EA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		D35ABC0E188EC2AE00BD1D2D /* LikertScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewController.h; path = classes/ui/LikertScaleViewController.h; sourceTree = "<group>"; };
 		D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LikertScaleViewController.m; path = classes/ui/LikertScaleViewController.m; sourceTree = "<group>"; };
 		D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -189,8 +190,6 @@
 		D38A216C16BFF9F80075D093 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D38FBDB5196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D38FBDB7196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D38FBDB9196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = de; path = de.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		D38FBDBE196C1DFC00C63681 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D39736C619B0C11D005D643D /* SelfReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelfReport.h; path = classes/model/SelfReport.h; sourceTree = "<group>"; };
 		D39736C719B0C11D005D643D /* SelfReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelfReport.m; path = classes/model/SelfReport.m; sourceTree = "<group>"; };
 		D39736C919B0C11E005D643D /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Activity.h; path = classes/model/Activity.h; sourceTree = "<group>"; };
@@ -637,8 +636,8 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				de,
+				Base,
 			);
 			mainGroup = 604CCD7F16A6F31000E87194;
 			productRefGroup = 604CCD8B16A6F31000E87194 /* Products */;
@@ -797,7 +796,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				D38FBDB7196C1DC000C63681 /* de */,
-				D38FBDBE196C1DFC00C63681 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -805,7 +803,7 @@
 		D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D38FBDB9196C1DC000C63681 /* de */,
+				D35462EE19B21AEE006B2EA3 /* Base */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
