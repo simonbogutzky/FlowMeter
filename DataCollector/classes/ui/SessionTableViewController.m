@@ -30,6 +30,27 @@
 {
     return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (self.fetchedResultsController != nil) {
+        self.fetchedResultsController.delegate = self;
+        
+        NSError *error = nil;
+        if (![self.fetchedResultsController performFetch:&error])
+        {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+        [self.tableView reloadData];
+    }
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.fetchedResultsController.delegate = nil;
+}
 
 #pragma mark - Table View
 
