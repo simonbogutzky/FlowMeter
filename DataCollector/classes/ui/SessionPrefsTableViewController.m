@@ -17,7 +17,7 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSMutableDictionary *sessionDictionary;
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UITableView *prefsTableView;
 @property (nonatomic, weak) IBOutlet UITableViewCell *firstNameTableViewCell;
 @property (nonatomic, weak) IBOutlet UITableViewCell *lastNameTableViewCell;
 @property (nonatomic, weak) IBOutlet UITableViewCell *activityTableViewCell;
@@ -64,6 +64,7 @@
     }
     
     [self.tableView reloadData];
+    [self.prefsTableView reloadData];
 }
 
 #pragma mark -

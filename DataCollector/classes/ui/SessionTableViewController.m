@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "Session+OutStream.h"
 #import "SelfReport+Description.h"
+#import "User.h"
+#import "Activity.h"
 
 @interface SessionTableViewController () {
     NSFetchedResultsController *_fetchedResultsController;
@@ -22,6 +24,7 @@
 
 @property (nonatomic, readonly) NSDateFormatter *dateFormatter;
 @property (nonatomic, readonly) NSDateFormatter *dateFormatterDay;
+@property (nonatomic, readonly) NSNumberFormatter *numberFormatter;
 @end
 
 @implementation SessionTableViewController
@@ -90,6 +93,10 @@
     [view addSubview:labelDate];
     
     [view setBackgroundColor:[UIColor colorWithRed:236/255.0 green:241/255.0 blue:244/255.0 alpha:1.0]];
+    
+    labelDate.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+    labelDay.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     return view;
 }
 
@@ -105,9 +112,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Session Cell" forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44.0;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -255,13 +267,24 @@
 {
     Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:NSLocalizedString(@"dd.MM.yy", @"dd.MM.yy")];
-    NSString *dateString = [dateFormatter stringFromDate:session.date];
-    [dateFormatter setDateFormat:NSLocalizedString(@"HH:mm", @"HH:mm")];
-    NSString *timeString = [dateFormatter stringFromDate:session.date];
-    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ Uhr", @"%@ %@ Uhr"), dateString, timeString];
-//    cell.accessoryType = [session.selfReportsAreSynced boolValue] && [session.heartRateMonitorDataIsSynced boolValue] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    UILabel *labelFlowScore = (UILabel *)[cell viewWithTag:100];
+    labelFlowScore.text = [self.numberFormatter stringFromNumber:session.averageFlow];
+    
+    UILabel *labelUsername = (UILabel *)[cell viewWithTag:101];
+    labelUsername.text = [NSString stringWithFormat:@"%@ %@", session.user.firstName, session.user.lastName];
+    
+    UILabel *labelActivity = (UILabel *)[cell viewWithTag:102];
+    labelActivity.text = session.activity.name;
+
+    UILabel *labelSelfReportCount = (UILabel *)[cell viewWithTag:104];
+    labelSelfReportCount.text = [NSString stringWithFormat:@"%d", [session.selfReportCount intValue]];
+    
+    UILabel *labelAverageBPM = (UILabel *)[cell viewWithTag:106];
+    labelAverageBPM.text = [NSString stringWithFormat:@"%d", [session.averageBPM intValue]];
+    
+    UILabel *labelDuration = (UILabel *)[cell viewWithTag:107];
+    labelDuration.text = [self stringFromTimeInterval:[session.duration doubleValue]];
+    
 }
 
 #pragma mark -
@@ -431,6 +454,27 @@
         [dateFormatterDay setDateFormat:formatString];
     }
     return dateFormatterDay;
+}
+
+- (NSNumberFormatter *)numberFormatter
+{
+    static NSNumberFormatter *numberFormatter = nil;
+    if (numberFormatter == nil) {
+        numberFormatter = [[NSNumberFormatter alloc] init];
+        numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        numberFormatter.alwaysShowsDecimalSeparator = YES;
+        numberFormatter.minimumFractionDigits = 1;
+        numberFormatter.maximumFractionDigits = 1;
+    }
+    return numberFormatter;
+}
+
+- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval {
+    NSInteger ti = (NSInteger)interval;
+    //NSInteger seconds = ti % 60;
+    NSInteger minutes = (ti / 60) % 60;
+    NSInteger hours = (ti / 3600);
+    return [NSString stringWithFormat:@"%02ldh %02ldm", (long)hours, (long)minutes];
 }
 
 @end

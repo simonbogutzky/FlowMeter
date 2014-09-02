@@ -9,6 +9,7 @@
 #import "SessionViewController.h"
 #import "AppDelegate.h"
 #import "User.h"
+#import "Activity.h"
 #import "Session.h"
 #import "SelfReport.h"
 #import "HeartRateRecord.h"
@@ -92,6 +93,30 @@
     }
     
     return user;
+}
+
+- (Activity *)getActivityWithPredicate:(NSPredicate *)predicate
+{
+    Activity *activity = nil;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Activity" inManagedObjectContext:self.appDelegate.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *fetchedObjects = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    if (fetchedObjects == nil) {
+        // Handle the error.
+    }
+    
+    if ([fetchedObjects count] == 0) {
+        activity = [NSEntityDescription insertNewObjectForEntityForName:@"Activity" inManagedObjectContext:self.appDelegate.managedObjectContext];
+    } else {
+        activity = fetchedObjects[0];
+    }
+    
+    return activity;
 }
 
 #pragma mark -
@@ -234,18 +259,23 @@
     self.anxietySum = 0.0;
     self.fitSum = 0.0;
     
-    NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"(firstName == %@) AND (lastName == %@) ", [self.sessionDictionary objectForKey:@"firstName"], [self.sessionDictionary objectForKey:@"lastName"]];
+    NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"(firstName == %@) AND (lastName == %@)", [self.sessionDictionary objectForKey:@"firstName"], [self.sessionDictionary objectForKey:@"lastName"]];
     User *user = [self getUserWithPredicate:userPredicate];
     
     if (user.firstName == nil && user.lastName == nil) {
         user.firstName = [self.sessionDictionary objectForKey:@"firstName"];
         user.lastName = [self.sessionDictionary objectForKey:@"lastName"];
     }
-    
-    
     self.session.user = user;
-    //TODO: Aktivität suchen oder hinzufügen
-    //self.session.activity = [self.sessionDictionary objectForKey:@"activity"];
+    
+    
+    NSPredicate *activityPredicate = [NSPredicate predicateWithFormat:@"(name == %@)", [self.sessionDictionary objectForKey:@"activity"]];
+    Activity *activity = [self getActivityWithPredicate:activityPredicate];
+    
+    if (activity.name == nil) {
+        activity.name = [self.sessionDictionary objectForKey:@"activity"];
+    }
+    self.session.activity = activity;
     switch ([[self.sessionDictionary objectForKey:@"questionnaire"] intValue]) {
         case flowShortScale:
             break;
