@@ -26,6 +26,8 @@
 @property (nonatomic, retain) NSSet *selfReports;
 @property (nonatomic, retain) User *user;
 @property (nonatomic, retain) Activity *activity;
+@property (nonatomic, strong) NSString *sectionTitle;
+
 @end
 
 @interface Session (CoreDataGeneratedAccessors)

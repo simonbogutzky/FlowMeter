@@ -28,5 +28,13 @@
 @dynamic selfReports;
 @dynamic user;
 @dynamic activity;
+@synthesize sectionTitle;
+
+-(NSString *)sectionTitle
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+    return [dateFormatter stringFromDate:self.date];
+}
 
 @end

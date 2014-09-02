@@ -19,6 +19,9 @@
 @property (nonatomic, strong) Session *selectedSession;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic, strong) NSString *filename;
+
+@property (nonatomic, readonly) NSDateFormatter *dateFormatter;
+@property (nonatomic, readonly) NSDateFormatter *dateFormatterDay;
 @end
 
 @implementation SessionTableViewController
@@ -63,6 +66,41 @@
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
     return [sectionInfo numberOfObjects];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+    NSDate *date = [dateFormatter dateFromString:[self tableView:tableView titleForHeaderInSection:section]];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 24)];
+    
+    UILabel *labelDay = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, (tableView.frame.size.width / 2) - 10, 24)];
+    [labelDay setFont:[UIFont boldSystemFontOfSize:12]];
+    [labelDay setText:[self.dateFormatterDay stringFromDate:date]];
+    [labelDay setTextColor:[UIColor colorWithRed:166/255.0 green:170/255.0 blue:169/255.0 alpha:1.0]];
+    [view addSubview:labelDay];
+    
+    UILabel *labelDate = [[UILabel alloc] initWithFrame:CGRectMake(tableView.frame.size.width / 2, 0, (tableView.frame.size.width / 2) - 10, 24)];
+    [labelDate setFont:[UIFont boldSystemFontOfSize:12]];
+    [labelDate setText:[self.dateFormatter stringFromDate:date]];
+    [labelDate setTextColor:[UIColor colorWithRed:166/255.0 green:170/255.0 blue:169/255.0 alpha:1.0]];
+    [labelDate setTextAlignment:NSTextAlignmentRight];
+    [view addSubview:labelDate];
+    
+    [view setBackgroundColor:[UIColor colorWithRed:236/255.0 green:241/255.0 blue:244/255.0 alpha:1.0]];
+    return view;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[[self.fetchedResultsController sections] objectAtIndex:section] name];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 24.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -135,7 +173,7 @@
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.appDelegate.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.appDelegate.managedObjectContext sectionNameKeyPath:@"sectionTitle" cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
@@ -371,6 +409,28 @@
             break;
     }
     self.filename = nil;
+}
+
+- (NSDateFormatter *)dateFormatter
+{
+    static NSDateFormatter *dateFormatter = nil;
+    if (dateFormatter == nil) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateStyle = NSDateIntervalFormatterMediumStyle;
+        dateFormatter.timeStyle = NSDateIntervalFormatterNoStyle;
+    }
+    return dateFormatter;
+}
+
+- (NSDateFormatter *)dateFormatterDay
+{
+    static NSDateFormatter *dateFormatterDay = nil;
+    if (dateFormatterDay == nil) {
+        dateFormatterDay = [[NSDateFormatter alloc] init];
+        NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"EEEE" options:0 locale:[NSLocale currentLocale]];
+        [dateFormatterDay setDateFormat:formatString];
+    }
+    return dateFormatterDay;
 }
 
 @end

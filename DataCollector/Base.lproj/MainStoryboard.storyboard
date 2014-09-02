@@ -361,16 +361,17 @@
             </objects>
             <point key="canvasLocation" x="3111" y="-149"/>
         </scene>
-        <!--Aktivität-->
+        <!--Flow-Messungen-->
         <scene sceneID="9PP-s5-yRx">
             <objects>
                 <tableViewController id="9tQ-ao-a9m" customClass="SessionTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4NU-bL-Hd7">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4NU-bL-Hd7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="separatorColor" red="0.92549019607843142" green="0.94509803921568625" blue="0.95686274509803915" alpha="1" colorSpace="deviceRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="Ven-oY-KFx" style="IBUITableViewCellStyleDefault" id="FXH-0e-nGC">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="Ven-oY-KFx" style="IBUITableViewCellStyleDefault" id="FXH-0e-nGC">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FXH-0e-nGC" id="767-B4-ES6">
@@ -392,7 +393,7 @@
                             <outlet property="delegate" destination="9tQ-ao-a9m" id="nNc-zr-oRc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Aktivität" id="tZl-QD-bic"/>
+                    <navigationItem key="navigationItem" title="Flow-Messungen" id="tZl-QD-bic"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M6U-EF-lDO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -675,11 +676,11 @@
             </objects>
             <point key="canvasLocation" x="3111" y="506"/>
         </scene>
-        <!--Aktivität-->
+        <!--Flow-Messungen-->
         <scene sceneID="XV5-tC-gzb">
             <objects>
                 <navigationController storyboardIdentifier="session" automaticallyAdjustsScrollViewInsets="NO" id="hOG-6G-Nrn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Aktivität" id="Zq6-8C-6RD"/>
+                    <tabBarItem key="tabBarItem" title="Flow-Messungen" id="Zq6-8C-6RD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EXf-Aw-rVF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -724,5 +725,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="iNb-cQ-gbG"/>
     </inferredMetricsTieBreakers>
-    <color key="tintColor" red="0.011764707043766975" green="0.69019609689712524" blue="0.0039215688593685627" alpha="1" colorSpace="deviceRGB"/>
+    <color key="tintColor" red="0.11372549019607843" green="0.4392156862745098" blue="0.71764705882352942" alpha="1" colorSpace="deviceRGB"/>
 </document>
