@@ -62,9 +62,6 @@
     if (activity != nil && ![activity isEqualToString:@""]) {
         self.activityTableViewCell.detailTextLabel.text = activity;
     }
-    
-    [self.tableView reloadData];
-    [self.prefsTableView reloadData];
 }
 
 #pragma mark -
