@@ -620,7 +620,7 @@
         <scene sceneID="HZE-7k-ip6">
             <objects>
                 <navigationController storyboardIdentifier="home" automaticallyAdjustsScrollViewInsets="NO" id="4ut-9f-ibK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Start" id="Oo6-yD-QJr"/>
+                    <tabBarItem key="tabBarItem" title="Start" image="TabBarIconStart" id="Oo6-yD-QJr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FMs-Ts-gdI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -639,7 +639,7 @@
         <scene sceneID="Eaq-Tk-6bf">
             <objects>
                 <navigationController storyboardIdentifier="prefs" automaticallyAdjustsScrollViewInsets="NO" id="h8g-rW-bkP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Einstellungen" id="Im2-FV-wo3"/>
+                    <tabBarItem key="tabBarItem" title="Einstellungen" image="TabBarIconPrefs" id="Im2-FV-wo3"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YYV-pa-alm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -747,7 +747,7 @@
         <scene sceneID="XV5-tC-gzb">
             <objects>
                 <navigationController storyboardIdentifier="session" automaticallyAdjustsScrollViewInsets="NO" id="hOG-6G-Nrn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Flow-Messungen" id="Zq6-8C-6RD"/>
+                    <tabBarItem key="tabBarItem" title="Flow-Messungen" image="TabBarIconMeassurements" id="Zq6-8C-6RD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EXf-Aw-rVF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -781,6 +781,11 @@
             <point key="canvasLocation" x="2604" y="-149"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="TabBarIconMeassurements" width="30" height="30"/>
+        <image name="TabBarIconPrefs" width="30" height="30"/>
+        <image name="TabBarIconStart" width="30" height="30"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
