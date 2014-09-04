@@ -305,7 +305,9 @@
     self.session.averageFit = [NSNumber numberWithFloat:self.fitSum / self.selfReportCount];
     self.session.averageFlow = [NSNumber numberWithFloat:self.flowSum / self.selfReportCount];
     self.session.averageFluency = [NSNumber numberWithFloat:self.fluencySum / self.selfReportCount];
-    self.session.averageBPM = [NSNumber numberWithFloat:self.heartRateSum / self.heartRateCount];
+    if (self.heartRateCount != 0) {
+        self.session.averageBPM = [NSNumber numberWithFloat:self.heartRateSum / self.heartRateCount];
+    }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self.appDelegate saveContext];
         dispatch_async(dispatch_get_main_queue(), ^{
