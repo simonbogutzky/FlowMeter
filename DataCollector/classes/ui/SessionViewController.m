@@ -400,7 +400,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     [self.session addSelfReportsObject:selfReport];
     
     if (self.isCollecting) {
-        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:SELF_REPORT_INTERVAL * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
+        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.sessionDictionary objectForKey:@"timeInterval"] intValue] * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     } else {
         if (self.isLastSelfReport) {
             [self saveData];
