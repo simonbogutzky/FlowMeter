@@ -28,6 +28,7 @@
 		D31AA2E11951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2D91951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D31AA2E31951FDE5004ACB8D /* HeartRateMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2E21951FDE5004ACB8D /* HeartRateMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D31AA2E41951FEC1004ACB8D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
+		D324688219B8AA9E00355ABE /* SessionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D324688119B8AA9E00355ABE /* SessionDetailViewController.m */; };
 		D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACDD197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m */; };
 		D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE3197A98F400B144B5 /* SelfReport+Description.m */; };
 		D329ACED197A98F400B144B5 /* Session+OutStream.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE7197A98F400B144B5 /* Session+OutStream.m */; };
@@ -37,7 +38,6 @@
 		D34C9D191725044D004C261C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D151725044D004C261C /* AppDelegate.m */; };
 		D34C9D1A1725044D004C261C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D161725044D004C261C /* main.m */; };
 		D34C9D2917250463004C261C /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D1F17250463004C261C /* SessionViewController.m */; };
-		D34C9D2B17250463004C261C /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D2317250463004C261C /* MenuViewController.m */; };
 		D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D2517250463004C261C /* PrefsTableViewController.m */; };
 		D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */; };
 		D36C44B016D788BE000B8502 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
@@ -160,6 +160,8 @@
 		D31AA2D91951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorManagerDelegate.h; sourceTree = "<group>"; };
 		D31AA2E21951FDE5004ACB8D /* HeartRateMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitor.h; sourceTree = "<group>"; };
 		D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewControllerDelegate.h; path = classes/ui/LikertScaleViewControllerDelegate.h; sourceTree = "<group>"; };
+		D324688019B8AA9E00355ABE /* SessionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionDetailViewController.h; path = classes/ui/SessionDetailViewController.h; sourceTree = "<group>"; };
+		D324688119B8AA9E00355ABE /* SessionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionDetailViewController.m; path = classes/ui/SessionDetailViewController.m; sourceTree = "<group>"; };
 		D329ACDC197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeartRateMonitorDeviceTableViewController.h; path = classes/ui/HeartRateMonitorDeviceTableViewController.h; sourceTree = "<group>"; };
 		D329ACDD197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeartRateMonitorDeviceTableViewController.m; path = classes/ui/HeartRateMonitorDeviceTableViewController.m; sourceTree = "<group>"; };
 		D329ACE2197A98F400B144B5 /* SelfReport+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SelfReport+Description.h"; path = "classes/model/SelfReport+Description.h"; sourceTree = "<group>"; };
@@ -174,8 +176,6 @@
 		D34C9D161725044D004C261C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = classes/main.m; sourceTree = "<group>"; };
 		D34C9D1E17250463004C261C /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionViewController.h; path = classes/ui/SessionViewController.h; sourceTree = "<group>"; };
 		D34C9D1F17250463004C261C /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionViewController.m; path = classes/ui/SessionViewController.m; sourceTree = "<group>"; };
-		D34C9D2217250463004C261C /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuViewController.h; path = classes/ui/MenuViewController.h; sourceTree = "<group>"; };
-		D34C9D2317250463004C261C /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuViewController.m; path = classes/ui/MenuViewController.m; sourceTree = "<group>"; };
 		D34C9D2417250463004C261C /* PrefsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefsTableViewController.h; path = classes/ui/PrefsTableViewController.h; sourceTree = "<group>"; };
 		D34C9D2517250463004C261C /* PrefsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrefsTableViewController.m; path = classes/ui/PrefsTableViewController.m; sourceTree = "<group>"; };
 		D34C9D31172504A8004C261C /* DataCollector-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DataCollector-Info.plist"; path = "supporting-files/DataCollector-Info.plist"; sourceTree = "<group>"; };
@@ -510,8 +510,6 @@
 				D35ABC0E188EC2AE00BD1D2D /* LikertScaleViewController.h */,
 				D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */,
 				D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */,
-				D34C9D2217250463004C261C /* MenuViewController.h */,
-				D34C9D2317250463004C261C /* MenuViewController.m */,
 				D34C9D2417250463004C261C /* PrefsTableViewController.h */,
 				D34C9D2517250463004C261C /* PrefsTableViewController.m */,
 				D3B3DC1C1733BECB001F2830 /* SessionPrefsTableViewController.h */,
@@ -520,6 +518,8 @@
 				D3A4629E1726E08900D454F7 /* SessionTableViewController.m */,
 				D34C9D1E17250463004C261C /* SessionViewController.h */,
 				D34C9D1F17250463004C261C /* SessionViewController.m */,
+				D324688019B8AA9E00355ABE /* SessionDetailViewController.h */,
+				D324688119B8AA9E00355ABE /* SessionDetailViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -724,7 +724,6 @@
 				D34C9D2917250463004C261C /* SessionViewController.m in Sources */,
 				D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */,
 				D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */,
-				D34C9D2B17250463004C261C /* MenuViewController.m in Sources */,
 				D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */,
 				D3C1291318632A1E00C361CA /* Reachability.m in Sources */,
 				D39736CB19B0C11E005D643D /* Activity.m in Sources */,
@@ -732,6 +731,7 @@
 				D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */,
 				D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */,
 				D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */,
+				D324688219B8AA9E00355ABE /* SessionDetailViewController.m in Sources */,
 				D3B3DC091733B93A001F2830 /* DataCollector.xcdatamodeld in Sources */,
 				D3B3DC1E1733BECC001F2830 /* SessionPrefsTableViewController.m in Sources */,
 				D39736C819B0C11D005D643D /* SelfReport.m in Sources */,
