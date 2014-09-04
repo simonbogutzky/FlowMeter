@@ -112,4 +112,11 @@
     
 }
 
+- (IBAction)cancelTouched:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(likertScaleViewControllerCancelled:)]) {
+        [self.delegate likertScaleViewControllerCancelled:self];
+    }
+}
+
 @end

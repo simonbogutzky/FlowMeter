@@ -411,6 +411,22 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     }
 }
 
+- (void)likertScaleViewControllerCancelled:(LikertScaleViewController *)viewController
+{
+    [viewController dismissViewControllerAnimated:YES
+                                       completion:^{
+                                           ;
+                                       }];
+    if (self.isCollecting) {
+        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.sessionDictionary objectForKey:@"timeInterval"] intValue] * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
+    } else {
+        if (self.isLastSelfReport) {
+            [self saveData];
+            self.isLastSelfReport = NO;
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark - Self-reports
 
