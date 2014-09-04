@@ -17,11 +17,11 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSMutableDictionary *sessionDictionary;
 
-@property (nonatomic, weak) IBOutlet UITableView *prefsTableView;
 @property (nonatomic, weak) IBOutlet UITableViewCell *firstNameTableViewCell;
 @property (nonatomic, weak) IBOutlet UITableViewCell *lastNameTableViewCell;
 @property (nonatomic, weak) IBOutlet UITableViewCell *activityTableViewCell;
 @property (nonatomic, weak) IBOutlet UISwitch *flowShortScaleStatusSwitch;
+@property (nonatomic, weak) IBOutlet UITableViewCell *timeIntervalTableViewCell;
 @end
 
 @implementation SessionPrefsTableViewController
@@ -41,7 +41,7 @@
 {
     [super viewDidLoad];
     
-    self.sessionDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @"", @"", [NSNumber numberWithInt:flowShortScale]] forKeys:@[@"firstName", @"lastName", @"activity", @"questionnaire"]];
+    self.sessionDictionary = [NSMutableDictionary dictionaryWithObjects:@[@"", @"", @"", [NSNumber numberWithInt:flowShortScale], @"15"] forKeys:@[@"firstName", @"lastName", @"activity", @"questionnaire", @"timeInterval"]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -51,16 +51,31 @@
     NSString *firstName = [self.sessionDictionary valueForKey:@"firstName"];
     if (firstName != nil && ![firstName isEqualToString:@""]) {
         self.firstNameTableViewCell.detailTextLabel.text = firstName;
+    } else {
+        self.firstNameTableViewCell.detailTextLabel.text = @" ";
     }
     
     NSString *lastName = [self.sessionDictionary valueForKey:@"lastName"];
     if (lastName != nil && ![lastName isEqualToString:@""]) {
         self.lastNameTableViewCell.detailTextLabel.text = lastName;
+    } else {
+        self.lastNameTableViewCell.detailTextLabel.text = @" ";
     }
     
     NSString *activity = [self.sessionDictionary valueForKey:@"activity"];
     if (activity != nil && ![activity isEqualToString:@""]) {
         self.activityTableViewCell.detailTextLabel.text = activity;
+    } else {
+        self.activityTableViewCell.detailTextLabel.text = @" ";
+    }
+    
+    NSNumber *timeInterval = [NSNumber numberWithInt:[[self.sessionDictionary valueForKey:@"timeInterval"] intValue]];
+    if (timeInterval != nil && [timeInterval intValue] != 0) {
+        self.timeIntervalTableViewCell.detailTextLabel.text = [NSString stringWithFormat:@"%d min", [timeInterval intValue]];
+        [self.sessionDictionary setObject:timeInterval forKey:@"timeInterval"];
+    } else {
+        self.timeIntervalTableViewCell.detailTextLabel.text = @"15 min";
+        [self.sessionDictionary setObject:@15 forKey:@"timeInterval"];
     }
 }
 
@@ -70,9 +85,12 @@
 - (IBAction)changeFlowShowScaleStatus:(UISwitch *)sender {
     if (sender.on) {
         [self.sessionDictionary setObject:[NSNumber numberWithInt:flowShortScale] forKey:@"questionnaire"];
+            self.timeIntervalTableViewCell.hidden = NO;
     } else {
         [self.sessionDictionary setObject:[NSNumber numberWithInt:none] forKey:@"questionnaire"];
+            self.timeIntervalTableViewCell.hidden = YES;
     }
+    [self.tableView reloadData];
 }
 
 - (IBAction)startTouched:(id)sender
@@ -109,6 +127,14 @@
         UINavigationController *navigationController = segue.destinationViewController;
         EditViewController *editViewController = (EditViewController *) navigationController.topViewController;
         editViewController.propertyName = @"activity";
+        editViewController.propertyDictionary = self.sessionDictionary;
+        [((UITableViewCell *) sender) setSelected:NO animated:YES];
+    }
+    
+    if ([segue.identifier isEqualToString:@"editTimeInterval"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        EditViewController *editViewController = (EditViewController *) navigationController.topViewController;
+        editViewController.propertyName = @"timeInterval";
         editViewController.propertyDictionary = self.sessionDictionary;
         [((UITableViewCell *) sender) setSelected:NO animated:YES];
     }

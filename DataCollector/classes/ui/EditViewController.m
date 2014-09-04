@@ -12,6 +12,7 @@
 @interface EditViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *textField;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *doneButton;
 
 @end
 
@@ -24,7 +25,12 @@
 {
     [super viewDidLoad];
     self.navigationController.navigationBar.topItem.title = NSLocalizedString(self.propertyName, @"Vorname oder Nachname oder Aktivität") ;
-    self.textField.text = [self.propertyDictionary valueForKey:self.propertyName];
+    if ([[self.propertyDictionary valueForKey:self.propertyName] isKindOfClass:[NSNumber class]]) {
+        self.textField.keyboardType = UIKeyboardTypeNumberPad;
+        self.textField.text = [NSString stringWithFormat:@"%d", [[self.propertyDictionary valueForKey:self.propertyName] intValue]];
+    } else {
+        self.textField.text = [self.propertyDictionary valueForKey:self.propertyName];
+    }
 }
 
 #pragma mark -

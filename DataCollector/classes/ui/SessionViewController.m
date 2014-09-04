@@ -294,7 +294,7 @@
     [self startStopWatch];
     
     if ([[self.sessionDictionary objectForKey:@"questionnaire"] intValue] == flowShortScale) {
-        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:SELF_REPORT_INTERVAL * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
+        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.sessionDictionary objectForKey:@"timeInterval"] intValue] * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     }
 }
 
