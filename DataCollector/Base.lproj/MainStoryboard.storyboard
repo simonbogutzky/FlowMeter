@@ -7,10 +7,10 @@
         <capability name="Constraints with attributes relative to the layout margin" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar-->
         <scene sceneID="Ql7-o7-e7W">
             <objects>
-                <tabBarController id="zkI-Pb-t4W" sceneMemberID="viewController">
+                <tabBarController id="zkI-Pb-t4W" userLabel="Tab Bar" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="DHM-Al-I5O">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -27,10 +27,10 @@
             </objects>
             <point key="canvasLocation" x="590" y="-149"/>
         </scene>
-        <!--Lauf-->
+        <!--Aufnahme-->
         <scene sceneID="5">
             <objects>
-                <viewController storyboardIdentifier="record" id="2" customClass="SessionViewController" sceneMemberID="viewController">
+                <viewController id="2" userLabel="Aufnahme" customClass="SessionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Whr-Xy-ju9"/>
                         <viewControllerLayoutGuide type="bottom" id="HrJ-cN-hIc"/>
@@ -121,10 +121,10 @@
             </objects>
             <point key="canvasLocation" x="2485" y="506"/>
         </scene>
-        <!--Aufnahme-->
+        <!--Aufnahme Einstellungen-->
         <scene sceneID="akl-ge-5bM">
             <objects>
-                <tableViewController id="rvc-y0-Bvq" customClass="SessionPrefsTableViewController" sceneMemberID="viewController">
+                <tableViewController id="rvc-y0-Bvq" userLabel="Aufnahme Einstellungen" customClass="SessionPrefsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="tg2-uC-fGM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -312,10 +312,10 @@
             </objects>
             <point key="canvasLocation" x="1592" y="-149"/>
         </scene>
-        <!--bearbeiten-->
+        <!--Parameter bearbeiten-->
         <scene sceneID="WDT-VT-Zvr">
             <objects>
-                <viewController id="wdA-CD-sxA" customClass="EditViewController" sceneMemberID="viewController">
+                <viewController id="wdA-CD-sxA" userLabel="Parameter bearbeiten" customClass="EditViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BfI-PG-hve"/>
                         <viewControllerLayoutGuide type="bottom" id="mAQ-EO-yG1"/>
@@ -368,10 +368,10 @@
             </objects>
             <point key="canvasLocation" x="2485" y="-149"/>
         </scene>
-        <!--Flow-Messungen-->
+        <!--Flow-Messungen Übersicht-->
         <scene sceneID="9PP-s5-yRx">
             <objects>
-                <tableViewController id="9tQ-ao-a9m" customClass="SessionTableViewController" sceneMemberID="viewController">
+                <tableViewController id="9tQ-ao-a9m" userLabel="Flow-Messungen Übersicht" customClass="SessionTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4NU-bL-Hd7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -473,10 +473,10 @@
             </objects>
             <point key="canvasLocation" x="1592" y="-806"/>
         </scene>
-        <!--Einstellungen-->
+        <!--Allgemeine Einstellungen-->
         <scene sceneID="sM5-jz-Dgc">
             <objects>
-                <tableViewController id="pk8-WG-38E" customClass="PrefsTableViewController" sceneMemberID="viewController">
+                <tableViewController id="pk8-WG-38E" userLabel="Allgemeine Einstellungen" customClass="PrefsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0lr-wU-A8v">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -624,10 +624,10 @@
             </objects>
             <point key="canvasLocation" x="2091" y="506"/>
         </scene>
-        <!--Aufnahme-->
+        <!--Aufnahme Navigation-->
         <scene sceneID="HZE-7k-ip6">
             <objects>
-                <navigationController storyboardIdentifier="home" automaticallyAdjustsScrollViewInsets="NO" id="4ut-9f-ibK" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="home" automaticallyAdjustsScrollViewInsets="NO" id="4ut-9f-ibK" userLabel="Aufnahme Navigation" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Aufnahme" image="TabBarIconStart" id="Oo6-yD-QJr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="FMs-Ts-gdI">
@@ -648,10 +648,10 @@
             </objects>
             <point key="canvasLocation" x="1084" y="-149"/>
         </scene>
-        <!--Einstellungen-->
+        <!--Allgemeine Einstellungen Navigation-->
         <scene sceneID="Eaq-Tk-6bf">
             <objects>
-                <navigationController storyboardIdentifier="prefs" automaticallyAdjustsScrollViewInsets="NO" id="h8g-rW-bkP" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="prefs" automaticallyAdjustsScrollViewInsets="NO" id="h8g-rW-bkP" userLabel="Allgemeine Einstellungen Navigation" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Einstellungen" image="TabBarIconPrefs" id="Im2-FV-wo3"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="YYV-pa-alm">
@@ -672,10 +672,10 @@
             </objects>
             <point key="canvasLocation" x="1084" y="506"/>
         </scene>
-        <!--Likert Scale View Controller-->
+        <!--Likert Skala-->
         <scene sceneID="mdz-TR-d52">
             <objects>
-                <viewController storyboardIdentifier="LikertScale" id="CWW-IL-c45" customClass="LikertScaleViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LikertScale" id="CWW-IL-c45" userLabel="Likert Skala" customClass="LikertScaleViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7D3-tG-h9O"/>
                         <viewControllerLayoutGuide type="bottom" id="BdN-Xy-Zda"/>
@@ -753,10 +753,10 @@
             </objects>
             <point key="canvasLocation" x="3064" y="506"/>
         </scene>
-        <!--Flow-Messungen-->
+        <!--Flow-Messungen Navigation-->
         <scene sceneID="XV5-tC-gzb">
             <objects>
-                <navigationController storyboardIdentifier="session" automaticallyAdjustsScrollViewInsets="NO" id="hOG-6G-Nrn" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="session" automaticallyAdjustsScrollViewInsets="NO" id="hOG-6G-Nrn" userLabel="Flow-Messungen Navigation" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Flow-Messungen" image="TabBarIconMeassurements" id="Zq6-8C-6RD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="EXf-Aw-rVF">
@@ -777,10 +777,10 @@
             </objects>
             <point key="canvasLocation" x="1098" y="-815"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Parameter bearbeiten Navigation-->
         <scene sceneID="KLG-vc-1F9">
             <objects>
-                <navigationController storyboardIdentifier="edit" automaticallyAdjustsScrollViewInsets="NO" id="RKk-Uf-Ko4" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="edit" automaticallyAdjustsScrollViewInsets="NO" id="RKk-Uf-Ko4" userLabel="Parameter bearbeiten Navigation" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="0w2-cW-83V"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="wLY-7J-LjY">
