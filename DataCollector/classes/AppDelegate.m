@@ -68,15 +68,14 @@
 //    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"e0j2mxziwyk196j" appSecret:@"9n3zo6omw06kgd2" root:kDBRootAppFolder];
     [DBSession setSharedSession:dbSession];
     
-    // Appearance
-    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x1D70B7)];
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor colorWithRed:245.0/255.0 green:255.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
-                                                           [UIFont systemFontOfSize:18], NSFontAttributeName, nil]];
-    
+    // Global apperance
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    
+    [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0x1D70B7)];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    //
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    [tabBarController setSelectedIndex:1];
     
     return YES;
 }
