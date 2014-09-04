@@ -54,13 +54,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TV8-ty-RU8">
-                                <rect key="frame" x="128" y="396" width="64" height="152"/>
+                                <rect key="frame" x="122" y="396" width="76" height="152"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="HmS-vu-tJQ"/>
+                                    <constraint firstAttribute="width" constant="76" id="HmS-vu-tJQ"/>
                                     <constraint firstAttribute="height" constant="152" id="aVF-gb-kaI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="Start">
+                                <state key="normal" title="Stoppen">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="disabled">
@@ -74,11 +74,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfM-7K-tdj" userLabel="Start Countdown Label">
-                                        <rect key="frame" x="132" y="224" width="56" height="120"/>
+                                        <rect key="frame" x="133" y="224" width="55" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="7ww-ZU-chg"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="100"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="100"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -119,35 +119,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2604" y="506"/>
+            <point key="canvasLocation" x="2485" y="506"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="HNQ-as-RPz">
-            <objects>
-                <viewController id="aOF-3G-wfa" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cnA-n7-UcD"/>
-                        <viewControllerLayoutGuide type="bottom" id="ITn-AF-jzS"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6AR-9P-UkY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="ZgX-cw-bXM">
-                        <barButtonItem key="rightBarButtonItem" title="Start" style="done" id="GFm-rc-TtX">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <segue destination="rvc-y0-Bvq" kind="push" id="gL4-Bu-KWo"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZqY-55-jf1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1592" y="-149"/>
-        </scene>
-        <!--Einstellungen-->
+        <!--Aufnahme-->
         <scene sceneID="akl-ge-5bM">
             <objects>
                 <tableViewController id="rvc-y0-Bvq" customClass="SessionPrefsTableViewController" sceneMemberID="viewController">
@@ -160,9 +134,9 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMI-il-cAu">
-                                    <rect key="frame" x="20" y="7" width="280" height="30"/>
+                                    <rect key="frame" x="20" y="7" width="280" height="34"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                    <state key="normal" title="Start">
+                                    <state key="normal" title="Starten">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -299,7 +273,7 @@
                             <outlet property="delegate" destination="rvc-y0-Bvq" id="szu-Mn-mIv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Einstellungen" id="xMI-jY-74u"/>
+                    <navigationItem key="navigationItem" title="Aufnahme" id="xMI-jY-74u"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="RB5-Ih-sYF">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
@@ -313,7 +287,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ha9-3c-T2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2091" y="-149"/>
+            <point key="canvasLocation" x="1592" y="-149"/>
         </scene>
         <!--bearbeiten-->
         <scene sceneID="WDT-VT-Zvr">
@@ -362,7 +336,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5c-xw-h9R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3111" y="-149"/>
+            <point key="canvasLocation" x="2485" y="-149"/>
         </scene>
         <!--Flow-Messungen-->
         <scene sceneID="9PP-s5-yRx">
@@ -620,11 +594,11 @@
             </objects>
             <point key="canvasLocation" x="2091" y="506"/>
         </scene>
-        <!--Start-->
+        <!--Aufnahme-->
         <scene sceneID="HZE-7k-ip6">
             <objects>
                 <navigationController storyboardIdentifier="home" automaticallyAdjustsScrollViewInsets="NO" id="4ut-9f-ibK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Start" image="TabBarIconStart" id="Oo6-yD-QJr"/>
+                    <tabBarItem key="tabBarItem" title="Aufnahme" image="TabBarIconStart" id="Oo6-yD-QJr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="FMs-Ts-gdI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -637,7 +611,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="aOF-3G-wfa" kind="relationship" relationship="rootViewController" id="geZ-dJ-pXm"/>
+                        <segue destination="rvc-y0-Bvq" kind="relationship" relationship="rootViewController" id="jxg-0p-2rV"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S2G-jV-xHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -755,7 +729,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gP9-lo-bzk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3111" y="506"/>
+            <point key="canvasLocation" x="3064" y="506"/>
         </scene>
         <!--Flow-Messungen-->
         <scene sceneID="XV5-tC-gzb">
@@ -802,7 +776,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ahS-Of-9Wl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2604" y="-149"/>
+            <point key="canvasLocation" x="2077" y="-149"/>
         </scene>
     </scenes>
     <resources>
