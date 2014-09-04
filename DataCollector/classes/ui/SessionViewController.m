@@ -20,7 +20,7 @@
 //TODO: Sekunden in Einstellungen auslagern
 #define START_COUNTDOWN_SECONDS 5
 //TODO: Minuten in Einstellungen auslagern
-#define SELF_REPORT_INTERVAL 1
+#define SELF_REPORT_INTERVAL 15
 
 @interface SessionViewController ()
 
@@ -43,6 +43,8 @@
 @property (nonatomic) BOOL isCollecting;
 @property (nonatomic) BOOL isLastSelfReport;
 @property (nonatomic) int startCountdown;
+@property (nonatomic) int heartRateCount;
+@property (nonatomic) long heartRateSum;
 @property (nonatomic) NSTimeInterval lastTimeInterval;
 
 @property (nonatomic, weak) IBOutlet UIView *startCountdownView;
@@ -258,6 +260,8 @@
     self.absorptionSum = 0.0;
     self.anxietySum = 0.0;
     self.fitSum = 0.0;
+    self.heartRateCount = 0;
+    self.heartRateSum = 0;
     
     NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"(firstName == %@) AND (lastName == %@)", [self.sessionDictionary objectForKey:@"firstName"], [self.sessionDictionary objectForKey:@"lastName"]];
     User *user = [self getUserWithPredicate:userPredicate];
@@ -302,7 +306,8 @@
     self.session.averageAnxiety = [NSNumber numberWithFloat:self.anxietySum / self.selfReportCount];
     self.session.averageFit = [NSNumber numberWithFloat:self.fitSum / self.selfReportCount];
     self.session.averageFlow = [NSNumber numberWithFloat:self.flowSum / self.selfReportCount];
-    self.session.averageFluency= [NSNumber numberWithFloat:self.fluencySum / self.selfReportCount];
+    self.session.averageFluency = [NSNumber numberWithFloat:self.fluencySum / self.selfReportCount];
+    self.session.averageBPM = [NSNumber numberWithFloat:self.heartRateSum / self.heartRateCount];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self.appDelegate saveContext];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -336,7 +341,8 @@
     if(self.isCollecting) {
         
         HeartRateRecord *heartRateRecord = [NSEntityDescription insertNewObjectForEntityForName:@"HeartRateRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
-        
+        self.heartRateCount++;
+        self.heartRateSum = self.heartRateSum + data.heartRate;
         for (NSNumber *rrInterval in data.rrIntervals) {
             
             self.lastTimeInterval = self.lastTimeInterval + [rrInterval doubleValue];

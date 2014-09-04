@@ -414,7 +414,7 @@
                                             <color key="textColor" red="0.1137254902" green="0.43921568630000002" blue="0.71764705880000002" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="106" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJb-DU-WeX">
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="106" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="24" translatesAutoresizingMaskIntoConstraints="NO" id="dJb-DU-WeX">
                                             <rect key="frame" x="151" y="24" width="24" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.1137254902" green="0.43921568630000002" blue="0.71764705880000002" alpha="1" colorSpace="deviceRGB"/>
@@ -533,7 +533,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-nl-z8v">
                                                     <rect key="frame" x="213" y="4" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.062745101750000004" green="0.46666669849999998" blue="0.55686277149999996" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="onTintColor" red="0.13333334029999999" green="0.44705885649999999" blue="0.70980393890000004" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
                                                         <action selector="changeHxMConnectionStatus:" destination="pk8-WG-38E" eventType="touchUpInside" id="pPO-3a-4gU"/>
                                                     </connections>
