@@ -19,8 +19,6 @@
 
 //TODO: Sekunden in Einstellungen auslagern
 #define START_COUNTDOWN_SECONDS 5
-//TODO: Minuten in Einstellungen auslagern
-#define SELF_REPORT_INTERVAL 15
 
 @interface SessionViewController ()
 

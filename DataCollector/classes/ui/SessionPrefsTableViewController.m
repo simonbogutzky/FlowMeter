@@ -94,16 +94,6 @@
     [self.tableView reloadData];
 }
 
-- (IBAction)startTouched:(id)sender
-{
-    SessionViewController *sessionStartViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"record"];
-    [UIView beginAnimations:@"flipping view" context:nil];
-    [UIView setAnimationDuration:0.75];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:YES];
-    [self.navigationController pushViewController:sessionStartViewController animated:NO];
-    [UIView commitAnimations];
-}
-
 #pragma mark -
 #pragma mark - Segue
 
