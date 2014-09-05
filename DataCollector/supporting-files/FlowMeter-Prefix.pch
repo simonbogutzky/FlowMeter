@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'DataCollector' target in the 'DataCollector' project
+// Prefix header for all source files of the 'FlowMeter' target in the 'FlowMeter' project
 //
 
 #import <Availability.h>

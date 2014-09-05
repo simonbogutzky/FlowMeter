@@ -279,7 +279,7 @@
 		604CCD7F16A6F31000E87194 = {
 			isa = PBXGroup;
 			children = (
-				604CCD9416A6F31000E87194 /* DataCollector */,
+				604CCD9416A6F31000E87194 /* FlowMeter */,
 				D3C7ADCD171FCA86000A7D34 /* ExternalClasses */,
 				D35FEABC17253FF800D92DEB /* ExternalProjects */,
 				604CCD8D16A6F31000E87194 /* Frameworks */,
@@ -324,12 +324,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		604CCD9416A6F31000E87194 /* DataCollector */ = {
+		604CCD9416A6F31000E87194 /* FlowMeter */ = {
 			isa = PBXGroup;
 			children = (
 				D34C9D1217250407004C261C /* Classes */,
 				604CCD9516A6F31000E87194 /* Supporting Files */,
 			);
+			name = FlowMeter;
 			path = DataCollector;
 			sourceTree = "<group>";
 		};
