@@ -22,6 +22,7 @@
 @property (nonatomic, weak) IBOutlet UITableViewCell *activityTableViewCell;
 @property (nonatomic, weak) IBOutlet UISwitch *flowShortScaleStatusSwitch;
 @property (nonatomic, weak) IBOutlet UITableViewCell *timeIntervalTableViewCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *timeIntervalPickerTableViewCell;
 @property (nonatomic, weak) IBOutlet UIButton *startButton;
 @end
 
@@ -80,24 +81,8 @@
     }
 }
 
-#pragma mark -
-#pragma marl - IBActions
-
-- (IBAction)changeFlowShowScaleStatus:(UISwitch *)sender {
-    if (sender.on) {
-        [self.sessionDictionary setObject:[NSNumber numberWithInt:flowShortScale] forKey:@"questionnaire"];
-            self.timeIntervalTableViewCell.hidden = NO;
-    } else {
-        [self.sessionDictionary setObject:[NSNumber numberWithInt:none] forKey:@"questionnaire"];
-            self.timeIntervalTableViewCell.hidden = YES;
-    }
-    [self.tableView reloadData];
-}
-
-#pragma mark -
-#pragma mark - Segue
-
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
     if ([identifier isEqualToString:@"startRecording"]) {
         BOOL canStartRecording = YES;
         NSString *firstName = [self.sessionDictionary valueForKey:@"firstName"];
@@ -126,11 +111,11 @@
             return canStartRecording;
         }
     }
-    
     return YES;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     if ([segue.identifier isEqualToString:@"editFirstName"]) {
         UINavigationController *navigationController = segue.destinationViewController;
         EditViewController *editViewController = (EditViewController *) navigationController.topViewController;
@@ -155,19 +140,45 @@
         [((UITableViewCell *) sender) setSelected:NO animated:YES];
     }
     
-    if ([segue.identifier isEqualToString:@"editTimeInterval"]) {
-        UINavigationController *navigationController = segue.destinationViewController;
-        EditViewController *editViewController = (EditViewController *) navigationController.topViewController;
-        editViewController.propertyName = @"timeInterval";
-        editViewController.propertyDictionary = self.sessionDictionary;
-        [((UITableViewCell *) sender) setSelected:NO animated:YES];
-    }
-    
     if ([segue.identifier isEqualToString:@"startRecording"]) {
         SessionViewController *sessionStartViewController = (SessionViewController *) segue.destinationViewController;
         sessionStartViewController.sessionDictionary = self.sessionDictionary;
     }
-       
+}
+
+#pragma mark -
+#pragma mark - UITableViewDelegate implementation
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSLog(@"Tag: %d", cell.tag);
+    switch (cell.tag) {
+        case 2000:
+        {
+            self.timeIntervalPickerTableViewCell.hidden = !self.timeIntervalPickerTableViewCell.hidden;
+            [self.tableView reloadData];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark -
+#pragma marl - IBActions
+
+- (IBAction)changeFlowShowScaleStatus:(UISwitch *)sender
+{
+    if (sender.on) {
+        [self.sessionDictionary setObject:[NSNumber numberWithInt:flowShortScale] forKey:@"questionnaire"];
+            self.timeIntervalTableViewCell.hidden = NO;
+    } else {
+        [self.sessionDictionary setObject:[NSNumber numberWithInt:none] forKey:@"questionnaire"];
+            self.timeIntervalTableViewCell.hidden = YES;
+    }
+    [self.tableView reloadData];
 }
 
 @end

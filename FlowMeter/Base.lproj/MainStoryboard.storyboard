@@ -251,7 +251,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Rr9-3m-WqR" detailTextLabel="I2g-Q3-guU" style="IBUITableViewCellStyleValue2" id="oWa-8q-jhT">
+                                    <tableViewCell tag="2000" contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Rr9-3m-WqR" detailTextLabel="I2g-Q3-guU" style="IBUITableViewCellStyleValue2" id="oWa-8q-jhT">
                                         <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oWa-8q-jhT" id="Iue-lH-4oM">
@@ -272,9 +272,22 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="RKk-Uf-Ko4" kind="modal" identifier="editTimeInterval" id="Np0-Oo-Xe7"/>
-                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell hidden="YES" contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="132" id="cM5-tb-M69">
+                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cM5-tb-M69" id="1x5-Db-mop">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ie7-MH-uE7">
+                                                    <rect key="frame" x="0.0" y="-15" width="320" height="162"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="431615685.95686501">
+                                                        <!--2014-09-05 13:14:45 +0000-->
+                                                    </date>
+                                                </datePicker>
+                                            </subviews>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -291,12 +304,13 @@
                         <outlet property="flowShortScaleStatusSwitch" destination="zIV-pI-YUU" id="kHk-XJ-C1k"/>
                         <outlet property="lastNameTableViewCell" destination="GSh-fI-lot" id="ISK-mZ-fYg"/>
                         <outlet property="startButton" destination="mMI-il-cAu" id="lBQ-aT-zRd"/>
+                        <outlet property="timeIntervalPickerTableViewCell" destination="cM5-tb-M69" id="4p7-UZ-NTL"/>
                         <outlet property="timeIntervalTableViewCell" destination="oWa-8q-jhT" id="V6x-dz-ggT"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ha9-3c-T2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1592" y="-149"/>
+            <point key="canvasLocation" x="1592" y="-180"/>
         </scene>
         <!--Parameter bearbeiten-->
         <scene sceneID="WDT-VT-Zvr">
@@ -840,7 +854,7 @@
         </simulatedScreenMetrics>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Np0-Oo-Xe7"/>
+        <segue reference="sGD-jV-yf9"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.11372549019607843" green="0.4392156862745098" blue="0.71764705882352942" alpha="1" colorSpace="deviceRGB"/>
 </document>
