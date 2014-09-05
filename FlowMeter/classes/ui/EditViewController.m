@@ -24,13 +24,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBar.topItem.title = NSLocalizedString(self.propertyName, @"Vorname oder Nachname oder Aktivität") ;
-    if ([[self.propertyDictionary valueForKey:self.propertyName] isKindOfClass:[NSNumber class]]) {
-        self.textField.keyboardType = UIKeyboardTypeNumberPad;
-        self.textField.text = [NSString stringWithFormat:@"%d", [[self.propertyDictionary valueForKey:self.propertyName] intValue]];
-    } else {
-        self.textField.text = [self.propertyDictionary valueForKey:self.propertyName];
-    }
+    self.navigationController.navigationBar.topItem.title = [self.itemDictionary objectForKey:kTitleKey];
+    self.textField.text = @"";
 }
 
 #pragma mark -
@@ -38,7 +33,10 @@
 
 - (IBAction)doneTouched:(id)sender
 {
-    [self.propertyDictionary setValue:self.textField.text forKey:self.propertyName];
+    [self.itemDictionary setValue:self.textField.text forKey:kValueKey];
+    if ([self.textField.text isEqualToString:@""]) {
+        [self.itemDictionary setValue:@" " forKey:kValueKey];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
     [self resignFirstResponder];
 }

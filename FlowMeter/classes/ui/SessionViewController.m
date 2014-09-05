@@ -20,6 +20,10 @@
 //TODO: Sekunden in Einstellungen auslagern
 #define START_COUNTDOWN_SECONDS 5
 
+#define kTitleKey       @"title"   // key for obtaining the data source item's title
+#define kValueKey       @"value"   // key for obtaining the data source item's value
+#define kDateKey        @"date"    // key for obtaining the data source item's date value
+
 @interface SessionViewController ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
@@ -130,7 +134,7 @@
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
     // Rename button title
-    [self.startStopButton setTitle:NSLocalizedString(@"Stop", @"Stoppe Aufnahme") forState:0];
+    [self.startStopButton setTitle:NSLocalizedString(@"Stoppen", @"Stoppe Aufnahme") forState:0];
     
     // Start sensor updates
     [self startSensorUpdates];
@@ -157,7 +161,7 @@
         
         [self.stopWatchTimer invalidate];
         
-        if ([[self.sessionDictionary objectForKey:@"questionnaire"] intValue] == flowShortScale) {
+        if ([[self.sessionData[2][0] objectForKey:kValueKey] isEqualToString:@"1"]) {
             [self.selfReportTimer invalidate];
             self.isLastSelfReport = YES;
             
@@ -261,38 +265,29 @@
     self.heartRateCount = 0;
     self.heartRateSum = 0;
     
-    NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"(firstName == %@) AND (lastName == %@)", [self.sessionDictionary objectForKey:@"firstName"], [self.sessionDictionary objectForKey:@"lastName"]];
+    NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"(firstName == %@) AND (lastName == %@)", [self.sessionData[0][0] objectForKey:kValueKey], [self.sessionData[0][1] objectForKey:kValueKey]];
     User *user = [self getUserWithPredicate:userPredicate];
     
     if (user.firstName == nil && user.lastName == nil) {
-        user.firstName = [self.sessionDictionary objectForKey:@"firstName"];
-        user.lastName = [self.sessionDictionary objectForKey:@"lastName"];
+        user.firstName = [self.sessionData[0][0] objectForKey:kValueKey];
+        user.lastName = [self.sessionData[0][1] objectForKey:kValueKey];
     }
     self.session.user = user;
     
     
-    NSPredicate *activityPredicate = [NSPredicate predicateWithFormat:@"(name == %@)", [self.sessionDictionary objectForKey:@"activity"]];
+    NSPredicate *activityPredicate = [NSPredicate predicateWithFormat:@"(name == %@)", [self.sessionData[1][0] objectForKey:kValueKey]];
     Activity *activity = [self getActivityWithPredicate:activityPredicate];
     
     if (activity.name == nil) {
-        activity.name = [self.sessionDictionary objectForKey:@"activity"];
+        activity.name = [self.sessionData[1][0] objectForKey:kValueKey];
     }
     self.session.activity = activity;
-    switch ([[self.sessionDictionary objectForKey:@"questionnaire"] intValue]) {
-        case flowShortScale:
-            break;
-            
-        default:
-            break;
-    }
-    
-    
     self.isCollecting = !self.isCollecting;
     
     [self startStopWatch];
     
-    if ([[self.sessionDictionary objectForKey:@"questionnaire"] intValue] == flowShortScale) {
-        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.sessionDictionary objectForKey:@"timeInterval"] intValue] * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
+    if ([[self.sessionData[2][0] objectForKey:kValueKey] isEqualToString:@"1"]) {
+        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.sessionData[2][1] objectForKey:kDateKey] doubleValue] target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     }
 }
 
@@ -405,7 +400,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     [self.session addSelfReportsObject:selfReport];
     
     if (self.isCollecting) {
-        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.sessionDictionary objectForKey:@"timeInterval"] intValue] * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
+        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.sessionData[2][1] objectForKey:kDateKey] doubleValue] target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     } else {
         if (self.isLastSelfReport) {
             [self saveData];
@@ -421,7 +416,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                                            ;
                                        }];
     if (self.isCollecting) {
-        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.sessionDictionary objectForKey:@"timeInterval"] intValue] * 60 target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
+        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.sessionData[2][1] objectForKey:kDateKey] doubleValue] target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     } else {
         if (self.isLastSelfReport) {
             [self saveData];
@@ -438,7 +433,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     self.startSelfReportDate = [NSDate date];
     AudioServicesPlaySystemSound(1007);
     
-    if ([[self.sessionDictionary objectForKey:@"questionnaire"] intValue] == flowShortScale) {
+    if ([[self.sessionData[2][0] objectForKey:kValueKey] isEqualToString:@"1"]) {
         [self presentViewController:[self flowShortScaleViewControllerFromStoryboard] animated:YES completion:nil];
     }
 }

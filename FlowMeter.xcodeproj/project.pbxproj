@@ -56,7 +56,6 @@
 		D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */; };
 		D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionTableViewController.m */; };
 		D3B3DC091733B93A001F2830 /* FlowMeter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC071733B93A001F2830 /* FlowMeter.xcdatamodeld */; };
-		D3B3DC1E1733BECC001F2830 /* SessionPrefsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC1D1733BECB001F2830 /* SessionPrefsTableViewController.m */; };
 		D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1290F1863296A00C361CA /* MBProgressHUD.m */; };
 		D3C1291318632A1E00C361CA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1291218632A1E00C361CA /* Reachability.m */; };
 		D3C1292618632B4B00C361CA /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C1292018632B4B00C361CA /* libTestFlight.a */; };
@@ -68,6 +67,7 @@
 		D3C7ADC9171EEA44000A7D34 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */; };
 		D3C7ADCB171EEA8C000A7D34 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADCA171EEA8C000A7D34 /* SystemConfiguration.framework */; };
 		D3DA4A7716DCCB0300ECBE4B /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DA4A7616DCCB0300ECBE4B /* GLKit.framework */; };
+		D3EB072419BB9552005F0333 /* SessionPrefsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EB072319BB9552005F0333 /* SessionPrefsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -206,8 +206,6 @@
 		D3A4629D1726E08900D454F7 /* SessionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionTableViewController.h; path = classes/ui/SessionTableViewController.h; sourceTree = "<group>"; };
 		D3A4629E1726E08900D454F7 /* SessionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionTableViewController.m; path = classes/ui/SessionTableViewController.m; sourceTree = "<group>"; };
 		D3B3DC081733B93A001F2830 /* FlowMeter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlowMeter.xcdatamodel; sourceTree = "<group>"; };
-		D3B3DC1C1733BECB001F2830 /* SessionPrefsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionPrefsTableViewController.h; path = classes/ui/SessionPrefsTableViewController.h; sourceTree = "<group>"; };
-		D3B3DC1D1733BECB001F2830 /* SessionPrefsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionPrefsTableViewController.m; path = classes/ui/SessionPrefsTableViewController.m; sourceTree = "<group>"; };
 		D3C1290E1863296A00C361CA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
 		D3C1290F1863296A00C361CA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		D3C1291118632A1E00C361CA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = SOURCE_ROOT; };
@@ -225,6 +223,8 @@
 		D3C7ADCA171EEA8C000A7D34 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D3DA4A7616DCCB0300ECBE4B /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		D3E1F9AE19B9BA3000D1E8EC /* FlowMeter-Version-002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-002.xcdatamodel"; sourceTree = "<group>"; };
+		D3EB072219BB9552005F0333 /* SessionPrefsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionPrefsTableViewController.h; path = classes/ui/SessionPrefsTableViewController.h; sourceTree = "<group>"; };
+		D3EB072319BB9552005F0333 /* SessionPrefsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionPrefsTableViewController.m; path = classes/ui/SessionPrefsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -511,14 +511,14 @@
 				D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */,
 				D34C9D2417250463004C261C /* PrefsTableViewController.h */,
 				D34C9D2517250463004C261C /* PrefsTableViewController.m */,
-				D3B3DC1C1733BECB001F2830 /* SessionPrefsTableViewController.h */,
-				D3B3DC1D1733BECB001F2830 /* SessionPrefsTableViewController.m */,
+				D324688019B8AA9E00355ABE /* SessionDetailViewController.h */,
+				D324688119B8AA9E00355ABE /* SessionDetailViewController.m */,
+				D3EB072219BB9552005F0333 /* SessionPrefsTableViewController.h */,
+				D3EB072319BB9552005F0333 /* SessionPrefsTableViewController.m */,
 				D3A4629D1726E08900D454F7 /* SessionTableViewController.h */,
 				D3A4629E1726E08900D454F7 /* SessionTableViewController.m */,
 				D34C9D1E17250463004C261C /* SessionViewController.h */,
 				D34C9D1F17250463004C261C /* SessionViewController.m */,
-				D324688019B8AA9E00355ABE /* SessionDetailViewController.h */,
-				D324688119B8AA9E00355ABE /* SessionDetailViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -732,8 +732,8 @@
 				D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */,
 				D324688219B8AA9E00355ABE /* SessionDetailViewController.m in Sources */,
 				D3B3DC091733B93A001F2830 /* FlowMeter.xcdatamodeld in Sources */,
-				D3B3DC1E1733BECC001F2830 /* SessionPrefsTableViewController.m in Sources */,
 				D39736C819B0C11D005D643D /* SelfReport.m in Sources */,
+				D3EB072419BB9552005F0333 /* SessionPrefsTableViewController.m in Sources */,
 				D37067D71733F41300F86BBD /* EditViewController.m in Sources */,
 				D39736D419B0C11E005D643D /* Session.m in Sources */,
 			);

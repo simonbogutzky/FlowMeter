@@ -12,6 +12,6 @@
 
 @interface SessionViewController : UIViewController <UIAlertViewDelegate, HeartRateMonitorManagerDelegate, LikertScaleViewControllerDelegate>
 
-@property (nonatomic, strong) NSDictionary *sessionDictionary;
+@property (nonatomic, strong) NSArray *sessionData;
 
 @end

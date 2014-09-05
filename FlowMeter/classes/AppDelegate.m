@@ -76,6 +76,7 @@
     //
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     [tabBarController setSelectedIndex:1];
+    tabBarController.tabBar.translucent = NO;
     
     return YES;
 }

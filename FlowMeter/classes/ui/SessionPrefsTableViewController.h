@@ -1,5 +1,5 @@
 //
-//  SessionPrefsTableViewController.h
+//  SessionPrefsTableViewController.m
 //  FlowMeter
 //
 //  Created by Simon Bogutzky on 03.05.13.
