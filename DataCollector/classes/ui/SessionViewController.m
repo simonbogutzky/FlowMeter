@@ -340,11 +340,14 @@
     
     if(self.isCollecting) {
         
-        HeartRateRecord *heartRateRecord = [NSEntityDescription insertNewObjectForEntityForName:@"HeartRateRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
+        
         self.heartRateCount++;
         self.heartRateSum = self.heartRateSum + data.heartRate;
         for (NSNumber *rrInterval in data.rrIntervals) {
-            
+            HeartRateRecord *heartRateRecord = [NSEntityDescription insertNewObjectForEntityForName:@"HeartRateRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
+            heartRateRecord.date = [NSDate date];
+            heartRateRecord.rrInterval = rrInterval;
+            heartRateRecord.heartRate = [NSNumber numberWithDouble:60/([rrInterval doubleValue]/1000)];
             self.lastTimeInterval = self.lastTimeInterval + [rrInterval doubleValue];
             heartRateRecord.timeInterval = [NSNumber numberWithDouble:self.lastTimeInterval];
             [self.session addHeartRateRecordsObject:heartRateRecord];

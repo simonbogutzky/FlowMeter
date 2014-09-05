@@ -14,5 +14,8 @@
 
 @dynamic timeInterval;
 @dynamic session;
+@dynamic date;
+@dynamic rrInterval;
+@dynamic heartRate;
 
 @end

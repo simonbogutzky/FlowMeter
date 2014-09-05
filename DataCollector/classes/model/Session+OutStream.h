@@ -10,9 +10,7 @@
 
 @interface Session (OutStream)
 
-- (NSString *)writeOutSelfReports;
-- (NSString *)zipSelfReports;
-- (NSString *)writeOutHeartRateRecords;
-- (NSString *)zipHeartRateRecords;
+- (NSString *)writeOut;
+- (NSString *)writeOutArchive;
 
 @end

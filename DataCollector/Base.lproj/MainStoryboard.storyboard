@@ -477,6 +477,9 @@
                     <navigationItem key="navigationItem" title="S. Bogutzky - Laufen" id="fhB-78-Qag">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="action" id="cit-fV-ckV">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="actionTouched:" destination="Uao-04-vlE" id="QHG-sn-qfb"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>

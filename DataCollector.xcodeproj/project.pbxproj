@@ -225,6 +225,7 @@
 		D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D3C7ADCA171EEA8C000A7D34 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D3DA4A7616DCCB0300ECBE4B /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		D3E1F9AE19B9BA3000D1E8EC /* DataCollector-Version-002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DataCollector-Version-002.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1140,9 +1141,10 @@
 		D3B3DC071733B93A001F2830 /* DataCollector.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D3E1F9AE19B9BA3000D1E8EC /* DataCollector-Version-002.xcdatamodel */,
 				D3B3DC081733B93A001F2830 /* DataCollector.xcdatamodel */,
 			);
-			currentVersion = D3B3DC081733B93A001F2830 /* DataCollector.xcdatamodel */;
+			currentVersion = D3E1F9AE19B9BA3000D1E8EC /* DataCollector-Version-002.xcdatamodel */;
 			name = DataCollector.xcdatamodeld;
 			path = "supporting-files/DataCollector.xcdatamodeld";
 			sourceTree = "<group>";

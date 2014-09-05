@@ -13,7 +13,10 @@
 
 @interface HeartRateRecord : NSManagedObject
 
+@property (nonatomic, retain) NSDate * date;
+@property (nonatomic, retain) NSNumber * rrInterval;
 @property (nonatomic, retain) NSNumber * timeInterval;
+@property (nonatomic, retain) NSNumber * heartRate;
 @property (nonatomic, retain) Session *session;
 
 @end

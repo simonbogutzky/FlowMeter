@@ -15,9 +15,7 @@
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) MBProgressHUD *hud;
-
-
-//@property (nonatomic, strong) NSString *filename;
+@property (nonatomic, strong) NSString *filename;
 
 @end
 
@@ -34,7 +32,8 @@
 #pragma mark -
 #pragma mark - Setter
 
-- (void)setSession:(Session *)newSession {
+- (void)setSession:(Session *)newSession
+{
     if (_session != newSession) {
         _session = newSession;
         
@@ -43,20 +42,60 @@
     }
 }
 
-- (void)configureView {
+#pragma mark -
+#pragma mark - UIViewControllerDelegate implementation
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self configureView];
+}
+
+#pragma mark -
+#pragma mark - IBActions
+
+- (IBAction)actionTouched:(UIBarButtonItem *)sender
+{
+    if ([[DBSession sharedSession] isLinked]) {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Aktionen", @"Aktionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern", @"Datei auf dem Gerät speichern"), NSLocalizedString(@"In die Dropbox laden", @"Datei in die Dropbox laden"), nil];
+        [actionSheet showInView:self.view];
+    } else {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Aktionen", @"Aktionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern", @"Datei auf dem Gerät speichern"), nil];
+        [actionSheet showInView:self.view];
+    }
+}
+
+#pragma mark -
+#pragma mark - Convenient methods
+
+- (void)configureView
+{
     if (self.session) {
         self.navigationItem.title = [NSString stringWithFormat:@"%@. %@ - %@", [self.session.user.firstName substringToIndex:1], self.session.user.lastName, self.session.activity.name];
     }
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self configureView];
+- (void)uploadFileToDropbox:(NSString *)filename
+{
+    self.filename = filename;
+    NSString *destinationPath = @"/";
+    self.appDelegate.dbRestClient.delegate = self;
+    [self.appDelegate.dbRestClient loadMetadata:[NSString stringWithFormat:@"%@%@", destinationPath, filename]];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)uploadFileToDropbox:(NSString *)filename withRev:(NSString *)rev
+{
+    
+    NSString *sourcePath = [self.appDelegate.userDirectory stringByAppendingPathComponent:filename];
+    NSString *destinationPath = @"/";
+    [self.appDelegate.dbRestClient uploadFile:filename toPath:destinationPath withParentRev:rev fromPath:sourcePath];
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    // Initialize MBProgressHUD - AnnularDeterminate
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.delegate = self;
+    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
 }
 
 #pragma mark -
@@ -66,144 +105,116 @@
 {
     switch (buttonIndex) {
         case 0:
-            NSLog(@"### Anzahl der Self-reports: %lu", (unsigned long)[self.session.selfReports count]);
-            NSLog(@"### %@", [self.session writeOutSelfReports]);
+            NSLog(@"### %@", [self.session writeOut]);
             break;
             
-//        case 1: {
-//            if ([[DBSession sharedSession] isLinked]) {
-//                NSLog(@"### Anzahl der Self-reports: %lu", (unsigned long)[self.selectedSession.selfReports count]);
-//                if (self.appDelegate.reachability.isReachable) {
-//                    if (self.appDelegate.reachability.isReachableViaWiFi) {
-//                        NSString *filename = [self.selectedSession zipSelfReports];
-//                        [self uploadFileToDropbox:filename];
-//                    } else {
-//                        self.filename = [self.selectedSession zipSelfReports];
-//                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?", @"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") otherButtonTitles:NSLocalizedString(@"Ok", @"Ok"), nil];
-//                        [alertView show];
-//                    }
-//                } else {
-//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine Internetverbindung", @"Du hast zurzeit keine Internetverbindung") delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok") otherButtonTitles:nil];
-//                    [alertView show];
-//                }
-//            }
-//        }
-//            break;
+        case 1: {
+            if ([[DBSession sharedSession] isLinked]) {
+                if (self.appDelegate.reachability.isReachable) {
+                    if (self.appDelegate.reachability.isReachableViaWiFi) {
+                        NSString *filename = [self.session writeOutArchive];
+                        [self uploadFileToDropbox:filename];
+                    } else {
+                        self.filename = [self.session writeOutArchive];
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?", @"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") otherButtonTitles:NSLocalizedString(@"Ok", @"Ok"), nil];
+                        [alertView show];
+                    }
+                } else {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine Internetverbindung", @"Du hast zurzeit keine Internetverbindung") delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok") otherButtonTitles:nil];
+                    [alertView show];
+                }
+            }
+        }
+            break;
             
         default:
             break;
     }
 }
 
-//#pragma mark -
-//#pragma mark - Dropbox convenient methods
-//
-//- (void)uploadFileToDropbox:(NSString *)filename
-//{
-//    self.filename = filename;
-//    NSString *destinationPath = @"/";
-//    self.appDelegate.dbRestClient.delegate = self;
-//    [self.appDelegate.dbRestClient loadMetadata:[NSString stringWithFormat:@"%@%@", destinationPath, filename]];
-//}
-//
-//- (void)uploadFileToDropbox:(NSString *)filename withRev:(NSString *)rev
-//{
-//    
-//    NSString *sourcePath = [self.appDelegate.userDirectory stringByAppendingPathComponent:filename];
-//    NSString *destinationPath = @"/";
-//    [self.appDelegate.dbRestClient uploadFile:filename toPath:destinationPath withParentRev:rev fromPath:sourcePath];
-//    
-//    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-//    
-//    // Initialize MBProgressHUD - AnnularDeterminate
-//    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    self.hud.delegate = self;
-//    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
-//}
-//
-//#pragma mark -
-//#pragma mark - DBRestClientDelegate implementation
-//
-//- (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath from:(NSString*)srcPath metadata:(DBMetadata*)metadata
-//{
-//    NSLog(@"# File uploaded successfully to path: %@", metadata.path);
-//    
-//    NSError *error = nil;
-//    
-//    // Delete file
-//    NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-//    NSString *archivePath = [rootPath stringByAppendingPathComponent:metadata.filename];
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    [fileManager removeItemAtPath:archivePath error:&error];
-//    
-//    // Change MBProgressHUD mode - CustomView
-//    self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark"]];
-//    self.hud.mode = MBProgressHUDModeCustomView;
-//    [self.hud hide:YES afterDelay:2];
-//    
-//    self.filename = nil;
-//}
-//
-//- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
-//{
-//    NSLog(@"# File upload failed with error - %@", error);
-//    [self.hud hide:YES];
-//    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-//}
-//
-//- (void)restClient:(DBRestClient*)client uploadProgress:(CGFloat)progress forFile:(NSString*)destPath from:(NSString*)srcPath
-//{
-//    NSLog(@"# Progress - %f", progress);
-//    self.hud.progress = progress;
-//}
-//
-//- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
-//{
-//    NSLog(@"# event code: %u", eventCode);
-//}
-//
-//- (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata
-//{
-//    [self uploadFileToDropbox:metadata.filename withRev:metadata.rev];
-//}
-//
-//- (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error
-//{
-//    switch (error.code) {
-//        case 404:
-//            [self uploadFileToDropbox:self.filename withRev:nil];
-//            break;
-//            
-//        default:
-//            NSLog(@"# Load meta failed with error - %@", error);
-//            break;
-//    }
-//}
-//
-//#pragma mark -
-//#pragma mark - UIAlertViewDelegate implementation
-//
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    switch (buttonIndex) {
-//        case 1:
-//            [self uploadFileToDropbox:self.filename];
-//            break;
-//            
-//        default: {
-//            
-//            NSError *error = nil;
-//            
-//            // Delete file
-//            NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-//            NSString *archivePath = [rootPath stringByAppendingPathComponent:self.filename];
-//            NSFileManager *fileManager = [NSFileManager defaultManager];
-//            [fileManager removeItemAtPath:archivePath error:&error];
-//        }
-//            
-//            break;
-//    }
-//    self.filename = nil;
-//}
+#pragma mark -
+#pragma mark - UIAlertViewDelegate implementation
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 1:
+            [self uploadFileToDropbox:self.filename];
+            break;
+            
+        default: {
+            
+            NSError *error = nil;
+            
+            // Delete file
+            NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+            NSString *archivePath = [rootPath stringByAppendingPathComponent:self.filename];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            [fileManager removeItemAtPath:archivePath error:&error];
+        }
+            
+            break;
+    }
+    self.filename = nil;
+}
+
+#pragma mark -
+#pragma mark - DBRestClientDelegate implementation
+
+- (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath from:(NSString*)srcPath metadata:(DBMetadata*)metadata
+{
+    NSLog(@"# File uploaded successfully to path: %@", metadata.path);
+    
+    NSError *error = nil;
+    
+    // Delete file
+    NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString *archivePath = [rootPath stringByAppendingPathComponent:metadata.filename];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:archivePath error:&error];
+    
+    // Change MBProgressHUD mode - CustomView
+    self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark"]];
+    self.hud.mode = MBProgressHUDModeCustomView;
+    [self.hud hide:YES afterDelay:2];
+    
+    self.filename = nil;
+}
+
+- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
+{
+    NSLog(@"# File upload failed with error - %@", error);
+    [self.hud hide:YES];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+- (void)restClient:(DBRestClient*)client uploadProgress:(CGFloat)progress forFile:(NSString*)destPath from:(NSString*)srcPath
+{
+    NSLog(@"# Progress - %f", progress);
+    self.hud.progress = progress;
+}
+
+- (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata
+{
+    [self uploadFileToDropbox:metadata.filename withRev:metadata.rev];
+}
+
+- (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error
+{
+    switch (error.code) {
+        case 404:
+            [self uploadFileToDropbox:self.filename withRev:nil];
+            break;
+            
+        default:
+            NSLog(@"# Load meta failed with error - %@", error);
+            break;
+    }
+}
+
+- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
+{
+    NSLog(@"# event code: %u", eventCode);
+}
 
 @end
