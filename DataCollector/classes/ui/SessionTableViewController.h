@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <DropboxSDK/DropboxSDK.h>
-#import "MBProgressHUD.h"
 
-@interface SessionTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UIActionSheetDelegate, DBRestClientDelegate, MBProgressHUDDelegate, UIAlertViewDelegate>
+@interface SessionTableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 

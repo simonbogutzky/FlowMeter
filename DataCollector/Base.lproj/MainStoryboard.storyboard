@@ -337,7 +337,7 @@
                                 <action selector="cancelTouched:" destination="wdA-CD-sxA" id="T2B-x6-0yT"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Fertig" style="done" id="f4C-xZ-rCx">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="f4C-xZ-rCx">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="doneTouched:" destination="wdA-CD-sxA" id="fuy-di-anF"/>
@@ -461,7 +461,7 @@
             </objects>
             <point key="canvasLocation" x="1584" y="-855"/>
         </scene>
-        <!--Session Detail View Controller-->
+        <!--S. Bogutzky - Laufen-->
         <scene sceneID="DDe-xy-Gwq">
             <objects>
                 <viewController id="Uao-04-vlE" customClass="SessionDetailViewController" sceneMemberID="viewController">
@@ -474,7 +474,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="fhB-78-Qag"/>
+                    <navigationItem key="navigationItem" title="S. Bogutzky - Laufen" id="fhB-78-Qag">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="action" id="cit-fV-ckV">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lt5-ww-hHW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

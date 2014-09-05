@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <DropboxSDK/DropboxSDK.h>
+#import "MBProgressHUD.h"
+#import "Session+OutStream.h"
 
-@interface SessionDetailViewController : UIViewController
+@interface SessionDetailViewController : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate, DBRestClientDelegate, MBProgressHUDDelegate>
 
-@property (strong, nonatomic) id detailItem;
+@property (strong, nonatomic) Session *session;
 
 @end
