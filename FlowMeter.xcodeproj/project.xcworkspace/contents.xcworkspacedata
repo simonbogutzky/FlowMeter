@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:DataCollector.xcodeproj">
+      location = "self:FlowMeter.xcodeproj">
    </FileRef>
 </Workspace>

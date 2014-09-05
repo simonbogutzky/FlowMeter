@@ -17,7 +17,7 @@
                BlueprintIdentifier = "D31AA2AF1951FD19004ACB8D"
                BuildableName = "HeartRateMonitor.framework"
                BlueprintName = "HeartRateMonitor"
-               ReferencedContainer = "container:DataCollector.xcodeproj">
+               ReferencedContainer = "container:FlowMeter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "D31AA2B91951FD19004ACB8D"
                BuildableName = "HeartRateMonitorTests.xctest"
                BlueprintName = "HeartRateMonitorTests"
-               ReferencedContainer = "container:DataCollector.xcodeproj">
+               ReferencedContainer = "container:FlowMeter.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -49,6 +49,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D31AA2AF1951FD19004ACB8D"
+            BuildableName = "HeartRateMonitor.framework"
+            BlueprintName = "HeartRateMonitor"
+            ReferencedContainer = "container:FlowMeter.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

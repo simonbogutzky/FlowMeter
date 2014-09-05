@@ -139,7 +139,7 @@
 /* Begin PBXFileReference section */
 		4523E19A16F9EE2600761733 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4523E19B16F9EE2600761733 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		604CCD8A16A6F31000E87194 /* DataCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		604CCD8A16A6F31000E87194 /* FlowMeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlowMeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		604CCD8E16A6F31000E87194 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		604CCD9016A6F31000E87194 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		604CCD9216A6F31000E87194 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -178,8 +178,8 @@
 		D34C9D1F17250463004C261C /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionViewController.m; path = classes/ui/SessionViewController.m; sourceTree = "<group>"; };
 		D34C9D2417250463004C261C /* PrefsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefsTableViewController.h; path = classes/ui/PrefsTableViewController.h; sourceTree = "<group>"; };
 		D34C9D2517250463004C261C /* PrefsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrefsTableViewController.m; path = classes/ui/PrefsTableViewController.m; sourceTree = "<group>"; };
-		D34C9D31172504A8004C261C /* DataCollector-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DataCollector-Info.plist"; path = "supporting-files/DataCollector-Info.plist"; sourceTree = "<group>"; };
-		D34C9D32172504A8004C261C /* DataCollector-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DataCollector-Prefix.pch"; path = "supporting-files/DataCollector-Prefix.pch"; sourceTree = "<group>"; };
+		D34C9D31172504A8004C261C /* FlowMeter-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "FlowMeter-Info.plist"; path = "supporting-files/FlowMeter-Info.plist"; sourceTree = "<group>"; };
+		D34C9D32172504A8004C261C /* FlowMeter-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "FlowMeter-Prefix.pch"; path = "supporting-files/FlowMeter-Prefix.pch"; sourceTree = "<group>"; };
 		D35462EE19B21AEE006B2EA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		D35ABC0E188EC2AE00BD1D2D /* LikertScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewController.h; path = classes/ui/LikertScaleViewController.h; sourceTree = "<group>"; };
 		D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LikertScaleViewController.m; path = classes/ui/LikertScaleViewController.m; sourceTree = "<group>"; };
@@ -293,7 +293,7 @@
 		604CCD8B16A6F31000E87194 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				604CCD8A16A6F31000E87194 /* DataCollector.app */,
+				604CCD8A16A6F31000E87194 /* FlowMeter.app */,
 				D31AA2B01951FD19004ACB8D /* HeartRateMonitor.framework */,
 				D31AA2BA1951FD19004ACB8D /* HeartRateMonitorTests.xctest */,
 			);
@@ -387,8 +387,8 @@
 		D31C4BCA19A619DE0017AA5A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D34C9D31172504A8004C261C /* DataCollector-Info.plist */,
-				D34C9D32172504A8004C261C /* DataCollector-Prefix.pch */,
+				D34C9D31172504A8004C261C /* FlowMeter-Info.plist */,
+				D34C9D32172504A8004C261C /* FlowMeter-Prefix.pch */,
 				D3B3DC071733B93A001F2830 /* DataCollector.xcdatamodeld */,
 				D398FAE619AB4072003DB0CA /* DataCollector-Bridging-Header.h */,
 			);
@@ -553,9 +553,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		604CCD8916A6F31000E87194 /* DataCollector */ = {
+		604CCD8916A6F31000E87194 /* FlowMeter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 604CCDAE16A6F31100E87194 /* Build configuration list for PBXNativeTarget "DataCollector" */;
+			buildConfigurationList = 604CCDAE16A6F31100E87194 /* Build configuration list for PBXNativeTarget "FlowMeter" */;
 			buildPhases = (
 				604CCD8616A6F31000E87194 /* Sources */,
 				604CCD8716A6F31000E87194 /* Frameworks */,
@@ -569,9 +569,9 @@
 				D31AA2C41951FD19004ACB8D /* PBXTargetDependency */,
 				D31AA2C81951FD19004ACB8D /* PBXTargetDependency */,
 			);
-			name = DataCollector;
+			name = FlowMeter;
 			productName = DataCollector;
-			productReference = 604CCD8A16A6F31000E87194 /* DataCollector.app */;
+			productReference = 604CCD8A16A6F31000E87194 /* FlowMeter.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D31AA2AF1951FD19004ACB8D /* HeartRateMonitor */ = {
@@ -632,7 +632,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 604CCD8416A6F31000E87194 /* Build configuration list for PBXProject "DataCollector" */;
+			buildConfigurationList = 604CCD8416A6F31000E87194 /* Build configuration list for PBXProject "FlowMeter" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -651,7 +651,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				604CCD8916A6F31000E87194 /* DataCollector */,
+				604CCD8916A6F31000E87194 /* FlowMeter */,
 				D31AA2AF1951FD19004ACB8D /* HeartRateMonitor */,
 				D31AA2B91951FD19004ACB8D /* HeartRateMonitorTests */,
 			);
@@ -883,9 +883,9 @@
 					"$(SRCROOT)/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DataCollector/supporting-files/DataCollector-Prefix.pch";
+				GCC_PREFIX_HEADER = "DataCollector/supporting-files/FlowMeter-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "DataCollector/supporting-files/DataCollector-Info.plist";
+				INFOPLIST_FILE = "DataCollector/supporting-files/FlowMeter-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -901,7 +901,7 @@
 					"-lstdc++",
 					"-all_load",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FlowMeter;
 				PROVISIONING_PROFILE = "057b2130-8322-4e8a-b37e-e1026d8861ec";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "057b2130-8322-4e8a-b37e-e1026d8861ec";
 				SWIFT_OBJC_BRIDGING_HEADER = "DataCollector/DataCollector-Bridging-Header.h";
@@ -925,9 +925,9 @@
 					"$(SRCROOT)/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DataCollector/supporting-files/DataCollector-Prefix.pch";
+				GCC_PREFIX_HEADER = "DataCollector/supporting-files/FlowMeter-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "DataCollector/supporting-files/DataCollector-Info.plist";
+				INFOPLIST_FILE = "DataCollector/supporting-files/FlowMeter-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -943,7 +943,7 @@
 					"-lstdc++",
 					"-all_load",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FlowMeter;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DataCollector/DataCollector-Bridging-Header.h";
@@ -1099,7 +1099,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		604CCD8416A6F31000E87194 /* Build configuration list for PBXProject "DataCollector" */ = {
+		604CCD8416A6F31000E87194 /* Build configuration list for PBXProject "FlowMeter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				604CCDAC16A6F31100E87194 /* Debug */,
@@ -1108,7 +1108,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		604CCDAE16A6F31100E87194 /* Build configuration list for PBXNativeTarget "DataCollector" */ = {
+		604CCDAE16A6F31100E87194 /* Build configuration list for PBXNativeTarget "FlowMeter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				604CCDAF16A6F31100E87194 /* Debug */,
