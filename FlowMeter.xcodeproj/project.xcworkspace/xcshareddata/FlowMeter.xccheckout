@@ -17,7 +17,7 @@
 		<key>940F78D5F98A404F0CE03A452F2871238905218C</key>
 		<string>https://github.com/kolpanic/ZipKit.git</string>
 		<key>FAC44F63CB4568E6F9161B59257F8C81F11493B3</key>
-		<string>https://bitbucket.org/sbogutzky/flow-meter-ios.git</string>
+		<string>https://bitbucket.org/sbogutzky/flowmeter-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>FlowMeter.xcodeproj</string>
@@ -33,7 +33,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://bitbucket.org/sbogutzky/flow-meter-ios.git</string>
+	<string>https://bitbucket.org/sbogutzky/flowmeter-ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
@@ -46,7 +46,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>FAC44F63CB4568E6F9161B59257F8C81F11493B3</string>
 			<key>IDESourceControlWCCName</key>
-			<string>flow-meter-ios</string>
+			<string>flowmeter-ios</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
@@ -54,7 +54,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>4182765C525509B305166AB949D5935FD5C85212</string>
 			<key>IDESourceControlWCCName</key>
-			<string>flow-meter-iosMBProgressHUD</string>
+			<string>flowmeter-iosMBProgressHUD</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
@@ -62,7 +62,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>7070BA961BCA286ED2393408B1E3D78393C99B33</string>
 			<key>IDESourceControlWCCName</key>
-			<string>flow-meter-iosReachability</string>
+			<string>flowmeter-iosReachability</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
@@ -70,7 +70,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>940F78D5F98A404F0CE03A452F2871238905218C</string>
 			<key>IDESourceControlWCCName</key>
-			<string>flow-meter-iosZipKit</string>
+			<string>flowmeter-iosZipKit</string>
 		</dict>
 	</array>
 </dict>
