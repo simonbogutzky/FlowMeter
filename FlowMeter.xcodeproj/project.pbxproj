@@ -330,7 +330,7 @@
 				604CCD9516A6F31000E87194 /* Supporting Files */,
 			);
 			name = FlowMeter;
-			path = DataCollector;
+			path = FlowMeter;
 			sourceTree = "<group>";
 		};
 		604CCD9516A6F31000E87194 /* Supporting Files */ = {
@@ -497,7 +497,7 @@
 				D35FEAE91725415000D92DEB /* Reachability */,
 			);
 			name = ExternalClasses;
-			path = DataCollector;
+			path = FlowMeter;
 			sourceTree = "<group>";
 		};
 		D3C7ADD6171FCCC6000A7D34 /* UI */ = {
@@ -569,7 +569,7 @@
 				D31AA2C81951FD19004ACB8D /* PBXTargetDependency */,
 			);
 			name = FlowMeter;
-			productName = DataCollector;
+			productName = FlowMeter;
 			productReference = 604CCD8A16A6F31000E87194 /* FlowMeter.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -882,9 +882,9 @@
 					"$(SRCROOT)/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DataCollector/supporting-files/FlowMeter-Prefix.pch";
+				GCC_PREFIX_HEADER = "FlowMeter/supporting-files/FlowMeter-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "DataCollector/supporting-files/FlowMeter-Info.plist";
+				INFOPLIST_FILE = "FlowMeter/supporting-files/FlowMeter-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -903,7 +903,7 @@
 				PRODUCT_NAME = FlowMeter;
 				PROVISIONING_PROFILE = "057b2130-8322-4e8a-b37e-e1026d8861ec";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "057b2130-8322-4e8a-b37e-e1026d8861ec";
-				SWIFT_OBJC_BRIDGING_HEADER = "DataCollector/DataCollector-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "FlowMeter/FlowMeter-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;
 				WRAPPER_EXTENSION = app;
@@ -924,9 +924,9 @@
 					"$(SRCROOT)/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DataCollector/supporting-files/FlowMeter-Prefix.pch";
+				GCC_PREFIX_HEADER = "FlowMeter/supporting-files/FlowMeter-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "DataCollector/supporting-files/FlowMeter-Info.plist";
+				INFOPLIST_FILE = "FlowMeter/supporting-files/FlowMeter-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -945,7 +945,7 @@
 				PRODUCT_NAME = FlowMeter;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "DataCollector/DataCollector-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "FlowMeter/FlowMeter-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;
 				WRAPPER_EXTENSION = app;
 			};
