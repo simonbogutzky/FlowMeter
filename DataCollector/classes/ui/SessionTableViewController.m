@@ -13,12 +13,10 @@
 #import "Activity.h"
 #import "SessionDetailViewController.h"
 
-@interface SessionTableViewController () {
-    NSFetchedResultsController *_fetchedResultsController;
-}
+@interface SessionTableViewController ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
-
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, readonly) NSDateFormatter *dateFormatter;
 @property (nonatomic, readonly) NSDateFormatter *dateFormatterDay;
 @property (nonatomic, readonly) NSNumberFormatter *numberFormatter;
@@ -33,6 +31,79 @@
 {
     return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:self.appDelegate.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.appDelegate.managedObjectContext sectionNameKeyPath:@"sectionTitle" cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return _fetchedResultsController;
+}
+
+- (NSDateFormatter *)dateFormatter
+{
+    static NSDateFormatter *dateFormatter = nil;
+    if (dateFormatter == nil) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateStyle = NSDateIntervalFormatterMediumStyle;
+        dateFormatter.timeStyle = NSDateIntervalFormatterNoStyle;
+    }
+    return dateFormatter;
+}
+
+- (NSDateFormatter *)dateFormatterDay
+{
+    static NSDateFormatter *dateFormatterDay = nil;
+    if (dateFormatterDay == nil) {
+        dateFormatterDay = [[NSDateFormatter alloc] init];
+        NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"EEEE" options:0 locale:[NSLocale currentLocale]];
+        [dateFormatterDay setDateFormat:formatString];
+    }
+    return dateFormatterDay;
+}
+
+- (NSNumberFormatter *)numberFormatter
+{
+    static NSNumberFormatter *numberFormatter = nil;
+    if (numberFormatter == nil) {
+        numberFormatter = [[NSNumberFormatter alloc] init];
+        numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        numberFormatter.alwaysShowsDecimalSeparator = YES;
+        numberFormatter.minimumFractionDigits = 1;
+        numberFormatter.maximumFractionDigits = 1;
+    }
+    return numberFormatter;
+}
+
+#pragma mark -
+#pragma mark - UIViewControllerDelegate implementation
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -56,18 +127,17 @@
     self.fetchedResultsController.delegate = nil;
 }
 
-#pragma mark - Table View
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    return [[self.fetchedResultsController sections] count];
+    if ([segue.identifier isEqualToString:@"Show Session Details"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        Session *session = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        [[segue destinationViewController] setSession:session];
+    }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
-}
+#pragma mark -
+#pragma mark - UITableViewDelegate implementation
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -98,14 +168,33 @@
     return view;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return [[[self.fetchedResultsController sections] objectAtIndex:section] name];
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 24.0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44.0;
+}
+
+#pragma mark -
+#pragma mark - UITableViewDataSource implementation
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [[self.fetchedResultsController sections] count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[[self.fetchedResultsController sections] objectAtIndex:section] name];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -115,14 +204,8 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44.0;
-}
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
     return YES;
 }
 
@@ -142,61 +225,8 @@
     }
 }
 
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // The table view should not be re-orderable.
-    return NO;
-}
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    self.selectedSession = [_fetchedResultsController objectAtIndexPath:indexPath];
-//    if ([[DBSession sharedSession] isLinked]) {
-//        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Optionen", @"Optionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern", @"Datei auf dem Gerät speichern"), NSLocalizedString(@"In die Dropbox laden", @"Datei in die Dropbox laden"), nil];
-//        [actionSheet showInView:self.view];
-//    } else {
-//        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Optionen", @"Optionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern", @"Datei auf dem Gerät speichern"), nil];
-//        [actionSheet showInView:self.view];
-//    }
-//    
-//}
-
-#pragma mark - Fetched results controller
-
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:self.appDelegate.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.appDelegate.managedObjectContext sectionNameKeyPath:@"sectionTitle" cacheName:nil];
-    aFetchedResultsController.delegate = self;
-    self.fetchedResultsController = aFetchedResultsController;
-    
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-	    abort();
-	}
-    
-    return _fetchedResultsController;
-}
+#pragma mark -
+#pragma mark - NSFetchedResultsControllerDelegate implementation
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
@@ -251,15 +281,8 @@
     [self.tableView endUpdates];
 }
 
-/*
- // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
- 
- - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
- {
- // In the simplest, most efficient, case, reload the table view.
- [self.tableView reloadData];
- }
- */
+#pragma mark -
+#pragma mark - Convenient methods
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
@@ -273,7 +296,7 @@
     
     UILabel *labelActivity = (UILabel *)[cell viewWithTag:102];
     labelActivity.text = session.activity.name;
-
+    
     UILabel *labelSelfReportCount = (UILabel *)[cell viewWithTag:104];
     labelSelfReportCount.text = [NSString stringWithFormat:@"%d", [session.selfReportCount intValue]];
     
@@ -282,57 +305,10 @@
     
     UILabel *labelDuration = (UILabel *)[cell viewWithTag:107];
     labelDuration.text = [self stringFromTimeInterval:[session.duration doubleValue]];
-    
 }
 
-#pragma mark -
-#pragma mark - Segue
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval
 {
-    if ([segue.identifier isEqualToString:@"Show Session Details"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        Session *session = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [[segue destinationViewController] setSession:session];
-    }
-}
-
-- (NSDateFormatter *)dateFormatter
-{
-    static NSDateFormatter *dateFormatter = nil;
-    if (dateFormatter == nil) {
-        dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateStyle = NSDateIntervalFormatterMediumStyle;
-        dateFormatter.timeStyle = NSDateIntervalFormatterNoStyle;
-    }
-    return dateFormatter;
-}
-
-- (NSDateFormatter *)dateFormatterDay
-{
-    static NSDateFormatter *dateFormatterDay = nil;
-    if (dateFormatterDay == nil) {
-        dateFormatterDay = [[NSDateFormatter alloc] init];
-        NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"EEEE" options:0 locale:[NSLocale currentLocale]];
-        [dateFormatterDay setDateFormat:formatString];
-    }
-    return dateFormatterDay;
-}
-
-- (NSNumberFormatter *)numberFormatter
-{
-    static NSNumberFormatter *numberFormatter = nil;
-    if (numberFormatter == nil) {
-        numberFormatter = [[NSNumberFormatter alloc] init];
-        numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-        numberFormatter.alwaysShowsDecimalSeparator = YES;
-        numberFormatter.minimumFractionDigits = 1;
-        numberFormatter.maximumFractionDigits = 1;
-    }
-    return numberFormatter;
-}
-
-- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval {
     NSInteger ti = (NSInteger)interval;
     //NSInteger seconds = ti % 60;
     NSInteger minutes = (ti / 60) % 60;
