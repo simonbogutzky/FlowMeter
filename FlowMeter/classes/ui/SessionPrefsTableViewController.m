@@ -9,6 +9,7 @@
 #import "SessionPrefsTableViewController.h"
 #import "EditViewController.h"
 #import "SessionViewController.h"
+#import "LabelAndSwitchTableViewCell.h"
 
 #define kPickerAnimationDuration    0.40   // duration for the animation to slide the date picker into view
 #define kDatePickerTag              99     // view tag identifiying the date picker view
@@ -18,6 +19,8 @@
 #define kValueKey       @"value"   // key for obtaining the data source item's value
 
 // keep track of which sections and rows have picker cells
+#define kFlowShortScaleSwitchSection   2
+#define kFlowShortScaleSwitchRow   0
 #define kTimeIntervalSection   2
 #define kTimeIntervalRow   1
 #define kTimeIntervalDummySection   2
@@ -28,6 +31,7 @@
 static NSString *kDateCellID = @"dateCell";     // the cells with the start or end date
 static NSString *kDatePickerID = @"datePicker"; // the cell containing the date picker
 static NSString *kOtherCell = @"valueCell";     // the remaining cells at the end
+static NSString *kSwitchCell = @"switchCell";     // the remaining cells at the end
 static NSString *kDummyCell = @"dummyCell";     // the remaining cells at the end
 
 @interface SessionPrefsTableViewController ()
@@ -46,6 +50,8 @@ static NSString *kDummyCell = @"dummyCell";     // the remaining cells at the en
 
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 
+@property (assign) BOOL flowShortScalePropertiesHidden;
+
 @end
 
 @implementation SessionPrefsTableViewController
@@ -63,7 +69,7 @@ static NSString *kDummyCell = @"dummyCell";     // the remaining cells at the en
     NSArray *sectionOne = @[itemOne, itemTwo];
     NSMutableDictionary *itemThree = [@{ kTitleKey : NSLocalizedString(@"Aktivität", @"Aktivität"), kValueKey : @" "} mutableCopy];
     NSArray *sectionTwo = @[itemThree];
-    NSMutableDictionary *itemFour = [@{ kTitleKey : NSLocalizedString(@"Flow Kurzskala", @"Flow Kurzskala"), kValueKey : @"1"} mutableCopy];
+    NSMutableDictionary *itemFour = [@{ kTitleKey : NSLocalizedString(@"Flow Kurzskala", @"Flow Kurzskala"), kValueKey : @1} mutableCopy];
     NSMutableDictionary *itemFive = [@{ kTitleKey : @"Zeitinterval",
                                         kDateKey : [NSNumber numberWithDouble:60 * 60.0] } mutableCopy];
     NSMutableDictionary *itemSix = [@{ kTitleKey : @"dummy", kValueKey : @""} mutableCopy];
@@ -132,6 +138,8 @@ static NSString *kDummyCell = @"dummyCell";     // the remaining cells at the en
         return self.pickerCellRowHeight;
     } else if ([self indexPathHasDummy:indexPath]) {
         return 0.0;
+    } else if ([self indexPathHasSwitch:indexPath]) {
+        return 44.0;
     }
     return self.tableView.rowHeight;
 }
@@ -143,6 +151,10 @@ static NSString *kDummyCell = @"dummyCell";     // the remaining cells at the en
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 2 && self.flowShortScalePropertiesHidden) {
+        return 1;
+    }
+    
     if ([self isInlineDatePickerInSection:section])
     {
         // we have a date picker, so allow for it in the number of rows in this section
@@ -170,6 +182,8 @@ static NSString *kDummyCell = @"dummyCell";     // the remaining cells at the en
         cellID = kDateCellID;       // the start/end date cells
     } else if ([self indexPathHasDummy:indexPath]) {
         cellID = kDummyCell;
+    } else if ([self indexPathHasSwitch:indexPath]) {
+        cellID = kSwitchCell;
     }
 
     cell = [tableView dequeueReusableCellWithIdentifier:cellID];
@@ -205,6 +219,9 @@ static NSString *kDummyCell = @"dummyCell";     // the remaining cells at the en
         //
         cell.textLabel.text = [itemData valueForKey:kTitleKey];
         cell.detailTextLabel.text = [itemData valueForKey:kValueKey];
+    } else if ([cellID isEqualToString:kSwitchCell]) {
+        ((LabelAndSwitchTableViewCell * )cell).label.text = [itemData valueForKey:kTitleKey];
+        ((LabelAndSwitchTableViewCell * )cell).contentswitch.on = [[itemData valueForKey:kValueKey] boolValue];
     }
     
 	return cell;
@@ -370,6 +387,39 @@ static NSString *kDummyCell = @"dummyCell";     // the remaining cells at the en
     [self.dataArray[targetedCellIndexPath.section][targetedCellIndexPath.row] setObject:[NSNumber numberWithDouble:targetedDatePicker.countDownDuration] forKey:kDateKey];
 }
 
+- (IBAction)switchChangeAction:(UISwitch *)sender
+{
+    CGPoint center = sender.center;
+    CGPoint rootViewPoint = [sender.superview convertPoint:center toView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:rootViewPoint];
+    
+    // update our data model
+    NSMutableDictionary *itemData = self.dataArray[indexPath.section][indexPath.row];
+    [itemData setValue:[NSNumber numberWithBool:sender.on] forKey:kValueKey];
+    
+    if (kFlowShortScaleSwitchSection == indexPath.section && kFlowShortScaleSwitchRow == indexPath.row) {
+        self.flowShortScalePropertiesHidden = !sender.on;
+        NSArray *indexPaths = nil;
+        if ([self hasPickerForIndexPath:[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section]]){
+            indexPaths = @[[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section], [NSIndexPath indexPathForRow:indexPath.row + 2 inSection:indexPath.section], [NSIndexPath indexPathForRow:indexPath.row + 3 inSection:indexPath.section]];
+        } else {
+            indexPaths = @[[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section], [NSIndexPath indexPathForRow:indexPath.row + 2 inSection:indexPath.section]];
+        }
+        
+        if (!sender.on){
+            [self.tableView deleteRowsAtIndexPaths:indexPaths
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            self.datePickerIndexPath = nil;
+        }
+        else
+        {
+            [self.tableView insertRowsAtIndexPaths:indexPaths
+                                  withRowAnimation:UITableViewRowAnimationFade];
+        }
+    }
+    [self.tableView reloadData];
+}
+
 
 /*! User chose to finish using the UIDatePicker by pressing the "Done" button
     (used only for "non-inline" date picker, iOS 6.1.x or earlier)
@@ -473,6 +523,18 @@ NSUInteger DeviceSystemMajorVersion()
  
  @param indexPath The indexPath to check if it represents start/end date cell.
  */
+
+- (BOOL)indexPathHasSwitch:(NSIndexPath *)indexPath
+{
+    BOOL hasSwitch = NO;
+    
+    if (indexPath.section == kFlowShortScaleSwitchSection && indexPath.row == kFlowShortScaleSwitchRow) {
+        hasSwitch = YES;
+    }
+    
+    return hasSwitch;
+}
+
 - (BOOL)indexPathHasDate:(NSIndexPath *)indexPath
 {
     BOOL hasDate = NO;

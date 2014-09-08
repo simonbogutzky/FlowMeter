@@ -161,7 +161,7 @@
         
         [self.stopWatchTimer invalidate];
         
-        if ([[self.sessionData[2][0] objectForKey:kValueKey] isEqualToString:@"1"]) {
+        if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
             [self.selfReportTimer invalidate];
             self.isLastSelfReport = YES;
             
@@ -286,7 +286,7 @@
     
     [self startStopWatch];
     
-    if ([[self.sessionData[2][0] objectForKey:kValueKey] isEqualToString:@"1"]) {
+    if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
         self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.sessionData[2][1] objectForKey:kDateKey] doubleValue] target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     }
 }
@@ -433,7 +433,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     self.startSelfReportDate = [NSDate date];
     AudioServicesPlaySystemSound(1007);
     
-    if ([[self.sessionData[2][0] objectForKey:kValueKey] isEqualToString:@"1"]) {
+    if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
         [self presentViewController:[self flowShortScaleViewControllerFromStoryboard] animated:YES completion:nil];
     }
 }

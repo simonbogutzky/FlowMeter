@@ -47,6 +47,7 @@
 		D38FBDBA196C1DC000C63681 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB4196C1DC000C63681 /* InfoPlist.strings */; };
 		D38FBDBB196C1DC000C63681 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB6196C1DC000C63681 /* Localizable.strings */; };
 		D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */; };
+		D396933D19BE10D700249D2C /* LabelAndSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D396933C19BE10D700249D2C /* LabelAndSwitchTableViewCell.m */; };
 		D39736C819B0C11D005D643D /* SelfReport.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736C719B0C11D005D643D /* SelfReport.m */; };
 		D39736CB19B0C11E005D643D /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736CA19B0C11E005D643D /* Activity.m */; };
 		D39736CE19B0C11E005D643D /* HeartRateRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736CD19B0C11E005D643D /* HeartRateRecord.m */; };
@@ -190,6 +191,8 @@
 		D38A216C16BFF9F80075D093 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D38FBDB5196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D38FBDB7196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D396933B19BE10D700249D2C /* LabelAndSwitchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LabelAndSwitchTableViewCell.h; path = classes/ui/LabelAndSwitchTableViewCell.h; sourceTree = "<group>"; };
+		D396933C19BE10D700249D2C /* LabelAndSwitchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LabelAndSwitchTableViewCell.m; path = classes/ui/LabelAndSwitchTableViewCell.m; sourceTree = "<group>"; };
 		D39736C619B0C11D005D643D /* SelfReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelfReport.h; path = classes/model/SelfReport.h; sourceTree = "<group>"; };
 		D39736C719B0C11D005D643D /* SelfReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelfReport.m; path = classes/model/SelfReport.m; sourceTree = "<group>"; };
 		D39736C919B0C11E005D643D /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Activity.h; path = classes/model/Activity.h; sourceTree = "<group>"; };
@@ -519,6 +522,8 @@
 				D3A4629E1726E08900D454F7 /* SessionTableViewController.m */,
 				D34C9D1E17250463004C261C /* SessionViewController.h */,
 				D34C9D1F17250463004C261C /* SessionViewController.m */,
+				D396933B19BE10D700249D2C /* LabelAndSwitchTableViewCell.h */,
+				D396933C19BE10D700249D2C /* LabelAndSwitchTableViewCell.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -719,6 +724,7 @@
 				D329ACED197A98F400B144B5 /* Session+OutStream.m in Sources */,
 				D34C9D191725044D004C261C /* AppDelegate.m in Sources */,
 				D34C9D1A1725044D004C261C /* main.m in Sources */,
+				D396933D19BE10D700249D2C /* LabelAndSwitchTableViewCell.m in Sources */,
 				D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */,
 				D34C9D2917250463004C261C /* SessionViewController.m in Sources */,
 				D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */,

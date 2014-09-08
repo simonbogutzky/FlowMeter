@@ -26,6 +26,11 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.topItem.title = [self.itemDictionary objectForKey:kTitleKey];
     self.textField.text = @"";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidHide:)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
 }
 
 #pragma mark -
@@ -37,14 +42,20 @@
     if ([self.textField.text isEqualToString:@""]) {
         [self.itemDictionary setValue:@" " forKey:kValueKey];
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self resignFirstResponder];
+    [self.textField resignFirstResponder];
 }
 
 - (IBAction)cancelTouched:(id)sender
 {
+    if (![self.textField isFirstResponder]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    [self.textField resignFirstResponder];
+}
+
+- (void)keyboardDidHide:(NSNotification *)notification
+{
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self resignFirstResponder];
 }
 
 
