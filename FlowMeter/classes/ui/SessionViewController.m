@@ -295,11 +295,14 @@
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.session.selfReportCount = [NSNumber numberWithInt:self.selfReportCount];
-    self.session.averageAbsorption = [NSNumber numberWithFloat:self.absorptionSum / self.selfReportCount];
-    self.session.averageAnxiety = [NSNumber numberWithFloat:self.anxietySum / self.selfReportCount];
-    self.session.averageFit = [NSNumber numberWithFloat:self.fitSum / self.selfReportCount];
-    self.session.averageFlow = [NSNumber numberWithFloat:self.flowSum / self.selfReportCount];
-    self.session.averageFluency = [NSNumber numberWithFloat:self.fluencySum / self.selfReportCount];
+    if ([self.session.selfReportCount integerValue] != 0) {
+        self.session.averageAbsorption = [NSNumber numberWithFloat:self.absorptionSum / self.selfReportCount];
+        self.session.averageAnxiety = [NSNumber numberWithFloat:self.anxietySum / self.selfReportCount];
+        self.session.averageFit = [NSNumber numberWithFloat:self.fitSum / self.selfReportCount];
+        self.session.averageFlow = [NSNumber numberWithFloat:self.flowSum / self.selfReportCount];
+        self.session.averageFluency = [NSNumber numberWithFloat:self.fluencySum / self.selfReportCount];
+    }
+    
     if (self.heartRateCount != 0) {
         self.session.averageBPM = [NSNumber numberWithFloat:self.heartRateSum / self.heartRateCount];
     }
