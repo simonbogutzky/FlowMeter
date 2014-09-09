@@ -59,13 +59,9 @@
     
     
     NSLog(@"# HeartRateMonitor State: %d", self.heartRateMonitorManager.state);
-    
-    // TestFlight takeoff
-//    [TestFlight takeOff:@"f73deffe-10d8-4f69-a5dd-096197db5a7e"];
-    
+
     // Dropbox
     DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"tvd64fwxro7ck60" appSecret:@"2azrb93xdsddgx2" root:kDBRootAppFolder];
-//    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"e0j2mxziwyk196j" appSecret:@"9n3zo6omw06kgd2" root:kDBRootAppFolder];
     [DBSession setSharedSession:dbSession];
     
     // Global apperance
