@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define kTitleKey       @"title"   // key for obtaining the data source item's title
-#define kValueKey       @"value"   // key for obtaining the data source item's value
-
 @interface EditViewController : UIViewController
 
 @property (nonatomic, strong) NSDictionary *itemDictionary;

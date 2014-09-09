@@ -10,13 +10,10 @@
 #import "EditViewController.h"
 #import "SessionViewController.h"
 #import "LabelAndSwitchTableViewCell.h"
+#import "AppDelegate.h"
 
 #define kPickerAnimationDuration    0.40   // duration for the animation to slide the date picker into view
 #define kDatePickerTag              99     // view tag identifiying the date picker view
-
-#define kTitleKey       @"title"   // key for obtaining the data source item's title
-#define kDateKey        @"date"    // key for obtaining the data source item's date value
-#define kValueKey       @"value"   // key for obtaining the data source item's value
 
 // keep track of which sections and rows have picker cells
 #define kFlowShortScaleSwitchSection   2
@@ -64,10 +61,10 @@ static NSString *kDummyCell = @"dummyCell";     // the remaining cells at the en
     [super viewDidLoad];
     
     // setup our data source
-    NSMutableDictionary *itemOne = [@{ kTitleKey : NSLocalizedString(@"Vorname", @"Vorname"), kValueKey : @" "} mutableCopy];
-    NSMutableDictionary *itemTwo = [@{ kTitleKey : NSLocalizedString(@"Nachname", @"Nachname"), kValueKey : @" "} mutableCopy];
+    NSMutableDictionary *itemOne = [@{ kTitleKey : NSLocalizedString(@"Vorname", @"Vorname"), kValueKey : @" ", kEntityKey : @"User", kPropertyKey: @"firstName"} mutableCopy];
+    NSMutableDictionary *itemTwo = [@{ kTitleKey : NSLocalizedString(@"Nachname", @"Nachname"), kValueKey : @" ", kEntityKey : @"User", kPropertyKey: @"lastName"} mutableCopy];
     NSArray *sectionOne = @[itemOne, itemTwo];
-    NSMutableDictionary *itemThree = [@{ kTitleKey : NSLocalizedString(@"Aktivität", @"Aktivität"), kValueKey : @" "} mutableCopy];
+    NSMutableDictionary *itemThree = [@{ kTitleKey : NSLocalizedString(@"Aktivität", @"Aktivität"), kValueKey : @" ", kEntityKey : @"Activity", kPropertyKey: @"name"} mutableCopy];
     NSArray *sectionTwo = @[itemThree];
     NSMutableDictionary *itemFour = [@{ kTitleKey : NSLocalizedString(@"Flow Kurzskala", @"Flow Kurzskala"), kValueKey : @1} mutableCopy];
     NSMutableDictionary *itemFive = [@{ kTitleKey : @"Zeitinterval",

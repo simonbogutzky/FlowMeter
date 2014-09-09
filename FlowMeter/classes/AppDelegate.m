@@ -66,7 +66,7 @@
     
     // Global apperance
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0x1D70B7)];
+    [[UITabBar appearance] setTintColor:UIColorFromRGB(0x1D70B7)];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     //

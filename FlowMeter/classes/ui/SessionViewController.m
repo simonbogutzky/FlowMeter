@@ -20,10 +20,6 @@
 //TODO: Sekunden in Einstellungen auslagern
 #define START_COUNTDOWN_SECONDS 5
 
-#define kTitleKey       @"title"   // key for obtaining the data source item's title
-#define kValueKey       @"value"   // key for obtaining the data source item's value
-#define kDateKey        @"date"    // key for obtaining the data source item's date value
-
 @interface SessionViewController ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;

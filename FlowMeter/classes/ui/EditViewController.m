@@ -7,16 +7,23 @@
 //
 
 #import "EditViewController.h"
-#import "User.h"
+#import "AppDelegate.h"
 
 @interface EditViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *textField;
-@property (nonatomic, weak) IBOutlet UIBarButtonItem *doneButton;
 
 @end
 
 @implementation EditViewController
+
+#pragma mark -
+#pragma mark - Getter
+
+- (AppDelegate *)appDelegate
+{
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
 
 #pragma mark -
 #pragma mark - UIViewControllerDelegate implementation
@@ -31,6 +38,28 @@
                                              selector:@selector(keyboardDidHide:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
+    
+    NSLog(@"%@", [[self getDisplayNameStrings] componentsJoinedByString:@", "]);
+}
+
+- (NSArray *)getDisplayNameStrings
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[self.itemDictionary objectForKey:kEntityKey] inManagedObjectContext:self.appDelegate.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSArray *fetchedObjects = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    if (fetchedObjects == nil) {
+        return @[];
+    }
+    
+    NSMutableArray *displayNameStrings = [NSMutableArray array];
+    for (NSManagedObject *object in fetchedObjects) {
+        [displayNameStrings addObject:[object valueForKey:[self.itemDictionary objectForKey:kPropertyKey]]];
+    }
+    
+    return displayNameStrings;
 }
 
 #pragma mark -
