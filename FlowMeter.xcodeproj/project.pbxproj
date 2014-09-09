@@ -894,8 +894,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = FlowMeter/FlowMeter.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Simon Bogutzky (3G74VT8VX3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Bogutzky (3G74VT8VX3)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: out there/ communication (8936XLC29N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: out there/ communication (8936XLC29N)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
@@ -917,8 +917,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = FlowMeter;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "821e3eab-f5b9-439e-8152-55ca84c764d8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "821e3eab-f5b9-439e-8152-55ca84c764d8";
 				SWIFT_OBJC_BRIDGING_HEADER = "FlowMeter/FlowMeter-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;

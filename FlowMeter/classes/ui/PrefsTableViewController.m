@@ -10,23 +10,30 @@
 #import "PrefsTableViewController.h"
 #import "AppDelegate.h"
 
-@interface PrefsTableViewController () {
-    AppDelegate *_appDelegate;
-}
+@interface PrefsTableViewController ()
+
+@property (nonatomic, strong) AppDelegate *appDelegate;
 @property (weak, nonatomic) IBOutlet UISwitch *dbConnectionStatusSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *hxmConnectionStatusSwitch;
-@property (weak, nonatomic) IBOutlet UITableViewCell *hxmTableViewCell;
-
 
 @end
 
 @implementation PrefsTableViewController
 
+#pragma mark -
+#pragma mark - Getter
+
+- (AppDelegate *)appDelegate
+{
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+#pragma mark -
+#pragma mark - UIViewControllerDelegate implementation
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dBConnectionChanged:) name:NOTIFICATION_DB_CONNECTION_CANCELLED object:nil];
 }
 
@@ -34,8 +41,8 @@
 {
     [super viewWillAppear:animated];
     self.dbConnectionStatusSwitch.on = [[DBSession sharedSession] isLinked];
-    self.hxmConnectionStatusSwitch.on = _appDelegate.heartRateMonitorManager.hasConnection;
-    self.hxmConnectionStatusSwitch.enabled = _appDelegate.heartRateMonitorManager.hasConnection;
+    self.hxmConnectionStatusSwitch.on = self.appDelegate.heartRateMonitorManager.hasConnection;
+    self.hxmConnectionStatusSwitch.enabled = self.self.appDelegate.heartRateMonitorManager.hasConnection;
 }
 
 #pragma mark -
@@ -43,16 +50,16 @@
 
 - (IBAction)changeDbConnectionStatus:(id)sender
 {
-    if (![[DBSession sharedSession] isLinked] && _dbConnectionStatusSwitch.on)
+    if (![[DBSession sharedSession] isLinked] && self.dbConnectionStatusSwitch.on)
         [[DBSession sharedSession] linkFromController:self];
     
-    if ([[DBSession sharedSession] isLinked] && !_dbConnectionStatusSwitch.on)
+    if ([[DBSession sharedSession] isLinked] && !self.dbConnectionStatusSwitch.on)
         [[DBSession sharedSession] unlinkAll];
 }
 
 - (IBAction)changeHxMConnectionStatus:(UISwitch *)sender {
-    if (_appDelegate.heartRateMonitorManager.hasConnection && !sender.on) {
-        [_appDelegate.heartRateMonitorManager disconnectHeartRateMonitorDevice];
+    if (self.appDelegate.heartRateMonitorManager.hasConnection && !sender.on) {
+        [self.appDelegate.heartRateMonitorManager disconnectHeartRateMonitorDevice];
     }
     sender.enabled = NO;
 }
@@ -63,6 +70,8 @@
 
 - (void)dBConnectionChanged:(NSNotification *)notification
 {
-    [_dbConnectionStatusSwitch setOn:!_dbConnectionStatusSwitch.on animated:YES];
+    if ([notification.name isEqualToString:@"NotificationDBLinkCancelled"] && self.dbConnectionStatusSwitch.on) {
+        [self.dbConnectionStatusSwitch setOn:NO animated:YES];
+    }
 }
 @end

@@ -58,10 +58,10 @@
 {
     if ([[DBSession sharedSession] isLinked]) {
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Aktionen", @"Aktionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern", @"Datei auf dem Gerät speichern"), NSLocalizedString(@"In die Dropbox laden", @"Datei in die Dropbox laden"), nil];
-        [actionSheet showInView:self.view];
+        [actionSheet showFromTabBar:self.tabBarController.tabBar];
     } else {
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Aktionen", @"Aktionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern", @"Datei auf dem Gerät speichern"), nil];
-        [actionSheet showInView:self.view];
+        [actionSheet showFromTabBar:self.tabBarController.tabBar];
     }
 }
 
@@ -179,6 +179,8 @@
     [self.hud hide:YES afterDelay:2];
     
     self.filename = nil;
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 - (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
