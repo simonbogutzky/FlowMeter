@@ -214,9 +214,4 @@
     }
 }
 
-- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
-{
-    NSLog(@"# event code: %u", eventCode);
-}
-
 @end

@@ -56,9 +56,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
-    
-    NSLog(@"# HeartRateMonitor State: %d", self.heartRateMonitorManager.state);
 
     // Dropbox
     DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"tvd64fwxro7ck60" appSecret:@"2azrb93xdsddgx2" root:kDBRootAppFolder];
@@ -66,7 +63,7 @@
     
     // Global apperance
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0x1D70B7)];
+    [[UITabBar appearance] setTintColor:UIColorFromRGB(0x1D70B7)];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     //
