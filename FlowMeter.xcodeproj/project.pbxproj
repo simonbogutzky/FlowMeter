@@ -156,6 +156,7 @@
 		D31AA2D81951FD6A004ACB8D /* HeartRateMonitorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorManager.m; sourceTree = "<group>"; };
 		D31AA2D91951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorManagerDelegate.h; sourceTree = "<group>"; };
 		D31AA2E21951FDE5004ACB8D /* HeartRateMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitor.h; sourceTree = "<group>"; };
+		D31BEF3C19C028090005BBFC /* FlowMeter-Version-003.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-003.xcdatamodel"; sourceTree = "<group>"; };
 		D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewControllerDelegate.h; path = classes/ui/LikertScaleViewControllerDelegate.h; sourceTree = "<group>"; };
 		D324688019B8AA9E00355ABE /* SessionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionDetailViewController.h; path = classes/ui/SessionDetailViewController.h; sourceTree = "<group>"; };
 		D324688119B8AA9E00355ABE /* SessionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionDetailViewController.m; path = classes/ui/SessionDetailViewController.m; sourceTree = "<group>"; };
@@ -1115,10 +1116,11 @@
 		D3B3DC071733B93A001F2830 /* FlowMeter.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D31BEF3C19C028090005BBFC /* FlowMeter-Version-003.xcdatamodel */,
 				D3E1F9AE19B9BA3000D1E8EC /* FlowMeter-Version-002.xcdatamodel */,
 				D3B3DC081733B93A001F2830 /* FlowMeter.xcdatamodel */,
 			);
-			currentVersion = D3E1F9AE19B9BA3000D1E8EC /* FlowMeter-Version-002.xcdatamodel */;
+			currentVersion = D31BEF3C19C028090005BBFC /* FlowMeter-Version-003.xcdatamodel */;
 			name = FlowMeter.xcdatamodeld;
 			path = "supporting-files/FlowMeter.xcdatamodeld";
 			sourceTree = "<group>";
