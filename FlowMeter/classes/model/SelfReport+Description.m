@@ -40,8 +40,8 @@
     static NSDateFormatter *dateFormatter = nil;
     if (dateFormatter == nil) {
         dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateStyle = NSDateIntervalFormatterShortStyle;
-        dateFormatter.timeStyle = NSDateIntervalFormatterShortStyle;
+        dateFormatter.dateStyle = NSDateFormatterShortStyle;
+        dateFormatter.timeStyle = NSDateFormatterShortStyle;
     }
     return dateFormatter;
 }
