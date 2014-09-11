@@ -123,7 +123,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		D31AA2D01951FD19004ACB8D /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -156,6 +156,7 @@
 		D31AA2D81951FD6A004ACB8D /* HeartRateMonitorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorManager.m; sourceTree = "<group>"; };
 		D31AA2D91951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorManagerDelegate.h; sourceTree = "<group>"; };
 		D31AA2E21951FDE5004ACB8D /* HeartRateMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitor.h; sourceTree = "<group>"; };
+		D31BEF3C19C028090005BBFC /* FlowMeter-Version-003.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-003.xcdatamodel"; sourceTree = "<group>"; };
 		D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewControllerDelegate.h; path = classes/ui/LikertScaleViewControllerDelegate.h; sourceTree = "<group>"; };
 		D324688019B8AA9E00355ABE /* SessionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionDetailViewController.h; path = classes/ui/SessionDetailViewController.h; sourceTree = "<group>"; };
 		D324688119B8AA9E00355ABE /* SessionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionDetailViewController.m; path = classes/ui/SessionDetailViewController.m; sourceTree = "<group>"; };
@@ -811,7 +812,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "057b2130-8322-4e8a-b37e-e1026d8861ec";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "057b2130-8322-4e8a-b37e-e1026d8861ec";
@@ -830,12 +831,12 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: out there/ communication (8936XLC29N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: out there/ communication (8936XLC29N)";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
@@ -1115,10 +1116,11 @@
 		D3B3DC071733B93A001F2830 /* FlowMeter.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D31BEF3C19C028090005BBFC /* FlowMeter-Version-003.xcdatamodel */,
 				D3E1F9AE19B9BA3000D1E8EC /* FlowMeter-Version-002.xcdatamodel */,
 				D3B3DC081733B93A001F2830 /* FlowMeter.xcdatamodel */,
 			);
-			currentVersion = D3E1F9AE19B9BA3000D1E8EC /* FlowMeter-Version-002.xcdatamodel */;
+			currentVersion = D31BEF3C19C028090005BBFC /* FlowMeter-Version-003.xcdatamodel */;
 			name = FlowMeter.xcdatamodeld;
 			path = "supporting-files/FlowMeter.xcdatamodeld";
 			sourceTree = "<group>";

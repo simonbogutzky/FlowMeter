@@ -72,8 +72,8 @@
     static NSDateFormatter *dateFormatter = nil;
     if (dateFormatter == nil) {
         dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateStyle = NSDateIntervalFormatterMediumStyle;
-        dateFormatter.timeStyle = NSDateIntervalFormatterNoStyle;
+        dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+        dateFormatter.timeStyle = NSDateFormatterNoStyle;
     }
     return dateFormatter;
 }

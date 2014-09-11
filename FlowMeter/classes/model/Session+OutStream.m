@@ -137,8 +137,8 @@
     static NSDateFormatter *dateFormatter = nil;
     if (dateFormatter == nil) {
         dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateStyle = NSDateIntervalFormatterShortStyle;
-        dateFormatter.timeStyle = NSDateIntervalFormatterNoStyle;
+        dateFormatter.dateStyle = NSDateFormatterShortStyle;
+        dateFormatter.timeStyle = NSDateFormatterNoStyle;
     }
     return dateFormatter;
 }
@@ -148,8 +148,8 @@
     static NSDateFormatter *dateFormatter = nil;
     if (dateFormatter == nil) {
         dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateStyle = NSDateIntervalFormatterNoStyle;
-        dateFormatter.timeStyle = NSDateIntervalFormatterShortStyle;
+        dateFormatter.dateStyle = NSDateFormatterNoStyle;
+        dateFormatter.timeStyle = NSDateFormatterShortStyle;
     }
     return dateFormatter;
 }
