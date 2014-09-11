@@ -12,6 +12,9 @@
 @interface EditViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *textField;
+@property (nonatomic, strong) AppDelegate *appDelegate;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSArray *option;
 
 @end
 
@@ -33,33 +36,27 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.topItem.title = [self.itemDictionary objectForKey:kTitleKey];
     self.textField.text = @"";
+    self.option = [self getDisplayNameStrings];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidHide:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
-    
-    NSLog(@"%@", [[self getDisplayNameStrings] componentsJoinedByString:@", "]);
 }
 
-- (NSArray *)getDisplayNameStrings
+#pragma mark -
+#pragma mark - UITableViewDataSource implementation
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:[self.itemDictionary objectForKey:kEntityKey] inManagedObjectContext:self.appDelegate.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    NSArray *fetchedObjects = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:nil];
-    if (fetchedObjects == nil) {
-        return @[];
-    }
-    
-    NSMutableArray *displayNameStrings = [NSMutableArray array];
-    for (NSManagedObject *object in fetchedObjects) {
-        [displayNameStrings addObject:[object valueForKey:[self.itemDictionary objectForKey:kPropertyKey]]];
-    }
-    
-    return displayNameStrings;
+    return self.option.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Option Cell" forIndexPath:indexPath];
+    //[self configureCell:cell atIndexPath:indexPath];
+    return cell;
 }
 
 #pragma mark -
@@ -82,9 +79,32 @@
     [self.textField resignFirstResponder];
 }
 
+#pragma mark -
+#pragma mark - Convenient methods
+
 - (void)keyboardDidHide:(NSNotification *)notification
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (NSArray *)getDisplayNameStrings
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[self.itemDictionary objectForKey:kEntityKey] inManagedObjectContext:self.appDelegate.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSArray *fetchedObjects = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    if (fetchedObjects == nil) {
+        return @[];
+    }
+    
+    NSMutableArray *displayNameStrings = [NSMutableArray array];
+    for (NSManagedObject *object in fetchedObjects) {
+        [displayNameStrings addObject:[object valueForKey:[self.itemDictionary objectForKey:kPropertyKey]]];
+    }
+    
+    return displayNameStrings;
 }
 
 
