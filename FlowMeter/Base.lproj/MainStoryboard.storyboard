@@ -121,23 +121,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VCk-FN-gWn">
-                                <rect key="frame" x="20" y="20" width="280" height="44"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DFu-Aw-v46">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VCk-FN-gWn">
+                                        <rect key="frame" x="16" y="13" width="288" height="20"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
+                                        <connections>
+                                            <action selector="doneTouched:" destination="wdA-CD-sxA" eventType="editingDidEndOnExit" id="sxY-b1-4ex"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="1ea-qH-5s3"/>
+                                    <constraint firstItem="VCk-FN-gWn" firstAttribute="leading" secondItem="DFu-Aw-v46" secondAttribute="leading" constant="16" id="0ke-xw-cON"/>
+                                    <constraint firstAttribute="centerY" secondItem="VCk-FN-gWn" secondAttribute="centerY" id="0oN-SL-kwe"/>
+                                    <constraint firstAttribute="trailing" secondItem="VCk-FN-gWn" secondAttribute="trailing" constant="16" id="1Rr-1e-q1d"/>
+                                    <constraint firstAttribute="height" constant="45" id="1U9-f5-cZg"/>
                                 </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
-                                <connections>
-                                    <action selector="doneTouched:" destination="wdA-CD-sxA" eventType="editingDidEndOnExit" id="sxY-b1-4ex"/>
-                                </connections>
-                            </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tpd-F3-oak">
-                                <rect key="frame" x="0.0" y="72" width="320" height="432"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tpd-F3-oak">
+                                <rect key="frame" x="0.0" y="46" width="320" height="458"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Option Cell" textLabel="3Dj-cx-6L9" style="IBUITableViewCellStyleDefault" id="wqn-bd-a5w">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="Option Cell" textLabel="3Dj-cx-6L9" style="IBUITableViewCellStyleDefault" id="wqn-bd-a5w">
                                         <rect key="frame" x="0.0" y="0.0" width="275" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wqn-bd-a5w" id="QVV-3d-sd0">
@@ -151,6 +160,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -159,12 +169,15 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="VCk-FN-gWn" firstAttribute="top" secondItem="BfI-PG-hve" secondAttribute="bottom" constant="20" id="5e7-Pu-hQ1"/>
-                            <constraint firstItem="mAQ-EO-yG1" firstAttribute="top" secondItem="VCk-FN-gWn" secondAttribute="bottom" constant="440" id="EW3-RS-Q0H"/>
-                            <constraint firstItem="VCk-FN-gWn" firstAttribute="leading" secondItem="kBz-oe-xH4" secondAttribute="leading" constant="20" id="L1W-1E-zFT"/>
-                            <constraint firstAttribute="trailing" secondItem="VCk-FN-gWn" secondAttribute="trailing" constant="20" id="n12-TY-dvO"/>
+                            <constraint firstItem="tpd-F3-oak" firstAttribute="leading" secondItem="kBz-oe-xH4" secondAttribute="leading" id="8lu-e5-aPn"/>
+                            <constraint firstAttribute="trailing" secondItem="DFu-Aw-v46" secondAttribute="trailing" id="OMm-QN-Zxw"/>
+                            <constraint firstAttribute="trailing" secondItem="tpd-F3-oak" secondAttribute="trailing" id="Rqh-zC-Wt9"/>
+                            <constraint firstItem="DFu-Aw-v46" firstAttribute="top" secondItem="BfI-PG-hve" secondAttribute="bottom" id="vNP-aw-cS1"/>
+                            <constraint firstItem="DFu-Aw-v46" firstAttribute="leading" secondItem="kBz-oe-xH4" secondAttribute="leading" id="yxb-xS-zCv"/>
+                            <constraint firstItem="mAQ-EO-yG1" firstAttribute="top" secondItem="tpd-F3-oak" secondAttribute="bottom" id="zQ2-5q-SU4"/>
+                            <constraint firstItem="tpd-F3-oak" firstAttribute="top" secondItem="DFu-Aw-v46" secondAttribute="bottom" constant="1" id="zZD-7V-q1x"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="bearbeiten" id="3IC-dB-72B">

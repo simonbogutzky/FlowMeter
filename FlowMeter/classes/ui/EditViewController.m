@@ -45,6 +45,16 @@
 }
 
 #pragma mark -
+#pragma mark - UITableViewDelegate implementation
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.itemDictionary setValue:[self.option objectAtIndex:indexPath.row] forKey:kValueKey];
+    [self dismissViewController];
+}
+
+#pragma mark -
 #pragma mark - UITableViewDataSource implementation
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -55,7 +65,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Option Cell" forIndexPath:indexPath];
-    //[self configureCell:cell atIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
@@ -64,7 +74,7 @@
 
 - (IBAction)doneTouched:(id)sender
 {
-    [self.itemDictionary setValue:self.textField.text forKey:kValueKey];
+    [self.itemDictionary setValue:[self.textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] forKey:kValueKey];
     if ([self.textField.text isEqualToString:@""]) {
         [self.itemDictionary setValue:@" " forKey:kValueKey];
     }
@@ -73,10 +83,7 @@
 
 - (IBAction)cancelTouched:(id)sender
 {
-    if (![self.textField isFirstResponder]) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-    [self.textField resignFirstResponder];
+    [self dismissViewController];
 }
 
 #pragma mark -
@@ -107,5 +114,17 @@
     return displayNameStrings;
 }
 
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    cell.textLabel.text = [self.option objectAtIndex:indexPath.row];
+}
+
+- (void)dismissViewController
+{
+    if (![self.textField isFirstResponder]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    [self.textField resignFirstResponder];
+}
 
 @end
