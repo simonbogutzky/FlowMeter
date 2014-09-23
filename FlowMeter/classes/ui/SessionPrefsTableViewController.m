@@ -17,7 +17,6 @@
 
 static NSString *kDateTimeCellID = @"dateTimeCell";     // the cells with date/time
 static NSString *kDateTimePickerID = @"dateTimePicker"; // the cell containing the date/time picker
-static NSString *kDummyCellID = @"dummyCell";           // dummy cell for the end of a picker animation
 static NSString *kSwitchCellID = @"switchCell";         // a cell with a switch
 static NSString *kOtherCellID = @"otherCell";           // the remaining cells at the end
 
@@ -93,18 +92,18 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
     if (_dataArray == nil) {
         NSArray *section01 = @[
                                [@{kTitleKey:NSLocalizedString(@"Vorname", @"Vorname"), kValueKey:@" ", kEntityKey:@"User", kPropertyKey:@"firstName", kCellIDKey:kOtherCellID} mutableCopy],
-                               [@{kTitleKey:NSLocalizedString(@"Zeit", @"Zeit"), kValueKey:[NSNumber numberWithDouble:2 * 60 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy],
                                [@{kTitleKey:NSLocalizedString(@"Nachname", @"Nachname"), kValueKey:@" ", kEntityKey:@"User", kPropertyKey:@"lastName", kCellIDKey:kOtherCellID} mutableCopy]
                                ];
         NSArray *section02 = @[
-                               [@{kTitleKey:NSLocalizedString(@"Flow", @"Flow"), kValueKey:@0, kCellIDKey:kSwitchCellID} mutableCopy],
-                               [@{kTitleKey:NSLocalizedString(@"Aktivität", @"Aktivität"), kValueKey:@" ", kEntityKey:@"Activity", kPropertyKey:@"name", kCellIDKey:kOtherCellID} mutableCopy]
+                               [@{kTitleKey:NSLocalizedString(@"Aktivität", @"Aktivität"), kValueKey:@" ", kEntityKey:@"Activity", kPropertyKey:@"name", kCellIDKey:kOtherCellID} mutableCopy],
+                               [@{kTitleKey:NSLocalizedString(@"Countdown", @"Countdown"), kValueKey:[NSNumber numberWithDouble:5.0], kCellIDKey:kDateTimeCellID} mutableCopy]
                                ];
         NSArray *section03 = @[
                                [@{kTitleKey:NSLocalizedString(@"Flow Kurzskala", @"Flow Kurzskala"), kValueKey:@1, kCellIDKey:kSwitchCellID} mutableCopy],
-                               [@{kTitleKey:NSLocalizedString(@"Zeitinterval", @"Zeitinterval"), kValueKey:[NSNumber numberWithDouble:60 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy],
-                               [@{kTitleKey:@"dummy", kValueKey:[NSNumber numberWithDouble:60 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy]
+                               [@{kTitleKey:NSLocalizedString(@"Zeitinterval", @"Zeitinterval"), kValueKey:[NSNumber numberWithDouble:2 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy],
+                               [@{kTitleKey:NSLocalizedString(@"Variablität", @"Variablität"), kValueKey:[NSNumber numberWithDouble:1 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy]
                                ];
+                               
         
         _dataArray = @[section01, section02, section03];
     }

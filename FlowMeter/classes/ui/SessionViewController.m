@@ -20,7 +20,6 @@
 //TODO: Sekunden in Einstellungen auslagern
 #define START_COUNTDOWN_SECONDS 5
 
-#define VARIABLE_SECONDS 6 * 60
 
 @interface SessionViewController ()
 
@@ -138,7 +137,7 @@
     [self startSensorUpdates];
     
     // Start start countdown
-    [self startStartCounterWithInterval:START_COUNTDOWN_SECONDS];
+    [self startStartCounterWithInterval:[[self.sessionData[1][1] objectForKey:kValueKey] doubleValue]];
 }
 
 #pragma mark -
@@ -530,14 +529,14 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 
 - (NSTimeInterval)timeToNextSelfReport
 {
-    NSTimeInterval timeInMinutes = [[self.sessionData[2][1] objectForKey:kValueKey] doubleValue] / 60.0;
-    NSTimeInterval variabilityInMinutes = random() % ((int)(VARIABLE_SECONDS / 60) / 2);
+    NSTimeInterval time = [[self.sessionData[2][1] objectForKey:kValueKey] doubleValue];
+    NSTimeInterval variability = random() % ((int)([[self.sessionData[2][2] objectForKey:kValueKey] doubleValue]) / 2);
     if(random() % 2 == 0) {
-        NSLog(@"%f", (timeInMinutes + variabilityInMinutes) * 60.0);
-        return (timeInMinutes + variabilityInMinutes) * 60.0;
+        NSLog(@"%f", time + variability);
+        return time + variability;
     } else {
-        NSLog(@"%f", (timeInMinutes - variabilityInMinutes) * 60.0);
-        return (timeInMinutes - variabilityInMinutes) * 60.0;
+        NSLog(@"%f", time - variability);
+        return time - variability;
     }
 }
 

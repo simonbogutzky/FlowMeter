@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="zkI-Pb-t4W">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Tab Bar-->
@@ -731,8 +732,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="215"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <datePicker tag="99" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" countDownDuration="60" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZPR-76-fBj">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+                                        <datePicker tag="99" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" countDownDuration="50" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZPR-76-fBj">
+                                            <rect key="frame" x="0.0" y="8" width="320" height="162"/>
                                             <date key="date" timeIntervalSinceReferenceDate="393205466.33293098">
                                                 <!--2013-06-17 23:44:26 +0000-->
                                             </date>
@@ -741,13 +742,11 @@
                                             </connections>
                                         </datePicker>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerX" secondItem="ZPR-76-fBj" secondAttribute="centerX" id="DTs-wk-7ky"/>
+                                        <constraint firstItem="ZPR-76-fBj" firstAttribute="top" secondItem="KnE-nE-DHh" secondAttribute="topMargin" id="UIz-Q7-TOO"/>
+                                    </constraints>
                                 </tableViewCellContentView>
-                                <constraints>
-                                    <constraint firstItem="ZPR-76-fBj" firstAttribute="centerY" secondItem="qBH-9u-ukH" secondAttribute="centerY" id="DHo-BN-oGy"/>
-                                    <constraint firstItem="ZPR-76-fBj" firstAttribute="trailing" secondItem="qBH-9u-ukH" secondAttribute="trailing" id="Sxh-IS-EeH"/>
-                                    <constraint firstItem="ZPR-76-fBj" firstAttribute="leading" secondItem="qBH-9u-ukH" secondAttribute="leading" id="bfr-V6-Dqo"/>
-                                    <constraint firstItem="ZPR-76-fBj" firstAttribute="top" secondItem="qBH-9u-ukH" secondAttribute="top" id="z54-6D-KVX"/>
-                                </constraints>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="otherCell" textLabel="Ko6-wq-69x" detailTextLabel="KXe-AL-4yJ" style="IBUITableViewCellStyleValue2" id="7J0-5U-utP">
                                 <rect key="frame" x="0.0" y="315" width="320" height="45"/>
@@ -774,14 +773,6 @@
                                 <connections>
                                     <segue destination="RKk-Uf-Ko4" kind="modal" identifier="Edit value" id="z2u-vv-ItZ"/>
                                 </connections>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dummyCell" rowHeight="1" id="7aw-i2-3MU">
-                                <rect key="frame" x="0.0" y="315" width="320" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7aw-i2-3MU" id="kh0-yX-6C8">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="switchCell" rowHeight="44" id="4XQ-Rp-GAP" customClass="LabelAndSwitchTableViewCell">
                                 <rect key="frame" x="0.0" y="315" width="320" height="45"/>
@@ -825,22 +816,11 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Aufnahme" id="xDQ-T2-Doq"/>
                     <connections>
-                        <outlet property="pickerView" destination="9R1-Mq-ddJ" id="t4m-V7-ced"/>
                         <outlet property="startButton" destination="mMI-il-cAu" id="pwe-ds-LgO"/>
                         <outlet property="view" destination="fDh-Lm-PdN" id="XZu-il-5fD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9w5-Op-PYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="9R1-Mq-ddJ">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <date key="date" timeIntervalSinceReferenceDate="377204788.09288597">
-                        <!--2012-12-14 19:06:28 +0000-->
-                    </date>
-                    <connections>
-                        <action selector="dateAction:" destination="ZCf-lQ-cUe" eventType="valueChanged" id="DGv-lk-8ql"/>
-                    </connections>
-                </datePicker>
             </objects>
             <point key="canvasLocation" x="1592" y="-149"/>
         </scene>
