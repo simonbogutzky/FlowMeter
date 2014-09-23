@@ -20,6 +20,8 @@
 //TODO: Sekunden in Einstellungen auslagern
 #define START_COUNTDOWN_SECONDS 5
 
+#define VARIABLE_SECONDS 6 * 60
+
 @interface SessionViewController ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
@@ -283,7 +285,7 @@
     [self startStopWatch];
     
     if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
-        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.sessionData[2][1] objectForKey:kDateKey] doubleValue] target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
+        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[self timeToNextSelfReport] target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     }
 }
 
@@ -399,7 +401,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     [self.session addSelfReportsObject:selfReport];
     
     if (self.isCollecting) {
-        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.sessionData[2][1] objectForKey:kDateKey] doubleValue] target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
+        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[self timeToNextSelfReport] target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     } else {
         if (self.isLastSelfReport) {
             [self saveData];
@@ -415,7 +417,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                                            ;
                                        }];
     if (self.isCollecting) {
-        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[[self.sessionData[2][1] objectForKey:kDateKey] doubleValue] target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
+        self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[self timeToNextSelfReport] target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     } else {
         if (self.isLastSelfReport) {
             [self saveData];
@@ -524,6 +526,19 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 {
     NSExpression *expression = [NSExpression expressionForFunction:@"stddev:" arguments:@[[NSExpression expressionForConstantValue:numbers]]];
     return [expression expressionValueWithObject:nil context:nil];
+}
+
+- (NSTimeInterval)timeToNextSelfReport
+{
+    NSTimeInterval timeInMinutes = [[self.sessionData[2][1] objectForKey:kValueKey] doubleValue] / 60.0;
+    NSTimeInterval variabilityInMinutes = random() % ((int)(VARIABLE_SECONDS / 60) / 2);
+    if(random() % 2 == 0) {
+        NSLog(@"%f", (timeInMinutes + variabilityInMinutes) * 60.0);
+        return (timeInMinutes + variabilityInMinutes) * 60.0;
+    } else {
+        NSLog(@"%f", (timeInMinutes - variabilityInMinutes) * 60.0);
+        return (timeInMinutes - variabilityInMinutes) * 60.0;
+    }
 }
 
 @end

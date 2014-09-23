@@ -700,7 +700,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dateCell" textLabel="Rvg-l2-k8e" detailTextLabel="Zsq-WU-lxK" style="IBUITableViewCellStyleValue2" id="a4N-K0-i4x">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dateTimeCell" textLabel="Rvg-l2-k8e" detailTextLabel="Zsq-WU-lxK" style="IBUITableViewCellStyleValue2" id="a4N-K0-i4x">
                                 <rect key="frame" x="0.0" y="55" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a4N-K0-i4x" id="Bt4-WJ-b1M">
@@ -724,7 +724,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="datePicker" rowHeight="216" id="qBH-9u-ukH">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="dateTimePicker" rowHeight="216" id="qBH-9u-ukH">
                                 <rect key="frame" x="0.0" y="99" width="320" height="216"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qBH-9u-ukH" id="KnE-nE-DHh">
@@ -749,7 +749,7 @@
                                     <constraint firstItem="ZPR-76-fBj" firstAttribute="top" secondItem="qBH-9u-ukH" secondAttribute="top" id="z54-6D-KVX"/>
                                 </constraints>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="valueCell" textLabel="Ko6-wq-69x" detailTextLabel="KXe-AL-4yJ" style="IBUITableViewCellStyleValue2" id="7J0-5U-utP">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="otherCell" textLabel="Ko6-wq-69x" detailTextLabel="KXe-AL-4yJ" style="IBUITableViewCellStyleValue2" id="7J0-5U-utP">
                                 <rect key="frame" x="0.0" y="315" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7J0-5U-utP" id="h53-HC-OJJ">
@@ -775,7 +775,7 @@
                                     <segue destination="RKk-Uf-Ko4" kind="modal" identifier="Edit value" id="z2u-vv-ItZ"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dummyCell" rowHeight="0.0" id="7aw-i2-3MU">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dummyCell" rowHeight="1" id="7aw-i2-3MU">
                                 <rect key="frame" x="0.0" y="315" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7aw-i2-3MU" id="kh0-yX-6C8">
@@ -825,7 +825,6 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Aufnahme" id="xDQ-T2-Doq"/>
                     <connections>
-                        <outlet property="doneButton" destination="YAb-TZ-a1j" id="3qY-fe-FZt"/>
                         <outlet property="pickerView" destination="9R1-Mq-ddJ" id="t4m-V7-ced"/>
                         <outlet property="startButton" destination="mMI-il-cAu" id="pwe-ds-LgO"/>
                         <outlet property="view" destination="fDh-Lm-PdN" id="XZu-il-5fD"/>
@@ -842,11 +841,6 @@
                         <action selector="dateAction:" destination="ZCf-lQ-cUe" eventType="valueChanged" id="DGv-lk-8ql"/>
                     </connections>
                 </datePicker>
-                <barButtonItem title="Done" style="done" id="YAb-TZ-a1j" userLabel="Done Button">
-                    <connections>
-                        <action selector="doneAction:" destination="ZCf-lQ-cUe" id="oXB-V9-kPL"/>
-                    </connections>
-                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1592" y="-149"/>
         </scene>
