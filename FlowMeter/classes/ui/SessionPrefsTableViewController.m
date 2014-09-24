@@ -96,7 +96,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
                                ];
         NSArray *section02 = @[
                                [@{kTitleKey:NSLocalizedString(@"Aktivität", @"Aktivität"), kValueKey:@" ", kEntityKey:@"Activity", kPropertyKey:@"name", kCellIDKey:kOtherCellID} mutableCopy],
-                               [@{kTitleKey:NSLocalizedString(@"Countdown", @"Countdown"), kValueKey:[NSNumber numberWithDouble:5.0], kCellIDKey:kDateTimeCellID} mutableCopy]
+                               [@{kTitleKey:NSLocalizedString(@"Countdown", @"Countdown"), kValueKey:[NSNumber numberWithDouble:5.0], kUnitKey:NSLocalizedString(@"s", @"s"), kCellIDKey:kOtherCellID} mutableCopy]
                                ];
         NSArray *section03 = @[
                                [@{kTitleKey:NSLocalizedString(@"Flow Kurzskala", @"Flow Kurzskala"), kValueKey:@1, kCellIDKey:kSwitchCellID} mutableCopy],
@@ -184,7 +184,12 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
         cell.detailTextLabel.text = [self stringFromTimeInterval:[[dataItem valueForKey:kValueKey] doubleValue]];
     } else if ([cellID isEqualToString:kOtherCellID]) {
         cell.textLabel.text = [dataItem valueForKey:kTitleKey];
-        cell.detailTextLabel.text = [dataItem valueForKey:kValueKey];
+        
+        if ([dataItem valueForKey:kUnitKey] != nil) {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%@", [[dataItem valueForKey:kValueKey] description], [dataItem valueForKey:kUnitKey]];
+        } else {
+            cell.detailTextLabel.text = [[dataItem valueForKey:kValueKey] description];
+        }
     } else if ([cellID isEqualToString:kSwitchCellID]) {
         ((LabelAndSwitchTableViewCell * )cell).label.text = [dataItem valueForKey:kTitleKey];
         ((LabelAndSwitchTableViewCell * )cell).contentswitch.on = [[dataItem valueForKey:kValueKey] boolValue];

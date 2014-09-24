@@ -12,6 +12,8 @@
 @interface EditViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *barButtonItemDone;
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSArray *option;
@@ -36,7 +38,18 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.topItem.title = [self.itemDictionary objectForKey:kTitleKey];
     self.textField.text = @"";
-    self.option = [self getDisplayNameStrings];
+    
+    if ([[self.itemDictionary valueForKey:kValueKey] isKindOfClass:[NSNumber class]]) {
+        self.textField.keyboardType = UIKeyboardTypeNumberPad;
+        self.option = @[];
+        self.tableView.hidden = YES;
+        self.barButtonItemDone.enabled = YES;
+        self.barButtonItemDone.tintColor = nil;
+    } else {
+        self.barButtonItemDone.enabled = NO;
+        self.barButtonItemDone.tintColor = [UIColor clearColor];
+        self.option = [self getDisplayNameStrings];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidHide:)
@@ -74,9 +87,15 @@
 
 - (IBAction)doneTouched:(id)sender
 {
-    [self.itemDictionary setValue:[self.textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] forKey:kValueKey];
-    if ([self.textField.text isEqualToString:@""]) {
-        [self.itemDictionary setValue:@" " forKey:kValueKey];
+    if ([[self.itemDictionary valueForKey:kValueKey] isKindOfClass:[NSNumber class]]) {
+        if (![self.textField.text isEqualToString:@""]) {
+            [self.itemDictionary setValue:[NSNumber numberWithInt:[self.textField.text intValue]] forKey:kValueKey];
+        }
+    } else {
+        [self.itemDictionary setValue:[self.textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] forKey:kValueKey];
+        if ([self.textField.text isEqualToString:@""]) {
+            [self.itemDictionary setValue:@" " forKey:kValueKey];
+        }
     }
     [self.textField resignFirstResponder];
 }

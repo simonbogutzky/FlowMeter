@@ -27,6 +27,7 @@
 
 #define kTitleKey       @"title"        // key for obtaining the data source item's title
 #define kValueKey       @"value"        // key for obtaining the data source item's value
+#define kUnitKey        @"unit"         // key for obtaining the data source item's unit
 #define kEntityKey      @"entity"       // key for obtaining the data source item's entity
 #define kPropertyKey    @"property"     // key for obtaining the data source item's property
 #define kCellIDKey      @"cellID"       // key for obtaining the data source item's cellID

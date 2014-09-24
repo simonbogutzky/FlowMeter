@@ -187,9 +187,16 @@
                                 <action selector="cancelTouched:" destination="wdA-CD-sxA" id="T2B-x6-0yT"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="TXi-p8-V2q">
+                            <connections>
+                                <action selector="doneTouched:" destination="wdA-CD-sxA" id="gma-4s-Js3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="barButtonItemDone" destination="TXi-p8-V2q" id="OKB-Yd-yf6"/>
+                        <outlet property="tableView" destination="tpd-F3-oak" id="XnK-Y7-EYL"/>
                         <outlet property="textField" destination="VCk-FN-gWn" id="jVR-iA-ODL"/>
                     </connections>
                 </viewController>
