@@ -32,6 +32,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
 
 @property (nonatomic, strong) IBOutlet UIDatePicker *pickerView;
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
+@property (nonatomic, assign) BOOL varibilityAlertAlreadyShown;
 
 @end
 
@@ -307,7 +308,43 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
     
     // update the cell's date string
     cell.detailTextLabel.text = [self stringFromTimeInterval:targetedDatePicker.countDownDuration];
-    [self.dataArray[targetedCellIndexPath.section][targetedCellIndexPath.row] setObject:[NSNumber numberWithDouble:targetedDatePicker.countDownDuration] forKey:@"value"];
+    
+    [self updateModelAtIndexPath:targetedCellIndexPath withValue:targetedDatePicker.countDownDuration];
+}
+
+- (void)updateModelAtIndexPath:(NSIndexPath *)indexPath withValue:(double)value
+{
+    // User will update interval
+    if (indexPath.section == 2 && indexPath.row == 1) {
+        double variabilityLimit = value / 2.0;
+        double variability = [[self.dataArray[2][2] objectForKey:kValueKey] doubleValue];
+        
+        if (variabilityLimit < variability) {
+            [self.dataArray[2][2] setObject:[NSNumber numberWithDouble:variabilityLimit] forKey:kValueKey];
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:2]];
+            cell.detailTextLabel.text = [self stringFromTimeInterval:variabilityLimit];
+        }
+    }
+    
+    // User will update variability
+    if (indexPath.section == 2 && indexPath.row == 2) {
+        double variabilityLimit = [[self.dataArray[2][1] objectForKey:kValueKey] doubleValue] / 2.0;
+        double variability = value;
+        
+        if (variabilityLimit < variability) {
+            [self.dataArray[2][2] setObject:[NSNumber numberWithDouble:variabilityLimit] forKey:kValueKey];
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            cell.detailTextLabel.text = [self stringFromTimeInterval:variabilityLimit];
+            
+            if (!self.varibilityAlertAlreadyShown) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Info", @"Info") message:NSLocalizedString(@"Der Wert der Varibilität kann höchsten die Hälfe des Intervallwerts annehmen.", @"Der Wert der Varibilität kann höchsten die Hälfe des Intervallwerts annehmen.") delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok") otherButtonTitles:nil];
+                [alertView show];
+                self.varibilityAlertAlreadyShown = YES;
+            }
+            
+            
+        }
+    }
 }
 
 - (IBAction)switchChangeAction:(UISwitch *)sender
