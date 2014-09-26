@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="zkI-Pb-t4W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="zkI-Pb-t4W">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -306,8 +306,29 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Flow-Messungen" id="tZl-QD-bic"/>
+                    <connections>
+                        <outlet property="cancelButton" destination="iGG-CQ-IIh" id="EWo-le-OQj"/>
+                        <outlet property="deleteButton" destination="paP-BI-5q6" id="GNz-61-IOS"/>
+                        <outlet property="editButton" destination="fDc-Ss-DjS" id="Z45-Tw-Ofk"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M6U-EF-lDO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem systemItem="edit" id="fDc-Ss-DjS" userLabel="EditButton">
+                    <connections>
+                        <action selector="editAction:" destination="9tQ-ao-a9m" id="jj5-ck-Q8U"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem style="done" systemItem="cancel" id="iGG-CQ-IIh" userLabel="CancelButton">
+                    <connections>
+                        <action selector="cancelAction:" destination="9tQ-ao-a9m" id="waI-AT-xkl"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem title="Alle Löschen" id="paP-BI-5q6" userLabel="DeleteButton">
+                    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="deleteAction:" destination="9tQ-ao-a9m" id="Q7W-ea-2tt"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1584" y="-855"/>
         </scene>
@@ -320,7 +341,7 @@
                         <viewControllerLayoutGuide type="bottom" id="b1h-4M-Ga1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="i5L-bJ-m4Q">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

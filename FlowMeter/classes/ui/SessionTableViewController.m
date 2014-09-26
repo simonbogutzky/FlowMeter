@@ -20,6 +20,10 @@
 @property (nonatomic, readonly) NSDateFormatter *dateFormatter;
 @property (nonatomic, readonly) NSDateFormatter *dateFormatterDay;
 @property (nonatomic, readonly) NSNumberFormatter *numberFormatter;
+
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *editButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *deleteButton;
 @end
 
 @implementation SessionTableViewController
@@ -105,6 +109,15 @@
 #pragma mark -
 #pragma mark - UIViewControllerDelegate implementation
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    
+    // make our view consistent
+    [self updateButtonsToMatchTableState];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     if (self.fetchedResultsController != nil) {
@@ -134,6 +147,47 @@
         Session *session = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         [[segue destinationViewController] setSession:session];
     }
+}
+
+#pragma mark -
+#pragma mark - IBActions
+
+- (IBAction)editAction:(id)sender
+{
+    [self.tableView setEditing:YES animated:YES];
+    [self updateButtonsToMatchTableState];
+}
+
+- (IBAction)cancelAction:(id)sender
+{
+    [self.tableView setEditing:NO animated:YES];
+    [self updateButtonsToMatchTableState];
+}
+
+- (IBAction)deleteAction:(id)sender
+{
+    // Open a dialog with just an OK button.
+    NSString *actionTitle;
+    if (([[self.tableView indexPathsForSelectedRows] count] == 1)) {
+        actionTitle = NSLocalizedString(@"Bist du sicher, dass du diese Flow-Messung entfernen willst?", @"");
+    }
+    else
+    {
+        actionTitle = NSLocalizedString(@"Bist du sicher, dass du diese Flow-Messungen entfernen willst?", @"");
+    }
+    
+    NSString *cancelTitle = NSLocalizedString(@"Abbrechen", @"Cancel title for item removal action");
+    NSString *OKTitle = NSLocalizedString(@"OK", @"OK title for item removal action");
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:actionTitle
+                                                             delegate:self
+                                                    cancelButtonTitle:cancelTitle
+                                               destructiveButtonTitle:OKTitle
+                                                    otherButtonTitles:nil];
+    
+    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+    
+    // Show from our table view (pops up in the middle of the table).
+    [actionSheet showInView:self.view];
 }
 
 #pragma mark -
@@ -176,6 +230,23 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 44.0;
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Update the delete button's title based on how many items are selected.
+    [self updateDeleteButtonTitle];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Update the delete button's title based on how many items are selected.
+    [self updateButtonsToMatchTableState];
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    return !self.tableView.editing;
 }
 
 #pragma mark -
@@ -282,6 +353,47 @@
 }
 
 #pragma mark -
+#pragma mark - UIActionSheetDelegate implementation
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // The user tapped one of the OK/Cancel buttons.
+    if (buttonIndex == 0)
+    {
+        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+        
+        // Delete what the user selected.
+        NSArray *selectedRows = [self.tableView indexPathsForSelectedRows];
+        BOOL deleteSpecificRows = selectedRows.count > 0;
+        if (deleteSpecificRows)
+        {
+            for (NSIndexPath *selectionIndex in selectedRows)
+            {
+                [context deleteObject:[self.fetchedResultsController objectAtIndexPath:selectionIndex]];
+            }
+        }
+        else
+        {
+            for (NSManagedObject *objects in [self.fetchedResultsController fetchedObjects]) {
+                [context deleteObject:objects];
+            }
+        }
+        
+        NSError *error = nil;
+        if (![context save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+        
+        // Exit editing mode after the deletion.
+        [self.tableView setEditing:NO animated:YES];
+        [self updateButtonsToMatchTableState];
+    }
+}
+
+#pragma mark -
 #pragma mark - Convenient methods
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -314,6 +426,64 @@
     NSInteger minutes = (ti / 60) % 60;
     NSInteger hours = (ti / 3600);
     return [NSString stringWithFormat:@"%02ldh %02ldm", (long)hours, (long)minutes];
+}
+
+#pragma mark -
+#pragma mark - Updating button state
+
+- (void)updateButtonsToMatchTableState
+{
+    if (self.tableView.editing)
+    {
+        // Show the option to cancel the edit.
+        self.navigationItem.rightBarButtonItem = self.cancelButton;
+        
+        [self updateDeleteButtonTitle];
+        
+        // Show the delete button.
+        self.navigationItem.leftBarButtonItem = self.deleteButton;
+    }
+    else
+    {
+        // Not in editing mode.
+        self.navigationItem.leftBarButtonItem = nil;
+        
+        // Show the edit button, but disable the edit button if there's nothing to edit.
+        if ([[self.fetchedResultsController sections] count] > 0)
+        {
+            self.editButton.enabled = YES;
+        }
+        else
+        {
+            self.editButton.enabled = NO;
+        }
+        self.navigationItem.rightBarButtonItem = self.editButton;
+    }
+}
+
+- (void)updateDeleteButtonTitle
+{
+    // Update the delete button's title, based on how many items are selected
+    NSArray *selectedRows = [self.tableView indexPathsForSelectedRows];
+    
+    int rowCount = 0;
+    for (id <NSFetchedResultsSectionInfo> sectionInfo in [self.fetchedResultsController sections]) {
+        rowCount += [sectionInfo numberOfObjects];
+    }
+    
+    BOOL allItemsAreSelected = selectedRows.count == rowCount;
+    BOOL noItemsAreSelected = selectedRows.count == 0;
+    
+    if (allItemsAreSelected || noItemsAreSelected)
+    {
+        self.deleteButton.title = NSLocalizedString(@"Alle Löschen", @"");
+    }
+    else
+    {
+        NSString *titleFormatString =
+        NSLocalizedString(@"Lösche (%d)", @"Title for delete button with placeholder for number");
+        self.deleteButton.title = [NSString stringWithFormat:titleFormatString, selectedRows.count];
+    }
 }
 
 @end

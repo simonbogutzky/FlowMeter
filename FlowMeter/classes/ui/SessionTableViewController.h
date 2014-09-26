@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SessionTableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface SessionTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UIActionSheetDelegate>
 
 @end
