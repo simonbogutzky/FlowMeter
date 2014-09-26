@@ -17,10 +17,6 @@
 #import "LikertScaleViewController.h"
 #import <AudioToolbox/AudioServices.h>
 
-//TODO: Sekunden in Einstellungen auslagern
-#define START_COUNTDOWN_SECONDS 5
-
-
 @interface SessionViewController ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
@@ -335,7 +331,6 @@
     
     if(self.isCollecting) {
         
-        
         self.heartRateCount++;
         self.heartRateSum = self.heartRateSum + data.heartRate;
         for (NSNumber *rrInterval in data.rrIntervals) {
@@ -431,7 +426,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 - (void)showSelfReport
 {
     self.startSelfReportDate = [NSDate date];
-    AudioServicesPlaySystemSound(1007);
+    AudioServicesPlaySystemSound(1008);
     
     if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
         [self presentViewController:[self flowShortScaleViewControllerFromStoryboard] animated:YES completion:nil];
@@ -532,10 +527,8 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     NSTimeInterval time = [[self.sessionData[2][1] objectForKey:kValueKey] doubleValue];
     NSTimeInterval variability = random() % ((int)([[self.sessionData[2][2] objectForKey:kValueKey] doubleValue]) / 2);
     if(random() % 2 == 0) {
-        NSLog(@"%f", time + variability);
         return time + variability;
     } else {
-        NSLog(@"%f", time - variability);
         return time - variability;
     }
 }
