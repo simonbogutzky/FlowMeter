@@ -337,7 +337,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
             cell.detailTextLabel.text = [self stringFromTimeInterval:variabilityLimit];
             
             if (!self.varibilityAlertAlreadyShown) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Info", @"Info") message:NSLocalizedString(@"Der Wert der Varibilität kann höchsten die Hälfe des Intervallwerts annehmen.", @"Der Wert der Varibilität kann höchsten die Hälfe des Intervallwerts annehmen.") delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok") otherButtonTitles:nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Info", @"Info") message:NSLocalizedString(@"Der Wert der Varibilität kann höchsten die Hälfe des Intervallwerts annehmen.", @"Der Wert der Varibilität kann höchsten die Hälfe des Intervallwerts annehmen.") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
                 [alertView show];
                 self.varibilityAlertAlreadyShown = YES;
             }
