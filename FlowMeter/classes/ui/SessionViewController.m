@@ -176,8 +176,11 @@
     self.startCountdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                                 target:self
                                                               selector:@selector(updateStartCountdown)
+    
                                                               userInfo:nil repeats:YES];
-    self.startCountdownView.hidden = NO;
+    if (seconds != 0) {
+        self.startCountdownView.hidden = NO;
+    }
 }
 
 - (void)updateStartCountdown
