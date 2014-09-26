@@ -56,6 +56,7 @@
 		D39747B11882CC7B00CFF3DF /* libtouchzipkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D39747AE1882CC6400CFF3DF /* libtouchzipkit.a */; };
 		D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */; };
 		D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionTableViewController.m */; };
+		D3AB053219D5581A00626323 /* 5min-silence.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3AB053119D5581A00626323 /* 5min-silence.mp3 */; };
 		D3B3DC091733B93A001F2830 /* FlowMeter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC071733B93A001F2830 /* FlowMeter.xcdatamodeld */; };
 		D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1290F1863296A00C361CA /* MBProgressHUD.m */; };
 		D3C1291318632A1E00C361CA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1291218632A1E00C361CA /* Reachability.m */; };
@@ -207,6 +208,7 @@
 		D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HeartRateRecord+Description.m"; path = "classes/model/HeartRateRecord+Description.m"; sourceTree = "<group>"; };
 		D3A4629D1726E08900D454F7 /* SessionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionTableViewController.h; path = classes/ui/SessionTableViewController.h; sourceTree = "<group>"; };
 		D3A4629E1726E08900D454F7 /* SessionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionTableViewController.m; path = classes/ui/SessionTableViewController.m; sourceTree = "<group>"; };
+		D3AB053119D5581A00626323 /* 5min-silence.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "5min-silence.mp3"; sourceTree = "<group>"; };
 		D3B3DC081733B93A001F2830 /* FlowMeter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlowMeter.xcdatamodel; sourceTree = "<group>"; };
 		D3C1290E1863296A00C361CA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
 		D3C1290F1863296A00C361CA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
@@ -331,6 +333,7 @@
 		604CCD9516A6F31000E87194 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D3AB053119D5581A00626323 /* 5min-silence.mp3 */,
 				D31C4BCA19A619DE0017AA5A /* Model */,
 				D34C9D3E172504D7004C261C /* UI */,
 			);
@@ -669,6 +672,7 @@
 				D38FBDBA196C1DC000C63681 /* InfoPlist.strings in Resources */,
 				D38FBDBB196C1DC000C63681 /* Localizable.strings in Resources */,
 				D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */,
+				D3AB053219D5581A00626323 /* 5min-silence.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

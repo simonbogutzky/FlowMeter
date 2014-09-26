@@ -11,7 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <HeartRateMonitor/HeartRateMonitor.h>
 #import <DropboxSDK/DropboxSDK.h>
-#import <AVFoundation/AVAudioSession.h>
+#import <AVFoundation/AVFoundation.h>
 #import "Reachability.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, DBRestClientDelegate, NSStreamDelegate>
@@ -23,6 +23,8 @@
 @property (readonly, strong, nonatomic) HeartRateMonitorManager *heartRateMonitorManager;
 @property (readonly, strong, nonatomic) DBRestClient *dbRestClient;
 @property (readonly, strong, nonatomic) Reachability *reachability;
+@property (nonatomic, strong) AVPlayer *player;
+@property (nonatomic, strong) id timeObserver;
 
 - (void)saveContext;
 - (NSString *)userDirectory;

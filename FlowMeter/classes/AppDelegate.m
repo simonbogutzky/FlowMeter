@@ -71,6 +71,8 @@
     [tabBarController setSelectedIndex:1];
     tabBarController.tabBar.translucent = NO;
     
+    [self initAVPlayer];
+    
     return YES;
 }
 							
@@ -195,6 +197,43 @@
     return _persistentStoreCoordinator;
 }
 
+#pragma mark -
+#pragma mark - AVPlayer
+
+- (void)initAVPlayer
+{
+    // Set AVAudioSession
+    NSError *sessionError = nil;
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:&sessionError];
+    
+    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:[[NSBundle mainBundle] URLForResource:@"5min-silence" withExtension:@"mp3"]];
+    self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+    self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerItemDidReachEnd:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:[self.player currentItem]];
+    
+    void (^observerBlock)(CMTime time) = ^(CMTime time) {
+        if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
+            //NSLog(@"App is backgrounded.");
+        }
+    };
+    
+    self.timeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1)
+                                                                  queue:dispatch_get_main_queue()
+                                                             usingBlock:observerBlock];
+    [self.player play];
+}
+
+- (void)playerItemDidReachEnd:(NSNotification *)notification {
+    AVPlayerItem *playerItem = [notification object];
+    [playerItem seekToTime:kCMTimeZero];
+}
+
+
+#pragma mark -
 #pragma mark - Application's Documents directory
 
 // Returns the URL to the application's Documents directory.
