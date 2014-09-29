@@ -165,7 +165,16 @@
 
 - (NSString *)removeSpecialCharactersFromString:(NSString *)string
 {
-    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"] invertedSet];
+    string = [string stringByReplacingOccurrencesOfString:@"ü" withString:@"ue"];
+    string = [string stringByReplacingOccurrencesOfString:@"Ü" withString:@"Ue"];
+    string = [string stringByReplacingOccurrencesOfString:@"ä" withString:@"ae"];
+    string = [string stringByReplacingOccurrencesOfString:@"Ä" withString:@"Ae"];
+    string = [string stringByReplacingOccurrencesOfString:@"ö" withString:@"oe"];
+    string = [string stringByReplacingOccurrencesOfString:@"Ö" withString:@"Oe"];
+    string = [string stringByReplacingOccurrencesOfString:@"ß" withString:@"ss"];
+    string = [string stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+    
+    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-"] invertedSet];
     return [[string componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
 }
 

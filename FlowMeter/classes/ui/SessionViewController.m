@@ -307,7 +307,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
-                                                            message:NSLocalizedString(@"Deine Daten wurden lOKal gespeichert." , @"Deine Daten wurden lOKal gespeichert.")
+                                                            message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
                                                            delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"Bestätigung: OK")
                                                   otherButtonTitles:nil];
             [alert show];
