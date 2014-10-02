@@ -10,7 +10,7 @@
 #import <HeartRateMonitor/HeartRateMonitor.h>
 #import "LikertScaleViewControllerDelegate.h"
 
-@interface SessionViewController : UIViewController <UIAlertViewDelegate, HeartRateMonitorManagerDelegate, LikertScaleViewControllerDelegate>
+@interface SessionViewController : UIViewController <HeartRateMonitorManagerDelegate, LikertScaleViewControllerDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSArray *sessionData;
 

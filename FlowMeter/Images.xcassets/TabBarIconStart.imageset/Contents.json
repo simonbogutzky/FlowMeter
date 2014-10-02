@@ -8,6 +8,10 @@
       "idiom" : "universal",
       "scale" : "2x",
       "filename" : "2013-07-22-app-icon.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

@@ -41,6 +41,13 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
 #pragma mark -
 #pragma mark - UIViewControllerDelegate implementation
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -101,7 +108,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
                                ];
         NSArray *section03 = @[
                                [@{kTitleKey:NSLocalizedString(@"Flow Kurzskala", @"Flow Kurzskala"), kValueKey:@1, kCellIDKey:kSwitchCellID} mutableCopy],
-                               [@{kTitleKey:NSLocalizedString(@"Zeitinterval", @"Zeitinterval"), kValueKey:[NSNumber numberWithDouble:2 * 60.0 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy],
+                               [@{kTitleKey:NSLocalizedString(@"Zeitintervall", @"Zeitintervall"), kValueKey:[NSNumber numberWithDouble:2 * 60.0 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy],
                                [@{kTitleKey:NSLocalizedString(@"Variablität", @"Variablität"), kValueKey:[NSNumber numberWithDouble:1 * 60.0 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy]
                                ];
                                

@@ -71,6 +71,9 @@
     [tabBarController setSelectedIndex:1];
     tabBarController.tabBar.translucent = NO;
     
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     [self initAVPlayer];
     
     return YES;

@@ -47,6 +47,11 @@
 @property (nonatomic, weak) IBOutlet UILabel *stopWatchLabel;
 @property (nonatomic, weak) IBOutlet UIButton *startStopButton;
 @property (nonatomic, weak) IBOutlet UILabel *heartRateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *firstUnitStopWatchLabel;
+@property (weak, nonatomic) IBOutlet UILabel *secondUnitStopWatchLabel;
+@property (weak, nonatomic) IBOutlet UILabel *selfReportCountLabel;
+@property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer *lpgr;
+
 
 @end
 
@@ -123,9 +128,6 @@
 {
     [super viewDidLoad];
     
-    // Hide navigation bar
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
-    
     // Rename button title
     [self.startStopButton setTitle:NSLocalizedString(@"Stoppen", @"Stoppe Aufnahme") forState:0];
     
@@ -134,35 +136,34 @@
     
     // Start start countdown
     [self startStartCounterWithInterval:[[self.sessionData[1][1] objectForKey:kValueKey] doubleValue]];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 #pragma mark -
 #pragma mark - IBActions
 
+- (IBAction)userWantToStopCollection:(id)sender {
+    NSLog(@"Long press");
+}
+
 - (IBAction)stopEndTouchUpInside:(UIButton *)sender
 {
+    self.isCollecting = !self.isCollecting;
+    [self stopSensorUpdates];
     
-    if (!self.isCollecting) {
-        [self dismissViewControllerAnimated:YES completion:^{
+    self.session.duration = [NSNumber numberWithDouble:[self stopWatchTimeInterval]];
+    
+    [self.stopWatchTimer invalidate];
+    
+    if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
+        [self.selfReportTimer invalidate];
+        self.isLastSelfReport = YES;
         
-        }];
+        [self showSelfReport];
     } else {
-        self.isCollecting = !self.isCollecting;
-        [self stopSensorUpdates];
-        
-        self.session.duration = [NSNumber numberWithDouble:[self stopWatchTimeInterval]];
-        
-        [self.stopWatchTimer invalidate];
-        
-        if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
-            [self.selfReportTimer invalidate];
-            self.isLastSelfReport = YES;
-            
-            [self showSelfReport];
-        } else {
-            [self saveData];
-        }
-        
+        [self saveData];
     }
 }
 
@@ -187,19 +188,29 @@
 {
     self.startCountdown--;
     self.startCountdownLabel.text = [NSString stringWithFormat:@"%i", self.startCountdown];
-    if (self.startCountdown == 0) {
+    if (self.startCountdown <= 0) {
         [self.startCountdownTimer invalidate];
-        self.startCountdownView.hidden = YES;
-        
-        [self startCollecting];
+        [UIView animateWithDuration:0.5
+                         animations:^{
+                             self.startCountdownView.alpha = 0.0;   // fade out
+                             self.startCountdownLabel.alpha = 0.0;
+                         }
+                         completion:^(BOOL finished){
+                             self.startCountdownView.hidden = YES;
+                             self.stopWatchLabel.text = @"00:00";
+                             self.firstUnitStopWatchLabel.text = NSLocalizedString(@"MIN", @"Minuten Einheit Label im SessionViewController");
+                             self.secondUnitStopWatchLabel.text = NSLocalizedString(@"S", @"Sekunden Einheit Label im SessionViewController");
+                             self.heartRateLabel.text = NSLocalizedString(@"NA", @"Anfangs-Heartrate Label im SessionViewController");
+                             self.selfReportCountLabel.text = @"0";
+                             
+                             [self startCollecting];
+                         }];
     }
 }
 
 - (void)startStopWatch
 {
     self.stopWatchStartDate = [NSDate date];
-    self.stopWatchLabel.text = @"00:00:00";
-    self.stopWatchLabel.hidden = NO;
     self.stopWatchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
                                                            target:self
                                                          selector:@selector(updateStopWatch)
@@ -209,12 +220,22 @@
 
 - (void)updateStopWatch
 {
-    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:[self stopWatchTimeInterval]];
+    NSTimeInterval elapsedTime = [self stopWatchTimeInterval];
+    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:elapsedTime];
     
     // Create a date formatter
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm:ss"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
+    
+    if (elapsedTime < 1 * 60 * 60) {
+        [dateFormatter setDateFormat:@"mm:ss"];
+        self.firstUnitStopWatchLabel.text = NSLocalizedString(@"MIN", @"Minuten Einheit Label im SessionViewController");
+        self.secondUnitStopWatchLabel.text = NSLocalizedString(@"S", @"Sekunden Einheit Label im SessionViewController");
+    } else {
+        [dateFormatter setDateFormat:@"HH:mm"];
+        self.firstUnitStopWatchLabel.text = NSLocalizedString(@"H", @"Stunden Einheit Label im SessionViewController");
+        self.secondUnitStopWatchLabel.text = NSLocalizedString(@"MIN", @"Minuten Einheit Label im SessionViewController");
+    }
     
     // Format the elapsed time and set it to the label
     NSString *timeString = [dateFormatter stringFromDate:timerDate];
@@ -241,7 +262,6 @@
 {
     // Stop heart rate monitor updates
     if (self.appDelegate.heartRateMonitorManager.hasConnection) {
-        self.heartRateLabel.hidden = YES;
         [self.appDelegate.heartRateMonitorManager stopMonitoring];
     }
 }
@@ -249,7 +269,7 @@
 - (void)startCollecting
 {
     NSLog(@"# Start collecting");
-    self.heartRateLabel.hidden = NO;
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.session.date = [NSDate date];
     self.startSelfReportDate = nil;
     self.selfReportCount = 0;
@@ -289,38 +309,33 @@
 
 - (void)saveData
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.session.selfReportCount = [NSNumber numberWithInt:self.selfReportCount];
-    if ([self.session.selfReportCount integerValue] != 0) {
-        self.session.averageAbsorption = [NSNumber numberWithFloat:self.absorptionSum / self.selfReportCount];
-        self.session.averageAnxiety = [NSNumber numberWithFloat:self.anxietySum / self.selfReportCount];
-        self.session.averageFit = [NSNumber numberWithFloat:self.fitSum / self.selfReportCount];
-        self.session.averageFlow = [NSNumber numberWithFloat:self.flowSum / self.selfReportCount];
-        self.session.averageFluency = [NSNumber numberWithFloat:self.fluencySum / self.selfReportCount];
-    }
-    
-    if (self.heartRateCount != 0) {
-        self.session.averageBPM = [NSNumber numberWithFloat:self.heartRateSum / self.heartRateCount];
-    }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self.appDelegate saveContext];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Gute Arbeit!", @"Gute Arbeit!")
-                                                            message:NSLocalizedString(@"Deine Daten wurden lokal gespeichert." , @"Deine Daten wurden lokal gespeichert.")
-                                                           delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"Bestätigung: OK")
-                                                  otherButtonTitles:nil];
-            [alert show];
-        });
-    });
-}
-
-#pragma mark -
-#pragma mark - UIAlertViewDelegate implementation
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    [self.startStopButton setTitle:NSLocalizedString(@"Zurück", "Zurück zu den Laufeinstellungen") forState:0];
+    self.startCountdownView.hidden = NO;
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         self.startCountdownView.alpha = 1.0;   // fade in
+                     }
+                     completion:^(BOOL finished){
+                         self.session.selfReportCount = [NSNumber numberWithInt:self.selfReportCount];
+                         if ([self.session.selfReportCount integerValue] != 0) {
+                             self.session.averageAbsorption = [NSNumber numberWithFloat:self.absorptionSum / self.selfReportCount];
+                             self.session.averageAnxiety = [NSNumber numberWithFloat:self.anxietySum / self.selfReportCount];
+                             self.session.averageFit = [NSNumber numberWithFloat:self.fitSum / self.selfReportCount];
+                             self.session.averageFlow = [NSNumber numberWithFloat:self.flowSum / self.selfReportCount];
+                             self.session.averageFluency = [NSNumber numberWithFloat:self.fluencySum / self.selfReportCount];
+                         }
+                         
+                         if (self.heartRateCount != 0) {
+                             self.session.averageBPM = [NSNumber numberWithFloat:self.heartRateSum / self.heartRateCount];
+                         }
+                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                             [self.appDelegate saveContext];
+                             dispatch_async(dispatch_get_main_queue(), ^{
+                                 [self dismissViewControllerAnimated:YES completion:^{
+                                     
+                                 }];
+                             });
+                         });
+                     }];
 }
 
 #pragma mark -
@@ -328,11 +343,10 @@
 
 - (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager didReceiveHeartrateMonitorData:(HeartRateMonitorData *)data fromHeartRateMonitorDevice:(HeartRateMonitorDevice *)device
 {
-    if (data.heartRate != -1) {
-        self.heartRateLabel.text = [NSString stringWithFormat:@"%d %@", data.heartRate, data.heartRateUnit];
-    }
-    
     if(self.isCollecting) {
+        if (data.heartRate != -1) {
+            self.heartRateLabel.text = [NSString stringWithFormat:@"%d", data.heartRate];
+        }
         
         self.heartRateCount++;
         self.heartRateSum = self.heartRateSum + data.heartRate;
@@ -353,7 +367,7 @@ didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                           error:(NSError *)error
 {
     AudioServicesPlaySystemSound(1073);
-    self.heartRateLabel.text = NSLocalizedString(@"Getrennt", "HR Monitor wurde getrennt");
+    self.heartRateLabel.text = NSLocalizedString(@"ERR", "Fehleranzeige - HR Monitor wurde getrennt");
 }
 
 - (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
@@ -389,6 +403,9 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     selfReport.fitSD = [flowShortScaleFactors objectForKey:@"fitSD"];
     
     self.selfReportCount++;
+    
+    self.selfReportCountLabel.text = [NSString stringWithFormat:@"%d", self.selfReportCount];
+    
     self.flowSum += [selfReport.flow floatValue];
     self.fluencySum += [selfReport.fluency floatValue];
     self.absorptionSum += [selfReport.absorption floatValue];
@@ -534,6 +551,36 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     } else {
         return time - variability;
     }
+}
+
+
+- (void)addLayer {
+    
+//    CAShapeLayer *progressLayer = [CAShapeLayer layer];
+//    progressLayer.path = (__bridge CGPathRef)([UIBezierPath bezierPathWithArcCenter:CGPointMake(20, 20)
+//                                                                          radius:40
+//                                                                      startAngle:M_PI
+//                                                                        endAngle:-M_PI
+//                                                                       clockwise:YES]);
+//    progressLayer.strokeColor = [[UIColor whiteColor] CGColor];
+//    progressLayer.fillColor = [[UIColor clearColor] CGColor];
+//    progressLayer.lineWidth = 8.0f;
+//    progressLayer.strokeStart = 10.0f;
+//    progressLayer.strokeEnd = 40.0f;
+//    
+//    [[self.startStopButton layer] addSublayer:progressLayer];
+//    //self.currentProgressLayer = progressLayer;
+    
+    CAShapeLayer *progressLayer = [CAShapeLayer layer];
+    progressLayer.frame = self.startStopButton.layer.bounds;
+    progressLayer.path = CFBridgingRetain([UIBezierPath bezierPathWithArcCenter:CGPointMake(20, 20) radius:40 startAngle:M_PI endAngle:-M_PI clockwise:YES]);
+    progressLayer.strokeColor = [[UIColor whiteColor] CGColor];
+        progressLayer.fillColor = [[UIColor clearColor] CGColor];
+        progressLayer.lineWidth = 8.0f;
+        progressLayer.strokeStart = 10.0f;
+        progressLayer.strokeEnd = 40.0f;
+    [self.startStopButton.layer addSublayer:progressLayer];
+    
 }
 
 @end
