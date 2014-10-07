@@ -14,6 +14,7 @@
 #import "SelfReport.h"
 #import "HeartRateRecord.h"
 #import "MBProgressHUD.h"
+#import "ZCSHoldProgress.h"
 #import "LikertScaleViewController.h"
 #import <AudioToolbox/AudioServices.h>
 
@@ -23,7 +24,7 @@
 @property (nonatomic, strong) Session *session;
 
 @property (nonatomic, strong) NSTimer *selfReportTimer;
-@property (nonatomic, strong) NSTimer *startCountdownTimer;
+@property (nonatomic, strong) NSTimer *countdownTimer;
 @property (nonatomic, strong) NSTimer *stopWatchTimer;
 @property (nonatomic, strong) NSDate *stopWatchStartDate;
 
@@ -37,20 +38,20 @@
 
 @property (nonatomic) BOOL isCollecting;
 @property (nonatomic) BOOL isLastSelfReport;
-@property (nonatomic) int startCountdown;
+@property (nonatomic) int countdown;
 @property (nonatomic) int heartRateCount;
 @property (nonatomic) long heartRateSum;
 @property (nonatomic) NSTimeInterval lastTimeInterval;
 
-@property (nonatomic, weak) IBOutlet UIView *startCountdownView;
-@property (nonatomic, weak) IBOutlet UILabel *startCountdownLabel;
+@property (nonatomic, weak) IBOutlet UIView *countdownBackgroundView;
+@property (nonatomic, weak) IBOutlet UILabel *countdownLabel;
 @property (nonatomic, weak) IBOutlet UILabel *stopWatchLabel;
-@property (nonatomic, weak) IBOutlet UIButton *startStopButton;
+@property (nonatomic, weak) IBOutlet UIView *stopButtonView;
 @property (nonatomic, weak) IBOutlet UILabel *heartRateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *firstUnitStopWatchLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondUnitStopWatchLabel;
 @property (weak, nonatomic) IBOutlet UILabel *selfReportCountLabel;
-@property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer *lpgr;
+
 
 
 @end
@@ -128,84 +129,103 @@
 {
     [super viewDidLoad];
     
-    // Rename button title
-    [self.startStopButton setTitle:NSLocalizedString(@"Stoppen", @"Stoppe Aufnahme") forState:0];
-    
     // Start sensor updates
     [self startSensorUpdates];
+
+    // Show UI or start countdown
+    self.countdown = [[self.sessionData[1][1] objectForKey:kValueKey] intValue];
+    if (self.countdown < 1) {
+        [self showUI];
+    } else {
+       [self startCountdown];
+    }
     
-    // Start start countdown
-    [self startStartCounterWithInterval:[[self.sessionData[1][1] objectForKey:kValueKey] doubleValue]];
-    
+    // Hide status bar
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
+    // Set hold press on button
+    ZCSHoldProgress *holdProgress = [[ZCSHoldProgress alloc] initWithTarget:self action:@selector(gestureRecogizerTarget:)];
+    holdProgress.minimumPressDuration = 1.0;
+    holdProgress.allowableMovement = 0;
+    holdProgress.hideOnComplete = NO;
+    
+    holdProgress.alpha = 1.0f;
+    holdProgress.color = [UIColor colorWithRed:0.17281592153284672 green:0.51933166058394165 blue:0.76862745098038943 alpha:1.0];
+    holdProgress.completedColor = [UIColor colorWithRed:0.17281592153284672 green:0.51933166058394165 blue:0.76862745098038943 alpha:1.0];
+    holdProgress.borderSize = 0.0f;
+    holdProgress.size = 164.0f;
+    holdProgress.minimumSize = 80.0f;
+    [self.stopButtonView addGestureRecognizer:holdProgress];
 }
 
 #pragma mark -
-#pragma mark - IBActions
+#pragma mark - Setter
 
-- (IBAction)userWantToStopCollection:(id)sender {
-    NSLog(@"Long press");
-}
-
-- (IBAction)stopEndTouchUpInside:(UIButton *)sender
+- (void)setCountdown:(int)countdown
 {
-    self.isCollecting = !self.isCollecting;
-    [self stopSensorUpdates];
-    
-    self.session.duration = [NSNumber numberWithDouble:[self stopWatchTimeInterval]];
-    
-    [self.stopWatchTimer invalidate];
-    
-    if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
-        [self.selfReportTimer invalidate];
-        self.isLastSelfReport = YES;
-        
-        [self showSelfReport];
-    } else {
-        [self saveData];
-    }
+    _countdown = countdown;
+    BOOL hidden = self.countdown < 1;
+    self.countdownLabel.hidden = hidden;
+    self.countdownLabel.text = [NSString stringWithFormat:@"%d", self.countdown];
 }
 
 #pragma mark -
 #pragma mark - Convient methods
 
-- (void)startStartCounterWithInterval:(int)seconds
-{
-    self.startCountdown = seconds;
-    self.startCountdownLabel.text = [NSString stringWithFormat:@"%d", self.startCountdown];
-    self.startCountdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                                target:self
-                                                              selector:@selector(updateStartCountdown)
-    
-                                                              userInfo:nil repeats:YES];
-    if (seconds != 0) {
-        self.startCountdownView.hidden = NO;
+- (void)gestureRecogizerTarget:(UIGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        self.isCollecting = !self.isCollecting;
+        [self stopSensorUpdates];
+        
+        self.session.duration = [NSNumber numberWithDouble:[self stopWatchTimeInterval]];
+        
+        [self.stopWatchTimer invalidate];
+        
+        if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
+            [self.selfReportTimer invalidate];
+            self.isLastSelfReport = YES;
+            
+            [self showSelfReport];
+        } else {
+            [self saveData];
+        }
     }
 }
 
-- (void)updateStartCountdown
+- (void)startCountdown
 {
-    self.startCountdown--;
-    self.startCountdownLabel.text = [NSString stringWithFormat:@"%i", self.startCountdown];
-    if (self.startCountdown <= 0) {
-        [self.startCountdownTimer invalidate];
-        [UIView animateWithDuration:0.5
-                         animations:^{
-                             self.startCountdownView.alpha = 0.0;   // fade out
-                             self.startCountdownLabel.alpha = 0.0;
-                         }
-                         completion:^(BOOL finished){
-                             self.startCountdownView.hidden = YES;
-                             self.stopWatchLabel.text = @"00:00";
-                             self.firstUnitStopWatchLabel.text = NSLocalizedString(@"MIN", @"Minuten Einheit Label im SessionViewController");
-                             self.secondUnitStopWatchLabel.text = NSLocalizedString(@"S", @"Sekunden Einheit Label im SessionViewController");
-                             self.heartRateLabel.text = NSLocalizedString(@"NA", @"Anfangs-Heartrate Label im SessionViewController");
-                             self.selfReportCountLabel.text = @"0";
-                             
-                             [self startCollecting];
-                         }];
+    self.countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                                    target:self
+                                                                  selector:@selector(updateCountdown)
+                                                                  userInfo:nil repeats:YES];
+}
+
+- (void)updateCountdown
+{
+    self.countdown--;
+    if (self.countdown <= 0) {
+        [self.countdownTimer invalidate];
+        [self showUI];
     }
+}
+
+- (void)showUI
+{
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         self.countdownBackgroundView.alpha = 0.0;   // fade out
+                         self.countdownLabel.alpha = 0.0;
+                     }
+                     completion:^(BOOL finished){
+                         self.countdownBackgroundView.hidden = YES;
+                         self.stopWatchLabel.text = @"00:00";
+                         self.firstUnitStopWatchLabel.text = NSLocalizedString(@"MIN", @"Minuten Einheit Label im SessionViewController");
+                         self.secondUnitStopWatchLabel.text = NSLocalizedString(@"S", @"Sekunden Einheit Label im SessionViewController");
+                         self.heartRateLabel.text = NSLocalizedString(@"NA", @"Anfangs-Heartrate Label im SessionViewController");
+                         self.selfReportCountLabel.text = @"0";
+                         [self startCollecting];
+                     }];
 }
 
 - (void)startStopWatch
@@ -309,10 +329,10 @@
 
 - (void)saveData
 {
-    self.startCountdownView.hidden = NO;
+    self.countdownBackgroundView.hidden = NO;
     [UIView animateWithDuration:0.5
                      animations:^{
-                         self.startCountdownView.alpha = 1.0;   // fade in
+                         self.countdownBackgroundView.alpha = 1.0;   // fade in
                      }
                      completion:^(BOOL finished){
                          self.session.selfReportCount = [NSNumber numberWithInt:self.selfReportCount];
@@ -551,36 +571,6 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     } else {
         return time - variability;
     }
-}
-
-
-- (void)addLayer {
-    
-//    CAShapeLayer *progressLayer = [CAShapeLayer layer];
-//    progressLayer.path = (__bridge CGPathRef)([UIBezierPath bezierPathWithArcCenter:CGPointMake(20, 20)
-//                                                                          radius:40
-//                                                                      startAngle:M_PI
-//                                                                        endAngle:-M_PI
-//                                                                       clockwise:YES]);
-//    progressLayer.strokeColor = [[UIColor whiteColor] CGColor];
-//    progressLayer.fillColor = [[UIColor clearColor] CGColor];
-//    progressLayer.lineWidth = 8.0f;
-//    progressLayer.strokeStart = 10.0f;
-//    progressLayer.strokeEnd = 40.0f;
-//    
-//    [[self.startStopButton layer] addSublayer:progressLayer];
-//    //self.currentProgressLayer = progressLayer;
-    
-    CAShapeLayer *progressLayer = [CAShapeLayer layer];
-    progressLayer.frame = self.startStopButton.layer.bounds;
-    progressLayer.path = CFBridgingRetain([UIBezierPath bezierPathWithArcCenter:CGPointMake(20, 20) radius:40 startAngle:M_PI endAngle:-M_PI clockwise:YES]);
-    progressLayer.strokeColor = [[UIColor whiteColor] CGColor];
-        progressLayer.fillColor = [[UIColor clearColor] CGColor];
-        progressLayer.lineWidth = 8.0f;
-        progressLayer.strokeStart = 10.0f;
-        progressLayer.strokeEnd = 40.0f;
-    [self.startStopButton.layer addSublayer:progressLayer];
-    
 }
 
 @end

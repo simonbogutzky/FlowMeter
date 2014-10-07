@@ -61,6 +61,7 @@
 		D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1290F1863296A00C361CA /* MBProgressHUD.m */; };
 		D3C1291318632A1E00C361CA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1291218632A1E00C361CA /* Reachability.m */; };
 		D3C1292A18632C9A00C361CA /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C1292918632C9A00C361CA /* DropboxSDK.framework */; };
+		D3C75BCD19E187A100AA35CA /* ZCSHoldProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C75BCC19E187A100AA35CA /* ZCSHoldProgress.m */; };
 		D3C7ADC0171ED660000A7D34 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADBF171ED660000A7D34 /* Security.framework */; };
 		D3C7ADC2171ED66A000A7D34 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADC1171ED66A000A7D34 /* QuartzCore.framework */; };
 		D3C7ADC9171EEA44000A7D34 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */; };
@@ -215,6 +216,8 @@
 		D3C1291118632A1E00C361CA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = SOURCE_ROOT; };
 		D3C1291218632A1E00C361CA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = SOURCE_ROOT; };
 		D3C1292918632C9A00C361CA /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = DropboxSDK/DropboxSDK.framework; sourceTree = "<group>"; };
+		D3C75BCB19E187A100AA35CA /* ZCSHoldProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCSHoldProgress.h; sourceTree = "<group>"; };
+		D3C75BCC19E187A100AA35CA /* ZCSHoldProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCSHoldProgress.m; sourceTree = "<group>"; };
 		D3C7ADBF171ED660000A7D34 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D3C7ADC1171ED66A000A7D34 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -478,6 +481,8 @@
 		D3C7ADD6171FCCC6000A7D34 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D3C75BCB19E187A100AA35CA /* ZCSHoldProgress.h */,
+				D3C75BCC19E187A100AA35CA /* ZCSHoldProgress.m */,
 				D37067D51733F41300F86BBD /* EditViewController.h */,
 				D37067D61733F41300F86BBD /* EditViewController.m */,
 				D329ACDC197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.h */,
@@ -705,6 +710,7 @@
 				D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */,
 				D34C9D2917250463004C261C /* SessionViewController.m in Sources */,
 				D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */,
+				D3C75BCD19E187A100AA35CA /* ZCSHoldProgress.m in Sources */,
 				D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */,
 				D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */,
 				D3C1291318632A1E00C361CA /* Reachability.m in Sources */,
