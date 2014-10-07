@@ -10,12 +10,15 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "Activity.h"
+#import "BEMSimpleLineGraphView.h"
+#import "SelfReport+Description.h"
 
-@interface SessionDetailViewController ()
+@interface SessionDetailViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic, strong) NSString *filename;
+@property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *lineGraphView;
 
 @end
 
@@ -212,6 +215,22 @@
             NSLog(@"# Load meta failed with error - %@", error);
             break;
     }
+}
+
+#pragma mark -
+#pragma mark - BEMSimpleLineGraphDataSource implementation
+
+- (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph
+{
+    return [self.session.selfReportCount intValue]; // Number of points in the graph.
+}
+
+- (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index
+{
+    NSSortDescriptor *dateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
+    NSArray *selfReports = [self.session.selfReports sortedArrayUsingDescriptors:@[dateDescriptor]];
+    SelfReport *selfReport = selfReports[index];
+    return [selfReport.flow floatValue]; // The value of the point on the Y-Axis for the index.
 }
 
 @end

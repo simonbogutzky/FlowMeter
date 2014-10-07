@@ -44,6 +44,9 @@
 		D3877C0B19BEEE0E00F21881 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3877C0A19BEEE0E00F21881 /* libz.dylib */; };
 		D3877C0D19BEEFED00F21881 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3877C0C19BEEFED00F21881 /* ExternalAccessory.framework */; };
 		D38A216D16BFF9F80075D093 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38A216C16BFF9F80075D093 /* CoreLocation.framework */; };
+		D38C595719E42B8B0069049C /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = D38C595219E42B8B0069049C /* BEMCircle.m */; };
+		D38C595819E42B8B0069049C /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = D38C595419E42B8B0069049C /* BEMLine.m */; };
+		D38C595919E42B8B0069049C /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = D38C595619E42B8B0069049C /* BEMSimpleLineGraphView.m */; };
 		D38FBDBA196C1DC000C63681 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB4196C1DC000C63681 /* InfoPlist.strings */; };
 		D38FBDBB196C1DC000C63681 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB6196C1DC000C63681 /* Localizable.strings */; };
 		D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */; };
@@ -190,6 +193,12 @@
 		D3877C0C19BEEFED00F21881 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		D3877C0E19BEEFED00F21881 /* FlowMeter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FlowMeter.entitlements; sourceTree = "<group>"; };
 		D38A216C16BFF9F80075D093 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D38C595119E42B8B0069049C /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
+		D38C595219E42B8B0069049C /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
+		D38C595319E42B8B0069049C /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
+		D38C595419E42B8B0069049C /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
+		D38C595519E42B8B0069049C /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
+		D38C595619E42B8B0069049C /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
 		D38FBDB5196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D38FBDB7196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D396933B19BE10D700249D2C /* LabelAndSwitchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LabelAndSwitchTableViewCell.h; path = classes/ui/LabelAndSwitchTableViewCell.h; sourceTree = "<group>"; };
@@ -458,6 +467,19 @@
 			name = Reachability;
 			sourceTree = "<group>";
 		};
+		D38C594E19E42B640069049C /* BEMSimpleLineGraph */ = {
+			isa = PBXGroup;
+			children = (
+				D38C595119E42B8B0069049C /* BEMCircle.h */,
+				D38C595219E42B8B0069049C /* BEMCircle.m */,
+				D38C595319E42B8B0069049C /* BEMLine.h */,
+				D38C595419E42B8B0069049C /* BEMLine.m */,
+				D38C595519E42B8B0069049C /* BEMSimpleLineGraphView.h */,
+				D38C595619E42B8B0069049C /* BEMSimpleLineGraphView.m */,
+			);
+			name = BEMSimpleLineGraph;
+			sourceTree = "<group>";
+		};
 		D39747A41882CC6400CFF3DF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,6 +493,7 @@
 		D3C7ADCD171FCA86000A7D34 /* ExternalClasses */ = {
 			isa = PBXGroup;
 			children = (
+				D38C594E19E42B640069049C /* BEMSimpleLineGraph */,
 				D3DF0A65173F9A4C00643E5A /* MBProgressHUD */,
 				D35FEAE91725415000D92DEB /* Reachability */,
 			);
@@ -707,6 +730,8 @@
 				D34C9D191725044D004C261C /* AppDelegate.m in Sources */,
 				D34C9D1A1725044D004C261C /* main.m in Sources */,
 				D396933D19BE10D700249D2C /* LabelAndSwitchTableViewCell.m in Sources */,
+				D38C595819E42B8B0069049C /* BEMLine.m in Sources */,
+				D38C595919E42B8B0069049C /* BEMSimpleLineGraphView.m in Sources */,
 				D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */,
 				D34C9D2917250463004C261C /* SessionViewController.m in Sources */,
 				D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */,
@@ -722,6 +747,7 @@
 				D324688219B8AA9E00355ABE /* SessionDetailViewController.m in Sources */,
 				D3B3DC091733B93A001F2830 /* FlowMeter.xcdatamodeld in Sources */,
 				D39736C819B0C11D005D643D /* SelfReport.m in Sources */,
+				D38C595719E42B8B0069049C /* BEMCircle.m in Sources */,
 				D3EB072419BB9552005F0333 /* SessionPrefsTableViewController.m in Sources */,
 				D37067D71733F41300F86BBD /* EditViewController.m in Sources */,
 				D39736D419B0C11E005D643D /* Session.m in Sources */,

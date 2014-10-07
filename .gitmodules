@@ -7,3 +7,6 @@
 [submodule "ZipKit"]
 	path = ZipKit
 	url = https://github.com/kolpanic/ZipKit.git
+[submodule "BEMSimpleLineGraph"]
+	path = BEMSimpleLineGraph
+	url = https://github.com/Boris-Em/BEMSimpleLineGraph.git
