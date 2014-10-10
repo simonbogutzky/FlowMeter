@@ -412,8 +412,8 @@
     UILabel *labelSelfReportCount = (UILabel *)[cell viewWithTag:104];
     labelSelfReportCount.text = [NSString stringWithFormat:@"%d", [session.selfReportCount intValue]];
     
-    UILabel *labelAverageBPM = (UILabel *)[cell viewWithTag:106];
-    labelAverageBPM.text = [NSString stringWithFormat:@"%d", [session.averageBPM intValue]];
+    UILabel *labelAverageHeartrate = (UILabel *)[cell viewWithTag:106];
+    labelAverageHeartrate.text = [NSString stringWithFormat:@"%d", [session.averageHeartrate intValue]];
     
     UILabel *labelDuration = (UILabel *)[cell viewWithTag:107];
     labelDuration.text = [self stringFromTimeInterval:[session.duration doubleValue]];

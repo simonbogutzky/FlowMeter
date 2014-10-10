@@ -18,7 +18,7 @@
 @dynamic date;
 @dynamic duration;
 @dynamic selfReportCount;
-@dynamic averageBPM;
+@dynamic averageHeartrate;
 @dynamic averageFlow;
 @dynamic averageFit;
 @dynamic averageAbsorption;

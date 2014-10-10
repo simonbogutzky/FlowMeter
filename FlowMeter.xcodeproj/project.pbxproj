@@ -60,7 +60,7 @@
 		D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */; };
 		D3A4629F1726E08900D454F7 /* SessionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionTableViewController.m */; };
 		D3AB053219D5581A00626323 /* 5min-silence.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3AB053119D5581A00626323 /* 5min-silence.mp3 */; };
-		D3B3DC091733B93A001F2830 /* FlowMeter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3B3DC071733B93A001F2830 /* FlowMeter.xcdatamodeld */; };
+		D3B5EF5319ED55E100572C01 /* FlowMeter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3B5EF4F19ED55E100572C01 /* FlowMeter.xcdatamodeld */; };
 		D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1290F1863296A00C361CA /* MBProgressHUD.m */; };
 		D3C1291318632A1E00C361CA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1291218632A1E00C361CA /* Reachability.m */; };
 		D3C1292A18632C9A00C361CA /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C1292918632C9A00C361CA /* DropboxSDK.framework */; };
@@ -161,10 +161,9 @@
 		D31AA2D81951FD6A004ACB8D /* HeartRateMonitorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorManager.m; sourceTree = "<group>"; };
 		D31AA2D91951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorManagerDelegate.h; sourceTree = "<group>"; };
 		D31AA2E21951FDE5004ACB8D /* HeartRateMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitor.h; sourceTree = "<group>"; };
-		D31BEF3C19C028090005BBFC /* FlowMeter-Version-003.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-003.xcdatamodel"; sourceTree = "<group>"; };
 		D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewControllerDelegate.h; path = classes/ui/LikertScaleViewControllerDelegate.h; sourceTree = "<group>"; };
 		D324688019B8AA9E00355ABE /* SessionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionDetailViewController.h; path = classes/ui/SessionDetailViewController.h; sourceTree = "<group>"; };
-		D324688119B8AA9E00355ABE /* SessionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionDetailViewController.m; path = classes/ui/SessionDetailViewController.m; sourceTree = "<group>"; };
+		D324688119B8AA9E00355ABE /* SessionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SessionDetailViewController.m; path = classes/ui/SessionDetailViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D329ACDC197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeartRateMonitorDeviceTableViewController.h; path = classes/ui/HeartRateMonitorDeviceTableViewController.h; sourceTree = "<group>"; };
 		D329ACDD197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeartRateMonitorDeviceTableViewController.m; path = classes/ui/HeartRateMonitorDeviceTableViewController.m; sourceTree = "<group>"; };
 		D329ACE2197A98F400B144B5 /* SelfReport+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SelfReport+Description.h"; path = "classes/model/SelfReport+Description.h"; sourceTree = "<group>"; };
@@ -178,7 +177,7 @@
 		D34C9D151725044D004C261C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = classes/AppDelegate.m; sourceTree = "<group>"; };
 		D34C9D161725044D004C261C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = classes/main.m; sourceTree = "<group>"; };
 		D34C9D1E17250463004C261C /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionViewController.h; path = classes/ui/SessionViewController.h; sourceTree = "<group>"; };
-		D34C9D1F17250463004C261C /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionViewController.m; path = classes/ui/SessionViewController.m; sourceTree = "<group>"; };
+		D34C9D1F17250463004C261C /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SessionViewController.m; path = classes/ui/SessionViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D34C9D2417250463004C261C /* PrefsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefsTableViewController.h; path = classes/ui/PrefsTableViewController.h; sourceTree = "<group>"; };
 		D34C9D2517250463004C261C /* PrefsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrefsTableViewController.m; path = classes/ui/PrefsTableViewController.m; sourceTree = "<group>"; };
 		D34C9D31172504A8004C261C /* FlowMeter-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "FlowMeter-Info.plist"; path = "supporting-files/FlowMeter-Info.plist"; sourceTree = "<group>"; };
@@ -211,15 +210,19 @@
 		D39736CD19B0C11E005D643D /* HeartRateRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeartRateRecord.m; path = classes/model/HeartRateRecord.m; sourceTree = "<group>"; };
 		D39736CF19B0C11E005D643D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = classes/model/User.h; sourceTree = "<group>"; };
 		D39736D019B0C11E005D643D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = classes/model/User.m; sourceTree = "<group>"; };
-		D39736D219B0C11E005D643D /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = classes/model/Session.h; sourceTree = "<group>"; };
-		D39736D319B0C11E005D643D /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = classes/model/Session.m; sourceTree = "<group>"; };
+		D39736D219B0C11E005D643D /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Session.h; path = classes/model/Session.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		D39736D319B0C11E005D643D /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Session.m; path = classes/model/Session.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZipKit.xcodeproj; path = ZipKit/ZipKit.xcodeproj; sourceTree = "<group>"; };
 		D398FAEF19AB5B52003DB0CA /* HeartRateRecord+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "HeartRateRecord+Description.h"; path = "classes/model/HeartRateRecord+Description.h"; sourceTree = "<group>"; };
 		D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HeartRateRecord+Description.m"; path = "classes/model/HeartRateRecord+Description.m"; sourceTree = "<group>"; };
 		D3A4629D1726E08900D454F7 /* SessionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionTableViewController.h; path = classes/ui/SessionTableViewController.h; sourceTree = "<group>"; };
-		D3A4629E1726E08900D454F7 /* SessionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionTableViewController.m; path = classes/ui/SessionTableViewController.m; sourceTree = "<group>"; };
+		D3A4629E1726E08900D454F7 /* SessionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SessionTableViewController.m; path = classes/ui/SessionTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		D3A5D11519ED58DF0067897B /* FlowMeter-Version-004.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-004.xcdatamodel"; sourceTree = "<group>"; };
+		D3A5D11819ED60030067897B /* FlowMeter-Version-005.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-005.xcdatamodel"; sourceTree = "<group>"; };
 		D3AB053119D5581A00626323 /* 5min-silence.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "5min-silence.mp3"; sourceTree = "<group>"; };
-		D3B3DC081733B93A001F2830 /* FlowMeter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlowMeter.xcdatamodel; sourceTree = "<group>"; };
+		D3B5EF5019ED55E100572C01 /* FlowMeter-Version-002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-002.xcdatamodel"; sourceTree = "<group>"; };
+		D3B5EF5119ED55E100572C01 /* FlowMeter-Version-003.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-003.xcdatamodel"; sourceTree = "<group>"; };
+		D3B5EF5219ED55E100572C01 /* FlowMeter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlowMeter.xcdatamodel; sourceTree = "<group>"; };
 		D3C1290E1863296A00C361CA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
 		D3C1290F1863296A00C361CA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		D3C1291118632A1E00C361CA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = SOURCE_ROOT; };
@@ -232,7 +235,6 @@
 		D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D3C7ADCA171EEA8C000A7D34 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D3DA4A7616DCCB0300ECBE4B /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		D3E1F9AE19B9BA3000D1E8EC /* FlowMeter-Version-002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-002.xcdatamodel"; sourceTree = "<group>"; };
 		D3EB072219BB9552005F0333 /* SessionPrefsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionPrefsTableViewController.h; path = classes/ui/SessionPrefsTableViewController.h; sourceTree = "<group>"; };
 		D3EB072319BB9552005F0333 /* SessionPrefsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionPrefsTableViewController.m; path = classes/ui/SessionPrefsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -397,9 +399,9 @@
 		D31C4BCA19A619DE0017AA5A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D3B5EF4F19ED55E100572C01 /* FlowMeter.xcdatamodeld */,
 				D34C9D31172504A8004C261C /* FlowMeter-Info.plist */,
 				D34C9D32172504A8004C261C /* FlowMeter-Prefix.pch */,
-				D3B3DC071733B93A001F2830 /* FlowMeter.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -726,6 +728,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D39736D119B0C11E005D643D /* User.m in Sources */,
+				D3B5EF5319ED55E100572C01 /* FlowMeter.xcdatamodeld in Sources */,
 				D329ACED197A98F400B144B5 /* Session+OutStream.m in Sources */,
 				D34C9D191725044D004C261C /* AppDelegate.m in Sources */,
 				D34C9D1A1725044D004C261C /* main.m in Sources */,
@@ -745,7 +748,6 @@
 				D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */,
 				D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */,
 				D324688219B8AA9E00355ABE /* SessionDetailViewController.m in Sources */,
-				D3B3DC091733B93A001F2830 /* FlowMeter.xcdatamodeld in Sources */,
 				D39736C819B0C11D005D643D /* SelfReport.m in Sources */,
 				D38C595719E42B8B0069049C /* BEMCircle.m in Sources */,
 				D3EB072419BB9552005F0333 /* SessionPrefsTableViewController.m in Sources */,
@@ -1149,14 +1151,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D3B3DC071733B93A001F2830 /* FlowMeter.xcdatamodeld */ = {
+		D3B5EF4F19ED55E100572C01 /* FlowMeter.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D31BEF3C19C028090005BBFC /* FlowMeter-Version-003.xcdatamodel */,
-				D3E1F9AE19B9BA3000D1E8EC /* FlowMeter-Version-002.xcdatamodel */,
-				D3B3DC081733B93A001F2830 /* FlowMeter.xcdatamodel */,
+				D3A5D11819ED60030067897B /* FlowMeter-Version-005.xcdatamodel */,
+				D3A5D11519ED58DF0067897B /* FlowMeter-Version-004.xcdatamodel */,
+				D3B5EF5019ED55E100572C01 /* FlowMeter-Version-002.xcdatamodel */,
+				D3B5EF5119ED55E100572C01 /* FlowMeter-Version-003.xcdatamodel */,
+				D3B5EF5219ED55E100572C01 /* FlowMeter.xcdatamodel */,
 			);
-			currentVersion = D31BEF3C19C028090005BBFC /* FlowMeter-Version-003.xcdatamodel */;
+			currentVersion = D3A5D11819ED60030067897B /* FlowMeter-Version-005.xcdatamodel */;
 			name = FlowMeter.xcdatamodeld;
 			path = "supporting-files/FlowMeter.xcdatamodeld";
 			sourceTree = "<group>";

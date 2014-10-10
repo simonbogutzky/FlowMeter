@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSNumber * duration;
 @property (nonatomic, retain) NSNumber * selfReportCount;
-@property (nonatomic, retain) NSNumber * averageBPM;
+@property (nonatomic, retain) NSNumber * averageHeartrate;
 @property (nonatomic, retain) NSNumber * averageFlow;
 @property (nonatomic, retain) NSNumber * averageFit;
 @property (nonatomic, retain) NSNumber * averageAbsorption;

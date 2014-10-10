@@ -222,7 +222,7 @@
                          self.stopWatchLabel.text = @"00:00";
                          self.firstUnitStopWatchLabel.text = NSLocalizedString(@"MIN", @"Minuten Einheit Label im SessionViewController");
                          self.secondUnitStopWatchLabel.text = NSLocalizedString(@"S", @"Sekunden Einheit Label im SessionViewController");
-                         self.heartRateLabel.text = NSLocalizedString(@"NA", @"Anfangs-Heartrate Label im SessionViewController");
+                         self.heartRateLabel.text = NSLocalizedString(@"NA", @"Anfangs-Herzraten Label im SessionViewController");
                          self.selfReportCountLabel.text = @"0";
                          [self startCollecting];
                      }];
@@ -345,7 +345,7 @@
                          }
                          
                          if (self.heartRateCount != 0) {
-                             self.session.averageBPM = [NSNumber numberWithFloat:self.heartRateSum / self.heartRateCount];
+                             self.session.averageHeartrate = [NSNumber numberWithFloat:self.heartRateSum / self.heartRateCount];
                          }
                          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                              [self.appDelegate saveContext];
