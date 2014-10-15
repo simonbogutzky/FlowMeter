@@ -12,6 +12,7 @@
 #import "Activity.h"
 #import "BEMSimpleLineGraphView.h"
 #import "SelfReport+Description.h"
+#import "PropertyTableViewCell.h"
 
 @interface SessionDetailViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -147,8 +148,8 @@
         }
         
         UIColor *color = [self.dataSrc[selectedIndexPath.row] objectForKey:kColorKey];
-        self.lineGraphView.colorLine = [color colorWithAlphaComponent:0.8];
-        self.lineGraphView.colorPoint = [color colorWithAlphaComponent:0.8];
+        self.lineGraphView.colorLine = color;
+        self.lineGraphView.colorPoint = color;
     }
     
     // Customization of the graph
@@ -334,6 +335,26 @@
     return [self.lineGraphDataSource[index] floatValue]; // The value of the point on the Y-Axis for the index.
 }
 
+- (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index
+{
+    // NSString *label = [self.ArrayOfDates objectAtIndex:index];
+    return [NSString stringWithFormat:@"%d", index];
+}
+
+- (CGFloat)maxValueForLineGraph:(BEMSimpleLineGraphView *)graph
+{
+    return 7.0;
+}
+
+- (CGFloat)minValueForLineGraph:(BEMSimpleLineGraphView *)graph
+{
+    return 2.0;
+}
+
+- (NSInteger)numberOfYAxisLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph
+{
+    return 5;
+}
 
 #pragma mark -
 #pragma mark - UITableViewDelegate implementation
@@ -358,14 +379,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = nil;
+    PropertyTableViewCell *cell = nil;
     NSString *cellID = @"Property Cell";
     cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
-    cell.textLabel.text = [self.dataSrc[indexPath.row] objectForKey:kTitleKey];
+    cell.labelPropertyName.text = [self.dataSrc[indexPath.row] objectForKey:kTitleKey];
     NSNumber *number = [self.session valueForKey:[NSString stringWithFormat:@"%@%@", @"average", [[self.dataSrc[indexPath.row] objectForKey:kValueKey] capitalizedString]]];
     
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f ⍉", [number doubleValue]];
+    cell.labelPropertyValue.text = [NSString stringWithFormat:@"%.1f ⍉", [number doubleValue]];
+    
+    cell.color = [self.dataSrc[indexPath.row] objectForKey:kColorKey];
     
     return cell;
 }
