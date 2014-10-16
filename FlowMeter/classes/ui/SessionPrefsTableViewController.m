@@ -365,7 +365,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
     [dataItem setValue:[NSNumber numberWithBool:sender.on] forKey:kValueKey];
     
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-    int numberOfRows = [self.dataArray[indexPath.section] count];
+    unsigned long numberOfRows = [self.dataArray[indexPath.section] count];
     for (int i = 1; i < numberOfRows; i++) {
         [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:indexPath.section]];
     }

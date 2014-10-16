@@ -169,6 +169,8 @@
     self.lineGraphView.enableBezierCurve = NO;
     self.lineGraphView.enableYAxisLabel = YES;
     self.lineGraphView.autoScaleYAxis = YES;
+    self.lineGraphView.yAxisMin = [NSNumber numberWithInt:2];
+    self.lineGraphView.yAxisMax = [NSNumber numberWithInt:7];
     self.lineGraphView.alwaysDisplayDots = NO;
     self.lineGraphView.enableReferenceAxisLines = YES;
     self.lineGraphView.enableReferenceAxisFrame = YES;

@@ -1,0 +1,177 @@
+
+/* Class = "IBUILabel"; text = "4.5 ⍉"; ObjectID = "11w-qP-avr"; */
+"11w-qP-avr.text" = "4.5 ⍉";
+
+/* Class = "IBUILabel"; text = "Triff nicht zu"; ObjectID = "1X8-td-6f1"; */
+"1X8-td-6f1.text" = "Triff nicht zu";
+
+/* Class = "IBUILabel"; text = "Triff zu"; ObjectID = "1d2-E2-RwK"; */
+"1d2-E2-RwK.text" = "Triff zu";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "3Dj-cx-6L9"; */
+"3Dj-cx-6L9.text" = "Title";
+
+/* Class = "IBUINavigationItem"; title = "bearbeiten"; ObjectID = "3IC-dB-72B"; */
+"3IC-dB-72B.title" = "bearbeiten";
+
+/* Class = "IBUILabel"; text = "Simon Bogutzky"; ObjectID = "3OO-2z-d6W"; */
+"3OO-2z-d6W.text" = "Simon Bogutzky";
+
+/* Class = "IBUILabel"; text = "03h 05m"; ObjectID = "4Yf-mk-QvG"; */
+"4Yf-mk-QvG.text" = "03h 05m";
+
+/* Class = "IBUILabel"; text = "FLOW"; ObjectID = "4vJ-Is-xZ5"; */
+"4vJ-Is-xZ5.text" = "FLOW";
+
+/* Class = "IBUILabel"; text = "✎"; ObjectID = "744-6J-0ve"; */
+"744-6J-0ve.text" = "✎";
+
+/* Class = "IBUILabel"; text = "MESSUNGEN"; ObjectID = "7P5-t7-rHo"; */
+"7P5-t7-rHo.text" = "MESSUNGEN";
+
+/* Class = "IBUIBarButtonItem"; title = "Menu"; ObjectID = "7Rs-Et-hYD"; */
+"7Rs-Et-hYD.title" = "Menu";
+
+/* Class = "IBUILabel"; text = "❤︎"; ObjectID = "8ie-3Q-cwT"; */
+"8ie-3Q-cwT.text" = "❤︎";
+
+/* Class = "IBUILabel"; text = "ZEIT"; ObjectID = "AVB-X3-04Z"; */
+"AVB-X3-04Z.text" = "ZEIT";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "BSX-sb-I5L"; */
+"BSX-sb-I5L.text" = "Title";
+
+/* Class = "IBUILabel"; text = "S"; ObjectID = "Cs9-qS-JfL"; */
+"Cs9-qS-JfL.text" = "S";
+
+/* Class = "IBUILabel"; text = "02:05:00"; ObjectID = "DRM-us-BNo"; */
+"DRM-us-BNo.text" = "02:05:00";
+
+/* Class = "IBUINavigationItem"; title = "HxM Geräte"; ObjectID = "DuS-St-5RM"; */
+"DuS-St-5RM.title" = "HxM Geräte";
+
+/* Class = "IBUILabel"; text = "0"; ObjectID = "HbQ-sv-eTH"; */
+"HbQ-sv-eTH.text" = "0";
+
+/* Class = "IBUILabel"; text = "120 ⍉"; ObjectID = "IXj-cB-LmA"; */
+"IXj-cB-LmA.text" = "120 ⍉";
+
+/* Class = "IBUITabBarItem"; title = "Einstellungen"; ObjectID = "Im2-FV-wo3"; */
+"Im2-FV-wo3.title" = "Einstellungen";
+
+/* Class = "IBUILabel"; text = "00:00"; ObjectID = "JBd-iU-TgT"; */
+"JBd-iU-TgT.text" = "00:00";
+
+/* Class = "IBUILabel"; text = " "; ObjectID = "KXe-AL-4yJ"; */
+"KXe-AL-4yJ.text" = " ";
+
+/* Class = "IBUIButton"; normalTitle = "Abbrechen"; ObjectID = "KhE-yR-7X5"; */
+"KhE-yR-7X5.normalTitle" = "Abbrechen";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "Ko6-wq-69x"; */
+"Ko6-wq-69x.text" = "Title";
+
+/* Class = "IBUIBarButtonItem"; title = "Abbrechen"; ObjectID = "NIg-71-mrk"; */
+"NIg-71-mrk.title" = "Abbrechen";
+
+/* Class = "IBUITabBarItem"; title = "Aufnahme"; ObjectID = "Oo6-yD-QJr"; */
+"Oo6-yD-QJr.title" = "Aufnahme";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "Rvg-l2-k8e"; */
+"Rvg-l2-k8e.text" = "Title";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "TjS-8J-YUm"; */
+"TjS-8J-YUm.text" = "Label";
+
+/* Class = "IBUITabBarItem"; title = "Flow-Messungen"; ObjectID = "Zq6-8C-6RD"; */
+"Zq6-8C-6RD.title" = "Flow-Messungen";
+
+/* Class = "IBUILabel"; text = " "; ObjectID = "Zsq-WU-lxK"; */
+"Zsq-WU-lxK.text" = " ";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "b34-Ts-ek6"; */
+"b34-Ts-ek6.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Ich fühle mich optimal beansprucht"; ObjectID = "bjO-rZ-Nvg"; */
+"bjO-rZ-Nvg.text" = "Ich fühle mich optimal beansprucht";
+
+/* Class = "IBUINavigationItem"; title = "Einstellungen"; ObjectID = "cFc-Wy-kcx"; */
+"cFc-Wy-kcx.title" = "Einstellungen";
+
+/* Class = "IBUILabel"; text = "4.5 ⍉"; ObjectID = "car-Lx-cye"; */
+"car-Lx-cye.text" = "4.5 ⍉";
+
+/* Class = "IBUILabel"; text = "Dropbox Verbindung"; ObjectID = "cxS-zW-O3x"; */
+"cxS-zW-O3x.text" = "Dropbox Verbindung";
+
+/* Class = "IBUILabel"; text = "120"; ObjectID = "dJb-DU-WeX"; */
+"dJb-DU-WeX.text" = "120";
+
+/* Class = "IBUILabel"; text = "HxM Verbindung"; ObjectID = "dxo-2B-l8I"; */
+"dxo-2B-l8I.text" = "HxM Verbindung";
+
+/* Class = "IBUILabel"; text = "teils-teils"; ObjectID = "f4Y-Br-TSS"; */
+"f4Y-Br-TSS.text" = "teils-teils";
+
+/* Class = "IBUINavigationItem"; title = "S. Bogutzky - Laufen"; ObjectID = "fhB-78-Qag"; */
+"fhB-78-Qag.title" = "S. Bogutzky - Laufen";
+
+/* Class = "IBUILabel"; text = "✎"; ObjectID = "g1v-4K-Oax"; */
+"g1v-4K-Oax.text" = "✎";
+
+/* Class = "IBUINavigationItem"; title = "Lauf"; ObjectID = "hQZ-pK-huO"; */
+"hQZ-pK-huO.title" = "Lauf";
+
+/* Class = "IBUILabel"; text = "14"; ObjectID = "hma-90-mkH"; */
+"hma-90-mkH.text" = "14";
+
+/* Class = "IBUIBarButtonItem"; title = "Scan"; ObjectID = "ibw-L0-Seu"; */
+"ibw-L0-Seu.title" = "Scan";
+
+/* Class = "IBUILabel"; text = "5"; ObjectID = "kfM-7K-tdj"; */
+"kfM-7K-tdj.text" = "5";
+
+/* Class = "IBUILabel"; text = "4.5"; ObjectID = "kra-zN-Y2H"; */
+"kra-zN-Y2H.text" = "4.5";
+
+/* Class = "IBUILabel"; text = "Laufen"; ObjectID = "lxG-6c-LKo"; */
+"lxG-6c-LKo.text" = "Laufen";
+
+/* Class = "IBUIButton"; normalTitle = "Starten"; ObjectID = "mMI-il-cAu"; */
+"mMI-il-cAu.normalTitle" = "Starten";
+
+/* Class = "IBUILabel"; text = "MIN"; ObjectID = "mlH-m3-f8i"; */
+"mlH-m3-f8i.text" = "MIN";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Verbindung"; ObjectID = "nSS-ym-ztX"; */
+"nSS-ym-ztX.headerTitle" = "Verbindung";
+
+/* Class = "IBUIBarButtonItem"; title = "Alle Löschen"; ObjectID = "paP-BI-5q6"; */
+"paP-BI-5q6.title" = "Alle Löschen";
+
+/* Class = "IBUINavigationItem"; title = "Flow-Messungen"; ObjectID = "tZl-QD-bic"; */
+"tZl-QD-bic.title" = "Flow-Messungen";
+
+/* Class = "IBUILabel"; text = "NA"; ObjectID = "uLq-37-zr6"; */
+"uLq-37-zr6.text" = "NA";
+
+/* Class = "IBUILabel"; text = "❤︎"; ObjectID = "uuA-Yb-SmM"; */
+"uuA-Yb-SmM.text" = "❤︎";
+
+/* Class = "IBUILabel"; text = "BPM"; ObjectID = "vyr-L6-cSf"; */
+"vyr-L6-cSf.text" = "BPM";
+
+/* Class = "IBUILabel"; text = "FLOW"; ObjectID = "wMl-tr-4gU"; */
+"wMl-tr-4gU.text" = "FLOW";
+
+/* Class = "IBUINavigationItem"; title = "Aufnahme"; ObjectID = "xDQ-T2-Doq"; */
+"xDQ-T2-Doq.title" = "Aufnahme";
+
+/* Class = "IBUILabel"; text = "7"; ObjectID = "xDl-la-9j6"; */
+"xDl-la-9j6.text" = "7";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "xkg-C7-6Eh"; */
+"xkg-C7-6Eh.text" = "Label";
+
+/* Class = "IBUILabel"; text = "August 28, 2014 - 17:30"; ObjectID = "yp2-k7-OXg"; */
+"yp2-k7-OXg.text" = "August 28, 2014 - 17:30";
