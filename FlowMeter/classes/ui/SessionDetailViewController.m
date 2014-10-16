@@ -31,7 +31,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *lineGraphView;
-@property (strong, nonatomic) NSMutableArray *lineGraphDataSource;
+@property (strong, nonatomic) NSMutableArray *yValues;
+@property (strong, nonatomic) NSMutableArray *xLabels;
 
 @end
 
@@ -142,9 +143,11 @@
         
         NSSortDescriptor *dateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
         NSArray *managedObjects = [[self.session valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kEntityKey]] sortedArrayUsingDescriptors:@[dateDescriptor]];
-        self.lineGraphDataSource = [NSMutableArray arrayWithCapacity:[managedObjects count]];
+        self.yValues = [NSMutableArray arrayWithCapacity:[managedObjects count]];
+        self.xLabels = [NSMutableArray arrayWithCapacity:[managedObjects count]];
         for (NSManagedObject *managedObject in managedObjects) {
-            [self.lineGraphDataSource addObject:[managedObject valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]];
+            [self.yValues addObject:[managedObject valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]];
+            [self.xLabels addObject:[managedObject valueForKey:@"date"]];
         }
         
         UIColor *color = [self.dataSrc[selectedIndexPath.row] objectForKey:kColorKey];
@@ -327,18 +330,21 @@
 
 - (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph
 {
-    return [self.lineGraphDataSource count]; // Number of points in the graph.
+    return [self.yValues count]; // Number of points in the graph.
 }
 
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index
 {
-    return [self.lineGraphDataSource[index] floatValue]; // The value of the point on the Y-Axis for the index.
+    return [self.yValues[index] floatValue]; // The value of the point on the Y-Axis for the index.
 }
 
 - (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index
 {
-    // NSString *label = [self.ArrayOfDates objectAtIndex:index];
-    return [NSString stringWithFormat:@"%d", index];
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+    timeFormatter.dateStyle = NSDateFormatterNoStyle;
+    timeFormatter.timeStyle = NSDateFormatterShortStyle;
+    
+    return [NSString stringWithFormat:@"%@", [timeFormatter stringFromDate:self.xLabels[index]]];
 }
 
 - (CGFloat)maxValueForLineGraph:(BEMSimpleLineGraphView *)graph
