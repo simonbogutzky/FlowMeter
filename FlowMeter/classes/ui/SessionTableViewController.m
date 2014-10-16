@@ -145,7 +145,7 @@
     if ([segue.identifier isEqualToString:@"Show Session Details"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         Session *session = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [[segue destinationViewController] setSession:session];
+        [(SessionDetailViewController *)[segue destinationViewController] setSession:session];
     }
 }
 

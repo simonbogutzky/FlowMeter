@@ -13,8 +13,6 @@
 		604CCD9116A6F31000E87194 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604CCD9016A6F31000E87194 /* Foundation.framework */; };
 		604CCD9316A6F31000E87194 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604CCD9216A6F31000E87194 /* CoreGraphics.framework */; };
 		60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60AA4F7216A829100026DE8D /* CoreMotion.framework */; };
-		D31AA2BB1951FD19004ACB8D /* HeartRateMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31AA2B01951FD19004ACB8D /* HeartRateMonitor.framework */; };
-		D31AA2C21951FD19004ACB8D /* HeartRateMonitorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D31AA2C11951FD19004ACB8D /* HeartRateMonitorTests.m */; };
 		D31AA2C51951FD19004ACB8D /* HeartRateMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31AA2B01951FD19004ACB8D /* HeartRateMonitor.framework */; };
 		D31AA2C61951FD19004ACB8D /* HeartRateMonitor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D31AA2B01951FD19004ACB8D /* HeartRateMonitor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D31AA2DA1951FD6A004ACB8D /* HeartRateMonitorData.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2D21951FD6A004ACB8D /* HeartRateMonitorData.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -47,8 +45,6 @@
 		D38C595719E42B8B0069049C /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = D38C595219E42B8B0069049C /* BEMCircle.m */; };
 		D38C595819E42B8B0069049C /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = D38C595419E42B8B0069049C /* BEMLine.m */; };
 		D38C595919E42B8B0069049C /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = D38C595619E42B8B0069049C /* BEMSimpleLineGraphView.m */; };
-		D38FBDBA196C1DC000C63681 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB4196C1DC000C63681 /* InfoPlist.strings */; };
-		D38FBDBB196C1DC000C63681 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB6196C1DC000C63681 /* Localizable.strings */; };
 		D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */; };
 		D396933D19BE10D700249D2C /* LabelAndSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D396933C19BE10D700249D2C /* LabelAndSwitchTableViewCell.m */; };
 		D39736C819B0C11D005D643D /* SelfReport.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736C719B0C11D005D643D /* SelfReport.m */; };
@@ -75,13 +71,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D31AA2BC1951FD19004ACB8D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 604CCD8116A6F31000E87194 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D31AA2AF1951FD19004ACB8D;
-			remoteInfo = HeartRateMonitor;
-		};
 		D31AA2C31951FD19004ACB8D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 604CCD8116A6F31000E87194 /* Project object */;
@@ -150,9 +139,6 @@
 		60AA4F7216A829100026DE8D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		D31AA2B01951FD19004ACB8D /* HeartRateMonitor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HeartRateMonitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D31AA2B31951FD19004ACB8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D31AA2BA1951FD19004ACB8D /* HeartRateMonitorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeartRateMonitorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D31AA2C01951FD19004ACB8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D31AA2C11951FD19004ACB8D /* HeartRateMonitorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorTests.m; sourceTree = "<group>"; };
 		D31AA2D21951FD6A004ACB8D /* HeartRateMonitorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorData.h; sourceTree = "<group>"; };
 		D31AA2D31951FD6A004ACB8D /* HeartRateMonitorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorData.m; sourceTree = "<group>"; };
 		D31AA2D41951FD6A004ACB8D /* HeartRateMonitorDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorDevice.h; sourceTree = "<group>"; };
@@ -199,8 +185,7 @@
 		D38C595419E42B8B0069049C /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
 		D38C595519E42B8B0069049C /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
 		D38C595619E42B8B0069049C /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
-		D38FBDB5196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D38FBDB7196C1DC000C63681 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D38F7ABE19F0089600016B6E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		D396933B19BE10D700249D2C /* LabelAndSwitchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LabelAndSwitchTableViewCell.h; path = classes/ui/LabelAndSwitchTableViewCell.h; sourceTree = "<group>"; };
 		D396933C19BE10D700249D2C /* LabelAndSwitchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LabelAndSwitchTableViewCell.m; path = classes/ui/LabelAndSwitchTableViewCell.m; sourceTree = "<group>"; };
 		D39736C619B0C11D005D643D /* SelfReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelfReport.h; path = classes/model/SelfReport.h; sourceTree = "<group>"; };
@@ -278,14 +263,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D31AA2B71951FD19004ACB8D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D31AA2BB1951FD19004ACB8D /* HeartRateMonitor.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -293,11 +270,10 @@
 			isa = PBXGroup;
 			children = (
 				604CCD9416A6F31000E87194 /* FlowMeter */,
-				D3C7ADCD171FCA86000A7D34 /* ExternalClasses */,
-				D35FEABC17253FF800D92DEB /* ExternalProjects */,
+				D3C7ADCD171FCA86000A7D34 /* External Classes */,
+				D35FEABC17253FF800D92DEB /* External Projects */,
 				604CCD8D16A6F31000E87194 /* Frameworks */,
 				D31AA2B11951FD19004ACB8D /* HeartRateMonitor */,
-				D31AA2BE1951FD19004ACB8D /* HeartRateMonitorTests */,
 				604CCD8B16A6F31000E87194 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -307,7 +283,6 @@
 			children = (
 				604CCD8A16A6F31000E87194 /* FlowMeter.app */,
 				D31AA2B01951FD19004ACB8D /* HeartRateMonitor.framework */,
-				D31AA2BA1951FD19004ACB8D /* HeartRateMonitorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -340,7 +315,6 @@
 		604CCD9416A6F31000E87194 /* FlowMeter */ = {
 			isa = PBXGroup;
 			children = (
-				D3877C0E19BEEFED00F21881 /* FlowMeter.entitlements */,
 				D34C9D1217250407004C261C /* Classes */,
 				604CCD9516A6F31000E87194 /* Supporting Files */,
 			);
@@ -350,7 +324,10 @@
 		604CCD9516A6F31000E87194 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D3AB053119D5581A00626323 /* 5min-silence.mp3 */,
+				D34C9D31172504A8004C261C /* FlowMeter-Info.plist */,
+				D34C9D32172504A8004C261C /* FlowMeter-Prefix.pch */,
+				D3877C0E19BEEFED00F21881 /* FlowMeter.entitlements */,
+				D38F7ABA19F0070300016B6E /* Audio */,
 				D31C4BCA19A619DE0017AA5A /* Model */,
 				D34C9D3E172504D7004C261C /* UI */,
 			);
@@ -382,29 +359,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D31AA2BE1951FD19004ACB8D /* HeartRateMonitorTests */ = {
-			isa = PBXGroup;
-			children = (
-				D31AA2C11951FD19004ACB8D /* HeartRateMonitorTests.m */,
-				D31AA2BF1951FD19004ACB8D /* Supporting Files */,
-			);
-			path = HeartRateMonitorTests;
-			sourceTree = "<group>";
-		};
-		D31AA2BF1951FD19004ACB8D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D31AA2C01951FD19004ACB8D /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		D31C4BCA19A619DE0017AA5A /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				D3B5EF4F19ED55E100572C01 /* FlowMeter.xcdatamodeld */,
-				D34C9D31172504A8004C261C /* FlowMeter-Info.plist */,
-				D34C9D32172504A8004C261C /* FlowMeter-Prefix.pch */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -448,19 +406,17 @@
 			isa = PBXGroup;
 			children = (
 				D335030819A5D89B008CC93A /* Images.xcassets */,
-				D38FBDB4196C1DC000C63681 /* InfoPlist.strings */,
-				D38FBDB6196C1DC000C63681 /* Localizable.strings */,
 				D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */,
 			);
 			name = UI;
 			sourceTree = "<group>";
 		};
-		D35FEABC17253FF800D92DEB /* ExternalProjects */ = {
+		D35FEABC17253FF800D92DEB /* External Projects */ = {
 			isa = PBXGroup;
 			children = (
 				D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */,
 			);
-			name = ExternalProjects;
+			name = "External Projects";
 			sourceTree = "<group>";
 		};
 		D35FEAE91725415000D92DEB /* Reachability */ = {
@@ -485,6 +441,14 @@
 			name = BEMSimpleLineGraph;
 			sourceTree = "<group>";
 		};
+		D38F7ABA19F0070300016B6E /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				D3AB053119D5581A00626323 /* 5min-silence.mp3 */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
 		D39747A41882CC6400CFF3DF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,14 +459,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D3C7ADCD171FCA86000A7D34 /* ExternalClasses */ = {
+		D3C7ADCD171FCA86000A7D34 /* External Classes */ = {
 			isa = PBXGroup;
 			children = (
 				D38C594E19E42B640069049C /* BEMSimpleLineGraph */,
 				D3DF0A65173F9A4C00643E5A /* MBProgressHUD */,
 				D35FEAE91725415000D92DEB /* Reachability */,
 			);
-			name = ExternalClasses;
+			name = "External Classes";
 			path = FlowMeter;
 			sourceTree = "<group>";
 		};
@@ -603,24 +567,6 @@
 			productReference = D31AA2B01951FD19004ACB8D /* HeartRateMonitor.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D31AA2B91951FD19004ACB8D /* HeartRateMonitorTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D31AA2D11951FD19004ACB8D /* Build configuration list for PBXNativeTarget "HeartRateMonitorTests" */;
-			buildPhases = (
-				D31AA2B61951FD19004ACB8D /* Sources */,
-				D31AA2B71951FD19004ACB8D /* Frameworks */,
-				D31AA2B81951FD19004ACB8D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D31AA2BD1951FD19004ACB8D /* PBXTargetDependency */,
-			);
-			name = HeartRateMonitorTests;
-			productName = HeartRateMonitorTests;
-			productReference = D31AA2BA1951FD19004ACB8D /* HeartRateMonitorTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -641,10 +587,6 @@
 					D31AA2AF1951FD19004ACB8D = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = 8936XLC29N;
-					};
-					D31AA2B91951FD19004ACB8D = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = D31AA2AF1951FD19004ACB8D;
 					};
 				};
 			};
@@ -669,7 +611,6 @@
 			targets = (
 				604CCD8916A6F31000E87194 /* FlowMeter */,
 				D31AA2AF1951FD19004ACB8D /* HeartRateMonitor */,
-				D31AA2B91951FD19004ACB8D /* HeartRateMonitorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -704,21 +645,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D335030919A5D89B008CC93A /* Images.xcassets in Resources */,
-				D38FBDBA196C1DC000C63681 /* InfoPlist.strings in Resources */,
-				D38FBDBB196C1DC000C63681 /* Localizable.strings in Resources */,
 				D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */,
 				D3AB053219D5581A00626323 /* 5min-silence.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D31AA2AE1951FD19004ACB8D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D31AA2B81951FD19004ACB8D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -772,22 +704,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D31AA2B61951FD19004ACB8D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D31AA2C21951FD19004ACB8D /* HeartRateMonitorTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D31AA2BD1951FD19004ACB8D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D31AA2AF1951FD19004ACB8D /* HeartRateMonitor */;
-			targetProxy = D31AA2BC1951FD19004ACB8D /* PBXContainerItemProxy */;
-		};
 		D31AA2C41951FD19004ACB8D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D31AA2AF1951FD19004ACB8D /* HeartRateMonitor */;
@@ -806,26 +725,11 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D38FBDB4196C1DC000C63681 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D38FBDB5196C1DC000C63681 /* de */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		D38FBDB6196C1DC000C63681 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D38FBDB7196C1DC000C63681 /* de */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D35462EE19B21AEE006B2EA3 /* Base */,
+				D38F7ABE19F0089600016B6E /* de */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -1052,69 +956,6 @@
 			};
 			name = Release;
 		};
-		D31AA2CB1951FD19004ACB8D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = HeartRateMonitorTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		D31AA2CC1951FD19004ACB8D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = HeartRateMonitorTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1141,15 +982,6 @@
 			buildConfigurations = (
 				D31AA2C91951FD19004ACB8D /* Debug */,
 				D31AA2CA1951FD19004ACB8D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D31AA2D11951FD19004ACB8D /* Build configuration list for PBXNativeTarget "HeartRateMonitorTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D31AA2CB1951FD19004ACB8D /* Debug */,
-				D31AA2CC1951FD19004ACB8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
