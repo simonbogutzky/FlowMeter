@@ -1,5 +1,5 @@
 //
-//  SessionViewController.h
+//  SessionRecordViewController.h
 //  FlowMeter
 //
 //  Created by Simon Bogutzky on 16.01.13.
@@ -10,7 +10,7 @@
 #import <HeartRateMonitor/HeartRateMonitor.h>
 #import "LikertScaleViewControllerDelegate.h"
 
-@interface SessionViewController : UIViewController <HeartRateMonitorManagerDelegate, LikertScaleViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface SessionRecordViewController : UIViewController <HeartRateMonitorManagerDelegate, LikertScaleViewControllerDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSArray *sessionData;
 

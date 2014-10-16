@@ -113,7 +113,7 @@
     } else {
         if ([_delegate respondsToSelector:@selector(heartRateMonitorManager:didFailToMonitorHeartrateMonitorDevice:error:)]) {
             NSMutableDictionary *details = [NSMutableDictionary dictionary];
-            [details setValue:@"No connected heartrate monitor device" forKey:NSLocalizedDescriptionKey];
+            [details setValue:@"No connected heart rate monitor device" forKey:NSLocalizedDescriptionKey];
             NSError *error = [NSError errorWithDomain:@"de.bogutzky" code:2 userInfo:details];
             NSLog(@"## Error: %@", [error localizedDescription]);
             [_delegate heartRateMonitorManager:self didFailToMonitorHeartrateMonitorDevice:nil error:error];
@@ -151,7 +151,7 @@
     } else {
         if ([_delegate respondsToSelector:@selector(heartRateMonitorManager:didFailToMonitorHeartrateMonitorDevice:error:)]) {
             NSMutableDictionary *details = [NSMutableDictionary dictionary];
-            [details setValue:@"No connected heartrate monitor device" forKey:NSLocalizedDescriptionKey];
+            [details setValue:@"No connected heart rate monitor device" forKey:NSLocalizedDescriptionKey];
             NSError *error = [NSError errorWithDomain:@"de.bogutzky" code:2 userInfo:details];
             NSLog(@"## Error: %@", [error localizedDescription]);
             [_delegate heartRateMonitorManager:self didFailToMonitorHeartrateMonitorDevice:nil error:error];

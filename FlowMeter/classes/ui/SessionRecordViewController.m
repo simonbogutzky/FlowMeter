@@ -1,12 +1,12 @@
 //
-//  SessionViewController.m
+//  SessionRecordViewController.m
 //  FlowMeter
 //
 //  Created by Simon Bogutzky on 16.01.13.
 //  Copyright (c) 2013 Simon Bogutzky. All rights reserved.
 //
 
-#import "SessionViewController.h"
+#import "SessionRecordViewController.h"
 #import "AppDelegate.h"
 #import "User.h"
 #import "Activity.h"
@@ -18,7 +18,7 @@
 #import "LikertScaleViewController.h"
 #import <AudioToolbox/AudioServices.h>
 
-@interface SessionViewController ()
+@interface SessionRecordViewController ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) Session *session;
@@ -56,7 +56,7 @@
 
 @end
 
-@implementation SessionViewController
+@implementation SessionRecordViewController
 
 #pragma mark -
 #pragma mark - Getter

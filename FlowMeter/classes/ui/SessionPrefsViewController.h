@@ -1,5 +1,5 @@
 //
-//  SessionPrefsTableViewController.m
+//  SessionPrefsViewController.m
 //  FlowMeter
 //
 //  Created by Simon Bogutzky on 03.05.13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SessionPrefsTableViewController : UITableViewController
+@interface SessionPrefsViewController : UITableViewController
 
 @end

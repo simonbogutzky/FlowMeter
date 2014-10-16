@@ -1,19 +1,19 @@
 //
-//  SessionTableViewController.m
+//  SessionOverviewViewController.m
 //  FlowMeter
 //
 //  Created by Simon Bogutzky on 23.04.13.
 //  Copyright (c) 2013 Simon Bogutzky. All rights reserved.
 //
 
-#import "SessionTableViewController.h"
+#import "SessionOverviewViewController.h"
 #import "AppDelegate.h"
 #import "Session.h"
 #import "User.h"
 #import "Activity.h"
 #import "SessionDetailViewController.h"
 
-@interface SessionTableViewController ()
+@interface SessionOverviewViewController ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -26,7 +26,7 @@
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *deleteButton;
 @end
 
-@implementation SessionTableViewController
+@implementation SessionOverviewViewController
 
 #pragma mark -
 #pragma mark - Getter

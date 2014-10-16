@@ -1,14 +1,14 @@
 //
-//  SessionPrefsTableViewController.m
+//  SessionPrefsViewController.m
 //  FlowMeter
 //
 //  Created by Simon Bogutzky on 03.05.13.
 //  Copyright (c) 2013 Simon Bogutzky. All rights reserved.
 //
 
-#import "SessionPrefsTableViewController.h"
+#import "SessionPrefsViewController.h"
 #import "EditViewController.h"
-#import "SessionViewController.h"
+#import "SessionRecordViewController.h"
 #import "LabelAndSwitchTableViewCell.h"
 #import "AppDelegate.h"
 
@@ -20,7 +20,7 @@ static NSString *kDateTimePickerID = @"dateTimePicker"; // the cell containing t
 static NSString *kSwitchCellID = @"switchCell";         // a cell with a switch
 static NSString *kOtherCellID = @"otherCell";           // the remaining cells at the end
 
-@interface SessionPrefsTableViewController ()
+@interface SessionPrefsViewController ()
 
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, strong) NSArray *dataHeaders;
@@ -36,7 +36,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
 
 @end
 
-@implementation SessionPrefsTableViewController
+@implementation SessionPrefsViewController
 
 #pragma mark -
 #pragma mark - UIViewControllerDelegate implementation
@@ -67,7 +67,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
     }
     
     if ([segue.identifier isEqualToString:@"Start recording"]) {
-        SessionViewController *sessionStartViewController = (SessionViewController *) segue.destinationViewController;
+        SessionRecordViewController *sessionStartViewController = (SessionRecordViewController *) segue.destinationViewController;
         sessionStartViewController.sessionData = self.dataArray;
     }
 }

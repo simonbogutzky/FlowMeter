@@ -28,7 +28,7 @@
         <!--Aufnahme-->
         <scene sceneID="5">
             <objects>
-                <viewController id="2" userLabel="Aufnahme" customClass="SessionViewController" sceneMemberID="viewController">
+                <viewController id="2" userLabel="Aufnahme" customClass="SessionRecordViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Whr-Xy-ju9"/>
                         <viewControllerLayoutGuide type="bottom" id="HrJ-cN-hIc"/>
@@ -262,7 +262,7 @@
         <!--Flow-Messungen Übersicht-->
         <scene sceneID="9PP-s5-yRx">
             <objects>
-                <tableViewController id="9tQ-ao-a9m" userLabel="Flow-Messungen Übersicht" customClass="SessionTableViewController" sceneMemberID="viewController">
+                <tableViewController id="9tQ-ao-a9m" userLabel="Flow-Messungen Übersicht" customClass="SessionOverviewViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4NU-bL-Hd7">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1019,7 +1019,7 @@
         <!--Aufnahme-->
         <scene sceneID="nCO-j7-dcS">
             <objects>
-                <tableViewController id="ZCf-lQ-cUe" customClass="SessionPrefsTableViewController" sceneMemberID="viewController">
+                <tableViewController id="ZCf-lQ-cUe" customClass="SessionPrefsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fDh-Lm-PdN">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
