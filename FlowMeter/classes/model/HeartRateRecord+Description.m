@@ -7,8 +7,6 @@
 //
 
 #import "HeartRateRecord+Description.h"
-#import "Session.h"
-#import "User.h"
 
 @implementation HeartRateRecord (Description)
 
