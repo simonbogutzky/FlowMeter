@@ -10,3 +10,6 @@
 [submodule "BEMSimpleLineGraph"]
 	path = BEMSimpleLineGraph
 	url = https://github.com/Boris-Em/BEMSimpleLineGraph.git
+[submodule "HeartRateMonitorFramework"]
+	path = HeartRateMonitorFramework
+	url = https://sbogutzky@bitbucket.org/sbogutzky/heartratemonitorframework.git

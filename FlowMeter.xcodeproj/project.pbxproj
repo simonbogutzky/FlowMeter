@@ -13,18 +13,6 @@
 		604CCD9116A6F31000E87194 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604CCD9016A6F31000E87194 /* Foundation.framework */; };
 		604CCD9316A6F31000E87194 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604CCD9216A6F31000E87194 /* CoreGraphics.framework */; };
 		60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60AA4F7216A829100026DE8D /* CoreMotion.framework */; };
-		D31AA2C51951FD19004ACB8D /* HeartRateMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31AA2B01951FD19004ACB8D /* HeartRateMonitor.framework */; };
-		D31AA2C61951FD19004ACB8D /* HeartRateMonitor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D31AA2B01951FD19004ACB8D /* HeartRateMonitor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		D31AA2DA1951FD6A004ACB8D /* HeartRateMonitorData.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2D21951FD6A004ACB8D /* HeartRateMonitorData.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D31AA2DB1951FD6A004ACB8D /* HeartRateMonitorData.m in Sources */ = {isa = PBXBuildFile; fileRef = D31AA2D31951FD6A004ACB8D /* HeartRateMonitorData.m */; };
-		D31AA2DC1951FD6A004ACB8D /* HeartRateMonitorDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2D41951FD6A004ACB8D /* HeartRateMonitorDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D31AA2DD1951FD6A004ACB8D /* HeartRateMonitorDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D31AA2D51951FD6A004ACB8D /* HeartRateMonitorDevice.m */; };
-		D31AA2DE1951FD6A004ACB8D /* HeartRateMonitorDeviceDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2D61951FD6A004ACB8D /* HeartRateMonitorDeviceDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D31AA2DF1951FD6A004ACB8D /* HeartRateMonitorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2D71951FD6A004ACB8D /* HeartRateMonitorManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D31AA2E01951FD6A004ACB8D /* HeartRateMonitorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D31AA2D81951FD6A004ACB8D /* HeartRateMonitorManager.m */; };
-		D31AA2E11951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2D91951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D31AA2E31951FDE5004ACB8D /* HeartRateMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = D31AA2E21951FDE5004ACB8D /* HeartRateMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D31AA2E41951FEC1004ACB8D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
 		D324688219B8AA9E00355ABE /* SessionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D324688119B8AA9E00355ABE /* SessionDetailViewController.m */; };
 		D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACDD197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m */; };
 		D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE3197A98F400B144B5 /* SelfReport+Description.m */; };
@@ -51,6 +39,17 @@
 		D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */; };
 		D3A4629F1726E08900D454F7 /* SessionOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionOverviewViewController.m */; };
 		D3AB053219D5581A00626323 /* 5min-silence.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3AB053119D5581A00626323 /* 5min-silence.mp3 */; };
+		D3AEA5D419F12A56008CD870 /* HeartRateMonitorFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = D3AEA5D319F12A56008CD870 /* HeartRateMonitorFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D3AEA5E319F12A56008CD870 /* HeartRateMonitorFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3AEA5CF19F12A56008CD870 /* HeartRateMonitorFramework.framework */; };
+		D3AEA5E419F12A56008CD870 /* HeartRateMonitorFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D3AEA5CF19F12A56008CD870 /* HeartRateMonitorFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D3AEA5F519F12AA6008CD870 /* HeartRateMonitorData.h in Headers */ = {isa = PBXBuildFile; fileRef = D3AEA5ED19F12AA6008CD870 /* HeartRateMonitorData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D3AEA5F619F12AA6008CD870 /* HeartRateMonitorData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AEA5EE19F12AA6008CD870 /* HeartRateMonitorData.m */; };
+		D3AEA5F719F12AA6008CD870 /* HeartRateMonitorDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = D3AEA5EF19F12AA6008CD870 /* HeartRateMonitorDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D3AEA5F819F12AA6008CD870 /* HeartRateMonitorDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AEA5F019F12AA6008CD870 /* HeartRateMonitorDevice.m */; };
+		D3AEA5F919F12AA6008CD870 /* HeartRateMonitorDeviceDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D3AEA5F119F12AA6008CD870 /* HeartRateMonitorDeviceDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D3AEA5FA19F12AA6008CD870 /* HeartRateMonitorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D3AEA5F219F12AA6008CD870 /* HeartRateMonitorManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D3AEA5FB19F12AA6008CD870 /* HeartRateMonitorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AEA5F319F12AA6008CD870 /* HeartRateMonitorManager.m */; };
+		D3AEA5FC19F12AA6008CD870 /* HeartRateMonitorManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D3AEA5F419F12AA6008CD870 /* HeartRateMonitorManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1290F1863296A00C361CA /* MBProgressHUD.m */; };
 		D3C1291318632A1E00C361CA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1291218632A1E00C361CA /* Reachability.m */; };
 		D3C1292A18632C9A00C361CA /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C1292918632C9A00C361CA /* DropboxSDK.framework */; };
@@ -71,20 +70,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D31AA2C31951FD19004ACB8D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 604CCD8116A6F31000E87194 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D31AA2AF1951FD19004ACB8D;
-			remoteInfo = HeartRateMonitor;
-		};
-		D31AA2C71951FD19004ACB8D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 604CCD8116A6F31000E87194 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D31AA2AF1951FD19004ACB8D;
-			remoteInfo = HeartRateMonitor;
-		};
 		D39747A91882CC6400CFF3DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */;
@@ -113,6 +98,20 @@
 			remoteGlobalIDString = CB6F0A9717484BDE00F91524;
 			remoteInfo = touchzipkit;
 		};
+		D3AEA5E119F12A56008CD870 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 604CCD8116A6F31000E87194 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D3AEA5CE19F12A56008CD870;
+			remoteInfo = HeartRateMonitorFramework;
+		};
+		D3AEA5E519F12A56008CD870 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 604CCD8116A6F31000E87194 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D3AEA5CE19F12A56008CD870;
+			remoteInfo = HeartRateMonitorFramework;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -122,7 +121,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D31AA2C61951FD19004ACB8D /* HeartRateMonitor.framework in Embed Frameworks */,
+				D3AEA5E419F12A56008CD870 /* HeartRateMonitorFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,17 +136,6 @@
 		604CCD9016A6F31000E87194 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		604CCD9216A6F31000E87194 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		60AA4F7216A829100026DE8D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		D31AA2B01951FD19004ACB8D /* HeartRateMonitor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HeartRateMonitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D31AA2B31951FD19004ACB8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D31AA2D21951FD6A004ACB8D /* HeartRateMonitorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorData.h; sourceTree = "<group>"; };
-		D31AA2D31951FD6A004ACB8D /* HeartRateMonitorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorData.m; sourceTree = "<group>"; };
-		D31AA2D41951FD6A004ACB8D /* HeartRateMonitorDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorDevice.h; sourceTree = "<group>"; };
-		D31AA2D51951FD6A004ACB8D /* HeartRateMonitorDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorDevice.m; sourceTree = "<group>"; };
-		D31AA2D61951FD6A004ACB8D /* HeartRateMonitorDeviceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorDeviceDelegate.h; sourceTree = "<group>"; };
-		D31AA2D71951FD6A004ACB8D /* HeartRateMonitorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorManager.h; sourceTree = "<group>"; };
-		D31AA2D81951FD6A004ACB8D /* HeartRateMonitorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorManager.m; sourceTree = "<group>"; };
-		D31AA2D91951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorManagerDelegate.h; sourceTree = "<group>"; };
-		D31AA2E21951FDE5004ACB8D /* HeartRateMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitor.h; sourceTree = "<group>"; };
 		D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewControllerDelegate.h; path = classes/ui/LikertScaleViewControllerDelegate.h; sourceTree = "<group>"; };
 		D324688019B8AA9E00355ABE /* SessionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionDetailViewController.h; path = classes/ui/SessionDetailViewController.h; sourceTree = "<group>"; };
 		D324688119B8AA9E00355ABE /* SessionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SessionDetailViewController.m; path = classes/ui/SessionDetailViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -193,6 +181,17 @@
 		D3A4629D1726E08900D454F7 /* SessionOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionOverviewViewController.h; path = classes/ui/SessionOverviewViewController.h; sourceTree = "<group>"; };
 		D3A4629E1726E08900D454F7 /* SessionOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SessionOverviewViewController.m; path = classes/ui/SessionOverviewViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D3AB053119D5581A00626323 /* 5min-silence.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "5min-silence.mp3"; sourceTree = "<group>"; };
+		D3AEA5CF19F12A56008CD870 /* HeartRateMonitorFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HeartRateMonitorFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3AEA5D219F12A56008CD870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3AEA5D319F12A56008CD870 /* HeartRateMonitorFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorFramework.h; sourceTree = "<group>"; };
+		D3AEA5ED19F12AA6008CD870 /* HeartRateMonitorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorData.h; sourceTree = "<group>"; };
+		D3AEA5EE19F12AA6008CD870 /* HeartRateMonitorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorData.m; sourceTree = "<group>"; };
+		D3AEA5EF19F12AA6008CD870 /* HeartRateMonitorDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorDevice.h; sourceTree = "<group>"; };
+		D3AEA5F019F12AA6008CD870 /* HeartRateMonitorDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorDevice.m; sourceTree = "<group>"; };
+		D3AEA5F119F12AA6008CD870 /* HeartRateMonitorDeviceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorDeviceDelegate.h; sourceTree = "<group>"; };
+		D3AEA5F219F12AA6008CD870 /* HeartRateMonitorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorManager.h; sourceTree = "<group>"; };
+		D3AEA5F319F12AA6008CD870 /* HeartRateMonitorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorManager.m; sourceTree = "<group>"; };
+		D3AEA5F419F12AA6008CD870 /* HeartRateMonitorManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorManagerDelegate.h; sourceTree = "<group>"; };
 		D3C1290E1863296A00C361CA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
 		D3C1290F1863296A00C361CA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		D3C1291118632A1E00C361CA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = SOURCE_ROOT; };
@@ -248,18 +247,17 @@
 				D36C44B016D788BE000B8502 /* CoreBluetooth.framework in Frameworks */,
 				D38A216D16BFF9F80075D093 /* CoreLocation.framework in Frameworks */,
 				D3C1292A18632C9A00C361CA /* DropboxSDK.framework in Frameworks */,
-				D31AA2C51951FD19004ACB8D /* HeartRateMonitor.framework in Frameworks */,
 				60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */,
+				D3AEA5E319F12A56008CD870 /* HeartRateMonitorFramework.framework in Frameworks */,
 				604CCD8F16A6F31000E87194 /* UIKit.framework in Frameworks */,
 				604CCD9316A6F31000E87194 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D31AA2AC1951FD19004ACB8D /* Frameworks */ = {
+		D3AEA5CB19F12A56008CD870 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D31AA2E41951FEC1004ACB8D /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,8 +268,8 @@
 			isa = PBXGroup;
 			children = (
 				604CCD9416A6F31000E87194 /* FlowMeter */,
+				D3AEA5D019F12A56008CD870 /* HeartRateMonitorFramework */,
 				D38C594E19E42B640069049C /* BEMSimpleLineGraph */,
-				D31AA2B11951FD19004ACB8D /* HeartRateMonitor */,
 				D3DF0A65173F9A4C00643E5A /* MBProgressHUD */,
 				D35FEAE91725415000D92DEB /* Reachability */,
 				D3EFDE0A19F01B2700D7E88A /* ZCSHoldProgress */,
@@ -284,7 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				604CCD8A16A6F31000E87194 /* FlowMeter.app */,
-				D31AA2B01951FD19004ACB8D /* HeartRateMonitor.framework */,
+				D3AEA5CF19F12A56008CD870 /* HeartRateMonitorFramework.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -338,31 +336,6 @@
 				D38F7ABA19F0070300016B6E /* Audio */,
 				D31C4BCA19A619DE0017AA5A /* Model */,
 				D34C9D3E172504D7004C261C /* UI */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D31AA2B11951FD19004ACB8D /* HeartRateMonitor */ = {
-			isa = PBXGroup;
-			children = (
-				D31AA2E21951FDE5004ACB8D /* HeartRateMonitor.h */,
-				D31AA2D21951FD6A004ACB8D /* HeartRateMonitorData.h */,
-				D31AA2D31951FD6A004ACB8D /* HeartRateMonitorData.m */,
-				D31AA2D41951FD6A004ACB8D /* HeartRateMonitorDevice.h */,
-				D31AA2D51951FD6A004ACB8D /* HeartRateMonitorDevice.m */,
-				D31AA2D61951FD6A004ACB8D /* HeartRateMonitorDeviceDelegate.h */,
-				D31AA2D71951FD6A004ACB8D /* HeartRateMonitorManager.h */,
-				D31AA2D81951FD6A004ACB8D /* HeartRateMonitorManager.m */,
-				D31AA2D91951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h */,
-				D31AA2B21951FD19004ACB8D /* Supporting Files */,
-			);
-			path = HeartRateMonitor;
-			sourceTree = "<group>";
-		};
-		D31AA2B21951FD19004ACB8D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D31AA2B31951FD19004ACB8D /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -449,6 +422,31 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D3AEA5D019F12A56008CD870 /* HeartRateMonitorFramework */ = {
+			isa = PBXGroup;
+			children = (
+				D3AEA5ED19F12AA6008CD870 /* HeartRateMonitorData.h */,
+				D3AEA5EE19F12AA6008CD870 /* HeartRateMonitorData.m */,
+				D3AEA5EF19F12AA6008CD870 /* HeartRateMonitorDevice.h */,
+				D3AEA5F019F12AA6008CD870 /* HeartRateMonitorDevice.m */,
+				D3AEA5F119F12AA6008CD870 /* HeartRateMonitorDeviceDelegate.h */,
+				D3AEA5F219F12AA6008CD870 /* HeartRateMonitorManager.h */,
+				D3AEA5F319F12AA6008CD870 /* HeartRateMonitorManager.m */,
+				D3AEA5F419F12AA6008CD870 /* HeartRateMonitorManagerDelegate.h */,
+				D3AEA5D319F12A56008CD870 /* HeartRateMonitorFramework.h */,
+				D3AEA5D119F12A56008CD870 /* Supporting Files */,
+			);
+			path = HeartRateMonitorFramework;
+			sourceTree = "<group>";
+		};
+		D3AEA5D119F12A56008CD870 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D3AEA5D219F12A56008CD870 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		D3C7ADD6171FCCC6000A7D34 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -500,16 +498,16 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		D31AA2AD1951FD19004ACB8D /* Headers */ = {
+		D3AEA5CC19F12A56008CD870 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D31AA2DA1951FD6A004ACB8D /* HeartRateMonitorData.h in Headers */,
-				D31AA2DF1951FD6A004ACB8D /* HeartRateMonitorManager.h in Headers */,
-				D31AA2DE1951FD6A004ACB8D /* HeartRateMonitorDeviceDelegate.h in Headers */,
-				D31AA2DC1951FD6A004ACB8D /* HeartRateMonitorDevice.h in Headers */,
-				D31AA2E31951FDE5004ACB8D /* HeartRateMonitor.h in Headers */,
-				D31AA2E11951FD6A004ACB8D /* HeartRateMonitorManagerDelegate.h in Headers */,
+				D3AEA5F519F12AA6008CD870 /* HeartRateMonitorData.h in Headers */,
+				D3AEA5D419F12A56008CD870 /* HeartRateMonitorFramework.h in Headers */,
+				D3AEA5FA19F12AA6008CD870 /* HeartRateMonitorManager.h in Headers */,
+				D3AEA5F919F12AA6008CD870 /* HeartRateMonitorDeviceDelegate.h in Headers */,
+				D3AEA5F719F12AA6008CD870 /* HeartRateMonitorDevice.h in Headers */,
+				D3AEA5FC19F12AA6008CD870 /* HeartRateMonitorManagerDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,30 +527,30 @@
 			);
 			dependencies = (
 				D39747B01882CC7000CFF3DF /* PBXTargetDependency */,
-				D31AA2C41951FD19004ACB8D /* PBXTargetDependency */,
-				D31AA2C81951FD19004ACB8D /* PBXTargetDependency */,
+				D3AEA5E219F12A56008CD870 /* PBXTargetDependency */,
+				D3AEA5E619F12A56008CD870 /* PBXTargetDependency */,
 			);
 			name = FlowMeter;
 			productName = FlowMeter;
 			productReference = 604CCD8A16A6F31000E87194 /* FlowMeter.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D31AA2AF1951FD19004ACB8D /* HeartRateMonitor */ = {
+		D3AEA5CE19F12A56008CD870 /* HeartRateMonitorFramework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D31AA2CF1951FD19004ACB8D /* Build configuration list for PBXNativeTarget "HeartRateMonitor" */;
+			buildConfigurationList = D3AEA5E719F12A56008CD870 /* Build configuration list for PBXNativeTarget "HeartRateMonitorFramework" */;
 			buildPhases = (
-				D31AA2AB1951FD19004ACB8D /* Sources */,
-				D31AA2AC1951FD19004ACB8D /* Frameworks */,
-				D31AA2AD1951FD19004ACB8D /* Headers */,
-				D31AA2AE1951FD19004ACB8D /* Resources */,
+				D3AEA5CA19F12A56008CD870 /* Sources */,
+				D3AEA5CB19F12A56008CD870 /* Frameworks */,
+				D3AEA5CC19F12A56008CD870 /* Headers */,
+				D3AEA5CD19F12A56008CD870 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = HeartRateMonitor;
-			productName = HeartRateMonitor;
-			productReference = D31AA2B01951FD19004ACB8D /* HeartRateMonitor.framework */;
+			name = HeartRateMonitorFramework;
+			productName = HeartRateMonitorFramework;
+			productReference = D3AEA5CF19F12A56008CD870 /* HeartRateMonitorFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -572,7 +570,7 @@
 							};
 						};
 					};
-					D31AA2AF1951FD19004ACB8D = {
+					D3AEA5CE19F12A56008CD870 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = 8936XLC29N;
 					};
@@ -598,7 +596,7 @@
 			projectRoot = "";
 			targets = (
 				604CCD8916A6F31000E87194 /* FlowMeter */,
-				D31AA2AF1951FD19004ACB8D /* HeartRateMonitor */,
+				D3AEA5CE19F12A56008CD870 /* HeartRateMonitorFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -638,7 +636,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D31AA2AE1951FD19004ACB8D /* Resources */ = {
+		D3AEA5CD19F12A56008CD870 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -682,33 +680,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D31AA2AB1951FD19004ACB8D /* Sources */ = {
+		D3AEA5CA19F12A56008CD870 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D31AA2DB1951FD6A004ACB8D /* HeartRateMonitorData.m in Sources */,
-				D31AA2DD1951FD6A004ACB8D /* HeartRateMonitorDevice.m in Sources */,
-				D31AA2E01951FD6A004ACB8D /* HeartRateMonitorManager.m in Sources */,
+				D3AEA5F619F12AA6008CD870 /* HeartRateMonitorData.m in Sources */,
+				D3AEA5F819F12AA6008CD870 /* HeartRateMonitorDevice.m in Sources */,
+				D3AEA5FB19F12AA6008CD870 /* HeartRateMonitorManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D31AA2C41951FD19004ACB8D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D31AA2AF1951FD19004ACB8D /* HeartRateMonitor */;
-			targetProxy = D31AA2C31951FD19004ACB8D /* PBXContainerItemProxy */;
-		};
-		D31AA2C81951FD19004ACB8D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D31AA2AF1951FD19004ACB8D /* HeartRateMonitor */;
-			targetProxy = D31AA2C71951FD19004ACB8D /* PBXContainerItemProxy */;
-		};
 		D39747B01882CC7000CFF3DF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = touchzipkit;
 			targetProxy = D39747AF1882CC7000CFF3DF /* PBXContainerItemProxy */;
+		};
+		D3AEA5E219F12A56008CD870 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D3AEA5CE19F12A56008CD870 /* HeartRateMonitorFramework */;
+			targetProxy = D3AEA5E119F12A56008CD870 /* PBXContainerItemProxy */;
+		};
+		D3AEA5E619F12A56008CD870 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D3AEA5CE19F12A56008CD870 /* HeartRateMonitorFramework */;
+			targetProxy = D3AEA5E519F12A56008CD870 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -863,7 +861,7 @@
 			};
 			name = Release;
 		};
-		D31AA2C91951FD19004ACB8D /* Debug */ = {
+		D3AEA5E819F12A56008CD870 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -891,11 +889,10 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = HeartRateMonitor/Info.plist;
+				INFOPLIST_FILE = HeartRateMonitorFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -905,7 +902,7 @@
 			};
 			name = Debug;
 		};
-		D31AA2CA1951FD19004ACB8D /* Release */ = {
+		D3AEA5E919F12A56008CD870 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -918,6 +915,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -930,11 +928,10 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = HeartRateMonitor/Info.plist;
+				INFOPLIST_FILE = HeartRateMonitorFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -965,11 +962,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D31AA2CF1951FD19004ACB8D /* Build configuration list for PBXNativeTarget "HeartRateMonitor" */ = {
+		D3AEA5E719F12A56008CD870 /* Build configuration list for PBXNativeTarget "HeartRateMonitorFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D31AA2C91951FD19004ACB8D /* Debug */,
-				D31AA2CA1951FD19004ACB8D /* Release */,
+				D3AEA5E819F12A56008CD870 /* Debug */,
+				D3AEA5E919F12A56008CD870 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
