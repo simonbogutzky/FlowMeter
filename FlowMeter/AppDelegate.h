@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreMotion/CoreMotion.h>
 #import <CoreLocation/CoreLocation.h>
-#import <HeartRateMonitor/HeartRateMonitor.h>
+#import <HeartRateMonitorFramework/HeartRateMonitorFramework.h>
 #import <DropboxSDK/DropboxSDK.h>
 #import <AVFoundation/AVFoundation.h>
 #import "Reachability.h"

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <HeartRateMonitor/HeartRateMonitor.h>
+#import <HeartRateMonitorFramework/HeartRateMonitorFramework.h>
 
 @interface HeartRateMonitorDeviceTableViewController : UITableViewController <HeartRateMonitorManagerDelegate, UIAlertViewDelegate>
 
