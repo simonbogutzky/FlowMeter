@@ -17,6 +17,10 @@
 		D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACDD197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m */; };
 		D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE3197A98F400B144B5 /* SelfReport+Description.m */; };
 		D329ACED197A98F400B144B5 /* Session+OutStream.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE7197A98F400B144B5 /* Session+OutStream.m */; };
+		D32E9A7D19F151140090F774 /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = D32E9A7819F151140090F774 /* BEMCircle.m */; };
+		D32E9A7E19F151140090F774 /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = D32E9A7A19F151140090F774 /* BEMLine.m */; };
+		D32E9A7F19F151140090F774 /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = D32E9A7C19F151140090F774 /* BEMSimpleLineGraphView.m */; };
+		D32E9A8219F151260090F774 /* ZCSHoldProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = D32E9A8119F151260090F774 /* ZCSHoldProgress.m */; };
 		D335030919A5D89B008CC93A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D335030819A5D89B008CC93A /* Images.xcassets */; };
 		D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3383BA91726CE1500AAC993 /* CoreData.framework */; };
 		D34C9D2917250463004C261C /* SessionRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D1F17250463004C261C /* SessionRecordViewController.m */; };
@@ -62,10 +66,6 @@
 		D3EFDE2119F01B9200D7E88A /* FlowMeter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3EFDE1519F01B9200D7E88A /* FlowMeter.xcdatamodeld */; };
 		D3EFDE2319F01B9200D7E88A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EFDE1C19F01B9200D7E88A /* main.m */; };
 		D3EFDE2619F01BED00D7E88A /* PropertyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EFDE2519F01BED00D7E88A /* PropertyTableViewCell.m */; };
-		D3EFDE2919F01C0500D7E88A /* ZCSHoldProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EFDE2819F01C0500D7E88A /* ZCSHoldProgress.m */; };
-		D3EFDE3019F01C4700D7E88A /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EFDE2B19F01C4700D7E88A /* BEMCircle.m */; };
-		D3EFDE3119F01C4700D7E88A /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EFDE2D19F01C4700D7E88A /* BEMLine.m */; };
-		D3EFDE3219F01C4700D7E88A /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EFDE2F19F01C4700D7E88A /* BEMSimpleLineGraphView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +144,14 @@
 		D329ACE3197A98F400B144B5 /* SelfReport+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SelfReport+Description.m"; path = "classes/model/SelfReport+Description.m"; sourceTree = "<group>"; };
 		D329ACE6197A98F400B144B5 /* Session+OutStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Session+OutStream.h"; path = "classes/model/Session+OutStream.h"; sourceTree = "<group>"; };
 		D329ACE7197A98F400B144B5 /* Session+OutStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Session+OutStream.m"; path = "classes/model/Session+OutStream.m"; sourceTree = "<group>"; };
+		D32E9A7719F151140090F774 /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BEMCircle.h; path = BEMSimpleLineGraph/Classes/BEMCircle.h; sourceTree = SOURCE_ROOT; };
+		D32E9A7819F151140090F774 /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BEMCircle.m; path = BEMSimpleLineGraph/Classes/BEMCircle.m; sourceTree = SOURCE_ROOT; };
+		D32E9A7919F151140090F774 /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BEMLine.h; path = BEMSimpleLineGraph/Classes/BEMLine.h; sourceTree = SOURCE_ROOT; };
+		D32E9A7A19F151140090F774 /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BEMLine.m; path = BEMSimpleLineGraph/Classes/BEMLine.m; sourceTree = SOURCE_ROOT; };
+		D32E9A7B19F151140090F774 /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BEMSimpleLineGraphView.h; path = BEMSimpleLineGraph/Classes/BEMSimpleLineGraphView.h; sourceTree = SOURCE_ROOT; };
+		D32E9A7C19F151140090F774 /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BEMSimpleLineGraphView.m; path = BEMSimpleLineGraph/Classes/BEMSimpleLineGraphView.m; sourceTree = SOURCE_ROOT; };
+		D32E9A8019F151260090F774 /* ZCSHoldProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZCSHoldProgress.h; path = ZCSHoldProgress/ZCSHoldProgress.h; sourceTree = SOURCE_ROOT; };
+		D32E9A8119F151260090F774 /* ZCSHoldProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZCSHoldProgress.m; path = ZCSHoldProgress/ZCSHoldProgress.m; sourceTree = SOURCE_ROOT; };
 		D335030819A5D89B008CC93A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D3383BA91726CE1500AAC993 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D34C9D1E17250463004C261C /* SessionRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionRecordViewController.h; path = classes/ui/SessionRecordViewController.h; sourceTree = "<group>"; };
@@ -214,14 +222,6 @@
 		D3EFDE1C19F01B9200D7E88A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D3EFDE2419F01BED00D7E88A /* PropertyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyTableViewCell.h; path = classes/ui/PropertyTableViewCell.h; sourceTree = "<group>"; };
 		D3EFDE2519F01BED00D7E88A /* PropertyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PropertyTableViewCell.m; path = classes/ui/PropertyTableViewCell.m; sourceTree = "<group>"; };
-		D3EFDE2719F01C0500D7E88A /* ZCSHoldProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCSHoldProgress.h; sourceTree = "<group>"; };
-		D3EFDE2819F01C0500D7E88A /* ZCSHoldProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCSHoldProgress.m; sourceTree = "<group>"; };
-		D3EFDE2A19F01C4700D7E88A /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
-		D3EFDE2B19F01C4700D7E88A /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
-		D3EFDE2C19F01C4700D7E88A /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
-		D3EFDE2D19F01C4700D7E88A /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
-		D3EFDE2E19F01C4700D7E88A /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
-		D3EFDE2F19F01C4700D7E88A /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,12 +389,12 @@
 		D38C594E19E42B640069049C /* BEMSimpleLineGraph */ = {
 			isa = PBXGroup;
 			children = (
-				D3EFDE2A19F01C4700D7E88A /* BEMCircle.h */,
-				D3EFDE2B19F01C4700D7E88A /* BEMCircle.m */,
-				D3EFDE2C19F01C4700D7E88A /* BEMLine.h */,
-				D3EFDE2D19F01C4700D7E88A /* BEMLine.m */,
-				D3EFDE2E19F01C4700D7E88A /* BEMSimpleLineGraphView.h */,
-				D3EFDE2F19F01C4700D7E88A /* BEMSimpleLineGraphView.m */,
+				D32E9A7719F151140090F774 /* BEMCircle.h */,
+				D32E9A7819F151140090F774 /* BEMCircle.m */,
+				D32E9A7919F151140090F774 /* BEMLine.h */,
+				D32E9A7A19F151140090F774 /* BEMLine.m */,
+				D32E9A7B19F151140090F774 /* BEMSimpleLineGraphView.h */,
+				D32E9A7C19F151140090F774 /* BEMSimpleLineGraphView.m */,
 			);
 			name = BEMSimpleLineGraph;
 			path = FlowMeter;
@@ -484,8 +484,8 @@
 		D3EFDE0A19F01B2700D7E88A /* ZCSHoldProgress */ = {
 			isa = PBXGroup;
 			children = (
-				D3EFDE2719F01C0500D7E88A /* ZCSHoldProgress.h */,
-				D3EFDE2819F01C0500D7E88A /* ZCSHoldProgress.m */,
+				D32E9A8019F151260090F774 /* ZCSHoldProgress.h */,
+				D32E9A8119F151260090F774 /* ZCSHoldProgress.m */,
 			);
 			name = ZCSHoldProgress;
 			path = FlowMeter;
@@ -651,25 +651,25 @@
 				D329ACED197A98F400B144B5 /* Session+OutStream.m in Sources */,
 				D396933D19BE10D700249D2C /* LabelAndSwitchTableViewCell.m in Sources */,
 				D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */,
+				D32E9A7E19F151140090F774 /* BEMLine.m in Sources */,
+				D32E9A7F19F151140090F774 /* BEMSimpleLineGraphView.m in Sources */,
 				D34C9D2917250463004C261C /* SessionRecordViewController.m in Sources */,
 				D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */,
 				D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */,
 				D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */,
 				D3C1291318632A1E00C361CA /* Reachability.m in Sources */,
-				D3EFDE3019F01C4700D7E88A /* BEMCircle.m in Sources */,
-				D3EFDE3219F01C4700D7E88A /* BEMSimpleLineGraphView.m in Sources */,
 				D3EFDE2619F01BED00D7E88A /* PropertyTableViewCell.m in Sources */,
 				D39736CB19B0C11E005D643D /* Activity.m in Sources */,
 				D39736CE19B0C11E005D643D /* HeartRateRecord.m in Sources */,
 				D3A4629F1726E08900D454F7 /* SessionOverviewViewController.m in Sources */,
+				D32E9A8219F151260090F774 /* ZCSHoldProgress.m in Sources */,
 				D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */,
 				D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */,
-				D3EFDE2919F01C0500D7E88A /* ZCSHoldProgress.m in Sources */,
 				D324688219B8AA9E00355ABE /* SessionDetailViewController.m in Sources */,
 				D39736C819B0C11D005D643D /* SelfReport.m in Sources */,
-				D3EFDE3119F01C4700D7E88A /* BEMLine.m in Sources */,
 				D3EB072419BB9552005F0333 /* SessionPrefsViewController.m in Sources */,
 				D37067D71733F41300F86BBD /* EditViewController.m in Sources */,
+				D32E9A7D19F151140090F774 /* BEMCircle.m in Sources */,
 				D3EFDE2119F01B9200D7E88A /* FlowMeter.xcdatamodeld in Sources */,
 				D3EFDE2319F01B9200D7E88A /* main.m in Sources */,
 				D39736D419B0C11E005D643D /* Session.m in Sources */,
