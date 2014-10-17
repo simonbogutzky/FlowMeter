@@ -14,13 +14,6 @@
     #import <CoreData/CoreData.h>
 #endif
 
-#define WF_NOTIFICATION_DISCOVERED_SENSOR      @"WFNotificationDiscoveredSensor"
-#define WF_NOTIFICATION_HW_CONNECTED           @"WFNotificationHWConnected"
-#define WF_NOTIFICATION_HW_DISCONNECTED        @"WFNotificationHWDisconnected"
-#define WF_NOTIFICATION_SENSOR_CONNECTED       @"WFNotificationSensorConnected"
-#define WF_NOTIFICATION_SENSOR_DISCONNECTED    @"WFNotificationSensorDisconnected"
-#define WF_NOTIFICATION_SENSOR_HAS_DATA        @"WFNotificationSensorHasData"
-
 #define NOTIFICATION_DB_CONNECTION_CANCELLED   @"NotificationDBLinkCancelled"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
