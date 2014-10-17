@@ -9,11 +9,6 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>HeartRateMonitor.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -33,6 +28,16 @@
 			<true/>
 		</dict>
 		<key>D35E713F16C13D2800A20000</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D3AEA5CE19F12A56008CD870</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D3AEA5D819F12A56008CD870</key>
 		<dict>
 			<key>primary</key>
 			<true/>

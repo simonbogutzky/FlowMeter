@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <HeartRateMonitor/HeartRateMonitor.h>
+#import <HeartRateMonitorFramework/HeartRateMonitorFramework.h>
 #import "LikertScaleViewControllerDelegate.h"
 
 @interface SessionRecordViewController : UIViewController <HeartRateMonitorManagerDelegate, LikertScaleViewControllerDelegate, UIGestureRecognizerDelegate>
