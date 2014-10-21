@@ -30,7 +30,6 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
 
 @property (nonatomic, assign) NSInteger pickerCellRowHeight;
 
-@property (nonatomic, strong) IBOutlet UIDatePicker *pickerView;
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 @property (nonatomic, assign) BOOL varibilityAlertAlreadyShown;
 
@@ -362,27 +361,29 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
     
     // update our data model
     NSMutableDictionary *dataItem = self.dataArray[indexPath.section][indexPath.row];
-    [dataItem setValue:[NSNumber numberWithBool:sender.on] forKey:kValueKey];
-    
-    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-    unsigned long numberOfRows = [self.dataArray[indexPath.section] count];
-    for (int i = 1; i < numberOfRows; i++) {
-        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:indexPath.section]];
+    if ([[dataItem objectForKey:kValueKey] boolValue] != sender.on) {
+       
+        [dataItem setValue:[NSNumber numberWithBool:sender.on] forKey:kValueKey];
+        
+        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+        unsigned long numberOfRows = [self.dataArray[indexPath.section] count];
+        for (int i = 1; i < numberOfRows; i++) {
+            [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:indexPath.section]];
+        }
+        
+        if(self.datePickerIndexPath != nil && self.datePickerIndexPath.section == indexPath.section) {
+            [indexPaths addObject:[NSIndexPath indexPathForRow:numberOfRows inSection:indexPath.section]];
+        }
+        
+        if (!sender.on) {
+            [self.tableView deleteRowsAtIndexPaths:indexPaths
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            self.datePickerIndexPath = nil;
+        } else {
+            [self.tableView insertRowsAtIndexPaths:indexPaths
+                                  withRowAnimation:UITableViewRowAnimationFade];
+        }
     }
-    
-    if(self.datePickerIndexPath != nil && self.datePickerIndexPath.section == indexPath.section) {
-        [indexPaths addObject:[NSIndexPath indexPathForRow:numberOfRows inSection:indexPath.section]];
-    }
-    
-    if (!sender.on) {
-        [self.tableView deleteRowsAtIndexPaths:indexPaths
-                              withRowAnimation:UITableViewRowAnimationFade];
-        self.datePickerIndexPath = nil;
-    } else {
-        [self.tableView insertRowsAtIndexPaths:indexPaths
-                              withRowAnimation:UITableViewRowAnimationFade];
-    }
-    [self.tableView reloadData];
 }
 
 #pragma mark -
