@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <HeartRateMonitorFramework/HeartRateMonitorFramework.h>
 
-@interface SessionPrefsViewController : UITableViewController
+@interface SessionPrefsViewController : UITableViewController <HeartRateMonitorManagerDelegate, UIAlertViewDelegate>
 
 @end

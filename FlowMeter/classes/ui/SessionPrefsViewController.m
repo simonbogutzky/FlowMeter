@@ -22,8 +22,10 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
 
 @interface SessionPrefsViewController ()
 
+@property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, strong) NSArray *dataHeaders;
+@property (nonatomic, strong) NSMutableArray *heartRateMonitorDevices;
 
 // keep track which indexPath points to the cell with UIDatePicker
 @property (nonatomic, strong) NSIndexPath *datePickerIndexPath;
@@ -37,8 +39,16 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
 
 @implementation SessionPrefsViewController
 
+@synthesize appDelegate = _appDelegate;
+
 #pragma mark -
 #pragma mark - UIViewControllerDelegate implementation
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self performSelector:@selector(scan) withObject:nil afterDelay:0.5];
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -93,6 +103,14 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
 
 #pragma mark -
 #pragma mark - Getter
+
+- (AppDelegate *)appDelegate
+{
+    if (_appDelegate == Nil) {
+        _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    }
+    return _appDelegate;
+}
 
 - (NSArray *)dataArray
 {
@@ -443,6 +461,101 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
     NSInteger minutes = (ti / 60) % 60;
     NSInteger hours = (ti / 3600);
     return [NSString stringWithFormat:@"%02ldh %02ldmin", (long)hours, (long)minutes];
+}
+
+#pragma mark -
+#pragma mark - Convenient methods of the heart rate monitor
+
+- (void)scan
+{
+    self.heartRateMonitorDevices = [[NSMutableArray alloc] initWithCapacity:1];
+    self.appDelegate.heartRateMonitorManager.delegate = self;
+    
+    NSString *cause = nil;
+    
+    switch (self.appDelegate.heartRateMonitorManager.state) {
+        case HeartRateMonitorManagerStatePoweredOn: {
+            [self.appDelegate.heartRateMonitorManager scanForHeartRateMonitorDeviceWhichWereConnected:YES];
+        }
+            break;
+            
+        case HeartRateMonitorManagerStatePoweredOff: {
+            cause = NSLocalizedString(@"Überprüfe, ob Bluetooth eingeschlatet ist", @"Überprüfe, ob Bluetooth eingeschlatet ist");
+            
+        }
+            break;
+        case HeartRateMonitorManagerStateResetting: {
+            cause = NSLocalizedString(@"Bluetooth Manager wird gerade zurückgesetzt", @"Bluetooth Manager wird gerade zurückgesetzt");
+            
+        }
+            break;
+        case HeartRateMonitorManagerStateUnauthorized: {
+            cause = NSLocalizedString(@"Überprüfe deine Sicherheitseinstellungen", @"Überprüfe deine Sicherheitseinstellungen");
+            
+        }
+            break;
+        case HeartRateMonitorManagerStateUnknown: {
+            cause = NSLocalizedString(@"Ein unbekannter Fehler ist aufgetreten", @"Ein unbekannter Fehler ist aufgetreten");
+            
+        }
+            break;
+        case HeartRateMonitorManagerStateUnsupported: {
+            cause = NSLocalizedString(@"Gerät unterstützt kein Bluetooth LE", @"Gerät unterstützt kein Bluetooth LE");
+            
+        }
+            break;
+    }
+    
+    if (self.appDelegate.heartRateMonitorManager.state != HeartRateMonitorManagerStatePoweredOn) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Keine Verbindung möglich", @"Keine Verbindung möglich")
+                                                            message:cause
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+- (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
+didDiscoverHeartrateMonitorDevices:(NSArray *)heartRateMonitorDevices
+{
+    [self.appDelegate.heartRateMonitorManager stopScanning];
+    for (HeartRateMonitorDevice *heartRateMonitorDevice in heartRateMonitorDevices) {
+        [self.heartRateMonitorDevices addObject:heartRateMonitorDevice];
+    }
+    
+    if (self.heartRateMonitorDevices.count > 0) {
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            HeartRateMonitorDevice *heartRateMonitorDevice = [self.heartRateMonitorDevices objectAtIndex:0];
+            [self.appDelegate.heartRateMonitorManager connectHeartRateMonitorDevice:heartRateMonitorDevice];
+        });
+    }
+}
+
+- (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
+didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
+                          error:(NSError *)error
+{
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Verbindung wurde wieder getrennt", @"Verbindung wurde wieder getrennt")
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+- (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
+didFailToConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
+                          error:(NSError *)error
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Fehler beim Verbinden", @"Fehler beim Verbinden")
+                                                        message:[error localizedDescription]
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+    [alertView show];
 }
 
 @end

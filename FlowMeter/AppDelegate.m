@@ -73,6 +73,7 @@
     
     [self initAVPlayer];
     
+    NSLog(@"%d", self.heartRateMonitorManager.state);
     return YES;
 }
 							
