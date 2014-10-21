@@ -265,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				604CCD9416A6F31000E87194 /* FlowMeter */,
+				604CCD8D16A6F31000E87194 /* Frameworks */,
 				D3AEA5D019F12A56008CD870 /* HeartRateMonitorFramework */,
 				D38C594E19E42B640069049C /* BEMSimpleLineGraph */,
 				D3DF0A65173F9A4C00643E5A /* MBProgressHUD */,
@@ -306,7 +307,6 @@
 				604CCD8E16A6F31000E87194 /* UIKit.framework */,
 			);
 			name = Frameworks;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		604CCD9416A6F31000E87194 /* FlowMeter */ = {
@@ -317,10 +317,9 @@
 				D3EFDE1C19F01B9200D7E88A /* main.m */,
 				D3EFDE1419F01B9200D7E88A /* FlowMeter-Prefix.pch */,
 				D3EFDE1319F01B9200D7E88A /* FlowMeter-Info.plist */,
-				604CCD8D16A6F31000E87194 /* Frameworks */,
 				D329ACDF197A98CC00B144B5 /* Model */,
-				604CCD9516A6F31000E87194 /* Supporting Files */,
 				D3C7ADD6171FCCC6000A7D34 /* UI */,
+				604CCD9516A6F31000E87194 /* Supporting Files */,
 			);
 			path = FlowMeter;
 			sourceTree = "<group>";

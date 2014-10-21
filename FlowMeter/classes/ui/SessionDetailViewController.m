@@ -150,15 +150,28 @@
             [self.xLabels addObject:[managedObject valueForKey:@"date"]];
         }
         
+        // Customization of the graph
         UIColor *color = [self.dataSrc[selectedIndexPath.row] objectForKey:kColorKey];
         self.lineGraphView.colorLine = color;
         self.lineGraphView.colorPoint = color;
+        
+        NSString *propertyName = [self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey];
+        if (![@"heartRate" isEqualToString:propertyName]) {
+            self.lineGraphView.yAxisMin = [NSNumber numberWithInt:2];
+            self.lineGraphView.yAxisMax = [NSNumber numberWithInt:7];
+            self.lineGraphView.paddingMax = 40;
+            self.lineGraphView.enableBezierCurve = NO;
+        } else {
+            self.lineGraphView.yAxisMin = nil;
+            self.lineGraphView.yAxisMax = nil;
+            self.lineGraphView.paddingMax = 40;
+            self.lineGraphView.enableBezierCurve = YES;
+        }
     }
     
     // Customization of the graph
     self.lineGraphView.colorTop = [UIColor whiteColor];
     self.lineGraphView.colorBottom = [UIColor whiteColor];
-    
     self.lineGraphView.colorBackgroundXaxis = [UIColor clearColor];
     self.lineGraphView.colorBackgroundYaxis = [UIColor clearColor];
     self.lineGraphView.colorXaxisLabel = [UIColor lightGrayColor];
@@ -166,12 +179,8 @@
     self.lineGraphView.widthLine = 3.0;
     self.lineGraphView.enableTouchReport = YES;
     self.lineGraphView.enablePopUpReport = YES;
-    self.lineGraphView.enableBezierCurve = NO;
     self.lineGraphView.enableYAxisLabel = YES;
     self.lineGraphView.autoScaleYAxis = YES;
-    self.lineGraphView.yAxisMin = [NSNumber numberWithInt:2];
-    self.lineGraphView.yAxisMax = [NSNumber numberWithInt:7];
-    self.lineGraphView.paddingMax = 40;
     self.lineGraphView.alwaysDisplayDots = NO;
     self.lineGraphView.enableReferenceAxisLines = YES;
     self.lineGraphView.enableReferenceAxisFrame = YES;
@@ -352,17 +361,34 @@
 
 - (CGFloat)maxValueForLineGraph:(BEMSimpleLineGraphView *)graph
 {
-    return 7.0;
+    return graph.yAxisMax == nil ? [[self calculateMaximumPointValue] floatValue] : [graph.yAxisMax floatValue];
 }
 
 - (CGFloat)minValueForLineGraph:(BEMSimpleLineGraphView *)graph
 {
-    return 2.0;
+    return graph.yAxisMin == nil ? [[self calculateMinimumPointValue] floatValue] : [graph.yAxisMin floatValue];
 }
 
 - (NSInteger)numberOfYAxisLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph
 {
     return 5;
+}
+
+- (NSInteger)numberOfGapsBetweenLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph
+{
+    if (self.yValues.count > 10000) {
+        return 100;
+    }
+    if (self.yValues.count > 1000) {
+        return 10;
+    }
+    if (self.yValues.count > 100) {
+        return 4;
+    }
+    if (self.yValues.count > 20) {
+        return 1;
+    }
+    return 0;
 }
 
 #pragma mark -
@@ -400,6 +426,21 @@
     cell.color = [self.dataSrc[indexPath.row] objectForKey:kColorKey];
     
     return cell;
+}
+
+- (NSNumber *)calculateMinimumPointValue {
+    if (self.yValues.count > 0) {
+        NSExpression *expression = [NSExpression expressionForFunction:@"min:" arguments:@[[NSExpression expressionForConstantValue:self.yValues]]];
+        NSNumber *value = [expression expressionValueWithObject:nil context:nil];
+        return value;
+    } else return 0;
+}
+
+- (NSNumber *)calculateMaximumPointValue {
+    NSExpression *expression = [NSExpression expressionForFunction:@"max:" arguments:@[[NSExpression expressionForConstantValue:self.yValues]]];
+    NSNumber *value = [expression expressionValueWithObject:nil context:nil];
+    
+    return value;
 }
 
 @end
