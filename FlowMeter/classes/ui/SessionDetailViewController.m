@@ -60,7 +60,7 @@
                          [@{kTitleKey:NSLocalizedString(@"Absorbiertheit", @"Name des Faktors II Absorbiertheit in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"absorption", kColorKey:[UIColor colorWithRed:138.0/255.0 green:233.0/255.0 blue:145.0/255.0 alpha:1]} mutableCopy],
                          [@{kTitleKey:NSLocalizedString(@"Besorgnis", @"Name des Faktors III Besorgnis in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"anxiety", kColorKey:[UIColor colorWithRed:138.0/255.0 green:188.0/255.0 blue:249.0/255.0 alpha:1]} mutableCopy],
                          [@{kTitleKey:NSLocalizedString(@"Passung", @"Name des Faktors Passung in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"fit", kColorKey:[UIColor colorWithRed:181.0/255.0 green:93.0/255.0 blue:155.0/255.0 alpha:1]} mutableCopy],
-                         [@{kTitleKey:NSLocalizedString(@"Herzrate", @"Herzrate in der Tabelle"), kEntityKey:@"heartRateRecords", kValueKey:@"heartRate", kColorKey:[UIColor colorWithRed:255.0/255.0 green:126.0/255.0 blue:121.0/255.0 alpha:1]} mutableCopy]
+                         [@{kTitleKey:NSLocalizedString(@"Herzrate", @"Herzrate in der Tabelle"), kEntityKey:@"heartRateRecords", kValueKey:@"heartRate", kColorKey:[UIColor colorWithRed:235.0/255.0 green:93.0/255.0 blue:70.0/255.0 alpha:1]} mutableCopy]
                          ];
         } else {
             _dataSrc = @[
@@ -143,11 +143,44 @@
         
         NSSortDescriptor *dateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
         NSArray *managedObjects = [[self.session valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kEntityKey]] sortedArrayUsingDescriptors:@[dateDescriptor]];
-        self.yValues = [NSMutableArray arrayWithCapacity:[managedObjects count]];
-        self.xLabels = [NSMutableArray arrayWithCapacity:[managedObjects count]];
-        for (NSManagedObject *managedObject in managedObjects) {
-            [self.yValues addObject:[managedObject valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]];
-            [self.xLabels addObject:[managedObject valueForKey:@"date"]];
+        
+        if ([@"heartRate" isEqualToString:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]) {
+            NSDate *date = [managedObjects[0] valueForKey:@"date"];
+            NSTimeInterval nextTimeInterval = [date timeIntervalSince1970] + 60;
+            
+            NSMutableArray *yValues = [@[] mutableCopy];
+            
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            formatter.dateStyle = NSDateFormatterNoStyle;
+            formatter.timeStyle = NSDateFormatterShortStyle;
+            for (NSManagedObject *managedObject in managedObjects) {
+                
+                NSDate *date = [managedObject valueForKey:@"date"];
+                NSTimeInterval timeInterval = [date timeIntervalSince1970];
+                [yValues addObject:[managedObject valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]];
+                
+                if (nextTimeInterval <= timeInterval) {
+                    
+                    
+                    NSNumber *yValue = [NSNumber numberWithInt:0];
+                    if (yValues.count > 0) {
+                        NSExpression *expression = [NSExpression expressionForFunction:@"median:" arguments:@[[NSExpression expressionForConstantValue:yValues]]];
+                        yValue = [expression expressionValueWithObject:nil context:nil];
+                    }
+                    [self.yValues addObject:yValue];
+                    [self.xLabels addObject:date];
+                    
+                    yValues = [@[] mutableCopy];
+                    nextTimeInterval = timeInterval + 60;
+                }
+            }
+        } else {
+            self.yValues = [NSMutableArray arrayWithCapacity:[managedObjects count]];
+            self.xLabels = [NSMutableArray arrayWithCapacity:[managedObjects count]];
+            for (NSManagedObject *managedObject in managedObjects) {
+                [self.yValues addObject:[managedObject valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]];
+                [self.xLabels addObject:[managedObject valueForKey:@"date"]];
+            }
         }
         
         // Customization of the graph
@@ -377,15 +410,15 @@
 - (NSInteger)numberOfGapsBetweenLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph
 {
     if (self.yValues.count > 10000) {
-        return 100;
+        return 300;
     }
     if (self.yValues.count > 1000) {
-        return 10;
+        return 30;
     }
     if (self.yValues.count > 100) {
-        return 4;
+        return 3;
     }
-    if (self.yValues.count > 20) {
+    if (self.yValues.count > 33) {
         return 1;
     }
     return 0;
