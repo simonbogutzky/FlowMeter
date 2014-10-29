@@ -473,41 +473,44 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
     
     NSString *cause = nil;
     
+    BOOL showAlertView = NO;
+    
     switch (self.appDelegate.heartRateMonitorManager.state) {
         case HeartRateMonitorManagerStatePoweredOn: {
             [self.appDelegate.heartRateMonitorManager scanForHeartRateMonitorDeviceWhichWereConnected:YES];
+            showAlertView = YES;
         }
             break;
             
         case HeartRateMonitorManagerStatePoweredOff: {
-            cause = NSLocalizedString(@"Überprüfe, ob Bluetooth eingeschlatet ist", @"Überprüfe, ob Bluetooth eingeschlatet ist");
+//            cause = NSLocalizedString(@"Überprüfe, ob Bluetooth eingeschlatet ist", @"Überprüfe, ob Bluetooth eingeschlatet ist");
             
         }
             break;
         case HeartRateMonitorManagerStateResetting: {
             cause = NSLocalizedString(@"Bluetooth Manager wird gerade zurückgesetzt", @"Bluetooth Manager wird gerade zurückgesetzt");
-            
+            showAlertView = YES;
         }
             break;
         case HeartRateMonitorManagerStateUnauthorized: {
-            cause = NSLocalizedString(@"Überprüfe deine Sicherheitseinstellungen", @"Überprüfe deine Sicherheitseinstellungen");
+//            cause = NSLocalizedString(@"Überprüfe deine Sicherheitseinstellungen", @"Überprüfe deine Sicherheitseinstellungen");
             
         }
             break;
         case HeartRateMonitorManagerStateUnknown: {
             cause = NSLocalizedString(@"Ein unbekannter Fehler ist aufgetreten", @"Ein unbekannter Fehler ist aufgetreten");
-            
+            showAlertView = YES;
         }
             break;
         case HeartRateMonitorManagerStateUnsupported: {
-            cause = NSLocalizedString(@"Gerät unterstützt kein Bluetooth LE", @"Gerät unterstützt kein Bluetooth LE");
+//            cause = NSLocalizedString(@"Gerät unterstützt kein Bluetooth LE", @"Gerät unterstützt kein Bluetooth LE");
             
         }
             break;
     }
     
-    if (self.appDelegate.heartRateMonitorManager.state != HeartRateMonitorManagerStatePoweredOn) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Keine Verbindung möglich", @"Keine Verbindung möglich")
+    if (self.appDelegate.heartRateMonitorManager.state != HeartRateMonitorManagerStatePoweredOn && showAlertView) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Keine Bluetooth Verbindung möglich", @"Keine Bluetooth Verbindung möglich")
                                                             message:cause
                                                            delegate:nil
                                                   cancelButtonTitle:@"Ok"
