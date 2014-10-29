@@ -10,6 +10,8 @@
 	<string>FlowMeter</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>1CA8AD815677B6FB0DD135F65EC4576AE68426CF</key>
+		<string>https://bitbucket.org/sbogutzky/bemsimplelinegraph.git</string>
 		<key>4182765C525509B305166AB949D5935FD5C85212</key>
 		<string>https://github.com/jdg/MBProgressHUD.git</string>
 		<key>7070BA961BCA286ED2393408B1E3D78393C99B33</key>
@@ -25,6 +27,8 @@
 	<string>FlowMeter.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>1CA8AD815677B6FB0DD135F65EC4576AE68426CF</key>
+		<string>../../BEMSimpleLineGraph</string>
 		<key>4182765C525509B305166AB949D5935FD5C85212</key>
 		<string>../..MBProgressHUD</string>
 		<key>7070BA961BCA286ED2393408B1E3D78393C99B33</key>
@@ -44,6 +48,14 @@
 	<string>FAC44F63CB4568E6F9161B59257F8C81F11493B3</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1CA8AD815677B6FB0DD135F65EC4576AE68426CF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BEMSimpleLineGraph</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
