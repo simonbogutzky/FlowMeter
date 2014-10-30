@@ -473,12 +473,9 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
     
     NSString *cause = nil;
     
-    BOOL showAlertView = NO;
-    
     switch (self.appDelegate.heartRateMonitorManager.state) {
         case HeartRateMonitorManagerStatePoweredOn: {
             [self.appDelegate.heartRateMonitorManager scanForHeartRateMonitorDeviceWhichWereConnected:YES];
-            showAlertView = YES;
         }
             break;
             
@@ -489,17 +486,14 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
             break;
         case HeartRateMonitorManagerStateResetting: {
             cause = NSLocalizedString(@"Bluetooth Manager wird gerade zurückgesetzt", @"Bluetooth Manager wird gerade zurückgesetzt");
-            showAlertView = YES;
         }
             break;
         case HeartRateMonitorManagerStateUnauthorized: {
 //            cause = NSLocalizedString(@"Überprüfe deine Sicherheitseinstellungen", @"Überprüfe deine Sicherheitseinstellungen");
-            
         }
             break;
         case HeartRateMonitorManagerStateUnknown: {
             cause = NSLocalizedString(@"Ein unbekannter Fehler ist aufgetreten", @"Ein unbekannter Fehler ist aufgetreten");
-            showAlertView = YES;
         }
             break;
         case HeartRateMonitorManagerStateUnsupported: {
@@ -509,7 +503,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
             break;
     }
     
-    if (self.appDelegate.heartRateMonitorManager.state != HeartRateMonitorManagerStatePoweredOn && showAlertView) {
+    if (self.appDelegate.heartRateMonitorManager.state != HeartRateMonitorManagerStatePoweredOn && self.appDelegate.heartRateMonitorManager.state != HeartRateMonitorManagerStatePoweredOff) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Keine Bluetooth Verbindung möglich", @"Keine Bluetooth Verbindung möglich")
                                                             message:cause
                                                            delegate:nil

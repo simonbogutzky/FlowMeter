@@ -705,7 +705,7 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vPw-LP-ebh">
-                                                    <rect key="frame" x="213" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="251" y="6" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.17281592153284672" green="0.51933166058394165" blue="0.76862745098038943" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
                                                         <action selector="changeDbConnectionStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="BZ2-8u-ibb"/>
@@ -714,7 +714,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="vPw-LP-ebh" firstAttribute="top" secondItem="FUX-c9-3Aq" secondAttribute="top" constant="6" id="D2y-cr-udi"/>
-                                                <constraint firstAttribute="trailing" secondItem="vPw-LP-ebh" secondAttribute="trailing" constant="58" id="aHI-wR-FOr"/>
+                                                <constraint firstAttribute="trailing" secondItem="vPw-LP-ebh" secondAttribute="trailing" constant="20" id="aHI-wR-FOr"/>
                                                 <constraint firstAttribute="bottom" secondItem="vPw-LP-ebh" secondAttribute="bottom" constant="6" id="j0V-1w-0c8"/>
                                                 <constraint firstItem="cxS-zW-O3x" firstAttribute="top" secondItem="FUX-c9-3Aq" secondAttribute="top" constant="14" id="q01-uC-Hx0"/>
                                             </constraints>
@@ -723,7 +723,7 @@
                                             <constraint firstItem="cxS-zW-O3x" firstAttribute="leading" secondItem="zEO-Bl-onT" secondAttribute="leading" constant="20" id="Uo7-mV-GKV"/>
                                         </constraints>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="jbh-Ch-qM2">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="jbh-Ch-qM2">
                                         <rect key="frame" x="0.0" y="163" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jbh-Ch-qM2" id="LEW-Mf-iIT">
@@ -740,7 +740,7 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-nl-z8v">
-                                                    <rect key="frame" x="213" y="4" width="51" height="31"/>
+                                                    <rect key="frame" x="251" y="4" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.17281592153284672" green="0.51933166058394165" blue="0.76862745098038943" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
                                                         <action selector="changeHxMConnectionStatus:" destination="pk8-WG-38E" eventType="touchUpInside" id="pPO-3a-4gU"/>
@@ -750,16 +750,13 @@
                                             <constraints>
                                                 <constraint firstItem="Igf-nl-z8v" firstAttribute="top" secondItem="LEW-Mf-iIT" secondAttribute="top" constant="4" id="3E6-97-olj"/>
                                                 <constraint firstAttribute="bottom" secondItem="Igf-nl-z8v" secondAttribute="bottom" constant="8" id="TxU-v6-ZrT"/>
-                                                <constraint firstAttribute="trailing" secondItem="Igf-nl-z8v" secondAttribute="trailing" constant="25" id="mnG-zv-gu3"/>
+                                                <constraint firstAttribute="trailing" secondItem="Igf-nl-z8v" secondAttribute="trailing" constant="20" id="mnG-zv-gu3"/>
                                                 <constraint firstItem="dxo-2B-l8I" firstAttribute="top" secondItem="LEW-Mf-iIT" secondAttribute="top" constant="14" id="zDK-7A-RPY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <constraints>
                                             <constraint firstItem="dxo-2B-l8I" firstAttribute="leading" secondItem="jbh-Ch-qM2" secondAttribute="leading" constant="20" id="mLq-kd-1X5"/>
                                         </constraints>
-                                        <connections>
-                                            <segue destination="0A1-Tz-Jd0" kind="push" identifier="showHxMDevices" id="ziL-na-nH7"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -785,7 +782,7 @@
             <objects>
                 <tableViewController id="0A1-Tz-Jd0" customClass="HeartRateMonitorDeviceTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1mA-jy-fvL">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

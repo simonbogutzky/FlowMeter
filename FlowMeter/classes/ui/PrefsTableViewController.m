@@ -15,6 +15,7 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (weak, nonatomic) IBOutlet UISwitch *dbConnectionStatusSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *hxmConnectionStatusSwitch;
+@property (nonatomic, strong) NSMutableArray *heartRateMonitorDevices;
 
 @end
 
@@ -42,7 +43,6 @@
     [super viewWillAppear:animated];
     self.dbConnectionStatusSwitch.on = [[DBSession sharedSession] isLinked];
     self.hxmConnectionStatusSwitch.on = self.appDelegate.heartRateMonitorManager.hasConnection;
-    self.hxmConnectionStatusSwitch.enabled = self.self.appDelegate.heartRateMonitorManager.hasConnection;
 }
 
 #pragma mark -
@@ -60,8 +60,9 @@
 - (IBAction)changeHxMConnectionStatus:(UISwitch *)sender {
     if (self.appDelegate.heartRateMonitorManager.hasConnection && !sender.on) {
         [self.appDelegate.heartRateMonitorManager disconnectHeartRateMonitorDevice];
+    } else {
+        [self scan];
     }
-    sender.enabled = NO;
 }
 
 
@@ -74,4 +75,99 @@
         [self.dbConnectionStatusSwitch setOn:NO animated:YES];
     }
 }
+
+#pragma mark -
+#pragma mark - Convenient methods of the heart rate monitor
+
+- (void)scan
+{
+    self.heartRateMonitorDevices = [[NSMutableArray alloc] initWithCapacity:1];
+    self.appDelegate.heartRateMonitorManager.delegate = self;
+    
+    NSString *cause = nil;
+    
+    switch (self.appDelegate.heartRateMonitorManager.state) {
+        case HeartRateMonitorManagerStatePoweredOn: {
+            [self.appDelegate.heartRateMonitorManager scanForHeartRateMonitorDeviceWhichWereConnected:YES];
+        }
+            break;
+            
+        case HeartRateMonitorManagerStatePoweredOff: {
+            cause = NSLocalizedString(@"Überprüfe, ob Bluetooth eingeschlatet ist", @"Überprüfe, ob Bluetooth eingeschlatet ist");
+            
+        }
+            break;
+        case HeartRateMonitorManagerStateResetting: {
+            cause = NSLocalizedString(@"Bluetooth Manager wird gerade zurückgesetzt", @"Bluetooth Manager wird gerade zurückgesetzt");
+        }
+            break;
+        case HeartRateMonitorManagerStateUnauthorized: {
+            cause = NSLocalizedString(@"Überprüfe deine Sicherheitseinstellungen", @"Überprüfe deine Sicherheitseinstellungen");
+        }
+            break;
+        case HeartRateMonitorManagerStateUnknown: {
+            cause = NSLocalizedString(@"Ein unbekannter Fehler ist aufgetreten", @"Ein unbekannter Fehler ist aufgetreten");
+        }
+            break;
+        case HeartRateMonitorManagerStateUnsupported: {
+            cause = NSLocalizedString(@"Gerät unterstützt kein Bluetooth LE", @"Gerät unterstützt kein Bluetooth LE");
+        }
+            break;
+    }
+    
+    if (self.appDelegate.heartRateMonitorManager.state != HeartRateMonitorManagerStatePoweredOn) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Keine Bluetooth Verbindung möglich", @"Keine Bluetooth Verbindung möglich")
+                                                            message:cause
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        [self.hxmConnectionStatusSwitch setOn:NO animated:YES];
+    }
+}
+
+- (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
+didDiscoverHeartrateMonitorDevices:(NSArray *)heartRateMonitorDevices
+{
+    [self.appDelegate.heartRateMonitorManager stopScanning];
+    for (HeartRateMonitorDevice *heartRateMonitorDevice in heartRateMonitorDevices) {
+        [self.heartRateMonitorDevices addObject:heartRateMonitorDevice];
+    }
+    
+    if (self.heartRateMonitorDevices.count > 0) {
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            HeartRateMonitorDevice *heartRateMonitorDevice = [self.heartRateMonitorDevices objectAtIndex:0];
+            [self.appDelegate.heartRateMonitorManager connectHeartRateMonitorDevice:heartRateMonitorDevice];
+        });
+    }
+}
+
+- (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
+didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
+                          error:(NSError *)error
+{
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Verbindung wurde wieder getrennt", @"Verbindung wurde wieder getrennt")
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        [self.hxmConnectionStatusSwitch setOn:NO animated:YES];
+    }
+}
+
+- (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
+didFailToConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
+                          error:(NSError *)error
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Fehler beim Verbinden", @"Fehler beim Verbinden")
+                                                        message:[error localizedDescription]
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+    [alertView show];
+    [self.hxmConnectionStatusSwitch setOn:NO animated:YES];
+}
+
 @end
