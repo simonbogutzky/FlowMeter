@@ -13,5 +13,6 @@
 @property (strong, nonatomic) NSArray *itemLabelTexts;
 @property (strong, nonatomic) NSArray *itemSegments;
 @property (strong, nonatomic) NSArray *scaleLabels;
+@property (strong, nonatomic) NSArray *cicleColors;
 @property (weak, nonatomic) id <LikertScaleViewControllerDelegate> delegate;
 @end

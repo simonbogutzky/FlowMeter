@@ -479,6 +479,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     LikertScaleViewController *flowShortScaleViewController = (LikertScaleViewController *)[storyboard instantiateViewControllerWithIdentifier:@"LikertScale"];
     
     flowShortScaleViewController.delegate = self;
+    flowShortScaleViewController.cicleColors = self.appDelegate.colors;
     
     flowShortScaleViewController.itemLabelTexts = @[
                                                      NSLocalizedString(@"Ich fühle mich optimal beansprucht.", @"Ich fühle mich optimal beansprucht."),

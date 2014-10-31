@@ -379,7 +379,7 @@
                     </connections>
                 </barButtonItem>
                 <barButtonItem title="Alle Löschen" id="paP-BI-5q6" userLabel="DeleteButton">
-                    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="tintColor" red="0.8901960784313725" green="0.27450980392156865" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <action selector="deleteAction:" destination="9tQ-ao-a9m" id="Q7W-ea-2tt"/>
                     </connections>
@@ -883,46 +883,26 @@
                         <viewControllerLayoutGuide type="bottom" id="BdN-Xy-Zda"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MGK-dM-tfm">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ich fühle mich optimal beansprucht" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="bjO-rZ-Nvg">
-                                <rect key="frame" x="32" y="51" width="256" height="250"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="750" constant="250" id="7Yj-e2-VSe"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Triff nicht zu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1X8-td-6f1">
-                                <rect key="frame" x="8" y="279" width="63" height="14"/>
+                                <rect key="frame" x="8" y="201" width="63" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Triff zu" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1d2-E2-RwK">
-                                <rect key="frame" x="278" y="279" width="34" height="14"/>
+                                <rect key="frame" x="278" y="201" width="34" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="hVz-ks-vjB">
-                                <rect key="frame" x="8" y="301" width="304" height="31"/>
-                                <segments>
-                                    <segment title=""/>
-                                    <segment title=""/>
-                                    <segment title=""/>
-                                </segments>
-                                <connections>
-                                    <action selector="displayNextItem:" destination="CWW-IL-c45" eventType="valueChanged" id="mb2-a0-LCM"/>
-                                </connections>
-                            </segmentedControl>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="teils-teils" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4Y-Br-TSS">
-                                <rect key="frame" x="137" y="279" width="47" height="14"/>
+                                <rect key="frame" x="137" y="201" width="47" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KhE-yR-7X5">
-                                <rect key="frame" x="225" y="20" width="75" height="30"/>
+                                <rect key="frame" x="229" y="20" width="75" height="30"/>
                                 <state key="normal" title="Abbrechen">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -930,29 +910,35 @@
                                     <action selector="cancelTouched:" destination="CWW-IL-c45" eventType="touchUpInside" id="YmR-mE-Qrl"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ich fühle mich optimal beansprucht" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="256" translatesAutoresizingMaskIntoConstraints="NO" id="bjO-rZ-Nvg">
+                                <rect key="frame" x="32" y="106" width="256" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="EuC-xo-F5m"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KhE-yR-7X5" firstAttribute="top" secondItem="7D3-tG-h9O" secondAttribute="bottom" id="1wS-PA-4gP"/>
-                            <constraint firstItem="hVz-ks-vjB" firstAttribute="top" secondItem="f4Y-Br-TSS" secondAttribute="bottom" constant="8" id="8gR-Dn-LMB"/>
-                            <constraint firstItem="hVz-ks-vjB" firstAttribute="top" secondItem="1d2-E2-RwK" secondAttribute="bottom" constant="8" id="FxW-Km-0tm"/>
-                            <constraint firstAttribute="trailing" secondItem="hVz-ks-vjB" secondAttribute="trailing" constant="8" id="KJ3-3P-nQd"/>
-                            <constraint firstItem="KhE-yR-7X5" firstAttribute="trailing" secondItem="MGK-dM-tfm" secondAttribute="trailing" constant="-20" id="LVP-wR-9gK"/>
-                            <constraint firstItem="bjO-rZ-Nvg" firstAttribute="top" secondItem="7D3-tG-h9O" secondAttribute="bottom" constant="31" id="O28-f9-d3i"/>
-                            <constraint firstItem="hVz-ks-vjB" firstAttribute="top" secondItem="1X8-td-6f1" secondAttribute="bottom" constant="8" id="P3g-wf-Hwn"/>
-                            <constraint firstAttribute="centerY" secondItem="hVz-ks-vjB" secondAttribute="centerY" constant="-32" id="S0a-V2-03n"/>
-                            <constraint firstAttribute="trailing" secondItem="1d2-E2-RwK" secondAttribute="trailing" constant="8" id="VHi-At-F1z"/>
-                            <constraint firstItem="1X8-td-6f1" firstAttribute="leading" secondItem="MGK-dM-tfm" secondAttribute="leading" constant="8" id="ZFI-gT-YY7"/>
-                            <constraint firstAttribute="centerX" secondItem="f4Y-Br-TSS" secondAttribute="centerX" id="b8x-5N-w6o"/>
-                            <constraint firstItem="hVz-ks-vjB" firstAttribute="top" secondItem="bjO-rZ-Nvg" secondAttribute="bottom" id="fPh-bf-ACr"/>
-                            <constraint firstAttribute="centerX" secondItem="bjO-rZ-Nvg" secondAttribute="centerX" id="t8E-zR-7Yq"/>
-                            <constraint firstItem="hVz-ks-vjB" firstAttribute="leading" secondItem="MGK-dM-tfm" secondAttribute="leading" constant="8" id="uN3-CE-tpN"/>
+                            <constraint firstAttribute="centerX" secondItem="f4Y-Br-TSS" secondAttribute="centerX" id="2RH-ch-oAe"/>
+                            <constraint firstItem="f4Y-Br-TSS" firstAttribute="top" secondItem="bjO-rZ-Nvg" secondAttribute="bottom" constant="15" id="3Ju-Vf-qwA"/>
+                            <constraint firstAttribute="centerY" secondItem="1d2-E2-RwK" secondAttribute="centerY" constant="32" id="8gQ-wR-6Ld"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bjO-rZ-Nvg" secondAttribute="trailing" constant="16" id="BFG-LY-UDz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KhE-yR-7X5" secondAttribute="trailing" id="Pdg-ka-jKR"/>
+                            <constraint firstItem="1X8-td-6f1" firstAttribute="leading" secondItem="MGK-dM-tfm" secondAttribute="leading" constant="8" id="hEv-cr-nS3"/>
+                            <constraint firstItem="bjO-rZ-Nvg" firstAttribute="leading" secondItem="MGK-dM-tfm" secondAttribute="leadingMargin" constant="16" id="hoI-7y-uwE"/>
+                            <constraint firstAttribute="trailing" secondItem="1d2-E2-RwK" secondAttribute="trailing" constant="8" id="iKm-Zv-OKl"/>
+                            <constraint firstAttribute="centerY" secondItem="1X8-td-6f1" secondAttribute="centerY" constant="32" id="jBN-PE-quk"/>
+                            <constraint firstItem="KhE-yR-7X5" firstAttribute="top" secondItem="7D3-tG-h9O" secondAttribute="bottom" id="tKw-vV-Zce"/>
+                            <constraint firstAttribute="centerY" secondItem="f4Y-Br-TSS" secondAttribute="centerY" constant="32" id="x4M-gK-z5k"/>
                         </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="itemLabel" destination="bjO-rZ-Nvg" id="a8j-lG-h1e"/>
-                        <outlet property="likertScaleSegmentedControl" destination="hVz-ks-vjB" id="9Ec-Zh-9oQ"/>
                         <outlet property="scaleLabel1" destination="1X8-td-6f1" id="sw3-Ig-MsY"/>
                         <outlet property="scaleLabel2" destination="f4Y-Br-TSS" id="qri-ZB-KEM"/>
                         <outlet property="scaleLabel3" destination="1d2-E2-RwK" id="ByZ-fh-NvE"/>

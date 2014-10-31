@@ -55,20 +55,20 @@
         
         if ([self.session.averageHeartrate doubleValue] != 0) {
             _dataSrc = @[
-                         [@{kTitleKey:NSLocalizedString(@"Flow", @"Name des Gesamt Faktors Flow in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"flow", kColorKey:[UIColor colorWithRed:235.0/255.0 green:93.0/255.0 blue:70.0/255.0 alpha:1]} mutableCopy],
-                         [@{kTitleKey:NSLocalizedString(@"Verlauf", @"Name des Faktors I Verlauf in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"fluency", kColorKey:[UIColor colorWithRed:228.0/255.0 green:219.0/255.0 blue:145.0/255.0 alpha:1]} mutableCopy],
-                         [@{kTitleKey:NSLocalizedString(@"Absorbiertheit", @"Name des Faktors II Absorbiertheit in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"absorption", kColorKey:[UIColor colorWithRed:138.0/255.0 green:233.0/255.0 blue:145.0/255.0 alpha:1]} mutableCopy],
-                         [@{kTitleKey:NSLocalizedString(@"Besorgnis", @"Name des Faktors III Besorgnis in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"anxiety", kColorKey:[UIColor colorWithRed:138.0/255.0 green:188.0/255.0 blue:249.0/255.0 alpha:1]} mutableCopy],
-                         [@{kTitleKey:NSLocalizedString(@"Passung", @"Name des Faktors Passung in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"fit", kColorKey:[UIColor colorWithRed:181.0/255.0 green:93.0/255.0 blue:155.0/255.0 alpha:1]} mutableCopy],
-                         [@{kTitleKey:NSLocalizedString(@"Herzrate", @"Herzrate in der Tabelle"), kEntityKey:@"heartRateRecords", kValueKey:@"heartRate", kColorKey:[UIColor colorWithRed:235.0/255.0 green:93.0/255.0 blue:70.0/255.0 alpha:1]} mutableCopy]
+                         [@{kTitleKey:NSLocalizedString(@"Flow", @"Name des Gesamt Faktors Flow in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"flow"} mutableCopy],
+                         [@{kTitleKey:NSLocalizedString(@"Verlauf", @"Name des Faktors I Verlauf in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"fluency"} mutableCopy],
+                         [@{kTitleKey:NSLocalizedString(@"Absorbiertheit", @"Name des Faktors II Absorbiertheit in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"absorption"} mutableCopy],
+                         [@{kTitleKey:NSLocalizedString(@"Besorgnis", @"Name des Faktors III Besorgnis in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"anxiety"} mutableCopy],
+                         [@{kTitleKey:NSLocalizedString(@"Passung", @"Name des Faktors Passung in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"fit"} mutableCopy],
+                         [@{kTitleKey:NSLocalizedString(@"Herzrate", @"Herzrate in der Tabelle"), kEntityKey:@"heartRateRecords", kValueKey:@"heartRate"} mutableCopy]
                          ];
         } else {
             _dataSrc = @[
-                         [@{kTitleKey:NSLocalizedString(@"Flow", @"Name des Gesamt Faktors Flow in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"flow", kColorKey:[UIColor colorWithRed:235.0/255.0 green:93.0/255.0 blue:70.0/255.0 alpha:1]} mutableCopy],
-                         [@{kTitleKey:NSLocalizedString(@"Verlauf", @"Name des Faktors I Verlauf in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"fluency", kColorKey:[UIColor colorWithRed:228.0/255.0 green:219.0/255.0 blue:145.0/255.0 alpha:1]} mutableCopy],
-                         [@{kTitleKey:NSLocalizedString(@"Absorbiertheit", @"Name des Faktors II Absorbiertheit in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"absorption", kColorKey:[UIColor colorWithRed:138.0/255.0 green:233.0/255.0 blue:145.0/255.0 alpha:1]} mutableCopy],
-                         [@{kTitleKey:NSLocalizedString(@"Besorgnis", @"Name des Faktors III Besorgnis in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"anxiety", kColorKey:[UIColor colorWithRed:138.0/255.0 green:188.0/255.0 blue:249.0/255.0 alpha:1]} mutableCopy],
-                         [@{kTitleKey:NSLocalizedString(@"Passung", @"Name des Faktors Passung in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"fit", kColorKey:[UIColor colorWithRed:181.0/255.0 green:93.0/255.0 blue:155.0/255.0 alpha:1]} mutableCopy]
+                         [@{kTitleKey:NSLocalizedString(@"Flow", @"Name des Gesamt Faktors Flow in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"flow"} mutableCopy],
+                         [@{kTitleKey:NSLocalizedString(@"Verlauf", @"Name des Faktors I Verlauf in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"fluency"} mutableCopy],
+                         [@{kTitleKey:NSLocalizedString(@"Absorbiertheit", @"Name des Faktors II Absorbiertheit in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"absorption"} mutableCopy],
+                         [@{kTitleKey:NSLocalizedString(@"Besorgnis", @"Name des Faktors III Besorgnis in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"anxiety"} mutableCopy],
+                         [@{kTitleKey:NSLocalizedString(@"Passung", @"Name des Faktors Passung in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"fit"} mutableCopy]
                          ];
         }
         
@@ -184,7 +184,7 @@
         }
         
         // Customization of the graph
-        UIColor *color = [self.dataSrc[selectedIndexPath.row] objectForKey:kColorKey];
+        UIColor *color = self.appDelegate.colors[selectedIndexPath.row % (self.appDelegate.colors.count + 1)];
         self.lineGraphView.colorLine = color;
         self.lineGraphView.colorPoint = color;
         
@@ -456,7 +456,7 @@
     
     cell.labelPropertyValue.text = [NSString stringWithFormat:@"%.1f ⍉", [number doubleValue]];
     
-    cell.color = [self.dataSrc[indexPath.row] objectForKey:kColorKey];
+    cell.color = self.appDelegate.colors[indexPath.row % (self.appDelegate.colors.count + 1)];
     
     return cell;
 }

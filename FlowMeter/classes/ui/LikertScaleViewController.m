@@ -10,7 +10,6 @@
 
 @interface LikertScaleViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *itemLabel;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *likertScaleSegmentedControl;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *likertScaleLabels;
 @property (weak, nonatomic) IBOutlet UILabel *scaleLabel3;
 @property (weak, nonatomic) IBOutlet UILabel *scaleLabel2;
@@ -18,6 +17,8 @@
 @property (nonatomic) int itemIndex;
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) NSMutableArray *responses;
+@property (strong, nonatomic) NSMutableArray *circleControls;
+@property (strong, nonatomic) NSMutableArray *circleIndicatorControls;
 @end
 
 @implementation LikertScaleViewController
@@ -37,7 +38,6 @@
 {
     if (!_itemSegments) {
         _itemSegments = @[@1];
-        self.likertScaleSegmentedControl.hidden = YES;
         for (UILabel *likertScaleLabel in self.likertScaleLabels) {
             likertScaleLabel.hidden = YES;
         }
@@ -61,40 +61,52 @@
     return _responses;
 }
 
+- (NSMutableArray *)circleControls
+{
+    if (!_circleControls) {
+        int numberOfItems = [[self.itemSegments objectAtIndex:self.itemIndex] intValue];
+        _circleControls = [[NSMutableArray alloc] initWithCapacity:numberOfItems];
+        _circleIndicatorControls = [[NSMutableArray alloc] initWithCapacity:numberOfItems];
+        
+        for (int i = 0; i < numberOfItems; i++) {
+            UIControl *circleControl = [[UIControl alloc] initWithFrame:CGRectNull];
+            circleControl.layer.cornerRadius = 10;
+            
+            UIControl *circleIndicatorControl = [[UIControl alloc] initWithFrame:CGRectNull];
+            circleIndicatorControl.layer.cornerRadius = 14;
+            if (self.cicleColors != nil) {
+                circleControl.backgroundColor = self.cicleColors[i % (self.cicleColors.count)];
+            } else {
+                circleControl.backgroundColor = [UIColor redColor];
+            }
+            circleIndicatorControl.backgroundColor = [UIColor clearColor];
+            circleControl.tag = i;
+            circleIndicatorControl.tag = i;
+            [circleControl addTarget:self action:@selector(circleControlTouchedInside:) forControlEvents:UIControlEventTouchUpInside];
+            [circleIndicatorControl addTarget:self action:@selector(circleControlTouchedInside:) forControlEvents:UIControlEventTouchUpInside];
+            [_circleControls addObject:circleControl];
+            [_circleIndicatorControls addObject:circleIndicatorControl];
+            [self.view addSubview:circleIndicatorControl];
+            [self.view addSubview:circleControl];
+        }
+    }
+    return _circleControls;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	
     self.itemLabel.text = [self.itemLabelTexts objectAtIndex:0];
-    [self setSegmentsForItemIndex:0];
+    [self setCircleControlsForItemIndex:0];
     self.scaleLabel1.text = [[self.scaleLabels objectAtIndex:0] objectAtIndex:0];
     self.scaleLabel2.text = [[self.scaleLabels objectAtIndex:0] objectAtIndex:1];
     self.scaleLabel3.text = [[self.scaleLabels objectAtIndex:0] objectAtIndex:2];
     self.date = [NSDate date];
 }
 
-- (void)setSegmentsForItemIndex:(NSInteger)itemIndex {
-    
-    if ([[self.itemSegments objectAtIndex:itemIndex] intValue] < self.likertScaleSegmentedControl.numberOfSegments) {
-        NSUInteger currentSegmentCount = self.likertScaleSegmentedControl.numberOfSegments;
-        NSUInteger newSegmentCount = [[self.itemSegments objectAtIndex:itemIndex] intValue];
-        NSUInteger removeCount = currentSegmentCount - newSegmentCount;
-        
-        for (int i = 0; i < removeCount; i++) {
-            [self.likertScaleSegmentedControl removeSegmentAtIndex:newSegmentCount animated:YES];
-        }
-    }
-    
-    if ([[self.itemSegments objectAtIndex:itemIndex] intValue] > self.likertScaleSegmentedControl.numberOfSegments) {
-        for (NSUInteger i = self.likertScaleSegmentedControl.numberOfSegments + 1; i <= [[self.itemSegments objectAtIndex:itemIndex] intValue]; i++) {
-            [self.likertScaleSegmentedControl insertSegmentWithTitle:@"" atIndex:i animated:YES];
-        }
-    }
-}
-
-- (IBAction)displayNextItem:(id)sender {
-    [self.responses addObject:[NSNumber numberWithLong:self.likertScaleSegmentedControl.selectedSegmentIndex + 1]];
-    
+- (void)increaseItemIndex
+{
     self.itemIndex++;
     if (self.itemIndex < [self.itemLabelTexts count]) {
         self.itemLabel.text = [self.itemLabelTexts objectAtIndex:self.itemIndex];
@@ -102,14 +114,65 @@
         self.scaleLabel2.text = [[self.scaleLabels objectAtIndex:self.itemIndex] objectAtIndex:1];
         self.scaleLabel3.text = [[self.scaleLabels objectAtIndex:self.itemIndex] objectAtIndex:2];
         
-        [self setSegmentsForItemIndex:self.itemIndex];
-        [self.likertScaleSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+        [self setCircleControlsForItemIndex:self.itemIndex];
     } else {
         if ([self.delegate respondsToSelector:@selector(likertScaleViewController:didFinishWithResponses:atDate:)]) {
             [self.delegate likertScaleViewController:self didFinishWithResponses:self.responses atDate:self.date];
         }
     }
+}
+
+#pragma mark -
+#pragma mark - CircleControl methods
+
+- (void)redrawCicleControlsForSize:(CGSize)size
+{
+    CGFloat screenWidth = size.width;
+    CGFloat screenHeight = size.height;
+    int numberOfCircles = [self.circleControls count];
+    CGFloat offset = (screenWidth - 80) / (numberOfCircles - 1);
+    int i = 0;
+    for (UIControl *circleControl in self.circleControls) {
+        circleControl.frame = CGRectMake(45 - 14 + offset * i, screenHeight/2 + 9, 18, 18);
+        i++;
+    }
+    i = 0;
+    for (UIControl *circleIndicatorControl in self.circleIndicatorControls) {
+        circleIndicatorControl.frame = CGRectMake(40 - 14 + offset * i, screenHeight/2 + 4, 28, 28);
+        i++;
+    }
+}
+
+- (void)setCircleControlsForItemIndex:(NSInteger)itemIndex {
+    if (self.circleControls != nil) {
+        for (UIControl *circleControl in self.circleControls) {
+            [circleControl removeFromSuperview];
+        }
+        self.circleControls = nil;
+        
+        for (UIControl *circleIndicatorControls in self.circleIndicatorControls) {
+            [circleIndicatorControls removeFromSuperview];
+        }
+        self.circleIndicatorControls = nil;
+        
+    }
+    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenBound.size;
+    [self redrawCicleControlsForSize:screenSize];
+}
+
+#pragma mark -
+#pragma mark - IBActions
+
+- (IBAction)circleControlTouchedInside:(id)sender
+{
+    UIControl *circleControl = sender;
     
+    UIControl *circleIndicatorControl = self.circleIndicatorControls[circleControl.tag];
+    circleIndicatorControl.backgroundColor = [self.cicleColors[circleControl.tag] colorWithAlphaComponent:0.6];
+    [self.responses addObject:[NSNumber numberWithInt:circleControl.tag + 1]];
+    
+    [self performSelector:@selector(increaseItemIndex) withObject:nil afterDelay:0.1];
 }
 
 - (IBAction)cancelTouched:(id)sender
@@ -117,6 +180,11 @@
     if ([self.delegate respondsToSelector:@selector(likertScaleViewControllerCancelled:)]) {
         [self.delegate likertScaleViewControllerCancelled:self];
     }
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [self redrawCicleControlsForSize:size];
 }
 
 @end

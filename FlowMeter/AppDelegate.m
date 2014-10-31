@@ -19,6 +19,7 @@
 @synthesize heartRateMonitorManager = _heartRateMonitorManager;
 @synthesize dbRestClient = _dbRestClient;
 @synthesize reachability = _reachability;
+@synthesize colors = _colors;
 
 #pragma mark -
 #pragma mark - Getter (Lazy-Instantiation)
@@ -45,6 +46,13 @@
         _reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
     }
     return _reachability;
+}
+
+- (NSArray *)colors {
+    if (!_colors) {
+        _colors = @[UIColorFromRGB(0xEB5D46), UIColorFromRGB(0xF39019), UIColorFromRGB(0xE6DC4B), UIColorFromRGB(0x8AE890), UIColorFromRGB(0x00882B), UIColorFromRGB(0x2663A1), UIColorFromRGB(0x8ABCF9), UIColorFromRGB(0x9A5DB4), UIColorFromRGB(0xA6AAA9)];
+    }
+    return _colors;
 }
 
 #pragma mark -

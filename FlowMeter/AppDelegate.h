@@ -25,6 +25,7 @@
 @property (readonly, strong, nonatomic) Reachability *reachability;
 @property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) id timeObserver;
+@property (readonly, strong, nonatomic) NSArray *colors;
 
 - (void)saveContext;
 - (NSString *)userDirectory;
