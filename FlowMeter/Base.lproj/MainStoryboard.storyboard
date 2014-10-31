@@ -780,7 +780,7 @@
         <!--HxM Geräte-->
         <scene sceneID="9G9-DV-8iP">
             <objects>
-                <tableViewController id="0A1-Tz-Jd0" customClass="HeartRateMonitorDeviceTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="HxM Overview" id="0A1-Tz-Jd0" customClass="HeartRateMonitorDeviceTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1mA-jy-fvL">
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

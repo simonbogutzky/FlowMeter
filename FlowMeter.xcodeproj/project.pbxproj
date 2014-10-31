@@ -28,6 +28,7 @@
 		D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */; };
 		D36C44B016D788BE000B8502 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
 		D37067D71733F41300F86BBD /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37067D61733F41300F86BBD /* EditViewController.m */; };
+		D38400651A04144A006710FB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38400671A04144A006710FB /* LaunchScreen.xib */; };
 		D3877C0B19BEEE0E00F21881 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3877C0A19BEEE0E00F21881 /* libz.dylib */; };
 		D3877C0D19BEEFED00F21881 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3877C0C19BEEFED00F21881 /* ExternalAccessory.framework */; };
 		D38A216D16BFF9F80075D093 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38A216C16BFF9F80075D093 /* CoreLocation.framework */; };
@@ -164,6 +165,8 @@
 		D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D37067D51733F41300F86BBD /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewController.h; path = classes/ui/EditViewController.h; sourceTree = "<group>"; };
 		D37067D61733F41300F86BBD /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewController.m; path = classes/ui/EditViewController.m; sourceTree = "<group>"; };
+		D38400661A04144A006710FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		D38400691A041464006710FB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D3877C0A19BEEE0E00F21881 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D3877C0C19BEEFED00F21881 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		D3877C0E19BEEFED00F21881 /* FlowMeter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FlowMeter.entitlements; sourceTree = "<group>"; };
@@ -369,6 +372,7 @@
 		D34C9D3E172504D7004C261C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D38400671A04144A006710FB /* LaunchScreen.xib */,
 				D335030819A5D89B008CC93A /* Images.xcassets */,
 				D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */,
 			);
@@ -625,6 +629,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D38400651A04144A006710FB /* LaunchScreen.xib in Resources */,
 				D335030919A5D89B008CC93A /* Images.xcassets in Resources */,
 				D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */,
 				D3AB053219D5581A00626323 /* 5min-silence.mp3 in Resources */,
@@ -706,6 +711,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		D38400671A04144A006710FB /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D38400661A04144A006710FB /* Base */,
+				D38400691A041464006710FB /* de */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
 		D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -779,7 +793,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = FlowMeter/FlowMeter.entitlements;
@@ -820,7 +833,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = FlowMeter/FlowMeter.entitlements;
