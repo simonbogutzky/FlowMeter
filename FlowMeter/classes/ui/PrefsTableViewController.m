@@ -93,7 +93,7 @@
             break;
             
         case HeartRateMonitorManagerStatePoweredOff: {
-            cause = NSLocalizedString(@"Überprüfe, ob Bluetooth eingeschlatet ist", @"Überprüfe, ob Bluetooth eingeschlatet ist");
+            cause = NSLocalizedString(@"Überprüfe, ob Bluetooth eingeschaltet ist", @"Überprüfe, ob Bluetooth eingeschaltet ist");
             
         }
             break;

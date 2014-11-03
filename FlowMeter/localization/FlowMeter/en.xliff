@@ -1,792 +1,792 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
-    <file original="FlowMeter/Base.lproj/LaunchScreen.xib" source-language="de" datatype="plaintext" target-language="en">
-        <header>
-            <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"></tool>
-        </header>
-        <body>
-            <trans-unit id="8ie-xW-0ye.text">
-                <source>  Copyright (c) 2014 Simon Bogutzky. All rights reserved.</source>
-                <note>Class = "IBUILabel"; text = "  Copyright (c) 2014 Simon Bogutzky. All rights reserved."; ObjectID = "8ie-xW-0ye";</note>
-                <target>Copyright (c) 2014 Simon Bogutzky. All rights reserved.</target>
-            </trans-unit>
-        </body>
-    </file>
-    <file original="FlowMeter/Base.lproj/MainStoryboard.storyboard" source-language="de" datatype="plaintext" target-language="en">
-        <header>
-            <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"></tool>
-        </header>
-        <body>
-            <trans-unit id="1X8-td-6f1.text">
-                <source>Triff nicht zu</source>
-                <note>Class = "IBUILabel"; text = "Triff nicht zu"; ObjectID = "1X8-td-6f1";</note>
-                <target>not at all</target>
-            </trans-unit>
-            <trans-unit id="1d2-E2-RwK.text">
-                <source>Triff zu</source>
-                <note>Class = "IBUILabel"; text = "Triff zu"; ObjectID = "1d2-E2-RwK";</note>
-                <target>very much</target>
-            </trans-unit>
-            <trans-unit id="3Dj-cx-6L9.text">
-                <source>Title</source>
-                <note>Class = "IBUILabel"; text = "Title"; ObjectID = "3Dj-cx-6L9";</note>
-                <target>Title</target>
-            </trans-unit>
-            <trans-unit id="3IC-dB-72B.title">
-                <source>bearbeiten</source>
-                <note>Class = "IBUINavigationItem"; title = "bearbeiten"; ObjectID = "3IC-dB-72B";</note>
-                <target>edit</target>
-            </trans-unit>
-            <trans-unit id="3OO-2z-d6W.text">
-                <source>Simon Bogutzky</source>
-                <note>Class = "IBUILabel"; text = "Simon Bogutzky"; ObjectID = "3OO-2z-d6W";</note>
-                <target>Simon Bogutzky</target>
-            </trans-unit>
-            <trans-unit id="4Yf-mk-QvG.text">
-                <source>03h 05m</source>
-                <note>Class = "IBUILabel"; text = "03h 05m"; ObjectID = "4Yf-mk-QvG";</note>
-                <target>03h 05m</target>
-            </trans-unit>
-            <trans-unit id="4vJ-Is-xZ5.text">
-                <source>FLOW</source>
-                <note>Class = "IBUILabel"; text = "FLOW"; ObjectID = "4vJ-Is-xZ5";</note>
-                <target>FLOW</target>
-            </trans-unit>
-            <trans-unit id="7P5-t7-rHo.text">
-                <source>MESSUNGEN</source>
-                <note>Class = "IBUILabel"; text = "MESSUNGEN"; ObjectID = "7P5-t7-rHo";</note>
-                <target>MEASUREMENTS</target>
-            </trans-unit>
-            <trans-unit id="7Rs-Et-hYD.title">
-                <source>Menu</source>
-                <note>Class = "IBUIBarButtonItem"; title = "Menu"; ObjectID = "7Rs-Et-hYD";</note>
-                <target>menu</target>
-            </trans-unit>
-            <trans-unit id="8ie-3Q-cwT.text">
-                <source>❤︎</source>
-                <note>Class = "IBUILabel"; text = "❤︎"; ObjectID = "8ie-3Q-cwT";</note>
-                <target>❤︎</target>
-            </trans-unit>
-            <trans-unit id="11w-qP-avr.text">
-                <source>4.5 ⍉</source>
-                <note>Class = "IBUILabel"; text = "4.5 ⍉"; ObjectID = "11w-qP-avr";</note>
-                <target>4.5 ⍉</target>
-            </trans-unit>
-            <trans-unit id="744-6J-0ve.text">
-                <source>✎</source>
-                <note>Class = "IBUILabel"; text = "✎"; ObjectID = "744-6J-0ve";</note>
-                <target>✎</target>
-            </trans-unit>
-            <trans-unit id="AVB-X3-04Z.text">
-                <source>ZEIT</source>
-                <note>Class = "IBUILabel"; text = "ZEIT"; ObjectID = "AVB-X3-04Z";</note>
-                <target>TIME</target>
-            </trans-unit>
-            <trans-unit id="BSX-sb-I5L.text">
-                <source>Title</source>
-                <note>Class = "IBUILabel"; text = "Title"; ObjectID = "BSX-sb-I5L";</note>
-                <target>Title</target>
-            </trans-unit>
-            <trans-unit id="Cs9-qS-JfL.text">
-                <source>S</source>
-                <note>Class = "IBUILabel"; text = "S"; ObjectID = "Cs9-qS-JfL";</note>
-                <target>S</target>
-            </trans-unit>
-            <trans-unit id="DRM-us-BNo.text">
-                <source>02:05:00</source>
-                <note>Class = "IBUILabel"; text = "02:05:00"; ObjectID = "DRM-us-BNo";</note>
-                <target>02:05:00</target>
-            </trans-unit>
-            <trans-unit id="DuS-St-5RM.title">
-                <source>HxM Geräte</source>
-                <note>Class = "IBUINavigationItem"; title = "HxM Geräte"; ObjectID = "DuS-St-5RM";</note>
-                <target>HxM devices</target>
-            </trans-unit>
-            <trans-unit id="HbQ-sv-eTH.text">
-                <source>0</source>
-                <note>Class = "IBUILabel"; text = "0"; ObjectID = "HbQ-sv-eTH";</note>
-                <target>0</target>
-            </trans-unit>
-            <trans-unit id="IXj-cB-LmA.text">
-                <source>120 ⍉</source>
-                <note>Class = "IBUILabel"; text = "120 ⍉"; ObjectID = "IXj-cB-LmA";</note>
-                <target>120 ⍉</target>
-            </trans-unit>
-            <trans-unit id="Im2-FV-wo3.title">
-                <source>Einstellungen</source>
-                <note>Class = "IBUITabBarItem"; title = "Einstellungen"; ObjectID = "Im2-FV-wo3";</note>
-                <target>Preferences</target>
-            </trans-unit>
-            <trans-unit id="JBd-iU-TgT.text">
-                <source>00:00</source>
-                <note>Class = "IBUILabel"; text = "00:00"; ObjectID = "JBd-iU-TgT";</note>
-                <target>00:00</target>
-            </trans-unit>
-            <trans-unit id="KXe-AL-4yJ.text">
-                <source></source>
-                <note>Class = "IBUILabel"; text = " "; ObjectID = "KXe-AL-4yJ";</note>
-                <target></target>
-            </trans-unit>
-            <trans-unit id="KhE-yR-7X5.normalTitle">
-                <source>Abbrechen</source>
-                <note>Class = "IBUIButton"; normalTitle = "Abbrechen"; ObjectID = "KhE-yR-7X5";</note>
-                <target>Cancel</target>
-            </trans-unit>
-            <trans-unit id="Ko6-wq-69x.text">
-                <source>Title</source>
-                <note>Class = "IBUILabel"; text = "Title"; ObjectID = "Ko6-wq-69x";</note>
-                <target>Title</target>
-            </trans-unit>
-            <trans-unit id="NIg-71-mrk.title">
-                <source>Abbrechen</source>
-                <note>Class = "IBUIBarButtonItem"; title = "Abbrechen"; ObjectID = "NIg-71-mrk";</note>
-                <target>Cancel</target>
-            </trans-unit>
-            <trans-unit id="Oo6-yD-QJr.title">
-                <source>Aufnahme</source>
-                <note>Class = "IBUITabBarItem"; title = "Aufnahme"; ObjectID = "Oo6-yD-QJr";</note>
-                <target>Recording</target>
-            </trans-unit>
-            <trans-unit id="Rvg-l2-k8e.text">
-                <source>Title</source>
-                <note>Class = "IBUILabel"; text = "Title"; ObjectID = "Rvg-l2-k8e";</note>
-                <target>Title</target>
-            </trans-unit>
-            <trans-unit id="TjS-8J-YUm.text">
-                <source>Label</source>
-                <note>Class = "IBUILabel"; text = "Label"; ObjectID = "TjS-8J-YUm";</note>
-                <target>Label</target>
-            </trans-unit>
-            <trans-unit id="Zq6-8C-6RD.title">
-                <source>Flow-Messungen</source>
-                <note>Class = "IBUITabBarItem"; title = "Flow-Messungen"; ObjectID = "Zq6-8C-6RD";</note>
-                <target>Flow-Measurements</target>
-            </trans-unit>
-            <trans-unit id="Zsq-WU-lxK.text">
-                <source></source>
-                <note>Class = "IBUILabel"; text = " "; ObjectID = "Zsq-WU-lxK";</note>
-                <target></target>
-            </trans-unit>
-            <trans-unit id="b34-Ts-ek6.text">
-                <source>Label</source>
-                <note>Class = "IBUILabel"; text = "Label"; ObjectID = "b34-Ts-ek6";</note>
-                <target>Label</target>
-            </trans-unit>
-            <trans-unit id="bjO-rZ-Nvg.text">
-                <source>Ich fühle mich optimal beansprucht</source>
-                <note>Class = "IBUILabel"; text = "Ich fühle mich optimal beansprucht"; ObjectID = "bjO-rZ-Nvg";</note>
-                <target>I feel just the right amount of challange</target>
-            </trans-unit>
-            <trans-unit id="cFc-Wy-kcx.title">
-                <source>Einstellungen</source>
-                <note>Class = "IBUINavigationItem"; title = "Einstellungen"; ObjectID = "cFc-Wy-kcx";</note>
-                <target>Preferences</target>
-            </trans-unit>
-            <trans-unit id="car-Lx-cye.text">
-                <source>4.5 ⍉</source>
-                <note>Class = "IBUILabel"; text = "4.5 ⍉"; ObjectID = "car-Lx-cye";</note>
-                <target>4.5 ⍉</target>
-            </trans-unit>
-            <trans-unit id="cxS-zW-O3x.text">
-                <source>Dropbox Verbindung</source>
-                <note>Class = "IBUILabel"; text = "Dropbox Verbindung"; ObjectID = "cxS-zW-O3x";</note>
-                <target>Dropbox connection</target>
-            </trans-unit>
-            <trans-unit id="dJb-DU-WeX.text">
-                <source>120</source>
-                <note>Class = "IBUILabel"; text = "120"; ObjectID = "dJb-DU-WeX";</note>
-                <target>120</target>
-            </trans-unit>
-            <trans-unit id="dxo-2B-l8I.text">
-                <source>HxM Verbindung</source>
-                <note>Class = "IBUILabel"; text = "HxM Verbindung"; ObjectID = "dxo-2B-l8I";</note>
-                <target>HxM connection</target>
-            </trans-unit>
-            <trans-unit id="f4Y-Br-TSS.text">
-                <source>teils-teils</source>
-                <note>Class = "IBUILabel"; text = "teils-teils"; ObjectID = "f4Y-Br-TSS";</note>
-                <target>partly</target>
-            </trans-unit>
-            <trans-unit id="fhB-78-Qag.title">
-                <source>S. Bogutzky - Laufen</source>
-                <note>Class = "IBUINavigationItem"; title = "S. Bogutzky - Laufen"; ObjectID = "fhB-78-Qag";</note>
-                <target>S. Bogutzky - Running</target>
-            </trans-unit>
-            <trans-unit id="g1v-4K-Oax.text">
-                <source>✎</source>
-                <note>Class = "IBUILabel"; text = "✎"; ObjectID = "g1v-4K-Oax";</note>
-                <target>✎</target>
-            </trans-unit>
-            <trans-unit id="hQZ-pK-huO.title">
-                <source>Lauf</source>
-                <note>Class = "IBUINavigationItem"; title = "Lauf"; ObjectID = "hQZ-pK-huO";</note>
-                <target>Run</target>
-            </trans-unit>
-            <trans-unit id="hma-90-mkH.text">
-                <source>14</source>
-                <note>Class = "IBUILabel"; text = "14"; ObjectID = "hma-90-mkH";</note>
-                <target>14</target>
-            </trans-unit>
-            <trans-unit id="ibw-L0-Seu.title">
-                <source>Scan</source>
-                <note>Class = "IBUIBarButtonItem"; title = "Scan"; ObjectID = "ibw-L0-Seu";</note>
-                <target>Scan</target>
-            </trans-unit>
-            <trans-unit id="kfM-7K-tdj.text">
-                <source>5</source>
-                <note>Class = "IBUILabel"; text = "5"; ObjectID = "kfM-7K-tdj";</note>
-                <target>5</target>
-            </trans-unit>
-            <trans-unit id="kra-zN-Y2H.text">
-                <source>4.5</source>
-                <note>Class = "IBUILabel"; text = "4.5"; ObjectID = "kra-zN-Y2H";</note>
-                <target>4.5</target>
-            </trans-unit>
-            <trans-unit id="lxG-6c-LKo.text">
-                <source>Laufen</source>
-                <note>Class = "IBUILabel"; text = "Laufen"; ObjectID = "lxG-6c-LKo";</note>
-                <target>Running</target>
-            </trans-unit>
-            <trans-unit id="mMI-il-cAu.normalTitle">
-                <source>Starten</source>
-                <note>Class = "IBUIButton"; normalTitle = "Starten"; ObjectID = "mMI-il-cAu";</note>
-                <target>Start</target>
-            </trans-unit>
-            <trans-unit id="mlH-m3-f8i.text">
-                <source>MIN</source>
-                <note>Class = "IBUILabel"; text = "MIN"; ObjectID = "mlH-m3-f8i";</note>
-                <target>MIN</target>
-            </trans-unit>
-            <trans-unit id="nSS-ym-ztX.headerTitle">
-                <source>Verbindung</source>
-                <note>Class = "IBUITableViewSection"; headerTitle = "Verbindung"; ObjectID = "nSS-ym-ztX";</note>
-                <target>Connection</target>
-            </trans-unit>
-            <trans-unit id="paP-BI-5q6.title">
-                <source>Alle Löschen</source>
-                <note>Class = "IBUIBarButtonItem"; title = "Alle Löschen"; ObjectID = "paP-BI-5q6";</note>
-                <target>Delete all</target>
-            </trans-unit>
-            <trans-unit id="tZl-QD-bic.title">
-                <source>Flow-Messungen</source>
-                <note>Class = "IBUINavigationItem"; title = "Flow-Messungen"; ObjectID = "tZl-QD-bic";</note>
-                <target>Flow-Measurements</target>
-            </trans-unit>
-            <trans-unit id="uLq-37-zr6.text">
-                <source>NA</source>
-                <note>Class = "IBUILabel"; text = "NA"; ObjectID = "uLq-37-zr6";</note>
-                <target>NA</target>
-            </trans-unit>
-            <trans-unit id="uuA-Yb-SmM.text">
-                <source>❤︎</source>
-                <note>Class = "IBUILabel"; text = "❤︎"; ObjectID = "uuA-Yb-SmM";</note>
-                <target>❤︎</target>
-            </trans-unit>
-            <trans-unit id="vyr-L6-cSf.text">
-                <source>BPM</source>
-                <note>Class = "IBUILabel"; text = "BPM"; ObjectID = "vyr-L6-cSf";</note>
-                <target>BPM</target>
-            </trans-unit>
-            <trans-unit id="wMl-tr-4gU.text">
-                <source>FLOW</source>
-                <note>Class = "IBUILabel"; text = "FLOW"; ObjectID = "wMl-tr-4gU";</note>
-                <target>FLOW</target>
-            </trans-unit>
-            <trans-unit id="xDQ-T2-Doq.title">
-                <source>Aufnahme</source>
-                <note>Class = "IBUINavigationItem"; title = "Aufnahme"; ObjectID = "xDQ-T2-Doq";</note>
-                <target>Recording</target>
-            </trans-unit>
-            <trans-unit id="xDl-la-9j6.text">
-                <source>7</source>
-                <note>Class = "IBUILabel"; text = "7"; ObjectID = "xDl-la-9j6";</note>
-                <target>7</target>
-            </trans-unit>
-            <trans-unit id="xkg-C7-6Eh.text">
-                <source>Label</source>
-                <note>Class = "IBUILabel"; text = "Label"; ObjectID = "xkg-C7-6Eh";</note>
-                <target>Label</target>
-            </trans-unit>
-            <trans-unit id="yp2-k7-OXg.text">
-                <source>August 28, 2014 - 17:30</source>
-                <note>Class = "IBUILabel"; text = "August 28, 2014 - 17:30"; ObjectID = "yp2-k7-OXg";</note>
-                <target>August 28, 2014 - 17:30</target>
-            </trans-unit>
-        </body>
-    </file>
-    <file original="FlowMeter/Base.lproj/FlowMeter-Info.plist" source-language="de" datatype="plaintext" target-language="en">
-        <header>
-            <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"></tool>
-        </header>
-        <body>
-            <trans-unit id="CFBundleDisplayName">
-                <source>${PRODUCT_NAME}</source>
-                <target>${PRODUCT_NAME}</target>
-            </trans-unit>
-            <trans-unit id="CFBundleName">
-                <source>${PRODUCT_NAME}</source>
-                <target>${PRODUCT_NAME}</target>
-            </trans-unit>
-            <trans-unit id="CFBundleShortVersionString">
-                <source>0.9</source>
-                <target>0.9</target>
-            </trans-unit>
-        </body>
-    </file>
-    <file original="FlowMeter/Base.lproj/Localizable.strings" source-language="de" datatype="plaintext" target-language="en">
-        <header>
-            <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"></tool>
-        </header>
-        <body>
-            <trans-unit id="Abbrechen">
-                <source>Abbrechen</source>
-                <target>Cancel</target>
-            </trans-unit>
-            <trans-unit id="Absorbiertheit">
-                <source>Absorbiertheit</source>
-                <target>Absorption</target>
-            </trans-unit>
-            <trans-unit id="Absorbiertheit (SD)">
-                <source>Absorbiertheit (SD)</source>
-                <note>Absorbiertheit (SD)</note>
-                <target>Absorption (SD)</target>
-            </trans-unit>
-            <trans-unit id="Aktionen">
-                <source>Aktionen</source>
-                <note>Aktionen</note>
-                <target>Actions</target>
-            </trans-unit>
-            <trans-unit id="Aktivität">
-                <source>Aktivität</source>
-                <note>Aktivität</note>
-                <target>Aktivity</target>
-            </trans-unit>
-            <trans-unit id="Alle Löschen">
-                <source>Alle Löschen</source>
-                <note>No comment provided by engineer.</note>
-                <target>Delete all</target>
-            </trans-unit>
-            <trans-unit id="Auf Gerät speichern">
-                <source>Auf Gerät speichern</source>
-                <note>Datei auf dem Gerät speichern</note>
-                <target>Save on the device</target>
-            </trans-unit>
-            <trans-unit id="Beginn">
-                <source>Beginn</source>
-                <note>Beginn</note>
-                <target>Start</target>
-            </trans-unit>
-            <trans-unit id="Benutzer">
-                <source>Benutzer</source>
-                <note>Benutzer</note>
-                <target>User</target>
-            </trans-unit>
-            <trans-unit id="Besorgnis">
-                <source>Besorgnis</source>
-                <target>Anxiety</target>
-            </trans-unit>
-            <trans-unit id="Besorgnis (SD)">
-                <source>Besorgnis (SD)</source>
-                <note>Besorgnis (SD)</note>
-                <target>Anxiety (SD)</target>
-            </trans-unit>
-            <trans-unit id="Bist du sicher, dass du diese Flow-Messung entfernen willst?">
-                <source>Bist du sicher, dass du diese Flow-Messung entfernen willst?</source>
-                <note>No comment provided by engineer.</note>
-                <target>Are you sure, that you want to remove the current flow-measurement?</target>
-            </trans-unit>
-            <trans-unit id="Bist du sicher, dass du diese Flow-Messungen entfernen willst?">
-                <source>Bist du sicher, dass du diese Flow-Messungen entfernen willst?</source>
-                <note>No comment provided by engineer.</note>
-                <target>Are you sure, that you want to remove these flow-measurements?</target>
-            </trans-unit>
-            <trans-unit id="Bluetooth Manager wird gerade zurückgesetzt">
-                <source>Bluetooth Manager wird gerade zurückgesetzt</source>
-                <note>Bluetooth Manager wird gerade zurückgesetzt</note>
-                <target>Bluetooth Manager will be resetted</target>
-            </trans-unit>
-            <trans-unit id="Cellular">
-                <source>Cellular</source>
-                <note>No comment provided by engineer.</note>
-                <target>Cellular</target>
-            </trans-unit>
-            <trans-unit id="Countdown">
-                <source>Countdown</source>
-                <note>Countdown</note>
-                <target>Countdown</target>
-            </trans-unit>
-            <trans-unit id="Datum">
-                <source>Datum</source>
-                <note>Datum</note>
-                <target>Date</target>
-            </trans-unit>
-            <trans-unit id="Dauer">
-                <source>Dauer</source>
-                <note>Dauer</note>
-                <target>Duration</target>
-            </trans-unit>
-            <trans-unit id="Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen.">
-                <source>Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen.</source>
-                <note>Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen.</note>
-                <target>The value of the variation can assume at most the half of the interval value.</target>
-            </trans-unit>
-            <trans-unit id="Die richtigen Gedanken/Bewegungen kommen wie von selbst.">
-                <source>Die richtigen Gedanken/Bewegungen kommen wie von selbst.</source>
-                <note>Die richtigen Gedanken/Bewegungen kommen wie von selbst.</note>
-                <target>The right thoughts/movements occur of their own accord.
-</target>
-            </trans-unit>
-            <trans-unit id="Du hast zurzeit keine Internetverbindung">
-                <source>Du hast zurzeit keine Internetverbindung</source>
-                <note>Du hast zurzeit keine Internetverbindung</note>
-                <target>You currently have no Internet connection</target>
-            </trans-unit>
-            <trans-unit id="Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?">
-                <source>Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?</source>
-                <note>Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?</note>
-                <target>You currently have no Wi-Fi Internet connection. Would you still upload the data?</target>
-            </trans-unit>
-            <trans-unit id="ERR">
-                <source>ERR</source>
-                <note>Fehleranzeige - HR Monitor wurde getrennt</note>
-                <target>ERR</target>
-            </trans-unit>
-            <trans-unit id="Ein unbekannter Fehler ist aufgetreten">
-                <source>Ein unbekannter Fehler ist aufgetreten</source>
-                <note>Ein unbekannter Fehler ist aufgetreten</note>
-                <target>An unknown error has occurred</target>
-            </trans-unit>
-            <trans-unit id="Es steht etwas für mich Wichtiges auf dem Spiel.">
-                <source>Es steht etwas für mich Wichtiges auf dem Spiel.</source>
-                <note>Es steht etwas für mich Wichtiges auf dem Spiel.</note>
-                <target>Something important to me is at stake here.</target>
-            </trans-unit>
-            <trans-unit id="Fehler beim Verbinden">
-                <source>Fehler beim Verbinden</source>
-                <note>Fehler beim Verbinden</note>
-                <target>Failed to connect</target>
-            </trans-unit>
-            <trans-unit id="Flow">
-                <source>Flow</source>
-                <target>Flow</target>
-            </trans-unit>
-            <trans-unit id="Flow (SD)">
-                <source>Flow (SD)</source>
-                <note>Flow (SD)</note>
-                <target>Flow (SD)</target>
-            </trans-unit>
-            <trans-unit id="Flow Kurzskala">
-                <source>Flow Kurzskala</source>
-                <note>Flow Kurzskala</note>
-                <target>Flow short scale</target>
-            </trans-unit>
-            <trans-unit id="Flow-Messungen">
-                <source>Flow-Messungen</source>
-                <note>Flow-Messungen</note>
-                <target>Flow-Measurements</target>
-            </trans-unit>
-            <trans-unit id="Für mich persönlich sind die jetzigen Anforderungen...">
-                <source>Für mich persönlich sind die jetzigen Anforderungen...</source>
-                <note>Für mich persönlich sind die jetzigen Anforderungen...</note>
-                <target>For me personally, the current demands are...</target>
-            </trans-unit>
-            <trans-unit id="Gerät unterstützt kein Bluetooth LE">
-                <source>Gerät unterstützt kein Bluetooth LE</source>
-                <note>Gerät unterstützt kein Bluetooth LE</note>
-                <target>Device does not support Bluetooth LE</target>
-            </trans-unit>
-            <trans-unit id="H">
-                <source>H</source>
-                <note>Stunden Einheit Label im SessionViewController</note>
-                <target>H</target>
-            </trans-unit>
-            <trans-unit id="HR-Messungen">
-                <source>HR-Messungen</source>
-                <note>HR-Messungen</note>
-                <target>HR-Measurements</target>
-            </trans-unit>
-            <trans-unit id="Herzrate">
-                <source>Herzrate</source>
-                <note>Herzrate in der Tabelle</note>
-                <target>Heart rate</target>
-            </trans-unit>
-            <trans-unit id="Herzrate (BPM)">
-                <source>Herzrate (BPM)</source>
-                <note>Herzrate (BPM)</note>
-                <target>Heart rate (BPM)</target>
-            </trans-unit>
-            <trans-unit id="Ich bin ganz vertieft in das, was ich gerade mache.">
-                <source>Ich bin ganz vertieft in das, was ich gerade mache.</source>
-                <note>Ich bin ganz vertieft in das, was ich gerade mache.</note>
-                <target>I am totally absorbed in what I am doing.</target>
-            </trans-unit>
-            <trans-unit id="Ich bin völlig selbstvergessen.">
-                <source>Ich bin völlig selbstvergessen.</source>
-                <note>Ich bin völlig selbstvergessen.</note>
-                <target>I am completely lost in thought.</target>
-            </trans-unit>
-            <trans-unit id="Ich darf jetzt keine Fehler machen.">
-                <source>Ich darf jetzt keine Fehler machen.</source>
-                <note>Ich darf jetzt keine Fehler machen.</note>
-                <target>I won’t make any mistake here.</target>
-            </trans-unit>
-            <trans-unit id="Ich denke, meine Fähigkeiten auf diesem Gebiet sind...">
-                <source>Ich denke, meine Fähigkeiten auf diesem Gebiet sind...</source>
-                <note>Ich denke, meine Fähigkeiten auf diesem Gebiet sind...</note>
-                <target>I think that my competence in this area is...</target>
-            </trans-unit>
-            <trans-unit id="Ich fühle mich optimal beansprucht.">
-                <source>Ich fühle mich optimal beansprucht.</source>
-                <note>Ich fühle mich optimal beansprucht.</note>
-                <target>I feel just the right amount of challenge.</target>
-            </trans-unit>
-            <trans-unit id="Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben.">
-                <source>Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben.</source>
-                <note>Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben.</note>
-                <target>I feel that I have everything under control.</target>
-            </trans-unit>
-            <trans-unit id="Ich habe keine Mühe, mich zu konzentrieren.">
-                <source>Ich habe keine Mühe, mich zu konzentrieren.</source>
-                <note>Ich habe keine Mühe, mich zu konzentrieren.</note>
-                <target>I have no difficulty concentrating.</target>
-            </trans-unit>
-            <trans-unit id="Ich mache mir Sorgen über einen Misserfolg.">
-                <source>Ich mache mir Sorgen über einen Misserfolg.</source>
-                <note>Ich mache mir Sorgen über einen Misserfolg.</note>
-                <target>I am worried about failing.</target>
-            </trans-unit>
-            <trans-unit id="Ich merke gar nicht, wie die Zeit vergeht.">
-                <source>Ich merke gar nicht, wie die Zeit vergeht.</source>
-                <note>Ich merke gar nicht, wie die Zeit vergeht.</note>
-                <target>I don’t notice time passing.</target>
-            </trans-unit>
-            <trans-unit id="Ich weiß bei jedem Schritt, was ich zu tun habe.">
-                <source>Ich weiß bei jedem Schritt, was ich zu tun habe.</source>
-                <note>Ich weiß bei jedem Schritt, was ich zu tun habe.</note>
-                <target>I know what I have to do each step of the way.</target>
-            </trans-unit>
-            <trans-unit id="In die Dropbox laden">
-                <source>In die Dropbox laden</source>
-                <note>Datei in die Dropbox laden</note>
-                <target>Upload to Dropbox</target>
-            </trans-unit>
-            <trans-unit id="Info">
-                <source>Info</source>
-                <note>Info</note>
-                <target></target>
-            </trans-unit>
-            <trans-unit id="Information">
-                <source>Information</source>
-                <note>Information</note>
-                <target>Information</target>
-            </trans-unit>
-            <trans-unit id="Keine Bluetooth Verbindung möglich">
-                <source>Keine Bluetooth Verbindung möglich</source>
-                <note>Keine Bluetooth Verbindung möglich</note>
-                <target>No Bluetooth connection possible</target>
-            </trans-unit>
-            <trans-unit id="Keine Items vorhanden">
-                <source>Keine Items vorhanden</source>
-                <note>Keine Items vorhanden</note>
-                <target>No items available</target>
-            </trans-unit>
-            <trans-unit id="Keine Verbindung möglich">
-                <source>Keine Verbindung möglich</source>
-                <note>Keine Verbindung möglich</note>
-                <target>No connection possible</target>
-            </trans-unit>
-            <trans-unit id="Lösche (%d)">
-                <source>Lösche (%d)</source>
-                <note>Title for delete button with placeholder for number</note>
-                <target>Delete (%d)</target>
-            </trans-unit>
-            <trans-unit id="MIN">
-                <source>MIN</source>
-                <note>Minuten Einheit Label im SessionViewController</note>
-                <target>MIN</target>
-            </trans-unit>
-            <trans-unit id="Mein Kopf ist völlig klar.">
-                <source>Mein Kopf ist völlig klar.</source>
-                <note>Mein Kopf ist völlig klar.</note>
-                <target>My mind is completely clear.</target>
-            </trans-unit>
-            <trans-unit id="Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt.">
-                <source>Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt.</source>
-                <note>Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt.</note>
-                <target>My thoughts/activities run fluidly and smoothly.</target>
-            </trans-unit>
-            <trans-unit id="NA">
-                <source>NA</source>
-                <note>Anfangs-Herzraten Label im SessionViewController</note>
-                <target>NA</target>
-            </trans-unit>
-            <trans-unit id="Nachname">
-                <source>Nachname</source>
-                <note>Nachname</note>
-                <target>Last name</target>
-            </trans-unit>
-            <trans-unit id="No Connection">
-                <source>No Connection</source>
-                <note>No comment provided by engineer.</note>
-                <target>No Connection</target>
-            </trans-unit>
-            <trans-unit id="OK">
-                <source>OK</source>
-                <target>OK</target>
-            </trans-unit>
-            <trans-unit id="Passung">
-                <source>Passung</source>
-                <target>Fit</target>
-            </trans-unit>
-            <trans-unit id="Passung (SD)">
-                <source>Passung (SD)</source>
-                <note>Passung (SD)</note>
-                <target>Fir (SD)</target>
-            </trans-unit>
-            <trans-unit id="Person">
-                <source>Person</source>
-                <note>Person</note>
-                <target>Person</target>
-            </trans-unit>
-            <trans-unit id="RR-Intervall (s)">
-                <source>RR-Intervall (s)</source>
-                <note>RR-Intervall (s)</note>
-                <target>RR-Interval</target>
-            </trans-unit>
-            <trans-unit id="S">
-                <source>S</source>
-                <note>Sekunden Einheit Label im SessionViewController</note>
-                <target>S</target>
-            </trans-unit>
-            <trans-unit id="Selbsteinsätzung">
-                <source>Selbsteinsätzung</source>
-                <note>Selbsteinsätzung</note>
-                <target>Self-report</target>
-            </trans-unit>
-            <trans-unit id="Trifft nicht zu">
-                <source>Trifft nicht zu</source>
-                <note>Trifft nicht zu</note>
-                <target>not at all</target>
-            </trans-unit>
-            <trans-unit id="Trifft zu">
-                <source>Trifft zu</source>
-                <note>Trifft zu</note>
-                <target>very much</target>
-            </trans-unit>
-            <trans-unit id="Überprüfe deine Sicherheitseinstellungen">
-                <source>Überprüfe deine Sicherheitseinstellungen</source>
-                <note>Überprüfe deine Sicherheitseinstellungen</note>
-                <target>Check your security settings</target>
-            </trans-unit>
-            <trans-unit id="Überprüfe, ob Bluetooth eingeschaltet ist">
-                <source>Überprüfe, ob Bluetooth eingeschaltet ist</source>
-                <note>Überprüfe, ob Bluetooth eingeschaltet ist</note>
-                <target>Check if Bluetooth is turned on</target>
-            </trans-unit>
-            <trans-unit id="Variablität">
-                <source>Variablität</source>
-                <note>Variablität</note>
-                <target>Variability</target>
-            </trans-unit>
-            <trans-unit id="Verbindung wurde wieder getrennt">
-                <source>Verbindung wurde wieder getrennt</source>
-                <note>Verbindung wurde wieder getrennt</note>
-                <target>Connection has been disconnected</target>
-            </trans-unit>
-            <trans-unit id="Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit...">
-                <source>Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit...</source>
-                <note>Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit...</note>
-                <target>Compared to all other activities which I partake in, this one is...</target>
-            </trans-unit>
-            <trans-unit id="Verlauf">
-                <source>Verlauf</source>
-                <target>Fluency</target>
-            </trans-unit>
-            <trans-unit id="Verlauf (SD)">
-                <source>Verlauf (SD)</source>
-                <note>Verlauf (SD)</note>
-                <target>Fluency (SD)</target>
-            </trans-unit>
-            <trans-unit id="Vorname">
-                <source>Vorname</source>
-                <note>Vorname</note>
-                <target>First name</target>
-            </trans-unit>
-            <trans-unit id="WiFi">
-                <source>WiFi</source>
-                <note>No comment provided by engineer.</note>
-                <target>WiFi</target>
-            </trans-unit>
-            <trans-unit id="Zeitintervall">
-                <source>Zeitintervall</source>
-                <note>Zeitintervall</note>
-                <target>Time interval</target>
-            </trans-unit>
-            <trans-unit id="Zeitstempel (s)">
-                <source>Zeitstempel (s)</source>
-                <note>Zeitstempel (s)</note>
-                <target>Timestamp (s)</target>
-            </trans-unit>
-            <trans-unit id="gerade richtig">
-                <source>gerade richtig</source>
-                <note>Beanspruchung: gerade richtig</note>
-                <target>just right</target>
-            </trans-unit>
-            <trans-unit id="hoch">
-                <source>hoch</source>
-                <note>Fähigkeiten: hoch</note>
-                <target>high</target>
-            </trans-unit>
-            <trans-unit id="leicht">
-                <source>leicht</source>
-                <note>Schwierigkeit: leicht</note>
-                <target>easy</target>
-            </trans-unit>
-            <trans-unit id="niedrig">
-                <source>niedrig</source>
-                <note>Fähigkeiten: niedrig</note>
-                <target>low</target>
-            </trans-unit>
-            <trans-unit id="s">
-                <source>s</source>
-                <note>s</note>
-                <target>s</target>
-            </trans-unit>
-            <trans-unit id="schwer">
-                <source>schwer</source>
-                <note>Schwierigkeit: schwer</note>
-                <target>difficult</target>
-            </trans-unit>
-            <trans-unit id="teils-teils">
-                <source>teils-teils</source>
-                <note>teils-teils</note>
-                <target>partly</target>
-            </trans-unit>
-            <trans-unit id="zu gering">
-                <source>zu gering</source>
-                <note>Beanspruchung: zu gering</note>
-                <target>to low</target>
-            </trans-unit>
-            <trans-unit id="zu hoch">
-                <source>zu hoch</source>
-                <note>Beanspruchung: zu hoch</note>
-                <target>to high</target>
-            </trans-unit>
-        </body>
-    </file>
-    <file original="HeartRateMonitorFramework/Info.plist" source-language="de" datatype="plaintext" target-language="en">
-        <header>
-            <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"></tool>
-        </header>
-        <body>
-            <trans-unit id="CFBundleName">
-                <source>$(PRODUCT_NAME)</source>
-                <target>$(PRODUCT_NAME)</target>
-            </trans-unit>
-            <trans-unit id="CFBundleShortVersionString">
-                <source>1.0</source>
-                <target>1.0</target>
-            </trans-unit>
-        </body>
-    </file>
+  <file original="FlowMeter/Base.lproj/LaunchScreen.xib" source-language="de" datatype="plaintext" target-language="en">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"/>
+    </header>
+    <body>
+      <trans-unit id="8ie-xW-0ye.text">
+          <source>  Copyright (c) 2014 Simon Bogutzky. All rights reserved.</source>
+          <note>Class = "IBUILabel"; text = "  Copyright (c) 2014 Simon Bogutzky. All rights reserved."; ObjectID = "8ie-xW-0ye";</note>
+          <target>Copyright (c) 2014 Simon Bogutzky. All rights reserved.</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="FlowMeter/Base.lproj/MainStoryboard.storyboard" source-language="de" datatype="plaintext" target-language="en">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"/>
+    </header>
+    <body>
+      <trans-unit id="1X8-td-6f1.text">
+          <source>Triff nicht zu</source>
+          <note>Class = "IBUILabel"; text = "Triff nicht zu"; ObjectID = "1X8-td-6f1";</note>
+          <target>not at all</target>
+      </trans-unit>
+      <trans-unit id="1d2-E2-RwK.text">
+          <source>Triff zu</source>
+          <note>Class = "IBUILabel"; text = "Triff zu"; ObjectID = "1d2-E2-RwK";</note>
+          <target>very much</target>
+      </trans-unit>
+      <trans-unit id="3Dj-cx-6L9.text">
+          <source>Title</source>
+          <note>Class = "IBUILabel"; text = "Title"; ObjectID = "3Dj-cx-6L9";</note>
+          <target>Title</target>
+      </trans-unit>
+      <trans-unit id="3IC-dB-72B.title">
+          <source>bearbeiten</source>
+          <note>Class = "IBUINavigationItem"; title = "bearbeiten"; ObjectID = "3IC-dB-72B";</note>
+          <target>edit</target>
+      </trans-unit>
+      <trans-unit id="3OO-2z-d6W.text">
+          <source>Simon Bogutzky</source>
+          <note>Class = "IBUILabel"; text = "Simon Bogutzky"; ObjectID = "3OO-2z-d6W";</note>
+          <target>Simon Bogutzky</target>
+      </trans-unit>
+      <trans-unit id="4Yf-mk-QvG.text">
+          <source>03h 05m</source>
+          <note>Class = "IBUILabel"; text = "03h 05m"; ObjectID = "4Yf-mk-QvG";</note>
+          <target>03h 05m</target>
+      </trans-unit>
+      <trans-unit id="4vJ-Is-xZ5.text">
+          <source>FLOW</source>
+          <note>Class = "IBUILabel"; text = "FLOW"; ObjectID = "4vJ-Is-xZ5";</note>
+          <target>FLOW</target>
+      </trans-unit>
+      <trans-unit id="7P5-t7-rHo.text">
+          <source>MESSUNGEN</source>
+          <note>Class = "IBUILabel"; text = "MESSUNGEN"; ObjectID = "7P5-t7-rHo";</note>
+          <target>MEASUREMENTS</target>
+      </trans-unit>
+      <trans-unit id="7Rs-Et-hYD.title">
+          <source>Menu</source>
+          <note>Class = "IBUIBarButtonItem"; title = "Menu"; ObjectID = "7Rs-Et-hYD";</note>
+          <target>menu</target>
+      </trans-unit>
+      <trans-unit id="8ie-3Q-cwT.text">
+          <source>❤︎</source>
+          <note>Class = "IBUILabel"; text = "❤︎"; ObjectID = "8ie-3Q-cwT";</note>
+          <target>❤︎</target>
+      </trans-unit>
+      <trans-unit id="11w-qP-avr.text">
+          <source>4.5 ⍉</source>
+          <note>Class = "IBUILabel"; text = "4.5 ⍉"; ObjectID = "11w-qP-avr";</note>
+          <target>4.5 ⍉</target>
+      </trans-unit>
+      <trans-unit id="744-6J-0ve.text">
+          <source>✎</source>
+          <note>Class = "IBUILabel"; text = "✎"; ObjectID = "744-6J-0ve";</note>
+          <target>✎</target>
+      </trans-unit>
+      <trans-unit id="AVB-X3-04Z.text">
+          <source>ZEIT</source>
+          <note>Class = "IBUILabel"; text = "ZEIT"; ObjectID = "AVB-X3-04Z";</note>
+          <target>TIME</target>
+      </trans-unit>
+      <trans-unit id="BSX-sb-I5L.text">
+          <source>Title</source>
+          <note>Class = "IBUILabel"; text = "Title"; ObjectID = "BSX-sb-I5L";</note>
+          <target>Title</target>
+      </trans-unit>
+      <trans-unit id="Cs9-qS-JfL.text">
+          <source>S</source>
+          <note>Class = "IBUILabel"; text = "S"; ObjectID = "Cs9-qS-JfL";</note>
+          <target>S</target>
+      </trans-unit>
+      <trans-unit id="DRM-us-BNo.text">
+          <source>02:05:00</source>
+          <note>Class = "IBUILabel"; text = "02:05:00"; ObjectID = "DRM-us-BNo";</note>
+          <target>02:05:00</target>
+      </trans-unit>
+      <trans-unit id="DuS-St-5RM.title">
+          <source>HxM Geräte</source>
+          <note>Class = "IBUINavigationItem"; title = "HxM Geräte"; ObjectID = "DuS-St-5RM";</note>
+          <target>HxM devices</target>
+      </trans-unit>
+      <trans-unit id="HbQ-sv-eTH.text">
+          <source>0</source>
+          <note>Class = "IBUILabel"; text = "0"; ObjectID = "HbQ-sv-eTH";</note>
+          <target>0</target>
+      </trans-unit>
+      <trans-unit id="IXj-cB-LmA.text">
+          <source>120 ⍉</source>
+          <note>Class = "IBUILabel"; text = "120 ⍉"; ObjectID = "IXj-cB-LmA";</note>
+          <target>120 ⍉</target>
+      </trans-unit>
+      <trans-unit id="Im2-FV-wo3.title">
+          <source>Einstellungen</source>
+          <note>Class = "IBUITabBarItem"; title = "Einstellungen"; ObjectID = "Im2-FV-wo3";</note>
+          <target>Preferences</target>
+      </trans-unit>
+      <trans-unit id="JBd-iU-TgT.text">
+          <source>00:00</source>
+          <note>Class = "IBUILabel"; text = "00:00"; ObjectID = "JBd-iU-TgT";</note>
+          <target>00:00</target>
+      </trans-unit>
+      <trans-unit id="KXe-AL-4yJ.text">
+          <source></source>
+          <note>Class = "IBUILabel"; text = " "; ObjectID = "KXe-AL-4yJ";</note>
+          <target></target>
+      </trans-unit>
+      <trans-unit id="KhE-yR-7X5.normalTitle">
+          <source>Abbrechen</source>
+          <note>Class = "IBUIButton"; normalTitle = "Abbrechen"; ObjectID = "KhE-yR-7X5";</note>
+          <target>Cancel</target>
+      </trans-unit>
+      <trans-unit id="Ko6-wq-69x.text">
+          <source>Title</source>
+          <note>Class = "IBUILabel"; text = "Title"; ObjectID = "Ko6-wq-69x";</note>
+          <target>Title</target>
+      </trans-unit>
+      <trans-unit id="NIg-71-mrk.title">
+          <source>Abbrechen</source>
+          <note>Class = "IBUIBarButtonItem"; title = "Abbrechen"; ObjectID = "NIg-71-mrk";</note>
+          <target>Cancel</target>
+      </trans-unit>
+      <trans-unit id="Oo6-yD-QJr.title">
+          <source>Aufnahme</source>
+          <note>Class = "IBUITabBarItem"; title = "Aufnahme"; ObjectID = "Oo6-yD-QJr";</note>
+          <target>Recording</target>
+      </trans-unit>
+      <trans-unit id="Rvg-l2-k8e.text">
+          <source>Title</source>
+          <note>Class = "IBUILabel"; text = "Title"; ObjectID = "Rvg-l2-k8e";</note>
+          <target>Title</target>
+      </trans-unit>
+      <trans-unit id="TjS-8J-YUm.text">
+          <source>Label</source>
+          <note>Class = "IBUILabel"; text = "Label"; ObjectID = "TjS-8J-YUm";</note>
+          <target>Label</target>
+      </trans-unit>
+      <trans-unit id="Zq6-8C-6RD.title">
+          <source>Flow-Messungen</source>
+          <note>Class = "IBUITabBarItem"; title = "Flow-Messungen"; ObjectID = "Zq6-8C-6RD";</note>
+          <target>Flow-Measurements</target>
+      </trans-unit>
+      <trans-unit id="Zsq-WU-lxK.text">
+          <source></source>
+          <note>Class = "IBUILabel"; text = " "; ObjectID = "Zsq-WU-lxK";</note>
+          <target></target>
+      </trans-unit>
+      <trans-unit id="b34-Ts-ek6.text">
+          <source>Label</source>
+          <note>Class = "IBUILabel"; text = "Label"; ObjectID = "b34-Ts-ek6";</note>
+          <target>Label</target>
+      </trans-unit>
+      <trans-unit id="bjO-rZ-Nvg.text">
+          <source>Ich fühle mich optimal beansprucht</source>
+          <note>Class = "IBUILabel"; text = "Ich fühle mich optimal beansprucht"; ObjectID = "bjO-rZ-Nvg";</note>
+          <target>I feel just the right amount of challange</target>
+      </trans-unit>
+      <trans-unit id="cFc-Wy-kcx.title">
+          <source>Einstellungen</source>
+          <note>Class = "IBUINavigationItem"; title = "Einstellungen"; ObjectID = "cFc-Wy-kcx";</note>
+          <target>Preferences</target>
+      </trans-unit>
+      <trans-unit id="car-Lx-cye.text">
+          <source>4.5 ⍉</source>
+          <note>Class = "IBUILabel"; text = "4.5 ⍉"; ObjectID = "car-Lx-cye";</note>
+          <target>4.5 ⍉</target>
+      </trans-unit>
+      <trans-unit id="cxS-zW-O3x.text">
+          <source>Dropbox Verbindung</source>
+          <note>Class = "IBUILabel"; text = "Dropbox Verbindung"; ObjectID = "cxS-zW-O3x";</note>
+          <target>Dropbox connection</target>
+      </trans-unit>
+      <trans-unit id="dJb-DU-WeX.text">
+          <source>120</source>
+          <note>Class = "IBUILabel"; text = "120"; ObjectID = "dJb-DU-WeX";</note>
+          <target>120</target>
+      </trans-unit>
+      <trans-unit id="dxo-2B-l8I.text">
+          <source>HxM Verbindung</source>
+          <note>Class = "IBUILabel"; text = "HxM Verbindung"; ObjectID = "dxo-2B-l8I";</note>
+          <target>HxM connection</target>
+      </trans-unit>
+      <trans-unit id="f4Y-Br-TSS.text">
+          <source>teils-teils</source>
+          <note>Class = "IBUILabel"; text = "teils-teils"; ObjectID = "f4Y-Br-TSS";</note>
+          <target>partly</target>
+      </trans-unit>
+      <trans-unit id="fhB-78-Qag.title">
+          <source>S. Bogutzky - Laufen</source>
+          <note>Class = "IBUINavigationItem"; title = "S. Bogutzky - Laufen"; ObjectID = "fhB-78-Qag";</note>
+          <target>S. Bogutzky - Running</target>
+      </trans-unit>
+      <trans-unit id="g1v-4K-Oax.text">
+          <source>✎</source>
+          <note>Class = "IBUILabel"; text = "✎"; ObjectID = "g1v-4K-Oax";</note>
+          <target>✎</target>
+      </trans-unit>
+      <trans-unit id="hQZ-pK-huO.title">
+          <source>Lauf</source>
+          <note>Class = "IBUINavigationItem"; title = "Lauf"; ObjectID = "hQZ-pK-huO";</note>
+          <target>Run</target>
+      </trans-unit>
+      <trans-unit id="hma-90-mkH.text">
+          <source>14</source>
+          <note>Class = "IBUILabel"; text = "14"; ObjectID = "hma-90-mkH";</note>
+          <target>14</target>
+      </trans-unit>
+      <trans-unit id="ibw-L0-Seu.title">
+          <source>Scan</source>
+          <note>Class = "IBUIBarButtonItem"; title = "Scan"; ObjectID = "ibw-L0-Seu";</note>
+          <target>Scan</target>
+      </trans-unit>
+      <trans-unit id="kfM-7K-tdj.text">
+          <source>5</source>
+          <note>Class = "IBUILabel"; text = "5"; ObjectID = "kfM-7K-tdj";</note>
+          <target>5</target>
+      </trans-unit>
+      <trans-unit id="kra-zN-Y2H.text">
+          <source>4.5</source>
+          <note>Class = "IBUILabel"; text = "4.5"; ObjectID = "kra-zN-Y2H";</note>
+          <target>4.5</target>
+      </trans-unit>
+      <trans-unit id="lxG-6c-LKo.text">
+          <source>Laufen</source>
+          <note>Class = "IBUILabel"; text = "Laufen"; ObjectID = "lxG-6c-LKo";</note>
+          <target>Running</target>
+      </trans-unit>
+      <trans-unit id="mMI-il-cAu.normalTitle">
+          <source>Starten</source>
+          <note>Class = "IBUIButton"; normalTitle = "Starten"; ObjectID = "mMI-il-cAu";</note>
+          <target>Start</target>
+      </trans-unit>
+      <trans-unit id="mlH-m3-f8i.text">
+          <source>MIN</source>
+          <note>Class = "IBUILabel"; text = "MIN"; ObjectID = "mlH-m3-f8i";</note>
+          <target>MIN</target>
+      </trans-unit>
+      <trans-unit id="nSS-ym-ztX.headerTitle">
+          <source>Verbindung</source>
+          <note>Class = "IBUITableViewSection"; headerTitle = "Verbindung"; ObjectID = "nSS-ym-ztX";</note>
+          <target>Connection</target>
+      </trans-unit>
+      <trans-unit id="paP-BI-5q6.title">
+          <source>Alle Löschen</source>
+          <note>Class = "IBUIBarButtonItem"; title = "Alle Löschen"; ObjectID = "paP-BI-5q6";</note>
+          <target>Delete all</target>
+      </trans-unit>
+      <trans-unit id="tZl-QD-bic.title">
+          <source>Flow-Messungen</source>
+          <note>Class = "IBUINavigationItem"; title = "Flow-Messungen"; ObjectID = "tZl-QD-bic";</note>
+          <target>Flow-Measurements</target>
+      </trans-unit>
+      <trans-unit id="uLq-37-zr6.text">
+          <source>NA</source>
+          <note>Class = "IBUILabel"; text = "NA"; ObjectID = "uLq-37-zr6";</note>
+          <target>NA</target>
+      </trans-unit>
+      <trans-unit id="uuA-Yb-SmM.text">
+          <source>❤︎</source>
+          <note>Class = "IBUILabel"; text = "❤︎"; ObjectID = "uuA-Yb-SmM";</note>
+          <target>❤︎</target>
+      </trans-unit>
+      <trans-unit id="vyr-L6-cSf.text">
+          <source>BPM</source>
+          <note>Class = "IBUILabel"; text = "BPM"; ObjectID = "vyr-L6-cSf";</note>
+          <target>BPM</target>
+      </trans-unit>
+      <trans-unit id="wMl-tr-4gU.text">
+          <source>FLOW</source>
+          <note>Class = "IBUILabel"; text = "FLOW"; ObjectID = "wMl-tr-4gU";</note>
+          <target>FLOW</target>
+      </trans-unit>
+      <trans-unit id="xDQ-T2-Doq.title">
+          <source>Aufnahme</source>
+          <note>Class = "IBUINavigationItem"; title = "Aufnahme"; ObjectID = "xDQ-T2-Doq";</note>
+          <target>Recording</target>
+      </trans-unit>
+      <trans-unit id="xDl-la-9j6.text">
+          <source>7</source>
+          <note>Class = "IBUILabel"; text = "7"; ObjectID = "xDl-la-9j6";</note>
+          <target>7</target>
+      </trans-unit>
+      <trans-unit id="xkg-C7-6Eh.text">
+          <source>Label</source>
+          <note>Class = "IBUILabel"; text = "Label"; ObjectID = "xkg-C7-6Eh";</note>
+          <target>Label</target>
+      </trans-unit>
+      <trans-unit id="yp2-k7-OXg.text">
+          <source>August 28, 2014 - 17:30</source>
+          <note>Class = "IBUILabel"; text = "August 28, 2014 - 17:30"; ObjectID = "yp2-k7-OXg";</note>
+          <target>August 28, 2014 - 17:30</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="FlowMeter/FlowMeter-Info.plist" source-language="de" datatype="plaintext" target-language="en">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleDisplayName">
+          <source>${PRODUCT_NAME}</source>
+          <target>${PRODUCT_NAME}</target>
+      </trans-unit>
+      <trans-unit id="CFBundleName">
+          <source>${PRODUCT_NAME}</source>
+          <target>${PRODUCT_NAME}</target>
+      </trans-unit>
+      <trans-unit id="CFBundleShortVersionString">
+          <source>0.9</source>
+          <target>0.9</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="FlowMeter/de.lproj/Localizable.strings" source-language="de" datatype="plaintext" target-language="en">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"/>
+    </header>
+    <body>
+	              <trans-unit id="Abbrechen">
+	                  <source>Abbrechen</source>
+	                  <target>Cancel</target>
+	              </trans-unit>
+	              <trans-unit id="Absorbiertheit">
+	                  <source>Absorbiertheit</source>
+	                  <target>Absorption</target>
+	              </trans-unit>
+	              <trans-unit id="Absorbiertheit (SD)">
+	                  <source>Absorbiertheit (SD)</source>
+	                  <note>Absorbiertheit (SD)</note>
+	                  <target>Absorption (SD)</target>
+	              </trans-unit>
+	              <trans-unit id="Aktionen">
+	                  <source>Aktionen</source>
+	                  <note>Aktionen</note>
+	                  <target>Actions</target>
+	              </trans-unit>
+	              <trans-unit id="Aktivität">
+	                  <source>Aktivität</source>
+	                  <note>Aktivität</note>
+	                  <target>Aktivity</target>
+	              </trans-unit>
+	              <trans-unit id="Alle Löschen">
+	                  <source>Alle Löschen</source>
+	                  <note>No comment provided by engineer.</note>
+	                  <target>Delete all</target>
+	              </trans-unit>
+	              <trans-unit id="Auf Gerät speichern">
+	                  <source>Auf Gerät speichern</source>
+	                  <note>Datei auf dem Gerät speichern</note>
+	                  <target>Save on the device</target>
+	              </trans-unit>
+	              <trans-unit id="Beginn">
+	                  <source>Beginn</source>
+	                  <note>Beginn</note>
+	                  <target>Start</target>
+	              </trans-unit>
+	              <trans-unit id="Benutzer">
+	                  <source>Benutzer</source>
+	                  <note>Benutzer</note>
+	                  <target>User</target>
+	              </trans-unit>
+	              <trans-unit id="Besorgnis">
+	                  <source>Besorgnis</source>
+	                  <target>Anxiety</target>
+	              </trans-unit>
+	              <trans-unit id="Besorgnis (SD)">
+	                  <source>Besorgnis (SD)</source>
+	                  <note>Besorgnis (SD)</note>
+	                  <target>Anxiety (SD)</target>
+	              </trans-unit>
+	              <trans-unit id="Bist du sicher, dass du diese Flow-Messung entfernen willst?">
+	                  <source>Bist du sicher, dass du diese Flow-Messung entfernen willst?</source>
+	                  <note>No comment provided by engineer.</note>
+	                  <target>Are you sure, that you want to remove the current flow-measurement?</target>
+	              </trans-unit>
+	              <trans-unit id="Bist du sicher, dass du diese Flow-Messungen entfernen willst?">
+	                  <source>Bist du sicher, dass du diese Flow-Messungen entfernen willst?</source>
+	                  <note>No comment provided by engineer.</note>
+	                  <target>Are you sure, that you want to remove these flow-measurements?</target>
+	              </trans-unit>
+	              <trans-unit id="Bluetooth Manager wird gerade zurückgesetzt">
+	                  <source>Bluetooth Manager wird gerade zurückgesetzt</source>
+	                  <note>Bluetooth Manager wird gerade zurückgesetzt</note>
+	                  <target>Bluetooth Manager will be resetted</target>
+	              </trans-unit>
+	              <trans-unit id="Cellular">
+	                  <source>Cellular</source>
+	                  <note>No comment provided by engineer.</note>
+	                  <target>Cellular</target>
+	              </trans-unit>
+	              <trans-unit id="Countdown">
+	                  <source>Countdown</source>
+	                  <note>Countdown</note>
+	                  <target>Countdown</target>
+	              </trans-unit>
+	              <trans-unit id="Datum">
+	                  <source>Datum</source>
+	                  <note>Datum</note>
+	                  <target>Date</target>
+	              </trans-unit>
+	              <trans-unit id="Dauer">
+	                  <source>Dauer</source>
+	                  <note>Dauer</note>
+	                  <target>Duration</target>
+	              </trans-unit>
+	              <trans-unit id="Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen.">
+	                  <source>Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen.</source>
+	                  <note>Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen.</note>
+	                  <target>The value of the variation can assume at most the half of the interval value.</target>
+	              </trans-unit>
+	              <trans-unit id="Die richtigen Gedanken/Bewegungen kommen wie von selbst.">
+	                  <source>Die richtigen Gedanken/Bewegungen kommen wie von selbst.</source>
+	                  <note>Die richtigen Gedanken/Bewegungen kommen wie von selbst.</note>
+	                  <target>The right thoughts/movements occur of their own accord.
+	  </target>
+	              </trans-unit>
+	              <trans-unit id="Du hast zurzeit keine Internetverbindung">
+	                  <source>Du hast zurzeit keine Internetverbindung</source>
+	                  <note>Du hast zurzeit keine Internetverbindung</note>
+	                  <target>You currently have no Internet connection</target>
+	              </trans-unit>
+	              <trans-unit id="Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?">
+	                  <source>Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?</source>
+	                  <note>Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?</note>
+	                  <target>You currently have no Wi-Fi Internet connection. Would you still upload the data?</target>
+	              </trans-unit>
+	              <trans-unit id="ERR">
+	                  <source>ERR</source>
+	                  <note>Fehleranzeige - HR Monitor wurde getrennt</note>
+	                  <target>ERR</target>
+	              </trans-unit>
+	              <trans-unit id="Ein unbekannter Fehler ist aufgetreten">
+	                  <source>Ein unbekannter Fehler ist aufgetreten</source>
+	                  <note>Ein unbekannter Fehler ist aufgetreten</note>
+	                  <target>An unknown error has occurred</target>
+	              </trans-unit>
+	              <trans-unit id="Es steht etwas für mich Wichtiges auf dem Spiel.">
+	                  <source>Es steht etwas für mich Wichtiges auf dem Spiel.</source>
+	                  <note>Es steht etwas für mich Wichtiges auf dem Spiel.</note>
+	                  <target>Something important to me is at stake here.</target>
+	              </trans-unit>
+	              <trans-unit id="Fehler beim Verbinden">
+	                  <source>Fehler beim Verbinden</source>
+	                  <note>Fehler beim Verbinden</note>
+	                  <target>Failed to connect</target>
+	              </trans-unit>
+	              <trans-unit id="Flow">
+	                  <source>Flow</source>
+	                  <target>Flow</target>
+	              </trans-unit>
+	              <trans-unit id="Flow (SD)">
+	                  <source>Flow (SD)</source>
+	                  <note>Flow (SD)</note>
+	                  <target>Flow (SD)</target>
+	              </trans-unit>
+	              <trans-unit id="Flow Kurzskala">
+	                  <source>Flow Kurzskala</source>
+	                  <note>Flow Kurzskala</note>
+	                  <target>Flow short scale</target>
+	              </trans-unit>
+	              <trans-unit id="Flow-Messungen">
+	                  <source>Flow-Messungen</source>
+	                  <note>Flow-Messungen</note>
+	                  <target>Flow-Measurements</target>
+	              </trans-unit>
+	              <trans-unit id="Für mich persönlich sind die jetzigen Anforderungen...">
+	                  <source>Für mich persönlich sind die jetzigen Anforderungen...</source>
+	                  <note>Für mich persönlich sind die jetzigen Anforderungen...</note>
+	                  <target>For me personally, the current demands are...</target>
+	              </trans-unit>
+	              <trans-unit id="Gerät unterstützt kein Bluetooth LE">
+	                  <source>Gerät unterstützt kein Bluetooth LE</source>
+	                  <note>Gerät unterstützt kein Bluetooth LE</note>
+	                  <target>Device does not support Bluetooth LE</target>
+	              </trans-unit>
+	              <trans-unit id="H">
+	                  <source>H</source>
+	                  <note>Stunden Einheit Label im SessionViewController</note>
+	                  <target>H</target>
+	              </trans-unit>
+	              <trans-unit id="HR-Messungen">
+	                  <source>HR-Messungen</source>
+	                  <note>HR-Messungen</note>
+	                  <target>HR-Measurements</target>
+	              </trans-unit>
+	              <trans-unit id="Herzrate">
+	                  <source>Herzrate</source>
+	                  <note>Herzrate in der Tabelle</note>
+	                  <target>Heart rate</target>
+	              </trans-unit>
+	              <trans-unit id="Herzrate (BPM)">
+	                  <source>Herzrate (BPM)</source>
+	                  <note>Herzrate (BPM)</note>
+	                  <target>Heart rate (BPM)</target>
+	              </trans-unit>
+	              <trans-unit id="Ich bin ganz vertieft in das, was ich gerade mache.">
+	                  <source>Ich bin ganz vertieft in das, was ich gerade mache.</source>
+	                  <note>Ich bin ganz vertieft in das, was ich gerade mache.</note>
+	                  <target>I am totally absorbed in what I am doing.</target>
+	              </trans-unit>
+	              <trans-unit id="Ich bin völlig selbstvergessen.">
+	                  <source>Ich bin völlig selbstvergessen.</source>
+	                  <note>Ich bin völlig selbstvergessen.</note>
+	                  <target>I am completely lost in thought.</target>
+	              </trans-unit>
+	              <trans-unit id="Ich darf jetzt keine Fehler machen.">
+	                  <source>Ich darf jetzt keine Fehler machen.</source>
+	                  <note>Ich darf jetzt keine Fehler machen.</note>
+	                  <target>I won’t make any mistake here.</target>
+	              </trans-unit>
+	              <trans-unit id="Ich denke, meine Fähigkeiten auf diesem Gebiet sind...">
+	                  <source>Ich denke, meine Fähigkeiten auf diesem Gebiet sind...</source>
+	                  <note>Ich denke, meine Fähigkeiten auf diesem Gebiet sind...</note>
+	                  <target>I think that my competence in this area is...</target>
+	              </trans-unit>
+	              <trans-unit id="Ich fühle mich optimal beansprucht.">
+	                  <source>Ich fühle mich optimal beansprucht.</source>
+	                  <note>Ich fühle mich optimal beansprucht.</note>
+	                  <target>I feel just the right amount of challenge.</target>
+	              </trans-unit>
+	              <trans-unit id="Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben.">
+	                  <source>Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben.</source>
+	                  <note>Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben.</note>
+	                  <target>I feel that I have everything under control.</target>
+	              </trans-unit>
+	              <trans-unit id="Ich habe keine Mühe, mich zu konzentrieren.">
+	                  <source>Ich habe keine Mühe, mich zu konzentrieren.</source>
+	                  <note>Ich habe keine Mühe, mich zu konzentrieren.</note>
+	                  <target>I have no difficulty concentrating.</target>
+	              </trans-unit>
+	              <trans-unit id="Ich mache mir Sorgen über einen Misserfolg.">
+	                  <source>Ich mache mir Sorgen über einen Misserfolg.</source>
+	                  <note>Ich mache mir Sorgen über einen Misserfolg.</note>
+	                  <target>I am worried about failing.</target>
+	              </trans-unit>
+	              <trans-unit id="Ich merke gar nicht, wie die Zeit vergeht.">
+	                  <source>Ich merke gar nicht, wie die Zeit vergeht.</source>
+	                  <note>Ich merke gar nicht, wie die Zeit vergeht.</note>
+	                  <target>I don’t notice time passing.</target>
+	              </trans-unit>
+	              <trans-unit id="Ich weiß bei jedem Schritt, was ich zu tun habe.">
+	                  <source>Ich weiß bei jedem Schritt, was ich zu tun habe.</source>
+	                  <note>Ich weiß bei jedem Schritt, was ich zu tun habe.</note>
+	                  <target>I know what I have to do each step of the way.</target>
+	              </trans-unit>
+	              <trans-unit id="In die Dropbox laden">
+	                  <source>In die Dropbox laden</source>
+	                  <note>Datei in die Dropbox laden</note>
+	                  <target>Upload to Dropbox</target>
+	              </trans-unit>
+	              <trans-unit id="Info">
+	                  <source>Info</source>
+	                  <note>Info</note>
+	                  <target></target>
+	              </trans-unit>
+	              <trans-unit id="Information">
+	                  <source>Information</source>
+	                  <note>Information</note>
+	                  <target>Information</target>
+	              </trans-unit>
+	              <trans-unit id="Keine Bluetooth Verbindung möglich">
+	                  <source>Keine Bluetooth Verbindung möglich</source>
+	                  <note>Keine Bluetooth Verbindung möglich</note>
+	                  <target>No Bluetooth connection possible</target>
+	              </trans-unit>
+	              <trans-unit id="Keine Items vorhanden">
+	                  <source>Keine Items vorhanden</source>
+	                  <note>Keine Items vorhanden</note>
+	                  <target>No items available</target>
+	              </trans-unit>
+	              <trans-unit id="Keine Verbindung möglich">
+	                  <source>Keine Verbindung möglich</source>
+	                  <note>Keine Verbindung möglich</note>
+	                  <target>No connection possible</target>
+	              </trans-unit>
+	              <trans-unit id="Lösche (%d)">
+	                  <source>Lösche (%d)</source>
+	                  <note>Title for delete button with placeholder for number</note>
+	                  <target>Delete (%d)</target>
+	              </trans-unit>
+	              <trans-unit id="MIN">
+	                  <source>MIN</source>
+	                  <note>Minuten Einheit Label im SessionViewController</note>
+	                  <target>MIN</target>
+	              </trans-unit>
+	              <trans-unit id="Mein Kopf ist völlig klar.">
+	                  <source>Mein Kopf ist völlig klar.</source>
+	                  <note>Mein Kopf ist völlig klar.</note>
+	                  <target>My mind is completely clear.</target>
+	              </trans-unit>
+	              <trans-unit id="Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt.">
+	                  <source>Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt.</source>
+	                  <note>Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt.</note>
+	                  <target>My thoughts/activities run fluidly and smoothly.</target>
+	              </trans-unit>
+	              <trans-unit id="NA">
+	                  <source>NA</source>
+	                  <note>Anfangs-Herzraten Label im SessionViewController</note>
+	                  <target>NA</target>
+	              </trans-unit>
+	              <trans-unit id="Nachname">
+	                  <source>Nachname</source>
+	                  <note>Nachname</note>
+	                  <target>Last name</target>
+	              </trans-unit>
+	              <trans-unit id="No Connection">
+	                  <source>No Connection</source>
+	                  <note>No comment provided by engineer.</note>
+	                  <target>No Connection</target>
+	              </trans-unit>
+	              <trans-unit id="OK">
+	                  <source>OK</source>
+	                  <target>OK</target>
+	              </trans-unit>
+	              <trans-unit id="Passung">
+	                  <source>Passung</source>
+	                  <target>Fit</target>
+	              </trans-unit>
+	              <trans-unit id="Passung (SD)">
+	                  <source>Passung (SD)</source>
+	                  <note>Passung (SD)</note>
+	                  <target>Fir (SD)</target>
+	              </trans-unit>
+	              <trans-unit id="Person">
+	                  <source>Person</source>
+	                  <note>Person</note>
+	                  <target>Person</target>
+	              </trans-unit>
+	              <trans-unit id="RR-Intervall (s)">
+	                  <source>RR-Intervall (s)</source>
+	                  <note>RR-Intervall (s)</note>
+	                  <target>RR-Interval</target>
+	              </trans-unit>
+	              <trans-unit id="S">
+	                  <source>S</source>
+	                  <note>Sekunden Einheit Label im SessionViewController</note>
+	                  <target>S</target>
+	              </trans-unit>
+	              <trans-unit id="Selbsteinsätzung">
+	                  <source>Selbsteinsätzung</source>
+	                  <note>Selbsteinsätzung</note>
+	                  <target>Self-report</target>
+	              </trans-unit>
+	              <trans-unit id="Trifft nicht zu">
+	                  <source>Trifft nicht zu</source>
+	                  <note>Trifft nicht zu</note>
+	                  <target>not at all</target>
+	              </trans-unit>
+	              <trans-unit id="Trifft zu">
+	                  <source>Trifft zu</source>
+	                  <note>Trifft zu</note>
+	                  <target>very much</target>
+	              </trans-unit>
+	              <trans-unit id="Überprüfe deine Sicherheitseinstellungen">
+	                  <source>Überprüfe deine Sicherheitseinstellungen</source>
+	                  <note>Überprüfe deine Sicherheitseinstellungen</note>
+	                  <target>Check your security settings</target>
+	              </trans-unit>
+	              <trans-unit id="Überprüfe, ob Bluetooth eingeschaltet ist">
+	                  <source>Überprüfe, ob Bluetooth eingeschaltet ist</source>
+	                  <note>Überprüfe, ob Bluetooth eingeschaltet ist</note>
+	                  <target>Check if Bluetooth is turned on</target>
+	              </trans-unit>
+	              <trans-unit id="Variablität">
+	                  <source>Variablität</source>
+	                  <note>Variablität</note>
+	                  <target>Variability</target>
+	              </trans-unit>
+	              <trans-unit id="Verbindung wurde wieder getrennt">
+	                  <source>Verbindung wurde wieder getrennt</source>
+	                  <note>Verbindung wurde wieder getrennt</note>
+	                  <target>Connection has been disconnected</target>
+	              </trans-unit>
+	              <trans-unit id="Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit...">
+	                  <source>Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit...</source>
+	                  <note>Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit...</note>
+	                  <target>Compared to all other activities which I partake in, this one is...</target>
+	              </trans-unit>
+	              <trans-unit id="Verlauf">
+	                  <source>Verlauf</source>
+	                  <target>Fluency</target>
+	              </trans-unit>
+	              <trans-unit id="Verlauf (SD)">
+	                  <source>Verlauf (SD)</source>
+	                  <note>Verlauf (SD)</note>
+	                  <target>Fluency (SD)</target>
+	              </trans-unit>
+	              <trans-unit id="Vorname">
+	                  <source>Vorname</source>
+	                  <note>Vorname</note>
+	                  <target>First name</target>
+	              </trans-unit>
+	              <trans-unit id="WiFi">
+	                  <source>WiFi</source>
+	                  <note>No comment provided by engineer.</note>
+	                  <target>WiFi</target>
+	              </trans-unit>
+	              <trans-unit id="Zeitintervall">
+	                  <source>Zeitintervall</source>
+	                  <note>Zeitintervall</note>
+	                  <target>Time interval</target>
+	              </trans-unit>
+	              <trans-unit id="Zeitstempel (s)">
+	                  <source>Zeitstempel (s)</source>
+	                  <note>Zeitstempel (s)</note>
+	                  <target>Timestamp (s)</target>
+	              </trans-unit>
+	              <trans-unit id="gerade richtig">
+	                  <source>gerade richtig</source>
+	                  <note>Beanspruchung: gerade richtig</note>
+	                  <target>just right</target>
+	              </trans-unit>
+	              <trans-unit id="hoch">
+	                  <source>hoch</source>
+	                  <note>Fähigkeiten: hoch</note>
+	                  <target>high</target>
+	              </trans-unit>
+	              <trans-unit id="leicht">
+	                  <source>leicht</source>
+	                  <note>Schwierigkeit: leicht</note>
+	                  <target>easy</target>
+	              </trans-unit>
+	              <trans-unit id="niedrig">
+	                  <source>niedrig</source>
+	                  <note>Fähigkeiten: niedrig</note>
+	                  <target>low</target>
+	              </trans-unit>
+	              <trans-unit id="s">
+	                  <source>s</source>
+	                  <note>s</note>
+	                  <target>s</target>
+	              </trans-unit>
+	              <trans-unit id="schwer">
+	                  <source>schwer</source>
+	                  <note>Schwierigkeit: schwer</note>
+	                  <target>difficult</target>
+	              </trans-unit>
+	              <trans-unit id="teils-teils">
+	                  <source>teils-teils</source>
+	                  <note>teils-teils</note>
+	                  <target>partly</target>
+	              </trans-unit>
+	              <trans-unit id="zu gering">
+	                  <source>zu gering</source>
+	                  <note>Beanspruchung: zu gering</note>
+	                  <target>to low</target>
+	              </trans-unit>
+	              <trans-unit id="zu hoch">
+	                  <source>zu hoch</source>
+	                  <note>Beanspruchung: zu hoch</note>
+	                  <target>to high</target>
+	              </trans-unit>
+    </body>
+  </file>
+  <file original="HeartRateMonitorFramework/Info.plist" source-language="de" datatype="plaintext" target-language="en">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+          <source>$(PRODUCT_NAME)</source>
+          <target>$(PRODUCT_NAME)</target>
+      </trans-unit>
+      <trans-unit id="CFBundleShortVersionString">
+          <source>1.0</source>
+          <target>1.0</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

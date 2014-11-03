@@ -361,7 +361,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
             cell.detailTextLabel.text = [self stringFromTimeInterval:variabilityLimit];
             
             if (!self.varibilityAlertAlreadyShown) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Info", @"Info") message:NSLocalizedString(@"Der Wert der Varibilität kann höchsten die Hälfe des Intervallwerts annehmen.", @"Der Wert der Varibilität kann höchsten die Hälfe des Intervallwerts annehmen.") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", @"Information") message:NSLocalizedString(@"Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen.", @"Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen.") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
                 [alertView show];
                 self.varibilityAlertAlreadyShown = YES;
             }
@@ -480,7 +480,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
             break;
             
         case HeartRateMonitorManagerStatePoweredOff: {
-//            cause = NSLocalizedString(@"Überprüfe, ob Bluetooth eingeschlatet ist", @"Überprüfe, ob Bluetooth eingeschlatet ist");
+//            cause = NSLocalizedString(@"Überprüfe, ob Bluetooth eingeschaltet ist", @"Überprüfe, ob Bluetooth eingeschaltet ist");
             
         }
             break;

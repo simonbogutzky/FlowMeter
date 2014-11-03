@@ -1,0 +1,265 @@
+/* (No Commment) */
+"Abbrechen" = "Cancel";
+
+/* (No Commment) */
+"Absorbiertheit" = "Absorption";
+
+/* Absorbiertheit (SD) */
+"Absorbiertheit (SD)" = "Absorption (SD)";
+
+/* Aktionen */
+"Aktionen" = "Actions";
+
+/* Aktivität */
+"Aktivität" = "Aktivity";
+
+/* No comment provided by engineer. */
+"Alle Löschen" = "Delete all";
+
+/* Datei auf dem Gerät speichern */
+"Auf Gerät speichern" = "Save on the device";
+
+/* Beginn */
+"Beginn" = "Start";
+
+/* Benutzer */
+"Benutzer" = "User";
+
+/* (No Commment) */
+"Besorgnis" = "Anxiety";
+
+/* Besorgnis (SD) */
+"Besorgnis (SD)" = "Anxiety (SD)";
+
+/* No comment provided by engineer. */
+"Bist du sicher, dass du diese Flow-Messung entfernen willst?" = "Are you sure, that you want to remove the current flow-measurement?";
+
+/* No comment provided by engineer. */
+"Bist du sicher, dass du diese Flow-Messungen entfernen willst?" = "Are you sure, that you want to remove these flow-measurements?";
+
+/* Bluetooth Manager wird gerade zurückgesetzt */
+"Bluetooth Manager wird gerade zurückgesetzt" = "Bluetooth Manager will be resetted";
+
+/* No comment provided by engineer. */
+"Cellular" = "Cellular";
+
+/* Countdown */
+"Countdown" = "Countdown";
+
+/* Datum */
+"Datum" = "Date";
+
+/* Dauer */
+"Dauer" = "Duration";
+
+/* Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen. */
+"Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen." = "The value of the variation can assume at most the half of the interval value.";
+
+/* Die richtigen Gedanken/Bewegungen kommen wie von selbst. */
+"Die richtigen Gedanken/Bewegungen kommen wie von selbst." = "The right thoughts/movements occur of their own accord.
+	  ";
+
+/* Du hast zurzeit keine Internetverbindung */
+"Du hast zurzeit keine Internetverbindung" = "You currently have no Internet connection";
+
+/* Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen? */
+"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?" = "You currently have no Wi-Fi Internet connection. Would you still upload the data?";
+
+/* Fehleranzeige - HR Monitor wurde getrennt */
+"ERR" = "ERR";
+
+/* Ein unbekannter Fehler ist aufgetreten */
+"Ein unbekannter Fehler ist aufgetreten" = "An unknown error has occurred";
+
+/* Es steht etwas für mich Wichtiges auf dem Spiel. */
+"Es steht etwas für mich Wichtiges auf dem Spiel." = "Something important to me is at stake here.";
+
+/* Fehler beim Verbinden */
+"Fehler beim Verbinden" = "Failed to connect";
+
+/* (No Commment) */
+"Flow" = "Flow";
+
+/* Flow (SD) */
+"Flow (SD)" = "Flow (SD)";
+
+/* Flow Kurzskala */
+"Flow Kurzskala" = "Flow short scale";
+
+/* Flow-Messungen */
+"Flow-Messungen" = "Flow-Measurements";
+
+/* Für mich persönlich sind die jetzigen Anforderungen... */
+"Für mich persönlich sind die jetzigen Anforderungen..." = "For me personally, the current demands are...";
+
+/* Gerät unterstützt kein Bluetooth LE */
+"Gerät unterstützt kein Bluetooth LE" = "Device does not support Bluetooth LE";
+
+/* Stunden Einheit Label im SessionViewController */
+"H" = "H";
+
+/* HR-Messungen */
+"HR-Messungen" = "HR-Measurements";
+
+/* Herzrate in der Tabelle */
+"Herzrate" = "Heart rate";
+
+/* Herzrate (BPM) */
+"Herzrate (BPM)" = "Heart rate (BPM)";
+
+/* Ich bin ganz vertieft in das, was ich gerade mache. */
+"Ich bin ganz vertieft in das, was ich gerade mache." = "I am totally absorbed in what I am doing.";
+
+/* Ich bin völlig selbstvergessen. */
+"Ich bin völlig selbstvergessen." = "I am completely lost in thought.";
+
+/* Ich darf jetzt keine Fehler machen. */
+"Ich darf jetzt keine Fehler machen." = "I won’t make any mistake here.";
+
+/* Ich denke, meine Fähigkeiten auf diesem Gebiet sind... */
+"Ich denke, meine Fähigkeiten auf diesem Gebiet sind..." = "I think that my competence in this area is...";
+
+/* Ich fühle mich optimal beansprucht. */
+"Ich fühle mich optimal beansprucht." = "I feel just the right amount of challenge.";
+
+/* Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben. */
+"Ich habe das Gefühl, den Ablauf unter Kontrolle zu haben." = "I feel that I have everything under control.";
+
+/* Ich habe keine Mühe, mich zu konzentrieren. */
+"Ich habe keine Mühe, mich zu konzentrieren." = "I have no difficulty concentrating.";
+
+/* Ich mache mir Sorgen über einen Misserfolg. */
+"Ich mache mir Sorgen über einen Misserfolg." = "I am worried about failing.";
+
+/* Ich merke gar nicht, wie die Zeit vergeht. */
+"Ich merke gar nicht, wie die Zeit vergeht." = "I don’t notice time passing.";
+
+/* Ich weiß bei jedem Schritt, was ich zu tun habe. */
+"Ich weiß bei jedem Schritt, was ich zu tun habe." = "I know what I have to do each step of the way.";
+
+/* Datei in die Dropbox laden */
+"In die Dropbox laden" = "Upload to Dropbox";
+
+/* Info */
+"Info" = "";
+
+/* Information */
+"Information" = "Information";
+
+/* Keine Bluetooth Verbindung möglich */
+"Keine Bluetooth Verbindung möglich" = "No Bluetooth connection possible";
+
+/* Keine Items vorhanden */
+"Keine Items vorhanden" = "No items available";
+
+/* Keine Verbindung möglich */
+"Keine Verbindung möglich" = "No connection possible";
+
+/* Title for delete button with placeholder for number */
+"Lösche (%d)" = "Delete (%d)";
+
+/* Minuten Einheit Label im SessionViewController */
+"MIN" = "MIN";
+
+/* Mein Kopf ist völlig klar. */
+"Mein Kopf ist völlig klar." = "My mind is completely clear.";
+
+/* Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt. */
+"Meine Gedanken bzw. Aktivitäten laufen flüssig und glatt." = "My thoughts/activities run fluidly and smoothly.";
+
+/* Anfangs-Herzraten Label im SessionViewController */
+"NA" = "NA";
+
+/* Nachname */
+"Nachname" = "Last name";
+
+/* No comment provided by engineer. */
+"No Connection" = "No Connection";
+
+/* (No Commment) */
+"OK" = "OK";
+
+/* (No Commment) */
+"Passung" = "Fit";
+
+/* Passung (SD) */
+"Passung (SD)" = "Fir (SD)";
+
+/* Person */
+"Person" = "Person";
+
+/* RR-Intervall (s) */
+"RR-Intervall (s)" = "RR-Interval";
+
+/* Sekunden Einheit Label im SessionViewController */
+"S" = "S";
+
+/* Selbsteinsätzung */
+"Selbsteinsätzung" = "Self-report";
+
+/* Trifft nicht zu */
+"Trifft nicht zu" = "not at all";
+
+/* Trifft zu */
+"Trifft zu" = "very much";
+
+/* Überprüfe deine Sicherheitseinstellungen */
+"Überprüfe deine Sicherheitseinstellungen" = "Check your security settings";
+
+/* Überprüfe, ob Bluetooth eingeschaltet ist */
+"Überprüfe, ob Bluetooth eingeschaltet ist" = "Check if Bluetooth is turned on";
+
+/* Variablität */
+"Variablität" = "Variability";
+
+/* Verbindung wurde wieder getrennt */
+"Verbindung wurde wieder getrennt" = "Connection has been disconnected";
+
+/* Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit... */
+"Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit..." = "Compared to all other activities which I partake in, this one is...";
+
+/* (No Commment) */
+"Verlauf" = "Fluency";
+
+/* Verlauf (SD) */
+"Verlauf (SD)" = "Fluency (SD)";
+
+/* Vorname */
+"Vorname" = "First name";
+
+/* No comment provided by engineer. */
+"WiFi" = "WiFi";
+
+/* Zeitintervall */
+"Zeitintervall" = "Time interval";
+
+/* Zeitstempel (s) */
+"Zeitstempel (s)" = "Timestamp (s)";
+
+/* Beanspruchung: gerade richtig */
+"gerade richtig" = "just right";
+
+/* Fähigkeiten: hoch */
+"hoch" = "high";
+
+/* Schwierigkeit: leicht */
+"leicht" = "easy";
+
+/* Fähigkeiten: niedrig */
+"niedrig" = "low";
+
+/* s */
+"s" = "s";
+
+/* Schwierigkeit: schwer */
+"schwer" = "difficult";
+
+/* teils-teils */
+"teils-teils" = "partly";
+
+/* Beanspruchung: zu gering */
+"zu gering" = "to low";
+
+/* Beanspruchung: zu hoch */
+"zu hoch" = "to high";
+

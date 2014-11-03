@@ -1,14 +1,14 @@
 /* Class = "IBUILabel"; text = "Triff nicht zu"; ObjectID = "1X8-td-6f1"; */
-"1X8-td-6f1.text" = "Triff nicht zu";
+"1X8-td-6f1.text" = "not at all";
 
 /* Class = "IBUILabel"; text = "Triff zu"; ObjectID = "1d2-E2-RwK"; */
-"1d2-E2-RwK.text" = "Triff zu";
+"1d2-E2-RwK.text" = "very much";
 
 /* Class = "IBUILabel"; text = "Title"; ObjectID = "3Dj-cx-6L9"; */
 "3Dj-cx-6L9.text" = "Title";
 
 /* Class = "IBUINavigationItem"; title = "bearbeiten"; ObjectID = "3IC-dB-72B"; */
-"3IC-dB-72B.title" = "bearbeiten";
+"3IC-dB-72B.title" = "edit";
 
 /* Class = "IBUILabel"; text = "Simon Bogutzky"; ObjectID = "3OO-2z-d6W"; */
 "3OO-2z-d6W.text" = "Simon Bogutzky";
@@ -20,10 +20,10 @@
 "4vJ-Is-xZ5.text" = "FLOW";
 
 /* Class = "IBUILabel"; text = "MESSUNGEN"; ObjectID = "7P5-t7-rHo"; */
-"7P5-t7-rHo.text" = "MESSUNGEN";
+"7P5-t7-rHo.text" = "MEASUREMENTS";
 
 /* Class = "IBUIBarButtonItem"; title = "Menu"; ObjectID = "7Rs-Et-hYD"; */
-"7Rs-Et-hYD.title" = "Menu";
+"7Rs-Et-hYD.title" = "menu";
 
 /* Class = "IBUILabel"; text = "❤︎"; ObjectID = "8ie-3Q-cwT"; */
 "8ie-3Q-cwT.text" = "❤︎";
@@ -35,7 +35,7 @@
 "744-6J-0ve.text" = "✎";
 
 /* Class = "IBUILabel"; text = "ZEIT"; ObjectID = "AVB-X3-04Z"; */
-"AVB-X3-04Z.text" = "ZEIT";
+"AVB-X3-04Z.text" = "TIME";
 
 /* Class = "IBUILabel"; text = "Title"; ObjectID = "BSX-sb-I5L"; */
 "BSX-sb-I5L.text" = "Title";
@@ -47,7 +47,7 @@
 "DRM-us-BNo.text" = "02:05:00";
 
 /* Class = "IBUINavigationItem"; title = "HxM Geräte"; ObjectID = "DuS-St-5RM"; */
-"DuS-St-5RM.title" = "HxM Geräte";
+"DuS-St-5RM.title" = "HxM devices";
 
 /* Class = "IBUILabel"; text = "0"; ObjectID = "HbQ-sv-eTH"; */
 "HbQ-sv-eTH.text" = "0";
@@ -56,25 +56,25 @@
 "IXj-cB-LmA.text" = "120 ⍉";
 
 /* Class = "IBUITabBarItem"; title = "Einstellungen"; ObjectID = "Im2-FV-wo3"; */
-"Im2-FV-wo3.title" = "Einstellungen";
+"Im2-FV-wo3.title" = "Preferences";
 
 /* Class = "IBUILabel"; text = "00:00"; ObjectID = "JBd-iU-TgT"; */
 "JBd-iU-TgT.text" = "00:00";
 
 /* Class = "IBUILabel"; text = " "; ObjectID = "KXe-AL-4yJ"; */
-"KXe-AL-4yJ.text" = " ";
+"KXe-AL-4yJ.text" = "";
 
 /* Class = "IBUIButton"; normalTitle = "Abbrechen"; ObjectID = "KhE-yR-7X5"; */
-"KhE-yR-7X5.normalTitle" = "Abbrechen";
+"KhE-yR-7X5.normalTitle" = "Cancel";
 
 /* Class = "IBUILabel"; text = "Title"; ObjectID = "Ko6-wq-69x"; */
 "Ko6-wq-69x.text" = "Title";
 
 /* Class = "IBUIBarButtonItem"; title = "Abbrechen"; ObjectID = "NIg-71-mrk"; */
-"NIg-71-mrk.title" = "Abbrechen";
+"NIg-71-mrk.title" = "Cancel";
 
 /* Class = "IBUITabBarItem"; title = "Aufnahme"; ObjectID = "Oo6-yD-QJr"; */
-"Oo6-yD-QJr.title" = "Aufnahme";
+"Oo6-yD-QJr.title" = "Recording";
 
 /* Class = "IBUILabel"; text = "Title"; ObjectID = "Rvg-l2-k8e"; */
 "Rvg-l2-k8e.text" = "Title";
@@ -83,43 +83,43 @@
 "TjS-8J-YUm.text" = "Label";
 
 /* Class = "IBUITabBarItem"; title = "Flow-Messungen"; ObjectID = "Zq6-8C-6RD"; */
-"Zq6-8C-6RD.title" = "Flow-Messungen";
+"Zq6-8C-6RD.title" = "Flow-Measurements";
 
 /* Class = "IBUILabel"; text = " "; ObjectID = "Zsq-WU-lxK"; */
-"Zsq-WU-lxK.text" = " ";
+"Zsq-WU-lxK.text" = "";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "b34-Ts-ek6"; */
 "b34-Ts-ek6.text" = "Label";
 
 /* Class = "IBUILabel"; text = "Ich fühle mich optimal beansprucht"; ObjectID = "bjO-rZ-Nvg"; */
-"bjO-rZ-Nvg.text" = "Ich fühle mich optimal beansprucht";
+"bjO-rZ-Nvg.text" = "I feel just the right amount of challange";
 
 /* Class = "IBUINavigationItem"; title = "Einstellungen"; ObjectID = "cFc-Wy-kcx"; */
-"cFc-Wy-kcx.title" = "Einstellungen";
+"cFc-Wy-kcx.title" = "Preferences";
 
 /* Class = "IBUILabel"; text = "4.5 ⍉"; ObjectID = "car-Lx-cye"; */
 "car-Lx-cye.text" = "4.5 ⍉";
 
 /* Class = "IBUILabel"; text = "Dropbox Verbindung"; ObjectID = "cxS-zW-O3x"; */
-"cxS-zW-O3x.text" = "Dropbox Verbindung";
+"cxS-zW-O3x.text" = "Dropbox connection";
 
 /* Class = "IBUILabel"; text = "120"; ObjectID = "dJb-DU-WeX"; */
 "dJb-DU-WeX.text" = "120";
 
 /* Class = "IBUILabel"; text = "HxM Verbindung"; ObjectID = "dxo-2B-l8I"; */
-"dxo-2B-l8I.text" = "HxM Verbindung";
+"dxo-2B-l8I.text" = "HxM connection";
 
 /* Class = "IBUILabel"; text = "teils-teils"; ObjectID = "f4Y-Br-TSS"; */
-"f4Y-Br-TSS.text" = "teils-teils";
+"f4Y-Br-TSS.text" = "partly";
 
 /* Class = "IBUINavigationItem"; title = "S. Bogutzky - Laufen"; ObjectID = "fhB-78-Qag"; */
-"fhB-78-Qag.title" = "S. Bogutzky - Laufen";
+"fhB-78-Qag.title" = "S. Bogutzky - Running";
 
 /* Class = "IBUILabel"; text = "✎"; ObjectID = "g1v-4K-Oax"; */
 "g1v-4K-Oax.text" = "✎";
 
 /* Class = "IBUINavigationItem"; title = "Lauf"; ObjectID = "hQZ-pK-huO"; */
-"hQZ-pK-huO.title" = "Lauf";
+"hQZ-pK-huO.title" = "Run";
 
 /* Class = "IBUILabel"; text = "14"; ObjectID = "hma-90-mkH"; */
 "hma-90-mkH.text" = "14";
@@ -134,22 +134,22 @@
 "kra-zN-Y2H.text" = "4.5";
 
 /* Class = "IBUILabel"; text = "Laufen"; ObjectID = "lxG-6c-LKo"; */
-"lxG-6c-LKo.text" = "Laufen";
+"lxG-6c-LKo.text" = "Running";
 
 /* Class = "IBUIButton"; normalTitle = "Starten"; ObjectID = "mMI-il-cAu"; */
-"mMI-il-cAu.normalTitle" = "Starten";
+"mMI-il-cAu.normalTitle" = "Start";
 
 /* Class = "IBUILabel"; text = "MIN"; ObjectID = "mlH-m3-f8i"; */
 "mlH-m3-f8i.text" = "MIN";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Verbindung"; ObjectID = "nSS-ym-ztX"; */
-"nSS-ym-ztX.headerTitle" = "Verbindung";
+"nSS-ym-ztX.headerTitle" = "Connection";
 
 /* Class = "IBUIBarButtonItem"; title = "Alle Löschen"; ObjectID = "paP-BI-5q6"; */
-"paP-BI-5q6.title" = "Alle Löschen";
+"paP-BI-5q6.title" = "Delete all";
 
 /* Class = "IBUINavigationItem"; title = "Flow-Messungen"; ObjectID = "tZl-QD-bic"; */
-"tZl-QD-bic.title" = "Flow-Messungen";
+"tZl-QD-bic.title" = "Flow-Measurements";
 
 /* Class = "IBUILabel"; text = "NA"; ObjectID = "uLq-37-zr6"; */
 "uLq-37-zr6.text" = "NA";
@@ -164,7 +164,7 @@
 "wMl-tr-4gU.text" = "FLOW";
 
 /* Class = "IBUINavigationItem"; title = "Aufnahme"; ObjectID = "xDQ-T2-Doq"; */
-"xDQ-T2-Doq.title" = "Aufnahme";
+"xDQ-T2-Doq.title" = "Recording";
 
 /* Class = "IBUILabel"; text = "7"; ObjectID = "xDl-la-9j6"; */
 "xDl-la-9j6.text" = "7";
