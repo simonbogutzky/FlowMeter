@@ -26,7 +26,6 @@
 		D34C9D2917250463004C261C /* SessionRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D1F17250463004C261C /* SessionRecordViewController.m */; };
 		D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D2517250463004C261C /* PrefsTableViewController.m */; };
 		D3566B631A07D95700237AE4 /* FlowMeter-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3566B651A07D95700237AE4 /* FlowMeter-InfoPlist.strings */; };
-		D3566B681A07D95700237AE4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3566B6A1A07D95700237AE4 /* InfoPlist.strings */; };
 		D3566B6D1A07D95800237AE4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3566B6F1A07D95800237AE4 /* Localizable.strings */; };
 		D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */; };
 		D36C44B016D788BE000B8502 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
@@ -168,10 +167,8 @@
 		D3566B5F1A07D81200237AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D3566B601A07D81200237AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		D3566B641A07D95700237AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/FlowMeter-InfoPlist.strings"; sourceTree = "<group>"; };
-		D3566B691A07D95700237AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D3566B6E1A07D95800237AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D3566B701A07DA5800237AE4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/FlowMeter-InfoPlist.strings"; sourceTree = "<group>"; };
-		D3566B711A07DA5800237AE4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D3566B721A07DA5800237AE4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D3566B7A1A07DC0C00237AE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "Base.lproj/FlowMeter-InfoPlist.strings"; sourceTree = "<group>"; };
 		D3566B7B1A07DC1900237AE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -456,7 +453,6 @@
 		D3AEA5D119F12A56008CD870 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D3566B6A1A07D95700237AE4 /* InfoPlist.strings */,
 				D3AEA5D219F12A56008CD870 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -657,7 +653,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3566B681A07D95700237AE4 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,15 +732,6 @@
 				D3566B7A1A07DC0C00237AE4 /* Base */,
 			);
 			name = "FlowMeter-InfoPlist.strings";
-			sourceTree = "<group>";
-		};
-		D3566B6A1A07D95700237AE4 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D3566B691A07D95700237AE4 /* en */,
-				D3566B711A07DA5800237AE4 /* de */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		D3566B6F1A07D95800237AE4 /* Localizable.strings */ = {
