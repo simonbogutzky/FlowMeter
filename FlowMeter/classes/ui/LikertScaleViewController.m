@@ -170,7 +170,7 @@
     
     UIControl *circleIndicatorControl = self.circleIndicatorControls[circleControl.tag];
     circleIndicatorControl.backgroundColor = [self.cicleColors[circleControl.tag] colorWithAlphaComponent:0.6];
-    [self.responses addObject:[NSNumber numberWithInt:circleControl.tag + 1]];
+    [self.responses addObject:[NSNumber numberWithLong:circleControl.tag + 1]];
     
     [self performSelector:@selector(increaseItemIndex) withObject:nil afterDelay:0.1];
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0610"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -20,20 +20,6 @@
                ReferencedContainer = "container:FlowMeter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D3AEA5D819F12A56008CD870"
-               BuildableName = "HeartRateMonitorFrameworkTests.xctest"
-               BlueprintName = "HeartRateMonitorFrameworkTests"
-               ReferencedContainer = "container:FlowMeter.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -42,16 +28,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D3AEA5D819F12A56008CD870"
-               BuildableName = "HeartRateMonitorFrameworkTests.xctest"
-               BlueprintName = "HeartRateMonitorFrameworkTests"
-               ReferencedContainer = "container:FlowMeter.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -72,8 +48,8 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES"
-      language = "de"
-      region = "DE">
+      language = "en"
+      region = "US">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"

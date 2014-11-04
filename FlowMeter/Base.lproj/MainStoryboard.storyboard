@@ -10,6 +10,7 @@
             <objects>
                 <tabBarController id="zkI-Pb-t4W" userLabel="Tab Bar" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="DHM-Al-I5O">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -174,7 +175,7 @@
                         <viewControllerLayoutGuide type="bottom" id="mAQ-EO-yG1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kBz-oe-xH4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DFu-Aw-v46">
@@ -396,7 +397,7 @@
                         <viewControllerLayoutGuide type="bottom" id="b1h-4M-Ga1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="i5L-bJ-m4Q">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="August 28, 2014 - 17:30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yp2-k7-OXg">
