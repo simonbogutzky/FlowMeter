@@ -215,7 +215,8 @@
     self.lineGraphView.enableYAxisLabel = YES;
     self.lineGraphView.autoScaleYAxis = YES;
     self.lineGraphView.alwaysDisplayDots = NO;
-    self.lineGraphView.enableReferenceAxisLines = YES;
+    self.lineGraphView.enableReferenceXAxisLines = YES;
+    self.lineGraphView.enableReferenceYAxisLines = YES;
     self.lineGraphView.enableReferenceAxisFrame = YES;
     self.lineGraphView.animationGraphStyle = BEMLineAnimationDraw;
     

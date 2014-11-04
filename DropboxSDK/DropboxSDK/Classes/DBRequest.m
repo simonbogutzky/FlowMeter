@@ -16,11 +16,6 @@
 static NSString * const DBURLAuthenticationMethodOAuth = @"NSURLAuthenticationMethodOAuth";
 static NSString * const DBURLAuthenticationMethodOAuth2 = @"NSURLAuthenticationMethodOAuth2";
 
-static const char *kBase64RootCerts[];
-static const size_t kNumRootCerts;
-static const size_t kMaxCertLen = 10000;
-static NSMutableArray * volatile sRootCerts = NULL;
-
 id<DBNetworkRequestDelegate> dbNetworkRequestDelegate = nil;
 
 
@@ -295,16 +290,37 @@ id<DBNetworkRequestDelegate> dbNetworkRequestDelegate = nil;
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)response {
-	return nil;
+    return nil;
 }
 
 - (NSInputStream *)connection:(NSURLConnection *)connection needNewBodyStream:(NSURLRequest *)req {
     if (!sourcePath) {
-		DBLogWarning(@"DropboxSDK: need new body stream, but none available");
-		return nil;
-	}
-	return [NSInputStream inputStreamWithFileAtPath:sourcePath];
+        DBLogWarning(@"DropboxSDK: need new body stream, but none available");
+        return nil;
+    }
+    return [NSInputStream inputStreamWithFileAtPath:sourcePath];
 }
+
+#pragma mark private methods
+
+- (void)setError:(NSError *)theError {
+    if (theError == error) return;
+    [error release];
+    error = [theError retain];
+
+    NSString *errorStr = [error.userInfo objectForKey:@"error"];
+    if (!errorStr) {
+        errorStr = [error description];
+    }
+
+    if (!([error.domain isEqual:DBErrorDomain] && error.code == 304)) {
+        // Log errors unless they're 304's
+        DBLogWarning(@"DropboxSDK: error making request to %@ - (%ld) %@",
+                       [[request URL] path], (long)error.code, errorStr);
+    }
+}
+
+#pragma mark SSL Security Configuration
 
 //
 // Called on SSL handshake
@@ -313,9 +329,9 @@ id<DBNetworkRequestDelegate> dbNetworkRequestDelegate = nil;
 // https://docs.google.com/a/dropbox.com/document/d/1NZ-82u_HxtM8J6IR1YSh-klHFfjqiIE8iTN1GL72a7E
 //
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-    
+
     NSString *host = [[challenge protectionSpace] host];
-    
+
     // Check the authentication method for connection: only SSL/TLS is allowed
     if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
 
@@ -325,10 +341,19 @@ id<DBNetworkRequestDelegate> dbNetworkRequestDelegate = nil;
         SecTrustResultType trustResult = kSecTrustResultInvalid;
         SecTrustEvaluate(serverTrust, &trustResult);
         if (trustResult == kSecTrustResultUnspecified) {
-            // Certificate validation succeeded. Continue the connection
-            [challenge.sender
-             useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]
-             forAuthenticationChallenge:challenge];
+            // Certificate validation succeeded.
+            // Next, check if the sertificate is not revoked
+            // Note: certificate is a reference into an existing object, and doesn't need a CFRelease.
+            SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, 0);
+            if ([DBRequest isRevokedCertificate: certificate]){
+                DBLogError(@"DropboxSDK: SSL Error. Revoked certificate for the host: %@", host);
+                [[challenge sender] cancelAuthenticationChallenge: challenge];
+            } else {
+                // Continue the connection
+                [challenge.sender
+                 useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]
+                 forAuthenticationChallenge:challenge];
+            }
         } else {
             // Certificate validation failed. Terminate the connection
             DBLogError(@"DropboxSDK: SSL Error. Cannot validate a certificate for the host: %@", host);
@@ -351,58 +376,253 @@ id<DBNetworkRequestDelegate> dbNetworkRequestDelegate = nil;
     }
 }
 
-#pragma mark private methods
+//
+// List of revoked certificates' serial numbers
+//
+static const char *kRevokedCertificateSNs[] = {
+    "\x02\x75\xc7\x6c\x1e\x64\x3c\x26\x49\x88\x6b\x0e\x76\x3a\xc3\xe9",  // digicert star.dropboxusercontent.com-20170419
+    "\x27\xab\x71\xba\x41\x86\x5c",                     // godaddy star.dropbox.com
+    "\x2b\x73\x47\x79\xdb\x80\x12"                      // godaddy dropbox.com-gd_bundle
+};
+static const size_t kMaxCertSNLen = 1000;
 
-- (void)setError:(NSError *)theError {
-    if (theError == error) return;
-    [error release];
-    error = [theError retain];
+#ifdef TARGET_OS_IPHONE
+/*  Helper function parse length octets from ASN.1 decoding
+ Only available on iPhone.
+ Input is a buf and the max length of the buffer (for safety checks) is in bufLen
+ idx is a pointer to the current index, at which we start parsing the length.
+ idx is changed as we move forward parsing octets according to the format indicators
+ length is a pointer to a length value that is set to the actual length of the value.
+ At the end of the function, idx will be at the start of the value and the length of the value,
+ after which a new tag starts, will be in the length argument.
 
-	NSString *errorStr = [error.userInfo objectForKey:@"error"];
-	if (!errorStr) {
-		errorStr = [error description];
-	}
+ Returns 0 on success or non zero values otherwise */
 
-	if (!([error.domain isEqual:DBErrorDomain] && error.code == 304)) {
-		// Log errors unless they're 304's
-		DBLogWarning(@"DropboxSDK: error making request to %@ - (%ld) %@",
-                       [[request URL] path], (long)error.code, errorStr);
-	}
-}
++ (int)readLength:(uint32_t *)length fromBuffer:(const uint8_t *)buf ofLength:(const uint32_t)bufLen atIndex:(uint32_t *)idx {
 
-// Static method returning NSArray with Dropbox root certificates
-+ (NSArray *)rootCertificates {
-    if (sRootCerts != NULL)
-        return sRootCerts;
-    @synchronized ([DBRequest class]) {
-        if (sRootCerts == NULL) {
-            NSMutableArray *certs = [NSMutableArray array];
-            for (int i=0; i < kNumRootCerts; i++) {
-                size_t base64CertLen = strnlen(kBase64RootCerts[i], kMaxCertLen);
-                size_t derCertLen = DBEstimateBas64DecodedDataSize(base64CertLen);
-                char derCert[derCertLen];
-                bool success = DBBase64DecodeData(kBase64RootCerts[i], base64CertLen, derCert, &derCertLen);
-                if (!success) {
-                    DBLogError(@"Root certificate base64 decoding failed!");
-                    continue;
-                }
-                CFDataRef rawCert = CFDataCreate(kCFAllocatorDefault, (const UInt8 *)derCert, derCertLen);
-                SecCertificateRef cert = SecCertificateCreateWithData (kCFAllocatorDefault, rawCert);
-                if (cert == NULL) {
-                    DBLogError(@"Invalid root certificate!");
-                    CFRelease(rawCert);
-                    continue;
-                }
-                CFRelease(rawCert);
-                [certs addObject:(id)cert];
-                CFRelease(cert);
-            }
-            sRootCerts = [certs retain];
-        }
+    if (*idx >= bufLen) {
+        DBLogWarning(@"readLength: idx:%d >= buflen:%d", *idx, bufLen);
+        return -2;
     }
-    return sRootCerts;
+
+    if (buf[*idx] == 0x80) {
+        //this is unlimited encoding and this can't happen
+        DBLogWarning(@"readLength: Invalid DER (unlimited length encoding)");
+        return -1;
+    }
+
+    uint8_t firstbit = (uint8_t) (buf[*idx] & 0x80);
+    //short form encoding
+    //first bit is 0 and the remaining bits
+    //is the length
+    //we save that and move the idx one step, where the value will start
+    if (firstbit == 0) {
+        *length = (uint32_t) (buf[*idx] & 0x7F);
+        *idx = *idx+1;
+        return 0;
+    }
+
+    //This is long form encoding
+    //The first bit is 1 and remaining bits are length of length
+
+    uint8_t len_of_len = (uint8_t) (buf[*idx] & 0x7f);
+    if (len_of_len > 4) {
+        //This is crazy -- more than 4bytes means that this is more than 4GB
+        DBLogWarning(@"readLength: length of any TLV can't be more than 32bit");
+        return -1;
+    }
+
+    if (*idx + len_of_len >= bufLen) {
+        DBLogWarning(@"readLength: idx:%d + len_of_len: %d >= bufLen:%d", *idx, len_of_len, bufLen);
+        return -2;
+    }
+
+    *idx = *idx + 1;
+    //now *idx is start of length integer value.
+    uint32_t len=0;
+    while (len_of_len) {
+        len = len << 8;
+        len = len + buf[*idx];
+        len_of_len--;
+        *idx = *idx+1;
+    }
+    *length = len;
+    return 0;
 }
-@end
+
+/*  Get serial number by parsing ASN.1 data from the certificate
+ This function only exists on iPhone because the system does not provide
+ a function to extract a serial number from a certificate.
+
+ The input is a buffer (derdata) with a DER encoded ASN.1 certificate (
+ a series of octets) and the length of the buffer. Returns a CFDataRef to
+ a newly allocated buffer that has the serial number octets.
+
+ While this code has been written with extreme paranoia, we are actually working on
+ only the initial few bytes of a certificate signed and verified by a root CA that
+ we have pinned. This data can be malicious only if the CA is compromised, which
+ means we have bigger problems for all our clients.
+
+ None the less, please talk to team-security before using this function.
+ */
+
++ (CFDataRef) copySerialFromCertificate:(const uint8_t *)derdata certificateLength:(const CFIndex)certlen {
+
+    /* High Level notes:
+     By the X.509 standard, serial number is
+     SEQ{
+     SEQ{
+     Version
+     Serial
+     }
+     }
+
+     So we go down two sequences and then look for Serial after jumping past version.
+
+     ASN.1 is a simple format: TAG, LENGTH, VALUE. We look for tag, get the length,
+     and then do what we want with the value (either ignoring it or reading it).
+
+     Best reference I found is http://www.oss.com/asn1/resources/books-whitepapers-pubs/larmouth-asn1-book.pdf
+     Start at Page 252 for encoding
+     */
+
+    static const uint8_t TAG_SEQ = 0x30;
+    static const uint8_t TAG_INT = 0x02;
+
+    if (certlen < 0 || certlen > (CFIndex) INT32_MAX) {
+        DBLogWarning(@"Certlen negative or too high: %ld. Paranoidly failing.", certlen);
+        return NULL;
+    }
+
+    uint32_t derlen = (uint32_t) certlen;
+    uint32_t idx = 0;
+
+    //first byte has to be for sequence
+    if (idx >= derlen) {
+        DBLogWarning(@"Error trying to read first TAG_SEQ. idx:%d >= certlen:%ld", idx, certlen);
+        return NULL;
+    }
+
+    if (derdata[idx] != TAG_SEQ) {
+        DBLogWarning(@"DER data does not start with TAG_SEQ. idx:%d octet:%X", idx, derdata[idx]);
+        return NULL;
+    }
+
+    idx++;
+
+    uint32_t len = 0;
+    if ([DBRequest readLength:&len fromBuffer:derdata ofLength:derlen atIndex:&idx] != 0) {
+        DBLogWarning(@"Failed to parse length from first TAG_SEQ.");
+        return NULL;
+    }
+
+    if (idx >= derlen) {
+        DBLogWarning(@"Error trying to read 2nd TAG_SEQ. idx:%d >= certlen:%ld", idx, certlen);
+        return NULL;
+    }
+
+    //now we are beyond the length and this is another sequence
+    if (derdata[idx] != TAG_SEQ) {
+        DBLogWarning(@"Error: first tag inside the TAG_SEQ is not a TAG_SEQ. idx:%d octet:%X", idx, derdata[idx]);
+        return NULL;
+    }
+
+    idx++;
+
+
+    if ([DBRequest readLength:&len fromBuffer:derdata ofLength:derlen atIndex:&idx] != 0) {
+        DBLogWarning(@"Failed to parse length from second TAG_SEQ");
+        return NULL;
+    }
+
+    //now we are at start of actual stuff.
+    //Semantically, this is the CERT_VERSION.
+    //We don't actually care what tag this is, but we need to jump past it.
+
+    if (idx >= derlen) {
+        DBLogWarning(@"Reached end of buffer while reading Version from first TLV inside TAG_SEQ. idx:%d >= certlen:%ld", idx, certlen);
+        return NULL;
+    }
+
+    //last five bits cant be all 1s, otherwise this is more than 1 byte tag
+    //which shouldn't happen for SSL certs
+    if ((derdata[idx] & 0x1F) == 0x1F) {
+        DBLogWarning(@"Invalid CERT Version tag inside 2nd SEQ");
+        return NULL;
+    }
+
+    idx++;
+
+    if ([DBRequest readLength:&len fromBuffer:derdata ofLength:derlen atIndex:&idx] != 0) {
+        DBLogWarning(@"Failed to parse length of CERT Version tag");
+        return NULL;
+    }
+
+    //we don't care about this so we only need to jump past it
+
+    idx+=len;
+
+
+    if (idx >= derlen) {
+        DBLogWarning(@"Reached end of buffer while reading Version from first TLV inside TAG_SEQ. idx:%d >= certlen:%ld", idx, certlen);
+        return NULL;
+    }
+
+    //ok now comes the serial number TLV
+    if (derdata[idx] != TAG_INT) {
+        DBLogWarning(@"Reached serial number, but it is not marked with TAG_INT. Failing");
+        return NULL;
+    }
+
+    idx++;
+
+    if ([DBRequest readLength:&len fromBuffer:derdata ofLength:derlen atIndex:&idx] != 0) {
+        DBLogWarning(@"Failed to parse length of serial number TLV");
+        return NULL;
+    }
+
+
+    if (idx+len >= derlen) {
+        DBLogWarning(@"Serial length goes beyond end of buffer. idx:%d >= certlen:%ld", idx, certlen);
+        return NULL;
+    }
+
+    // Now derdata+idx is start of serial of len
+    // CFDataCreate makes a copy by default
+    CFDataRef serial = CFDataCreate(NULL, derdata+idx, len);
+    return serial;
+}
+#endif
+
++ (bool)isRevokedCertificate:(SecCertificateRef)certificate {
+
+#ifdef TARGET_OS_IPHONE
+    const CFDataRef cfder = SecCertificateCopyData(certificate);
+    const CFDataRef serial = [DBRequest copySerialFromCertificate:CFDataGetBytePtr(cfder) certificateLength:CFDataGetLength(cfder)];
+    CFRelease(cfder);
+#else
+    const CFDataRef serial = SecCertificateCopySerialNumber(certificate, NULL);
+#endif
+
+    if (serial == NULL) {
+        // Sanity check, should never happen. Fail if we cannot get a serial number
+        DBLogError(@"DropboxSDK: SSL Error. Cannot read a serial number of the certificate");
+        return true;
+    }
+    bool isRevoked = false;
+    for (int i=0; i < sizeof(kRevokedCertificateSNs)/sizeof(kRevokedCertificateSNs[0]); i++) {
+        CFDataRef revoked_serial = CFDataCreateWithBytesNoCopy(NULL,
+                                                          (const UInt8*)kRevokedCertificateSNs[i],
+                                                          strnlen(kRevokedCertificateSNs[i], kMaxCertSNLen),
+                                                          kCFAllocatorNull);
+        if(CFEqual(serial, revoked_serial)) {
+            isRevoked = true;
+        }
+        CFRelease(revoked_serial);
+    }
+    CFRelease(serial);
+    return isRevoked;
+}
 
 //
 // Base64-encoded root certificates in DER format
@@ -425,12 +645,12 @@ id<DBNetworkRequestDelegate> dbNetworkRequestDelegate = nil;
 // Go Daddy Class 2 Certification Authority
 // Go Daddy Root Certificate Authority - G2
 // Go Daddy Secure Certification Authority serialNumber=07969287
+// Go Daddy Secure Server Certificate (Cross Intermediate Certificate)
 // Thawte Premium Server CA
 // Thawte Primary Root CA - G2
 // Thawte Primary Root CA - G3
 // Thawte Primary Root CA
 //
-static const size_t kNumRootCerts = 18;
 static const char *kBase64RootCerts[] = {
     //DigiCert Assured ID Root CA
     "MIIDtzCCAp+gAwIBAgIQDOfg5RfYRv6P5WD8G/AwOTANBgkqhkiG9w0BAQUFADBlMQswCQYDVQQGEwJV\
@@ -681,6 +901,29 @@ static const char *kBase64RootCerts[] = {
     RvOe5GPLL5CkKSkB2XIsKd83ASe8T+5o0yGPwLPk9Qnt0hCqU7S+8MxZC9Y7lhyVJEnfzuz9p0iRFEUO\
     OjZv2kWzRaJBydTXRE4+uXR21aITVSzGh6O1mawGhId/dQb8vxRMDsxuxN89txJx9OjxUUAiKEngHUuH\
     qDTMBqLdElrRhjZkAzVvb3du6/KFUJheqwNTrZEjYx8WnM25sgVjOuH0aBsXBTWVU+4=",
+    //Go Daddy Secure Server Certificate (Cross Intermediate Certificate)
+    "MIIE+zCCBGSgAwIBAgICAQ0wDQYJKoZIhvcNAQEFBQAwgbsxJDAiBgNVBAcTG1ZhbGlDZXJ0IFZhbGlk\
+    YXRpb24gTmV0d29yazEXMBUGA1UEChMOVmFsaUNlcnQsIEluYy4xNTAzBgNVBAsTLFZhbGlDZXJ0IENs\
+    YXNzIDIgUG9saWN5IFZhbGlkYXRpb24gQXV0aG9yaXR5MSEwHwYDVQQDExhodHRwOi8vd3d3LnZhbGlj\
+    ZXJ0LmNvbS8xIDAeBgkqhkiG9w0BCQEWEWluZm9AdmFsaWNlcnQuY29tMB4XDTA0MDYyOTE3MDYyMFoX\
+    DTI0MDYyOTE3MDYyMFowYzELMAkGA1UEBhMCVVMxITAfBgNVBAoTGFRoZSBHbyBEYWRkeSBHcm91cCwg\
+    SW5jLjExMC8GA1UECxMoR28gRGFkZHkgQ2xhc3MgMiBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eTCCASAw\
+    DQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBAN6d1+pXGEmhW+vXX0iG6r7d/+TvZxz0ZWizV3GgXne7\
+    7ZtJ6XCAPVYYYwhv2vLM0D9/AlQiVBDYsoHUwHU9S3/Hd8M+eKsaA7Ugay9qK7HFiH7Eux6wwdhFJ2+q\
+    N1j3hybX2C32qRe3H3I2TqYXP2WYktsqbl2i/ojgC95/5Y0V4evLOtXiEqITLdiOr18SPaAIBQi2XKVl\
+    OARFmR6jYGB0xUGlcmIbYsUfb18aQr4CUWWoriMYavx4A6lNf4DD+qta/KFApMoZFv6yyO9ecw3ud72a\
+    9nmYvLEHZ6IVDd2gWMZEewo+YihfukEHU1jPEX44dMX4/7VpkI+EdOqXG68CAQOjggHhMIIB3TAdBgNV\
+    HQ4EFgQU0sSw0pHUTBFxs2HLPaH+3ahq1OMwgdIGA1UdIwSByjCBx6GBwaSBvjCBuzEkMCIGA1UEBxMb\
+    VmFsaUNlcnQgVmFsaWRhdGlvbiBOZXR3b3JrMRcwFQYDVQQKEw5WYWxpQ2VydCwgSW5jLjE1MDMGA1UE\
+    CxMsVmFsaUNlcnQgQ2xhc3MgMiBQb2xpY3kgVmFsaWRhdGlvbiBBdXRob3JpdHkxITAfBgNVBAMTGGh0\
+    dHA6Ly93d3cudmFsaWNlcnQuY29tLzEgMB4GCSqGSIb3DQEJARYRaW5mb0B2YWxpY2VydC5jb22CAQEw\
+    DwYDVR0TAQH/BAUwAwEB/zAzBggrBgEFBQcBAQQnMCUwIwYIKwYBBQUHMAGGF2h0dHA6Ly9vY3NwLmdv\
+    ZGFkZHkuY29tMEQGA1UdHwQ9MDswOaA3oDWGM2h0dHA6Ly9jZXJ0aWZpY2F0ZXMuZ29kYWRkeS5jb20v\
+    cmVwb3NpdG9yeS9yb290LmNybDBLBgNVHSAERDBCMEAGBFUdIAAwODA2BggrBgEFBQcCARYqaHR0cDov\
+    L2NlcnRpZmljYXRlcy5nb2RhZGR5LmNvbS9yZXBvc2l0b3J5MA4GA1UdDwEB/wQEAwIBBjANBgkqhkiG\
+    9w0BAQUFAAOBgQC1QPmnHfbq/qQaQlpE9xXUhUaJwL6e4+PrxeNYiY+Sn1eocSxI0YGyeR+sBjUZsE4O\
+    WBsUs5iB0QQeyAfJg594RAoYC5jcdnplDQ1tgMQLARzLrUc+cb53S8wGd9D0VmsfSxOaFIqII6hR8INM\
+    qzW/Rn453HWkrugp++85j09VZw==",
     //Thawte Premium Server CA
     "MIIDJzCCApCgAwIBAgIBATANBgkqhkiG9w0BAQQFADCBzjELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdl\
     c3Rlcm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMR0wGwYDVQQKExRUaGF3dGUgQ29uc3VsdGluZyBj\
@@ -747,3 +990,40 @@ static const char *kBase64RootCerts[] = {
     /qxAeeWsEG89jxt5dovEN7MhGITlNgDrYyCZuen+MwS7QcjBAvlEYyCegc5C09Y/LHbTY5xZ3Y+m4Q6g\
     LkH3LpVHz7z9M/P2C2F+fpErgUfCJzDupxBdN49cOSvkBPB7jVaMaA=="
 };
+static const size_t kMaxCertLen = 10000;
+static NSMutableArray * volatile sRootCerts = NULL;
+
+// Static method returning NSArray with Dropbox root certificates
++ (NSArray *)rootCertificates {
+    if (sRootCerts != NULL)
+        return sRootCerts;
+    @synchronized ([DBRequest class]) {
+        if (sRootCerts == NULL) {
+            NSMutableArray *certs = [NSMutableArray array];
+            for (int i=0; i < sizeof(kBase64RootCerts)/sizeof(kBase64RootCerts[0]); i++) {
+                size_t base64CertLen = strnlen(kBase64RootCerts[i], kMaxCertLen);
+                size_t derCertLen = DBEstimateBas64DecodedDataSize(base64CertLen);
+                char derCert[derCertLen];
+                bool success = DBBase64DecodeData(kBase64RootCerts[i], base64CertLen, derCert, &derCertLen);
+                if (!success) {
+                    DBLogError(@"Root certificate base64 decoding failed!");
+                    continue;
+                }
+                CFDataRef rawCert = CFDataCreate(kCFAllocatorDefault, (const UInt8 *)derCert, derCertLen);
+                SecCertificateRef cert = SecCertificateCreateWithData (kCFAllocatorDefault, rawCert);
+                if (cert == NULL) {
+                    DBLogError(@"Invalid root certificate!");
+                    CFRelease(rawCert);
+                    continue;
+                }
+                CFRelease(rawCert);
+                [certs addObject:(id)cert];
+                CFRelease(cert);
+            }
+            sRootCerts = [certs retain];
+        }
+    }
+    return sRootCerts;
+}
+@end
+

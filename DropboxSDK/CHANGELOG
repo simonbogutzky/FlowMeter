@@ -4,6 +4,12 @@ Upgrade instructions
 3. Follow the installation instructions from the README to install the
    newest version of the SDK
 
+Changes from 1.3.12 to 1.3.13
+- Fix for "Cannot validate a certificate for the host" issue
+
+Changes from 1.3.11 to 1.3.12
+- Swift compatibility
+
 Changes from 1.3.10 to 1.3.11
 - Fix 404s on page transitions during authentication on iOS
 - Upgrade project files for use with XCode 5.1
