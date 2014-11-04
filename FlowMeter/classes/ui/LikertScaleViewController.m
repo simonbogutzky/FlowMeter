@@ -129,7 +129,7 @@
 {
     CGFloat screenWidth = size.width;
     CGFloat screenHeight = size.height;
-    int numberOfCircles = [self.circleControls count];
+    NSUInteger numberOfCircles = [self.circleControls count];
     CGFloat offset = (screenWidth - 80) / (numberOfCircles - 1);
     int i = 0;
     for (UIControl *circleControl in self.circleControls) {
