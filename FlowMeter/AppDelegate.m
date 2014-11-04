@@ -205,7 +205,7 @@
     NSError *sessionError = nil;
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:&sessionError];
     
-    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:[[NSBundle mainBundle] URLForResource:@"5min-silence" withExtension:@"mp3"]];
+    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:[[NSBundle mainBundle] URLForResource:@"background-music" withExtension:@"mp3"]];
     self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
     self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
     

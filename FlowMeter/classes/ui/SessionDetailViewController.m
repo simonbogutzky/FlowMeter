@@ -145,6 +145,10 @@
         NSArray *managedObjects = [[self.session valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kEntityKey]] sortedArrayUsingDescriptors:@[dateDescriptor]];
         
         if ([@"heartRate" isEqualToString:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]) {
+            
+            self.yValues = [@[] mutableCopy];
+            self.xLabels = [@[] mutableCopy];
+            
             NSDate *date = [managedObjects[0] valueForKey:@"date"];
             NSTimeInterval nextTimeInterval = [date timeIntervalSince1970] + 60;
             
@@ -160,7 +164,6 @@
                 [yValues addObject:[managedObject valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]];
                 
                 if (nextTimeInterval <= timeInterval) {
-                    
                     
                     NSNumber *yValue = [NSNumber numberWithInt:0];
                     if (yValues.count > 0) {

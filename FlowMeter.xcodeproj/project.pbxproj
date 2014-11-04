@@ -44,7 +44,7 @@
 		D39747B11882CC7B00CFF3DF /* libtouchzipkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D39747AE1882CC6400CFF3DF /* libtouchzipkit.a */; };
 		D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */; };
 		D3A4629F1726E08900D454F7 /* SessionOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionOverviewViewController.m */; };
-		D3AB053219D5581A00626323 /* 5min-silence.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3AB053119D5581A00626323 /* 5min-silence.mp3 */; };
+		D3AB053219D5581A00626323 /* background-music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3AB053119D5581A00626323 /* background-music.mp3 */; };
 		D3AEA5D419F12A56008CD870 /* HeartRateMonitorFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = D3AEA5D319F12A56008CD870 /* HeartRateMonitorFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D3AEA5E319F12A56008CD870 /* HeartRateMonitorFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3AEA5CF19F12A56008CD870 /* HeartRateMonitorFramework.framework */; };
 		D3AEA5E419F12A56008CD870 /* HeartRateMonitorFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D3AEA5CF19F12A56008CD870 /* HeartRateMonitorFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -199,7 +199,7 @@
 		D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HeartRateRecord+Description.m"; path = "classes/model/HeartRateRecord+Description.m"; sourceTree = "<group>"; };
 		D3A4629D1726E08900D454F7 /* SessionOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionOverviewViewController.h; path = classes/ui/SessionOverviewViewController.h; sourceTree = "<group>"; };
 		D3A4629E1726E08900D454F7 /* SessionOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SessionOverviewViewController.m; path = classes/ui/SessionOverviewViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		D3AB053119D5581A00626323 /* 5min-silence.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "5min-silence.mp3"; sourceTree = "<group>"; };
+		D3AB053119D5581A00626323 /* background-music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "background-music.mp3"; sourceTree = "<group>"; };
 		D3AEA5CF19F12A56008CD870 /* HeartRateMonitorFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HeartRateMonitorFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3AEA5D219F12A56008CD870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3AEA5D319F12A56008CD870 /* HeartRateMonitorFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorFramework.h; sourceTree = "<group>"; };
@@ -418,7 +418,7 @@
 		D38F7ABA19F0070300016B6E /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				D3AB053119D5581A00626323 /* 5min-silence.mp3 */,
+				D3AB053119D5581A00626323 /* background-music.mp3 */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -645,7 +645,7 @@
 				D38400651A04144A006710FB /* LaunchScreen.xib in Resources */,
 				D335030919A5D89B008CC93A /* Images.xcassets in Resources */,
 				D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */,
-				D3AB053219D5581A00626323 /* 5min-silence.mp3 in Resources */,
+				D3AB053219D5581A00626323 /* background-music.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
