@@ -49,8 +49,8 @@
 /* Class = "IBUILabel"; text = "02:05:00"; ObjectID = "DRM-us-BNo"; */
 "DRM-us-BNo.text" = "02:05:00";
 
-/* Class = "IBUINavigationItem"; title = "HxM Geräte"; ObjectID = "DuS-St-5RM"; */
-"DuS-St-5RM.title" = "HxM Geräte";
+/* Class = "IBUINavigationItem"; title = "HR Geräte"; ObjectID = "DuS-St-5RM"; */
+"DuS-St-5RM.title" = "HR Geräte";
 
 /* Class = "IBUILabel"; text = "0"; ObjectID = "HbQ-sv-eTH"; */
 "HbQ-sv-eTH.text" = "0";
@@ -109,8 +109,8 @@
 /* Class = "IBUILabel"; text = "120"; ObjectID = "dJb-DU-WeX"; */
 "dJb-DU-WeX.text" = "120";
 
-/* Class = "IBUILabel"; text = "HxM Verbindung"; ObjectID = "dxo-2B-l8I"; */
-"dxo-2B-l8I.text" = "HxM Verbindung";
+/* Class = "IBUILabel"; text = "HR Verbindung"; ObjectID = "dxo-2B-l8I"; */
+"dxo-2B-l8I.text" = "HR Verbindung";
 
 /* Class = "IBUILabel"; text = "teils-teils"; ObjectID = "f4Y-Br-TSS"; */
 "f4Y-Br-TSS.text" = "teils-teils";

@@ -731,7 +731,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="HxM Verbindung" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxo-2B-l8I">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="HR Verbindung" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxo-2B-l8I">
                                                     <rect key="frame" x="20" y="14" width="185" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="185" id="Gkr-oy-YHE"/>
@@ -938,7 +938,7 @@ Flow-Kurzfragebogen entwickelt von Falko Rheinberg &amp; Regina Vollmeyer, Unive
             </objects>
             <point key="canvasLocation" x="1591" y="1251"/>
         </scene>
-        <!--HxM Geräte-->
+        <!--HR Geräte-->
         <scene sceneID="9G9-DV-8iP">
             <objects>
                 <tableViewController storyboardIdentifier="HxM Overview" id="0A1-Tz-Jd0" customClass="HeartRateMonitorDeviceTableViewController" sceneMemberID="viewController">
@@ -970,7 +970,7 @@ Flow-Kurzfragebogen entwickelt von Falko Rheinberg &amp; Regina Vollmeyer, Unive
                             <outlet property="delegate" destination="0A1-Tz-Jd0" id="2Bs-FC-wjG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="HxM Geräte" id="DuS-St-5RM">
+                    <navigationItem key="navigationItem" title="HR Geräte" id="DuS-St-5RM">
                         <barButtonItem key="rightBarButtonItem" title="Scan" style="done" id="ibw-L0-Seu">
                             <color key="tintColor" red="0.97254908084869385" green="0.97254908084869385" blue="0.97254908084869385" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
