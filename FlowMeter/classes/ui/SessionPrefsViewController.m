@@ -534,10 +534,10 @@ didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                           error:(NSError *)error
 {
     if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Verbindung wurde wieder getrennt", @"Verbindung wurde wieder getrennt")
-                                                            message:[error localizedDescription]
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Verbindung wurde getrennt", @"Titel der Fehlermeldung: Verbindung wurde getrennt")
+                                                            message:NSLocalizedString(@"Die Verbindung zum HR-Brustgurt wurde unerwartet getrennt.", @"Beschreibung der Fehlermeldung: Verbindung wurde getrennt")
                                                            delegate:nil
-                                                  cancelButtonTitle:@"Ok"
+                                                  cancelButtonTitle:NSLocalizedString(@"Ok", @"Bestätigung der Fehlermeldung: Verbindung wurde getrennt")
                                                   otherButtonTitles:nil];
         [alertView show];
     }
@@ -547,10 +547,10 @@ didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 didFailToConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                           error:(NSError *)error
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Fehler beim Verbinden", @"Fehler beim Verbinden")
-                                                        message:[error localizedDescription]
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Fehler beim Verbinden", @"Titel der Fehlermeldung: Fehler beim Verbinden")
+                                                        message:NSLocalizedString(@"Es konnte keine Verbindung zum HR-Brustgurt hergestellt werden.", @"Beschreibung der Fehlermeldung: Fehler beim Verbinden")
                                                        delegate:nil
-                                              cancelButtonTitle:@"Ok"
+                                              cancelButtonTitle:NSLocalizedString(@"Ok", @"Bestätigung der Fehlermeldung: Fehler beim Verbinden")
                                               otherButtonTitles:nil];
     [alertView show];
 }
