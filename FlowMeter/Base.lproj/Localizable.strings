@@ -139,9 +139,6 @@
 /* Datei in die Dropbox laden */
 "In die Dropbox laden" = "In die Dropbox laden";
 
-/* Info */
-"Info" = "Info";
-
 /* Information */
 "Information" = "Information";
 
@@ -193,8 +190,8 @@
 /* Sekunden Einheit Label im SessionViewController */
 "S" = "S";
 
-/* Selbsteinsätzung */
-"Selbsteinsätzung" = "Selbsteinsätzung";
+/* Selbsteinschätzung */
+"Selbsteinschätzung" = "Selbsteinschätzung";
 
 /* Trifft nicht zu */
 "Trifft nicht zu" = "Trifft nicht zu";

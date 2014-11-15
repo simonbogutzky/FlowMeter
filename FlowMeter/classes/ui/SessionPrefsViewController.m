@@ -137,7 +137,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
 
 - (NSArray *)dataHeaders
 {
-    return @[NSLocalizedString(@"Benutzer", @"Benutzer"), NSLocalizedString(@"Aktivität", @"Aktivität"), NSLocalizedString(@"Selbsteinsätzung", @"Selbsteinsätzung")];
+    return @[NSLocalizedString(@"Benutzer", @"Benutzer"), NSLocalizedString(@"Aktivität", @"Aktivität"), NSLocalizedString(@"Selbsteinschätzung", @"Selbsteinschätzung")];
 }
 
 - (NSInteger)pickerCellRowHeight

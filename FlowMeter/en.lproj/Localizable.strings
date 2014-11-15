@@ -55,9 +55,11 @@
 /* Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen. */
 "Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen." = "The value of the variation can assume at most the half of the interval value.";
 
+/* Beschreibung der Fehlermeldung: Verbindung wurde getrennt */
+"Die Verbindung zum HR-Brustgurt wurde unerwartet getrennt." = "The connection to the HR chest strap was unexpectedly disconnected.";
+
 /* Die richtigen Gedanken/Bewegungen kommen wie von selbst. */
-"Die richtigen Gedanken/Bewegungen kommen wie von selbst." = "The right thoughts/movements occur of their own accord.
-	  ";
+"Die richtigen Gedanken/Bewegungen kommen wie von selbst." = "The right thoughts/movements occur of their own accord.";
 
 /* Du hast zurzeit keine Internetverbindung */
 "Du hast zurzeit keine Internetverbindung" = "You currently have no Internet connection";
@@ -71,10 +73,13 @@
 /* Ein unbekannter Fehler ist aufgetreten */
 "Ein unbekannter Fehler ist aufgetreten" = "An unknown error has occurred";
 
+/* Beschreibung der Fehlermeldung: Fehler beim Verbinden */
+"Es konnte keine Verbindung zum HR-Brustgurt hergestellt werden." = "The App could not establish a connection to the hr chest strap.";
+
 /* Es steht etwas für mich Wichtiges auf dem Spiel. */
 "Es steht etwas für mich Wichtiges auf dem Spiel." = "Something important to me is at stake here.";
 
-/* Fehler beim Verbinden */
+/* Titel der Fehlermeldung: Fehler beim Verbinden */
 "Fehler beim Verbinden" = "Failed to connect";
 
 /* (No Commment) */
@@ -155,6 +160,9 @@
 /* Title for delete button with placeholder for number */
 "Lösche (%d)" = "Delete (%d)";
 
+/* Genutzte Lizenzen */
+"MBProgressHUD \nCopyright (c) 2013 Matej Bukovinski\n\nDropboxSDK\nCopyright (c) 2010-2013 Dropbox, Inc., http://www.dropbox.com/\n\nBEMSimpleLineGraph\nCopyright (c) 2014 Boris Emorine. Copyright (c) 2014 Sam Spencer.\n\n--\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the 'Software'), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n--\n\nReachability\nCopyright (c) 2011-2013, Tony Million.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\nlist of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\nthis list of conditions and the following disclaimer in the documentation\nand/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 'AS IS'\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE\nLIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\nCONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\nSUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\nINTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\nCONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\nARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\nPOSSIBILITY OF SUCH DAMAGE.\n\n--\n\nZCSHoldProgress\nCopyright (c) 2014 Zane Shannon. All rights reserved.\n\n--\n\nZipKit developed by Karl Moskowski.\n\nRedistribution and use in source and binary forms, with or without\n    modification, are permitted provided that the following conditions are\n    met:\n\n    * Redistributions of source code must retain the above copyright\n      notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above\n      copyright notice, this list of conditions and the following disclaimer\n      in the documentation and/or other materials provided with the\n      distribution.\n    * Neither the name of Karl Moskowski nor the names of its\n      contributors may be used to endorse or promote products derived from\n      this software without specific prior written permission.\n\n    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n    'AS IS' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n    A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n    OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n    SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n    LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n    DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n    THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\t\n--\n\nFlow-Kurzfragebogen entwickelt von Falko Rheinberg & Regina Vollmeyer, Universität Potsdam" = "MBProgressHUD \nCopyright (c) 2013 Matej Bukovinski\n\nDropboxSDK\nCopyright (c) 2010-2013 Dropbox, Inc., http://www.dropbox.com/\n\nBEMSimpleLineGraph\nCopyright (c) 2014 Boris Emorine. Copyright (c) 2014 Sam Spencer.\n\n--\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the 'Software'), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n--\n\nReachability\nCopyright (c) 2011-2013, Tony Million.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\nlist of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\nthis list of conditions and the following disclaimer in the documentation\nand/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 'AS IS'\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE\nLIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\nCONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\nSUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\nINTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\nCONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\nARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\nPOSSIBILITY OF SUCH DAMAGE.\n\n--\n\nZCSHoldProgress\nCopyright (c) 2014 Zane Shannon. All rights reserved.\n\n--\n\nZipKit developed by Karl Moskowski.\n\nRedistribution and use in source and binary forms, with or without\n    modification, are permitted provided that the following conditions are\n    met:\n\n    * Redistributions of source code must retain the above copyright\n      notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above\n      copyright notice, this list of conditions and the following disclaimer\n      in the documentation and/or other materials provided with the\n      distribution.\n    * Neither the name of Karl Moskowski nor the names of its\n      contributors may be used to endorse or promote products derived from\n      this software without specific prior written permission.\n\n    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n    'AS IS' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n    A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n    OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n    SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n    LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n    DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n    THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\t\n--\n\nFlow short scale developed by Falko Rheinberg & Regina Vollmeyer, University Potsdam";
+
 /* Minuten Einheit Label im SessionViewController */
 "MIN" = "MIN";
 
@@ -177,6 +185,9 @@
 "OK" = "OK";
 
 /* (No Commment) */
+"Ok" = "Ok";
+
+/* (No Commment) */
 "Passung" = "Fit";
 
 /* Passung (SD) */
@@ -191,8 +202,8 @@
 /* Sekunden Einheit Label im SessionViewController */
 "S" = "S";
 
-/* Selbsteinsätzung */
-"Selbsteinsätzung" = "Self-report";
+/* Selbsteinschätzung */
+"Selbsteinschätzung" = "Self-report";
 
 /* Trifft nicht zu */
 "Trifft nicht zu" = "not at all";
@@ -209,8 +220,8 @@
 /* Variablität */
 "Variablität" = "Variability";
 
-/* Verbindung wurde wieder getrennt */
-"Verbindung wurde wieder getrennt" = "Connection has been disconnected";
+/* Titel der Fehlermeldung: Verbindung wurde getrennt */
+"Verbindung wurde getrennt" = "Connection lost";
 
 /* Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit... */
 "Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit..." = "Compared to all other activities which I partake in, this one is...";

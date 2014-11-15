@@ -1,5 +1,5 @@
 /* Class = "IBUILabel"; text = "Triff nicht zu"; ObjectID = "1X8-td-6f1"; */
-"1X8-td-6f1.text" = "not at all";
+"1X8-td-6f1.text" = "The App could not establish a connection to the hr chest strap.";
 
 /* Class = "IBUILabel"; text = "Triff zu"; ObjectID = "1d2-E2-RwK"; */
 "1d2-E2-RwK.text" = "very much";
@@ -34,8 +34,8 @@
 /* Class = "IBUILabel"; text = "✎"; ObjectID = "744-6J-0ve"; */
 "744-6J-0ve.text" = "✎";
 
-/* Class = "IBUITextView"; text = "Lisense Text"; ObjectID = "AKF-1o-zo5"; */
-"AKF-1o-zo5.text" = "bla";
+/* Class = "IBUITextView"; text = " de"; ObjectID = "AKF-1o-zo5"; */
+"AKF-1o-zo5.text" = "en";
 
 /* Class = "IBUILabel"; text = "ZEIT"; ObjectID = "AVB-X3-04Z"; */
 "AVB-X3-04Z.text" = "TIME";

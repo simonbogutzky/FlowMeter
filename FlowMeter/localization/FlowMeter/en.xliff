@@ -103,9 +103,9 @@
                 <note>Class = "IBUILabel"; text = "02:05:00"; ObjectID = "DRM-us-BNo";</note>
             </trans-unit>
             <trans-unit id="DuS-St-5RM.title">
-                <source>HxM Geräte</source>
-                <target>HxM devices</target>
-                <note>Class = "IBUINavigationItem"; title = "HxM Geräte"; ObjectID = "DuS-St-5RM";</note>
+                <source>HR Geräte</source>
+                <target>HR devices</target>
+                <note>Class = "IBUINavigationItem"; title = "HR Geräte"; ObjectID = "DuS-St-5RM";</note>
             </trans-unit>
             <trans-unit id="HbQ-sv-eTH.text">
                 <source>0</source>
@@ -169,8 +169,8 @@
             </trans-unit>
             <trans-unit id="ZqP-cL-jim.text">
                 <source>Lizenzen</source>
-                <note>Class = "IBUILabel"; text = "Lizenzen"; ObjectID = "ZqP-cL-jim";</note>
                 <target>Licenses</target>
+                <note>Class = "IBUILabel"; text = "Lizenzen"; ObjectID = "ZqP-cL-jim";</note>
             </trans-unit>
             <trans-unit id="Zsq-WU-lxK.text">
                 <source></source>
@@ -208,9 +208,9 @@
                 <note>Class = "IBUILabel"; text = "120"; ObjectID = "dJb-DU-WeX";</note>
             </trans-unit>
             <trans-unit id="dxo-2B-l8I.text">
-                <source>HxM Verbindung</source>
-                <target>HxM connection</target>
-                <note>Class = "IBUILabel"; text = "HxM Verbindung"; ObjectID = "dxo-2B-l8I";</note>
+                <source>HR Verbindung</source>
+                <target>HR connection</target>
+                <note>Class = "IBUILabel"; text = "HR Verbindung"; ObjectID = "dxo-2B-l8I";</note>
             </trans-unit>
             <trans-unit id="f4Y-Br-TSS.text">
                 <source>teils-teils</source>
@@ -264,8 +264,8 @@
             </trans-unit>
             <trans-unit id="mjE-nS-RSR.title">
                 <source>Lizenzen</source>
-                <note>Class = "IBUINavigationItem"; title = "Lizenzen"; ObjectID = "mjE-nS-RSR";</note>
                 <target>Licenses</target>
+                <note>Class = "IBUINavigationItem"; title = "Lizenzen"; ObjectID = "mjE-nS-RSR";</note>
             </trans-unit>
             <trans-unit id="mlH-m3-f8i.text">
                 <source>MIN</source>
@@ -299,8 +299,8 @@
             </trans-unit>
             <trans-unit id="vN8-dH-XZK.headerTitle">
                 <source>Allgemein</source>
-                <note>Class = "IBUITableViewSection"; headerTitle = "Allgemein"; ObjectID = "vN8-dH-XZK";</note>
                 <target>General</target>
+                <note>Class = "IBUITableViewSection"; headerTitle = "Allgemein"; ObjectID = "vN8-dH-XZK";</note>
             </trans-unit>
             <trans-unit id="vyr-L6-cSf.text">
                 <source>BPM</source>
@@ -450,10 +450,15 @@
                 <target>The value of the variation can assume at most the half of the interval value.</target>
                 <note>Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen.</note>
             </trans-unit>
+            <trans-unit id="Die Verbindung zum HR-Brustgurt wurde unerwartet getrennt.">
+                <source>Die Verbindung zum HR-Brustgurt wurde unerwartet getrennt.</source>
+                <note>Beschreibung der Fehlermeldung: Verbindung wurde getrennt</note>
+                <target>The connection to the HR chest strap has been unexpectedly disconnected.</target>
+            </trans-unit>
             <trans-unit id="Die richtigen Gedanken/Bewegungen kommen wie von selbst.">
                 <source>Die richtigen Gedanken/Bewegungen kommen wie von selbst.</source>
-                <note>Die richtigen Gedanken/Bewegungen kommen wie von selbst.</note>
                 <target>The right thoughts/movements occur of their own accord.</target>
+                <note>Die richtigen Gedanken/Bewegungen kommen wie von selbst.</note>
             </trans-unit>
             <trans-unit id="Du hast zurzeit keine Internetverbindung">
                 <source>Du hast zurzeit keine Internetverbindung</source>
@@ -475,6 +480,11 @@
                 <target>An unknown error has occurred</target>
                 <note>Ein unbekannter Fehler ist aufgetreten</note>
             </trans-unit>
+            <trans-unit id="Es konnte keine Verbindung zum HR-Brustgurt hergestellt werden.">
+                <source>Es konnte keine Verbindung zum HR-Brustgurt hergestellt werden.</source>
+                <note>Beschreibung der Fehlermeldung: Fehler beim Verbinden</note>
+                <target>The App could not establish a connection to the HR chest strap.</target>
+            </trans-unit>
             <trans-unit id="Es steht etwas für mich Wichtiges auf dem Spiel.">
                 <source>Es steht etwas für mich Wichtiges auf dem Spiel.</source>
                 <target>Something important to me is at stake here.</target>
@@ -483,7 +493,7 @@
             <trans-unit id="Fehler beim Verbinden">
                 <source>Fehler beim Verbinden</source>
                 <target>Failed to connect</target>
-                <note>Fehler beim Verbinden</note>
+                <note>Titel der Fehlermeldung: Fehler beim Verbinden</note>
             </trans-unit>
             <trans-unit id="Flow">
                 <source>Flow</source>
@@ -589,10 +599,6 @@
                 <target>Upload to Dropbox</target>
                 <note>Datei in die Dropbox laden</note>
             </trans-unit>
-            <trans-unit id="Info">
-                <source>Info</source>
-                <target></target>
-            </trans-unit>
             <trans-unit id="Information">
                 <source>Information</source>
                 <target>Information</target>
@@ -652,6 +658,10 @@
                 <source>OK</source>
                 <target>OK</target>
             </trans-unit>
+            <trans-unit id="Ok">
+                <source>Ok</source>
+                <target>Ok</target>
+            </trans-unit>
             <trans-unit id="Passung">
                 <source>Passung</source>
                 <target>Fit</target>
@@ -706,10 +716,14 @@
                 <target>Variability</target>
                 <note>Variablität</note>
             </trans-unit>
+            <trans-unit id="Verbindung wurde getrennt">
+                <source>Verbindung wurde getrennt</source>
+                <note>Titel der Fehlermeldung: Verbindung wurde getrennt</note>
+                <target>Connection has been disconnected</target>
+            </trans-unit>
             <trans-unit id="Verbindung wurde wieder getrennt">
                 <source>Verbindung wurde wieder getrennt</source>
                 <target>Connection has been disconnected</target>
-                <note>Verbindung wurde wieder getrennt</note>
             </trans-unit>
             <trans-unit id="Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit...">
                 <source>Verglichen mit allen anderen Tätigkeiten, die ich sonst mache, ist die jetzige Tätigkeit...</source>
@@ -799,11 +813,9 @@
         <body>
             <trans-unit id="CFBundleName">
                 <source>$(PRODUCT_NAME)</source>
-                <target>$(PRODUCT_NAME)</target>
             </trans-unit>
             <trans-unit id="CFBundleShortVersionString">
                 <source>1.0</source>
-                <target>1.0</target>
             </trans-unit>
         </body>
     </file>
