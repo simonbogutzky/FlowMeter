@@ -21,6 +21,7 @@
 		D32E9A7E19F151140090F774 /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = D32E9A7A19F151140090F774 /* BEMLine.m */; };
 		D32E9A7F19F151140090F774 /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = D32E9A7C19F151140090F774 /* BEMSimpleLineGraphView.m */; };
 		D32E9A8219F151260090F774 /* ZCSHoldProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = D32E9A8119F151260090F774 /* ZCSHoldProgress.m */; };
+		D32EF03E1A17A60500E9D60B /* AcknowledgementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D32EF03D1A17A60500E9D60B /* AcknowledgementViewController.m */; };
 		D335030919A5D89B008CC93A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D335030819A5D89B008CC93A /* Images.xcassets */; };
 		D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3383BA91726CE1500AAC993 /* CoreData.framework */; };
 		D34C9D2917250463004C261C /* SessionRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D1F17250463004C261C /* SessionRecordViewController.m */; };
@@ -157,6 +158,8 @@
 		D32E9A7C19F151140090F774 /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BEMSimpleLineGraphView.m; path = BEMSimpleLineGraph/Classes/BEMSimpleLineGraphView.m; sourceTree = SOURCE_ROOT; };
 		D32E9A8019F151260090F774 /* ZCSHoldProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZCSHoldProgress.h; path = ZCSHoldProgress/ZCSHoldProgress.h; sourceTree = SOURCE_ROOT; };
 		D32E9A8119F151260090F774 /* ZCSHoldProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZCSHoldProgress.m; path = ZCSHoldProgress/ZCSHoldProgress.m; sourceTree = SOURCE_ROOT; };
+		D32EF03C1A17A60500E9D60B /* AcknowledgementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AcknowledgementViewController.h; path = classes/ui/AcknowledgementViewController.h; sourceTree = "<group>"; };
+		D32EF03D1A17A60500E9D60B /* AcknowledgementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AcknowledgementViewController.m; path = classes/ui/AcknowledgementViewController.m; sourceTree = "<group>"; };
 		D335030819A5D89B008CC93A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D3383BA91726CE1500AAC993 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D34C9D1E17250463004C261C /* SessionRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionRecordViewController.h; path = classes/ui/SessionRecordViewController.h; sourceTree = "<group>"; };
@@ -168,8 +171,6 @@
 		D3566B601A07D81200237AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		D3566B641A07D95700237AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/FlowMeter-InfoPlist.strings"; sourceTree = "<group>"; };
 		D3566B6E1A07D95800237AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D3566B7A1A07DC0C00237AE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "Base.lproj/FlowMeter-InfoPlist.strings"; sourceTree = "<group>"; };
-		D3566B7B1A07DC1900237AE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D35ABC0E188EC2AE00BD1D2D /* LikertScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewController.h; path = classes/ui/LikertScaleViewController.h; sourceTree = "<group>"; };
 		D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LikertScaleViewController.m; path = classes/ui/LikertScaleViewController.m; sourceTree = "<group>"; };
 		D362AF3B1A177B3600901B95 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -486,6 +487,8 @@
 				D34C9D1F17250463004C261C /* SessionRecordViewController.m */,
 				D362AF3D1A177CEE00901B95 /* LicenseViewController.h */,
 				D362AF3E1A177CEE00901B95 /* LicenseViewController.m */,
+				D32EF03C1A17A60500E9D60B /* AcknowledgementViewController.h */,
+				D32EF03D1A17A60500E9D60B /* AcknowledgementViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				D3EB072419BB9552005F0333 /* SessionPrefsViewController.m in Sources */,
 				D37067D71733F41300F86BBD /* EditViewController.m in Sources */,
 				D32E9A7D19F151140090F774 /* BEMCircle.m in Sources */,
+				D32EF03E1A17A60500E9D60B /* AcknowledgementViewController.m in Sources */,
 				D3EFDE2119F01B9200D7E88A /* FlowMeter.xcdatamodeld in Sources */,
 				D3EFDE2319F01B9200D7E88A /* main.m in Sources */,
 				D39736D419B0C11E005D643D /* Session.m in Sources */,
@@ -735,7 +739,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				D3566B641A07D95700237AE4 /* en */,
-				D3566B7A1A07DC0C00237AE4 /* Base */,
 			);
 			name = "FlowMeter-InfoPlist.strings";
 			sourceTree = "<group>";
@@ -744,7 +747,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				D3566B6E1A07D95800237AE4 /* en */,
-				D3566B7B1A07DC1900237AE4 /* Base */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

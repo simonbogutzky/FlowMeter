@@ -55,6 +55,9 @@
 /* Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen. */
 "Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen." = "The value of the variation can assume at most the half of the interval value.";
 
+/* Danksagungen */
+"Die Entwicklung des FlowMeters wurde vom BMBF-Projekt 'Flow-Maschinen: Körperbewegung und Klang' an der Hochschule Bremen unter der Leitung von Prof. Dr. phil. Barbara Grüter unterstürzt (http://www.informatik.hs-bremen.de/gob/flow/). Ich danke meinen Kollegen des Flow-Maschinen Projekts Barbara Grüter und Nassrin Hajinejad für die Inspiration und anregende Diskussionen." = "The development of the flowmeter was supported by the BMBF project 'Flow machines: body movement and sound' at the University of Applied Sciences Bremen under the direction of Prof. Dr. phil. Barbara Grüter (http://www.informatik.hs-bremen.de/gob/flow/). I thank my colleagues of the flow project Barbara Grüter and Nassrin Hajinejad for the inspiration and positive discussions.";
+
 /* Beschreibung der Fehlermeldung: Verbindung wurde getrennt */
 "Die Verbindung zum HR-Brustgurt wurde unerwartet getrennt." = "The connection to the HR chest strap was unexpectedly disconnected.";
 

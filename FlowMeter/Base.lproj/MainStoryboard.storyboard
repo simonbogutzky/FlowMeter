@@ -455,7 +455,7 @@
                                         <color key="textColor" red="0.1728159215" green="0.51933166060000002" blue="0.76862745099999996" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MESSUNGEN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7P5-t7-rHo">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ANZAHL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7P5-t7-rHo">
                                         <rect key="frame" x="8" y="24" width="92" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="92" id="WAl-Az-wyo"/>
@@ -791,6 +791,34 @@
                                             <segue destination="6va-qW-iSN" kind="push" id="kFA-BP-zLF"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Szr-f9-luW">
+                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Szr-f9-luW" id="7WQ-Eq-DDS">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Danksagungen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ibI-x2-Bui">
+                                                    <rect key="frame" x="20" y="14" width="185" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="185" id="76c-24-MFE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ibI-x2-Bui" firstAttribute="top" secondItem="7WQ-Eq-DDS" secondAttribute="top" constant="14" id="GuI-PM-7HC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="ibI-x2-Bui" firstAttribute="leading" secondItem="Szr-f9-luW" secondAttribute="leading" constant="20" id="4Tf-6L-ZGL"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="0qV-wx-ch9" kind="push" id="fWc-3i-XsE"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -822,8 +850,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text=" de" translatesAutoresizingMaskIntoConstraints="NO" id="AKF-1o-zo5">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lizenzen" translatesAutoresizingMaskIntoConstraints="NO" id="AKF-1o-zo5">
+                                <rect key="frame" x="16" y="20" width="288" height="435"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -831,10 +859,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="AKF-1o-zo5" secondAttribute="trailing" id="CdK-km-zc8"/>
-                            <constraint firstItem="AKF-1o-zo5" firstAttribute="leading" secondItem="nX5-YA-Egu" secondAttribute="leading" id="FBW-8F-SRY"/>
-                            <constraint firstItem="AKF-1o-zo5" firstAttribute="bottom" secondItem="qO2-Dw-xoj" secondAttribute="top" id="UpV-sy-2oZ"/>
-                            <constraint firstItem="AKF-1o-zo5" firstAttribute="top" secondItem="nX5-YA-Egu" secondAttribute="top" id="YSV-hx-V6H"/>
+                            <constraint firstItem="AKF-1o-zo5" firstAttribute="top" secondItem="nX5-YA-Egu" secondAttribute="top" constant="20" symbolic="YES" id="dgi-K9-FUH"/>
+                            <constraint firstItem="AKF-1o-zo5" firstAttribute="trailing" secondItem="nX5-YA-Egu" secondAttribute="trailingMargin" id="h9y-TN-Ve4"/>
+                            <constraint firstItem="AKF-1o-zo5" firstAttribute="leading" secondItem="nX5-YA-Egu" secondAttribute="leadingMargin" id="kVc-VA-AJF"/>
+                            <constraint firstItem="AKF-1o-zo5" firstAttribute="bottom" secondItem="qO2-Dw-xoj" secondAttribute="top" id="o9h-MB-xpK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Lizenzen" id="mjE-nS-RSR"/>
@@ -844,7 +872,44 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lcV-ZR-6DC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1591" y="1251"/>
+            <point key="canvasLocation" x="1592" y="1380"/>
+        </scene>
+        <!--Danksagungen-->
+        <scene sceneID="JGI-jO-wvW">
+            <objects>
+                <viewController id="0qV-wx-ch9" customClass="AcknowledgementViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s4J-CL-d71"/>
+                        <viewControllerLayoutGuide type="bottom" id="aas-2D-Jlg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yrg-g7-IUi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Danksagungen" translatesAutoresizingMaskIntoConstraints="NO" id="Mw5-T3-e1a">
+                                <rect key="frame" x="16" y="20" width="288" height="435"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Mw5-T3-e1a" firstAttribute="bottom" secondItem="aas-2D-Jlg" secondAttribute="top" id="9s5-2x-7D1"/>
+                            <constraint firstItem="Mw5-T3-e1a" firstAttribute="top" secondItem="yrg-g7-IUi" secondAttribute="top" constant="20" symbolic="YES" id="UM8-Et-TVt"/>
+                            <constraint firstItem="Mw5-T3-e1a" firstAttribute="trailing" secondItem="yrg-g7-IUi" secondAttribute="trailingMargin" id="XJI-8b-upB"/>
+                            <constraint firstItem="Mw5-T3-e1a" firstAttribute="leading" secondItem="yrg-g7-IUi" secondAttribute="leadingMargin" id="sCE-sf-7dH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Danksagungen" id="ZiB-xe-gVx"/>
+                    <connections>
+                        <outlet property="textViewAcknowledgement" destination="Mw5-T3-e1a" id="A8o-rK-CFZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4tF-zd-y05" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1963" y="1380"/>
         </scene>
         <!--HR Geräte-->
         <scene sceneID="9G9-DV-8iP">

@@ -19,7 +19,7 @@
 /* Class = "IBUILabel"; text = "FLOW"; ObjectID = "4vJ-Is-xZ5"; */
 "4vJ-Is-xZ5.text" = "FLOW";
 
-/* Class = "IBUILabel"; text = "MESSUNGEN"; ObjectID = "7P5-t7-rHo"; */
+/* Class = "IBUILabel"; text = "ANZAHL"; ObjectID = "7P5-t7-rHo"; */
 "7P5-t7-rHo.text" = "COUNT";
 
 /* Class = "IBUIBarButtonItem"; title = "Menu"; ObjectID = "7Rs-Et-hYD"; */
@@ -34,7 +34,7 @@
 /* Class = "IBUILabel"; text = "✎"; ObjectID = "744-6J-0ve"; */
 "744-6J-0ve.text" = "✎";
 
-/* Class = "IBUITextView"; text = " de"; ObjectID = "AKF-1o-zo5"; */
+/* Class = "IBUITextView"; text = "Lizenzen"; ObjectID = "AKF-1o-zo5"; */
 "AKF-1o-zo5.text" = "en";
 
 /* Class = "IBUILabel"; text = "ZEIT"; ObjectID = "AVB-X3-04Z"; */
@@ -73,6 +73,9 @@
 /* Class = "IBUILabel"; text = "Title"; ObjectID = "Ko6-wq-69x"; */
 "Ko6-wq-69x.text" = "Title";
 
+/* Class = "IBUITextView"; text = "Danksagungen"; ObjectID = "Mw5-T3-e1a"; */
+"Mw5-T3-e1a.text" = "Acknowledgements";
+
 /* Class = "IBUIBarButtonItem"; title = "Abbrechen"; ObjectID = "NIg-71-mrk"; */
 "NIg-71-mrk.title" = "Cancel";
 
@@ -84,6 +87,9 @@
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "TjS-8J-YUm"; */
 "TjS-8J-YUm.text" = "Label";
+
+/* Class = "IBUINavigationItem"; title = "Danksagungen"; ObjectID = "ZiB-xe-gVx"; */
+"ZiB-xe-gVx.title" = "Acknowledgements";
 
 /* Class = "IBUITabBarItem"; title = "Flow-Messungen"; ObjectID = "Zq6-8C-6RD"; */
 "Zq6-8C-6RD.title" = "Flow-Measurements";
@@ -129,6 +135,9 @@
 
 /* Class = "IBUILabel"; text = "14"; ObjectID = "hma-90-mkH"; */
 "hma-90-mkH.text" = "14";
+
+/* Class = "IBUILabel"; text = "Danksagungen"; ObjectID = "ibI-x2-Bui"; */
+"ibI-x2-Bui.text" = "Acknowledgements";
 
 /* Class = "IBUIBarButtonItem"; title = "Scan"; ObjectID = "ibw-L0-Seu"; */
 "ibw-L0-Seu.title" = "Scan";
