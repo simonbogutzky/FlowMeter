@@ -168,7 +168,6 @@
 		D3566B601A07D81200237AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		D3566B641A07D95700237AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/FlowMeter-InfoPlist.strings"; sourceTree = "<group>"; };
 		D3566B6E1A07D95800237AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D3566B701A07DA5800237AE4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/FlowMeter-InfoPlist.strings"; sourceTree = "<group>"; };
 		D3566B7A1A07DC0C00237AE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "Base.lproj/FlowMeter-InfoPlist.strings"; sourceTree = "<group>"; };
 		D3566B7B1A07DC1900237AE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D35ABC0E188EC2AE00BD1D2D /* LikertScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewController.h; path = classes/ui/LikertScaleViewController.h; sourceTree = "<group>"; };
@@ -736,7 +735,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				D3566B641A07D95700237AE4 /* en */,
-				D3566B701A07DA5800237AE4 /* de */,
 				D3566B7A1A07DC0C00237AE4 /* Base */,
 			);
 			name = "FlowMeter-InfoPlist.strings";
