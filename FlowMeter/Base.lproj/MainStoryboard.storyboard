@@ -1,14 +1,92 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="zkI-Pb-t4W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6221" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="WOB-dE-wrc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="ICW-S6-mCA">
+            <objects>
+                <navigationController id="WOB-dE-wrc" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ish-1W-U2L">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Iwz-6n-8Ln" kind="relationship" relationship="rootViewController" id="JvX-ab-XaW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FCj-pt-3Db" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-353" y="-141"/>
+        </scene>
+        <!--Launch-->
+        <scene sceneID="6EN-9h-lQn">
+            <objects>
+                <viewController title="Launch" id="Iwz-6n-8Ln" customClass="LaunchViewController" customModule="FlowMeter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mxa-F4-E9p"/>
+                        <viewControllerLayoutGuide type="bottom" id="Sjs-ye-19c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AYX-t6-WDe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TinyTraveler" translatesAutoresizingMaskIntoConstraints="NO" id="L2o-Nb-5Ri">
+                                <rect key="frame" x="0.0" y="520" width="39" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="G1z-EA-Yrd"/>
+                                    <constraint firstAttribute="width" constant="39" id="mZH-nd-8Ef"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g35-oe-CBX">
+                                <rect key="frame" x="8" y="385" width="304" height="115"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="304" id="pI8-V2-2jP"/>
+                                </constraints>
+                                <string key="text">Die App "FlowMeter" ist ein Arbeitsergebnis des BMBF-Projekts "Flow-Maschinen: Körperbewegung und Klang", insofern sie aus dem Kontext des Projekts entstanden ist. 
+
+Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-Forschung zur Verfügung gestellt.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2014 Simon Bogutzky. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="fi7-XL-QJ6">
+                                <rect key="frame" x="32" y="545" width="281" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="281" id="q3R-FM-9Yk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppImage" translatesAutoresizingMaskIntoConstraints="NO" id="ILT-PI-Fqu">
+                                <rect key="frame" x="0.0" y="20" width="320" height="320"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="L2o-Nb-5Ri" firstAttribute="leading" secondItem="AYX-t6-WDe" secondAttribute="leading" id="JZ0-Dp-Z0X"/>
+                            <constraint firstAttribute="centerX" secondItem="g35-oe-CBX" secondAttribute="centerX" id="PYc-Bl-1aK"/>
+                            <constraint firstAttribute="bottom" secondItem="fi7-XL-QJ6" secondAttribute="bottom" constant="8" id="QUg-tE-mJp"/>
+                            <constraint firstItem="ILT-PI-Fqu" firstAttribute="top" secondItem="AYX-t6-WDe" secondAttribute="top" constant="20" id="gUh-qQ-KLG"/>
+                            <constraint firstAttribute="centerX" secondItem="ILT-PI-Fqu" secondAttribute="centerX" id="hWk-6T-uhb"/>
+                            <constraint firstItem="fi7-XL-QJ6" firstAttribute="leading" secondItem="AYX-t6-WDe" secondAttribute="leading" constant="32" id="lGv-Og-p4K"/>
+                            <constraint firstItem="L2o-Nb-5Ri" firstAttribute="bottom" secondItem="AYX-t6-WDe" secondAttribute="bottom" id="lor-NJ-ve9"/>
+                            <constraint firstItem="L2o-Nb-5Ri" firstAttribute="top" secondItem="g35-oe-CBX" secondAttribute="bottom" constant="20" id="pi0-wZ-uc6"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="heG-Iv-dpN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zbe-Jd-q2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135" y="-141"/>
+        </scene>
         <!--Tab Bar-->
         <scene sceneID="Ql7-o7-e7W">
             <objects>
-                <tabBarController id="zkI-Pb-t4W" userLabel="Tab Bar" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBar" id="zkI-Pb-t4W" userLabel="Tab Bar" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="DHM-Al-I5O">
@@ -791,34 +869,6 @@
                                             <segue destination="6va-qW-iSN" kind="push" id="kFA-BP-zLF"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Szr-f9-luW">
-                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Szr-f9-luW" id="7WQ-Eq-DDS">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Danksagungen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ibI-x2-Bui">
-                                                    <rect key="frame" x="20" y="14" width="185" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="185" id="76c-24-MFE"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="ibI-x2-Bui" firstAttribute="top" secondItem="7WQ-Eq-DDS" secondAttribute="top" constant="14" id="GuI-PM-7HC"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <constraints>
-                                            <constraint firstItem="ibI-x2-Bui" firstAttribute="leading" secondItem="Szr-f9-luW" secondAttribute="leading" constant="20" id="4Tf-6L-ZGL"/>
-                                        </constraints>
-                                        <connections>
-                                            <segue destination="0qV-wx-ch9" kind="push" id="fWc-3i-XsE"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -883,11 +933,11 @@
                         <viewControllerLayoutGuide type="bottom" id="aas-2D-Jlg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yrg-g7-IUi">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Danksagungen" translatesAutoresizingMaskIntoConstraints="NO" id="Mw5-T3-e1a">
-                                <rect key="frame" x="16" y="20" width="288" height="435"/>
+                                <rect key="frame" x="16" y="20" width="288" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1301,10 +1351,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AppImage" width="320" height="320"/>
         <image name="StopButton" width="160" height="160"/>
         <image name="TabBarIconMeassurements" width="30" height="30"/>
         <image name="TabBarIconPrefs" width="30" height="30"/>
         <image name="TabBarIconStart" width="30" height="30"/>
+        <image name="TinyTraveler" width="78" height="96"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

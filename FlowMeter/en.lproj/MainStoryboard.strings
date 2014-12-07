@@ -1,5 +1,9 @@
+
+/* Class = "IBUILabel"; text = "4.5 ⍉"; ObjectID = "11w-qP-avr"; */
+"11w-qP-avr.text" = "4.5 ⍉";
+
 /* Class = "IBUILabel"; text = "Triff nicht zu"; ObjectID = "1X8-td-6f1"; */
-"1X8-td-6f1.text" = "The App could not establish a connection to the hr chest strap.";
+"1X8-td-6f1.text" = "not at all";
 
 /* Class = "IBUILabel"; text = "Triff zu"; ObjectID = "1d2-E2-RwK"; */
 "1d2-E2-RwK.text" = "very much";
@@ -19,6 +23,9 @@
 /* Class = "IBUILabel"; text = "FLOW"; ObjectID = "4vJ-Is-xZ5"; */
 "4vJ-Is-xZ5.text" = "FLOW";
 
+/* Class = "IBUILabel"; text = "✎"; ObjectID = "744-6J-0ve"; */
+"744-6J-0ve.text" = "✎";
+
 /* Class = "IBUILabel"; text = "ANZAHL"; ObjectID = "7P5-t7-rHo"; */
 "7P5-t7-rHo.text" = "COUNT";
 
@@ -28,14 +35,8 @@
 /* Class = "IBUILabel"; text = "❤︎"; ObjectID = "8ie-3Q-cwT"; */
 "8ie-3Q-cwT.text" = "❤︎";
 
-/* Class = "IBUILabel"; text = "4.5 ⍉"; ObjectID = "11w-qP-avr"; */
-"11w-qP-avr.text" = "4.5 ⍉";
-
-/* Class = "IBUILabel"; text = "✎"; ObjectID = "744-6J-0ve"; */
-"744-6J-0ve.text" = "✎";
-
 /* Class = "IBUITextView"; text = "Lizenzen"; ObjectID = "AKF-1o-zo5"; */
-"AKF-1o-zo5.text" = "en";
+"AKF-1o-zo5.text" = "Lizenzen";
 
 /* Class = "IBUILabel"; text = "ZEIT"; ObjectID = "AVB-X3-04Z"; */
 "AVB-X3-04Z.text" = "TIME";
@@ -60,6 +61,9 @@
 
 /* Class = "IBUITabBarItem"; title = "Einstellungen"; ObjectID = "Im2-FV-wo3"; */
 "Im2-FV-wo3.title" = "Preferences";
+
+/* Class = "IBUIViewController"; title = "Launch"; ObjectID = "Iwz-6n-8Ln"; */
+"Iwz-6n-8Ln.title" = "Launch";
 
 /* Class = "IBUILabel"; text = "00:00"; ObjectID = "JBd-iU-TgT"; */
 "JBd-iU-TgT.text" = "00:00";
@@ -127,17 +131,20 @@
 /* Class = "IBUINavigationItem"; title = "S. Bogutzky - Laufen"; ObjectID = "fhB-78-Qag"; */
 "fhB-78-Qag.title" = "S. Bogutzky - Running";
 
+/* Class = "IBUILabel"; text = "  Copyright (c) 2014 Simon Bogutzky. All rights reserved."; ObjectID = "fi7-XL-QJ6"; */
+"fi7-XL-QJ6.text" = "  Copyright (c) 2014 Simon Bogutzky. All rights reserved.";
+
 /* Class = "IBUILabel"; text = "✎"; ObjectID = "g1v-4K-Oax"; */
 "g1v-4K-Oax.text" = "✎";
+
+/* Class = "IBUILabel"; text = "Die App \"FlowMeter\" ist ein Arbeitsergebnis des BMBF-Projekts \"Flow-Maschinen: Körperbewegung und Klang\", insofern sie aus dem Kontext des Projekts entstanden ist. \n\nSie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-Forschung zur Verfügung gestellt."; ObjectID = "g35-oe-CBX"; */
+"g35-oe-CBX.text" = "The app \"FlowMeter\" is a working result of the BMBF-project \"Flow-Mashines: Body movement and Sound\", insofar as its idea emerged from context of the project. It was developed by Simon Bogutzky outside working hours and is provided the flow research.";
 
 /* Class = "IBUINavigationItem"; title = "Lauf"; ObjectID = "hQZ-pK-huO"; */
 "hQZ-pK-huO.title" = "Run";
 
 /* Class = "IBUILabel"; text = "14"; ObjectID = "hma-90-mkH"; */
 "hma-90-mkH.text" = "14";
-
-/* Class = "IBUILabel"; text = "Danksagungen"; ObjectID = "ibI-x2-Bui"; */
-"ibI-x2-Bui.text" = "Acknowledgements";
 
 /* Class = "IBUIBarButtonItem"; title = "Scan"; ObjectID = "ibw-L0-Seu"; */
 "ibw-L0-Seu.title" = "Scan";
