@@ -138,7 +138,7 @@
 "g1v-4K-Oax.text" = "✎";
 
 /* Class = "IBUILabel"; text = "Die App \"FlowMeter\" ist ein Arbeitsergebnis des BMBF-Projekts \"Flow-Maschinen: Körperbewegung und Klang\", insofern sie aus dem Kontext des Projekts entstanden ist. \n\nSie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-Forschung zur Verfügung gestellt."; ObjectID = "g35-oe-CBX"; */
-"g35-oe-CBX.text" = "The app \"FlowMeter\" is a working result of the BMBF-project \"Flow-Mashines: Body movement and Sound\", insofar as its idea emerged out of the project context. It was developed by Simon Bogutzky outside working hours and was made available for the flow research.";
+"g35-oe-CBX.text" = "The app \"FlowMeter\" is a working result of the BMBF-project \"Flow-Mashines: Body movement and Sound\", insofar as its idea emerged out of the project context. \n\nIt was developed by Simon Bogutzky outside working hours and was made available for the flow research.";
 
 /* Class = "IBUINavigationItem"; title = "Lauf"; ObjectID = "hQZ-pK-huO"; */
 "hQZ-pK-huO.title" = "Run";
