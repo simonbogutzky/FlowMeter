@@ -914,8 +914,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = FlowMeter;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "03c5be58-8d92-40b4-a3c2-dc379136a056";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "03c5be58-8d92-40b4-a3c2-dc379136a056";
 				SWIFT_OBJC_BRIDGING_HEADER = "FlowMeter/FlowMeter-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;
