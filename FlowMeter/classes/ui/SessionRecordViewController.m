@@ -18,6 +18,9 @@
 #import "LikertScaleViewController.h"
 #import <AudioToolbox/AudioServices.h>
 #import <CoreMotion/CoreMotion.h>
+#import "MotionRecord.h"
+
+#define kMotionRecordMaxCount   500
 
 @interface SessionRecordViewController ()
 
@@ -44,6 +47,11 @@
 @property (nonatomic) int heartRateCount;
 @property (nonatomic) long heartRateSum;
 @property (nonatomic) NSTimeInterval lastTimeInterval;
+
+@property (nonatomic, strong) NSMutableArray *motionRecords1;
+@property (nonatomic, strong) NSMutableArray *motionRecords2;
+@property (nonatomic, assign) int motionRecordArrayId;
+@property (nonatomic, assign) int motionRecordCount;
 
 @property (nonatomic, weak) IBOutlet UIView *countdownBackgroundView;
 @property (nonatomic, weak) IBOutlet UILabel *countdownLabel;
@@ -282,11 +290,45 @@
     }
     
     // Start motion manager updates
+    self.motionRecords1 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
+    self.motionRecords2 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
+    
     if ([self.motionManager isDeviceMotionAvailable] == YES) {
         [self.motionManager setDeviceMotionUpdateInterval:1/100];
         [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
             if (error == nil) {
+                MotionRecord *motionRecord = [NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
+                motionRecord.timestamp = motion.timestamp;
+                motionRecord.userAccelerationX = motion.userAcceleration.x;
+                motionRecord.userAccelerationY = motion.userAcceleration.y;
+                motionRecord.userAccelerationZ = motion.userAcceleration.z;
+                motionRecord.gravityX = motion.gravity.x;
+                motionRecord.gravityY = motion.gravity.y;
+                motionRecord.gravityZ = motion.gravity.z;
+                motionRecord.rotationRateX = motion.rotationRate.x;
+                motionRecord.rotationRateY = motion.rotationRate.y;
+                motionRecord.rotationRateZ = motion.rotationRate.z;
+                motionRecord.attitudePitch = motion.attitude.pitch;
+                motionRecord.attitudeRoll = motion.attitude.roll;
+                motionRecord.attitudeYaw = motion.attitude.yaw;
                 
+                self.motionRecordCount++;
+                
+                if (self.motionRecordCount % kMotionRecordMaxCount == 0) {
+                    if (self.motionRecordArrayId == 1) {
+                        self.motionRecordArrayId = 2;
+                        [self saveMotionRecords:self.motionRecords1];
+                    } else {
+                        self.motionRecordArrayId = 1;
+                        [self saveMotionRecords:self.motionRecords2];
+                    }
+                }
+                
+                if (self.motionRecordArrayId == 1) {
+                    [self.motionRecords1 addObject:motionRecord];
+                } else {
+                    [self.motionRecords2 addObject:motionRecord];
+                }
             }
         }];
     }
@@ -375,6 +417,15 @@
                              });
                          });
                      }];
+}
+
+- (void)saveMotionRecords:(NSMutableArray *)motionRecords
+{
+    NSSet *motionRecordSet = [NSSet setWithArray:motionRecords];
+    [self.session addMotionRecords:motionRecordSet];
+    
+    [self.appDelegate saveContext];
+    [motionRecords removeAllObjects];
 }
 
 #pragma mark -
