@@ -12,6 +12,7 @@
 
 #import "SelfReport+Description.h"
 #import "HeartRateRecord+Description.h"
+#import "MotionRecord+Description.h"
 #import "ZipKit/ZipKit.h"
 
 @implementation Session (OutStream)
@@ -51,6 +52,20 @@
         // Append data
         for (HeartRateRecord *heartRateRecord in heartRateRecords) {
             [data appendData:[[heartRateRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        }
+    }
+    
+    if ([self.motionRecords count] > 0) {
+        
+        [data appendData:[[NSString stringWithFormat:@" \n\n\n%@ \n\n", NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        // Order by timestamp
+        NSArray *motionRecords = [self.motionRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
+        [data appendData:[[[motionRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        // Append data
+        for (MotionRecord *motionRecord in motionRecords) {
+            [data appendData:[[motionRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         }
     }
     
