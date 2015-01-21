@@ -31,7 +31,6 @@
 @property (nonatomic, strong) NSTimer *selfReportTimer;
 @property (nonatomic, strong) NSTimer *countdownTimer;
 @property (nonatomic, strong) NSTimer *stopWatchTimer;
-@property (nonatomic, strong) NSDate *stopWatchStartDate;
 
 @property (nonatomic, strong) NSDate *startSelfReportDate;
 @property (nonatomic) int selfReportCount;
@@ -52,6 +51,7 @@
 @property (nonatomic, strong) NSMutableArray *motionRecords2;
 @property (nonatomic, assign) int motionRecordArrayId;
 @property (nonatomic, assign) int motionRecordCount;
+@property (nonatomic, strong) NSNumber *firstMotionTimestamp;
 
 @property (nonatomic, weak) IBOutlet UIView *countdownBackgroundView;
 @property (nonatomic, weak) IBOutlet UILabel *countdownLabel;
@@ -242,7 +242,7 @@
 
 - (void)startStopWatch
 {
-    self.stopWatchStartDate = [NSDate date];
+    self.session.date = [NSDate date];
     self.stopWatchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
                                                            target:self
                                                          selector:@selector(updateStopWatch)
@@ -278,7 +278,7 @@
 {
     // Create date from the elapsed time
     NSDate *currentDate = [NSDate date];
-    return [currentDate timeIntervalSinceDate:self.stopWatchStartDate];
+    return [currentDate timeIntervalSinceDate:self.session.date];
 }
 
 - (void)startSensorUpdates
@@ -292,42 +292,52 @@
     // Start motion manager updates
     self.motionRecords1 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
     self.motionRecords2 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
+    self.firstMotionTimestamp = nil;
     
     if ([self.motionManager isDeviceMotionAvailable] == YES) {
         [self.motionManager setDeviceMotionUpdateInterval:1/100];
         [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
-            if (error == nil) {
-                MotionRecord *motionRecord = [NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
-                motionRecord.timestamp = motion.timestamp;
-                motionRecord.userAccelerationX = motion.userAcceleration.x;
-                motionRecord.userAccelerationY = motion.userAcceleration.y;
-                motionRecord.userAccelerationZ = motion.userAcceleration.z;
-                motionRecord.gravityX = motion.gravity.x;
-                motionRecord.gravityY = motion.gravity.y;
-                motionRecord.gravityZ = motion.gravity.z;
-                motionRecord.rotationRateX = motion.rotationRate.x;
-                motionRecord.rotationRateY = motion.rotationRate.y;
-                motionRecord.rotationRateZ = motion.rotationRate.z;
-                motionRecord.attitudePitch = motion.attitude.pitch;
-                motionRecord.attitudeRoll = motion.attitude.roll;
-                motionRecord.attitudeYaw = motion.attitude.yaw;
-                
-                self.motionRecordCount++;
-                
-                if (self.motionRecordCount % kMotionRecordMaxCount == 0) {
-                    if (self.motionRecordArrayId == 1) {
-                        self.motionRecordArrayId = 2;
-                        [self saveMotionRecords:self.motionRecords1];
+            if(self.isCollecting) {
+                if (error == nil) {
+                    MotionRecord *motionRecord = [NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
+                    
+                    if (self.firstMotionTimestamp == nil) {
+                        motionRecord.timestamp = fabs([self.session.date timeIntervalSinceNow]);
+                        self.firstMotionTimestamp = [NSNumber numberWithDouble:motion.timestamp - motionRecord.timestamp];
                     } else {
-                        self.motionRecordArrayId = 1;
-                        [self saveMotionRecords:self.motionRecords2];
+                        motionRecord.timestamp = motion.timestamp - [self.firstMotionTimestamp doubleValue];
                     }
-                }
-                
-                if (self.motionRecordArrayId == 1) {
-                    [self.motionRecords1 addObject:motionRecord];
-                } else {
-                    [self.motionRecords2 addObject:motionRecord];
+                    
+                    motionRecord.userAccelerationX = motion.userAcceleration.x;
+                    motionRecord.userAccelerationY = motion.userAcceleration.y;
+                    motionRecord.userAccelerationZ = motion.userAcceleration.z;
+                    motionRecord.gravityX = motion.gravity.x;
+                    motionRecord.gravityY = motion.gravity.y;
+                    motionRecord.gravityZ = motion.gravity.z;
+                    motionRecord.rotationRateX = motion.rotationRate.x;
+                    motionRecord.rotationRateY = motion.rotationRate.y;
+                    motionRecord.rotationRateZ = motion.rotationRate.z;
+                    motionRecord.attitudePitch = motion.attitude.pitch;
+                    motionRecord.attitudeRoll = motion.attitude.roll;
+                    motionRecord.attitudeYaw = motion.attitude.yaw;
+                    
+                    self.motionRecordCount++;
+                    
+                    if (self.motionRecordCount % kMotionRecordMaxCount == 0) {
+                        if (self.motionRecordArrayId == 1) {
+                            self.motionRecordArrayId = 2;
+                            [self saveMotionRecords:self.motionRecords1];
+                        } else {
+                            self.motionRecordArrayId = 1;
+                            [self saveMotionRecords:self.motionRecords2];
+                        }
+                    }
+                    
+                    if (self.motionRecordArrayId == 1) {
+                        [self.motionRecords1 addObject:motionRecord];
+                    } else {
+                        [self.motionRecords2 addObject:motionRecord];
+                    }
                 }
             }
         }];
@@ -351,7 +361,6 @@
 {
     NSLog(@"# Start collecting");
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    self.session.date = [NSDate date];
     self.startSelfReportDate = nil;
     self.selfReportCount = 0;
     self.flowSum = 0.0;
@@ -379,9 +388,9 @@
         activity.name = [self.sessionData[1][0] objectForKey:kValueKey];
     }
     self.session.activity = activity;
-    self.isCollecting = !self.isCollecting;
     
     [self startStopWatch];
+    self.isCollecting = !self.isCollecting;
     
     if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
         self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[self timeToNextSelfReport] target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
