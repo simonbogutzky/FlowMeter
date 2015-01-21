@@ -17,11 +17,13 @@
 #import "ZCSHoldProgress.h"
 #import "LikertScaleViewController.h"
 #import <AudioToolbox/AudioServices.h>
+#import <CoreMotion/CoreMotion.h>
 
 @interface SessionRecordViewController ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) Session *session;
+@property (nonatomic, strong) CMMotionManager *motionManager;
 
 @property (nonatomic, strong) NSTimer *selfReportTimer;
 @property (nonatomic, strong) NSTimer *countdownTimer;
@@ -128,6 +130,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.motionManager = [[CMMotionManager alloc] init];
     
     // Start sensor updates
     [self startSensorUpdates];
@@ -276,6 +280,16 @@
         self.appDelegate.heartRateMonitorManager.delegate = self;
         [self.appDelegate.heartRateMonitorManager startMonitoring];
     }
+    
+    // Start motion manager updates
+    if ([self.motionManager isDeviceMotionAvailable] == YES) {
+        [self.motionManager setDeviceMotionUpdateInterval:1/100];
+        [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
+            if (error == nil) {
+                
+            }
+        }];
+    }
 }
 
 - (void)stopSensorUpdates
@@ -283,6 +297,11 @@
     // Stop heart rate monitor updates
     if (self.appDelegate.heartRateMonitorManager.hasConnection) {
         [self.appDelegate.heartRateMonitorManager stopMonitoring];
+    }
+    
+    // Stop motion manager updates
+    if ([self.motionManager isDeviceMotionActive] == YES) {
+        [self.motionManager stopDeviceMotionUpdates];
     }
 }
 

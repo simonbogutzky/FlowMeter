@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Activity, HeartRateRecord, SelfReport, User;
+@class Activity, HeartRateRecord, MotionRecord, SelfReport, User;
 
 @interface Session : NSManagedObject
 
@@ -28,6 +28,7 @@
 @property (nonatomic, retain) Activity *activity;
 @property (nonatomic, strong) NSString *sectionTitle;
 
+@property (nonatomic, retain) NSSet *motionRecords;
 @end
 
 @interface Session (CoreDataGeneratedAccessors)
@@ -41,5 +42,10 @@
 - (void)removeSelfReportsObject:(SelfReport *)value;
 - (void)addSelfReports:(NSSet *)values;
 - (void)removeSelfReports:(NSSet *)values;
+
+- (void)addMotionRecordsObject:(MotionRecord *)value;
+- (void)removeMotionRecordsObject:(MotionRecord *)value;
+- (void)addMotionRecords:(NSSet *)values;
+- (void)removeMotionRecords:(NSSet *)values;
 
 @end

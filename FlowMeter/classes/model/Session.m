@@ -36,5 +36,6 @@
     [dateFormatter setDateFormat:@"yyyy/MM/dd"];
     return [dateFormatter stringFromDate:self.date];
 }
+@dynamic motionRecords;
 
 @end

@@ -13,6 +13,8 @@
 		604CCD9116A6F31000E87194 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604CCD9016A6F31000E87194 /* Foundation.framework */; };
 		604CCD9316A6F31000E87194 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604CCD9216A6F31000E87194 /* CoreGraphics.framework */; };
 		60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60AA4F7216A829100026DE8D /* CoreMotion.framework */; };
+		D310FCE21A6F9D18008E4EE6 /* MotionRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = D310FCE11A6F9D18008E4EE6 /* MotionRecord.m */; };
+		D310FCE51A6F9DBE008E4EE6 /* MotionRecord+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D310FCE41A6F9DBE008E4EE6 /* MotionRecord+Description.m */; };
 		D321AC421A333CAC0011D09C /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D321AC411A333CAC0011D09C /* LaunchViewController.swift */; };
 		D324688219B8AA9E00355ABE /* SessionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D324688119B8AA9E00355ABE /* SessionDetailViewController.m */; };
 		D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACDD197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m */; };
@@ -142,6 +144,11 @@
 		604CCD9016A6F31000E87194 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		604CCD9216A6F31000E87194 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		60AA4F7216A829100026DE8D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		D310FCDD1A6F9675008E4EE6 /* FlowMeter-Version-006.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-006.xcdatamodel"; sourceTree = "<group>"; };
+		D310FCE01A6F9D18008E4EE6 /* MotionRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MotionRecord.h; path = classes/model/MotionRecord.h; sourceTree = "<group>"; };
+		D310FCE11A6F9D18008E4EE6 /* MotionRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MotionRecord.m; path = classes/model/MotionRecord.m; sourceTree = "<group>"; };
+		D310FCE31A6F9DBE008E4EE6 /* MotionRecord+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MotionRecord+Description.h"; path = "classes/model/MotionRecord+Description.h"; sourceTree = "<group>"; };
+		D310FCE41A6F9DBE008E4EE6 /* MotionRecord+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MotionRecord+Description.m"; path = "classes/model/MotionRecord+Description.m"; sourceTree = "<group>"; };
 		D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewControllerDelegate.h; path = classes/ui/LikertScaleViewControllerDelegate.h; sourceTree = "<group>"; };
 		D321AC031A3337940011D09C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D321AC051A3337A30011D09C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
@@ -197,8 +204,8 @@
 		D39736CD19B0C11E005D643D /* HeartRateRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeartRateRecord.m; path = classes/model/HeartRateRecord.m; sourceTree = "<group>"; };
 		D39736CF19B0C11E005D643D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = classes/model/User.h; sourceTree = "<group>"; };
 		D39736D019B0C11E005D643D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = classes/model/User.m; sourceTree = "<group>"; };
-		D39736D219B0C11E005D643D /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Session.h; path = classes/model/Session.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		D39736D319B0C11E005D643D /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Session.m; path = classes/model/Session.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		D39736D219B0C11E005D643D /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Session.h; path = classes/model/Session.h; sourceTree = "<group>"; };
+		D39736D319B0C11E005D643D /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Session.m; path = classes/model/Session.m; sourceTree = "<group>"; };
 		D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZipKit.xcodeproj; path = ZipKit/ZipKit.xcodeproj; sourceTree = "<group>"; };
 		D398FAEF19AB5B52003DB0CA /* HeartRateRecord+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "HeartRateRecord+Description.h"; path = "classes/model/HeartRateRecord+Description.h"; sourceTree = "<group>"; };
 		D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HeartRateRecord+Description.m"; path = "classes/model/HeartRateRecord+Description.m"; sourceTree = "<group>"; };
@@ -247,6 +254,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */,
 				D3877C0B19BEEE0E00F21881 /* libz.dylib in Frameworks */,
 				604CCD9116A6F31000E87194 /* Foundation.framework in Frameworks */,
 				D3C7ADC9171EEA44000A7D34 /* CFNetwork.framework in Frameworks */,
@@ -262,7 +270,6 @@
 				D36C44B016D788BE000B8502 /* CoreBluetooth.framework in Frameworks */,
 				D38A216D16BFF9F80075D093 /* CoreLocation.framework in Frameworks */,
 				D3C1292A18632C9A00C361CA /* DropboxSDK.framework in Frameworks */,
-				60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */,
 				D3AEA5E319F12A56008CD870 /* HeartRateMonitorFramework.framework in Frameworks */,
 				604CCD8F16A6F31000E87194 /* UIKit.framework in Frameworks */,
 				604CCD9316A6F31000E87194 /* CoreGraphics.framework in Frameworks */,
@@ -381,6 +388,10 @@
 				D329ACE7197A98F400B144B5 /* Session+OutStream.m */,
 				D39736CF19B0C11E005D643D /* User.h */,
 				D39736D019B0C11E005D643D /* User.m */,
+				D310FCE01A6F9D18008E4EE6 /* MotionRecord.h */,
+				D310FCE11A6F9D18008E4EE6 /* MotionRecord.m */,
+				D310FCE31A6F9DBE008E4EE6 /* MotionRecord+Description.h */,
+				D310FCE41A6F9DBE008E4EE6 /* MotionRecord+Description.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -697,11 +708,13 @@
 				D39736CE19B0C11E005D643D /* HeartRateRecord.m in Sources */,
 				D3A4629F1726E08900D454F7 /* SessionOverviewViewController.m in Sources */,
 				D32E9A8219F151260090F774 /* ZCSHoldProgress.m in Sources */,
+				D310FCE21A6F9D18008E4EE6 /* MotionRecord.m in Sources */,
 				D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */,
 				D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */,
 				D324688219B8AA9E00355ABE /* SessionDetailViewController.m in Sources */,
 				D39736C819B0C11D005D643D /* SelfReport.m in Sources */,
 				D3EB072419BB9552005F0333 /* SessionPrefsViewController.m in Sources */,
+				D310FCE51A6F9DBE008E4EE6 /* MotionRecord+Description.m in Sources */,
 				D37067D71733F41300F86BBD /* EditViewController.m in Sources */,
 				D32E9A7D19F151140090F774 /* BEMCircle.m in Sources */,
 				D32EF03E1A17A60500E9D60B /* AcknowledgementViewController.m in Sources */,
@@ -851,8 +864,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = FlowMeter/FlowMeter.entitlements;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Bogutzky (3G74VT8VX3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
@@ -891,8 +904,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = FlowMeter/FlowMeter.entitlements;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: out there/ communication (8936XLC29N)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
@@ -914,7 +927,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = FlowMeter;
-				PROVISIONING_PROFILE = "03c5be58-8d92-40b4-a3c2-dc379136a056";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "03c5be58-8d92-40b4-a3c2-dc379136a056";
 				SWIFT_OBJC_BRIDGING_HEADER = "FlowMeter/FlowMeter-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1039,13 +1052,14 @@
 		D3EFDE1519F01B9200D7E88A /* FlowMeter.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D310FCDD1A6F9675008E4EE6 /* FlowMeter-Version-006.xcdatamodel */,
 				D3EFDE1619F01B9200D7E88A /* FlowMeter-Version-002.xcdatamodel */,
 				D3EFDE1719F01B9200D7E88A /* FlowMeter-Version-003.xcdatamodel */,
 				D3EFDE1819F01B9200D7E88A /* FlowMeter-Version-004.xcdatamodel */,
 				D3EFDE1919F01B9200D7E88A /* FlowMeter-Version-005.xcdatamodel */,
 				D3EFDE1A19F01B9200D7E88A /* FlowMeter.xcdatamodel */,
 			);
-			currentVersion = D3EFDE1919F01B9200D7E88A /* FlowMeter-Version-005.xcdatamodel */;
+			currentVersion = D310FCDD1A6F9675008E4EE6 /* FlowMeter-Version-006.xcdatamodel */;
 			path = FlowMeter.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
