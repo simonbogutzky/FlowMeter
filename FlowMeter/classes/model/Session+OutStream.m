@@ -17,16 +17,17 @@
 
 @implementation Session (OutStream)
 
-- (NSString *)writeOut
+- (NSArray *)writeOut
 {
-    // Create archive data
-    NSMutableData *data = [NSMutableData dataWithCapacity:0];
-    
-    // Append header
-    [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-    
+    NSMutableArray *txtFileNames = [[NSMutableArray alloc] initWithCapacity:3];
     
     if ([self.selfReportCount intValue] > 0) {
+        
+        // Create archive data
+        NSMutableData *data = [NSMutableData dataWithCapacity:0];
+        
+        // Append header
+        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         
         [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Flow-Messungen", @"Flow-Messungen")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         
@@ -38,12 +39,25 @@
         for (SelfReport *selfReport in selfReports) {
             [data appendData:[[selfReport csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         }
+        
+        // Write in file with filename
+        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
+        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
+        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-questionaire.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
+        
+        [txtFileNames addObject:[self writeData:data withFilename:filename]];
     }
     
     
     if ([self.heartRateRecords count] > 0) {
         
-        [data appendData:[[NSString stringWithFormat:@" \n\n\n%@ \n\n", NSLocalizedString(@"HR-Messungen", @"HR-Messungen")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        // Create archive data
+        NSMutableData *data = [NSMutableData dataWithCapacity:0];
+        
+        // Append header
+        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"HR-Messungen", @"HR-Messungen")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         
         // Order by timeInterval
         NSArray *heartRateRecords = [self.heartRateRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
@@ -53,11 +67,24 @@
         for (HeartRateRecord *heartRateRecord in heartRateRecords) {
             [data appendData:[[heartRateRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         }
+        
+        // Write in file with filename
+        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
+        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
+        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-heart.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
+        
+        [txtFileNames addObject:[self writeData:data withFilename:filename]];
     }
     
     if ([self.motionRecords count] > 0) {
         
-        [data appendData:[[NSString stringWithFormat:@" \n\n\n%@ \n\n", NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        // Create archive data
+        NSMutableData *data = [NSMutableData dataWithCapacity:0];
+        
+        // Append header
+        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         
         // Order by timestamp
         NSArray *motionRecords = [self.motionRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
@@ -67,19 +94,24 @@
         for (MotionRecord *motionRecord in motionRecords) {
             [data appendData:[[motionRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         }
+        
+        // Write in file with filename
+        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
+        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
+        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-motion.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
+        
+        [txtFileNames addObject:[self writeData:data withFilename:filename]];
     }
     
-    // Write in file with filename
-    NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
-    [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
-    NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
-    return [self writeData:data withFilename:filename];
+    
+    return txtFileNames;
 }
 
 - (NSString *)writeOutArchive
 {
-    NSString *filename = [self writeOut];
-    filename = [self zipFileWithFilename:filename];
+    NSArray *fileNames = [self writeOut];
+    
+    NSString *filename = [self zipFilesWithFilenames:fileNames];
     return filename;
 }
 
@@ -135,6 +167,42 @@
         }
     }
     return filename;
+}
+
+- (NSString *)zipFilesWithFilenames:(NSArray *)filenames
+{
+    // Write in file with filename
+    NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
+    [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
+    NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
+    
+    NSString *achiveName = [NSString stringWithFormat:@"%@.zip", filename];
+    NSString *achivePath = [self.userDirectory stringByAppendingPathComponent:achiveName];
+    
+    // Delete files
+    NSMutableArray *filePaths = [[NSMutableArray alloc] initWithCapacity:filenames.count];
+    for (NSString *filename in filenames) {
+        [filePaths addObject:[self.userDirectory stringByAppendingPathComponent:filename]];
+    }
+    
+    // Create archive
+    ZKDataArchive *archive = [ZKDataArchive new];
+    
+    if ([archive deflateFiles:filePaths relativeToPath:self.userDirectory usingResourceFork:NO] == zkSucceeded) {
+        if ([archive.data writeToFile:achivePath atomically:YES]) {
+            
+            NSError *error = nil;
+            
+            // Delete files
+            for (NSString *filePath in filePaths) {
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                [fileManager removeItemAtPath:filePath error:&error];
+            }
+            
+            return achiveName;
+        }
+    }
+    return nil;
 }
 
 - (NSString *)fileHeader

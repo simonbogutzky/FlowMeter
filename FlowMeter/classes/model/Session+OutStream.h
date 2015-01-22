@@ -10,7 +10,7 @@
 
 @interface Session (OutStream)
 
-- (NSString *)writeOut;
+- (NSArray *)writeOut;
 - (NSString *)writeOutArchive;
 
 @end

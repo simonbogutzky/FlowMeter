@@ -46,9 +46,6 @@
     return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
-#pragma mark -
-#pragma mark - Getter
-
 - (NSArray *)dataSrc
 {
     if (_dataSrc == nil) {
@@ -249,7 +246,16 @@
     NSString *sourcePath = [self.appDelegate.userDirectory stringByAppendingPathComponent:filename];
     NSString *destinationPath = @"/";
     [self.appDelegate.dbRestClient uploadFile:filename toPath:destinationPath withParentRev:rev fromPath:sourcePath];
-    
+}
+
+- (void)zipAndUploadData
+{
+    NSString *filename = [self.session writeOutArchive];
+    [self uploadFileToDropbox:filename];
+}
+
+- (void)showUploadIndicator
+{
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     // Initialize MBProgressHUD - AnnularDeterminate
@@ -264,18 +270,20 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (buttonIndex) {
-        case 0:
-            NSLog(@"### %@", [self.session writeOut]);
+        case 0:{
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSLog(@"### %@", [self.session writeOutArchive]);
+            });
+        }
             break;
             
         case 1: {
             if ([[DBSession sharedSession] isLinked]) {
                 if (self.appDelegate.reachability.isReachable) {
                     if (self.appDelegate.reachability.isReachableViaWiFi) {
-                        NSString *filename = [self.session writeOutArchive];
-                        [self uploadFileToDropbox:filename];
+                        [self showUploadIndicator];
+                        [self performSelector:@selector(zipAndUploadData) withObject:nil afterDelay:.1];
                     } else {
-                        self.filename = [self.session writeOutArchive];
                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?", @"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") otherButtonTitles:NSLocalizedString(@"OK", @"OK"), nil];
                         [alertView show];
                     }
@@ -298,21 +306,12 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (buttonIndex) {
-        case 1:
-            [self uploadFileToDropbox:self.filename];
+        case 1: {
+            [self showUploadIndicator];
+            [self performSelector:@selector(zipAndUploadData) withObject:nil afterDelay:.1];
             break;
-            
-        default: {
-            
-            NSError *error = nil;
-            
-            // Delete file
-            NSString *rootPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-            NSString *archivePath = [rootPath stringByAppendingPathComponent:self.filename];
-            NSFileManager *fileManager = [NSFileManager defaultManager];
-            [fileManager removeItemAtPath:archivePath error:&error];
         }
-            
+        default:
             break;
     }
     self.filename = nil;
