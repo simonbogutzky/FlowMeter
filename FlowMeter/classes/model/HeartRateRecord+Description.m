@@ -12,29 +12,16 @@
 
 - (NSString *)csvDescription
 {
-    return [NSString stringWithFormat:@"%@,%f,%f,%d\n",
-            [self.dateFormatter stringFromDate:self.date],
-            [self.timeInterval doubleValue] / 1000,
-            [self.rrInterval doubleValue] / 1000,
-            [self.heartRate intValue]
+    return [NSString stringWithFormat:@"%f,%f\n",
+            self.timestamp,
+            self.rrInterval
             ];
 }
 
 - (NSString *)csvHeader
 {
-    NSMutableString *header = [NSMutableString stringWithFormat:@"%@,%@,%@,%@\n", NSLocalizedString(@"Datum", @"Datum"), NSLocalizedString(@"Zeitstempel (s)", @"Zeitstempel (s)"), NSLocalizedString(@"RR-Intervall (s)", @"RR-Intervall (s)"), NSLocalizedString(@"Herzrate (BPM)", @"Herzrate (BPM)")];
+    NSMutableString *header = [NSMutableString stringWithFormat:@"%@,%@\n", NSLocalizedString(@"Zeitstempel (s)", @"Zeitstempel (s)"), NSLocalizedString(@"RR-Intervall (s)", @"RR-Intervall (s)")];
     return header;
-}
-
-- (NSDateFormatter *)dateFormatter
-{
-    static NSDateFormatter *dateFormatter = nil;
-    if (dateFormatter == nil) {
-        dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateStyle = NSDateFormatterShortStyle;
-        dateFormatter.timeStyle = NSDateFormatterShortStyle;
-    }
-    return dateFormatter;
 }
 
 @end

@@ -45,13 +45,13 @@
 @property (nonatomic) int countdown;
 @property (nonatomic) int heartRateCount;
 @property (nonatomic) long heartRateSum;
-@property (nonatomic) NSTimeInterval lastTimeInterval;
 
 @property (nonatomic, strong) NSMutableArray *motionRecords1;
 @property (nonatomic, strong) NSMutableArray *motionRecords2;
 @property (nonatomic, assign) int motionRecordArrayId;
 @property (nonatomic, assign) int motionRecordCount;
 @property (nonatomic, strong) NSNumber *firstMotionTimestamp;
+@property (nonatomic, strong) NSNumber *firstHeartRateTimestamp;
 
 @property (nonatomic, weak) IBOutlet UIView *countdownBackgroundView;
 @property (nonatomic, weak) IBOutlet UILabel *countdownLabel;
@@ -449,13 +449,21 @@
         
         self.heartRateCount++;
         self.heartRateSum = self.heartRateSum + data.heartRate;
-        for (NSNumber *rrInterval in data.rrIntervals) {
+        
+        long rrDataCount = [data.rrTimes count];
+        for (int i = 0; i < rrDataCount; i++) {
             HeartRateRecord *heartRateRecord = [NSEntityDescription insertNewObjectForEntityForName:@"HeartRateRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
-            heartRateRecord.date = [NSDate date];
-            heartRateRecord.rrInterval = rrInterval;
-            heartRateRecord.heartRate = [NSNumber numberWithDouble:60/([rrInterval doubleValue]/1000)];
-            self.lastTimeInterval = self.lastTimeInterval + [rrInterval doubleValue];
-            heartRateRecord.timeInterval = [NSNumber numberWithDouble:self.lastTimeInterval];
+            
+            if (self.firstMotionTimestamp == nil) {
+                heartRateRecord.timestamp = fabs([self.session.date timeIntervalSinceNow]);
+                
+                self.firstHeartRateTimestamp = [NSNumber numberWithDouble:[[data.rrTimes objectAtIndex:i] doubleValue] - heartRateRecord.timestamp];
+            } else {
+                heartRateRecord.timestamp = [[data.rrTimes objectAtIndex:i] doubleValue] - [self.firstHeartRateTimestamp doubleValue];
+            }
+            
+            heartRateRecord.rrInterval = [[data.rrIntervals objectAtIndex:i] doubleValue];
+            heartRateRecord.heartRate = (int) 60/heartRateRecord.rrInterval;
             [self.session addHeartRateRecordsObject:heartRateRecord];
         }
     }
@@ -472,7 +480,6 @@ didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 - (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
 didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 {
-    self.lastTimeInterval = 0.0;
     [manager startMonitoring];
 }
 

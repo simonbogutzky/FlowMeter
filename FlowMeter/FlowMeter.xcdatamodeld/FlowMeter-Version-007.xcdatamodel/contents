@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6750" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Activity" representedClassName="Activity" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="activity" inverseEntity="Session" syncable="YES"/>
+    </entity>
+    <entity name="HeartRateRecord" representedClassName="HeartRateRecord" syncable="YES">
+        <attribute name="heartRate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="rrInterval" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="heartRateRecords" inverseEntity="Session" syncable="YES"/>
+    </entity>
+    <entity name="MotionRecord" representedClassName="MotionRecord" syncable="YES">
+        <attribute name="attitudePitch" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="attitudeRoll" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="attitudeYaw" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="gravityX" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="gravityY" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="gravityZ" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rotationRateX" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rotationRateY" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rotationRateZ" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="userAccelerationX" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="userAccelerationY" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="userAccelerationZ" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="motionRecords" inverseEntity="Session" syncable="YES"/>
+    </entity>
+    <entity name="SelfReport" representedClassName="SelfReport" syncable="YES">
+        <attribute name="absorption" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="absorptionSD" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="anxiety" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="anxietySD" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="fit" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fitSD" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="flow" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="flowSD" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fluency" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fluencySD" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="selfReports" inverseEntity="Session" syncable="YES"/>
+    </entity>
+    <entity name="Session" representedClassName="Session" syncable="YES">
+        <attribute name="averageAbsorption" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="averageAnxiety" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="averageFit" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="averageFlow" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="averageFluency" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="averageHeartrate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="selfReportCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="sessions" inverseEntity="Activity" syncable="YES"/>
+        <relationship name="heartRateRecords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HeartRateRecord" inverseName="session" inverseEntity="HeartRateRecord" syncable="YES"/>
+        <relationship name="motionRecords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MotionRecord" inverseName="session" inverseEntity="MotionRecord" syncable="YES"/>
+        <relationship name="selfReports" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SelfReport" inverseName="session" inverseEntity="SelfReport" syncable="YES"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="sessions" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="user" inverseEntity="Session" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Activity" positionX="493" positionY="-270" width="128" height="75"/>
+        <element name="HeartRateRecord" positionX="538" positionY="-145" width="128" height="105"/>
+        <element name="MotionRecord" positionX="331" positionY="17" width="128" height="253"/>
+        <element name="SelfReport" positionX="574" positionY="-67" width="128" height="238"/>
+        <element name="Session" positionX="-173" positionY="-261" width="128" height="253"/>
+        <element name="User" positionX="72" positionY="135" width="128" height="88"/>
+    </elements>
+</model>

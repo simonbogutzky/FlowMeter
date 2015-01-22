@@ -149,6 +149,7 @@
 		D310FCE11A6F9D18008E4EE6 /* MotionRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MotionRecord.m; path = classes/model/MotionRecord.m; sourceTree = "<group>"; };
 		D310FCE31A6F9DBE008E4EE6 /* MotionRecord+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MotionRecord+Description.h"; path = "classes/model/MotionRecord+Description.h"; sourceTree = "<group>"; };
 		D310FCE41A6F9DBE008E4EE6 /* MotionRecord+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MotionRecord+Description.m"; path = "classes/model/MotionRecord+Description.m"; sourceTree = "<group>"; };
+		D31C377B1A710BAF001CAB71 /* FlowMeter-Version-007.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-007.xcdatamodel"; sourceTree = "<group>"; };
 		D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewControllerDelegate.h; path = classes/ui/LikertScaleViewControllerDelegate.h; sourceTree = "<group>"; };
 		D321AC031A3337940011D09C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D321AC051A3337A30011D09C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
@@ -1053,13 +1054,14 @@
 			isa = XCVersionGroup;
 			children = (
 				D310FCDD1A6F9675008E4EE6 /* FlowMeter-Version-006.xcdatamodel */,
+				D31C377B1A710BAF001CAB71 /* FlowMeter-Version-007.xcdatamodel */,
 				D3EFDE1619F01B9200D7E88A /* FlowMeter-Version-002.xcdatamodel */,
 				D3EFDE1719F01B9200D7E88A /* FlowMeter-Version-003.xcdatamodel */,
 				D3EFDE1819F01B9200D7E88A /* FlowMeter-Version-004.xcdatamodel */,
 				D3EFDE1919F01B9200D7E88A /* FlowMeter-Version-005.xcdatamodel */,
 				D3EFDE1A19F01B9200D7E88A /* FlowMeter.xcdatamodel */,
 			);
-			currentVersion = D310FCDD1A6F9675008E4EE6 /* FlowMeter-Version-006.xcdatamodel */;
+			currentVersion = D31C377B1A710BAF001CAB71 /* FlowMeter-Version-007.xcdatamodel */;
 			path = FlowMeter.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -12,9 +12,8 @@
 
 @implementation HeartRateRecord
 
-@dynamic timeInterval;
+@dynamic timestamp;
 @dynamic session;
-@dynamic date;
 @dynamic rrInterval;
 @dynamic heartRate;
 

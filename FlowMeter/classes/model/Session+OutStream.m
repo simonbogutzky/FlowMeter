@@ -46,7 +46,7 @@
         [data appendData:[[NSString stringWithFormat:@" \n\n\n%@ \n\n", NSLocalizedString(@"HR-Messungen", @"HR-Messungen")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         
         // Order by timeInterval
-        NSArray *heartRateRecords = [self.heartRateRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timeInterval" ascending:YES]]];
+        NSArray *heartRateRecords = [self.heartRateRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
         [data appendData:[[[heartRateRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         
         // Append data
