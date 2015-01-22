@@ -13,3 +13,6 @@
 [submodule "HeartRateMonitorFramework"]
 	path = HeartRateMonitorFramework
 	url = https://sbogutzky@bitbucket.org/sbogutzky/heartratemonitorframework.git
+[submodule "BEMSimpeLineGraphFlowMeter"]
+	path = BEMSimpeLineGraphFlowMeter
+	url = https://sbogutzky@bitbucket.org/sbogutzky/bemsimplelinegraph.git

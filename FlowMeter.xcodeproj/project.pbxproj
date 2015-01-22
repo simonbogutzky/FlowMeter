@@ -20,12 +20,12 @@
 		D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACDD197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m */; };
 		D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE3197A98F400B144B5 /* SelfReport+Description.m */; };
 		D329ACED197A98F400B144B5 /* Session+OutStream.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE7197A98F400B144B5 /* Session+OutStream.m */; };
-		D32E9A7D19F151140090F774 /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = D32E9A7819F151140090F774 /* BEMCircle.m */; };
-		D32E9A7E19F151140090F774 /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = D32E9A7A19F151140090F774 /* BEMLine.m */; };
-		D32E9A7F19F151140090F774 /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = D32E9A7C19F151140090F774 /* BEMSimpleLineGraphView.m */; };
 		D32E9A8219F151260090F774 /* ZCSHoldProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = D32E9A8119F151260090F774 /* ZCSHoldProgress.m */; };
 		D32EF03E1A17A60500E9D60B /* AcknowledgementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D32EF03D1A17A60500E9D60B /* AcknowledgementViewController.m */; };
 		D335030919A5D89B008CC93A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D335030819A5D89B008CC93A /* Images.xcassets */; };
+		D33675931A713AC10048177D /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = D33675711A713AC10048177D /* BEMCircle.m */; };
+		D33675941A713AC10048177D /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = D33675731A713AC10048177D /* BEMLine.m */; };
+		D33675951A713AC10048177D /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = D33675751A713AC10048177D /* BEMSimpleLineGraphView.m */; };
 		D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3383BA91726CE1500AAC993 /* CoreData.framework */; };
 		D34C9D2917250463004C261C /* SessionRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D1F17250463004C261C /* SessionRecordViewController.m */; };
 		D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D2517250463004C261C /* PrefsTableViewController.m */; };
@@ -163,17 +163,17 @@
 		D329ACE3197A98F400B144B5 /* SelfReport+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SelfReport+Description.m"; path = "classes/model/SelfReport+Description.m"; sourceTree = "<group>"; };
 		D329ACE6197A98F400B144B5 /* Session+OutStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Session+OutStream.h"; path = "classes/model/Session+OutStream.h"; sourceTree = "<group>"; };
 		D329ACE7197A98F400B144B5 /* Session+OutStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Session+OutStream.m"; path = "classes/model/Session+OutStream.m"; sourceTree = "<group>"; };
-		D32E9A7719F151140090F774 /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BEMCircle.h; path = BEMSimpleLineGraph/Classes/BEMCircle.h; sourceTree = SOURCE_ROOT; };
-		D32E9A7819F151140090F774 /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BEMCircle.m; path = BEMSimpleLineGraph/Classes/BEMCircle.m; sourceTree = SOURCE_ROOT; };
-		D32E9A7919F151140090F774 /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BEMLine.h; path = BEMSimpleLineGraph/Classes/BEMLine.h; sourceTree = SOURCE_ROOT; };
-		D32E9A7A19F151140090F774 /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BEMLine.m; path = BEMSimpleLineGraph/Classes/BEMLine.m; sourceTree = SOURCE_ROOT; };
-		D32E9A7B19F151140090F774 /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BEMSimpleLineGraphView.h; path = BEMSimpleLineGraph/Classes/BEMSimpleLineGraphView.h; sourceTree = SOURCE_ROOT; };
-		D32E9A7C19F151140090F774 /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BEMSimpleLineGraphView.m; path = BEMSimpleLineGraph/Classes/BEMSimpleLineGraphView.m; sourceTree = SOURCE_ROOT; };
 		D32E9A8019F151260090F774 /* ZCSHoldProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZCSHoldProgress.h; path = ZCSHoldProgress/ZCSHoldProgress.h; sourceTree = SOURCE_ROOT; };
 		D32E9A8119F151260090F774 /* ZCSHoldProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZCSHoldProgress.m; path = ZCSHoldProgress/ZCSHoldProgress.m; sourceTree = SOURCE_ROOT; };
 		D32EF03C1A17A60500E9D60B /* AcknowledgementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AcknowledgementViewController.h; path = classes/ui/AcknowledgementViewController.h; sourceTree = "<group>"; };
 		D32EF03D1A17A60500E9D60B /* AcknowledgementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AcknowledgementViewController.m; path = classes/ui/AcknowledgementViewController.m; sourceTree = "<group>"; };
 		D335030819A5D89B008CC93A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D33675701A713AC10048177D /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
+		D33675711A713AC10048177D /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
+		D33675721A713AC10048177D /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
+		D33675731A713AC10048177D /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
+		D33675741A713AC10048177D /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
+		D33675751A713AC10048177D /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
 		D3383BA91726CE1500AAC993 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D34C9D1E17250463004C261C /* SessionRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionRecordViewController.h; path = classes/ui/SessionRecordViewController.h; sourceTree = "<group>"; };
 		D34C9D1F17250463004C261C /* SessionRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SessionRecordViewController.m; path = classes/ui/SessionRecordViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -290,10 +290,10 @@
 		604CCD7F16A6F31000E87194 = {
 			isa = PBXGroup;
 			children = (
+				D336756C1A713AC10048177D /* BEMSimpeLineGraphFlowMeter */,
 				604CCD9416A6F31000E87194 /* FlowMeter */,
 				604CCD8D16A6F31000E87194 /* Frameworks */,
 				D3AEA5D019F12A56008CD870 /* HeartRateMonitorFramework */,
-				D38C594E19E42B640069049C /* BEMSimpleLineGraph */,
 				D3DF0A65173F9A4C00643E5A /* MBProgressHUD */,
 				D35FEAE91725415000D92DEB /* Reachability */,
 				D3EFDE0A19F01B2700D7E88A /* ZCSHoldProgress */,
@@ -397,6 +397,27 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		D336756C1A713AC10048177D /* BEMSimpeLineGraphFlowMeter */ = {
+			isa = PBXGroup;
+			children = (
+				D336756F1A713AC10048177D /* Classes */,
+			);
+			path = BEMSimpeLineGraphFlowMeter;
+			sourceTree = "<group>";
+		};
+		D336756F1A713AC10048177D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D33675701A713AC10048177D /* BEMCircle.h */,
+				D33675711A713AC10048177D /* BEMCircle.m */,
+				D33675721A713AC10048177D /* BEMLine.h */,
+				D33675731A713AC10048177D /* BEMLine.m */,
+				D33675741A713AC10048177D /* BEMSimpleLineGraphView.h */,
+				D33675751A713AC10048177D /* BEMSimpleLineGraphView.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		D34C9D3E172504D7004C261C /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,20 +437,6 @@
 				D3C1291218632A1E00C361CA /* Reachability.m */,
 			);
 			name = Reachability;
-			path = FlowMeter;
-			sourceTree = "<group>";
-		};
-		D38C594E19E42B640069049C /* BEMSimpleLineGraph */ = {
-			isa = PBXGroup;
-			children = (
-				D32E9A7719F151140090F774 /* BEMCircle.h */,
-				D32E9A7819F151140090F774 /* BEMCircle.m */,
-				D32E9A7919F151140090F774 /* BEMLine.h */,
-				D32E9A7A19F151140090F774 /* BEMLine.m */,
-				D32E9A7B19F151140090F774 /* BEMSimpleLineGraphView.h */,
-				D32E9A7C19F151140090F774 /* BEMSimpleLineGraphView.m */,
-			);
-			name = BEMSimpleLineGraph;
 			path = FlowMeter;
 			sourceTree = "<group>";
 		};
@@ -695,9 +702,9 @@
 				D39736D119B0C11E005D643D /* User.m in Sources */,
 				D329ACED197A98F400B144B5 /* Session+OutStream.m in Sources */,
 				D396933D19BE10D700249D2C /* LabelAndSwitchTableViewCell.m in Sources */,
+				D33675941A713AC10048177D /* BEMLine.m in Sources */,
+				D33675951A713AC10048177D /* BEMSimpleLineGraphView.m in Sources */,
 				D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */,
-				D32E9A7E19F151140090F774 /* BEMLine.m in Sources */,
-				D32E9A7F19F151140090F774 /* BEMSimpleLineGraphView.m in Sources */,
 				D34C9D2917250463004C261C /* SessionRecordViewController.m in Sources */,
 				D362AF3F1A177CEE00901B95 /* LicenseViewController.m in Sources */,
 				D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */,
@@ -712,12 +719,12 @@
 				D310FCE21A6F9D18008E4EE6 /* MotionRecord.m in Sources */,
 				D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */,
 				D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */,
+				D33675931A713AC10048177D /* BEMCircle.m in Sources */,
 				D324688219B8AA9E00355ABE /* SessionDetailViewController.m in Sources */,
 				D39736C819B0C11D005D643D /* SelfReport.m in Sources */,
 				D3EB072419BB9552005F0333 /* SessionPrefsViewController.m in Sources */,
 				D310FCE51A6F9DBE008E4EE6 /* MotionRecord+Description.m in Sources */,
 				D37067D71733F41300F86BBD /* EditViewController.m in Sources */,
-				D32E9A7D19F151140090F774 /* BEMCircle.m in Sources */,
 				D32EF03E1A17A60500E9D60B /* AcknowledgementViewController.m in Sources */,
 				D3EFDE2119F01B9200D7E88A /* FlowMeter.xcdatamodeld in Sources */,
 				D3EFDE2319F01B9200D7E88A /* main.m in Sources */,
