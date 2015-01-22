@@ -33,6 +33,8 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
 @property (nonatomic, assign) NSInteger pickerCellRowHeight;
 
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
+@property (weak, nonatomic) IBOutlet UILabel *labelHeartRateMonitorDeviceName;
+@property (weak, nonatomic) IBOutlet UILabel *labelHeartRateMonitorHasConnection;
 @property (nonatomic, assign) BOOL varibilityAlertAlreadyShown;
 
 @end
@@ -48,6 +50,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
 {
     [super viewDidLoad];
     [self performSelector:@selector(scan) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(checkHeartRateMonitorConnection) withObject:nil afterDelay:5];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -55,6 +58,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
     [super viewDidAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [self checkHeartRateMonitorConnection];
 }
 
 
@@ -523,7 +527,7 @@ didDiscoverHeartrateMonitorDevices:(NSArray *)heartRateMonitorDevices
     
     if (self.heartRateMonitorDevices.count > 0) {
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            HeartRateMonitorDevice *heartRateMonitorDevice = [self.heartRateMonitorDevices objectAtIndex:0];
+            HeartRateMonitorDevice *heartRateMonitorDevice = [self.heartRateMonitorDevices lastObject];
             [self.appDelegate.heartRateMonitorManager connectHeartRateMonitorDevice:heartRateMonitorDevice];
         });
     }
@@ -553,6 +557,18 @@ didFailToConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                                               cancelButtonTitle:NSLocalizedString(@"Ok", @"Bestätigung der Fehlermeldung: Fehler beim Verbinden")
                                               otherButtonTitles:nil];
     [alertView show];
+}
+
+- (void)checkHeartRateMonitorConnection
+{
+    if (self.appDelegate.heartRateMonitorManager.hasConnection) {
+        self.labelHeartRateMonitorDeviceName.text = self.appDelegate.heartRateMonitorManager.connectedHeartRateMonitorDevice.name;
+        self.labelHeartRateMonitorHasConnection.textColor = [UIColor redColor];
+    }
+    else {
+        self.labelHeartRateMonitorHasConnection.textColor = [UIColor darkGrayColor];
+    }
+    self.labelHeartRateMonitorDeviceName.hidden = !self.appDelegate.heartRateMonitorManager.hasConnection;
 }
 
 @end

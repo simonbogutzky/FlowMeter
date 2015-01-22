@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="WOB-dE-wrc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6724" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="WOB-dE-wrc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -30,18 +30,18 @@
                         <viewControllerLayoutGuide type="bottom" id="Sjs-ye-19c"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="AYX-t6-WDe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TinyTraveler" translatesAutoresizingMaskIntoConstraints="NO" id="L2o-Nb-5Ri">
-                                <rect key="frame" x="0.0" y="520" width="39" height="48"/>
+                                <rect key="frame" x="0.0" y="619" width="39" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="G1z-EA-Yrd"/>
                                     <constraint firstAttribute="width" constant="39" id="mZH-nd-8Ef"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g35-oe-CBX">
-                                <rect key="frame" x="8" y="385" width="304" height="115"/>
+                                <rect key="frame" x="36" y="484" width="304" height="115"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="304" id="pI8-V2-2jP"/>
                                 </constraints>
@@ -53,7 +53,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2014 Simon Bogutzky. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="fi7-XL-QJ6">
-                                <rect key="frame" x="32" y="545" width="281" height="15"/>
+                                <rect key="frame" x="32" y="644" width="281" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="281" id="q3R-FM-9Yk"/>
                                 </constraints>
@@ -62,7 +62,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppImage" translatesAutoresizingMaskIntoConstraints="NO" id="ILT-PI-Fqu">
-                                <rect key="frame" x="0.0" y="20" width="320" height="320"/>
+                                <rect key="frame" x="28" y="20" width="320" height="320"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -78,6 +78,10 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="heG-Iv-dpN"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zbe-Jd-q2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -88,7 +92,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
             <objects>
                 <tabBarController storyboardIdentifier="TabBar" id="zkI-Pb-t4W" userLabel="Tab Bar" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="DHM-Al-I5O">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -113,29 +117,29 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                         <viewControllerLayoutGuide type="bottom" id="HrJ-cN-hIc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" tag="105" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="❤︎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuA-Yb-SmM">
-                                <rect key="frame" x="175" y="125" width="34" height="48"/>
+                                <rect key="frame" x="203" y="175" width="34" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <color key="textColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uLq-37-zr6">
-                                <rect key="frame" x="217" y="125" width="56" height="48"/>
+                                <rect key="frame" x="245" y="175" width="56" height="48"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <color key="textColor" red="0.17281592153284672" green="0.51933166058394165" blue="0.76862745098038943" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HbQ-sv-eTH">
-                                <rect key="frame" x="84" y="125" width="23" height="48"/>
+                                <rect key="frame" x="112" y="175" width="23" height="48"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <color key="textColor" red="0.17281592153284672" green="0.51933166058394165" blue="0.76862745098038943" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBd-iU-TgT">
-                                <rect key="frame" x="36" y="173" width="249" height="96"/>
+                                <rect key="frame" x="63" y="223" width="249" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="249" id="JQt-79-OTP"/>
                                     <constraint firstAttribute="height" constant="96" id="NGx-ET-DC0"/>
@@ -145,13 +149,13 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="744-6J-0ve">
-                                <rect key="frame" x="42" y="125" width="34" height="48"/>
+                                <rect key="frame" x="70" y="175" width="34" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <color key="textColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cs9-qS-JfL">
-                                <rect key="frame" x="203" y="269" width="50" height="29"/>
+                                <rect key="frame" x="231" y="319" width="50" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="N7P-53-VAH"/>
                                     <constraint firstAttribute="width" constant="50" id="Uz4-GF-5Gu"/>
@@ -161,7 +165,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MIN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlH-m3-f8i">
-                                <rect key="frame" x="67" y="270" width="50" height="29"/>
+                                <rect key="frame" x="95" y="319" width="50" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="HwU-K1-mX3"/>
                                     <constraint firstAttribute="width" constant="50" id="eGc-M9-RcU"/>
@@ -171,7 +175,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQg-zv-JWB">
-                                <rect key="frame" x="80" y="406" width="160" height="160"/>
+                                <rect key="frame" x="108" y="505" width="160" height="160"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="StopButton" translatesAutoresizingMaskIntoConstraints="NO" id="W8S-co-ljA">
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
@@ -184,10 +188,10 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="No8-XL-3qD" userLabel="Start Countdown View">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfM-7K-tdj" userLabel="Start Countdown Label">
-                                        <rect key="frame" x="133" y="224" width="55" height="120"/>
+                                        <rect key="frame" x="160" y="274" width="55" height="120"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="100"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
@@ -253,14 +257,14 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                         <viewControllerLayoutGuide type="bottom" id="mAQ-EO-yG1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kBz-oe-xH4">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DFu-Aw-v46">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VCk-FN-gWn">
-                                        <rect key="frame" x="16" y="13" width="288" height="20"/>
+                                        <rect key="frame" x="16" y="13" width="343" height="20"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
@@ -278,7 +282,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tpd-F3-oak">
-                                <rect key="frame" x="0.0" y="46" width="320" height="458"/>
+                                <rect key="frame" x="0.0" y="46" width="375" height="557"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="Option Cell" textLabel="3Dj-cx-6L9" style="IBUITableViewCellStyleDefault" id="wqn-bd-a5w">
@@ -343,7 +347,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
             <objects>
                 <tableViewController id="9tQ-ao-a9m" userLabel="Flow-Messungen Übersicht" customClass="SessionOverviewViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4NU-bL-Hd7">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" red="0.92549019607843142" green="0.94509803921568625" blue="0.95686274509803915" alpha="1" colorSpace="deviceRGB"/>
@@ -380,19 +384,19 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="106" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="24" translatesAutoresizingMaskIntoConstraints="NO" id="dJb-DU-WeX">
-                                            <rect key="frame" x="151" y="24" width="24" height="17"/>
+                                            <rect key="frame" x="179" y="24" width="24" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.17281592153284672" green="0.51933166058394165" blue="0.76862745098038943" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="105" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="❤︎" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-3Q-cwT">
-                                            <rect key="frame" x="136" y="22" width="15" height="21"/>
+                                            <rect key="frame" x="164" y="22" width="15" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.17281592153284672" green="0.51933166058394165" blue="0.76862745098038943" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="107" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="03h 05m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Yf-mk-QvG">
-                                            <rect key="frame" x="197" y="24" width="90" height="17"/>
+                                            <rect key="frame" x="252" y="24" width="90" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="90" id="1LE-St-mCG"/>
                                             </constraints>
@@ -401,7 +405,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="102" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Laufen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lxG-6c-LKo">
-                                            <rect key="frame" x="197" y="0.0" width="90" height="17"/>
+                                            <rect key="frame" x="252" y="0.0" width="90" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="90" id="J0e-5C-aMA"/>
                                             </constraints>
@@ -475,17 +479,17 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                         <viewControllerLayoutGuide type="bottom" id="b1h-4M-Ga1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="i5L-bJ-m4Q">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="August 28, 2014 - 17:30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yp2-k7-OXg">
-                                <rect key="frame" x="73" y="6" width="175" height="20"/>
+                                <rect key="frame" x="100" y="6" width="175" height="20"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="textColor" red="0.47450980390000003" green="0.47450980390000003" blue="0.47450980390000003" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQq-g7-LQ8" userLabel="Line (Light grey)">
-                                <rect key="frame" x="0.0" y="32" width="320" height="1"/>
+                                <rect key="frame" x="0.0" y="32" width="375" height="1"/>
                                 <color key="backgroundColor" red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="dX1-WN-WvW"/>
@@ -501,7 +505,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.5 ⍉" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="car-Lx-cye">
-                                <rect key="frame" x="224" y="37" width="80" height="24"/>
+                                <rect key="frame" x="279" y="37" width="80" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="2rC-rk-pbc"/>
                                 </constraints>
@@ -510,7 +514,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHe-6K-3zW" customClass="BEMSimpleLineGraphView">
-                                <rect key="frame" x="8" y="61" width="292" height="180"/>
+                                <rect key="frame" x="8" y="61" width="347" height="180"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="180" id="Qgw-8I-Lsg"/>
@@ -521,7 +525,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kk5-wV-F1G">
-                                <rect key="frame" x="0.0" y="241" width="320" height="45"/>
+                                <rect key="frame" x="0.0" y="241" width="375" height="45"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDl-la-9j6">
                                         <rect key="frame" x="8" y="8" width="92" height="20"/>
@@ -563,7 +567,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZEIT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVB-X3-04Z">
-                                        <rect key="frame" x="164" y="25" width="80" height="20"/>
+                                        <rect key="frame" x="219" y="25" width="80" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="9Ts-6M-OYa"/>
                                             <constraint firstAttribute="height" constant="20" id="cwj-3d-iVi"/>
@@ -573,7 +577,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02:05:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRM-us-BNo">
-                                        <rect key="frame" x="164" y="8" width="80" height="20"/>
+                                        <rect key="frame" x="219" y="8" width="80" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="99K-sr-Vsi"/>
                                             <constraint firstAttribute="height" constant="20" id="hMm-wr-5Ot"/>
@@ -583,7 +587,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BPM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyr-L6-cSf">
-                                        <rect key="frame" x="256" y="25" width="56" height="20"/>
+                                        <rect key="frame" x="311" y="25" width="56" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="56" id="0y5-Pm-NvE"/>
                                             <constraint firstAttribute="height" constant="20" id="aVD-0w-6D5"/>
@@ -593,7 +597,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120 ⍉" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXj-cB-LmA">
-                                        <rect key="frame" x="256" y="8" width="56" height="20"/>
+                                        <rect key="frame" x="311" y="8" width="56" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="mOs-io-3Be"/>
                                             <constraint firstAttribute="width" constant="56" id="wPd-FJ-T84"/>
@@ -628,14 +632,14 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H0x-30-D3s" userLabel="Line (Dark grey)">
-                                <rect key="frame" x="0.0" y="286" width="320" height="1"/>
+                                <rect key="frame" x="0.0" y="286" width="375" height="1"/>
                                 <color key="backgroundColor" red="0.47450980390000003" green="0.47450980390000003" blue="0.47450980390000003" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="CkM-0b-DAD"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9to-jk-5g0">
-                                <rect key="frame" x="0.0" y="287" width="320" height="217"/>
+                                <rect key="frame" x="0.0" y="287" width="375" height="316"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Property Cell" id="PBE-0b-3Wa" customClass="PropertyTableViewCell">
@@ -653,7 +657,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b34-Ts-ek6">
-                                                    <rect key="frame" x="256" y="13" width="56" height="18"/>
+                                                    <rect key="frame" x="311" y="13" width="56" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="56" id="sVO-Kc-utO"/>
                                                     </constraints>
@@ -761,7 +765,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
             <objects>
                 <tableViewController id="pk8-WG-38E" userLabel="Allgemeine Einstellungen" customClass="PrefsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0lr-wU-A8v">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -784,7 +788,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vPw-LP-ebh">
-                                                    <rect key="frame" x="251" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="273" y="6" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.17281592153284672" green="0.51933166058394165" blue="0.76862745098038943" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
                                                         <action selector="changeDbConnectionStatus:" destination="pk8-WG-38E" eventType="valueChanged" id="BZ2-8u-ibb"/>
@@ -793,7 +797,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="vPw-LP-ebh" firstAttribute="top" secondItem="FUX-c9-3Aq" secondAttribute="top" constant="6" id="D2y-cr-udi"/>
-                                                <constraint firstAttribute="trailing" secondItem="vPw-LP-ebh" secondAttribute="trailing" constant="20" id="aHI-wR-FOr"/>
+                                                <constraint firstAttribute="trailing" secondItem="vPw-LP-ebh" secondAttribute="trailing" constant="53" id="aHI-wR-FOr"/>
                                                 <constraint firstAttribute="bottom" secondItem="vPw-LP-ebh" secondAttribute="bottom" constant="6" id="j0V-1w-0c8"/>
                                                 <constraint firstItem="cxS-zW-O3x" firstAttribute="top" secondItem="FUX-c9-3Aq" secondAttribute="top" constant="14" id="q01-uC-Hx0"/>
                                             </constraints>
@@ -802,7 +806,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                             <constraint firstItem="cxS-zW-O3x" firstAttribute="leading" secondItem="zEO-Bl-onT" secondAttribute="leading" constant="20" id="Uo7-mV-GKV"/>
                                         </constraints>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="jbh-Ch-qM2">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="jbh-Ch-qM2">
                                         <rect key="frame" x="0.0" y="163" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jbh-Ch-qM2" id="LEW-Mf-iIT">
@@ -819,7 +823,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-nl-z8v">
-                                                    <rect key="frame" x="251" y="4" width="51" height="31"/>
+                                                    <rect key="frame" x="273" y="4" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.17281592153284672" green="0.51933166058394165" blue="0.76862745098038943" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
                                                         <action selector="changeHxMConnectionStatus:" destination="pk8-WG-38E" eventType="touchUpInside" id="pPO-3a-4gU"/>
@@ -836,6 +840,9 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                         <constraints>
                                             <constraint firstItem="dxo-2B-l8I" firstAttribute="leading" secondItem="jbh-Ch-qM2" secondAttribute="leading" constant="20" id="mLq-kd-1X5"/>
                                         </constraints>
+                                        <connections>
+                                            <segue destination="0A1-Tz-Jd0" kind="push" id="O7n-Wy-gYm"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -897,11 +904,11 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                         <viewControllerLayoutGuide type="bottom" id="qO2-Dw-xoj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nX5-YA-Egu">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lizenzen" translatesAutoresizingMaskIntoConstraints="NO" id="AKF-1o-zo5">
-                                <rect key="frame" x="16" y="20" width="288" height="435"/>
+                                <rect key="frame" x="16" y="20" width="343" height="534"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -966,7 +973,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
             <objects>
                 <tableViewController storyboardIdentifier="HxM Overview" id="0A1-Tz-Jd0" customClass="HeartRateMonitorDeviceTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1mA-jy-fvL">
-                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1039,7 +1046,6 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                 <navigationController storyboardIdentifier="prefs" automaticallyAdjustsScrollViewInsets="NO" id="h8g-rW-bkP" userLabel="Allgemeine Einstellungen Navigation" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Einstellungen" image="TabBarIconPrefs" id="Im2-FV-wo3"/>
                     <toolbarItems/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="YYV-pa-alm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1193,20 +1199,52 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
             </objects>
             <point key="canvasLocation" x="2077" y="-149"/>
         </scene>
-        <!--Aufnahme-->
+        <!--Session Prefs View Controller-->
         <scene sceneID="nCO-j7-dcS">
             <objects>
                 <tableViewController id="ZCf-lQ-cUe" customClass="SessionPrefsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fDh-Lm-PdN">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="rFk-Q2-Qrp">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="❤︎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hP-GP-iz5">
+                                    <rect key="frame" x="347" y="0.0" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="yph-UU-uo1"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zyphyr HXM20002685" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YyU-dp-IJn">
+                                    <rect key="frame" x="219" y="0.0" width="120" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="120" id="AgN-45-5iS"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="YyU-dp-IJn" firstAttribute="top" secondItem="rFk-Q2-Qrp" secondAttribute="top" id="KOW-Ov-vuO"/>
+                                <constraint firstItem="YyU-dp-IJn" firstAttribute="top" secondItem="5hP-GP-iz5" secondAttribute="top" id="VJQ-4J-X93"/>
+                                <constraint firstItem="5hP-GP-iz5" firstAttribute="bottom" secondItem="YyU-dp-IJn" secondAttribute="bottom" id="cli-cr-mAO"/>
+                                <constraint firstItem="5hP-GP-iz5" firstAttribute="leading" secondItem="YyU-dp-IJn" secondAttribute="trailing" constant="8" symbolic="YES" id="llY-v3-R8h"/>
+                                <constraint firstItem="5hP-GP-iz5" firstAttribute="trailing" secondItem="rFk-Q2-Qrp" secondAttribute="trailingMargin" id="yiy-eF-BiV"/>
+                            </constraints>
+                        </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="JFU-mY-0n3">
-                            <rect key="frame" x="0.0" y="408" width="320" height="66"/>
+                            <rect key="frame" x="0.0" y="472" width="375" height="66"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMI-il-cAu">
-                                    <rect key="frame" x="120" y="16" width="80" height="34"/>
+                                    <rect key="frame" x="148" y="16" width="80" height="34"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="80" id="6R3-9Y-qs9"/>
                                     </constraints>
@@ -1258,7 +1296,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <datePicker tag="99" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" countDownDuration="50" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZPR-76-fBj">
-                                            <rect key="frame" x="0.0" y="8" width="320" height="162"/>
+                                            <rect key="frame" x="28" y="8" width="320" height="162"/>
                                             <date key="date" timeIntervalSinceReferenceDate="393205466.33293098">
                                                 <!--2013-06-17 23:44:26 +0000-->
                                             </date>
@@ -1316,7 +1354,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gvv-Lf-HoC">
-                                            <rect key="frame" x="214" y="6" width="51" height="31"/>
+                                            <rect key="frame" x="269" y="6" width="51" height="31"/>
                                             <color key="onTintColor" red="0.17281592153284672" green="0.51933166058394165" blue="0.76862745098038943" alpha="1" colorSpace="deviceRGB"/>
                                             <connections>
                                                 <action selector="switchChangeAction:" destination="ZCf-lQ-cUe" eventType="valueChanged" id="bWy-Xh-OHF"/>
@@ -1339,15 +1377,19 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Aufnahme" id="xDQ-T2-Doq"/>
+                    <navigationItem key="navigationItem" id="xDQ-T2-Doq">
+                        <nil key="title"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="labelHeartRateMonitorDeviceName" destination="YyU-dp-IJn" id="kdS-Dx-TAL"/>
+                        <outlet property="labelHeartRateMonitorHasConnection" destination="5hP-GP-iz5" id="qan-0j-u1b"/>
                         <outlet property="startButton" destination="mMI-il-cAu" id="pwe-ds-LgO"/>
                         <outlet property="view" destination="fDh-Lm-PdN" id="XZu-il-5fD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9w5-Op-PYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1592" y="-149"/>
+            <point key="canvasLocation" x="1591.5" y="-149.5"/>
         </scene>
     </scenes>
     <resources>
