@@ -385,7 +385,7 @@
 
 - (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index
 {
-    return [NSString stringWithFormat:@"%0.f s", [self.xLabels[index] doubleValue]];
+    return [NSString stringWithFormat:@"%0.fm", [self.xLabels[index] doubleValue]/60];
 }
 
 - (CGFloat)maxValueForLineGraph:(BEMSimpleLineGraphView *)graph
