@@ -12,7 +12,7 @@
 
 @implementation SelfReport
 
-@dynamic date;
+@dynamic timestamp;
 @dynamic flow;
 @dynamic flowSD;
 @dynamic fluency;

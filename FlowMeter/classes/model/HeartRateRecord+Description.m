@@ -12,7 +12,7 @@
 
 - (NSString *)csvDescription
 {
-    return [NSString stringWithFormat:@"%f,%f\n",
+    return [NSString stringWithFormat:@"%.3f,%.3f\n",
             self.timestamp,
             self.rrInterval
             ];

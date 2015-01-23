@@ -20,7 +20,7 @@
 #import <CoreMotion/CoreMotion.h>
 #import "MotionRecord.h"
 
-#define kMotionRecordMaxCount   500
+#define kMotionRecordMaxCount   720
 
 @interface SessionRecordViewController ()
 
@@ -32,7 +32,7 @@
 @property (nonatomic, strong) NSTimer *countdownTimer;
 @property (nonatomic, strong) NSTimer *stopWatchTimer;
 
-@property (nonatomic, strong) NSDate *startSelfReportDate;
+@property (nonatomic) NSTimeInterval startSelfReportTimestamp;
 @property (nonatomic) int selfReportCount;
 @property (nonatomic) float absorptionSum;
 @property (nonatomic) float anxietySum;
@@ -295,7 +295,7 @@
     self.firstMotionTimestamp = nil;
     
     if ([self.motionManager isDeviceMotionAvailable] == YES) {
-        [self.motionManager setDeviceMotionUpdateInterval:1/100];
+        [self.motionManager setDeviceMotionUpdateInterval:1/72.0];
         [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
             if(self.isCollecting) {
                 if (error == nil) {
@@ -360,8 +360,6 @@
 - (void)startCollecting
 {
     NSLog(@"# Start collecting");
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    self.startSelfReportDate = nil;
     self.selfReportCount = 0;
     self.flowSum = 0.0;
     self.fluencySum = 0.0;
@@ -463,7 +461,7 @@
             }
             
             heartRateRecord.rrInterval = [[data.rrIntervals objectAtIndex:i] doubleValue];
-            heartRateRecord.heartRate = (int) 60/heartRateRecord.rrInterval;
+            heartRateRecord.heartRate = data.heartRate;
             [self.session addHeartRateRecordsObject:heartRateRecord];
         }
     }
@@ -494,29 +492,29 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                                        }];
     
     SelfReport *selfReport = [NSEntityDescription insertNewObjectForEntityForName:@"SelfReport" inManagedObjectContext:self.appDelegate.managedObjectContext];
-    selfReport.date = self.startSelfReportDate;
-    selfReport.duration = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSinceDate:self.startSelfReportDate]];
+    selfReport.timestamp = self.startSelfReportTimestamp;
+    selfReport.duration = fabs([self.session.date timeIntervalSinceNow]) - selfReport.timestamp;
     NSDictionary *flowShortScaleFactors = [self calculateFlowShortScaleFactorsFromResponses:responses];
-    selfReport.flow = [flowShortScaleFactors objectForKey:@"flow"];
-    selfReport.flowSD = [flowShortScaleFactors objectForKey:@"flowSD"];
-    selfReport.fluency = [flowShortScaleFactors objectForKey:@"fluency"];
-    selfReport.fluencySD = [flowShortScaleFactors objectForKey:@"fluencySD"];
-    selfReport.absorption = [flowShortScaleFactors objectForKey:@"absorption"];
-    selfReport.absorptionSD = [flowShortScaleFactors objectForKey:@"absorptionSD"];
-    selfReport.anxiety = [flowShortScaleFactors objectForKey:@"anxiety"];
-    selfReport.anxietySD = [flowShortScaleFactors objectForKey:@"anxietySD"];
-    selfReport.fit = [flowShortScaleFactors objectForKey:@"fit"];
-    selfReport.fitSD = [flowShortScaleFactors objectForKey:@"fitSD"];
+    selfReport.flow = [[flowShortScaleFactors objectForKey:@"flow"] floatValue];
+    selfReport.flowSD = [[flowShortScaleFactors objectForKey:@"flowSD"] floatValue];
+    selfReport.fluency = [[flowShortScaleFactors objectForKey:@"fluency"] floatValue];
+    selfReport.fluencySD = [[flowShortScaleFactors objectForKey:@"fluencySD"] floatValue];
+    selfReport.absorption = [[flowShortScaleFactors objectForKey:@"absorption"] floatValue];
+    selfReport.absorptionSD = [[flowShortScaleFactors objectForKey:@"absorptionSD"] floatValue];
+    selfReport.anxiety = [[flowShortScaleFactors objectForKey:@"anxiety"] floatValue];
+    selfReport.anxietySD = [[flowShortScaleFactors objectForKey:@"anxietySD"] floatValue];
+    selfReport.fit = [[flowShortScaleFactors objectForKey:@"fit"] floatValue];
+    selfReport.fitSD = [[flowShortScaleFactors objectForKey:@"fitSD"] floatValue];
     
     self.selfReportCount++;
     
     self.selfReportCountLabel.text = [NSString stringWithFormat:@"%d", self.selfReportCount];
     
-    self.flowSum += [selfReport.flow floatValue];
-    self.fluencySum += [selfReport.fluency floatValue];
-    self.absorptionSum += [selfReport.absorption floatValue];
-    self.anxietySum += [selfReport.anxiety floatValue];
-    self.fitSum += [selfReport.fit floatValue];
+    self.flowSum += selfReport.flow;
+    self.fluencySum += selfReport.fluency;
+    self.absorptionSum += selfReport.absorption;
+    self.anxietySum += selfReport.anxiety;
+    self.fitSum += selfReport.fit;
     
     [self.session addSelfReportsObject:selfReport];
     
@@ -551,7 +549,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 
 - (void)showSelfReport
 {
-    self.startSelfReportDate = [NSDate date];
+    self.startSelfReportTimestamp = fabs([self.session.date timeIntervalSinceNow]);
     AudioServicesPlaySystemSound(1008);
     
     if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {

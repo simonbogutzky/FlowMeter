@@ -31,8 +31,8 @@
         
         [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Flow-Messungen", @"Flow-Messungen")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         
-        // Order by date
-        NSArray *selfReports = [self.selfReports sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
+        // Order by timestamp
+        NSArray *selfReports = [self.selfReports sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
         [data appendData:[[[selfReports lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         
         // Append data
@@ -59,7 +59,7 @@
         
         [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"HR-Messungen", @"HR-Messungen")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         
-        // Order by timeInterval
+        // Order by timestamp
         NSArray *heartRateRecords = [self.heartRateRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
         [data appendData:[[[heartRateRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         

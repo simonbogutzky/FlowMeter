@@ -138,29 +138,25 @@
         self.labelDuration.text = [self stringFromTimeInterval:[self.session.duration doubleValue]];
         self.labelAverageHeartrate.text = [NSString stringWithFormat:@"%d ⍉", [self.session.averageHeartrate intValue]];
         
-        NSSortDescriptor *dateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
-        NSArray *managedObjects = [[self.session valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kEntityKey]] sortedArrayUsingDescriptors:@[dateDescriptor]];
+        NSSortDescriptor *timestampDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
+        NSArray *managedObjects = [[self.session valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kEntityKey]] sortedArrayUsingDescriptors:@[timestampDescriptor]];
         
         if ([@"heartRate" isEqualToString:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]) {
             
             self.yValues = [@[] mutableCopy];
             self.xLabels = [@[] mutableCopy];
             
-            NSDate *date = [managedObjects[0] valueForKey:@"date"];
-            NSTimeInterval nextTimeInterval = [date timeIntervalSince1970] + 60;
+            NSTimeInterval timestamp = [[managedObjects[0] valueForKey:@"timestamp"] doubleValue];
+            NSTimeInterval nextTimestamp = timestamp + 60;
             
             NSMutableArray *yValues = [@[] mutableCopy];
             
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            formatter.dateStyle = NSDateFormatterNoStyle;
-            formatter.timeStyle = NSDateFormatterShortStyle;
             for (NSManagedObject *managedObject in managedObjects) {
                 
-                NSDate *date = [managedObject valueForKey:@"date"];
-                NSTimeInterval timeInterval = [date timeIntervalSince1970];
+                timestamp  = [[managedObject valueForKey:@"timestamp"] doubleValue];
                 [yValues addObject:[managedObject valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]];
                 
-                if (nextTimeInterval <= timeInterval) {
+                if (nextTimestamp <= timestamp) {
                     
                     NSNumber *yValue = [NSNumber numberWithInt:0];
                     if (yValues.count > 0) {
@@ -168,10 +164,10 @@
                         yValue = [expression expressionValueWithObject:nil context:nil];
                     }
                     [self.yValues addObject:yValue];
-                    [self.xLabels addObject:date];
+                    [self.xLabels addObject:[NSNumber numberWithDouble:timestamp]];
                     
                     yValues = [@[] mutableCopy];
-                    nextTimeInterval = timeInterval + 60;
+                    nextTimestamp = timestamp + 60;
                 }
             }
         } else {
@@ -179,7 +175,7 @@
             self.xLabels = [NSMutableArray arrayWithCapacity:[managedObjects count]];
             for (NSManagedObject *managedObject in managedObjects) {
                 [self.yValues addObject:[managedObject valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]];
-                [self.xLabels addObject:[managedObject valueForKey:@"date"]];
+                [self.xLabels addObject:[managedObject valueForKey:@"timestamp"]];
             }
         }
         
@@ -388,11 +384,7 @@
 
 - (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index
 {
-    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
-    timeFormatter.dateStyle = NSDateFormatterNoStyle;
-    timeFormatter.timeStyle = NSDateFormatterShortStyle;
-    
-    return [NSString stringWithFormat:@"%@", [timeFormatter stringFromDate:self.xLabels[index]]];
+    return [NSString stringWithFormat:@"%0.f s", [self.xLabels[index] doubleValue]];
 }
 
 - (CGFloat)maxValueForLineGraph:(BEMSimpleLineGraphView *)graph

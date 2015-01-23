@@ -248,6 +248,7 @@
 		D3EFDE1C19F01B9200D7E88A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D3EFDE2419F01BED00D7E88A /* PropertyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyTableViewCell.h; path = classes/ui/PropertyTableViewCell.h; sourceTree = "<group>"; };
 		D3EFDE2519F01BED00D7E88A /* PropertyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PropertyTableViewCell.m; path = classes/ui/PropertyTableViewCell.m; sourceTree = "<group>"; };
+		D3F23F4B1A715BBC00B84B52 /* FlowMeter-Version-008.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-008.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1062,13 +1063,14 @@
 			children = (
 				D310FCDD1A6F9675008E4EE6 /* FlowMeter-Version-006.xcdatamodel */,
 				D31C377B1A710BAF001CAB71 /* FlowMeter-Version-007.xcdatamodel */,
+				D3F23F4B1A715BBC00B84B52 /* FlowMeter-Version-008.xcdatamodel */,
 				D3EFDE1619F01B9200D7E88A /* FlowMeter-Version-002.xcdatamodel */,
 				D3EFDE1719F01B9200D7E88A /* FlowMeter-Version-003.xcdatamodel */,
 				D3EFDE1819F01B9200D7E88A /* FlowMeter-Version-004.xcdatamodel */,
 				D3EFDE1919F01B9200D7E88A /* FlowMeter-Version-005.xcdatamodel */,
 				D3EFDE1A19F01B9200D7E88A /* FlowMeter.xcdatamodel */,
 			);
-			currentVersion = D31C377B1A710BAF001CAB71 /* FlowMeter-Version-007.xcdatamodel */;
+			currentVersion = D3F23F4B1A715BBC00B84B52 /* FlowMeter-Version-008.xcdatamodel */;
 			path = FlowMeter.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
