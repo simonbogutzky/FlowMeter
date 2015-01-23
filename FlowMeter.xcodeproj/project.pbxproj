@@ -15,7 +15,7 @@
 		60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60AA4F7216A829100026DE8D /* CoreMotion.framework */; };
 		D310FCE21A6F9D18008E4EE6 /* MotionRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = D310FCE11A6F9D18008E4EE6 /* MotionRecord.m */; };
 		D310FCE51A6F9DBE008E4EE6 /* MotionRecord+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D310FCE41A6F9DBE008E4EE6 /* MotionRecord+Description.m */; };
-		D321AC421A333CAC0011D09C /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D321AC411A333CAC0011D09C /* LaunchViewController.swift */; };
+		D311D9161A7242F700A254DB /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D311D9141A7242F700A254DB /* LaunchViewController.m */; };
 		D324688219B8AA9E00355ABE /* SessionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D324688119B8AA9E00355ABE /* SessionDetailViewController.m */; };
 		D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACDD197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m */; };
 		D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D329ACE3197A98F400B144B5 /* SelfReport+Description.m */; };
@@ -149,12 +149,12 @@
 		D310FCE11A6F9D18008E4EE6 /* MotionRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MotionRecord.m; path = classes/model/MotionRecord.m; sourceTree = "<group>"; };
 		D310FCE31A6F9DBE008E4EE6 /* MotionRecord+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MotionRecord+Description.h"; path = "classes/model/MotionRecord+Description.h"; sourceTree = "<group>"; };
 		D310FCE41A6F9DBE008E4EE6 /* MotionRecord+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MotionRecord+Description.m"; path = "classes/model/MotionRecord+Description.m"; sourceTree = "<group>"; };
+		D311D9131A7242F700A254DB /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LaunchViewController.h; path = classes/ui/LaunchViewController.h; sourceTree = "<group>"; };
+		D311D9141A7242F700A254DB /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LaunchViewController.m; path = classes/ui/LaunchViewController.m; sourceTree = "<group>"; };
 		D31C377B1A710BAF001CAB71 /* FlowMeter-Version-007.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-007.xcdatamodel"; sourceTree = "<group>"; };
 		D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewControllerDelegate.h; path = classes/ui/LikertScaleViewControllerDelegate.h; sourceTree = "<group>"; };
 		D321AC031A3337940011D09C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D321AC051A3337A30011D09C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
-		D321AC401A333AE10011D09C /* FlowMeter-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlowMeter-Bridging-Header.h"; sourceTree = "<group>"; };
-		D321AC411A333CAC0011D09C /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchViewController.swift; path = classes/ui/LaunchViewController.swift; sourceTree = "<group>"; };
 		D324688019B8AA9E00355ABE /* SessionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionDetailViewController.h; path = classes/ui/SessionDetailViewController.h; sourceTree = "<group>"; };
 		D324688119B8AA9E00355ABE /* SessionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SessionDetailViewController.m; path = classes/ui/SessionDetailViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D329ACDC197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeartRateMonitorDeviceTableViewController.h; path = classes/ui/HeartRateMonitorDeviceTableViewController.h; sourceTree = "<group>"; };
@@ -354,7 +354,6 @@
 		604CCD9516A6F31000E87194 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D321AC401A333AE10011D09C /* FlowMeter-Bridging-Header.h */,
 				D3877C0E19BEEFED00F21881 /* FlowMeter.entitlements */,
 				D38F7ABA19F0070300016B6E /* Audio */,
 				D31C4BCA19A619DE0017AA5A /* Model */,
@@ -513,7 +512,8 @@
 				D362AF3E1A177CEE00901B95 /* LicenseViewController.m */,
 				D32EF03C1A17A60500E9D60B /* AcknowledgementViewController.h */,
 				D32EF03D1A17A60500E9D60B /* AcknowledgementViewController.m */,
-				D321AC411A333CAC0011D09C /* LaunchViewController.swift */,
+				D311D9131A7242F700A254DB /* LaunchViewController.h */,
+				D311D9141A7242F700A254DB /* LaunchViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -699,7 +699,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3EFDE1D19F01B9200D7E88A /* AppDelegate.m in Sources */,
-				D321AC421A333CAC0011D09C /* LaunchViewController.swift in Sources */,
 				D39736D119B0C11E005D643D /* User.m in Sources */,
 				D329ACED197A98F400B144B5 /* Session+OutStream.m in Sources */,
 				D396933D19BE10D700249D2C /* LabelAndSwitchTableViewCell.m in Sources */,
@@ -730,6 +729,7 @@
 				D3EFDE2119F01B9200D7E88A /* FlowMeter.xcdatamodeld in Sources */,
 				D3EFDE2319F01B9200D7E88A /* main.m in Sources */,
 				D39736D419B0C11E005D643D /* Session.m in Sources */,
+				D311D9161A7242F700A254DB /* LaunchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,8 +898,6 @@
 				PRODUCT_NAME = FlowMeter;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "FlowMeter/FlowMeter-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;
 				WRAPPER_EXTENSION = app;
@@ -938,7 +936,6 @@
 				PRODUCT_NAME = FlowMeter;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "03c5be58-8d92-40b4-a3c2-dc379136a056";
-				SWIFT_OBJC_BRIDGING_HEADER = "FlowMeter/FlowMeter-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;
 				WRAPPER_EXTENSION = app;
