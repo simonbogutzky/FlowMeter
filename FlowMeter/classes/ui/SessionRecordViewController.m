@@ -452,7 +452,7 @@
         for (int i = 0; i < rrDataCount; i++) {
             HeartRateRecord *heartRateRecord = [NSEntityDescription insertNewObjectForEntityForName:@"HeartRateRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
             
-            if (self.firstMotionTimestamp == nil) {
+            if (self.firstHeartRateTimestamp == nil) {
                 heartRateRecord.timestamp = fabs([self.session.date timeIntervalSinceNow]);
                 
                 self.firstHeartRateTimestamp = [NSNumber numberWithDouble:[[data.rrTimes objectAtIndex:i] doubleValue] - heartRateRecord.timestamp];
