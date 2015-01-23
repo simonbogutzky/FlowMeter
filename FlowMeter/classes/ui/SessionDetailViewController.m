@@ -255,7 +255,7 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     // Initialize MBProgressHUD - AnnularDeterminate
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud = [MBProgressHUD showHUDAddedTo:self.tabBarController.view animated:YES];
     self.hud.dimBackground = YES;
     self.hud.delegate = self;
     self.hud.mode = MBProgressHUDModeAnnularDeterminate;

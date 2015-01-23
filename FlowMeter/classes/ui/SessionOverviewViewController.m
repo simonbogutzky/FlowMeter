@@ -355,7 +355,7 @@
     [self.tableView setEditing:NO animated:YES];
     [self updateButtonsToMatchTableState];
     
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [MBProgressHUD hideHUDForView:self.tabBarController.view animated:YES];
 }
 
 #pragma mark -
@@ -366,7 +366,7 @@
     // The user tapped one of the OK/Cancel buttons.
     if (buttonIndex == 0)
     {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.tabBarController.view animated:YES];
         hud.dimBackground = YES;
         [self performSelector:@selector(deleteData) withObject:nil afterDelay:0.1];
     }
