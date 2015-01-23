@@ -94,8 +94,8 @@
 /* Flow Kurzskala */
 "Flow Kurzskala" = "Flow short scale";
 
-/* Flow-Messungen */
-"Flow-Messungen" = "Flow-Measurements";
+/* Flow Kurzskala */
+"Flow Kurzskalen" = "Flow short scales";
 
 /* Für mich persönlich sind die jetzigen Anforderungen... */
 "Für mich persönlich sind die jetzigen Anforderungen..." = "For me personally, the current demands are...";
@@ -205,8 +205,8 @@
 /* Sekunden Einheit Label im SessionViewController */
 "S" = "S";
 
-/* Selbsteinschätzung */
-"Selbsteinschätzung" = "Self-report";
+/* Mehrfach befragen */
+"Mehrfach befragen" = "Ask multiple";
 
 /* Trifft nicht zu */
 "Trifft nicht zu" = "not at all";

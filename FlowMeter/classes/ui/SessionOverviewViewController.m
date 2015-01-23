@@ -350,6 +350,12 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
+    
+    // Exit editing mode after the deletion.
+    [self.tableView setEditing:NO animated:YES];
+    [self updateButtonsToMatchTableState];
+    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 #pragma mark -
@@ -360,36 +366,38 @@
     // The user tapped one of the OK/Cancel buttons.
     if (buttonIndex == 0)
     {
-        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-        
-        // Delete what the user selected.
-        NSArray *selectedRows = [self.tableView indexPathsForSelectedRows];
-        BOOL deleteSpecificRows = selectedRows.count > 0;
-        if (deleteSpecificRows)
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self performSelector:@selector(deleteData) withObject:nil afterDelay:0.1];
+    }
+}
+
+- (void)deleteData
+{
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    
+    // Delete what the user selected.
+    NSArray *selectedRows = [self.tableView indexPathsForSelectedRows];
+    BOOL deleteSpecificRows = selectedRows.count > 0;
+    if (deleteSpecificRows)
+    {
+        for (NSIndexPath *selectionIndex in selectedRows)
         {
-            for (NSIndexPath *selectionIndex in selectedRows)
-            {
-                [context deleteObject:[self.fetchedResultsController objectAtIndexPath:selectionIndex]];
-            }
+            [context deleteObject:[self.fetchedResultsController objectAtIndexPath:selectionIndex]];
         }
-        else
-        {
-            for (NSManagedObject *objects in [self.fetchedResultsController fetchedObjects]) {
-                [context deleteObject:objects];
-            }
+    }
+    else
+    {
+        for (NSManagedObject *objects in [self.fetchedResultsController fetchedObjects]) {
+            [context deleteObject:objects];
         }
-        
-        NSError *error = nil;
-        if (![context save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-        
-        // Exit editing mode after the deletion.
-        [self.tableView setEditing:NO animated:YES];
-        [self updateButtonsToMatchTableState];
+    }
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
     }
 }
 

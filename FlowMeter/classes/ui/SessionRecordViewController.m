@@ -194,14 +194,14 @@
         
         [self.stopWatchTimer invalidate];
         
-        if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
+        //if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
             [self.selfReportTimer invalidate];
             self.isLastSelfReport = YES;
             
             [self showSelfReport];
-        } else {
-            [self saveData];
-        }
+//        } else {
+//            [self saveData];
+//        }
     }
 }
 
@@ -551,10 +551,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 {
     self.startSelfReportTimestamp = fabs([self.session.date timeIntervalSinceNow]);
     AudioServicesPlaySystemSound(1008);
-    
-    if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
-        [self presentViewController:[self flowShortScaleViewControllerFromStoryboard] animated:YES completion:nil];
-    }
+    [self presentViewController:[self flowShortScaleViewControllerFromStoryboard] animated:YES completion:nil];
 }
 
 - (LikertScaleViewController *)flowShortScaleViewControllerFromStoryboard

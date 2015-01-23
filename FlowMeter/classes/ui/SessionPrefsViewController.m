@@ -128,7 +128,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
                                [@{kTitleKey:NSLocalizedString(@"Countdown", @"Countdown"), kValueKey:[NSNumber numberWithDouble:5.0], kUnitKey:NSLocalizedString(@"s", @"s"), kCellIDKey:kOtherCellID} mutableCopy]
                                ];
         NSArray *section03 = @[
-                               [@{kTitleKey:NSLocalizedString(@"Flow Kurzskala", @"Flow Kurzskala"), kValueKey:@1, kCellIDKey:kSwitchCellID} mutableCopy],
+                               [@{kTitleKey:NSLocalizedString(@"Mehrfach befragen", @"Mehrfach befragen"), kValueKey:@0, kCellIDKey:kSwitchCellID} mutableCopy],
                                [@{kTitleKey:NSLocalizedString(@"Zeitintervall", @"Zeitintervall"), kValueKey:[NSNumber numberWithDouble:2 * 60.0 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy],
                                [@{kTitleKey:NSLocalizedString(@"Variablität", @"Variablität"), kValueKey:[NSNumber numberWithDouble:1 * 60.0 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy]
                                ];
@@ -141,7 +141,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
 
 - (NSArray *)dataHeaders
 {
-    return @[NSLocalizedString(@"Benutzer", @"Benutzer"), NSLocalizedString(@"Aktivität", @"Aktivität"), NSLocalizedString(@"Selbsteinschätzung", @"Selbsteinschätzung")];
+    return @[NSLocalizedString(@"Benutzer", @"Benutzer"), NSLocalizedString(@"Aktivität", @"Aktivität"), NSLocalizedString(@"Flow Kurzskala", @"Flow Kurzskala")];
 }
 
 - (NSInteger)pickerCellRowHeight

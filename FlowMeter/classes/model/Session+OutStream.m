@@ -29,7 +29,7 @@
         // Append header
         [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         
-        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Flow-Messungen", @"Flow-Messungen")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Flow Kurzskalen", @"Flow Kurzskalen")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         
         // Order by timestamp
         NSArray *selfReports = [self.selfReports sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];

@@ -1347,7 +1347,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xkg-C7-6Eh">
                                             <rect key="frame" x="8" y="14" width="102" height="15"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="102" id="Gdn-ay-0mo"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="102" id="Gdn-ay-0mo"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                             <color key="textColor" red="0.17281592153284672" green="0.51933166058394165" blue="0.76862745098038943" alpha="1" colorSpace="deviceRGB"/>
