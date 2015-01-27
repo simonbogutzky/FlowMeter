@@ -211,7 +211,7 @@
     NSString *timeString = [self.timeFormatter stringFromDate:self.date];
     NSString *durationString = [self stringFromTimeInterval:[self.duration doubleValue]];
     
-    NSMutableString *header = [NSMutableString stringWithFormat:@"%@: %@ \n%@: %@ \n%@: %@ \n%@: %@ \n%@: %@ \n\n\n", NSLocalizedString(@"Datum", @"Datum"), dateString, NSLocalizedString(@"Beginn", @"Beginn"), timeString, NSLocalizedString(@"Dauer", @"Dauer"), durationString, NSLocalizedString(@"Person", @"Person"), [NSString stringWithFormat:@"%@ %@", self.user.firstName, self.user.lastName], NSLocalizedString(@"Aktivität", @"Aktivität"), self.activity.name];
+    NSString *header = [NSMutableString stringWithFormat:@"%@: %@ \n%@: %@ \n%@: %@ \n%@: %@ \n%@: %@ \n\n\n", NSLocalizedString(@"Datum", @"Datum"), dateString, NSLocalizedString(@"Beginn", @"Beginn"), timeString, NSLocalizedString(@"Dauer", @"Dauer"), durationString, NSLocalizedString(@"Person", @"Person"), [NSString stringWithFormat:@"%@ %@", self.user.firstName, self.user.lastName], NSLocalizedString(@"Aktivität", @"Aktivität"), self.activity.name];
     return header;
 }
 

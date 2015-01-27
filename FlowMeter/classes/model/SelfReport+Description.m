@@ -8,7 +8,6 @@
 
 #import "SelfReport+Description.h"
 #import "Session.h"
-#import "User.h"
 
 @implementation SelfReport (Description)
 

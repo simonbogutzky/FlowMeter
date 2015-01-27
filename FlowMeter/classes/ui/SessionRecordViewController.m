@@ -287,12 +287,15 @@
     if (self.appDelegate.heartRateMonitorManager.hasConnection) {
         self.appDelegate.heartRateMonitorManager.delegate = self;
         [self.appDelegate.heartRateMonitorManager startMonitoring];
+        self.firstHeartRateTimestamp = nil;
     }
     
     // Start motion manager updates
     self.motionRecords1 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
     self.motionRecords2 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
     self.firstMotionTimestamp = nil;
+    self.motionRecordCount = 0;
+    self.motionRecordArrayId = 1;
     
     if ([self.motionManager isDeviceMotionAvailable] == YES) {
         [self.motionManager setDeviceMotionUpdateInterval:1/72.0];
@@ -354,6 +357,14 @@
     // Stop motion manager updates
     if ([self.motionManager isDeviceMotionActive] == YES) {
         [self.motionManager stopDeviceMotionUpdates];
+    }
+    
+    // Save last device motions
+    if (self.motionRecords1.count > 0) {
+        [self saveMotionRecords:self.motionRecords1];
+    }
+    if (self.motionRecords2.count > 0) {
+        [self saveMotionRecords:self.motionRecords2];
     }
 }
 
