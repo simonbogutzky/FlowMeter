@@ -289,6 +289,13 @@
         [self.appDelegate.heartRateMonitorManager startMonitoring];
     }
     
+    // Start location updates
+    if ([CLLocationManager authorizationStatus] == CBPeripheralManagerAuthorizationStatusAuthorized && [CLLocationManager locationServicesEnabled]) {
+        self.appDelegate.locationManager.delegate = self;
+        [self.appDelegate.locationManager startUpdatingLocation];
+    }
+    
+    
     // Start motion manager updates
     self.motionRecords1 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
     self.motionRecords2 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
@@ -349,6 +356,11 @@
     // Stop heart rate monitor updates
     if (self.appDelegate.heartRateMonitorManager.hasConnection) {
         [self.appDelegate.heartRateMonitorManager stopMonitoring];
+    }
+    
+    // Start location updates
+    if ([CLLocationManager authorizationStatus] == CBPeripheralManagerAuthorizationStatusAuthorized && [CLLocationManager locationServicesEnabled]) {
+        [self.appDelegate.locationManager stopUpdatingLocation];
     }
     
     // Stop motion manager updates
@@ -653,6 +665,27 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     } else {
         return time - variability;
     }
+}
+
+#pragma mark -
+#pragma mark - CLLocationManagerDelegate implementation
+
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"didUpdateToLocation");
+}
+
+
+- (void)locationManagerDidResumeLocationUpdates:(CLLocationManager *)manager
+{
+    NSLog(@"locationManagerDidResumeLocationUpdates");
+}
+
+- (void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager
+{
+    NSLog(@"locationManagerDidPauseLocationUpdates");
 }
 
 @end

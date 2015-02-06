@@ -1,0 +1,15 @@
+/* (No Commment) */
+CFBundleDisplayName = "FlowMeter";
+
+/* (No Commment) */
+CFBundleName = "FlowMeter";
+
+/* (No Commment) */
+CFBundleShortVersionString = "1.0.1";
+
+/* (No Commment) */
+NSLocationAlwaysUsageDescription = "Der FlowMeter benötigt den Standort für den vollen Funktionsumfang.";
+
+/* (No Commment) */
+NSLocationWhenInUseUsageDescription = "Der FlowMeter benötigt den Standort für den vollen Funktionsumfang.";
+

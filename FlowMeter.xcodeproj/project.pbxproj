@@ -29,13 +29,13 @@
 		D3383BAA1726CE1500AAC993 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3383BA91726CE1500AAC993 /* CoreData.framework */; };
 		D34C9D2917250463004C261C /* SessionRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D1F17250463004C261C /* SessionRecordViewController.m */; };
 		D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C9D2517250463004C261C /* PrefsTableViewController.m */; };
-		D3566B631A07D95700237AE4 /* FlowMeter-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3566B651A07D95700237AE4 /* FlowMeter-InfoPlist.strings */; };
 		D3566B6D1A07D95800237AE4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3566B6F1A07D95800237AE4 /* Localizable.strings */; };
 		D35ABC10188EC2AE00BD1D2D /* LikertScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */; };
 		D362AF3A1A177B3600901B95 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D362AF3C1A177B3600901B95 /* InfoPlist.strings */; };
 		D362AF3F1A177CEE00901B95 /* LicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D362AF3E1A177CEE00901B95 /* LicenseViewController.m */; };
 		D36C44B016D788BE000B8502 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
 		D37067D71733F41300F86BBD /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37067D61733F41300F86BBD /* EditViewController.m */; };
+		D37675831A84B601009D17B4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D37675811A84B601009D17B4 /* InfoPlist.strings */; };
 		D38400651A04144A006710FB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38400671A04144A006710FB /* LaunchScreen.xib */; };
 		D3877C0B19BEEE0E00F21881 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3877C0A19BEEE0E00F21881 /* libz.dylib */; };
 		D3877C0D19BEEFED00F21881 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3877C0C19BEEFED00F21881 /* ExternalAccessory.framework */; };
@@ -180,7 +180,6 @@
 		D34C9D2417250463004C261C /* PrefsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefsTableViewController.h; path = classes/ui/PrefsTableViewController.h; sourceTree = "<group>"; };
 		D34C9D2517250463004C261C /* PrefsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = PrefsTableViewController.m; path = classes/ui/PrefsTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D35462EE19B21AEE006B2EA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		D3566B641A07D95700237AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/FlowMeter-InfoPlist.strings"; sourceTree = "<group>"; };
 		D3566B6E1A07D95800237AE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D35ABC0E188EC2AE00BD1D2D /* LikertScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewController.h; path = classes/ui/LikertScaleViewController.h; sourceTree = "<group>"; };
 		D35ABC0F188EC2AE00BD1D2D /* LikertScaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LikertScaleViewController.m; path = classes/ui/LikertScaleViewController.m; sourceTree = "<group>"; };
@@ -190,6 +189,10 @@
 		D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D37067D51733F41300F86BBD /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewController.h; path = classes/ui/EditViewController.h; sourceTree = "<group>"; };
 		D37067D61733F41300F86BBD /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewController.m; path = classes/ui/EditViewController.m; sourceTree = "<group>"; };
+		D37675821A84B601009D17B4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D37675841A84B7CB009D17B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D37675851A84B802009D17B4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D37675871A84B863009D17B4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D38400661A04144A006710FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D3877C0A19BEEE0E00F21881 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D3877C0C19BEEFED00F21881 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
@@ -256,6 +259,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D38A216D16BFF9F80075D093 /* CoreLocation.framework in Frameworks */,
 				60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */,
 				D3877C0B19BEEE0E00F21881 /* libz.dylib in Frameworks */,
 				604CCD9116A6F31000E87194 /* Foundation.framework in Frameworks */,
@@ -270,7 +274,6 @@
 				4523E19C16F9EE2600761733 /* AudioToolbox.framework in Frameworks */,
 				D3DA4A7716DCCB0300ECBE4B /* GLKit.framework in Frameworks */,
 				D36C44B016D788BE000B8502 /* CoreBluetooth.framework in Frameworks */,
-				D38A216D16BFF9F80075D093 /* CoreLocation.framework in Frameworks */,
 				D3C1292A18632C9A00C361CA /* DropboxSDK.framework in Frameworks */,
 				D3AEA5E319F12A56008CD870 /* HeartRateMonitorFramework.framework in Frameworks */,
 				604CCD8F16A6F31000E87194 /* UIKit.framework in Frameworks */,
@@ -421,8 +424,8 @@
 		D34C9D3E172504D7004C261C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D37675811A84B601009D17B4 /* InfoPlist.strings */,
 				D3566B6F1A07D95800237AE4 /* Localizable.strings */,
-				D3566B651A07D95700237AE4 /* FlowMeter-InfoPlist.strings */,
 				D38400671A04144A006710FB /* LaunchScreen.xib */,
 				D335030819A5D89B008CC93A /* Images.xcassets */,
 				D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */,
@@ -674,10 +677,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3566B631A07D95700237AE4 /* FlowMeter-InfoPlist.strings in Resources */,
 				D3566B6D1A07D95800237AE4 /* Localizable.strings in Resources */,
 				D38400651A04144A006710FB /* LaunchScreen.xib in Resources */,
 				D335030919A5D89B008CC93A /* Images.xcassets in Resources */,
+				D37675831A84B601009D17B4 /* InfoPlist.strings in Resources */,
 				D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */,
 				D3AB053219D5581A00626323 /* background-music.mp3 in Resources */,
 			);
@@ -764,14 +767,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D3566B651A07D95700237AE4 /* FlowMeter-InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D3566B641A07D95700237AE4 /* en */,
-			);
-			name = "FlowMeter-InfoPlist.strings";
-			sourceTree = "<group>";
-		};
 		D3566B6F1A07D95800237AE4 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -788,11 +783,22 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		D37675811A84B601009D17B4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D37675821A84B601009D17B4 /* en */,
+				D37675841A84B7CB009D17B4 /* Base */,
+				D37675851A84B802009D17B4 /* de */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		D38400671A04144A006710FB /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D38400661A04144A006710FB /* Base */,
 				D321AC031A3337940011D09C /* en */,
+				D37675871A84B863009D17B4 /* de */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";

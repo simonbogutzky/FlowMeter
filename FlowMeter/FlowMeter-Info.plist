@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Der FlowMeter benötigt den Standort für den vollen Funktionsumfang.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Der FlowMeter benötigt den Standort für den vollen Funktionsumfang.</string>
+	<key>NSHumanReadableCopyright</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>de</string>
 	<key>CFBundleDisplayName</key>
@@ -43,6 +51,7 @@
 	<array>
 		<string>audio</string>
 		<string>bluetooth-central</string>
+		<string>location</string>
 	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>

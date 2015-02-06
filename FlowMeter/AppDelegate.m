@@ -17,6 +17,7 @@
 @implementation AppDelegate
 
 @synthesize heartRateMonitorManager = _heartRateMonitorManager;
+@synthesize locationManager = _locationManager;
 @synthesize dbRestClient = _dbRestClient;
 @synthesize reachability = _reachability;
 @synthesize colors = _colors;
@@ -29,6 +30,16 @@
         _heartRateMonitorManager = [[HeartRateMonitorManager alloc] init];
     }
     return _heartRateMonitorManager;
+}
+
+- (CLLocationManager *)locationManager
+{
+    if (!_locationManager) {
+        _locationManager = [[CLLocationManager alloc] init];
+        [_locationManager requestAlwaysAuthorization];
+        _locationManager.distanceFilter = 250.f;
+    }
+    return _locationManager;
 }
 
 - (DBRestClient *)dbRestClient
@@ -70,7 +81,12 @@
     
     [[UITabBar appearance] setTintColor:UIColorFromRGB(0x1D70B7)];
     
-    NSLog(@"%ld", self.heartRateMonitorManager.state);
+    if ([CLLocationManager authorizationStatus] == CBPeripheralManagerAuthorizationStatusNotDetermined) {
+        [self.locationManager startUpdatingLocation];
+        [self.locationManager stopUpdatingLocation];
+    }
+    
+    NSLog(@"%d", self.heartRateMonitorManager.state);
     return YES;
 }
 							
