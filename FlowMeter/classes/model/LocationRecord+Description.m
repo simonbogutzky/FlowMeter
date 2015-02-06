@@ -46,10 +46,11 @@
     static NSDateFormatter *dateFormatter = nil;
     if (dateFormatter == nil) {
         dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateStyle = NSDateFormatterShortStyle;
-        dateFormatter.timeStyle = NSDateFormatterShortStyle;
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
     }
     return dateFormatter;
 }
+
+
 
 @end

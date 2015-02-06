@@ -710,15 +710,4 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     [self.session addLocationRecordsObject:locationRecord];
 }
 
-
-- (void)locationManagerDidResumeLocationUpdates:(CLLocationManager *)manager
-{
-    NSLog(@"locationManagerDidResumeLocationUpdates");
-}
-
-- (void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager
-{
-    NSLog(@"locationManagerDidPauseLocationUpdates");
-}
-
 @end
