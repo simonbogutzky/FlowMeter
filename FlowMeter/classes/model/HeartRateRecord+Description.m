@@ -20,8 +20,7 @@
 
 - (NSString *)csvHeader
 {
-    NSMutableString *header = [NSMutableString stringWithFormat:@"%@,%@\n", NSLocalizedString(@"Zeitstempel (s)", @"Zeitstempel (s)"), NSLocalizedString(@"RR-Intervall (s)", @"RR-Intervall (s)")];
-    return header;
+    return [NSMutableString stringWithFormat:@"%@,%@\n", NSLocalizedString(@"Zeitstempel (s)", @"Zeitstempel (s)"), NSLocalizedString(@"RR-Intervall (s)", @"RR-Intervall (s)")];
 }
 
 @end

@@ -31,7 +31,7 @@
 
 - (NSString *)csvHeader
 {
-    NSMutableString *header = [NSMutableString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
+    return [NSMutableString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
                                NSLocalizedString(@"Zeitstempel (s)", @"Zeitstempel (s)"),
                                NSLocalizedString(@"Benutzerbeschleunigung X (Gs)", @"Benutzerbeschleunigung X (Gs)"),
                                NSLocalizedString(@"Benutzerbeschleunigung Y (Gs)", @"Benutzerbeschleunigung Y (Gs)"),
@@ -46,7 +46,6 @@
                                NSLocalizedString(@"Roll (rad)", @"Roll (rad)"),
                                NSLocalizedString(@"Yaw (rad)", @"Yaw (rad)")
                                ];
-    return header;
 }
 
 @end
