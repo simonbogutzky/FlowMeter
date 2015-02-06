@@ -19,6 +19,7 @@
 #import <AudioToolbox/AudioServices.h>
 #import <CoreMotion/CoreMotion.h>
 #import "MotionRecord.h"
+#import "LocationRecord.h"
 
 #define kMotionRecordMaxCount   720
 
@@ -190,7 +191,7 @@
         self.isCollecting = !self.isCollecting;
         [self stopSensorUpdates];
         
-        self.session.duration = [NSNumber numberWithDouble:[self stopWatchTimeInterval]];
+        self.session.duration = [self stopWatchTimeInterval];
         
         [self.stopWatchTimer invalidate];
         
@@ -426,17 +427,27 @@
                          self.countdownBackgroundView.alpha = 1.0;   // fade in
                      }
                      completion:^(BOOL finished){
-                         self.session.selfReportCount = [NSNumber numberWithInt:self.selfReportCount];
-                         if ([self.session.selfReportCount integerValue] != 0) {
-                             self.session.averageAbsorption = [NSNumber numberWithFloat:self.absorptionSum / self.selfReportCount];
-                             self.session.averageAnxiety = [NSNumber numberWithFloat:self.anxietySum / self.selfReportCount];
-                             self.session.averageFit = [NSNumber numberWithFloat:self.fitSum / self.selfReportCount];
-                             self.session.averageFlow = [NSNumber numberWithFloat:self.flowSum / self.selfReportCount];
-                             self.session.averageFluency = [NSNumber numberWithFloat:self.fluencySum / self.selfReportCount];
+                         
+                         if (self.selfReportCount != 0) {
+                             self.session.selfReportCount = self.selfReportCount;
+                             self.session.averageAbsorption = self.absorptionSum / self.selfReportCount;
+                             self.session.averageAnxiety = self.anxietySum / self.selfReportCount;
+                             self.session.averageFit = self.fitSum / self.selfReportCount;
+                             self.session.averageFlow = self.flowSum / self.selfReportCount;
+                             self.session.averageFluency = self.fluencySum / self.selfReportCount;
+                         } else {
+                             self.session.selfReportCount = 0;
+                             self.session.averageAbsorption = 0.f;
+                             self.session.averageAnxiety = 0.f;
+                             self.session.averageFit = 0.f;
+                             self.session.averageFlow = 0.f;
+                             self.session.averageFluency = 0.f;
                          }
                          
                          if (self.heartRateCount != 0) {
-                             self.session.averageHeartrate = [NSNumber numberWithFloat:self.heartRateSum / self.heartRateCount];
+                             self.session.averageHeartrate = self.heartRateSum / self.heartRateCount;
+                         } else {
+                             self.session.averageHeartrate = 0.f;
                          }
                          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                              [self.appDelegate saveContext];
@@ -685,7 +696,18 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"didUpdateToLocation");
+    LocationRecord *locationRecord = [NSEntityDescription insertNewObjectForEntityForName:@"LocationRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
+    locationRecord.date = newLocation.timestamp;
+    locationRecord.altitude = newLocation.altitude;
+    locationRecord.latitude = newLocation.coordinate.latitude;
+    locationRecord.longitude = newLocation.coordinate.longitude;
+    locationRecord.speed = newLocation.speed;
+    locationRecord.course = newLocation.course;
+    locationRecord.horizontalAccuracy = newLocation.horizontalAccuracy;
+    locationRecord.verticalAccuracy = newLocation.verticalAccuracy;
+    locationRecord.floor = newLocation.floor;
+    
+    [self.session addLocationRecordsObject:locationRecord];
 }
 
 

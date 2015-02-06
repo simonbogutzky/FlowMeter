@@ -410,7 +410,7 @@
     Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     UILabel *labelFlowScore = (UILabel *)[cell viewWithTag:100];
-    labelFlowScore.text = [self.numberFormatter stringFromNumber:session.averageFlow];
+    labelFlowScore.text = [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:session.averageFlow]];
     
     UILabel *labelUsername = (UILabel *)[cell viewWithTag:101];
     labelUsername.text = [NSString stringWithFormat:@"%@ %@", session.user.firstName, session.user.lastName];
@@ -419,13 +419,13 @@
     labelActivity.text = session.activity.name;
     
     UILabel *labelSelfReportCount = (UILabel *)[cell viewWithTag:104];
-    labelSelfReportCount.text = [NSString stringWithFormat:@"%d", [session.selfReportCount intValue]];
+    labelSelfReportCount.text = [NSString stringWithFormat:@"%d", session.selfReportCount];
     
     UILabel *labelAverageHeartrate = (UILabel *)[cell viewWithTag:106];
-    labelAverageHeartrate.text = [NSString stringWithFormat:@"%d", [session.averageHeartrate intValue]];
+    labelAverageHeartrate.text = [NSString stringWithFormat:@"%.0f", session.averageHeartrate];
     
     UILabel *labelDuration = (UILabel *)[cell viewWithTag:107];
-    labelDuration.text = [self stringFromTimeInterval:[session.duration doubleValue]];
+    labelDuration.text = [self stringFromTimeInterval:session.duration];
 }
 
 - (NSString *)stringFromTimeInterval:(NSTimeInterval)interval

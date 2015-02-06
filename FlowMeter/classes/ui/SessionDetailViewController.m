@@ -50,7 +50,7 @@
 {
     if (_dataSrc == nil) {
         
-        if ([self.session.averageHeartrate doubleValue] != 0) {
+        if (self.session.averageHeartrate != 0.f) {
             _dataSrc = @[
                          [@{kTitleKey:NSLocalizedString(@"Flow", @"Name des Gesamt Faktors Flow in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"flow"} mutableCopy],
                          [@{kTitleKey:NSLocalizedString(@"Verlauf", @"Name des Faktors I Verlauf in der Tabelle"), kEntityKey:@"selfReports", kValueKey:@"fluency"} mutableCopy],
@@ -133,10 +133,10 @@
         self.labelDisplayedPropertyAverage.text = [NSString stringWithFormat:@"%.1f ⍉", [number doubleValue]];
         
         
-        self.labelSelfReportCount.text = [NSString stringWithFormat:@"%d", [self.session.selfReportCount intValue]];
-        self.labelAverageFlow.text = [NSString stringWithFormat:@"%.1f ⍉", [self.session.averageFlow doubleValue]];
-        self.labelDuration.text = [self stringFromTimeInterval:[self.session.duration doubleValue]];
-        self.labelAverageHeartrate.text = [NSString stringWithFormat:@"%d ⍉", [self.session.averageHeartrate intValue]];
+        self.labelSelfReportCount.text = [NSString stringWithFormat:@"%d", self.session.selfReportCount];
+        self.labelAverageFlow.text = [NSString stringWithFormat:@"%.1f ⍉", self.session.averageFlow];
+        self.labelDuration.text = [self stringFromTimeInterval:self.session.duration];
+        self.labelAverageHeartrate.text = [NSString stringWithFormat:@"%.0f ⍉", self.session.averageHeartrate];
         
         NSSortDescriptor *timestampDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
         NSArray *managedObjects = [[self.session valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kEntityKey]] sortedArrayUsingDescriptors:@[timestampDescriptor]];

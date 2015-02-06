@@ -9,25 +9,29 @@
 #import "Session.h"
 #import "Activity.h"
 #import "HeartRateRecord.h"
+#import "LocationRecord.h"
+#import "MotionRecord.h"
 #import "SelfReport.h"
 #import "User.h"
 
 
 @implementation Session
 
+@dynamic averageAbsorption;
+@dynamic averageAnxiety;
+@dynamic averageFit;
+@dynamic averageFlow;
+@dynamic averageFluency;
+@dynamic averageHeartrate;
 @dynamic date;
 @dynamic duration;
 @dynamic selfReportCount;
-@dynamic averageHeartrate;
-@dynamic averageFlow;
-@dynamic averageFit;
-@dynamic averageAbsorption;
-@dynamic averageFluency;
-@dynamic averageAnxiety;
-@dynamic heartRateRecords;
-@dynamic selfReports;
-@dynamic user;
 @dynamic activity;
+@dynamic heartRateRecords;
+@dynamic motionRecords;
+@dynamic selfReports;
+@dynamic locationRecords;
+@dynamic user;
 @synthesize sectionTitle;
 
 -(NSString *)sectionTitle
@@ -36,6 +40,5 @@
     [dateFormatter setDateFormat:@"yyyy/MM/dd"];
     return [dateFormatter stringFromDate:self.date];
 }
-@dynamic motionRecords;
 
 @end

@@ -36,6 +36,9 @@
 		D36C44B016D788BE000B8502 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36C44AF16D788BE000B8502 /* CoreBluetooth.framework */; };
 		D37067D71733F41300F86BBD /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37067D61733F41300F86BBD /* EditViewController.m */; };
 		D37675831A84B601009D17B4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D37675811A84B601009D17B4 /* InfoPlist.strings */; };
+		D376758E1A84C0CE009D17B4 /* LocationRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = D376758D1A84C0CE009D17B4 /* LocationRecord.m */; };
+		D37675971A84C28F009D17B4 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = D37675961A84C28F009D17B4 /* Session.m */; };
+		D376759A1A84C842009D17B4 /* LocationRecord+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D37675991A84C842009D17B4 /* LocationRecord+Description.m */; };
 		D38400651A04144A006710FB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38400671A04144A006710FB /* LaunchScreen.xib */; };
 		D3877C0B19BEEE0E00F21881 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3877C0A19BEEE0E00F21881 /* libz.dylib */; };
 		D3877C0D19BEEFED00F21881 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3877C0C19BEEFED00F21881 /* ExternalAccessory.framework */; };
@@ -46,7 +49,6 @@
 		D39736CB19B0C11E005D643D /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736CA19B0C11E005D643D /* Activity.m */; };
 		D39736CE19B0C11E005D643D /* HeartRateRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736CD19B0C11E005D643D /* HeartRateRecord.m */; };
 		D39736D119B0C11E005D643D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736D019B0C11E005D643D /* User.m */; };
-		D39736D419B0C11E005D643D /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736D319B0C11E005D643D /* Session.m */; };
 		D39747B11882CC7B00CFF3DF /* libtouchzipkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D39747AE1882CC6400CFF3DF /* libtouchzipkit.a */; };
 		D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */; };
 		D3A4629F1726E08900D454F7 /* SessionOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionOverviewViewController.m */; };
@@ -192,7 +194,13 @@
 		D37675821A84B601009D17B4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D37675841A84B7CB009D17B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D37675851A84B802009D17B4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D37675871A84B863009D17B4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D376758B1A84BDFE009D17B4 /* FlowMeter-Version-009.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-009.xcdatamodel"; sourceTree = "<group>"; };
+		D376758C1A84C0CE009D17B4 /* LocationRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationRecord.h; path = classes/model/LocationRecord.h; sourceTree = "<group>"; };
+		D376758D1A84C0CE009D17B4 /* LocationRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationRecord.m; path = classes/model/LocationRecord.m; sourceTree = "<group>"; };
+		D37675951A84C28F009D17B4 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = classes/model/Session.h; sourceTree = "<group>"; };
+		D37675961A84C28F009D17B4 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = classes/model/Session.m; sourceTree = "<group>"; };
+		D37675981A84C842009D17B4 /* LocationRecord+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LocationRecord+Description.h"; path = "classes/model/LocationRecord+Description.h"; sourceTree = "<group>"; };
+		D37675991A84C842009D17B4 /* LocationRecord+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LocationRecord+Description.m"; path = "classes/model/LocationRecord+Description.m"; sourceTree = "<group>"; };
 		D38400661A04144A006710FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D3877C0A19BEEE0E00F21881 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D3877C0C19BEEFED00F21881 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
@@ -208,8 +216,6 @@
 		D39736CD19B0C11E005D643D /* HeartRateRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeartRateRecord.m; path = classes/model/HeartRateRecord.m; sourceTree = "<group>"; };
 		D39736CF19B0C11E005D643D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = classes/model/User.h; sourceTree = "<group>"; };
 		D39736D019B0C11E005D643D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = classes/model/User.m; sourceTree = "<group>"; };
-		D39736D219B0C11E005D643D /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Session.h; path = classes/model/Session.h; sourceTree = "<group>"; };
-		D39736D319B0C11E005D643D /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Session.m; path = classes/model/Session.m; sourceTree = "<group>"; };
 		D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZipKit.xcodeproj; path = ZipKit/ZipKit.xcodeproj; sourceTree = "<group>"; };
 		D398FAEF19AB5B52003DB0CA /* HeartRateRecord+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "HeartRateRecord+Description.h"; path = "classes/model/HeartRateRecord+Description.h"; sourceTree = "<group>"; };
 		D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HeartRateRecord+Description.m"; path = "classes/model/HeartRateRecord+Description.m"; sourceTree = "<group>"; };
@@ -376,6 +382,8 @@
 		D329ACDF197A98CC00B144B5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D37675951A84C28F009D17B4 /* Session.h */,
+				D37675961A84C28F009D17B4 /* Session.m */,
 				D39736C919B0C11E005D643D /* Activity.h */,
 				D39736CA19B0C11E005D643D /* Activity.m */,
 				D39736CC19B0C11E005D643D /* HeartRateRecord.h */,
@@ -386,8 +394,6 @@
 				D39736C719B0C11D005D643D /* SelfReport.m */,
 				D329ACE2197A98F400B144B5 /* SelfReport+Description.h */,
 				D329ACE3197A98F400B144B5 /* SelfReport+Description.m */,
-				D39736D219B0C11E005D643D /* Session.h */,
-				D39736D319B0C11E005D643D /* Session.m */,
 				D329ACE6197A98F400B144B5 /* Session+OutStream.h */,
 				D329ACE7197A98F400B144B5 /* Session+OutStream.m */,
 				D39736CF19B0C11E005D643D /* User.h */,
@@ -396,6 +402,10 @@
 				D310FCE11A6F9D18008E4EE6 /* MotionRecord.m */,
 				D310FCE31A6F9DBE008E4EE6 /* MotionRecord+Description.h */,
 				D310FCE41A6F9DBE008E4EE6 /* MotionRecord+Description.m */,
+				D376758C1A84C0CE009D17B4 /* LocationRecord.h */,
+				D376758D1A84C0CE009D17B4 /* LocationRecord.m */,
+				D37675981A84C842009D17B4 /* LocationRecord+Description.h */,
+				D37675991A84C842009D17B4 /* LocationRecord+Description.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -704,12 +714,14 @@
 				D3EFDE1D19F01B9200D7E88A /* AppDelegate.m in Sources */,
 				D39736D119B0C11E005D643D /* User.m in Sources */,
 				D329ACED197A98F400B144B5 /* Session+OutStream.m in Sources */,
+				D376758E1A84C0CE009D17B4 /* LocationRecord.m in Sources */,
 				D396933D19BE10D700249D2C /* LabelAndSwitchTableViewCell.m in Sources */,
 				D33675941A713AC10048177D /* BEMLine.m in Sources */,
 				D33675951A713AC10048177D /* BEMSimpleLineGraphView.m in Sources */,
 				D329ACDE197A98BF00B144B5 /* HeartRateMonitorDeviceTableViewController.m in Sources */,
 				D34C9D2917250463004C261C /* SessionRecordViewController.m in Sources */,
 				D362AF3F1A177CEE00901B95 /* LicenseViewController.m in Sources */,
+				D376759A1A84C842009D17B4 /* LocationRecord+Description.m in Sources */,
 				D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */,
 				D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */,
 				D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */,
@@ -726,12 +738,12 @@
 				D324688219B8AA9E00355ABE /* SessionDetailViewController.m in Sources */,
 				D39736C819B0C11D005D643D /* SelfReport.m in Sources */,
 				D3EB072419BB9552005F0333 /* SessionPrefsViewController.m in Sources */,
+				D37675971A84C28F009D17B4 /* Session.m in Sources */,
 				D310FCE51A6F9DBE008E4EE6 /* MotionRecord+Description.m in Sources */,
 				D37067D71733F41300F86BBD /* EditViewController.m in Sources */,
 				D32EF03E1A17A60500E9D60B /* AcknowledgementViewController.m in Sources */,
 				D3EFDE2119F01B9200D7E88A /* FlowMeter.xcdatamodeld in Sources */,
 				D3EFDE2319F01B9200D7E88A /* main.m in Sources */,
-				D39736D419B0C11E005D643D /* Session.m in Sources */,
 				D311D9161A7242F700A254DB /* LaunchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -798,7 +810,6 @@
 			children = (
 				D38400661A04144A006710FB /* Base */,
 				D321AC031A3337940011D09C /* en */,
-				D37675871A84B863009D17B4 /* de */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -1064,6 +1075,7 @@
 		D3EFDE1519F01B9200D7E88A /* FlowMeter.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D376758B1A84BDFE009D17B4 /* FlowMeter-Version-009.xcdatamodel */,
 				D310FCDD1A6F9675008E4EE6 /* FlowMeter-Version-006.xcdatamodel */,
 				D31C377B1A710BAF001CAB71 /* FlowMeter-Version-007.xcdatamodel */,
 				D3F23F4B1A715BBC00B84B52 /* FlowMeter-Version-008.xcdatamodel */,
@@ -1073,7 +1085,7 @@
 				D3EFDE1919F01B9200D7E88A /* FlowMeter-Version-005.xcdatamodel */,
 				D3EFDE1A19F01B9200D7E88A /* FlowMeter.xcdatamodel */,
 			);
-			currentVersion = D3F23F4B1A715BBC00B84B52 /* FlowMeter-Version-008.xcdatamodel */;
+			currentVersion = D376758B1A84BDFE009D17B4 /* FlowMeter-Version-009.xcdatamodel */;
 			path = FlowMeter.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

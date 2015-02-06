@@ -13,6 +13,7 @@
 #import "SelfReport+Description.h"
 #import "HeartRateRecord+Description.h"
 #import "MotionRecord+Description.h"
+#import "LocationRecord+Description.h"
 #import "ZipKit/ZipKit.h"
 
 @implementation Session (OutStream)
@@ -21,7 +22,7 @@
 {
     NSMutableArray *txtFileNames = [[NSMutableArray alloc] initWithCapacity:3];
     
-    if ([self.selfReportCount intValue] > 0) {
+    if (self.selfReportCount > 0) {
         
         // Create archive data
         NSMutableData *data = [NSMutableData dataWithCapacity:0];
@@ -99,6 +100,33 @@
         NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
         [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
         NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-motion.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
+        
+        [txtFileNames addObject:[self writeData:data withFilename:filename]];
+    }
+    
+    if ([self.locationRecords count] > 0) {
+        
+        // Create archive data
+        NSMutableData *data = [NSMutableData dataWithCapacity:0];
+        
+        // Append header
+        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Orte", @"Orte")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        // Order by timestamp
+        NSArray *locationRecords = [self.locationRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
+        [data appendData:[[[locationRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        // Append data
+        for (LocationRecord *locationRecord in locationRecords) {
+            [data appendData:[[locationRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        }
+        
+        // Write in file with filename
+        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
+        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
+        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-location.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
         
         [txtFileNames addObject:[self writeData:data withFilename:filename]];
     }
@@ -209,7 +237,7 @@
 {
     NSString *dateString = [self.dateFormatter stringFromDate:self.date];
     NSString *timeString = [self.timeFormatter stringFromDate:self.date];
-    NSString *durationString = [self stringFromTimeInterval:[self.duration doubleValue]];
+    NSString *durationString = [self stringFromTimeInterval:self.duration];
     
     NSString *header = [NSMutableString stringWithFormat:@"%@: %@ \n%@: %@ \n%@: %@ \n%@: %@ \n%@: %@ \n\n\n", NSLocalizedString(@"Datum", @"Datum"), dateString, NSLocalizedString(@"Beginn", @"Beginn"), timeString, NSLocalizedString(@"Dauer", @"Dauer"), durationString, NSLocalizedString(@"Person", @"Person"), [NSString stringWithFormat:@"%@ %@", self.user.firstName, self.user.lastName], NSLocalizedString(@"Aktivität", @"Aktivität"), self.activity.name];
     return header;
