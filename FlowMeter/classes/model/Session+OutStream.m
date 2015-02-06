@@ -131,6 +131,43 @@
         [txtFileNames addObject:[self writeData:data withFilename:filename]];
     }
     
+    if ([self.locationRecords count] > 0) {
+        
+        // Create archive data
+        NSMutableData *data = [NSMutableData dataWithCapacity:0];
+        // Order by timestamp
+        NSArray *locationRecords = [self.locationRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
+        [data appendData:[[[locationRecords lastObject] kmlHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        [data appendData:[[[locationRecords lastObject] kmlTimelineHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        // Append data
+        for (LocationRecord *locationRecord in locationRecords) {
+            [data appendData:[[locationRecord kmlTimelineDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        }
+        
+        [data appendData:[[[locationRecords lastObject] kmlTimelineFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        [data appendData:[[[locationRecords lastObject] kmlPathHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        // Append data
+        for (LocationRecord *locationRecord in locationRecords) {
+            [data appendData:[[locationRecord kmlPathDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        }
+        
+        [data appendData:[[[locationRecords lastObject] kmlPathFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        
+        
+        [data appendData:[[[locationRecords lastObject] kmlFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+
+        // Write in file with filename
+        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
+        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
+        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-location.kml",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
+        
+        [txtFileNames addObject:[self writeData:data withFilename:filename]];
+    }
+    
     
     return txtFileNames;
 }

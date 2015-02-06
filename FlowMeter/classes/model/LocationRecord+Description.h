@@ -13,4 +13,13 @@
 - (NSString *)csvDescription;
 - (NSString *)csvHeader;
 
+- (NSString *)kmlPathHeader;
+- (NSString *)kmlTimelineHeader;
+- (NSString *)kmlPathFooter;
+- (NSString *)kmlTimelineFooter;
+- (NSString *)kmlPathDescription;
+- (NSString *)kmlTimelineDescription;
+- (NSString *)kmlHeader;
+- (NSString *)kmlFooter;
+
 @end
