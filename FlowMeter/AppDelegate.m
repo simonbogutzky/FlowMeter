@@ -37,7 +37,7 @@
     if (!_locationManager) {
         _locationManager = [[CLLocationManager alloc] init];
         [_locationManager requestAlwaysAuthorization];
-        _locationManager.distanceFilter = 250.f;
+        _locationManager.distanceFilter = 100.f;
     }
     return _locationManager;
 }
