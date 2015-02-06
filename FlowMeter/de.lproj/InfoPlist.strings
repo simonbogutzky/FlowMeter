@@ -1,15 +1,21 @@
 /* (No Commment) */
-CFBundleDisplayName = "FlowMeter";
+"CFBundleDisplayName" = "FlowMeter";
 
 /* (No Commment) */
-CFBundleName = "FlowMeter";
+"CFBundleGetInfoString" = "";
 
 /* (No Commment) */
-CFBundleShortVersionString = "1.0.1";
+"CFBundleName" = "FlowMeter";
 
 /* (No Commment) */
-NSLocationAlwaysUsageDescription = "Der FlowMeter benötigt den Standort für den vollen Funktionsumfang.";
+"CFBundleShortVersionString" = "1.0.1";
 
 /* (No Commment) */
-NSLocationWhenInUseUsageDescription = "Der FlowMeter benötigt den Standort für den vollen Funktionsumfang.";
+"NSHumanReadableCopyright" = "";
+
+/* (No Commment) */
+"NSLocationAlwaysUsageDescription" = "Der FlowMeter benötigt den Standort für den vollen Funktionsumfang.";
+
+/* (No Commment) */
+"NSLocationWhenInUseUsageDescription" = "Der FlowMeter benötigt den Standort für den vollen Funktionsumfang.";
 

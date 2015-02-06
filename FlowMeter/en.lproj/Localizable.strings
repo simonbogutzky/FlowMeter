@@ -25,11 +25,23 @@
 /* Benutzer */
 "Benutzer" = "User";
 
+/* Benutzerbeschleunigung X (Gs) */
+"Benutzerbeschleunigung X (Gs)" = "User Acceleration X (Gs)";
+
+/* Benutzerbeschleunigung Y (Gs) */
+"Benutzerbeschleunigung Y (Gs)" = "User Acceleration X (Gs)";
+
+/* Benutzerbeschleunigung Z (Gs) */
+"Benutzerbeschleunigung Z (Gs)" = "User Acceleration Y (Gs)";
+
 /* (No Commment) */
 "Besorgnis" = "Anxiety";
 
 /* Besorgnis (SD) */
 "Besorgnis (SD)" = "Anxiety (SD)";
+
+/* Bewegungsdaten */
+"Bewegungsdaten" = "Motion Data";
 
 /* No comment provided by engineer. */
 "Bist du sicher, dass du diese Flow-Messung entfernen willst?" = "Are you sure, that you want to remove the current flow-measurement?";
@@ -39,6 +51,9 @@
 
 /* Bluetooth Manager wird gerade zurückgesetzt */
 "Bluetooth Manager wird gerade zurückgesetzt" = "Bluetooth Manager will be resetted";
+
+/* Breitengrad */
+"Breitengrad" = "Latitude";
 
 /* No comment provided by engineer. */
 "Cellular" = "Cellular";
@@ -51,6 +66,9 @@
 
 /* Dauer */
 "Dauer" = "Duration";
+
+/* Dauer (s) */
+"Dauer (s)" = "Duration (s)";
 
 /* Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen. */
 "Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen." = "The value of the variation can assume at most the half of the interval value.";
@@ -94,7 +112,7 @@
 /* Flow Kurzskala */
 "Flow Kurzskala" = "Flow short scale";
 
-/* Flow Kurzskala */
+/* Flow Kurzskalen */
 "Flow Kurzskalen" = "Flow short scales";
 
 /* Für mich persönlich sind die jetzigen Anforderungen... */
@@ -102,6 +120,18 @@
 
 /* Gerät unterstützt kein Bluetooth LE */
 "Gerät unterstützt kein Bluetooth LE" = "Device does not support Bluetooth LE";
+
+/* Geschwindigkeit (m/s) */
+"Geschwindigkeit (m/s)" = "Speed (m/s)";
+
+/* Gravitation X (Gs) */
+"Gravitation X (Gs)" = "Gravity X (Gs)";
+
+/* Gravitation Y (Gs) */
+"Gravitation Y (Gs)" = "Gravity Y (Gs)";
+
+/* Gravitation Z (Gs) */
+"Gravitation Z (Gs)" = "Gravity Z (Gs)";
 
 /* Stunden Einheit Label im SessionViewController */
 "H" = "H";
@@ -112,8 +142,11 @@
 /* Herzrate in der Tabelle */
 "Herzrate" = "Heart rate";
 
-/* Herzrate (BPM) */
-"Herzrate (BPM)" = "Heart rate (BPM)";
+/* Horizontale Genauigkeit (m) */
+"Horizontale Genauigkeit (m)" = "Horizontal Accuracy (m)";
+
+/* Höhe (m) */
+"Höhe (m)" = "Altitude (m)";
 
 /* Ich bin ganz vertieft in das, was ich gerade mache. */
 "Ich bin ganz vertieft in das, was ich gerade mache." = "I am totally absorbed in what I am doing.";
@@ -160,6 +193,12 @@
 /* Keine Verbindung möglich */
 "Keine Verbindung möglich" = "No connection possible";
 
+/* Kurs (deg) */
+"Kurs (deg)" = "Course (deg)";
+
+/* Längengrad */
+"Längengrad" = "Longitude";
+
 /* Title for delete button with placeholder for number */
 "Lösche (%d)" = "Delete (%d)";
 
@@ -168,6 +207,9 @@
 
 /* Minuten Einheit Label im SessionViewController */
 "MIN" = "MIN";
+
+/* Mehrfach befragen */
+"Mehrfach befragen" = "Ask multiple";
 
 /* Mein Kopf ist völlig klar. */
 "Mein Kopf ist völlig klar." = "My mind is completely clear.";
@@ -184,29 +226,50 @@
 /* No comment provided by engineer. */
 "No Connection" = "No Connection";
 
+/* No comment provided by engineer. */
+"No Data" = "No Data";
+
 /* (No Commment) */
 "OK" = "OK";
 
 /* (No Commment) */
 "Ok" = "Ok";
 
+/* Orte */
+"Orte" = "Locations";
+
 /* (No Commment) */
 "Passung" = "Fit";
 
 /* Passung (SD) */
-"Passung (SD)" = "Fir (SD)";
+"Passung (SD)" = "Fit (SD)";
 
 /* Person */
 "Person" = "Person";
 
+/* Pitch (rad) */
+"Pitch (rad)" = "Pitch (rad)";
+
 /* RR-Intervall (s) */
 "RR-Intervall (s)" = "RR-Interval";
+
+/* Roll (rad) */
+"Roll (rad)" = "Roll (rad)";
+
+/* Rotationsrate X (rad/s) */
+"Rotationsrate X (rad/s)" = "Rotation Rate X (rad/s)";
+
+/* Rotationsrate Y (rad/s) */
+"Rotationsrate Y (rad/s)" = "Rotation Rate Y (rad/s)";
+
+/* Rotationsrate Z (rad/s) */
+"Rotationsrate Z (rad/s)" = "Rotation Rate Z (rad/s)";
 
 /* Sekunden Einheit Label im SessionViewController */
 "S" = "S";
 
-/* Mehrfach befragen */
-"Mehrfach befragen" = "Ask multiple";
+/* Stockwerk */
+"Stockwerk" = "Floor";
 
 /* Trifft nicht zu */
 "Trifft nicht zu" = "not at all";
@@ -235,11 +298,17 @@
 /* Verlauf (SD) */
 "Verlauf (SD)" = "Fluency (SD)";
 
+/* Vertikale Genauigkeit (m) */
+"Vertikale Genauigkeit (m)" = "Vertical Accuracy (m)";
+
 /* Vorname */
 "Vorname" = "First name";
 
 /* No comment provided by engineer. */
 "WiFi" = "WiFi";
+
+/* Yaw (rad) */
+"Yaw (rad)" = "Yaw (rad)";
 
 /* Zeitintervall */
 "Zeitintervall" = "Time interval";

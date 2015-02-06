@@ -1,7 +1,3 @@
-
-/* Class = "IBUILabel"; text = "4.5 ⍉"; ObjectID = "11w-qP-avr"; */
-"11w-qP-avr.text" = "4.5 ⍉";
-
 /* Class = "IBUILabel"; text = "Triff nicht zu"; ObjectID = "1X8-td-6f1"; */
 "1X8-td-6f1.text" = "not at all";
 
@@ -23,8 +19,8 @@
 /* Class = "IBUILabel"; text = "FLOW"; ObjectID = "4vJ-Is-xZ5"; */
 "4vJ-Is-xZ5.text" = "FLOW";
 
-/* Class = "IBUILabel"; text = "✎"; ObjectID = "744-6J-0ve"; */
-"744-6J-0ve.text" = "✎";
+/* Class = "IBUILabel"; text = "❤︎"; ObjectID = "5hP-GP-iz5"; */
+"5hP-GP-iz5.text" = "❤︎";
 
 /* Class = "IBUILabel"; text = "ANZAHL"; ObjectID = "7P5-t7-rHo"; */
 "7P5-t7-rHo.text" = "COUNT";
@@ -34,6 +30,12 @@
 
 /* Class = "IBUILabel"; text = "❤︎"; ObjectID = "8ie-3Q-cwT"; */
 "8ie-3Q-cwT.text" = "❤︎";
+
+/* Class = "IBUILabel"; text = "4.5 ⍉"; ObjectID = "11w-qP-avr"; */
+"11w-qP-avr.text" = "4.5 ⍉";
+
+/* Class = "IBUILabel"; text = "✎"; ObjectID = "744-6J-0ve"; */
+"744-6J-0ve.text" = "✎";
 
 /* Class = "IBUITextView"; text = "Lizenzen"; ObjectID = "AKF-1o-zo5"; */
 "AKF-1o-zo5.text" = "Lizenzen";
@@ -91,6 +93,9 @@
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "TjS-8J-YUm"; */
 "TjS-8J-YUm.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Zyphyr HXM20002685"; ObjectID = "YyU-dp-IJn"; */
+"YyU-dp-IJn.text" = "Zyphyr HXM20002685";
 
 /* Class = "IBUINavigationItem"; title = "Danksagungen"; ObjectID = "ZiB-xe-gVx"; */
 "ZiB-xe-gVx.title" = "Acknowledgements";
@@ -190,9 +195,6 @@
 
 /* Class = "IBUILabel"; text = "FLOW"; ObjectID = "wMl-tr-4gU"; */
 "wMl-tr-4gU.text" = "FLOW";
-
-/* Class = "IBUINavigationItem"; title = "Aufnahme"; ObjectID = "xDQ-T2-Doq"; */
-"xDQ-T2-Doq.title" = "Recording";
 
 /* Class = "IBUILabel"; text = "7"; ObjectID = "xDl-la-9j6"; */
 "xDl-la-9j6.text" = "7";
