@@ -95,7 +95,7 @@
 - (NSString *)csvDescription
 {
     return [NSString stringWithFormat:@"%@,%f,%f,%f,%f,%f,%f,%f,%d\n",
-            [self.dateFormatter stringFromDate:self.date],
+            [self.dateFormatterForCSV stringFromDate:self.date],
             self.latitude,
             self.longitude,
             self.altitude,
@@ -122,12 +122,23 @@
                                ];
 }
 
+
 - (NSDateFormatter *)dateFormatterForKML
 {
     static NSDateFormatter *dateFormatter = nil;
     if (dateFormatter == nil) {
         dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+    }
+    return dateFormatter;
+}
+
+- (NSDateFormatter *)dateFormatterForCSV
+{
+    static NSDateFormatter *dateFormatter = nil;
+    if (dateFormatter == nil) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     }
     return dateFormatter;
 }
