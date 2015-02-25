@@ -483,6 +483,7 @@
         self.heartRateSum = self.heartRateSum + data.heartRate;
         
         long rrDataCount = [data.rrTimes count];
+//        AudioServicesPlaySystemSound(1057);
         for (int i = 0; i < rrDataCount; i++) {
             HeartRateRecord *heartRateRecord = [NSEntityDescription insertNewObjectForEntityForName:@"HeartRateRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
             
