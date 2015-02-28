@@ -43,6 +43,7 @@
 		D3877C0B19BEEE0E00F21881 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3877C0A19BEEE0E00F21881 /* libz.dylib */; };
 		D3877C0D19BEEFED00F21881 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3877C0C19BEEFED00F21881 /* ExternalAccessory.framework */; };
 		D38A216D16BFF9F80075D093 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38A216C16BFF9F80075D093 /* CoreLocation.framework */; };
+		D38B581B1AA0D69A0050E9D3 /* FlowMeter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D38B58111AA0D69A0050E9D3 /* FlowMeter.xcdatamodeld */; };
 		D38FBDBC196C1DC000C63681 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D38FBDB8196C1DC000C63681 /* MainStoryboard.storyboard */; };
 		D396933D19BE10D700249D2C /* LabelAndSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D396933C19BE10D700249D2C /* LabelAndSwitchTableViewCell.m */; };
 		D39736C819B0C11D005D643D /* SelfReport.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736C719B0C11D005D643D /* SelfReport.m */; };
@@ -74,7 +75,6 @@
 		D3DA4A7716DCCB0300ECBE4B /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DA4A7616DCCB0300ECBE4B /* GLKit.framework */; };
 		D3EB072419BB9552005F0333 /* SessionPrefsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EB072319BB9552005F0333 /* SessionPrefsViewController.m */; };
 		D3EFDE1D19F01B9200D7E88A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EFDE0C19F01B9200D7E88A /* AppDelegate.m */; };
-		D3EFDE2119F01B9200D7E88A /* FlowMeter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3EFDE1519F01B9200D7E88A /* FlowMeter.xcdatamodeld */; };
 		D3EFDE2319F01B9200D7E88A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EFDE1C19F01B9200D7E88A /* main.m */; };
 		D3EFDE2619F01BED00D7E88A /* PropertyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EFDE2519F01BED00D7E88A /* PropertyTableViewCell.m */; };
 /* End PBXBuildFile section */
@@ -146,14 +146,12 @@
 		604CCD9016A6F31000E87194 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		604CCD9216A6F31000E87194 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		60AA4F7216A829100026DE8D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		D310FCDD1A6F9675008E4EE6 /* FlowMeter-Version-006.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-006.xcdatamodel"; sourceTree = "<group>"; };
 		D310FCE01A6F9D18008E4EE6 /* MotionRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MotionRecord.h; path = classes/model/MotionRecord.h; sourceTree = "<group>"; };
 		D310FCE11A6F9D18008E4EE6 /* MotionRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MotionRecord.m; path = classes/model/MotionRecord.m; sourceTree = "<group>"; };
 		D310FCE31A6F9DBE008E4EE6 /* MotionRecord+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MotionRecord+Description.h"; path = "classes/model/MotionRecord+Description.h"; sourceTree = "<group>"; };
 		D310FCE41A6F9DBE008E4EE6 /* MotionRecord+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MotionRecord+Description.m"; path = "classes/model/MotionRecord+Description.m"; sourceTree = "<group>"; };
 		D311D9131A7242F700A254DB /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LaunchViewController.h; path = classes/ui/LaunchViewController.h; sourceTree = "<group>"; };
 		D311D9141A7242F700A254DB /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LaunchViewController.m; path = classes/ui/LaunchViewController.m; sourceTree = "<group>"; };
-		D31C377B1A710BAF001CAB71 /* FlowMeter-Version-007.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-007.xcdatamodel"; sourceTree = "<group>"; };
 		D31FCC5F1896859C006F18A0 /* LikertScaleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LikertScaleViewControllerDelegate.h; path = classes/ui/LikertScaleViewControllerDelegate.h; sourceTree = "<group>"; };
 		D321AC031A3337940011D09C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D321AC051A3337A30011D09C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 		D37675821A84B601009D17B4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D37675841A84B7CB009D17B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D37675851A84B802009D17B4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D376758B1A84BDFE009D17B4 /* FlowMeter-Version-009.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-009.xcdatamodel"; sourceTree = "<group>"; };
 		D376758C1A84C0CE009D17B4 /* LocationRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationRecord.h; path = classes/model/LocationRecord.h; sourceTree = "<group>"; };
 		D376758D1A84C0CE009D17B4 /* LocationRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationRecord.m; path = classes/model/LocationRecord.m; sourceTree = "<group>"; };
 		D37675951A84C28F009D17B4 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = classes/model/Session.h; sourceTree = "<group>"; };
@@ -208,6 +205,15 @@
 		D3877C0C19BEEFED00F21881 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		D3877C0E19BEEFED00F21881 /* FlowMeter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FlowMeter.entitlements; sourceTree = "<group>"; };
 		D38A216C16BFF9F80075D093 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D38B58121AA0D69A0050E9D3 /* FlowMeter-Version-002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-002.xcdatamodel"; sourceTree = "<group>"; };
+		D38B58131AA0D69A0050E9D3 /* FlowMeter-Version-003.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-003.xcdatamodel"; sourceTree = "<group>"; };
+		D38B58141AA0D69A0050E9D3 /* FlowMeter-Version-004.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-004.xcdatamodel"; sourceTree = "<group>"; };
+		D38B58151AA0D69A0050E9D3 /* FlowMeter-Version-005.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-005.xcdatamodel"; sourceTree = "<group>"; };
+		D38B58161AA0D69A0050E9D3 /* FlowMeter-Version-006.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-006.xcdatamodel"; sourceTree = "<group>"; };
+		D38B58171AA0D69A0050E9D3 /* FlowMeter-Version-007.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-007.xcdatamodel"; sourceTree = "<group>"; };
+		D38B58181AA0D69A0050E9D3 /* FlowMeter-Version-008.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-008.xcdatamodel"; sourceTree = "<group>"; };
+		D38B58191AA0D69A0050E9D3 /* FlowMeter-Version-009.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-009.xcdatamodel"; sourceTree = "<group>"; };
+		D38B581A1AA0D69A0050E9D3 /* FlowMeter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlowMeter.xcdatamodel; sourceTree = "<group>"; };
 		D396933B19BE10D700249D2C /* LabelAndSwitchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LabelAndSwitchTableViewCell.h; path = classes/ui/LabelAndSwitchTableViewCell.h; sourceTree = "<group>"; };
 		D396933C19BE10D700249D2C /* LabelAndSwitchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LabelAndSwitchTableViewCell.m; path = classes/ui/LabelAndSwitchTableViewCell.m; sourceTree = "<group>"; };
 		D39736C619B0C11D005D643D /* SelfReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelfReport.h; path = classes/model/SelfReport.h; sourceTree = "<group>"; };
@@ -251,15 +257,9 @@
 		D3EFDE0C19F01B9200D7E88A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D3EFDE1319F01B9200D7E88A /* FlowMeter-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FlowMeter-Info.plist"; sourceTree = "<group>"; };
 		D3EFDE1419F01B9200D7E88A /* FlowMeter-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlowMeter-Prefix.pch"; sourceTree = "<group>"; };
-		D3EFDE1619F01B9200D7E88A /* FlowMeter-Version-002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-002.xcdatamodel"; sourceTree = "<group>"; };
-		D3EFDE1719F01B9200D7E88A /* FlowMeter-Version-003.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-003.xcdatamodel"; sourceTree = "<group>"; };
-		D3EFDE1819F01B9200D7E88A /* FlowMeter-Version-004.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-004.xcdatamodel"; sourceTree = "<group>"; };
-		D3EFDE1919F01B9200D7E88A /* FlowMeter-Version-005.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-005.xcdatamodel"; sourceTree = "<group>"; };
-		D3EFDE1A19F01B9200D7E88A /* FlowMeter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlowMeter.xcdatamodel; sourceTree = "<group>"; };
 		D3EFDE1C19F01B9200D7E88A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D3EFDE2419F01BED00D7E88A /* PropertyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyTableViewCell.h; path = classes/ui/PropertyTableViewCell.h; sourceTree = "<group>"; };
 		D3EFDE2519F01BED00D7E88A /* PropertyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PropertyTableViewCell.m; path = classes/ui/PropertyTableViewCell.m; sourceTree = "<group>"; };
-		D3F23F4B1A715BBC00B84B52 /* FlowMeter-Version-008.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-008.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -365,6 +365,7 @@
 		604CCD9516A6F31000E87194 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D38B58111AA0D69A0050E9D3 /* FlowMeter.xcdatamodeld */,
 				D3877C0E19BEEFED00F21881 /* FlowMeter.entitlements */,
 				D38F7ABA19F0070300016B6E /* Audio */,
 				D31C4BCA19A619DE0017AA5A /* Model */,
@@ -376,7 +377,6 @@
 		D31C4BCA19A619DE0017AA5A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D3EFDE1519F01B9200D7E88A /* FlowMeter.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -724,6 +724,7 @@
 				D34C9D2917250463004C261C /* SessionRecordViewController.m in Sources */,
 				D362AF3F1A177CEE00901B95 /* LicenseViewController.m in Sources */,
 				D376759A1A84C842009D17B4 /* LocationRecord+Description.m in Sources */,
+				D38B581B1AA0D69A0050E9D3 /* FlowMeter.xcdatamodeld in Sources */,
 				D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */,
 				D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */,
 				D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */,
@@ -744,7 +745,6 @@
 				D310FCE51A6F9DBE008E4EE6 /* MotionRecord+Description.m in Sources */,
 				D37067D71733F41300F86BBD /* EditViewController.m in Sources */,
 				D32EF03E1A17A60500E9D60B /* AcknowledgementViewController.m in Sources */,
-				D3EFDE2119F01B9200D7E88A /* FlowMeter.xcdatamodeld in Sources */,
 				D3EFDE2319F01B9200D7E88A /* main.m in Sources */,
 				D311D9161A7242F700A254DB /* LaunchViewController.m in Sources */,
 			);
@@ -1076,20 +1076,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D3EFDE1519F01B9200D7E88A /* FlowMeter.xcdatamodeld */ = {
+		D38B58111AA0D69A0050E9D3 /* FlowMeter.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D376758B1A84BDFE009D17B4 /* FlowMeter-Version-009.xcdatamodel */,
-				D310FCDD1A6F9675008E4EE6 /* FlowMeter-Version-006.xcdatamodel */,
-				D31C377B1A710BAF001CAB71 /* FlowMeter-Version-007.xcdatamodel */,
-				D3F23F4B1A715BBC00B84B52 /* FlowMeter-Version-008.xcdatamodel */,
-				D3EFDE1619F01B9200D7E88A /* FlowMeter-Version-002.xcdatamodel */,
-				D3EFDE1719F01B9200D7E88A /* FlowMeter-Version-003.xcdatamodel */,
-				D3EFDE1819F01B9200D7E88A /* FlowMeter-Version-004.xcdatamodel */,
-				D3EFDE1919F01B9200D7E88A /* FlowMeter-Version-005.xcdatamodel */,
-				D3EFDE1A19F01B9200D7E88A /* FlowMeter.xcdatamodel */,
+				D38B58121AA0D69A0050E9D3 /* FlowMeter-Version-002.xcdatamodel */,
+				D38B58131AA0D69A0050E9D3 /* FlowMeter-Version-003.xcdatamodel */,
+				D38B58141AA0D69A0050E9D3 /* FlowMeter-Version-004.xcdatamodel */,
+				D38B58151AA0D69A0050E9D3 /* FlowMeter-Version-005.xcdatamodel */,
+				D38B58161AA0D69A0050E9D3 /* FlowMeter-Version-006.xcdatamodel */,
+				D38B58171AA0D69A0050E9D3 /* FlowMeter-Version-007.xcdatamodel */,
+				D38B58181AA0D69A0050E9D3 /* FlowMeter-Version-008.xcdatamodel */,
+				D38B58191AA0D69A0050E9D3 /* FlowMeter-Version-009.xcdatamodel */,
+				D38B581A1AA0D69A0050E9D3 /* FlowMeter.xcdatamodel */,
 			);
-			currentVersion = D376758B1A84BDFE009D17B4 /* FlowMeter-Version-009.xcdatamodel */;
+			currentVersion = D38B58191AA0D69A0050E9D3 /* FlowMeter-Version-009.xcdatamodel */;
 			path = FlowMeter.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
