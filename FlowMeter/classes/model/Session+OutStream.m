@@ -46,7 +46,7 @@
         [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
         NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-questionaire.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
         
-        [txtFileNames addObject:[self writeData:data withFilename:filename]];
+        [txtFileNames addObject:[self writeData:data withFilename:filename append:NO]];
     }
     
     
@@ -74,34 +74,47 @@
         [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
         NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-heart.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
         
-        [txtFileNames addObject:[self writeData:data withFilename:filename]];
+        [txtFileNames addObject:[self writeData:data withFilename:filename append:NO]];
     }
     
+    NSLog(@"Motion Count: %d", [self.motionRecords count]);
     if ([self.motionRecords count] > 0) {
         
         // Create archive data
-        NSMutableData *data = [NSMutableData dataWithCapacity:0];
+//        NSMutableData *data = [NSMutableData dataWithCapacity:0];
         
-        // Append header
-        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        // Append header
+//        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         
         // Order by timestamp
         NSArray *motionRecords = [self.motionRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
-        [data appendData:[[[motionRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        [data appendData:[[[motionRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
         
         // Append data
-        for (MotionRecord *motionRecord in motionRecords) {
-            [data appendData:[[motionRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        }
-        
-        // Write in file with filename
         NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
         [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
         NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-motion.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
         
-        [txtFileNames addObject:[self writeData:data withFilename:filename]];
+        
+        int i = 0;
+        
+        NSMutableData *data = [NSMutableData dataWithCapacity:0];
+        for (MotionRecord *motionRecord in motionRecords) {
+            
+            [data appendData:[[motionRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+            i++;
+            if (i % 100 == 0) {
+                [self writeData:data withFilename:filename append:YES];
+                data = [NSMutableData dataWithCapacity:0];
+            }
+        }
+        
+        // Write in file with filename
+        
+        
+        //[txtFileNames addObject:];
     }
     
     if ([self.locationRecords count] > 0) {
@@ -128,7 +141,7 @@
         [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
         NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-location.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
         
-        [txtFileNames addObject:[self writeData:data withFilename:filename]];
+        [txtFileNames addObject:[self writeData:data withFilename:filename append:NO]];
     }
     
     if ([self.locationRecords count] > 0) {
@@ -165,7 +178,7 @@
         [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
         NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-location.kml",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
         
-        [txtFileNames addObject:[self writeData:data withFilename:filename]];
+        [txtFileNames addObject:[self writeData:data withFilename:filename append:NO]];
     }
     
     
@@ -188,7 +201,7 @@
     return  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
 }
 
-- (NSString *)writeData:(NSData *)data withFilename:(NSString *)filename
+- (NSString *)writeData:(NSData *)data withFilename:(NSString *)filename append:(BOOL)append
 {
     NSString *filePath = [self.userDirectory stringByAppendingPathComponent:filename];
     
@@ -196,7 +209,7 @@
     if (![fileManager fileExistsAtPath:filePath])
     {
         [fileManager createFileAtPath:filePath contents:nil attributes:nil];
-    } else {
+    } else if(!append) {
         [fileManager removeItemAtPath:filePath error:NULL];
         [fileManager createFileAtPath:filePath contents:nil attributes:nil];
     }
@@ -204,6 +217,7 @@
     NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:filePath];
     [fileHandle seekToEndOfFile];
     [fileHandle writeData:data];
+    [fileHandle synchronizeFile];// Flush any data in memory to disk
     [fileHandle closeFile];
     
     return filename;
