@@ -22,164 +22,176 @@
 {
     NSMutableArray *txtFileNames = [[NSMutableArray alloc] initWithCapacity:3];
     
-    if (self.selfReportCount > 0) {
-        
-        // Create archive data
-        NSMutableData *data = [NSMutableData dataWithCapacity:0];
-        
-        // Append header
-        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Flow Kurzskalen", @"Flow Kurzskalen")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        // Order by timestamp
-        NSArray *selfReports = [self.selfReports sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
-        [data appendData:[[[selfReports lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        // Append data
-        for (SelfReport *selfReport in selfReports) {
-            [data appendData:[[selfReport csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        }
-        
-        // Write in file with filename
-        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
-        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
-        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-questionaire.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
-        
-        [txtFileNames addObject:[self writeData:data withFilename:filename append:NO]];
-    }
-    
-    
-    if ([self.heartRateRecords count] > 0) {
-        
-        // Create archive data
-        NSMutableData *data = [NSMutableData dataWithCapacity:0];
-        
-        // Append header
-        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"HR-Messungen", @"HR-Messungen")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        // Order by timestamp
-        NSArray *heartRateRecords = [self.heartRateRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
-        [data appendData:[[[heartRateRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        // Append data
-        for (HeartRateRecord *heartRateRecord in heartRateRecords) {
-            [data appendData:[[heartRateRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        }
-        
-        // Write in file with filename
-        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
-        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
-        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-heart.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
-        
-        [txtFileNames addObject:[self writeData:data withFilename:filename append:NO]];
-    }
-    
-    NSLog(@"Motion Count: %d", [self.motionRecords count]);
-    if ([self.motionRecords count] > 0) {
-        
-        // Create archive data
+//    if (self.selfReportCount == -1) {
+//        
+//        // Create archive data
 //        NSMutableData *data = [NSMutableData dataWithCapacity:0];
-        
+//        
 //        // Append header
 //        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
 //        
-//        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Flow Kurzskalen", @"Flow Kurzskalen")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        // Order by timestamp
+//        NSArray *selfReports = [self.selfReports sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
+//        [data appendData:[[[selfReports lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        // Append data
+//        for (SelfReport *selfReport in selfReports) {
+//            [data appendData:[[selfReport csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        }
+//        
+//        // Write in file with filename
+//        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
+//        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
+//        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-questionaire.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
+//        
+//        [txtFileNames addObject:[self writeData:data withFilename:filename append:NO]];
+//    }
+//    
+//    
+//    if ([self.heartRateRecords count] == -1) {
+//        
+//        // Create archive data
+//        NSMutableData *data = [NSMutableData dataWithCapacity:0];
+//        
+//        // Append header
+//        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"HR-Messungen", @"HR-Messungen")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        // Order by timestamp
+//        NSArray *heartRateRecords = [self.heartRateRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
+//        [data appendData:[[[heartRateRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        // Append data
+//        for (HeartRateRecord *heartRateRecord in heartRateRecords) {
+//            [data appendData:[[heartRateRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        }
+//        
+//        // Write in file with filename
+//        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
+//        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
+//        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-heart.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
+//        
+//        [txtFileNames addObject:[self writeData:data withFilename:filename append:NO]];
+//    }
+    
+    NSInteger motionRecordCount = self.motionRecords.count;
+    NSLog(@"# motion records count: %ld", (long) motionRecordCount);
+    if (motionRecordCount > 0) {
         
-        // Order by timestamp
-        NSArray *motionRecords = [self.motionRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
-//        [data appendData:[[[motionRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        // Append data
+        // Create file name
         NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
         [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
         NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-motion.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
-        
-        
-        int i = 0;
-        
-        NSMutableData *data = [NSMutableData dataWithCapacity:0];
-        for (MotionRecord *motionRecord in motionRecords) {
-            
-            [data appendData:[[motionRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-            i++;
-            if (i % 100 == 0) {
-                [self writeData:data withFilename:filename append:YES];
-                data = [NSMutableData dataWithCapacity:0];
-            }
-        }
-        
-        // Write in file with filename
-        
-        
-        //[txtFileNames addObject:];
-    }
-    
-    if ([self.locationRecords count] > 0) {
-        
-        // Create archive data
-        NSMutableData *data = [NSMutableData dataWithCapacity:0];
-        
-        // Append header
-        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Orte", @"Orte")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        // Order by timestamp
-        NSArray *locationRecords = [self.locationRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
-        [data appendData:[[[locationRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        // Append data
-        for (LocationRecord *locationRecord in locationRecords) {
-            [data appendData:[[locationRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        }
-        
-        // Write in file with filename
-        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
-        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
-        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-location.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
-        
-        [txtFileNames addObject:[self writeData:data withFilename:filename append:NO]];
-    }
-    
-    if ([self.locationRecords count] > 0) {
-        
-        // Create archive data
-        NSMutableData *data = [NSMutableData dataWithCapacity:0];
-        // Order by timestamp
-        NSArray *locationRecords = [self.locationRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
-        [data appendData:[[[locationRecords lastObject] kmlHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        [data appendData:[[[locationRecords lastObject] kmlTimelineHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        // Append data
-        for (LocationRecord *locationRecord in locationRecords) {
-            [data appendData:[[locationRecord kmlTimelineDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        }
-        
-        [data appendData:[[[locationRecords lastObject] kmlTimelineFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        [data appendData:[[[locationRecords lastObject] kmlPathHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        // Append data
-        for (LocationRecord *locationRecord in locationRecords) {
-            [data appendData:[[locationRecord kmlPathDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        }
-        
-        [data appendData:[[[locationRecords lastObject] kmlPathFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-        
-        
-        [data appendData:[[[locationRecords lastObject] kmlFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//
+//        // Create data object
+//        NSMutableData *data = [NSMutableData dataWithCapacity:0];
+//        
+//        // Append header
+//        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        [data appendData:[[[self.motionRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        // Fetch data sequential
+//        NSInteger fetchLimit = 100000;
+//        NSInteger fetchOffset = 0;
+//        while (fetchOffset < motionRecordCount) {
+//            @autoreleasepool {
+//                NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+//                fetchRequest.entity = [NSEntityDescription entityForName:@"MotionRecord" inManagedObjectContext:self.managedObjectContext];
+//                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"session == %@", self];
+//                fetchRequest.predicate = predicate;
+//                fetchRequest.fetchLimit = fetchLimit;
+//                fetchRequest.fetchOffset = fetchOffset;
+//                NSError *error = nil;
+//                NSArray *motionRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+//                
+//                // Loop through all records
+//                for (MotionRecord *motionRecord in motionRecords) {
+//                    
+//                    // Append data
+//                    [data appendData:[[motionRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//                }
+//                
+//                [self writeData:data withFilename:filename append:YES];
+//                data = [[NSMutableData alloc] init];
+//                
+//                fetchOffset += fetchLimit;
+//                NSLog(@"motionRecords count = %d", [motionRecords count]);
+//                NSLog(@"fetch offset = %d", fetchOffset);
+//            }
+//        }
 
-        // Write in file with filename
-        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
-        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
-        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-location.kml",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
-        
-        [txtFileNames addObject:[self writeData:data withFilename:filename append:NO]];
+        // Add filename
+        [txtFileNames addObject:filename];
     }
+//    int locationRecordsCount = [self.locationRecords count];
+//    NSLog(@"# location records count: %d", locationRecordsCount);
+//    if (locationRecordsCount > 0) {
+//        
+//        // Create archive data
+//        NSMutableData *data = [NSMutableData dataWithCapacity:0];
+//        
+//        // Append header
+//        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Orte", @"Orte")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        // Order by timestamp
+//        NSArray *locationRecords = [self.locationRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
+//        [data appendData:[[[locationRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        // Append data
+//        for (LocationRecord *locationRecord in locationRecords) {
+//            [data appendData:[[locationRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        }
+//        
+//        // Write in file with filename
+//        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
+//        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
+//        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-location.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
+//        [self writeData:data withFilename:filename append:NO];
+//        //[txtFileNames addObject:[self writeData:data withFilename:filename append:NO]];
+//    }
+//
+//    if ([self.locationRecords count] == -1) {
+//        
+//        // Create archive data
+//        NSMutableData *data = [NSMutableData dataWithCapacity:0];
+//        // Order by timestamp
+//        NSArray *locationRecords = [self.locationRecords sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
+//        [data appendData:[[[locationRecords lastObject] kmlHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        [data appendData:[[[locationRecords lastObject] kmlTimelineHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        // Append data
+//        for (LocationRecord *locationRecord in locationRecords) {
+//            [data appendData:[[locationRecord kmlTimelineDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        }
+//        
+//        [data appendData:[[[locationRecords lastObject] kmlTimelineFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        [data appendData:[[[locationRecords lastObject] kmlPathHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        // Append data
+//        for (LocationRecord *locationRecord in locationRecords) {
+//            [data appendData:[[locationRecord kmlPathDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        }
+//        
+//        [data appendData:[[[locationRecords lastObject] kmlPathFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//        
+//        
+//        [data appendData:[[[locationRecords lastObject] kmlFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+//
+//        // Write in file with filename
+//        NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
+//        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
+//        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-location.kml",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
+//        
+//        [txtFileNames addObject:[self writeData:data withFilename:filename append:NO]];
+//    }
     
     
     return txtFileNames;

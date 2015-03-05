@@ -34,11 +34,34 @@
 @dynamic user;
 @synthesize sectionTitle;
 
--(NSString *)sectionTitle
+- (NSString *)sectionTitle
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy/MM/dd"];
     return [dateFormatter stringFromDate:self.date];
+}
+
+- (void)addHeartRateRecordsObject:(HeartRateRecord *)value
+{
+    NSMutableOrderedSet* tempSet = [self mutableOrderedSetValueForKey:@"heartRateRecords"];
+    [tempSet addObject:value];
+}
+
+- (void)addLocationRecordsObject:(LocationRecord *)value {
+    NSMutableOrderedSet* tempSet = [self mutableOrderedSetValueForKey:@"locationRecords"];
+    [tempSet addObject:value];
+}
+
+- (void)addMotionRecords:(NSOrderedSet *)values
+{
+    NSMutableOrderedSet* tempSet = [self mutableOrderedSetValueForKey:@"motionRecords"];
+    [tempSet unionOrderedSet:values];
+}
+
+- (void)addSelfReportsObject:(SelfReport *)value
+{
+    NSMutableOrderedSet* tempSet = [self mutableOrderedSetValueForKey:@"selfReports"];
+    [tempSet addObject:value];
 }
 
 @end

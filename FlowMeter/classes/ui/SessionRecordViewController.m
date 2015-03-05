@@ -462,7 +462,7 @@
 
 - (void)saveMotionRecords:(NSMutableArray *)motionRecords
 {
-    NSSet *motionRecordSet = [NSSet setWithArray:motionRecords];
+    NSOrderedSet *motionRecordSet = [NSOrderedSet orderedSetWithArray:motionRecords];
     [self.session addMotionRecords:motionRecordSet];
     
     [self.appDelegate saveContext];
