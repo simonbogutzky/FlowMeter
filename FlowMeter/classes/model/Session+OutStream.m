@@ -77,53 +77,55 @@
 //        [txtFileNames addObject:[self writeData:data withFilename:filename append:NO]];
 //    }
     
-    NSInteger motionRecordCount = self.motionRecords.count;
-    NSLog(@"# motion records count: %ld", (long) motionRecordCount);
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MotionRecord" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Specify criteria for filtering which objects to fetch
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"session == %@", self];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSInteger motionRecordCount = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
+    
     if (motionRecordCount > 0) {
-        
+
         // Create file name
         NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
         [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
         NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-motion.txt",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
-//
-//        // Create data object
-//        NSMutableData *data = [NSMutableData dataWithCapacity:0];
-//        
-//        // Append header
-//        [data appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-//        [data appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-//        [data appendData:[[[self.motionRecords lastObject] csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-//        
-//        // Fetch data sequential
-//        NSInteger fetchLimit = 100000;
-//        NSInteger fetchOffset = 0;
-//        while (fetchOffset < motionRecordCount) {
-//            @autoreleasepool {
-//                NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-//                fetchRequest.entity = [NSEntityDescription entityForName:@"MotionRecord" inManagedObjectContext:self.managedObjectContext];
-//                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"session == %@", self];
-//                fetchRequest.predicate = predicate;
-//                fetchRequest.fetchLimit = fetchLimit;
-//                fetchRequest.fetchOffset = fetchOffset;
-//                NSError *error = nil;
-//                NSArray *motionRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-//                
-//                // Loop through all records
-//                for (MotionRecord *motionRecord in motionRecords) {
-//                    
-//                    // Append data
-//                    [data appendData:[[motionRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-//                }
-//                
-//                [self writeData:data withFilename:filename append:YES];
-//                data = [[NSMutableData alloc] init];
-//                
-//                fetchOffset += fetchLimit;
-//                NSLog(@"motionRecords count = %d", [motionRecords count]);
-//                NSLog(@"fetch offset = %d", fetchOffset);
-//            }
-//        }
 
+        // Create header data object
+        NSMutableData *header = [NSMutableData dataWithCapacity:0];
+        [header appendData:[[self fileHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        [header appendData:[[NSString stringWithFormat:@"%@ \n\n", NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten")] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        [header appendData:[[MotionRecord csvHeader] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+        [self writeData:header withFilename:filename append:NO];
+        
+        // Fetch data sequential
+        NSInteger fetchLimit = 10000;
+        NSInteger fetchOffset = 0;
+        while (fetchOffset < motionRecordCount) {
+            @autoreleasepool {
+                NSMutableData *data = [NSMutableData dataWithCapacity:0];
+                fetchRequest.fetchLimit = fetchLimit;
+                fetchRequest.fetchOffset = fetchOffset;
+                NSError *error = nil;
+                NSArray *motionRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+                
+                // Loop through all records
+                for (MotionRecord *motionRecord in motionRecords) {
+                    
+                    // Append data
+                    [data appendData:[[motionRecord csvDescription] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+                }
+                fetchOffset += fetchLimit;
+                [self writeData:data withFilename:filename append:YES];
+                data = nil;
+                motionRecords = nil;
+            }
+        }
+        
         // Add filename
         [txtFileNames addObject:filename];
     }
