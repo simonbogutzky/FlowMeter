@@ -253,6 +253,7 @@
 		D3E092F51AA710C500B10EE1 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = classes/model/Session.h; sourceTree = "<group>"; };
 		D3E092F61AA710C500B10EE1 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = classes/model/Session.m; sourceTree = "<group>"; };
 		D3E2146C1AAF04EF000BFB04 /* FlowMeter-Version-011.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-011.xcdatamodel"; sourceTree = "<group>"; };
+		D3E2146F1AAF264D000BFB04 /* FlowMeter-Version-012.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-012.xcdatamodel"; sourceTree = "<group>"; };
 		D3EB072219BB9552005F0333 /* SessionPrefsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionPrefsViewController.h; path = classes/ui/SessionPrefsViewController.h; sourceTree = "<group>"; };
 		D3EB072319BB9552005F0333 /* SessionPrefsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SessionPrefsViewController.m; path = classes/ui/SessionPrefsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D3EFDE0B19F01B9200D7E88A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1091,9 +1092,10 @@
 				D38B58191AA0D69A0050E9D3 /* FlowMeter-Version-009.xcdatamodel */,
 				D3E092E81AA7039800B10EE1 /* FlowMeter-Version-010.xcdatamodel */,
 				D3E2146C1AAF04EF000BFB04 /* FlowMeter-Version-011.xcdatamodel */,
+				D3E2146F1AAF264D000BFB04 /* FlowMeter-Version-012.xcdatamodel */,
 				D38B581A1AA0D69A0050E9D3 /* FlowMeter.xcdatamodel */,
 			);
-			currentVersion = D3E2146C1AAF04EF000BFB04 /* FlowMeter-Version-011.xcdatamodel */;
+			currentVersion = D3E2146F1AAF264D000BFB04 /* FlowMeter-Version-012.xcdatamodel */;
 			path = FlowMeter.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

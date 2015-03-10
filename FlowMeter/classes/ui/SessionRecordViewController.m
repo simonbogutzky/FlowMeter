@@ -21,7 +21,7 @@
 #import "MotionRecord.h"
 #import "LocationRecord.h"
 
-#define kMotionRecordMaxCount   720
+#define kMotionRecordMaxCount   640
 
 @interface SessionRecordViewController ()
 
@@ -459,7 +459,7 @@
 
 - (void)saveMotionRecords:(NSMutableArray *)motionRecords
 {
-    NSOrderedSet *motionRecordSet = [NSOrderedSet orderedSetWithArray:motionRecords];
+    NSSet *motionRecordSet = [NSSet setWithArray:motionRecords];
     [self.session addMotionRecords:motionRecordSet];
     
     [self.appDelegate saveContext];
