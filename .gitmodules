@@ -13,3 +13,6 @@
 [submodule "BEMSimpeLineGraphFlowMeter"]
 	path = BEMSimpeLineGraphFlowMeter
 	url = https://sbogutzky@bitbucket.org/sbogutzky/bemsimplelinegraph.git
+[submodule "ABFillButton"]
+	path = ABFillButton
+	url = https://github.com/andresbrun/ABFillButton.git

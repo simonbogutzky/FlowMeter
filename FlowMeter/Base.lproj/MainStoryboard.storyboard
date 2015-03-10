@@ -174,19 +174,6 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQg-zv-JWB">
-                                <rect key="frame" x="108" y="505" width="160" height="160"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="StopButton" translatesAutoresizingMaskIntoConstraints="NO" id="W8S-co-ljA">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="Krk-Pi-e7L"/>
-                                    <constraint firstAttribute="width" constant="160" id="WQ9-b8-JgT"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="No8-XL-3qD" userLabel="Start Countdown View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
@@ -203,6 +190,16 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                     <constraint firstAttribute="centerY" secondItem="kfM-7K-tdj" secondAttribute="centerY" id="Oa0-mr-yaw"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVo-zC-PCh" customClass="ABFillButton">
+                                <rect key="frame" x="107" y="487" width="160" height="160"/>
+                                <state key="normal" image="StopButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchCanceled:" destination="2" eventType="editingChanged" id="Fed-l0-nsA"/>
+                                    <outlet property="delegate" destination="2" id="w6v-os-nuT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -212,7 +209,6 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                             <constraint firstItem="Cs9-qS-JfL" firstAttribute="top" secondItem="JBd-iU-TgT" secondAttribute="bottom" id="6Wo-iy-C1m"/>
                             <constraint firstAttribute="centerX" secondItem="mlH-m3-f8i" secondAttribute="centerX" constant="68" id="CeV-8k-fY9"/>
                             <constraint firstItem="JBd-iU-TgT" firstAttribute="top" secondItem="uLq-37-zr6" secondAttribute="bottom" id="DIV-Un-Ai4"/>
-                            <constraint firstItem="HrJ-cN-hIc" firstAttribute="top" secondItem="eQg-zv-JWB" secondAttribute="bottom" constant="2" id="G0X-rl-oo6"/>
                             <constraint firstItem="No8-XL-3qD" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="Gu1-C3-WKE"/>
                             <constraint firstAttribute="centerX" secondItem="HbQ-sv-eTH" secondAttribute="centerX" constant="64" id="KyO-Uc-cDP"/>
                             <constraint firstAttribute="trailing" secondItem="No8-XL-3qD" secondAttribute="trailing" id="M5h-35-8Yk"/>
@@ -221,7 +217,8 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                             <constraint firstAttribute="centerY" secondItem="Cs9-qS-JfL" secondAttribute="centerY" id="Uhy-nu-AKs"/>
                             <constraint firstAttribute="centerX" secondItem="uuA-Yb-SmM" secondAttribute="centerX" constant="-32" id="VKH-94-bs3"/>
                             <constraint firstItem="JBd-iU-TgT" firstAttribute="top" secondItem="uuA-Yb-SmM" secondAttribute="bottom" id="dzc-RW-vqB"/>
-                            <constraint firstAttribute="centerX" secondItem="eQg-zv-JWB" secondAttribute="centerX" id="kgc-uL-AiW"/>
+                            <constraint firstItem="HrJ-cN-hIc" firstAttribute="top" secondItem="BVo-zC-PCh" secondAttribute="bottom" constant="20" id="eZQ-mA-0r9"/>
+                            <constraint firstAttribute="centerX" secondItem="BVo-zC-PCh" secondAttribute="centerX" id="lTZ-Wb-Wk9"/>
                             <constraint firstAttribute="centerX" secondItem="JBd-iU-TgT" secondAttribute="centerX" id="oo9-Rx-NGQ"/>
                             <constraint firstAttribute="bottom" secondItem="No8-XL-3qD" secondAttribute="bottom" id="rCu-3u-ZYr"/>
                             <constraint firstItem="HbQ-sv-eTH" firstAttribute="leading" secondItem="744-6J-0ve" secondAttribute="trailing" constant="8" id="t5h-SD-72p"/>
@@ -240,13 +237,13 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                         <outlet property="heartRateLabel" destination="uLq-37-zr6" id="kg6-ul-S1A"/>
                         <outlet property="secondUnitStopWatchLabel" destination="Cs9-qS-JfL" id="5Hf-BT-Kfo"/>
                         <outlet property="selfReportCountLabel" destination="HbQ-sv-eTH" id="9If-xX-Fu8"/>
-                        <outlet property="stopButtonView" destination="eQg-zv-JWB" id="aZy-Jw-B7p"/>
+                        <outlet property="stopButton" destination="BVo-zC-PCh" id="WBl-1j-0bs"/>
                         <outlet property="stopWatchLabel" destination="JBd-iU-TgT" id="pAF-Qq-XWc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2553" y="614"/>
+            <point key="canvasLocation" x="2552.5" y="613.5"/>
         </scene>
         <!--Parameter bearbeiten-->
         <scene sceneID="WDT-VT-Zvr">
@@ -1355,7 +1352,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="xDQ-T2-Doq">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" title="► Start" style="done" id="nji-Cc-eNz">
+                        <barButtonItem key="rightBarButtonItem" title="▶︎ Start" style="done" id="nji-Cc-eNz">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="2" kind="modal" identifier="Start recording" modalTransitionStyle="flipHorizontal" id="7kR-DA-SkA"/>

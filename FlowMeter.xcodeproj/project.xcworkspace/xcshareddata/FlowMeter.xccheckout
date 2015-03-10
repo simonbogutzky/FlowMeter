@@ -18,6 +18,8 @@
 		<string>https://github.com/tonymillion/Reachability.git</string>
 		<key>940F78D5F98A404F0CE03A452F2871238905218C</key>
 		<string>https://github.com/kolpanic/ZipKit.git</string>
+		<key>9A1DE4C73E1E0CF9F07BA84B7FA74E76CA9A445F</key>
+		<string>https://github.com/andresbrun/ABFillButton.git</string>
 		<key>C59C724B4C1C51243CD447C575CAD772BF621506</key>
 		<string>https://bitbucket.org/sbogutzky/heartratemonitorframework.git</string>
 		<key>FAC44F63CB4568E6F9161B59257F8C81F11493B3</key>
@@ -35,6 +37,8 @@
 		<string>../..Reachability</string>
 		<key>940F78D5F98A404F0CE03A452F2871238905218C</key>
 		<string>../..ZipKit</string>
+		<key>9A1DE4C73E1E0CF9F07BA84B7FA74E76CA9A445F</key>
+		<string>../../ABFillButton</string>
 		<key>C59C724B4C1C51243CD447C575CAD772BF621506</key>
 		<string>../../HeartRateMonitorFramework</string>
 		<key>FAC44F63CB4568E6F9161B59257F8C81F11493B3</key>
@@ -48,6 +52,14 @@
 	<string>FAC44F63CB4568E6F9161B59257F8C81F11493B3</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9A1DE4C73E1E0CF9F07BA84B7FA74E76CA9A445F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ABFillButton</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

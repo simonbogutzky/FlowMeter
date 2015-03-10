@@ -14,16 +14,16 @@
 #import "SelfReport.h"
 #import "HeartRateRecord.h"
 #import "MBProgressHUD.h"
-#import "ZCSHoldProgress.h"
 #import "LikertScaleViewController.h"
 #import <AudioToolbox/AudioServices.h>
 #import <CoreMotion/CoreMotion.h>
 #import "MotionRecord.h"
 #import "LocationRecord.h"
+#import "ABFillButton.h"
 
 #define kMotionRecordMaxCount   720
 
-@interface SessionRecordViewController ()
+@interface SessionRecordViewController () <ABFillButtonDelegate>
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) Session *session;
@@ -57,13 +57,11 @@
 @property (nonatomic, weak) IBOutlet UIView *countdownBackgroundView;
 @property (nonatomic, weak) IBOutlet UILabel *countdownLabel;
 @property (nonatomic, weak) IBOutlet UILabel *stopWatchLabel;
-@property (nonatomic, weak) IBOutlet UIView *stopButtonView;
+@property (nonatomic, weak) IBOutlet ABFillButton *stopButton;
 @property (nonatomic, weak) IBOutlet UILabel *heartRateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *firstUnitStopWatchLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondUnitStopWatchLabel;
 @property (weak, nonatomic) IBOutlet UILabel *selfReportCountLabel;
-
-
 
 @end
 
@@ -157,19 +155,12 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
-    // Set hold press on button
-    ZCSHoldProgress *holdProgress = [[ZCSHoldProgress alloc] initWithTarget:self action:@selector(gestureRecogizerTarget:)];
-    holdProgress.minimumPressDuration = 1.0;
-    holdProgress.allowableMovement = 0;
-    holdProgress.hideOnComplete = NO;
+    //If we want to add shadows and a grow up effect when user press the button
+    [self.stopButton configureButtonWithHightlightedShadowAndZoom:YES];
     
-    holdProgress.alpha = 1.0f;
-    holdProgress.color = [UIColor colorWithRed:0.17281592153284672 green:0.51933166058394165 blue:0.76862745098038943 alpha:1.0];
-    holdProgress.completedColor = [UIColor colorWithRed:0.17281592153284672 green:0.51933166058394165 blue:0.76862745098038943 alpha:1.0];
-    holdProgress.borderSize = 0.0f;
-    holdProgress.size = 164.0f;
-    holdProgress.minimumSize = 80.0f;
-    [self.stopButtonView addGestureRecognizer:holdProgress];
+    //If we want to empty the button with user pressing
+    [self.stopButton setEmptyButtonPressing:YES];
+    [self.stopButton setFillPercent:1.0];
 }
 
 #pragma mark -
@@ -185,26 +176,6 @@
 
 #pragma mark -
 #pragma mark - Convient methods
-
-- (void)gestureRecogizerTarget:(UIGestureRecognizer *)gestureRecognizer {
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        self.isCollecting = !self.isCollecting;
-        [self stopSensorUpdates];
-        
-        self.session.duration = [self stopWatchTimeInterval];
-        
-        [self.stopWatchTimer invalidate];
-        
-        //if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
-            [self.selfReportTimer invalidate];
-            self.isLastSelfReport = YES;
-            
-            [self showSelfReport];
-//        } else {
-//            [self saveData];
-//        }
-    }
-}
 
 - (void)startCountdown
 {
@@ -709,6 +680,31 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     locationRecord.floor = newLocation.floor;
     
     [self.session addLocationRecordsObject:locationRecord];
+}
+
+#pragma mark -
+#pragma mark - ABFillButtonDelegate Implementation
+- (void)buttonIsEmpty:(ABFillButton *)button
+{
+    self.isCollecting = !self.isCollecting;
+    [self stopSensorUpdates];
+    
+    self.session.duration = [self stopWatchTimeInterval];
+    
+    [self.stopWatchTimer invalidate];
+    
+    //if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
+    [self.selfReportTimer invalidate];
+    self.isLastSelfReport = YES;
+    
+    [self showSelfReport];
+    //        } else {
+    //            [self saveData];
+    //        }
+}
+
+- (IBAction)touchCanceled:(id)sender {
+    NSLog(@"fsfsd");
 }
 
 @end
