@@ -163,9 +163,6 @@
 /* Class = "IBUILabel"; text = "Laufen"; ObjectID = "lxG-6c-LKo"; */
 "lxG-6c-LKo.text" = "Running";
 
-/* Class = "IBUIButton"; normalTitle = "Starten"; ObjectID = "mMI-il-cAu"; */
-"mMI-il-cAu.normalTitle" = "Start";
-
 /* Class = "IBUINavigationItem"; title = "Lizenzen"; ObjectID = "mjE-nS-RSR"; */
 "mjE-nS-RSR.title" = "Licenses";
 
@@ -174,6 +171,9 @@
 
 /* Class = "IBUITableViewSection"; headerTitle = "Verbindung"; ObjectID = "nSS-ym-ztX"; */
 "nSS-ym-ztX.headerTitle" = "Connection";
+
+/* Class = "IBUIBarButtonItem"; title = "► Start"; ObjectID = "nji-Cc-eNz"; */
+"nji-Cc-eNz.title" = "► Start";
 
 /* Class = "IBUIBarButtonItem"; title = "Alle Löschen"; ObjectID = "paP-BI-5q6"; */
 "paP-BI-5q6.title" = "Delete all";

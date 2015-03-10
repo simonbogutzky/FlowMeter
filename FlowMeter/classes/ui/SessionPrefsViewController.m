@@ -32,7 +32,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
 
 @property (nonatomic, assign) NSInteger pickerCellRowHeight;
 
-@property (weak, nonatomic) IBOutlet UIButton *startButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *startButton;
 @property (weak, nonatomic) IBOutlet UILabel *labelHeartRateMonitorDeviceName;
 @property (weak, nonatomic) IBOutlet UILabel *labelHeartRateMonitorHasConnection;
 @property (nonatomic, assign) BOOL varibilityAlertAlreadyShown;
@@ -93,14 +93,14 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
             canStartRecording = NO;
         }
         if (!canStartRecording) {
-            CAKeyframeAnimation *shakeAnimation = [ CAKeyframeAnimation animationWithKeyPath:@"transform"];
-            shakeAnimation.values = @[ [ NSValue valueWithCATransform3D:CATransform3DMakeTranslation(-10.0f, 0.0f, 0.0f)], [NSValue valueWithCATransform3D:CATransform3DMakeTranslation(5.0f, 0.0f, 0.0f)]];
-            shakeAnimation.autoreverses = YES;
-            shakeAnimation.repeatCount = 3.0f;
-            shakeAnimation.duration = 0.07f;
-            [self.startButton.layer addAnimation:shakeAnimation forKey:nil];
-            return canStartRecording;
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Start nicht möglich", @"Start nicht möglich")
+                                                                message:NSLocalizedString(@"Vorname, Nachname und Aktivität müssen ausgefüllt werden", @"Vorname, Nachname und Aktivität müssen ausgefüllt werden")
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [alertView show];
         }
+        return canStartRecording;
     }
     return YES;
 }

@@ -1239,30 +1239,6 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 <constraint firstItem="5hP-GP-iz5" firstAttribute="trailing" secondItem="rFk-Q2-Qrp" secondAttribute="trailingMargin" id="yiy-eF-BiV"/>
                             </constraints>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="JFU-mY-0n3">
-                            <rect key="frame" x="0.0" y="472" width="375" height="66"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMI-il-cAu">
-                                    <rect key="frame" x="148" y="16" width="80" height="34"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="80" id="6R3-9Y-qs9"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                    <state key="normal" title="Starten">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <segue destination="2" kind="modal" identifier="Start recording" modalTransitionStyle="flipHorizontal" id="VRk-1I-JhV"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="centerY" secondItem="mMI-il-cAu" secondAttribute="centerY" id="NTA-po-pJr"/>
-                                <constraint firstAttribute="centerX" secondItem="mMI-il-cAu" secondAttribute="centerX" id="ZWd-Bw-hTu"/>
-                            </constraints>
-                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dateTimeCell" textLabel="Rvg-l2-k8e" detailTextLabel="Zsq-WU-lxK" style="IBUITableViewCellStyleValue2" id="a4N-K0-i4x">
                                 <rect key="frame" x="0.0" y="55" width="320" height="44"/>
@@ -1379,11 +1355,17 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="xDQ-T2-Doq">
                         <nil key="title"/>
+                        <barButtonItem key="rightBarButtonItem" title="► Start" style="done" id="nji-Cc-eNz">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="2" kind="modal" identifier="Start recording" modalTransitionStyle="flipHorizontal" id="7kR-DA-SkA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="labelHeartRateMonitorDeviceName" destination="YyU-dp-IJn" id="kdS-Dx-TAL"/>
                         <outlet property="labelHeartRateMonitorHasConnection" destination="5hP-GP-iz5" id="qan-0j-u1b"/>
-                        <outlet property="startButton" destination="mMI-il-cAu" id="pwe-ds-LgO"/>
+                        <outlet property="startButton" destination="nji-Cc-eNz" id="qe7-YQ-GAQ"/>
                         <outlet property="view" destination="fDh-Lm-PdN" id="XZu-il-5fD"/>
                     </connections>
                 </tableViewController>
