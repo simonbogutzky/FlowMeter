@@ -29,7 +29,7 @@
             ];
 }
 
-+ (NSString *)csvHeader
+- (NSString *)csvHeader
 {
     return [NSMutableString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
                                NSLocalizedString(@"Zeitstempel (s)", @"Zeitstempel (s)"),
