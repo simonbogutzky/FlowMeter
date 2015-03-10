@@ -12,7 +12,7 @@
 
 - (NSString *)csvDescription
 {
-    return [NSString stringWithFormat:@"%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f\n",
+    return [NSString stringWithFormat:@"%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f\n",
             self.timestamp,
             self.userAccelerationX,
             self.userAccelerationY,
@@ -22,16 +22,13 @@
             self.gravityZ,
             self.rotationRateX,
             self.rotationRateY,
-            self.rotationRateZ,
-            self.attitudePitch,
-            self.attitudeRoll,
-            self.attitudeYaw
+            self.rotationRateZ
             ];
 }
 
 - (NSString *)csvHeader
 {
-    return [NSMutableString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
+    return [NSMutableString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
                                NSLocalizedString(@"Zeitstempel (s)", @"Zeitstempel (s)"),
                                NSLocalizedString(@"Benutzerbeschleunigung X (Gs)", @"Benutzerbeschleunigung X (Gs)"),
                                NSLocalizedString(@"Benutzerbeschleunigung Y (Gs)", @"Benutzerbeschleunigung Y (Gs)"),
@@ -41,10 +38,7 @@
                                NSLocalizedString(@"Gravitation Z (Gs)", @"Gravitation Z (Gs)"),
                                NSLocalizedString(@"Rotationsrate X (rad/s)", @"Rotationsrate X (rad/s)"),
                                NSLocalizedString(@"Rotationsrate Y (rad/s)", @"Rotationsrate Y (rad/s)"),
-                               NSLocalizedString(@"Rotationsrate Z (rad/s)", @"Rotationsrate Z (rad/s)"),
-                               NSLocalizedString(@"Pitch (rad)", @"Pitch (rad)"),
-                               NSLocalizedString(@"Roll (rad)", @"Roll (rad)"),
-                               NSLocalizedString(@"Yaw (rad)", @"Yaw (rad)")
+                               NSLocalizedString(@"Rotationsrate Z (rad/s)", @"Rotationsrate Z (rad/s)")
                                ];
 }
 

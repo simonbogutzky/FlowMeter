@@ -235,7 +235,7 @@
         NSInteger fetchOffset = 0;
         BOOL appendCSVHeader = YES;
         while (fetchOffset < fetchRequestCount) {
-            @autoreleasepool {
+            //@autoreleasepool {
                 NSMutableData *data = [NSMutableData dataWithCapacity:0];
                 
                 fetchRequest.fetchLimit = fetchLimit;
@@ -258,7 +258,7 @@
                 data = nil;
                 fetchedObjects = nil;
           
-            }
+            //}
         }
         return filename;
     }
@@ -290,7 +290,7 @@
         NSInteger fetchOffset = 0;
         BOOL appendKMLHeader = YES;
         while (fetchOffset < fetchRequestCount) {
-            @autoreleasepool {
+            //@autoreleasepool {
                 NSMutableData *data = [NSMutableData dataWithCapacity:0];
                 fetchRequest.fetchLimit = fetchLimit;
                 fetchRequest.fetchOffset = fetchOffset;
@@ -316,7 +316,7 @@
                 [self writeData:data withFilename:filename append:YES];
                 data = nil;
                 fetchedObjects = nil;
-            }
+            //}
         }
         
         // Fetch data sequential
