@@ -21,27 +21,27 @@
 - (NSArray *)writeOut
 {
     NSMutableArray *filenames = [[NSMutableArray alloc] initWithCapacity:5];
-    NSString *filename = [self fetchAndWriteDataForEntityName:@"SelfReport" filenameSuffix:@"questionaire.txt" headerDescription:NSLocalizedString(@"Flow Kurzskalen", @"Flow Kurzskalen")];
+    NSString *filename = [self fetchAndWriteDataForEntityName:@"SelfReport" sortDescriptorKey:@"timestamp" filenameSuffix:@"questionaire.txt" headerDescription:NSLocalizedString(@"Flow Kurzskalen", @"Flow Kurzskalen")];
     if (filename != nil) {
         [filenames addObject:filename];
     }
     
-    filename = [self fetchAndWriteDataForEntityName:@"HeartRateRecord" filenameSuffix:@"heart.txt" headerDescription:NSLocalizedString(@"HR-Messungen", @"HR-Messungen")];
+    filename = [self fetchAndWriteDataForEntityName:@"HeartRateRecord" sortDescriptorKey:@"timestamp" filenameSuffix:@"heart.txt" headerDescription:NSLocalizedString(@"HR-Messungen", @"HR-Messungen")];
     if (filename != nil) {
         [filenames addObject:filename];
     }
     
-    filename = [self fetchAndWriteDataForEntityName:@"MotionRecord" filenameSuffix:@"motion.txt" headerDescription:NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten")];
+    filename = [self fetchAndWriteDataForEntityName:@"MotionRecord" sortDescriptorKey:@"timestamp" filenameSuffix:@"motion.txt" headerDescription:NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten")];
     if (filename != nil) {
         [filenames addObject:filename];
     }
     
-    filename = [self fetchAndWriteDataForEntityName:@"LocationRecord" filenameSuffix:@"location.txt" headerDescription:NSLocalizedString(@"Orte", @"Orte")];
+    filename = [self fetchAndWriteDataForEntityName:@"LocationRecord" sortDescriptorKey:@"date" filenameSuffix:@"location.txt" headerDescription:NSLocalizedString(@"Orte", @"Orte")];
     if (filename != nil) {
         [filenames addObject:filename];
     }
     
-    filename = [self fetchAndWriteKMLDataForEntityName:@"LocationRecord" filenameSuffix:@"location.kml"];
+    filename = [self fetchAndWriteKMLDataForEntityName:@"LocationRecord" sortDescriptorKey:@"date" filenameSuffix:@"location.kml"];
     if (filename != nil) {
         [filenames addObject:filename];
     }
@@ -204,7 +204,7 @@
     return [[string componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
 }
 
-- (NSString *)fetchAndWriteDataForEntityName:(NSString *)entityName filenameSuffix:(NSString *)filenameSuffix headerDescription:(NSString *)headerDescription
+- (NSString *)fetchAndWriteDataForEntityName:(NSString *)entityName sortDescriptorKey:(NSString *)sortDescriptorKey filenameSuffix:(NSString *)filenameSuffix headerDescription:(NSString *)headerDescription
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
@@ -231,6 +231,9 @@
         [self writeData:header withFilename:filename append:NO];
         
         // Fetch data sequential
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortDescriptorKey ascending:YES];
+        [fetchRequest setSortDescriptors:@[sortDescriptor]];
+        
         NSInteger fetchLimit = 10000;
         NSInteger fetchOffset = 0;
         BOOL appendCSVHeader = YES;
@@ -265,7 +268,7 @@
     return nil;
 }
 
-- (NSString *)fetchAndWriteKMLDataForEntityName:(NSString *)entityName filenameSuffix:(NSString *)filenameSuffix
+- (NSString *)fetchAndWriteKMLDataForEntityName:(NSString *)entityName sortDescriptorKey:(NSString *)sortDescriptorKey filenameSuffix:(NSString *)filenameSuffix
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
@@ -286,6 +289,9 @@
         NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]], filenameSuffix];
         
         // Fetch data sequential
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortDescriptorKey ascending:YES];
+        [fetchRequest setSortDescriptors:@[sortDescriptor]];
+        
         NSInteger fetchLimit = 10000;
         NSInteger fetchOffset = 0;
         BOOL appendKMLHeader = YES;
