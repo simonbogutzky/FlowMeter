@@ -21,9 +21,6 @@
 @dynamic rotationRateX;
 @dynamic rotationRateY;
 @dynamic rotationRateZ;
-@dynamic attitudeRoll;
-@dynamic attitudePitch;
-@dynamic attitudeYaw;
 @dynamic timestamp;
 @dynamic session;
 

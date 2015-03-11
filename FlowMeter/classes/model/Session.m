@@ -34,7 +34,7 @@
 @dynamic user;
 @synthesize sectionTitle;
 
--(NSString *)sectionTitle
+- (NSString *)sectionTitle
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy/MM/dd"];

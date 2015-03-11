@@ -21,7 +21,7 @@
 #import "LocationRecord.h"
 #import "ABFillButton.h"
 
-#define kMotionRecordMaxCount   720
+#define kMotionRecordMaxCount   640
 
 @interface SessionRecordViewController () <ABFillButtonDelegate>
 
@@ -277,7 +277,7 @@
     self.motionRecordArrayId = 1;
     
     if ([self.motionManager isDeviceMotionAvailable] == YES) {
-        [self.motionManager setDeviceMotionUpdateInterval:1/72.0];
+        [self.motionManager setDeviceMotionUpdateInterval:1/64.0];
         [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
             if(self.isCollecting) {
                 if (error == nil) {
@@ -299,9 +299,6 @@
                     motionRecord.rotationRateX = motion.rotationRate.x;
                     motionRecord.rotationRateY = motion.rotationRate.y;
                     motionRecord.rotationRateZ = motion.rotationRate.z;
-                    motionRecord.attitudePitch = motion.attitude.pitch;
-                    motionRecord.attitudeRoll = motion.attitude.roll;
-                    motionRecord.attitudeYaw = motion.attitude.yaw;
                     
                     self.motionRecordCount++;
                     

@@ -22,9 +22,6 @@
 @property (nonatomic) double rotationRateX;
 @property (nonatomic) double rotationRateY;
 @property (nonatomic) double rotationRateZ;
-@property (nonatomic) double attitudeRoll;
-@property (nonatomic) double attitudePitch;
-@property (nonatomic) double attitudeYaw;
 @property (nonatomic) double timestamp;
 @property (nonatomic, retain) Session *session;
 
