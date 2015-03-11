@@ -186,14 +186,14 @@
         
         NSString *propertyName = [self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey];
         if (![@"heartRate" isEqualToString:propertyName]) {
-            self.lineGraphView.yAxisMin = [NSNumber numberWithInt:2];
-            self.lineGraphView.yAxisMax = [NSNumber numberWithInt:7];
-            self.lineGraphView.paddingMax = 40;
+//            self.lineGraphView.yAxisMin = [NSNumber numberWithInt:2];
+//            self.lineGraphView.yAxisMax = [NSNumber numberWithInt:7];
+//            self.lineGraphView.paddingMax = 40;
             self.lineGraphView.enableBezierCurve = NO;
         } else {
-            self.lineGraphView.yAxisMin = nil;
-            self.lineGraphView.yAxisMax = nil;
-            self.lineGraphView.paddingMax = 40;
+//            self.lineGraphView.yAxisMin = nil;
+//            self.lineGraphView.yAxisMax = nil;
+//            self.lineGraphView.paddingMax = 40;
             self.lineGraphView.enableBezierCurve = YES;
         }
     }
@@ -390,12 +390,12 @@
 
 - (CGFloat)maxValueForLineGraph:(BEMSimpleLineGraphView *)graph
 {
-    return graph.yAxisMax == nil ? [[self calculateMaximumPointValue] floatValue] : [graph.yAxisMax floatValue];
+    return [[self calculateMaximumPointValue] floatValue]; //: [graph.yAxisMax floatValue];
 }
 
 - (CGFloat)minValueForLineGraph:(BEMSimpleLineGraphView *)graph
 {
-    return graph.yAxisMin == nil ? [[self calculateMinimumPointValue] floatValue] : [graph.yAxisMin floatValue];
+    return [[self calculateMinimumPointValue] floatValue]; // : [graph.yAxisMin floatValue];
 }
 
 - (NSInteger)numberOfYAxisLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph
