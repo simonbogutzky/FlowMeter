@@ -15,27 +15,55 @@
 #import "MotionRecord+Description.h"
 #import "LocationRecord+Description.h"
 #import "ZipKit/ZipKit.h"
+#import "DBManager.h"
+
 
 @implementation Session (OutStream)
 
 - (NSArray *)writeOut
 {
+    // Load obj
+    NSManagedObjectID *sessionID = self.objectID;
+    int sessionPK = [[[[[sessionID URIRepresentation] absoluteString] lastPathComponent] substringFromIndex:1] intValue];
+    
+    // Initialize the dbManager object
+    DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"FlowMeter.sqlite"];
+    
+    // Create date prefix
+    NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
+    [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
+    
+    // Array to store filenames
     NSMutableArray *filenames = [[NSMutableArray alloc] initWithCapacity:5];
-    NSString *filename = [self fetchAndWriteDataForEntityName:@"SelfReport" sortDescriptorKey:@"timestamp" filenameSuffix:@"questionaire.txt" headerDescription:NSLocalizedString(@"Flow Kurzskalen", @"Flow Kurzskalen")];
+    
+    // Query self reports
+    NSString *query = [NSString stringWithFormat:@"SELECT printf(\"%%.3f\",ZTIMESTAMP),printf(\"%%.3f\",ZDURATION),printf(\"%%.3f\",ZFLOW),printf(\"%%.3f\",ZFLOWSD),printf(\"%%.3f\",ZFLUENCY),printf(\"%%.3f\",ZFLUENCYSD),printf(\"%%.3f\",ZABSORPTION),printf(\"%%.3f\",ZABSORPTIONSD),printf(\"%%.3f\",ZANXIETY),printf(\"%%.3f\",ZANXIETYSD),printf(\"%%.3f\",ZFIT),printf(\"%%.3f\",ZFITSD) FROM ZSELFREPORT WHERE ZSESSION = %d ORDER BY ZTIMESTAMP ASC", sessionPK];
+    NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]], @"questionaire.txt"];
+    NSString *header = [NSString stringWithFormat:@"%@%@", [self fileHeader], [SelfReport csvHeader]];
+    filename = [dbManager writeCSVFromQuery:query inFileWithFilename:filename andHeader:header];
     if (filename != nil) {
         [filenames addObject:filename];
     }
     
-    filename = [self fetchAndWriteDataForEntityName:@"HeartRateRecord" sortDescriptorKey:@"timestamp" filenameSuffix:@"heart.txt" headerDescription:NSLocalizedString(@"HR-Messungen", @"HR-Messungen")];
+    // Query heart rate record
+    query = [NSString stringWithFormat:@"SELECT printf(\"%%.3f\",ZTIMESTAMP),printf(\"%%.3f\",ZRRINTERVAL) FROM ZHEARTRATERECORD WHERE ZSESSION = %d ORDER BY ZTIMESTAMP ASC", sessionPK];
+    filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]], @"heart.txt"];
+    header = [NSString stringWithFormat:@"%@%@", [self fileHeader], [HeartRateRecord csvHeader]];
+    filename = [dbManager writeCSVFromQuery:query inFileWithFilename:filename andHeader:header];
+    if (filename != nil) {
+        [filenames addObject:filename];
+    }
+
+    // Query motion records
+    query = [NSString stringWithFormat:@"SELECT printf(\"%%.3f\",ZTIMESTAMP),printf(\"%%.3f\",ZUSERACCELERATIONX),printf(\"%%.3f\",ZUSERACCELERATIONY),printf(\"%%.3f\",ZUSERACCELERATIONZ),printf(\"%%.3f\",ZGRAVITYX),printf(\"%%.3f\",ZGRAVITYY),printf(\"%%.3f\",ZGRAVITYZ),printf(\"%%.3f\",ZROTATIONRATEX),printf(\"%%.3f\",ZROTATIONRATEY),printf(\"%%.3f\",ZROTATIONRATEZ) FROM ZMOTIONRECORD WHERE ZSESSION = %d ORDER BY ZTIMESTAMP ASC", sessionPK];
+    filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]], @"motion.txt"];
+    header = [NSString stringWithFormat:@"%@%@", [self fileHeader], [MotionRecord csvHeader]];
+    filename = [dbManager writeCSVFromQuery:query inFileWithFilename:filename andHeader:header];
     if (filename != nil) {
         [filenames addObject:filename];
     }
     
-    filename = [self fetchAndWriteDataForEntityName:@"MotionRecord" sortDescriptorKey:@"timestamp" filenameSuffix:@"motion.txt" headerDescription:NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten")];
-    if (filename != nil) {
-        [filenames addObject:filename];
-    }
-    
+    // Fetch location records
     filename = [self fetchAndWriteDataForEntityName:@"LocationRecord" sortDescriptorKey:@"date" filenameSuffix:@"location.txt" headerDescription:NSLocalizedString(@"Orte", @"Orte")];
     if (filename != nil) {
         [filenames addObject:filename];

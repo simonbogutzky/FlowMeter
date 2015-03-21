@@ -10,7 +10,6 @@
 
 @interface HeartRateRecord (Description)
 
-- (NSString *)csvDescription;
-- (NSString *)csvHeader;
++ (NSString *)csvHeader;
 
 @end

@@ -10,25 +10,10 @@
 
 @implementation MotionRecord (Description)
 
-- (NSString *)csvDescription
++ (NSString *)csvHeader
 {
-    return [NSString stringWithFormat:@"%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f\n",
-            self.timestamp,
-            self.userAccelerationX,
-            self.userAccelerationY,
-            self.userAccelerationZ,
-            self.gravityX,
-            self.gravityY,
-            self.gravityZ,
-            self.rotationRateX,
-            self.rotationRateY,
-            self.rotationRateZ
-            ];
-}
-
-- (NSString *)csvHeader
-{
-    return [NSMutableString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
+    return [NSString stringWithFormat:@"%@ \n\n%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
+                               NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten"),
                                NSLocalizedString(@"Zeitstempel (s)", @"Zeitstempel (s)"),
                                NSLocalizedString(@"Benutzerbeschleunigung X (Gs)", @"Benutzerbeschleunigung X (Gs)"),
                                NSLocalizedString(@"Benutzerbeschleunigung Y (Gs)", @"Benutzerbeschleunigung Y (Gs)"),

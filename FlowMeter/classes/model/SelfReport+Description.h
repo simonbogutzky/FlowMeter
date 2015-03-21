@@ -10,7 +10,6 @@
 
 @interface SelfReport (Description)
 
-- (NSString *)csvDescription;
-- (NSString *)csvHeader;
++ (NSString *)csvHeader;
 
 @end

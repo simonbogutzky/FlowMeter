@@ -10,7 +10,6 @@
 
 @interface MotionRecord (Description)
 
-- (NSString *)csvDescription;
-- (NSString *)csvHeader;
++ (NSString *)csvHeader;
 
 @end

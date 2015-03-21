@@ -10,17 +10,9 @@
 
 @implementation HeartRateRecord (Description)
 
-- (NSString *)csvDescription
++ (NSString *)csvHeader
 {
-    return [NSString stringWithFormat:@"%.3f,%.3f\n",
-            self.timestamp,
-            self.rrInterval
-            ];
-}
-
-- (NSString *)csvHeader
-{
-    return [NSMutableString stringWithFormat:@"%@,%@\n", NSLocalizedString(@"Zeitstempel (s)", @"Zeitstempel (s)"), NSLocalizedString(@"RR-Intervall (s)", @"RR-Intervall (s)")];
+    return [NSMutableString stringWithFormat:@"%@ \n\n%@,%@\n", NSLocalizedString(@"HR-Messungen", @"HR-Messungen"),NSLocalizedString(@"Zeitstempel (s)", @"Zeitstempel (s)"), NSLocalizedString(@"RR-Intervall (s)", @"RR-Intervall (s)")];
 }
 
 @end
