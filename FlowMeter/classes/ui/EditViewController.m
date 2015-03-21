@@ -56,10 +56,6 @@
                                              selector:@selector(keyboardDidHide:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
     [self.textField becomeFirstResponder];
 }
 
