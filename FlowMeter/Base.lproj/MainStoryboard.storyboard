@@ -742,6 +742,8 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="constraintHeightLineGraphView" destination="Qgw-8I-Lsg" id="T6Q-jn-QGM"/>
+                        <outlet property="constraintVertiticalSpaceAboveLineGraphView" destination="hht-th-D0L" id="P47-ho-K75"/>
                         <outlet property="labelAverageFlow" destination="11w-qP-avr" id="18p-CL-iyK"/>
                         <outlet property="labelAverageHeartrate" destination="IXj-cB-LmA" id="dHr-nA-8Uf"/>
                         <outlet property="labelDate" destination="yp2-k7-OXg" id="B4f-rE-wu8"/>
@@ -750,6 +752,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                         <outlet property="labelDuration" destination="DRM-us-BNo" id="Vb8-kb-Pf9"/>
                         <outlet property="labelSelfReportCount" destination="xDl-la-9j6" id="SXd-Cv-AYJ"/>
                         <outlet property="lineGraphView" destination="rHe-6K-3zW" id="6ZS-sm-x1w"/>
+                        <outlet property="propertyView" destination="Kk5-wV-F1G" id="FHE-ZV-qm4"/>
                         <outlet property="tableView" destination="9to-jk-5g0" id="15V-7z-GUH"/>
                     </connections>
                 </viewController>

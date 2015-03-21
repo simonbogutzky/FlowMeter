@@ -29,6 +29,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelDuration;
 @property (weak, nonatomic) IBOutlet UILabel *labelAverageHeartrate;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *propertyView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintHeightLineGraphView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintVertiticalSpaceAboveLineGraphView;
 
 @property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *lineGraphView;
 @property (strong, nonatomic) NSMutableArray *yValues;
@@ -179,44 +182,77 @@
             }
         }
         
-        // Customization of the graph
-        UIColor *color = self.appDelegate.colors[selectedIndexPath.row % (self.appDelegate.colors.count + 1)];
-        self.lineGraphView.colorLine = color;
-        self.lineGraphView.colorPoint = color;
+        if (self.yValues.count > 1) {
+            
+            // Customization of the graph
+            UIColor *color = self.appDelegate.colors[selectedIndexPath.row % (self.appDelegate.colors.count + 1)];
+            self.lineGraphView.colorLine = color;
+            self.lineGraphView.colorPoint = color;
+            
+            NSString *propertyName = [self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey];
+            if (![@"heartRate" isEqualToString:propertyName]) {
+                self.lineGraphView.yAxisMin = [NSNumber numberWithInt:2];
+                self.lineGraphView.yAxisMax = [NSNumber numberWithInt:7];
+                self.lineGraphView.paddingMax = 40;
+                self.lineGraphView.enableBezierCurve = NO;
+            } else {
+                self.lineGraphView.yAxisMin = nil;
+                self.lineGraphView.yAxisMax = nil;
+                self.lineGraphView.paddingMax = 40;
+                self.lineGraphView.enableBezierCurve = NO;
+            }
         
-        NSString *propertyName = [self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey];
-        if (![@"heartRate" isEqualToString:propertyName]) {
-            self.lineGraphView.yAxisMin = [NSNumber numberWithInt:2];
-            self.lineGraphView.yAxisMax = [NSNumber numberWithInt:7];
-            self.lineGraphView.paddingMax = 40;
-            self.lineGraphView.enableBezierCurve = NO;
+            // Customization of the graph
+            self.lineGraphView.colorTop = [UIColor whiteColor];
+            self.lineGraphView.colorBottom = [UIColor whiteColor];
+            self.lineGraphView.colorBackgroundXaxis = [UIColor clearColor];
+            self.lineGraphView.colorBackgroundYaxis = [UIColor clearColor];
+            self.lineGraphView.colorXaxisLabel = [UIColor lightGrayColor];
+            self.lineGraphView.colorYaxisLabel = [UIColor lightGrayColor];
+            self.lineGraphView.widthLine = 3.0;
+            self.lineGraphView.enableTouchReport = YES;
+            self.lineGraphView.enablePopUpReport = YES;
+            self.lineGraphView.enableYAxisLabel = YES;
+            self.lineGraphView.autoScaleYAxis = YES;
+            self.lineGraphView.alwaysDisplayDots = NO;
+            self.lineGraphView.enableReferenceXAxisLines = YES;
+            self.lineGraphView.enableReferenceYAxisLines = YES;
+            self.lineGraphView.enableReferenceAxisFrame = YES;
+            self.lineGraphView.animationGraphStyle = BEMLineAnimationNone;
+            
+            [self.view layoutIfNeeded];
+            
+            self.constraintHeightLineGraphView.constant = 180;
+            self.constraintVertiticalSpaceAboveLineGraphView.constant = 28;
+            self.lineGraphView.hidden = NO;
+            self.labelDisplayedProperty.hidden = NO;
+            self.labelDisplayedPropertyAverage.hidden = NO;
+            self.propertyView.backgroundColor = UIColorFromRGB(0xCCCCCC);
+            
+            [UIView animateWithDuration:.6
+                             animations:^{
+                                 [self.view layoutIfNeeded]; // Called on parent view
+                             }];
+            
+            [self.lineGraphView reloadGraph];
+            
         } else {
-            self.lineGraphView.yAxisMin = nil;
-            self.lineGraphView.yAxisMax = nil;
-            self.lineGraphView.paddingMax = 40;
-            self.lineGraphView.enableBezierCurve = YES;
+            
+            [self.view layoutIfNeeded];
+            
+            self.constraintHeightLineGraphView.constant = 0;
+            self.constraintVertiticalSpaceAboveLineGraphView.constant = 0;
+            self.lineGraphView.hidden = YES;
+            self.labelDisplayedProperty.hidden = YES;
+            self.labelDisplayedPropertyAverage.hidden = YES;
+            self.propertyView.backgroundColor = [UIColor whiteColor];
+            
+            [UIView animateWithDuration:.6
+                             animations:^{
+                                 [self.view layoutIfNeeded]; // Called on parent view
+                             }];
         }
     }
-    
-    // Customization of the graph
-    self.lineGraphView.colorTop = [UIColor whiteColor];
-    self.lineGraphView.colorBottom = [UIColor whiteColor];
-    self.lineGraphView.colorBackgroundXaxis = [UIColor clearColor];
-    self.lineGraphView.colorBackgroundYaxis = [UIColor clearColor];
-    self.lineGraphView.colorXaxisLabel = [UIColor lightGrayColor];
-    self.lineGraphView.colorYaxisLabel = [UIColor lightGrayColor];
-    self.lineGraphView.widthLine = 3.0;
-    self.lineGraphView.enableTouchReport = YES;
-    self.lineGraphView.enablePopUpReport = YES;
-    self.lineGraphView.enableYAxisLabel = YES;
-    self.lineGraphView.autoScaleYAxis = YES;
-    self.lineGraphView.alwaysDisplayDots = NO;
-    self.lineGraphView.enableReferenceXAxisLines = YES;
-    self.lineGraphView.enableReferenceYAxisLines = YES;
-    self.lineGraphView.enableReferenceAxisFrame = YES;
-    self.lineGraphView.animationGraphStyle = BEMLineAnimationDraw;
-    
-    [self.lineGraphView reloadGraph];
 }
 
 - (NSString *)stringFromTimeInterval:(NSTimeInterval)interval
