@@ -46,6 +46,7 @@
         self.barButtonItemDone.enabled = YES;
         self.barButtonItemDone.tintColor = nil;
     } else {
+        self.textField.placeholder = [self.itemDictionary objectForKey:kTitleKey];
         self.barButtonItemDone.enabled = NO;
         self.barButtonItemDone.tintColor = [UIColor clearColor];
         self.option = [self getDisplayNameStrings];
@@ -55,6 +56,11 @@
                                              selector:@selector(keyboardDidHide:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.textField becomeFirstResponder];
 }
 
 #pragma mark -
