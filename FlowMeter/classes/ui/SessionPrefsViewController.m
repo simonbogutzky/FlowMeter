@@ -17,8 +17,9 @@
 
 static NSString *kDateTimeCellID = @"dateTimeCell";     // the cells with date/time
 static NSString *kDateTimePickerID = @"dateTimePicker"; // the cell containing the date/time picker
-static NSString *kSwitchCellID = @"switchCell";         // a cell with a switch
+static NSString *kOptionSwitchCellID = @"optionSwitchCell";         // a cell with a switch
 static NSString *kOtherCellID = @"otherCell";           // the remaining cells at the end
+static NSString *kSwitchCellID = @"switchCell";
 
 @interface SessionPrefsViewController ()
 
@@ -128,20 +129,24 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
                                [@{kTitleKey:NSLocalizedString(@"Countdown", @"Countdown"), kValueKey:[NSNumber numberWithDouble:5.0], kUnitKey:NSLocalizedString(@"s", @"s"), kCellIDKey:kOtherCellID} mutableCopy]
                                ];
         NSArray *section03 = @[
-                               [@{kTitleKey:NSLocalizedString(@"Mehrfach befragen", @"Mehrfach befragen"), kValueKey:@0, kCellIDKey:kSwitchCellID} mutableCopy],
+                               [@{kTitleKey:NSLocalizedString(@"Mehrfach befragen", @"Mehrfach befragen"), kValueKey:@0, kCellIDKey:kOptionSwitchCellID} mutableCopy],
                                [@{kTitleKey:NSLocalizedString(@"Zeitintervall", @"Zeitintervall"), kValueKey:[NSNumber numberWithDouble:2 * 60.0 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy],
                                [@{kTitleKey:NSLocalizedString(@"Variablität", @"Variablität"), kValueKey:[NSNumber numberWithDouble:1 * 60.0 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy]
                                ];
+        NSArray *section04 = @[
+                               [@{kTitleKey:NSLocalizedString(@"GPS-Positionen", @"GPS-Positionen"), kValueKey:@0, kCellIDKey:kSwitchCellID} mutableCopy],
+                               [@{kTitleKey:NSLocalizedString(@"Bewegungen", @"Bewegungen"), kValueKey:@0, kCellIDKey:kSwitchCellID} mutableCopy]
+                               ];
                                
         
-        _dataArray = @[section01, section02, section03];
+        _dataArray = @[section01, section02, section03, section04];
     }
     return _dataArray;
 }
 
 - (NSArray *)dataHeaders
 {
-    return @[NSLocalizedString(@"Benutzer", @"Benutzer"), NSLocalizedString(@"Aktivität", @"Aktivität"), NSLocalizedString(@"Flow Kurzskala", @"Flow Kurzskala")];
+    return @[NSLocalizedString(@"Benutzer", @"Benutzer"), NSLocalizedString(@"Aktivität", @"Aktivität"), NSLocalizedString(@"Flow Kurzskala", @"Flow Kurzskala"), NSLocalizedString(@"Datenaufnahme", @"Datenaufnahme")];
 }
 
 - (NSInteger)pickerCellRowHeight
@@ -171,12 +176,12 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([[self.dataArray[section][0] objectForKey:kCellIDKey] isEqualToString:kSwitchCellID]) {
+    if ([[self.dataArray[section][0] objectForKey:kCellIDKey] isEqualToString:kOptionSwitchCellID]) {
         if (![[self.dataArray[section][0] objectForKey:kValueKey] boolValue]) {
             return 1;
         }
@@ -219,7 +224,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
         } else {
             cell.detailTextLabel.text = [[dataItem valueForKey:kValueKey] description];
         }
-    } else if ([cellID isEqualToString:kSwitchCellID]) {
+    } else if ([cellID isEqualToString:kSwitchCellID] || [cellID isEqualToString:kOptionSwitchCellID]) {
         ((LabelAndSwitchTableViewCell * )cell).label.text = [dataItem valueForKey:kTitleKey];
         ((LabelAndSwitchTableViewCell * )cell).contentswitch.on = [[dataItem valueForKey:kValueKey] boolValue];
     }
@@ -380,6 +385,7 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
     CGPoint center = sender.center;
     CGPoint rootViewPoint = [sender.superview convertPoint:center toView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:rootViewPoint];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
     // update our data model
     NSMutableDictionary *dataItem = self.dataArray[indexPath.section][indexPath.row];
@@ -387,23 +393,25 @@ static NSString *kOtherCellID = @"otherCell";           // the remaining cells a
        
         [dataItem setValue:[NSNumber numberWithBool:sender.on] forKey:kValueKey];
         
-        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-        unsigned long numberOfRows = [self.dataArray[indexPath.section] count];
-        for (int i = 1; i < numberOfRows; i++) {
-            [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:indexPath.section]];
-        }
-        
-        if(self.datePickerIndexPath != nil && self.datePickerIndexPath.section == indexPath.section) {
-            [indexPaths addObject:[NSIndexPath indexPathForRow:numberOfRows inSection:indexPath.section]];
-        }
-        
-        if (!sender.on) {
-            [self.tableView deleteRowsAtIndexPaths:indexPaths
-                                  withRowAnimation:UITableViewRowAnimationFade];
-            self.datePickerIndexPath = nil;
-        } else {
-            [self.tableView insertRowsAtIndexPaths:indexPaths
-                                  withRowAnimation:UITableViewRowAnimationFade];
+        if ([cell.reuseIdentifier isEqual:kOptionSwitchCellID]) {
+            NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+            unsigned long numberOfRows = [self.dataArray[indexPath.section] count];
+            for (int i = 1; i < numberOfRows; i++) {
+                [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:indexPath.section]];
+            }
+            
+            if(self.datePickerIndexPath != nil && self.datePickerIndexPath.section == indexPath.section) {
+                [indexPaths addObject:[NSIndexPath indexPathForRow:numberOfRows inSection:indexPath.section]];
+            }
+            
+            if (!sender.on) {
+                [self.tableView deleteRowsAtIndexPaths:indexPaths
+                                      withRowAnimation:UITableViewRowAnimationFade];
+                self.datePickerIndexPath = nil;
+            } else {
+                [self.tableView insertRowsAtIndexPaths:indexPaths
+                                      withRowAnimation:UITableViewRowAnimationFade];
+            }
         }
     }
 }

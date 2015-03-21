@@ -263,63 +263,66 @@
     }
     
     // Start location updates
-    if ([CLLocationManager authorizationStatus] == CBPeripheralManagerAuthorizationStatusAuthorized && [CLLocationManager locationServicesEnabled]) {
-        self.appDelegate.locationManager.delegate = self;
-        [self.appDelegate.locationManager startUpdatingLocation];
+    if ([[self.sessionData[3][0] objectForKey:kValueKey] boolValue]) {
+        if ([CLLocationManager authorizationStatus] == CBPeripheralManagerAuthorizationStatusAuthorized && [CLLocationManager locationServicesEnabled]) {
+            self.appDelegate.locationManager.delegate = self;
+            [self.appDelegate.locationManager startUpdatingLocation];
+        }
     }
     
-    
     // Start motion manager updates
-    self.motionRecords1 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
-    self.motionRecords2 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
-    self.firstMotionTimestamp = nil;
-    self.motionRecordCount = 0;
-    self.motionRecordArrayId = 1;
-    
-    if ([self.motionManager isDeviceMotionAvailable] == YES) {
-        [self.motionManager setDeviceMotionUpdateInterval:1/64.0];
-        [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
-            if(self.isCollecting) {
-                if (error == nil) {
-                    MotionRecord *motionRecord = [NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
-                    
-                    if (self.firstMotionTimestamp == nil) {
-                        motionRecord.timestamp = fabs([self.session.date timeIntervalSinceNow]);
-                        self.firstMotionTimestamp = [NSNumber numberWithDouble:motion.timestamp - motionRecord.timestamp];
-                    } else {
-                        motionRecord.timestamp = motion.timestamp - [self.firstMotionTimestamp doubleValue];
-                    }
-                    
-                    motionRecord.userAccelerationX = motion.userAcceleration.x;
-                    motionRecord.userAccelerationY = motion.userAcceleration.y;
-                    motionRecord.userAccelerationZ = motion.userAcceleration.z;
-                    motionRecord.gravityX = motion.gravity.x;
-                    motionRecord.gravityY = motion.gravity.y;
-                    motionRecord.gravityZ = motion.gravity.z;
-                    motionRecord.rotationRateX = motion.rotationRate.x;
-                    motionRecord.rotationRateY = motion.rotationRate.y;
-                    motionRecord.rotationRateZ = motion.rotationRate.z;
-                    
-                    self.motionRecordCount++;
-                    
-                    if (self.motionRecordCount % kMotionRecordMaxCount == 0) {
-                        if (self.motionRecordArrayId == 1) {
-                            self.motionRecordArrayId = 2;
-                            [self saveMotionRecords:self.motionRecords1];
+    if ([[self.sessionData[3][1] objectForKey:kValueKey] boolValue]) {
+        self.motionRecords1 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
+        self.motionRecords2 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
+        self.firstMotionTimestamp = nil;
+        self.motionRecordCount = 0;
+        self.motionRecordArrayId = 1;
+        
+        if ([self.motionManager isDeviceMotionAvailable] == YES) {
+            [self.motionManager setDeviceMotionUpdateInterval:1/64.0];
+            [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
+                if(self.isCollecting) {
+                    if (error == nil) {
+                        MotionRecord *motionRecord = [NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
+                        
+                        if (self.firstMotionTimestamp == nil) {
+                            motionRecord.timestamp = fabs([self.session.date timeIntervalSinceNow]);
+                            self.firstMotionTimestamp = [NSNumber numberWithDouble:motion.timestamp - motionRecord.timestamp];
                         } else {
-                            self.motionRecordArrayId = 1;
-                            [self saveMotionRecords:self.motionRecords2];
+                            motionRecord.timestamp = motion.timestamp - [self.firstMotionTimestamp doubleValue];
+                        }
+                        
+                        motionRecord.userAccelerationX = motion.userAcceleration.x;
+                        motionRecord.userAccelerationY = motion.userAcceleration.y;
+                        motionRecord.userAccelerationZ = motion.userAcceleration.z;
+                        motionRecord.gravityX = motion.gravity.x;
+                        motionRecord.gravityY = motion.gravity.y;
+                        motionRecord.gravityZ = motion.gravity.z;
+                        motionRecord.rotationRateX = motion.rotationRate.x;
+                        motionRecord.rotationRateY = motion.rotationRate.y;
+                        motionRecord.rotationRateZ = motion.rotationRate.z;
+                        
+                        self.motionRecordCount++;
+                        
+                        if (self.motionRecordCount % kMotionRecordMaxCount == 0) {
+                            if (self.motionRecordArrayId == 1) {
+                                self.motionRecordArrayId = 2;
+                                [self saveMotionRecords:self.motionRecords1];
+                            } else {
+                                self.motionRecordArrayId = 1;
+                                [self saveMotionRecords:self.motionRecords2];
+                            }
+                        }
+                        
+                        if (self.motionRecordArrayId == 1) {
+                            [self.motionRecords1 addObject:motionRecord];
+                        } else {
+                            [self.motionRecords2 addObject:motionRecord];
                         }
                     }
-                    
-                    if (self.motionRecordArrayId == 1) {
-                        [self.motionRecords1 addObject:motionRecord];
-                    } else {
-                        [self.motionRecords2 addObject:motionRecord];
-                    }
                 }
-            }
-        }];
+            }];
+        }
     }
 }
 

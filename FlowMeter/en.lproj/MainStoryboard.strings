@@ -1,207 +1,210 @@
-/* Class = "IBUILabel"; text = "Triff nicht zu"; ObjectID = "1X8-td-6f1"; */
+/* Class = "UILabel"; text = "Triff nicht zu"; ObjectID = "1X8-td-6f1"; */
 "1X8-td-6f1.text" = "not at all";
 
-/* Class = "IBUILabel"; text = "Triff zu"; ObjectID = "1d2-E2-RwK"; */
+/* Class = "UILabel"; text = "Triff zu"; ObjectID = "1d2-E2-RwK"; */
 "1d2-E2-RwK.text" = "very much";
 
-/* Class = "IBUILabel"; text = "Title"; ObjectID = "3Dj-cx-6L9"; */
+/* Class = "UILabel"; text = "Title"; ObjectID = "3Dj-cx-6L9"; */
 "3Dj-cx-6L9.text" = "Title";
 
-/* Class = "IBUINavigationItem"; title = "bearbeiten"; ObjectID = "3IC-dB-72B"; */
+/* Class = "UINavigationItem"; title = "bearbeiten"; ObjectID = "3IC-dB-72B"; */
 "3IC-dB-72B.title" = "edit";
 
-/* Class = "IBUILabel"; text = "Simon Bogutzky"; ObjectID = "3OO-2z-d6W"; */
+/* Class = "UILabel"; text = "Simon Bogutzky"; ObjectID = "3OO-2z-d6W"; */
 "3OO-2z-d6W.text" = "Simon Bogutzky";
 
-/* Class = "IBUILabel"; text = "03h 05m"; ObjectID = "4Yf-mk-QvG"; */
+/* Class = "UILabel"; text = "03h 05m"; ObjectID = "4Yf-mk-QvG"; */
 "4Yf-mk-QvG.text" = "03h 05m";
 
-/* Class = "IBUILabel"; text = "FLOW"; ObjectID = "4vJ-Is-xZ5"; */
+/* Class = "UILabel"; text = "FLOW"; ObjectID = "4vJ-Is-xZ5"; */
 "4vJ-Is-xZ5.text" = "FLOW";
 
-/* Class = "IBUILabel"; text = "❤︎"; ObjectID = "5hP-GP-iz5"; */
+/* Class = "UILabel"; text = "❤︎"; ObjectID = "5hP-GP-iz5"; */
 "5hP-GP-iz5.text" = "❤︎";
 
-/* Class = "IBUILabel"; text = "ANZAHL"; ObjectID = "7P5-t7-rHo"; */
+/* Class = "UILabel"; text = "ANZAHL"; ObjectID = "7P5-t7-rHo"; */
 "7P5-t7-rHo.text" = "COUNT";
 
-/* Class = "IBUIBarButtonItem"; title = "Menu"; ObjectID = "7Rs-Et-hYD"; */
+/* Class = "UIBarButtonItem"; title = "Menu"; ObjectID = "7Rs-Et-hYD"; */
 "7Rs-Et-hYD.title" = "menu";
 
-/* Class = "IBUILabel"; text = "❤︎"; ObjectID = "8ie-3Q-cwT"; */
+/* Class = "UILabel"; text = "❤︎"; ObjectID = "8ie-3Q-cwT"; */
 "8ie-3Q-cwT.text" = "❤︎";
 
-/* Class = "IBUILabel"; text = "4.5 ⍉"; ObjectID = "11w-qP-avr"; */
+/* Class = "UILabel"; text = "4.5 ⍉"; ObjectID = "11w-qP-avr"; */
 "11w-qP-avr.text" = "4.5 ⍉";
 
-/* Class = "IBUILabel"; text = "✎"; ObjectID = "744-6J-0ve"; */
+/* Class = "UILabel"; text = "✎"; ObjectID = "744-6J-0ve"; */
 "744-6J-0ve.text" = "✎";
 
-/* Class = "IBUITextView"; text = "Lizenzen"; ObjectID = "AKF-1o-zo5"; */
+/* Class = "UITextView"; text = "Lizenzen"; ObjectID = "AKF-1o-zo5"; */
 "AKF-1o-zo5.text" = "Lizenzen";
 
-/* Class = "IBUILabel"; text = "ZEIT"; ObjectID = "AVB-X3-04Z"; */
+/* Class = "UILabel"; text = "ZEIT"; ObjectID = "AVB-X3-04Z"; */
 "AVB-X3-04Z.text" = "TIME";
 
-/* Class = "IBUILabel"; text = "Title"; ObjectID = "BSX-sb-I5L"; */
+/* Class = "UILabel"; text = "Title"; ObjectID = "BSX-sb-I5L"; */
 "BSX-sb-I5L.text" = "Title";
 
-/* Class = "IBUILabel"; text = "S"; ObjectID = "Cs9-qS-JfL"; */
+/* Class = "UILabel"; text = "S"; ObjectID = "Cs9-qS-JfL"; */
 "Cs9-qS-JfL.text" = "S";
 
-/* Class = "IBUILabel"; text = "02:05:00"; ObjectID = "DRM-us-BNo"; */
+/* Class = "UILabel"; text = "02:05:00"; ObjectID = "DRM-us-BNo"; */
 "DRM-us-BNo.text" = "02:05:00";
 
-/* Class = "IBUINavigationItem"; title = "HR Geräte"; ObjectID = "DuS-St-5RM"; */
+/* Class = "UINavigationItem"; title = "HR Geräte"; ObjectID = "DuS-St-5RM"; */
 "DuS-St-5RM.title" = "HR devices";
 
-/* Class = "IBUILabel"; text = "0"; ObjectID = "HbQ-sv-eTH"; */
+/* Class = "UILabel"; text = "0"; ObjectID = "HbQ-sv-eTH"; */
 "HbQ-sv-eTH.text" = "0";
 
-/* Class = "IBUILabel"; text = "120 ⍉"; ObjectID = "IXj-cB-LmA"; */
+/* Class = "UILabel"; text = "120 ⍉"; ObjectID = "IXj-cB-LmA"; */
 "IXj-cB-LmA.text" = "120 ⍉";
 
-/* Class = "IBUITabBarItem"; title = "Einstellungen"; ObjectID = "Im2-FV-wo3"; */
+/* Class = "UITabBarItem"; title = "Einstellungen"; ObjectID = "Im2-FV-wo3"; */
 "Im2-FV-wo3.title" = "Preferences";
 
-/* Class = "IBUIViewController"; title = "Launch"; ObjectID = "Iwz-6n-8Ln"; */
+/* Class = "UIViewController"; title = "Launch"; ObjectID = "Iwz-6n-8Ln"; */
 "Iwz-6n-8Ln.title" = "Launch";
 
-/* Class = "IBUILabel"; text = "00:00"; ObjectID = "JBd-iU-TgT"; */
+/* Class = "UILabel"; text = "00:00"; ObjectID = "JBd-iU-TgT"; */
 "JBd-iU-TgT.text" = "00:00";
 
-/* Class = "IBUILabel"; text = " "; ObjectID = "KXe-AL-4yJ"; */
+/* Class = "UILabel"; text = " "; ObjectID = "KXe-AL-4yJ"; */
 "KXe-AL-4yJ.text" = "";
 
-/* Class = "IBUIButton"; normalTitle = "Abbrechen"; ObjectID = "KhE-yR-7X5"; */
+/* Class = "UIButton"; normalTitle = "Abbrechen"; ObjectID = "KhE-yR-7X5"; */
 "KhE-yR-7X5.normalTitle" = "Cancel";
 
-/* Class = "IBUILabel"; text = "Title"; ObjectID = "Ko6-wq-69x"; */
+/* Class = "UILabel"; text = "Title"; ObjectID = "Ko6-wq-69x"; */
 "Ko6-wq-69x.text" = "Title";
 
-/* Class = "IBUITextView"; text = "Danksagungen"; ObjectID = "Mw5-T3-e1a"; */
+/* Class = "UITextView"; text = "Danksagungen"; ObjectID = "Mw5-T3-e1a"; */
 "Mw5-T3-e1a.text" = "Acknowledgements";
 
-/* Class = "IBUIBarButtonItem"; title = "Abbrechen"; ObjectID = "NIg-71-mrk"; */
+/* Class = "UIBarButtonItem"; title = "Abbrechen"; ObjectID = "NIg-71-mrk"; */
 "NIg-71-mrk.title" = "Cancel";
 
-/* Class = "IBUITabBarItem"; title = "Aufnahme"; ObjectID = "Oo6-yD-QJr"; */
+/* Class = "UITabBarItem"; title = "Aufnahme"; ObjectID = "Oo6-yD-QJr"; */
 "Oo6-yD-QJr.title" = "Recording";
 
-/* Class = "IBUILabel"; text = "Title"; ObjectID = "Rvg-l2-k8e"; */
+/* Class = "UILabel"; text = "Title"; ObjectID = "Rvg-l2-k8e"; */
 "Rvg-l2-k8e.text" = "Title";
 
-/* Class = "IBUILabel"; text = "Label"; ObjectID = "TjS-8J-YUm"; */
+/* Class = "UILabel"; text = "Label"; ObjectID = "TjS-8J-YUm"; */
 "TjS-8J-YUm.text" = "Label";
 
-/* Class = "IBUILabel"; text = "Zyphyr HXM20002685"; ObjectID = "YyU-dp-IJn"; */
+/* Class = "UILabel"; text = "Zyphyr HXM20002685"; ObjectID = "YyU-dp-IJn"; */
 "YyU-dp-IJn.text" = "Zyphyr HXM20002685";
 
-/* Class = "IBUINavigationItem"; title = "Danksagungen"; ObjectID = "ZiB-xe-gVx"; */
+/* Class = "UINavigationItem"; title = "Danksagungen"; ObjectID = "ZiB-xe-gVx"; */
 "ZiB-xe-gVx.title" = "Acknowledgements";
 
-/* Class = "IBUITabBarItem"; title = "Flow-Messungen"; ObjectID = "Zq6-8C-6RD"; */
+/* Class = "UITabBarItem"; title = "Flow-Messungen"; ObjectID = "Zq6-8C-6RD"; */
 "Zq6-8C-6RD.title" = "Flow-Measurements";
 
-/* Class = "IBUILabel"; text = "Lizenzen"; ObjectID = "ZqP-cL-jim"; */
+/* Class = "UILabel"; text = "Lizenzen"; ObjectID = "ZqP-cL-jim"; */
 "ZqP-cL-jim.text" = "Licenses";
 
-/* Class = "IBUILabel"; text = " "; ObjectID = "Zsq-WU-lxK"; */
+/* Class = "UILabel"; text = " "; ObjectID = "Zsq-WU-lxK"; */
 "Zsq-WU-lxK.text" = "";
 
-/* Class = "IBUILabel"; text = "Label"; ObjectID = "b34-Ts-ek6"; */
+/* Class = "UILabel"; text = "Label"; ObjectID = "b34-Ts-ek6"; */
 "b34-Ts-ek6.text" = "Label";
 
-/* Class = "IBUILabel"; text = "Ich fühle mich optimal beansprucht"; ObjectID = "bjO-rZ-Nvg"; */
+/* Class = "UILabel"; text = "Ich fühle mich optimal beansprucht"; ObjectID = "bjO-rZ-Nvg"; */
 "bjO-rZ-Nvg.text" = "I feel just the right amount of challange";
 
-/* Class = "IBUINavigationItem"; title = "Einstellungen"; ObjectID = "cFc-Wy-kcx"; */
+/* Class = "UINavigationItem"; title = "Einstellungen"; ObjectID = "cFc-Wy-kcx"; */
 "cFc-Wy-kcx.title" = "Preferences";
 
-/* Class = "IBUILabel"; text = "4.5 ⍉"; ObjectID = "car-Lx-cye"; */
+/* Class = "UILabel"; text = "4.5 ⍉"; ObjectID = "car-Lx-cye"; */
 "car-Lx-cye.text" = "4.5 ⍉";
 
-/* Class = "IBUILabel"; text = "Dropbox Verbindung"; ObjectID = "cxS-zW-O3x"; */
+/* Class = "UILabel"; text = "Dropbox Verbindung"; ObjectID = "cxS-zW-O3x"; */
 "cxS-zW-O3x.text" = "Dropbox connection";
 
-/* Class = "IBUILabel"; text = "120"; ObjectID = "dJb-DU-WeX"; */
+/* Class = "UILabel"; text = "120"; ObjectID = "dJb-DU-WeX"; */
 "dJb-DU-WeX.text" = "120";
 
-/* Class = "IBUILabel"; text = "HR Verbindung"; ObjectID = "dxo-2B-l8I"; */
+/* Class = "UILabel"; text = "HR Verbindung"; ObjectID = "dxo-2B-l8I"; */
 "dxo-2B-l8I.text" = "HR connection";
 
-/* Class = "IBUILabel"; text = "teils-teils"; ObjectID = "f4Y-Br-TSS"; */
+/* Class = "UILabel"; text = "teils-teils"; ObjectID = "f4Y-Br-TSS"; */
 "f4Y-Br-TSS.text" = "partly";
 
-/* Class = "IBUINavigationItem"; title = "S. Bogutzky - Laufen"; ObjectID = "fhB-78-Qag"; */
+/* Class = "UINavigationItem"; title = "S. Bogutzky - Laufen"; ObjectID = "fhB-78-Qag"; */
 "fhB-78-Qag.title" = "S. Bogutzky - Running";
 
-/* Class = "IBUILabel"; text = "  Copyright (c) 2014 Simon Bogutzky. All rights reserved."; ObjectID = "fi7-XL-QJ6"; */
+/* Class = "UILabel"; text = "  Copyright (c) 2014 Simon Bogutzky. All rights reserved."; ObjectID = "fi7-XL-QJ6"; */
 "fi7-XL-QJ6.text" = "  Copyright (c) 2014 Simon Bogutzky. All rights reserved.";
 
-/* Class = "IBUILabel"; text = "✎"; ObjectID = "g1v-4K-Oax"; */
+/* Class = "UILabel"; text = "✎"; ObjectID = "g1v-4K-Oax"; */
 "g1v-4K-Oax.text" = "✎";
 
-/* Class = "IBUILabel"; text = "Die App \"FlowMeter\" ist ein Arbeitsergebnis des BMBF-Projekts \"Flow-Maschinen: Körperbewegung und Klang\", insofern sie aus dem Kontext des Projekts entstanden ist. \n\nSie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-Forschung zur Verfügung gestellt."; ObjectID = "g35-oe-CBX"; */
+/* Class = "UILabel"; text = "Die App \"FlowMeter\" ist ein Arbeitsergebnis des BMBF-Projekts \"Flow-Maschinen: Körperbewegung und Klang\", insofern sie aus dem Kontext des Projekts entstanden ist. \n\nSie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-Forschung zur Verfügung gestellt."; ObjectID = "g35-oe-CBX"; */
 "g35-oe-CBX.text" = "The app \"FlowMeter\" is a working result of the BMBF-project \"Flow-Mashines: Body movement and Sound\", insofar as its idea emerged out of the project context. \n\nIt was developed by Simon Bogutzky outside working hours and was made available for the flow research.";
 
-/* Class = "IBUINavigationItem"; title = "Lauf"; ObjectID = "hQZ-pK-huO"; */
+/* Class = "UINavigationItem"; title = "Lauf"; ObjectID = "hQZ-pK-huO"; */
 "hQZ-pK-huO.title" = "Run";
 
-/* Class = "IBUILabel"; text = "14"; ObjectID = "hma-90-mkH"; */
+/* Class = "UILabel"; text = "14"; ObjectID = "hma-90-mkH"; */
 "hma-90-mkH.text" = "14";
 
-/* Class = "IBUIBarButtonItem"; title = "Scan"; ObjectID = "ibw-L0-Seu"; */
+/* Class = "UIBarButtonItem"; title = "Scan"; ObjectID = "ibw-L0-Seu"; */
 "ibw-L0-Seu.title" = "Scan";
 
-/* Class = "IBUILabel"; text = "5"; ObjectID = "kfM-7K-tdj"; */
+/* Class = "UILabel"; text = "Label"; ObjectID = "kJX-gO-7NS"; */
+"kJX-gO-7NS.text" = "";
+
+/* Class = "UILabel"; text = "5"; ObjectID = "kfM-7K-tdj"; */
 "kfM-7K-tdj.text" = "5";
 
-/* Class = "IBUILabel"; text = "4.5"; ObjectID = "kra-zN-Y2H"; */
+/* Class = "UILabel"; text = "4.5"; ObjectID = "kra-zN-Y2H"; */
 "kra-zN-Y2H.text" = "4.5";
 
-/* Class = "IBUILabel"; text = "Laufen"; ObjectID = "lxG-6c-LKo"; */
+/* Class = "UILabel"; text = "Laufen"; ObjectID = "lxG-6c-LKo"; */
 "lxG-6c-LKo.text" = "Running";
 
-/* Class = "IBUINavigationItem"; title = "Lizenzen"; ObjectID = "mjE-nS-RSR"; */
+/* Class = "UINavigationItem"; title = "Lizenzen"; ObjectID = "mjE-nS-RSR"; */
 "mjE-nS-RSR.title" = "Licenses";
 
-/* Class = "IBUILabel"; text = "MIN"; ObjectID = "mlH-m3-f8i"; */
+/* Class = "UILabel"; text = "MIN"; ObjectID = "mlH-m3-f8i"; */
 "mlH-m3-f8i.text" = "MIN";
 
-/* Class = "IBUITableViewSection"; headerTitle = "Verbindung"; ObjectID = "nSS-ym-ztX"; */
+/* Class = "UITableViewSection"; headerTitle = "Verbindung"; ObjectID = "nSS-ym-ztX"; */
 "nSS-ym-ztX.headerTitle" = "Connection";
 
-/* Class = "IBUIBarButtonItem"; title = "► Start"; ObjectID = "nji-Cc-eNz"; */
+/* Class = "UIBarButtonItem"; title = "▶︎ Start"; ObjectID = "nji-Cc-eNz"; */
 "nji-Cc-eNz.title" = "▶︎ Start";
 
-/* Class = "IBUIBarButtonItem"; title = "Alle Löschen"; ObjectID = "paP-BI-5q6"; */
+/* Class = "UIBarButtonItem"; title = "Alle Löschen"; ObjectID = "paP-BI-5q6"; */
 "paP-BI-5q6.title" = "Delete all";
 
-/* Class = "IBUINavigationItem"; title = "Flow-Messungen"; ObjectID = "tZl-QD-bic"; */
+/* Class = "UINavigationItem"; title = "Flow-Messungen"; ObjectID = "tZl-QD-bic"; */
 "tZl-QD-bic.title" = "Flow-Measurements";
 
-/* Class = "IBUILabel"; text = "NA"; ObjectID = "uLq-37-zr6"; */
+/* Class = "UILabel"; text = "NA"; ObjectID = "uLq-37-zr6"; */
 "uLq-37-zr6.text" = "NA";
 
-/* Class = "IBUILabel"; text = "❤︎"; ObjectID = "uuA-Yb-SmM"; */
+/* Class = "UILabel"; text = "❤︎"; ObjectID = "uuA-Yb-SmM"; */
 "uuA-Yb-SmM.text" = "❤︎";
 
-/* Class = "IBUITableViewSection"; headerTitle = "Allgemein"; ObjectID = "vN8-dH-XZK"; */
+/* Class = "UITableViewSection"; headerTitle = "Allgemein"; ObjectID = "vN8-dH-XZK"; */
 "vN8-dH-XZK.headerTitle" = "General";
 
-/* Class = "IBUILabel"; text = "BPM"; ObjectID = "vyr-L6-cSf"; */
+/* Class = "UILabel"; text = "BPM"; ObjectID = "vyr-L6-cSf"; */
 "vyr-L6-cSf.text" = "BPM";
 
-/* Class = "IBUILabel"; text = "FLOW"; ObjectID = "wMl-tr-4gU"; */
+/* Class = "UILabel"; text = "FLOW"; ObjectID = "wMl-tr-4gU"; */
 "wMl-tr-4gU.text" = "FLOW";
 
-/* Class = "IBUILabel"; text = "7"; ObjectID = "xDl-la-9j6"; */
+/* Class = "UILabel"; text = "7"; ObjectID = "xDl-la-9j6"; */
 "xDl-la-9j6.text" = "7";
 
-/* Class = "IBUILabel"; text = "Label"; ObjectID = "xkg-C7-6Eh"; */
+/* Class = "UILabel"; text = "Label"; ObjectID = "xkg-C7-6Eh"; */
 "xkg-C7-6Eh.text" = "Label";
 
-/* Class = "IBUILabel"; text = "August 28, 2014 - 17:30"; ObjectID = "yp2-k7-OXg"; */
+/* Class = "UILabel"; text = "August 28, 2014 - 17:30"; ObjectID = "yp2-k7-OXg"; */
 "yp2-k7-OXg.text" = "August 28, 2014 - 17:30";
 

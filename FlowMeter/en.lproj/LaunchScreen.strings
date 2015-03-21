@@ -1,6 +1,6 @@
-
-/* Class = "IBUILabel"; text = "  Copyright (c) 2014 Simon Bogutzky. All rights reserved."; ObjectID = "Pof-t4-WLi"; */
+/* Class = "UILabel"; text = "  Copyright (c) 2014 Simon Bogutzky. All rights reserved."; ObjectID = "Pof-t4-WLi"; */
 "Pof-t4-WLi.text" = "  Copyright (c) 2014 Simon Bogutzky. All rights reserved.";
 
-/* Class = "IBUILabel"; text = "Die App \"FlowMeter\" ist ein Arbeitsergebnis des BMBF-Projekts \"Flow-Maschinen: Körperbewegung und Klang\", insofern sie aus dem Kontext des Projekts entstanden ist. \n\nSie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-Forschung zur Verfügung gestellt."; ObjectID = "iog-VP-uWv"; */
-"iog-VP-uWv.text" = "Die App \"FlowMeter\" ist ein Arbeitsergebnis des BMBF-Projekts \"Flow-Maschinen: Körperbewegung und Klang\", insofern sie aus dem Kontext des Projekts entstanden ist. \n\nSie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-Forschung zur Verfügung gestellt.";
+/* Class = "UILabel"; text = "Die App \"FlowMeter\" ist ein Arbeitsergebnis des BMBF-Projekts \"Flow-Maschinen: Körperbewegung und Klang\", insofern sie aus dem Kontext des Projekts entstanden ist. \n\nSie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-Forschung zur Verfügung gestellt."; ObjectID = "iog-VP-uWv"; */
+"iog-VP-uWv.text" = "Die App \";
+

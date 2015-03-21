@@ -1313,7 +1313,7 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                     <segue destination="RKk-Uf-Ko4" kind="modal" identifier="Edit value" id="z2u-vv-ItZ"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="switchCell" rowHeight="44" id="4XQ-Rp-GAP" customClass="LabelAndSwitchTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="optionSwitchCell" rowHeight="44" id="4XQ-Rp-GAP" customClass="LabelAndSwitchTableViewCell">
                                 <rect key="frame" x="0.0" y="315" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4XQ-Rp-GAP" id="sg5-cm-PfY">
@@ -1347,6 +1347,42 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                 <connections>
                                     <outlet property="contentswitch" destination="Gvv-Lf-HoC" id="VFc-BT-evE"/>
                                     <outlet property="label" destination="xkg-C7-6Eh" id="D0I-Mp-oii"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="switchCell" rowHeight="44" id="cAH-0p-liT" customClass="LabelAndSwitchTableViewCell">
+                                <rect key="frame" x="0.0" y="315" width="320" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cAH-0p-liT" id="Ps3-OM-X62">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJX-gO-7NS">
+                                            <rect key="frame" x="8" y="14" width="102" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="102" id="cBc-Bw-7gz"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                            <color key="textColor" red="0.1728159215" green="0.51933166060000002" blue="0.76862745099999996" alpha="1" colorSpace="deviceRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v3I-LZ-9dn">
+                                            <rect key="frame" x="269" y="6" width="51" height="31"/>
+                                            <color key="onTintColor" red="0.1728159215" green="0.51933166060000002" blue="0.76862745099999996" alpha="1" colorSpace="deviceRGB"/>
+                                            <connections>
+                                                <action selector="switchChangeAction:" destination="ZCf-lQ-cUe" eventType="valueChanged" id="plk-6c-0WJ"/>
+                                            </connections>
+                                        </switch>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="v3I-LZ-9dn" secondAttribute="centerY" id="6i0-YX-nTs"/>
+                                        <constraint firstItem="kJX-gO-7NS" firstAttribute="leading" secondItem="Ps3-OM-X62" secondAttribute="leading" constant="8" id="J3y-5A-UNg"/>
+                                        <constraint firstAttribute="trailing" secondItem="v3I-LZ-9dn" secondAttribute="trailing" constant="57" id="NX3-jl-ZIJ"/>
+                                        <constraint firstAttribute="centerY" secondItem="kJX-gO-7NS" secondAttribute="centerY" id="PCo-qM-53C"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="contentswitch" destination="v3I-LZ-9dn" id="MbI-PD-hUh"/>
+                                    <outlet property="label" destination="kJX-gO-7NS" id="GhW-Jh-b3f"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

@@ -40,6 +40,9 @@
 /* Besorgnis (SD) */
 "Besorgnis (SD)" = "Anxiety (SD)";
 
+/* Bewegungen */
+"Bewegungen" = "Motion";
+
 /* Bewegungsdaten */
 "Bewegungsdaten" = "Motion Data";
 
@@ -60,6 +63,9 @@
 
 /* Countdown */
 "Countdown" = "Countdown";
+
+/* Datenaufnahme */
+"Datenaufnahme" = "Data collection";
 
 /* Datum */
 "Datum" = "Date";
@@ -117,6 +123,9 @@
 
 /* Für mich persönlich sind die jetzigen Anforderungen... */
 "Für mich persönlich sind die jetzigen Anforderungen..." = "For me personally, the current demands are...";
+
+/* GPS-Positionen */
+"GPS-Positionen" = "GPS locations";
 
 /* Gerät unterstützt kein Bluetooth LE */
 "Gerät unterstützt kein Bluetooth LE" = "Device does not support Bluetooth LE";
@@ -247,14 +256,8 @@
 /* Person */
 "Person" = "Person";
 
-/* Pitch (rad) */
-"Pitch (rad)" = "Pitch (rad)";
-
 /* RR-Intervall (s) */
 "RR-Intervall (s)" = "RR-Interval";
-
-/* Roll (rad) */
-"Roll (rad)" = "Roll (rad)";
 
 /* Rotationsrate X (rad/s) */
 "Rotationsrate X (rad/s)" = "Rotation Rate X (rad/s)";
@@ -312,9 +315,6 @@
 
 /* No comment provided by engineer. */
 "WiFi" = "WiFi";
-
-/* Yaw (rad) */
-"Yaw (rad)" = "Yaw (rad)";
 
 /* Zeit */
 "Zeit" = "Time";
