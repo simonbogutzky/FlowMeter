@@ -77,6 +77,19 @@
     DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"tvd64fwxro7ck60" appSecret:@"2azrb93xdsddgx2" root:kDBRootAppFolder];
     [DBSession setSharedSession:dbSession];
     
+    // Global apperance
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setTintColor:UIColorFromRGB(0x1D70B7)];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    //
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    [tabBarController setSelectedIndex:1];
+    tabBarController.tabBar.translucent = NO;
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     [self initAVPlayer];
     
     [[UITabBar appearance] setTintColor:UIColorFromRGB(0x1D70B7)];
