@@ -423,7 +423,7 @@
                 timestamp = fabs([self.session.date timeIntervalSinceNow]);
                 self.firstMotionTimestamp = [NSNumber numberWithDouble:[[data.rrTimes objectAtIndex:i] doubleValue] - timestamp];
             } else {
-                timestamp = timestamp - [self.firstMotionTimestamp doubleValue];
+                timestamp = [[data.rrTimes objectAtIndex:i] doubleValue] - [self.firstHeartRateTimestamp doubleValue];
             }
             
             NSString *query = [NSString stringWithFormat:@"INSERT INTO ZHEARTRATERECORD VALUES(NULL, 2, 1, %d, %d, %f, %f)", data.heartRate, self.sessionPK, [[data.rrIntervals objectAtIndex:i] doubleValue], timestamp];
