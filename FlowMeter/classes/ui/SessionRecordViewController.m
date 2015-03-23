@@ -20,8 +20,7 @@
 #import "MotionRecord.h"
 #import "LocationRecord.h"
 #import "ABFillButton.h"
-
-#define kMotionRecordMaxCount   640
+#import "DBManager.h"
 
 @interface SessionRecordViewController () <ABFillButtonDelegate>
 
@@ -47,12 +46,11 @@
 @property (nonatomic) int heartRateCount;
 @property (nonatomic) long heartRateSum;
 
-@property (nonatomic, strong) NSMutableArray *motionRecords1;
-@property (nonatomic, strong) NSMutableArray *motionRecords2;
-@property (nonatomic, assign) int motionRecordArrayId;
-@property (nonatomic, assign) int motionRecordCount;
 @property (nonatomic, strong) NSNumber *firstMotionTimestamp;
 @property (nonatomic, strong) NSNumber *firstHeartRateTimestamp;
+
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic) int sessionPK;
 
 @property (nonatomic, weak) IBOutlet UIView *countdownBackgroundView;
 @property (nonatomic, weak) IBOutlet UILabel *countdownLabel;
@@ -79,6 +77,11 @@
 {
     if (!_session) {
         _session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:self.appDelegate.managedObjectContext];
+        [self.appDelegate saveContext];
+        
+        // Load session pk
+        NSManagedObjectID *sessionID = self.session.objectID;
+        self.sessionPK = [[[[[sessionID URIRepresentation] absoluteString] lastPathComponent] substringFromIndex:1] intValue];
     }
     return _session;
 }
@@ -161,6 +164,9 @@
     //If we want to empty the button with user pressing
     [self.stopButton setEmptyButtonPressing:YES];
     [self.stopButton setFillPercent:1.0];
+    
+    // Initialize the dbManager object
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"FlowMeter.sqlite"];
 }
 
 #pragma mark -
@@ -272,53 +278,25 @@
     
     // Start motion manager updates
     if ([[self.sessionData[3][1] objectForKey:kValueKey] boolValue]) {
-        self.motionRecords1 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
-        self.motionRecords2 = [[NSMutableArray alloc] initWithCapacity:kMotionRecordMaxCount];
         self.firstMotionTimestamp = nil;
-        self.motionRecordCount = 0;
-        self.motionRecordArrayId = 1;
         
         if ([self.motionManager isDeviceMotionAvailable] == YES) {
-            [self.motionManager setDeviceMotionUpdateInterval:1/64.0];
+            [self.motionManager setDeviceMotionUpdateInterval:1/72.0];
             [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
                 if(self.isCollecting) {
                     if (error == nil) {
-                        MotionRecord *motionRecord = [NSEntityDescription insertNewObjectForEntityForName:@"MotionRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
                         
+                        NSTimeInterval timestamp = 0.0;
                         if (self.firstMotionTimestamp == nil) {
-                            motionRecord.timestamp = fabs([self.session.date timeIntervalSinceNow]);
-                            self.firstMotionTimestamp = [NSNumber numberWithDouble:motion.timestamp - motionRecord.timestamp];
+                            timestamp = fabs([self.session.date timeIntervalSinceNow]);
+                            self.firstMotionTimestamp = [NSNumber numberWithDouble:motion.timestamp - timestamp];
                         } else {
-                            motionRecord.timestamp = motion.timestamp - [self.firstMotionTimestamp doubleValue];
+                            timestamp = motion.timestamp - [self.firstMotionTimestamp doubleValue];
                         }
                         
-                        motionRecord.userAccelerationX = motion.userAcceleration.x;
-                        motionRecord.userAccelerationY = motion.userAcceleration.y;
-                        motionRecord.userAccelerationZ = motion.userAcceleration.z;
-                        motionRecord.gravityX = motion.gravity.x;
-                        motionRecord.gravityY = motion.gravity.y;
-                        motionRecord.gravityZ = motion.gravity.z;
-                        motionRecord.rotationRateX = motion.rotationRate.x;
-                        motionRecord.rotationRateY = motion.rotationRate.y;
-                        motionRecord.rotationRateZ = motion.rotationRate.z;
+                        NSString *query = [NSString stringWithFormat:@"INSERT INTO ZMOTIONRECORD VALUES(NULL, 4, 1, %d, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f)", self.sessionPK, motion.attitude.pitch, motion.attitude.roll, motion.attitude.yaw, motion.gravity.x, motion.gravity.y, motion.gravity.z, motion.rotationRate.x, motion.rotationRate.y, motion.rotationRate.z, timestamp, motion.userAcceleration.x, motion.userAcceleration.y, motion.userAcceleration.z];
                         
-                        self.motionRecordCount++;
-                        
-                        if (self.motionRecordCount % kMotionRecordMaxCount == 0) {
-                            if (self.motionRecordArrayId == 1) {
-                                self.motionRecordArrayId = 2;
-                                [self saveMotionRecords:self.motionRecords1];
-                            } else {
-                                self.motionRecordArrayId = 1;
-                                [self saveMotionRecords:self.motionRecords2];
-                            }
-                        }
-                        
-                        if (self.motionRecordArrayId == 1) {
-                            [self.motionRecords1 addObject:motionRecord];
-                        } else {
-                            [self.motionRecords2 addObject:motionRecord];
-                        }
+                        [self.dbManager executeQuery:query];
                     }
                 }
             }];
@@ -341,14 +319,6 @@
     // Stop motion manager updates
     if ([self.motionManager isDeviceMotionActive] == YES) {
         [self.motionManager stopDeviceMotionUpdates];
-    }
-    
-    // Save last device motions
-    if (self.motionRecords1.count > 0) {
-        [self saveMotionRecords:self.motionRecords1];
-    }
-    if (self.motionRecords2.count > 0) {
-        [self saveMotionRecords:self.motionRecords2];
     }
 }
 
@@ -431,15 +401,6 @@
                      }];
 }
 
-- (void)saveMotionRecords:(NSMutableArray *)motionRecords
-{
-    NSSet *motionRecordSet = [NSSet setWithArray:motionRecords];
-    [self.session addMotionRecords:motionRecordSet];
-    
-    [self.appDelegate saveContext];
-    [motionRecords removeAllObjects];
-}
-
 #pragma mark -
 #pragma mark - HeartRateMonitorManagerDelegate implementation
 
@@ -456,19 +417,18 @@
         long rrDataCount = [data.rrTimes count];
 //        AudioServicesPlaySystemSound(1057);
         for (int i = 0; i < rrDataCount; i++) {
-            HeartRateRecord *heartRateRecord = [NSEntityDescription insertNewObjectForEntityForName:@"HeartRateRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
             
-            if (self.firstHeartRateTimestamp == nil) {
-                heartRateRecord.timestamp = fabs([self.session.date timeIntervalSinceNow]);
-                
-                self.firstHeartRateTimestamp = [NSNumber numberWithDouble:[[data.rrTimes objectAtIndex:i] doubleValue] - heartRateRecord.timestamp];
+            NSTimeInterval timestamp = 0.0;
+            if (self.firstMotionTimestamp == nil) {
+                timestamp = fabs([self.session.date timeIntervalSinceNow]);
+                self.firstMotionTimestamp = [NSNumber numberWithDouble:[[data.rrTimes objectAtIndex:i] doubleValue] - timestamp];
             } else {
-                heartRateRecord.timestamp = [[data.rrTimes objectAtIndex:i] doubleValue] - [self.firstHeartRateTimestamp doubleValue];
+                timestamp = timestamp - [self.firstMotionTimestamp doubleValue];
             }
             
-            heartRateRecord.rrInterval = [[data.rrIntervals objectAtIndex:i] doubleValue];
-            heartRateRecord.heartRate = data.heartRate;
-            [self.session addHeartRateRecordsObject:heartRateRecord];
+            NSString *query = [NSString stringWithFormat:@"INSERT INTO ZHEARTRATERECORD VALUES(NULL, 2, 1, %d, %d, %f, %f)", data.heartRate, self.sessionPK, [[data.rrIntervals objectAtIndex:i] doubleValue], timestamp];
+            
+            [self.dbManager executeQuery:query];
         }
     }
 }
@@ -668,18 +628,11 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
 {
-    LocationRecord *locationRecord = [NSEntityDescription insertNewObjectForEntityForName:@"LocationRecord" inManagedObjectContext:self.appDelegate.managedObjectContext];
-    locationRecord.date = newLocation.timestamp;
-    locationRecord.altitude = newLocation.altitude;
-    locationRecord.latitude = newLocation.coordinate.latitude;
-    locationRecord.longitude = newLocation.coordinate.longitude;
-    locationRecord.speed = newLocation.speed;
-    locationRecord.course = newLocation.course;
-    locationRecord.horizontalAccuracy = newLocation.horizontalAccuracy;
-    locationRecord.verticalAccuracy = newLocation.verticalAccuracy;
-    locationRecord.floor = newLocation.floor;
-    
-    [self.session addLocationRecordsObject:locationRecord];
+    if (self.isCollecting) {
+        NSString *query = [NSString stringWithFormat:@"INSERT INTO ZLOCATIONRECORD VALUES(NULL, 3, 1, %ld, %d, %f, %f, %f, %f, %f, %f, %f, %f)", (long)newLocation.floor.level, self.sessionPK, newLocation.altitude, newLocation.course, [newLocation.timestamp timeIntervalSinceReferenceDate], newLocation.horizontalAccuracy, newLocation.coordinate.latitude, newLocation.coordinate.longitude, newLocation.speed, newLocation.verticalAccuracy];
+        
+        [self.dbManager executeQuery:query];
+    }
 }
 
 #pragma mark -
@@ -701,10 +654,6 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     //        } else {
     //            [self saveData];
     //        }
-}
-
-- (IBAction)touchCanceled:(id)sender {
-    NSLog(@"fsfsd");
 }
 
 @end

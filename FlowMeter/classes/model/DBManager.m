@@ -75,13 +75,14 @@
         if(prepareStatementResult == SQLITE_OK) {
             NSLog(@"SQLITE_OK: %d", prepareStatementResult);
             int r = 0;
+            int totalColumns = 0;
             NSMutableString *results = nil;
             // Loop through the results and add them to the results array row by row.
             while(sqlite3_step(compiledStatement) == SQLITE_ROW) {
                 @autoreleasepool {
                     
                     // Get the total number of columns.
-                    int totalColumns = sqlite3_column_count(compiledStatement);
+                    totalColumns = sqlite3_column_count(compiledStatement);
                     if (results == nil) {
                         if (r == 0) {
                             results = [[NSMutableString alloc] initWithString:header];
@@ -115,7 +116,13 @@
                     }
                 }
             }
-            [self writeData:[results dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] withFilename:filename append:(r != 1000)];
+            if (totalColumns > 0) {
+                [self writeData:[results dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] withFilename:filename append:(r != 1000)];
+            } else {
+                NSLog(@"NOTHING TO WRITE");
+                results = nil;
+                return nil;
+            }
             results = nil;
             NSLog(@"SQLITE_END");
             return filename;
@@ -200,7 +207,7 @@
                 
                 // Execute the query.
                 BOOL executeQueryResults = sqlite3_step(compiledStatement);
-                if (executeQueryResults == SQLITE_DONE) {
+                if (executeQueryResults) {
                     // Keep the affected rows.
                     self.affectedRows = sqlite3_changes(sqlite3Database);
                     

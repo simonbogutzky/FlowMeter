@@ -22,7 +22,7 @@
 
 - (NSArray *)writeOut
 {
-    // Load obj
+    // Load object pk
     NSManagedObjectID *sessionID = self.objectID;
     int sessionPK = [[[[[sessionID URIRepresentation] absoluteString] lastPathComponent] substringFromIndex:1] intValue];
     
@@ -55,7 +55,7 @@
     }
 
     // Query motion records
-    query = [NSString stringWithFormat:@"SELECT printf(\"%%.3f\",ZTIMESTAMP),printf(\"%%.3f\",ZUSERACCELERATIONX),printf(\"%%.3f\",ZUSERACCELERATIONY),printf(\"%%.3f\",ZUSERACCELERATIONZ),printf(\"%%.3f\",ZGRAVITYX),printf(\"%%.3f\",ZGRAVITYY),printf(\"%%.3f\",ZGRAVITYZ),printf(\"%%.3f\",ZROTATIONRATEX),printf(\"%%.3f\",ZROTATIONRATEY),printf(\"%%.3f\",ZROTATIONRATEZ) FROM ZMOTIONRECORD WHERE ZSESSION = %d ORDER BY ZTIMESTAMP ASC", sessionPK];
+    query = [NSString stringWithFormat:@"SELECT printf(\"%%.3f\",ZTIMESTAMP),printf(\"%%.3f\",ZUSERACCELERATIONX),printf(\"%%.3f\",ZUSERACCELERATIONY),printf(\"%%.3f\",ZUSERACCELERATIONZ),printf(\"%%.3f\",ZGRAVITYX),printf(\"%%.3f\",ZGRAVITYY),printf(\"%%.3f\",ZGRAVITYZ),printf(\"%%.3f\",ZROTATIONRATEX),printf(\"%%.3f\",ZROTATIONRATEY),printf(\"%%.3f\",ZROTATIONRATEZ,printf(\"%%.3f\",ZATTITUDEPITCH),printf(\"%%.3f\",ZATTITUDEROLL),printf(\"%%.3f\",ZATTITUDEYAW)) FROM ZMOTIONRECORD WHERE ZSESSION = %d ORDER BY ZTIMESTAMP ASC", sessionPK];
     filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]], @"motion.txt"];
     header = [NSString stringWithFormat:@"%@%@", [self fileHeader], [MotionRecord csvHeader]];
     filename = [dbManager writeCSVFromQuery:query inFileWithFilename:filename andHeader:header];

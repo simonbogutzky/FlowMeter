@@ -48,6 +48,8 @@
 		D39736D119B0C11E005D643D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D39736D019B0C11E005D643D /* User.m */; };
 		D39747B11882CC7B00CFF3DF /* libtouchzipkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D39747AE1882CC6400CFF3DF /* libtouchzipkit.a */; };
 		D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */; };
+		D39A46031ABD6A9300A96455 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D39A46021ABD6A9300A96455 /* libsqlite3.dylib */; };
+		D39A46081ABD6B1B00A96455 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D39A46071ABD6B1B00A96455 /* DBManager.m */; };
 		D3A4629F1726E08900D454F7 /* SessionOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4629E1726E08900D454F7 /* SessionOverviewViewController.m */; };
 		D3AB053219D5581A00626323 /* background-music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3AB053119D5581A00626323 /* background-music.mp3 */; };
 		D3AEA5D419F12A56008CD870 /* HeartRateMonitorFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = D3AEA5D319F12A56008CD870 /* HeartRateMonitorFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -219,6 +221,9 @@
 		D39747A31882CC6400CFF3DF /* ZipKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZipKit.xcodeproj; path = ZipKit/ZipKit.xcodeproj; sourceTree = "<group>"; };
 		D398FAEF19AB5B52003DB0CA /* HeartRateRecord+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "HeartRateRecord+Description.h"; path = "classes/model/HeartRateRecord+Description.h"; sourceTree = "<group>"; };
 		D398FAF019AB5B52003DB0CA /* HeartRateRecord+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HeartRateRecord+Description.m"; path = "classes/model/HeartRateRecord+Description.m"; sourceTree = "<group>"; };
+		D39A46021ABD6A9300A96455 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		D39A46061ABD6B1B00A96455 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManager.h; path = classes/model/DBManager.h; sourceTree = "<group>"; };
+		D39A46071ABD6B1B00A96455 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManager.m; path = classes/model/DBManager.m; sourceTree = "<group>"; };
 		D3A4629D1726E08900D454F7 /* SessionOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionOverviewViewController.h; path = classes/ui/SessionOverviewViewController.h; sourceTree = "<group>"; };
 		D3A4629E1726E08900D454F7 /* SessionOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SessionOverviewViewController.m; path = classes/ui/SessionOverviewViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D3AB053119D5581A00626323 /* background-music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "background-music.mp3"; sourceTree = "<group>"; };
@@ -233,6 +238,7 @@
 		D3AEA5F219F12AA6008CD870 /* HeartRateMonitorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorManager.h; sourceTree = "<group>"; };
 		D3AEA5F319F12AA6008CD870 /* HeartRateMonitorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartRateMonitorManager.m; sourceTree = "<group>"; };
 		D3AEA5F419F12AA6008CD870 /* HeartRateMonitorManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartRateMonitorManagerDelegate.h; sourceTree = "<group>"; };
+		D3B6DF4B1ABFFFC0001B8CB1 /* FlowMeter-Version-013.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlowMeter-Version-013.xcdatamodel"; sourceTree = "<group>"; };
 		D3C1290E1863296A00C361CA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
 		D3C1290F1863296A00C361CA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		D3C1291118632A1E00C361CA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = SOURCE_ROOT; };
@@ -270,6 +276,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D39A46031ABD6A9300A96455 /* libsqlite3.dylib in Frameworks */,
 				D38A216D16BFF9F80075D093 /* CoreLocation.framework in Frameworks */,
 				60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */,
 				D3877C0B19BEEE0E00F21881 /* libz.dylib in Frameworks */,
@@ -329,6 +336,7 @@
 		604CCD8D16A6F31000E87194 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D39A46021ABD6A9300A96455 /* libsqlite3.dylib */,
 				D3877C0C19BEEFED00F21881 /* ExternalAccessory.framework */,
 				D3877C0A19BEEE0E00F21881 /* libz.dylib */,
 				4523E19A16F9EE2600761733 /* AudioToolbox.framework */,
@@ -368,7 +376,6 @@
 		604CCD9516A6F31000E87194 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D38B58111AA0D69A0050E9D3 /* FlowMeter.xcdatamodeld */,
 				D3877C0E19BEEFED00F21881 /* FlowMeter.entitlements */,
 				D38F7ABA19F0070300016B6E /* Audio */,
 				D31C4BCA19A619DE0017AA5A /* Model */,
@@ -380,6 +387,7 @@
 		D31C4BCA19A619DE0017AA5A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D38B58111AA0D69A0050E9D3 /* FlowMeter.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -411,6 +419,8 @@
 				D3E092F61AA710C500B10EE1 /* Session.m */,
 				D39736CF19B0C11E005D643D /* User.h */,
 				D39736D019B0C11E005D643D /* User.m */,
+				D39A46061ABD6B1B00A96455 /* DBManager.h */,
+				D39A46071ABD6B1B00A96455 /* DBManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -730,6 +740,7 @@
 				D38B581B1AA0D69A0050E9D3 /* FlowMeter.xcdatamodeld in Sources */,
 				D3E092EF1AA7051900B10EE1 /* HeartRateRecord.m in Sources */,
 				D329ACEB197A98F400B144B5 /* SelfReport+Description.m in Sources */,
+				D39A46081ABD6B1B00A96455 /* DBManager.m in Sources */,
 				D398FAF119AB5B52003DB0CA /* HeartRateRecord+Description.m in Sources */,
 				D34C9D2C17250463004C261C /* PrefsTableViewController.m in Sources */,
 				D3C1291318632A1E00C361CA /* Reachability.m in Sources */,
@@ -1093,9 +1104,10 @@
 				D3E092E81AA7039800B10EE1 /* FlowMeter-Version-010.xcdatamodel */,
 				D3E2146C1AAF04EF000BFB04 /* FlowMeter-Version-011.xcdatamodel */,
 				D3E2146F1AAF264D000BFB04 /* FlowMeter-Version-012.xcdatamodel */,
+				D3B6DF4B1ABFFFC0001B8CB1 /* FlowMeter-Version-013.xcdatamodel */,
 				D38B581A1AA0D69A0050E9D3 /* FlowMeter.xcdatamodel */,
 			);
-			currentVersion = D3E2146F1AAF264D000BFB04 /* FlowMeter-Version-012.xcdatamodel */;
+			currentVersion = D3B6DF4B1ABFFFC0001B8CB1 /* FlowMeter-Version-013.xcdatamodel */;
 			path = FlowMeter.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

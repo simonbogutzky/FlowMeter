@@ -12,7 +12,7 @@
 
 + (NSString *)csvHeader
 {
-    return [NSString stringWithFormat:@"%@ \n\n%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
+    return [NSString stringWithFormat:@"%@ \n\n%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
                                NSLocalizedString(@"Bewegungsdaten", @"Bewegungsdaten"),
                                NSLocalizedString(@"Zeitstempel (s)", @"Zeitstempel (s)"),
                                NSLocalizedString(@"Benutzerbeschleunigung X (Gs)", @"Benutzerbeschleunigung X (Gs)"),
@@ -23,7 +23,10 @@
                                NSLocalizedString(@"Gravitation Z (Gs)", @"Gravitation Z (Gs)"),
                                NSLocalizedString(@"Rotationsrate X (rad/s)", @"Rotationsrate X (rad/s)"),
                                NSLocalizedString(@"Rotationsrate Y (rad/s)", @"Rotationsrate Y (rad/s)"),
-                               NSLocalizedString(@"Rotationsrate Z (rad/s)", @"Rotationsrate Z (rad/s)")
+                               NSLocalizedString(@"Rotationsrate Z (rad/s)", @"Rotationsrate Z (rad/s)"),
+                               NSLocalizedString(@"Pitch (rad)", @"Pitch (rad)"),
+                               NSLocalizedString(@"Roll (rad)", @"Roll (rad)"),
+                               NSLocalizedString(@"Yaw (rad)", @"Yaw (rad)")
                                ];
 }
 
