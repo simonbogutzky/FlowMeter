@@ -159,7 +159,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     //If we want to add shadows and a grow up effect when user press the button
-    [self.stopButton configureButtonWithHightlightedShadowAndZoom:YES];
+    [self.stopButton configureButtonWithHightlightedShadowAndZoom:NO];
     
     //If we want to empty the button with user pressing
     [self.stopButton setEmptyButtonPressing:YES];
