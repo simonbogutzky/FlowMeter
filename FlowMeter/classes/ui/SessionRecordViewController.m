@@ -392,6 +392,8 @@
                          }
                          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                              [self.appDelegate saveContext];
+                             [self.appDelegate.managedObjectContext reset];
+                             self.appDelegate.managedObjectContext = nil;
                              dispatch_async(dispatch_get_main_queue(), ^{
                                  [self dismissViewControllerAnimated:YES completion:^{
                                      

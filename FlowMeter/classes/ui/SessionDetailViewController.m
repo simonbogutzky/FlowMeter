@@ -149,7 +149,7 @@
             self.yValues = [@[] mutableCopy];
             self.xLabels = [@[] mutableCopy];
             
-            NSTimeInterval timestamp = [[managedObjects[0] valueForKey:@"timestamp"] doubleValue];
+            NSTimeInterval timestamp = [[[managedObjects firstObject] valueForKey:@"timestamp"] doubleValue];
             NSTimeInterval nextTimestamp = timestamp + 60;
             
             NSMutableArray *yValues = [@[] mutableCopy];
