@@ -931,8 +931,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = FlowMeter;
-				PROVISIONING_PROFILE = "15d69bf1-494d-42d4-9e5c-8d9821966a70";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "15d69bf1-494d-42d4-9e5c-8d9821966a70";
+				PROVISIONING_PROFILE = "809a8377-a993-4930-b3c7-40072d08297d";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "809a8377-a993-4930-b3c7-40072d08297d";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;
 				WRAPPER_EXTENSION = app;
@@ -946,8 +946,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = FlowMeter/FlowMeter.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: out there/ communication (8936XLC29N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: out there/ communication (8936XLC29N)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
@@ -969,8 +969,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = FlowMeter;
-				PROVISIONING_PROFILE = "15d69bf1-494d-42d4-9e5c-8d9821966a70";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "15d69bf1-494d-42d4-9e5c-8d9821966a70";
+				PROVISIONING_PROFILE = "03c5be58-8d92-40b4-a3c2-dc379136a056";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "03c5be58-8d92-40b4-a3c2-dc379136a056";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;
 				WRAPPER_EXTENSION = app;
