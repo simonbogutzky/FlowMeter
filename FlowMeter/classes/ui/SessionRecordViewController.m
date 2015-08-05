@@ -60,6 +60,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *firstUnitStopWatchLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondUnitStopWatchLabel;
 @property (weak, nonatomic) IBOutlet UILabel *selfReportCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *skinTempaturLabel;
+@property (weak, nonatomic) IBOutlet UILabel *postureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *activityLevelLabel;
+@property (weak, nonatomic) IBOutlet UILabel *breathRateLabel;
 
 @end
 
@@ -167,6 +171,16 @@
     
     // Initialize the dbManager object
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"FlowMeter.sqlite"];
+    
+    self.stopWatchLabel.text = @"00:00";
+    self.firstUnitStopWatchLabel.text = NSLocalizedString(@"MIN", @"Minuten Einheit Label im SessionViewController");
+    self.secondUnitStopWatchLabel.text = NSLocalizedString(@"S", @"Sekunden Einheit Label im SessionViewController");
+    self.heartRateLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
+    self.breathRateLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
+    self.skinTempaturLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
+    self.postureLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
+    self.skinTempaturLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
+    self.selfReportCountLabel.text = @"0";
 }
 
 #pragma mark -
@@ -209,11 +223,6 @@
                      }
                      completion:^(BOOL finished){
                          self.countdownBackgroundView.hidden = YES;
-                         self.stopWatchLabel.text = @"00:00";
-                         self.firstUnitStopWatchLabel.text = NSLocalizedString(@"MIN", @"Minuten Einheit Label im SessionViewController");
-                         self.secondUnitStopWatchLabel.text = NSLocalizedString(@"S", @"Sekunden Einheit Label im SessionViewController");
-                         self.heartRateLabel.text = NSLocalizedString(@"NA", @"Anfangs-Herzraten Label im SessionViewController");
-                         self.selfReportCountLabel.text = @"0";
                          [self startCollecting];
                      }];
 }
@@ -441,12 +450,23 @@ didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 {
     AudioServicesPlaySystemSound(1073);
     self.heartRateLabel.text = NSLocalizedString(@"ERR", "Fehleranzeige - HR Monitor wurde getrennt");
+    self.breathRateLabel.text = NSLocalizedString(@"ERR", "Fehleranzeige - HR Monitor wurde getrennt");
+    self.postureLabel.text = NSLocalizedString(@"ERR", "Fehleranzeige - HR Monitor wurde getrennt");
+    self.skinTempaturLabel.text = NSLocalizedString(@"ERR", "Fehleranzeige - HR Monitor wurde getrennt");
+    self.activityLevelLabel.text = NSLocalizedString(@"ERR", "Fehleranzeige - HR Monitor wurde getrennt");
 }
 
 - (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
 didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 {
     [manager startMonitoring];
+}
+
+- (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager didReceiveBioHarnessData:(BioharnessData *)data fromHeartRateMonitorDevice:(HeartRateMonitorDevice *)device {
+    self.breathRateLabel.text = [NSString stringWithFormat:@"%.1f", data.breathRate];
+    self.postureLabel.text = [NSString stringWithFormat:@"%d", data.posture];
+    self.skinTempaturLabel.text = [NSString stringWithFormat:@"%.1f", data.skinTemperatur];
+    self.activityLevelLabel.text = [NSString stringWithFormat:@"%.2f", data.activityLevel];
 }
 
 #pragma mark -

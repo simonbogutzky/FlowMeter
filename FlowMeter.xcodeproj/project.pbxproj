@@ -66,6 +66,8 @@
 		D3C129101863296A00C361CA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1290F1863296A00C361CA /* MBProgressHUD.m */; };
 		D3C1291318632A1E00C361CA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C1291218632A1E00C361CA /* Reachability.m */; };
 		D3C1292A18632C9A00C361CA /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C1292918632C9A00C361CA /* DropboxSDK.framework */; };
+		D3C6BC4D1B72131E00A0BF33 /* BioharnessData.h in Headers */ = {isa = PBXBuildFile; fileRef = D3C6BC4B1B72131E00A0BF33 /* BioharnessData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D3C6BC4E1B72131E00A0BF33 /* BioharnessData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C6BC4C1B72131E00A0BF33 /* BioharnessData.m */; };
 		D3C7ADC0171ED660000A7D34 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADBF171ED660000A7D34 /* Security.framework */; };
 		D3C7ADC2171ED66A000A7D34 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADC1171ED66A000A7D34 /* QuartzCore.framework */; };
 		D3C7ADC9171EEA44000A7D34 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */; };
@@ -244,6 +246,8 @@
 		D3C1291118632A1E00C361CA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = SOURCE_ROOT; };
 		D3C1291218632A1E00C361CA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = SOURCE_ROOT; };
 		D3C1292918632C9A00C361CA /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = DropboxSDK/DropboxSDK.framework; sourceTree = "<group>"; };
+		D3C6BC4B1B72131E00A0BF33 /* BioharnessData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BioharnessData.h; sourceTree = "<group>"; };
+		D3C6BC4C1B72131E00A0BF33 /* BioharnessData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BioharnessData.m; sourceTree = "<group>"; };
 		D3C7ADBF171ED660000A7D34 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D3C7ADC1171ED66A000A7D34 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D3C7ADC8171EEA44000A7D34 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -499,6 +503,8 @@
 		D3AEA5D019F12A56008CD870 /* HeartRateMonitorFramework */ = {
 			isa = PBXGroup;
 			children = (
+				D3C6BC4B1B72131E00A0BF33 /* BioharnessData.h */,
+				D3C6BC4C1B72131E00A0BF33 /* BioharnessData.m */,
 				D3AEA5ED19F12AA6008CD870 /* HeartRateMonitorData.h */,
 				D3AEA5EE19F12AA6008CD870 /* HeartRateMonitorData.m */,
 				D3AEA5EF19F12AA6008CD870 /* HeartRateMonitorDevice.h */,
@@ -578,6 +584,7 @@
 				D3AEA5FA19F12AA6008CD870 /* HeartRateMonitorManager.h in Headers */,
 				D3AEA5F919F12AA6008CD870 /* HeartRateMonitorDeviceDelegate.h in Headers */,
 				D3AEA5F719F12AA6008CD870 /* HeartRateMonitorDevice.h in Headers */,
+				D3C6BC4D1B72131E00A0BF33 /* BioharnessData.h in Headers */,
 				D3AEA5FC19F12AA6008CD870 /* HeartRateMonitorManagerDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -771,6 +778,7 @@
 				D3AEA5F619F12AA6008CD870 /* HeartRateMonitorData.m in Sources */,
 				D3AEA5F819F12AA6008CD870 /* HeartRateMonitorDevice.m in Sources */,
 				D3AEA5FB19F12AA6008CD870 /* HeartRateMonitorManager.m in Sources */,
+				D3C6BC4E1B72131E00A0BF33 /* BioharnessData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
