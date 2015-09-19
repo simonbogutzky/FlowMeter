@@ -27,7 +27,7 @@
 
 - (AppDelegate *)appDelegate
 {
-    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
 #pragma mark -
@@ -36,7 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBar.topItem.title = [self.itemDictionary objectForKey:kTitleKey];
+    self.navigationController.navigationBar.topItem.title = (self.itemDictionary)[kTitleKey];
     self.textField.text = @"";
     
     if ([[self.itemDictionary valueForKey:kValueKey] isKindOfClass:[NSNumber class]]) {
@@ -46,7 +46,7 @@
         self.barButtonItemDone.enabled = YES;
         self.barButtonItemDone.tintColor = nil;
     } else {
-        self.textField.placeholder = [self.itemDictionary objectForKey:kTitleKey];
+        self.textField.placeholder = (self.itemDictionary)[kTitleKey];
         self.barButtonItemDone.enabled = NO;
         self.barButtonItemDone.tintColor = [UIColor clearColor];
         self.option = [self getDisplayNameStrings];
@@ -65,7 +65,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.itemDictionary setValue:[self.option objectAtIndex:indexPath.row] forKey:kValueKey];
+    [self.itemDictionary setValue:(self.option)[indexPath.row] forKey:kValueKey];
     [self dismissViewController];
 }
 
@@ -91,7 +91,7 @@
 {
     if ([[self.itemDictionary valueForKey:kValueKey] isKindOfClass:[NSNumber class]]) {
         if (![self.textField.text isEqualToString:@""]) {
-            [self.itemDictionary setValue:[NSNumber numberWithInt:[self.textField.text intValue]] forKey:kValueKey];
+            [self.itemDictionary setValue:@((self.textField.text).intValue) forKey:kValueKey];
         }
     } else {
         [self.itemDictionary setValue:[self.textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] forKey:kValueKey];
@@ -119,8 +119,8 @@
 {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:[self.itemDictionary objectForKey:kEntityKey] inManagedObjectContext:self.appDelegate.managedObjectContext];
-    [fetchRequest setEntity:entity];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:(self.itemDictionary)[kEntityKey] inManagedObjectContext:self.appDelegate.managedObjectContext];
+    fetchRequest.entity = entity;
     
     NSArray *fetchedObjects = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:nil];
     if (fetchedObjects == nil) {
@@ -129,7 +129,7 @@
     
     NSMutableArray *displayNameStrings = [NSMutableArray array];
     for (NSManagedObject *object in fetchedObjects) {
-        [displayNameStrings addObject:[object valueForKey:[self.itemDictionary objectForKey:kPropertyKey]]];
+        [displayNameStrings addObject:[object valueForKey:(self.itemDictionary)[kPropertyKey]]];
     }
     
     return displayNameStrings;
@@ -137,7 +137,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    cell.textLabel.text = [self.option objectAtIndex:indexPath.row];
+    cell.textLabel.text = (self.option)[indexPath.row];
 }
 
 - (void)dismissViewController

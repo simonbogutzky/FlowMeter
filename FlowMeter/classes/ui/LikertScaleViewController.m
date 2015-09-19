@@ -56,7 +56,7 @@
 - (NSMutableArray *)responses
 {
     if (!_responses) {
-        _responses = [[NSMutableArray alloc] initWithCapacity:[_itemLabelTexts count]];
+        _responses = [[NSMutableArray alloc] initWithCapacity:_itemLabelTexts.count];
     }
     return _responses;
 }
@@ -64,7 +64,7 @@
 - (NSMutableArray *)circleControls
 {
     if (!_circleControls) {
-        int numberOfItems = [[self.itemSegments objectAtIndex:self.itemIndex] intValue];
+        int numberOfItems = [(self.itemSegments)[self.itemIndex] intValue];
         _circleControls = [[NSMutableArray alloc] initWithCapacity:numberOfItems];
         _circleIndicatorControls = [[NSMutableArray alloc] initWithCapacity:numberOfItems];
         
@@ -97,22 +97,22 @@
 {
     [super viewDidLoad];
 	
-    self.itemLabel.text = [self.itemLabelTexts objectAtIndex:0];
+    self.itemLabel.text = (self.itemLabelTexts)[0];
     [self setCircleControlsForItemIndex:0];
-    self.scaleLabel1.text = [[self.scaleLabels objectAtIndex:0] objectAtIndex:0];
-    self.scaleLabel2.text = [[self.scaleLabels objectAtIndex:0] objectAtIndex:1];
-    self.scaleLabel3.text = [[self.scaleLabels objectAtIndex:0] objectAtIndex:2];
+    self.scaleLabel1.text = (self.scaleLabels)[0][0];
+    self.scaleLabel2.text = (self.scaleLabels)[0][1];
+    self.scaleLabel3.text = (self.scaleLabels)[0][2];
     self.date = [NSDate date];
 }
 
 - (void)increaseItemIndex
 {
     self.itemIndex++;
-    if (self.itemIndex < [self.itemLabelTexts count]) {
-        self.itemLabel.text = [self.itemLabelTexts objectAtIndex:self.itemIndex];
-        self.scaleLabel1.text = [[self.scaleLabels objectAtIndex:self.itemIndex] objectAtIndex:0];
-        self.scaleLabel2.text = [[self.scaleLabels objectAtIndex:self.itemIndex] objectAtIndex:1];
-        self.scaleLabel3.text = [[self.scaleLabels objectAtIndex:self.itemIndex] objectAtIndex:2];
+    if (self.itemIndex < (self.itemLabelTexts).count) {
+        self.itemLabel.text = (self.itemLabelTexts)[self.itemIndex];
+        self.scaleLabel1.text = (self.scaleLabels)[self.itemIndex][0];
+        self.scaleLabel2.text = (self.scaleLabels)[self.itemIndex][1];
+        self.scaleLabel3.text = (self.scaleLabels)[self.itemIndex][2];
         
         [self setCircleControlsForItemIndex:self.itemIndex];
     } else {
@@ -129,7 +129,7 @@
 {
     CGFloat screenWidth = size.width;
     CGFloat screenHeight = size.height;
-    NSUInteger numberOfCircles = [self.circleControls count];
+    NSUInteger numberOfCircles = (self.circleControls).count;
     CGFloat offset = (screenWidth - 80) / (numberOfCircles - 1);
     int i = 0;
     for (UIControl *circleControl in self.circleControls) {
@@ -156,7 +156,7 @@
         self.circleIndicatorControls = nil;
         
     }
-    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    CGRect screenBound = [UIScreen mainScreen].bounds;
     CGSize screenSize = screenBound.size;
     [self redrawCicleControlsForSize:screenSize];
 }
@@ -170,7 +170,7 @@
     
     UIControl *circleIndicatorControl = self.circleIndicatorControls[circleControl.tag];
     circleIndicatorControl.backgroundColor = [self.cicleColors[circleControl.tag] colorWithAlphaComponent:0.6];
-    [self.responses addObject:[NSNumber numberWithLong:circleControl.tag + 1]];
+    [self.responses addObject:@(circleControl.tag + 1)];
     
     [self performSelector:@selector(increaseItemIndex) withObject:nil afterDelay:0.1];
 }

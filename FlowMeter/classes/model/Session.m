@@ -37,7 +37,7 @@
 - (NSString *)sectionTitle
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+    dateFormatter.dateFormat = @"yyyy/MM/dd";
     return [dateFormatter stringFromDate:self.date];
 }
 

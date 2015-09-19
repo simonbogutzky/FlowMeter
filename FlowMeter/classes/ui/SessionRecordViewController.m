@@ -78,7 +78,7 @@
 
 - (AppDelegate *)appDelegate
 {
-    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
 - (Session *)session
@@ -89,7 +89,7 @@
         
         // Load session pk
         NSManagedObjectID *sessionID = self.session.objectID;
-        self.sessionPK = [[[[[sessionID URIRepresentation] absoluteString] lastPathComponent] substringFromIndex:1] intValue];
+        self.sessionPK = [[sessionID URIRepresentation].absoluteString.lastPathComponent substringFromIndex:1].intValue;
     }
     return _session;
 }
@@ -100,16 +100,16 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:self.appDelegate.managedObjectContext];
-    [fetchRequest setEntity:entity];
+    fetchRequest.entity = entity;
     
-    [fetchRequest setPredicate:predicate];
+    fetchRequest.predicate = predicate;
     
     NSArray *fetchedObjects = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:nil];
     if (fetchedObjects == nil) {
         // Handle the error.
     }
     
-    if ([fetchedObjects count] == 0) {
+    if (fetchedObjects.count == 0) {
         user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:self.appDelegate.managedObjectContext];
     } else {
         user = fetchedObjects[0];
@@ -124,16 +124,16 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Activity" inManagedObjectContext:self.appDelegate.managedObjectContext];
-    [fetchRequest setEntity:entity];
+    fetchRequest.entity = entity;
     
-    [fetchRequest setPredicate:predicate];
+    fetchRequest.predicate = predicate;
     
     NSArray *fetchedObjects = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:nil];
     if (fetchedObjects == nil) {
         // Handle the error.
     }
     
-    if ([fetchedObjects count] == 0) {
+    if (fetchedObjects.count == 0) {
         activity = [NSEntityDescription insertNewObjectForEntityForName:@"Activity" inManagedObjectContext:self.appDelegate.managedObjectContext];
     } else {
         activity = fetchedObjects[0];
@@ -155,7 +155,7 @@
     [self startSensorUpdates];
 
     // Show UI or start countdown
-    self.countdown = [[self.sessionData[1][1] objectForKey:kValueKey] intValue];
+    self.countdown = [(self.sessionData[1][1])[kValueKey] intValue];
     if (self.countdown < 1) {
         [self showUI];
     } else {
@@ -164,14 +164,14 @@
     
     // Hide status bar
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     
     //If we want to add shadows and a grow up effect when user press the button
     [self.stopButton configureButtonWithHightlightedShadowAndZoom:NO];
     
     //If we want to empty the button with user pressing
     [self.stopButton setEmptyButtonPressing:YES];
-    [self.stopButton setFillPercent:1.0];
+    (self.stopButton).fillPercent = 1.0;
     
     // Initialize the dbManager object
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"FlowMeter.sqlite"];
@@ -248,14 +248,14 @@
     
     // Create a date formatter
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
+    dateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0.0];
     
     if (elapsedTime < 1 * 60 * 60) {
-        [dateFormatter setDateFormat:@"mm:ss"];
+        dateFormatter.dateFormat = @"mm:ss";
         self.firstUnitStopWatchLabel.text = NSLocalizedString(@"MIN", @"Minuten Einheit Label im SessionViewController");
         self.secondUnitStopWatchLabel.text = NSLocalizedString(@"S", @"Sekunden Einheit Label im SessionViewController");
     } else {
-        [dateFormatter setDateFormat:@"HH:mm"];
+        dateFormatter.dateFormat = @"HH:mm";
         self.firstUnitStopWatchLabel.text = NSLocalizedString(@"H", @"Stunden Einheit Label im SessionViewController");
         self.secondUnitStopWatchLabel.text = NSLocalizedString(@"MIN", @"Minuten Einheit Label im SessionViewController");
     }
@@ -282,7 +282,7 @@
     }
     
     // Start location updates
-    if ([[self.sessionData[3][0] objectForKey:kValueKey] boolValue]) {
+    if ([(self.sessionData[3][0])[kValueKey] boolValue]) {
         if ([CLLocationManager authorizationStatus] == CBPeripheralManagerAuthorizationStatusAuthorized && [CLLocationManager locationServicesEnabled]) {
             self.appDelegate.locationManager.delegate = self;
             [self.appDelegate.locationManager startUpdatingLocation];
@@ -290,21 +290,21 @@
     }
     
     // Start motion manager updates
-    if ([[self.sessionData[3][1] objectForKey:kValueKey] boolValue]) {
+    if ([(self.sessionData[3][1])[kValueKey] boolValue]) {
         self.firstMotionTimestamp = nil;
         
-        if ([self.motionManager isDeviceMotionAvailable] == YES) {
-            [self.motionManager setDeviceMotionUpdateInterval:1/72.0];
+        if ((self.motionManager).deviceMotionAvailable == YES) {
+            (self.motionManager).deviceMotionUpdateInterval = 1/72.0;
             [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
                 if(self.isCollecting) {
                     if (error == nil) {
                         
                         NSTimeInterval timestamp = 0.0;
                         if (self.firstMotionTimestamp == nil) {
-                            timestamp = fabs([self.session.date timeIntervalSinceNow]);
-                            self.firstMotionTimestamp = [NSNumber numberWithDouble:motion.timestamp - timestamp];
+                            timestamp = fabs((self.session.date).timeIntervalSinceNow);
+                            self.firstMotionTimestamp = @(motion.timestamp - timestamp);
                         } else {
-                            timestamp = motion.timestamp - [self.firstMotionTimestamp doubleValue];
+                            timestamp = motion.timestamp - (self.firstMotionTimestamp).doubleValue;
                         }
                         
                         NSString *query = [NSString stringWithFormat:@"INSERT INTO ZMOTIONRECORD VALUES(NULL, 4, 1, %d, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f)", self.sessionPK, motion.attitude.pitch, motion.attitude.roll, motion.attitude.yaw, motion.gravity.x, motion.gravity.y, motion.gravity.z, motion.rotationRate.x, motion.rotationRate.y, motion.rotationRate.z, timestamp, motion.userAcceleration.x, motion.userAcceleration.y, motion.userAcceleration.z];
@@ -330,7 +330,7 @@
     }
     
     // Stop motion manager updates
-    if ([self.motionManager isDeviceMotionActive] == YES) {
+    if ((self.motionManager).deviceMotionActive == YES) {
         [self.motionManager stopDeviceMotionUpdates];
     }
 }
@@ -347,28 +347,28 @@
     self.heartRateCount = 0;
     self.heartRateSum = 0;
     
-    NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"(firstName == %@) AND (lastName == %@)", [self.sessionData[0][0] objectForKey:kValueKey], [self.sessionData[0][1] objectForKey:kValueKey]];
+    NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"(firstName == %@) AND (lastName == %@)", (self.sessionData[0][0])[kValueKey], (self.sessionData[0][1])[kValueKey]];
     User *user = [self getUserWithPredicate:userPredicate];
     
     if (user.firstName == nil && user.lastName == nil) {
-        user.firstName = [self.sessionData[0][0] objectForKey:kValueKey];
-        user.lastName = [self.sessionData[0][1] objectForKey:kValueKey];
+        user.firstName = (self.sessionData[0][0])[kValueKey];
+        user.lastName = (self.sessionData[0][1])[kValueKey];
     }
     self.session.user = user;
     
     
-    NSPredicate *activityPredicate = [NSPredicate predicateWithFormat:@"(name == %@)", [self.sessionData[1][0] objectForKey:kValueKey]];
+    NSPredicate *activityPredicate = [NSPredicate predicateWithFormat:@"(name == %@)", (self.sessionData[1][0])[kValueKey]];
     Activity *activity = [self getActivityWithPredicate:activityPredicate];
     
     if (activity.name == nil) {
-        activity.name = [self.sessionData[1][0] objectForKey:kValueKey];
+        activity.name = (self.sessionData[1][0])[kValueKey];
     }
     self.session.activity = activity;
     
     [self startStopWatch];
     self.isCollecting = !self.isCollecting;
     
-    if ([[self.sessionData[2][0] objectForKey:kValueKey] boolValue]) {
+    if ([(self.sessionData[2][0])[kValueKey] boolValue]) {
         self.selfReportTimer = [NSTimer scheduledTimerWithTimeInterval:[self timeToNextSelfReport] target:self selector:@selector(showSelfReport) userInfo:nil repeats:NO];
     }
 }
@@ -429,19 +429,19 @@
         self.heartRateCount++;
         self.heartRateSum = self.heartRateSum + data.heartRate;
         
-        long rrDataCount = [data.rrTimes count];
+        long rrDataCount = (data.rrTimes).count;
 //        AudioServicesPlaySystemSound(1057);
         for (int i = 0; i < rrDataCount; i++) {
             
             NSTimeInterval timestamp = 0.0;
             if (self.firstMotionTimestamp == nil) {
-                timestamp = fabs([self.session.date timeIntervalSinceNow]);
-                self.firstMotionTimestamp = [NSNumber numberWithDouble:[[data.rrTimes objectAtIndex:i] doubleValue] - timestamp];
+                timestamp = fabs((self.session.date).timeIntervalSinceNow);
+                self.firstMotionTimestamp = @([(data.rrTimes)[i] doubleValue] - timestamp);
             } else {
-                timestamp = [[data.rrTimes objectAtIndex:i] doubleValue] - [self.firstHeartRateTimestamp doubleValue];
+                timestamp = [(data.rrTimes)[i] doubleValue] - (self.firstHeartRateTimestamp).doubleValue;
             }
             
-            NSString *query = [NSString stringWithFormat:@"INSERT INTO ZHEARTRATERECORD VALUES(NULL, 2, 1, %d, %d, %f, %f)", data.heartRate, self.sessionPK, [[data.rrIntervals objectAtIndex:i] doubleValue], timestamp];
+            NSString *query = [NSString stringWithFormat:@"INSERT INTO ZHEARTRATERECORD VALUES(NULL, 2, 1, %d, %d, %f, %f)", data.heartRate, self.sessionPK, [(data.rrIntervals)[i] doubleValue], timestamp];
             
             [self.dbManager executeQuery:query];
         }
@@ -497,18 +497,18 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     
     SelfReport *selfReport = [NSEntityDescription insertNewObjectForEntityForName:@"SelfReport" inManagedObjectContext:self.appDelegate.managedObjectContext];
     selfReport.timestamp = self.startSelfReportTimestamp;
-    selfReport.duration = fabs([self.session.date timeIntervalSinceNow]) - selfReport.timestamp;
+    selfReport.duration = fabs((self.session.date).timeIntervalSinceNow) - selfReport.timestamp;
     NSDictionary *flowShortScaleFactors = [self calculateFlowShortScaleFactorsFromResponses:responses];
-    selfReport.flow = [[flowShortScaleFactors objectForKey:@"flow"] floatValue];
-    selfReport.flowSD = [[flowShortScaleFactors objectForKey:@"flowSD"] floatValue];
-    selfReport.fluency = [[flowShortScaleFactors objectForKey:@"fluency"] floatValue];
-    selfReport.fluencySD = [[flowShortScaleFactors objectForKey:@"fluencySD"] floatValue];
-    selfReport.absorption = [[flowShortScaleFactors objectForKey:@"absorption"] floatValue];
-    selfReport.absorptionSD = [[flowShortScaleFactors objectForKey:@"absorptionSD"] floatValue];
-    selfReport.anxiety = [[flowShortScaleFactors objectForKey:@"anxiety"] floatValue];
-    selfReport.anxietySD = [[flowShortScaleFactors objectForKey:@"anxietySD"] floatValue];
-    selfReport.fit = [[flowShortScaleFactors objectForKey:@"fit"] floatValue];
-    selfReport.fitSD = [[flowShortScaleFactors objectForKey:@"fitSD"] floatValue];
+    selfReport.flow = [flowShortScaleFactors[@"flow"] floatValue];
+    selfReport.flowSD = [flowShortScaleFactors[@"flowSD"] floatValue];
+    selfReport.fluency = [flowShortScaleFactors[@"fluency"] floatValue];
+    selfReport.fluencySD = [flowShortScaleFactors[@"fluencySD"] floatValue];
+    selfReport.absorption = [flowShortScaleFactors[@"absorption"] floatValue];
+    selfReport.absorptionSD = [flowShortScaleFactors[@"absorptionSD"] floatValue];
+    selfReport.anxiety = [flowShortScaleFactors[@"anxiety"] floatValue];
+    selfReport.anxietySD = [flowShortScaleFactors[@"anxietySD"] floatValue];
+    selfReport.fit = [flowShortScaleFactors[@"fit"] floatValue];
+    selfReport.fitSD = [flowShortScaleFactors[@"fitSD"] floatValue];
     
     self.selfReportCount++;
     
@@ -553,7 +553,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 
 - (void)showSelfReport
 {
-    self.startSelfReportTimestamp = fabs([self.session.date timeIntervalSinceNow]);
+    self.startSelfReportTimestamp = fabs((self.session.date).timeIntervalSinceNow);
     AudioServicesPlaySystemSound(1008);
     [self presentViewController:[self flowShortScaleViewControllerFromStoryboard] animated:YES completion:nil];
 }
@@ -626,11 +626,11 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 
 - (NSDictionary *)calculateFlowShortScaleFactorsFromResponses:(NSArray *)responses
 {
-    NSArray *flowItems = @[[responses objectAtIndex:0], [responses objectAtIndex:1], [responses objectAtIndex:2], [responses objectAtIndex:3], [responses objectAtIndex:4], [responses objectAtIndex:5], [responses objectAtIndex:6], [responses objectAtIndex:7], [responses objectAtIndex:8], [responses objectAtIndex:9]];
-    NSArray *fluencyItems = @[[responses objectAtIndex:7], [responses objectAtIndex:6], [responses objectAtIndex:8], [responses objectAtIndex:3], [responses objectAtIndex:4], [responses objectAtIndex:1]];
-    NSArray *absorptionItems = @[[responses objectAtIndex:5], [responses objectAtIndex:0], [responses objectAtIndex:9], [responses objectAtIndex:2]];
-    NSArray *anxietyItems = @[[responses objectAtIndex:10], [responses objectAtIndex:11], [responses objectAtIndex:12]];
-    NSArray *fitItems = @[[responses objectAtIndex:13], [responses objectAtIndex:14], [responses objectAtIndex:15]];
+    NSArray *flowItems = @[responses[0], responses[1], responses[2], responses[3], responses[4], responses[5], responses[6], responses[7], responses[8], responses[9]];
+    NSArray *fluencyItems = @[responses[7], responses[6], responses[8], responses[3], responses[4], responses[1]];
+    NSArray *absorptionItems = @[responses[5], responses[0], responses[9], responses[2]];
+    NSArray *anxietyItems = @[responses[10], responses[11], responses[12]];
+    NSArray *fitItems = @[responses[13], responses[14], responses[15]];
     
     
     return @{@"flow" : [self meanFromNumbers:flowItems], @"flowSD" : [self sdFromNumbers:flowItems], @"fluency" : [self meanFromNumbers:fluencyItems], @"fluencySD" : [self sdFromNumbers:fluencyItems], @"absorption" : [self meanFromNumbers:absorptionItems], @"absorptionSD" : [self sdFromNumbers:flowItems], @"anxiety" : [self meanFromNumbers:anxietyItems], @"anxietySD" : [self sdFromNumbers:anxietyItems], @"fit" : [self meanFromNumbers:fitItems], @"fitSD" : [self sdFromNumbers:fitItems]};
@@ -650,8 +650,8 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 
 - (NSTimeInterval)timeToNextSelfReport
 {
-    NSTimeInterval time = [[self.sessionData[2][1] objectForKey:kValueKey] doubleValue];
-    NSTimeInterval variability = random() % ((int)([[self.sessionData[2][2] objectForKey:kValueKey] doubleValue]) / 2);
+    NSTimeInterval time = [(self.sessionData[2][1])[kValueKey] doubleValue];
+    NSTimeInterval variability = random() % ((int)([(self.sessionData[2][2])[kValueKey] doubleValue]) / 2);
     if(random() % 2 == 0) {
         return time + variability;
     } else {
@@ -667,7 +667,7 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
            fromLocation:(CLLocation *)oldLocation
 {
     if (self.isCollecting) {
-        NSString *query = [NSString stringWithFormat:@"INSERT INTO ZLOCATIONRECORD VALUES(NULL, 3, 1, %ld, %d, %f, %f, %f, %f, %f, %f, %f, %f)", (long)newLocation.floor.level, self.sessionPK, newLocation.altitude, newLocation.course, [newLocation.timestamp timeIntervalSinceReferenceDate], newLocation.horizontalAccuracy, newLocation.coordinate.latitude, newLocation.coordinate.longitude, newLocation.speed, newLocation.verticalAccuracy];
+        NSString *query = [NSString stringWithFormat:@"INSERT INTO ZLOCATIONRECORD VALUES(NULL, 3, 1, %ld, %d, %f, %f, %f, %f, %f, %f, %f, %f)", (long)newLocation.floor.level, self.sessionPK, newLocation.altitude, newLocation.course, (newLocation.timestamp).timeIntervalSinceReferenceDate, newLocation.horizontalAccuracy, newLocation.coordinate.latitude, newLocation.coordinate.longitude, newLocation.speed, newLocation.verticalAccuracy];
         
         [self.dbManager executeQuery:query];
     }

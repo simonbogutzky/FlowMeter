@@ -33,7 +33,7 @@
 
 - (AppDelegate *)appDelegate
 {
-    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
 - (NSFetchedResultsController *)fetchedResultsController
@@ -45,10 +45,10 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:self.appDelegate.managedObjectContext];
-    [fetchRequest setEntity:entity];
+    fetchRequest.entity = entity;
     
     // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
+    fetchRequest.fetchBatchSize = 20;
     
     // Edit the sort key as appropriate.
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
@@ -56,9 +56,9 @@
     
     // Specify criteria for filtering which objects to fetch
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date != nil"];
-    [fetchRequest setPredicate:predicate];
+    fetchRequest.predicate = predicate;
     
-    [fetchRequest setSortDescriptors:sortDescriptors];
+    fetchRequest.sortDescriptors = sortDescriptors;
     
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.appDelegate.managedObjectContext sectionNameKeyPath:@"sectionTitle" cacheName:nil];
     aFetchedResultsController.delegate = self;
@@ -68,7 +68,7 @@
     if (![self.fetchedResultsController performFetch:&error]) {
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
         abort();
     }
     
@@ -92,7 +92,7 @@
     if (dateFormatterDay == nil) {
         dateFormatterDay = [[NSDateFormatter alloc] init];
         NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"EEEE" options:0 locale:[NSLocale currentLocale]];
-        [dateFormatterDay setDateFormat:formatString];
+        dateFormatterDay.dateFormat = formatString;
     }
     return dateFormatterDay;
 }
@@ -130,7 +130,7 @@
         NSError *error = nil;
         if (![self.fetchedResultsController performFetch:&error])
         {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            NSLog(@"Unresolved error %@, %@", error, error.userInfo);
             abort();
         }
         [self.tableView reloadData];
@@ -147,9 +147,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Show Session Details"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        Session *session = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [(SessionDetailViewController *)[segue destinationViewController] setSession:session];
+        NSIndexPath *indexPath = (self.tableView).indexPathForSelectedRow;
+        Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        ((SessionDetailViewController *)segue.destinationViewController).session = session;
     }
 }
 
@@ -172,7 +172,7 @@
 {
     // Open a dialog with just an OK button.
     NSString *actionTitle;
-    if (([[self.tableView indexPathsForSelectedRows] count] == 1)) {
+    if (((self.tableView).indexPathsForSelectedRows.count == 1)) {
         actionTitle = NSLocalizedString(@"Bist du sicher, dass du diese Flow-Messung entfernen willst?", @"");
     }
     else
@@ -200,25 +200,25 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+    dateFormatter.dateFormat = @"yyyy/MM/dd";
     NSDate *date = [dateFormatter dateFromString:[self tableView:tableView titleForHeaderInSection:section]];
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 24)];
     
     UILabel *labelDay = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, (tableView.frame.size.width / 2) - 10, 24)];
-    [labelDay setFont:[UIFont boldSystemFontOfSize:12]];
-    [labelDay setText:[self.dateFormatterDay stringFromDate:date]];
-    [labelDay setTextColor:[UIColor colorWithRed:166/255.0 green:170/255.0 blue:169/255.0 alpha:1.0]];
+    labelDay.font = [UIFont boldSystemFontOfSize:12];
+    labelDay.text = [self.dateFormatterDay stringFromDate:date];
+    labelDay.textColor = [UIColor colorWithRed:166/255.0 green:170/255.0 blue:169/255.0 alpha:1.0];
     [view addSubview:labelDay];
     
     UILabel *labelDate = [[UILabel alloc] initWithFrame:CGRectMake(tableView.frame.size.width / 2, 0, (tableView.frame.size.width / 2) - 10, 24)];
-    [labelDate setFont:[UIFont boldSystemFontOfSize:12]];
-    [labelDate setText:[self.dateFormatter stringFromDate:date]];
-    [labelDate setTextColor:[UIColor colorWithRed:166/255.0 green:170/255.0 blue:169/255.0 alpha:1.0]];
-    [labelDate setTextAlignment:NSTextAlignmentRight];
+    labelDate.font = [UIFont boldSystemFontOfSize:12];
+    labelDate.text = [self.dateFormatter stringFromDate:date];
+    labelDate.textColor = [UIColor colorWithRed:166/255.0 green:170/255.0 blue:169/255.0 alpha:1.0];
+    labelDate.textAlignment = NSTextAlignmentRight;
     [view addSubview:labelDate];
     
-    [view setBackgroundColor:[UIColor colorWithRed:236/255.0 green:241/255.0 blue:244/255.0 alpha:1.0]];
+    view.backgroundColor = [UIColor colorWithRed:236/255.0 green:241/255.0 blue:244/255.0 alpha:1.0];
     
     labelDate.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     labelDay.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
@@ -258,18 +258,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[self.fetchedResultsController sections] count];
+    return (self.fetchedResultsController).sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
+    id <NSFetchedResultsSectionInfo> sectionInfo = (self.fetchedResultsController).sections[section];
+    return sectionInfo.numberOfObjects;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[[self.fetchedResultsController sections] objectAtIndex:section] name];
+    return (self.fetchedResultsController).sections[section].name;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -287,14 +287,14 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+        NSManagedObjectContext *context = (self.fetchedResultsController).managedObjectContext;
         [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
         
         NSError *error = nil;
         if (![context save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            NSLog(@"Unresolved error %@, %@", error, error.userInfo);
             abort();
         }
     }
@@ -378,10 +378,10 @@
 
 - (void)deleteData
 {
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSManagedObjectContext *context = (self.fetchedResultsController).managedObjectContext;
     
     // Delete what the user selected.
-    NSArray *selectedRows = [self.tableView indexPathsForSelectedRows];
+    NSArray *selectedRows = (self.tableView).indexPathsForSelectedRows;
     BOOL deleteSpecificRows = selectedRows.count > 0;
     if (deleteSpecificRows)
     {
@@ -392,7 +392,7 @@
     }
     else
     {
-        for (NSManagedObject *objects in [self.fetchedResultsController fetchedObjects]) {
+        for (NSManagedObject *objects in (self.fetchedResultsController).fetchedObjects) {
             [context deleteObject:objects];
         }
     }
@@ -401,7 +401,7 @@
     if (![context save:&error]) {
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
         abort();
     }
 }
@@ -414,7 +414,7 @@
     Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     UILabel *labelFlowScore = (UILabel *)[cell viewWithTag:100];
-    labelFlowScore.text = [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:session.averageFlow]];
+    labelFlowScore.text = [self.numberFormatter stringFromNumber:@(session.averageFlow)];
     
     UILabel *labelUsername = (UILabel *)[cell viewWithTag:101];
     labelUsername.text = [NSString stringWithFormat:@"%@ %@", session.user.firstName, session.user.lastName];
@@ -462,7 +462,7 @@
         self.navigationItem.leftBarButtonItem = nil;
         
         // Show the edit button, but disable the edit button if there's nothing to edit.
-        if ([[self.fetchedResultsController sections] count] > 0)
+        if ((self.fetchedResultsController).sections.count > 0)
         {
             self.editButton.enabled = YES;
         }
@@ -477,11 +477,11 @@
 - (void)updateDeleteButtonTitle
 {
     // Update the delete button's title, based on how many items are selected
-    NSArray *selectedRows = [self.tableView indexPathsForSelectedRows];
+    NSArray *selectedRows = (self.tableView).indexPathsForSelectedRows;
     
     int rowCount = 0;
-    for (id <NSFetchedResultsSectionInfo> sectionInfo in [self.fetchedResultsController sections]) {
-        rowCount += [sectionInfo numberOfObjects];
+    for (id <NSFetchedResultsSectionInfo> sectionInfo in (self.fetchedResultsController).sections) {
+        rowCount += sectionInfo.numberOfObjects;
     }
     
     BOOL allItemsAreSelected = selectedRows.count == rowCount;

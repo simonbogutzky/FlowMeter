@@ -33,7 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    _appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -59,7 +59,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.heartRateMonitorDevices count];
+    return (self.heartRateMonitorDevices).count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -70,7 +70,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        HeartRateMonitorDevice *heartRateMonitorDevice = [self.heartRateMonitorDevices objectAtIndex:indexPath.row];
+        HeartRateMonitorDevice *heartRateMonitorDevice = (self.heartRateMonitorDevices)[indexPath.row];
         [_appDelegate.heartRateMonitorManager connectHeartRateMonitorDevice:heartRateMonitorDevice];
         
     });
@@ -83,7 +83,7 @@
     static NSString *CellIdentifier = @"heartRateMonitorDeviceNameCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    HeartRateMonitorDevice *heartRateMonitorDevice = [self.heartRateMonitorDevices objectAtIndex:indexPath.row];
+    HeartRateMonitorDevice *heartRateMonitorDevice = (self.heartRateMonitorDevices)[indexPath.row];
     cell.textLabel.text = heartRateMonitorDevice.name;
     
     return cell;

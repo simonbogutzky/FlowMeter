@@ -10,7 +10,7 @@
 
 @interface Session (OutStream)
 
-- (NSArray *)writeOut;
-- (NSString *)writeOutArchive;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSArray *writeOut;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *writeOutArchive;
 
 @end

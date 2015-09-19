@@ -29,5 +29,5 @@
 @property (readonly, strong, nonatomic) NSArray *colors;
 
 - (void)saveContext;
-- (NSString *)userDirectory;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *userDirectory;
 @end

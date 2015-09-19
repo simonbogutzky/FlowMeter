@@ -58,7 +58,7 @@ static NSString *kSwitchCellID = @"switchCell";
 {
     [super viewDidAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self checkHeartRateMonitorConnection];
 }
 
@@ -90,7 +90,7 @@ static NSString *kSwitchCellID = @"switchCell";
 {
     if ([identifier isEqualToString:@"Start recording"]) {
         BOOL canStartRecording = YES;
-        if ([[self.dataArray[0][0] objectForKey:kValueKey] isEqualToString:@" "] || [[self.dataArray[0][1] objectForKey:kValueKey] isEqualToString:@" "] || [[self.dataArray[1][0] objectForKey:kValueKey] isEqualToString:@" "]) {
+        if ([(self.dataArray[0][0])[kValueKey] isEqualToString:@" "] || [(self.dataArray[0][1])[kValueKey] isEqualToString:@" "] || [(self.dataArray[1][0])[kValueKey] isEqualToString:@" "]) {
             canStartRecording = NO;
         }
         if (!canStartRecording) {
@@ -112,7 +112,7 @@ static NSString *kSwitchCellID = @"switchCell";
 - (AppDelegate *)appDelegate
 {
     if (_appDelegate == Nil) {
-        _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        _appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     }
     return _appDelegate;
 }
@@ -126,12 +126,12 @@ static NSString *kSwitchCellID = @"switchCell";
                                ];
         NSArray *section02 = @[
                                [@{kTitleKey:NSLocalizedString(@"Aktivität", @"Aktivität"), kValueKey:@" ", kEntityKey:@"Activity", kPropertyKey:@"name", kCellIDKey:kOtherCellID} mutableCopy],
-                               [@{kTitleKey:NSLocalizedString(@"Countdown", @"Countdown"), kValueKey:[NSNumber numberWithDouble:5.0], kUnitKey:NSLocalizedString(@"s", @"s"), kCellIDKey:kOtherCellID} mutableCopy]
+                               [@{kTitleKey:NSLocalizedString(@"Countdown", @"Countdown"), kValueKey:@5.0, kUnitKey:NSLocalizedString(@"s", @"s"), kCellIDKey:kOtherCellID} mutableCopy]
                                ];
         NSArray *section03 = @[
                                [@{kTitleKey:NSLocalizedString(@"Mehrfach befragen", @"Mehrfach befragen"), kValueKey:@0, kCellIDKey:kOptionSwitchCellID} mutableCopy],
-                               [@{kTitleKey:NSLocalizedString(@"Zeitintervall", @"Zeitintervall"), kValueKey:[NSNumber numberWithDouble:2 * 60.0 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy],
-                               [@{kTitleKey:NSLocalizedString(@"Variablität", @"Variablität"), kValueKey:[NSNumber numberWithDouble:1 * 60.0 * 60.0], kCellIDKey:kDateTimeCellID} mutableCopy]
+                               [@{kTitleKey:NSLocalizedString(@"Zeitintervall", @"Zeitintervall"), kValueKey:@(2 * 60.0 * 60.0), kCellIDKey:kDateTimeCellID} mutableCopy],
+                               [@{kTitleKey:NSLocalizedString(@"Variablität", @"Variablität"), kValueKey:@(1 * 60.0 * 60.0), kCellIDKey:kDateTimeCellID} mutableCopy]
                                ];
         NSArray *section04 = @[
                                [@{kTitleKey:NSLocalizedString(@"GPS-Positionen", @"GPS-Positionen"), kValueKey:@0, kCellIDKey:kSwitchCellID} mutableCopy],
@@ -181,8 +181,8 @@ static NSString *kSwitchCellID = @"switchCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([[self.dataArray[section][0] objectForKey:kCellIDKey] isEqualToString:kOptionSwitchCellID]) {
-        if (![[self.dataArray[section][0] objectForKey:kValueKey] boolValue]) {
+    if ([(self.dataArray[section][0])[kCellIDKey] isEqualToString:kOptionSwitchCellID]) {
+        if (![(self.dataArray[section][0])[kValueKey] boolValue]) {
             return 1;
         }
     }
@@ -209,7 +209,7 @@ static NSString *kSwitchCellID = @"switchCell";
     }
     NSDictionary *dataItem = self.dataArray[indexPath.section][row];
     
-    NSString *cellID = [dataItem objectForKey:kCellIDKey];
+    NSString *cellID = dataItem[kCellIDKey];
     cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
     // proceed to configure our cell
@@ -337,7 +337,7 @@ static NSString *kSwitchCellID = @"switchCell";
     
     // update our data model
     NSMutableDictionary *dataItem = self.dataArray[targetedCellIndexPath.section][targetedCellIndexPath.row];
-    [dataItem setValue:[NSNumber numberWithDouble:targetedDatePicker.countDownDuration] forKey:kValueKey];
+    [dataItem setValue:@(targetedDatePicker.countDownDuration) forKey:kValueKey];
     
     // update the cell's date string
     cell.detailTextLabel.text = [self stringFromTimeInterval:targetedDatePicker.countDownDuration];
@@ -350,10 +350,10 @@ static NSString *kSwitchCellID = @"switchCell";
     // User will update interval
     if (indexPath.section == 2 && indexPath.row == 1) {
         double variabilityLimit = value / 2.0;
-        double variability = [[self.dataArray[2][2] objectForKey:kValueKey] doubleValue];
+        double variability = [(self.dataArray[2][2])[kValueKey] doubleValue];
         
         if (variabilityLimit < variability) {
-            [self.dataArray[2][2] setObject:[NSNumber numberWithDouble:variabilityLimit] forKey:kValueKey];
+            (self.dataArray[2][2])[kValueKey] = @(variabilityLimit);
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:2]];
             cell.detailTextLabel.text = [self stringFromTimeInterval:variabilityLimit];
         }
@@ -361,11 +361,11 @@ static NSString *kSwitchCellID = @"switchCell";
     
     // User will update variability
     if (indexPath.section == 2 && indexPath.row == 2) {
-        double variabilityLimit = [[self.dataArray[2][1] objectForKey:kValueKey] doubleValue] / 2.0;
+        double variabilityLimit = [(self.dataArray[2][1])[kValueKey] doubleValue] / 2.0;
         double variability = value;
         
         if (variabilityLimit < variability) {
-            [self.dataArray[2][2] setObject:[NSNumber numberWithDouble:variabilityLimit] forKey:kValueKey];
+            (self.dataArray[2][2])[kValueKey] = @(variabilityLimit);
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
             cell.detailTextLabel.text = [self stringFromTimeInterval:variabilityLimit];
             
@@ -389,9 +389,9 @@ static NSString *kSwitchCellID = @"switchCell";
     
     // update our data model
     NSMutableDictionary *dataItem = self.dataArray[indexPath.section][indexPath.row];
-    if ([[dataItem objectForKey:kValueKey] boolValue] != sender.on) {
+    if ([dataItem[kValueKey] boolValue] != sender.on) {
        
-        [dataItem setValue:[NSNumber numberWithBool:sender.on] forKey:kValueKey];
+        [dataItem setValue:@(sender.on) forKey:kValueKey];
         
         if ([cell.reuseIdentifier isEqual:kOptionSwitchCellID]) {
             NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
@@ -454,7 +454,7 @@ static NSString *kSwitchCellID = @"switchCell";
             // we found a UIDatePicker in this cell, so update it's date value
             //
             NSDictionary *dataItem = self.dataArray[self.datePickerIndexPath.section][self.datePickerIndexPath.row - 1];
-            [targetedDatePicker setCountDownDuration:[[dataItem valueForKey:kValueKey] doubleValue]];
+            targetedDatePicker.countDownDuration = [[dataItem valueForKey:kValueKey] doubleValue];
         }
     }
 }
@@ -535,7 +535,7 @@ didDiscoverHeartrateMonitorDevices:(NSArray *)heartRateMonitorDevices
     
     if (self.heartRateMonitorDevices.count > 0) {
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            HeartRateMonitorDevice *heartRateMonitorDevice = [self.heartRateMonitorDevices lastObject];
+            HeartRateMonitorDevice *heartRateMonitorDevice = (self.heartRateMonitorDevices).lastObject;
             [self.appDelegate.heartRateMonitorManager connectHeartRateMonitorDevice:heartRateMonitorDevice];
         });
     }

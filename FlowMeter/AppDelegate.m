@@ -78,17 +78,17 @@
     [DBSession setSharedSession:dbSession];
     
     // Global apperance
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
     [[UITabBar appearance] setTintColor:UIColorFromRGB(0x1D70B7)];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     //
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-    [tabBarController setSelectedIndex:1];
+    tabBarController.selectedIndex = 1;
     tabBarController.tabBar.translucent = NO;
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     [self initAVPlayer];
     
@@ -137,7 +137,7 @@
 
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "de.bogutzky.FlowMeter" in the application's documents directory.
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    return [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].lastObject;
 }
 
 - (NSManagedObjectModel *)managedObjectModel {
@@ -158,13 +158,12 @@
     
     // Create the coordinator and store
     
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"FlowMeter.sqlite"];
     NSError *error = nil;
     
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption: @YES,
+                             NSInferMappingModelAutomaticallyOption: @YES};
     
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
@@ -176,7 +175,7 @@
         error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
         // Replace this with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
         abort();
     }
     
@@ -190,12 +189,12 @@
         return _managedObjectContext;
     }
     
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    NSPersistentStoreCoordinator *coordinator = self.persistentStoreCoordinator;
     if (!coordinator) {
         return nil;
     }
     _managedObjectContext = [[NSManagedObjectContext alloc] init];
-    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    _managedObjectContext.persistentStoreCoordinator = coordinator;
     _managedObjectContext.undoManager = nil;
     return _managedObjectContext;
 }
@@ -206,10 +205,10 @@
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
         NSError *error = nil;
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+        if (managedObjectContext.hasChanges && ![managedObjectContext save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            NSLog(@"Unresolved error %@, %@", error, error.userInfo);
             abort();
         }
     }
@@ -231,10 +230,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playerItemDidReachEnd:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
-                                               object:[self.player currentItem]];
+                                               object:(self.player).currentItem];
     
     void (^observerBlock)(CMTime time) = ^(CMTime time) {
-        if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
+        if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
             //NSLog(@"App is backgrounded.");
         }
     };
@@ -246,7 +245,7 @@
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
-    AVPlayerItem *playerItem = [notification object];
+    AVPlayerItem *playerItem = notification.object;
     [playerItem seekToTime:kCMTimeZero];
 }
 

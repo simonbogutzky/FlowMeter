@@ -24,21 +24,21 @@
 {
     // Load object pk
     NSManagedObjectID *sessionID = self.objectID;
-    int sessionPK = [[[[[sessionID URIRepresentation] absoluteString] lastPathComponent] substringFromIndex:1] intValue];
+    int sessionPK = [[sessionID URIRepresentation].absoluteString.lastPathComponent substringFromIndex:1].intValue;
     
     // Initialize the dbManager object
     DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"FlowMeter.sqlite"];
     
     // Create date prefix
     NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
-    [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
+    dateTimeFormatter.dateFormat = @"yyyy-MM-dd--HH-mm-ss";
     
     // Array to store filenames
     NSMutableArray *filenames = [[NSMutableArray alloc] initWithCapacity:5];
     
     // Query self reports
     NSString *query = [NSString stringWithFormat:@"SELECT printf(\"%%.3f\",ZTIMESTAMP),printf(\"%%.3f\",ZDURATION),printf(\"%%.3f\",ZFLOW),printf(\"%%.3f\",ZFLOWSD),printf(\"%%.3f\",ZFLUENCY),printf(\"%%.3f\",ZFLUENCYSD),printf(\"%%.3f\",ZABSORPTION),printf(\"%%.3f\",ZABSORPTIONSD),printf(\"%%.3f\",ZANXIETY),printf(\"%%.3f\",ZANXIETYSD),printf(\"%%.3f\",ZFIT),printf(\"%%.3f\",ZFITSD) FROM ZSELFREPORT WHERE ZSESSION = %d ORDER BY ZTIMESTAMP ASC", sessionPK];
-    NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]], @"questionaire.txt"];
+    NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:(self.user.lastName).lowercaseString], [self removeSpecialCharactersFromString:(self.user.firstName).lowercaseString], [self removeSpecialCharactersFromString:(self.activity.name).lowercaseString], @"questionaire.txt"];
     NSString *header = [NSString stringWithFormat:@"%@%@", [self fileHeader], [SelfReport csvHeader]];
     filename = [dbManager writeCSVFromQuery:query inFileWithFilename:filename andHeader:header];
     if (filename != nil) {
@@ -47,7 +47,7 @@
     
     // Query heart rate record
     query = [NSString stringWithFormat:@"SELECT printf(\"%%.3f\",ZTIMESTAMP),printf(\"%%.3f\",ZRRINTERVAL) FROM ZHEARTRATERECORD WHERE ZSESSION = %d ORDER BY ZTIMESTAMP ASC", sessionPK];
-    filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]], @"heart.txt"];
+    filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:(self.user.lastName).lowercaseString], [self removeSpecialCharactersFromString:(self.user.firstName).lowercaseString], [self removeSpecialCharactersFromString:(self.activity.name).lowercaseString], @"heart.txt"];
     header = [NSString stringWithFormat:@"%@%@", [self fileHeader], [HeartRateRecord csvHeader]];
     filename = [dbManager writeCSVFromQuery:query inFileWithFilename:filename andHeader:header];
     if (filename != nil) {
@@ -56,7 +56,7 @@
 
     // Query motion records
     query = [NSString stringWithFormat:@"SELECT printf(\"%%.3f\",ZTIMESTAMP),printf(\"%%.3f\",ZUSERACCELERATIONX),printf(\"%%.3f\",ZUSERACCELERATIONY),printf(\"%%.3f\",ZUSERACCELERATIONZ),printf(\"%%.3f\",ZGRAVITYX),printf(\"%%.3f\",ZGRAVITYY),printf(\"%%.3f\",ZGRAVITYZ),printf(\"%%.3f\",ZROTATIONRATEX),printf(\"%%.3f\",ZROTATIONRATEY),printf(\"%%.3f\",ZROTATIONRATEZ,printf(\"%%.3f\",ZATTITUDEPITCH),printf(\"%%.3f\",ZATTITUDEROLL),printf(\"%%.3f\",ZATTITUDEYAW)) FROM ZMOTIONRECORD WHERE ZSESSION = %d ORDER BY ZTIMESTAMP ASC", sessionPK];
-    filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]], @"motion.txt"];
+    filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:(self.user.lastName).lowercaseString], [self removeSpecialCharactersFromString:(self.user.firstName).lowercaseString], [self removeSpecialCharactersFromString:(self.activity.name).lowercaseString], @"motion.txt"];
     header = [NSString stringWithFormat:@"%@%@", [self fileHeader], [MotionRecord csvHeader]];
     filename = [dbManager writeCSVFromQuery:query inFileWithFilename:filename andHeader:header];
     if (filename != nil) {
@@ -144,8 +144,8 @@
 {
     // Write in file with filename
     NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
-    [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
-    NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]]];
+    dateTimeFormatter.dateFormat = @"yyyy-MM-dd--HH-mm-ss";
+    NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:(self.user.lastName).lowercaseString], [self removeSpecialCharactersFromString:(self.user.firstName).lowercaseString], [self removeSpecialCharactersFromString:(self.activity.name).lowercaseString]];
     
     NSString *achiveName = [NSString stringWithFormat:@"%@.zip", filename];
     NSString *achivePath = [self.userDirectory stringByAppendingPathComponent:achiveName];
@@ -228,7 +228,7 @@
     string = [string stringByReplacingOccurrencesOfString:@"ß" withString:@"ss"];
     string = [string stringByReplacingOccurrencesOfString:@" " withString:@"-"];
     
-    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-"] invertedSet];
+    NSCharacterSet *notAllowedChars = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-"].invertedSet;
     return [[string componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
 }
 
@@ -236,11 +236,11 @@
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
+    fetchRequest.entity = entity;
     
     // Specify criteria for filtering which objects to fetch
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"session == %@", self];
-    [fetchRequest setPredicate:predicate];
+    fetchRequest.predicate = predicate;
     
     NSError *error = nil;
     NSInteger fetchRequestCount = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
@@ -249,8 +249,8 @@
         
         // Create file name
         NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
-        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
-        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]], filenameSuffix];
+        dateTimeFormatter.dateFormat = @"yyyy-MM-dd--HH-mm-ss";
+        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:(self.user.lastName).lowercaseString], [self removeSpecialCharactersFromString:(self.user.firstName).lowercaseString], [self removeSpecialCharactersFromString:(self.activity.name).lowercaseString], filenameSuffix];
         
         // Create header data object
         NSMutableData *header = [NSMutableData dataWithCapacity:0];
@@ -260,7 +260,7 @@
         
         // Fetch data sequential
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortDescriptorKey ascending:YES];
-        [fetchRequest setSortDescriptors:@[sortDescriptor]];
+        fetchRequest.sortDescriptors = @[sortDescriptor];
         
         NSInteger fetchLimit = 10000;
         NSInteger fetchOffset = 0;
@@ -300,11 +300,11 @@
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
+    fetchRequest.entity = entity;
     
     // Specify criteria for filtering which objects to fetch
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"session == %@", self];
-    [fetchRequest setPredicate:predicate];
+    fetchRequest.predicate = predicate;
     
     NSError *error = nil;
     NSInteger fetchRequestCount = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
@@ -313,12 +313,12 @@
         
         // Create file name
         NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
-        [dateTimeFormatter setDateFormat:@"yyyy-MM-dd--HH-mm-ss"];
-        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:[self.user.lastName lowercaseString]], [self removeSpecialCharactersFromString:[self.user.firstName lowercaseString]], [self removeSpecialCharactersFromString:[self.activity.name lowercaseString]], filenameSuffix];
+        dateTimeFormatter.dateFormat = @"yyyy-MM-dd--HH-mm-ss";
+        NSString *filename = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",[dateTimeFormatter stringFromDate:self.date], [self removeSpecialCharactersFromString:(self.user.lastName).lowercaseString], [self removeSpecialCharactersFromString:(self.user.firstName).lowercaseString], [self removeSpecialCharactersFromString:(self.activity.name).lowercaseString], filenameSuffix];
         
         // Fetch data sequential
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortDescriptorKey ascending:YES];
-        [fetchRequest setSortDescriptors:@[sortDescriptor]];
+        fetchRequest.sortDescriptors = @[sortDescriptor];
         
         NSInteger fetchLimit = 10000;
         NSInteger fetchOffset = 0;
@@ -345,7 +345,7 @@
                 }
                 fetchOffset += fetchLimit;
                 if (fetchOffset > fetchRequestCount) {
-                    [data appendData:[[[fetchedObjects lastObject] kmlTimelineFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+                    [data appendData:[[fetchedObjects.lastObject kmlTimelineFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
                 }
                 [self writeData:data withFilename:filename append:YES];
                 data = nil;
@@ -377,8 +377,8 @@
                 }
                 fetchOffset += fetchLimit;
                 if (fetchOffset > fetchRequestCount) {
-                    [data appendData:[[[fetchedObjects lastObject] kmlPathFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-                    [data appendData:[[[fetchedObjects lastObject] kmlFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+                    [data appendData:[[fetchedObjects.lastObject kmlPathFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
+                    [data appendData:[[fetchedObjects.lastObject kmlFooter] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
                 }
                 [self writeData:data withFilename:filename append:YES];
                 data = nil;

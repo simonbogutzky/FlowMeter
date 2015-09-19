@@ -10,16 +10,16 @@
 
 @interface LocationRecord (Description)
 
-- (NSString *)csvDescription;
-- (NSString *)csvHeader;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *csvDescription;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *csvHeader;
 
-- (NSString *)kmlPathHeader;
-- (NSString *)kmlTimelineHeader;
-- (NSString *)kmlPathFooter;
-- (NSString *)kmlTimelineFooter;
-- (NSString *)kmlPathDescription;
-- (NSString *)kmlTimelineDescription;
-- (NSString *)kmlHeader;
-- (NSString *)kmlFooter;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *kmlPathHeader;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *kmlTimelineHeader;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *kmlPathFooter;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *kmlTimelineFooter;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *kmlPathDescription;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *kmlTimelineDescription;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *kmlHeader;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *kmlFooter;
 
 @end

@@ -128,7 +128,7 @@
     static NSDateFormatter *dateFormatter = nil;
     if (dateFormatter == nil) {
         dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+        dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
     }
     return dateFormatter;
 }
@@ -138,7 +138,7 @@
     static NSDateFormatter *dateFormatter = nil;
     if (dateFormatter == nil) {
         dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     }
     return dateFormatter;
 }

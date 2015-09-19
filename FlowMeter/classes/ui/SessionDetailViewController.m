@@ -46,7 +46,7 @@
 
 - (AppDelegate *)appDelegate
 {
-    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
 - (NSArray *)dataSrc
@@ -131,9 +131,9 @@
         self.labelDate.text = [NSString stringWithFormat:@"%@ - %@", [dateFormatter stringFromDate:self.session.date], [timeFormatter stringFromDate:self.session.date]];
         
         NSIndexPath *selectedIndexPath = self.tableView.indexPathsForSelectedRows[0];
-        self.labelDisplayedProperty.text = [self.dataSrc[selectedIndexPath.row] objectForKey:kTitleKey];
-        NSNumber *number = [self.session valueForKey:[NSString stringWithFormat:@"%@%@", @"average", [[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey] capitalizedString]]];
-        self.labelDisplayedPropertyAverage.text = [NSString stringWithFormat:@"%.1f ⍉", [number doubleValue]];
+        self.labelDisplayedProperty.text = (self.dataSrc[selectedIndexPath.row])[kTitleKey];
+        NSNumber *number = [self.session valueForKey:[NSString stringWithFormat:@"%@%@", @"average", [(self.dataSrc[selectedIndexPath.row])[kValueKey] capitalizedString]]];
+        self.labelDisplayedPropertyAverage.text = [NSString stringWithFormat:@"%.1f ⍉", number.doubleValue];
         
         
         self.labelSelfReportCount.text = [NSString stringWithFormat:@"%d", self.session.selfReportCount];
@@ -142,14 +142,14 @@
         self.labelAverageHeartrate.text = [NSString stringWithFormat:@"%.0f ⍉", self.session.averageHeartrate];
         
         NSSortDescriptor *timestampDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
-        NSArray *managedObjects = [[self.session valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kEntityKey]] sortedArrayUsingDescriptors:@[timestampDescriptor]];
+        NSArray *managedObjects = [[self.session valueForKey:(self.dataSrc[selectedIndexPath.row])[kEntityKey]] sortedArrayUsingDescriptors:@[timestampDescriptor]];
         
-        if ([@"heartRate" isEqualToString:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]) {
+        if ([@"heartRate" isEqualToString:(self.dataSrc[selectedIndexPath.row])[kValueKey]]) {
             
             self.yValues = [@[] mutableCopy];
             self.xLabels = [@[] mutableCopy];
             
-            NSTimeInterval timestamp = [[[managedObjects firstObject] valueForKey:@"timestamp"] doubleValue];
+            NSTimeInterval timestamp = [[managedObjects.firstObject valueForKey:@"timestamp"] doubleValue];
             NSTimeInterval nextTimestamp = timestamp + 60;
             
             NSMutableArray *yValues = [@[] mutableCopy];
@@ -157,27 +157,27 @@
             for (NSManagedObject *managedObject in managedObjects) {
                 
                 timestamp  = [[managedObject valueForKey:@"timestamp"] doubleValue];
-                [yValues addObject:[managedObject valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]];
+                [yValues addObject:[managedObject valueForKey:(self.dataSrc[selectedIndexPath.row])[kValueKey]]];
                 
                 if (nextTimestamp <= timestamp) {
                     
-                    NSNumber *yValue = [NSNumber numberWithInt:0];
+                    NSNumber *yValue = @0;
                     if (yValues.count > 0) {
                         NSExpression *expression = [NSExpression expressionForFunction:@"median:" arguments:@[[NSExpression expressionForConstantValue:yValues]]];
                         yValue = [expression expressionValueWithObject:nil context:nil];
                     }
                     [self.yValues addObject:yValue];
-                    [self.xLabels addObject:[NSNumber numberWithDouble:timestamp]];
+                    [self.xLabels addObject:@(timestamp)];
                     
                     yValues = [@[] mutableCopy];
                     nextTimestamp = timestamp + 60;
                 }
             }
         } else {
-            self.yValues = [NSMutableArray arrayWithCapacity:[managedObjects count]];
-            self.xLabels = [NSMutableArray arrayWithCapacity:[managedObjects count]];
+            self.yValues = [NSMutableArray arrayWithCapacity:managedObjects.count];
+            self.xLabels = [NSMutableArray arrayWithCapacity:managedObjects.count];
             for (NSManagedObject *managedObject in managedObjects) {
-                [self.yValues addObject:[managedObject valueForKey:[self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey]]];
+                [self.yValues addObject:[managedObject valueForKey:(self.dataSrc[selectedIndexPath.row])[kValueKey]]];
                 [self.xLabels addObject:[managedObject valueForKey:@"timestamp"]];
             }
         }
@@ -189,10 +189,10 @@
             self.lineGraphView.colorLine = color;
             self.lineGraphView.colorPoint = color;
             
-            NSString *propertyName = [self.dataSrc[selectedIndexPath.row] objectForKey:kValueKey];
+            NSString *propertyName = (self.dataSrc[selectedIndexPath.row])[kValueKey];
             if (![@"heartRate" isEqualToString:propertyName]) {
-                self.lineGraphView.yAxisMin = [NSNumber numberWithInt:2];
-                self.lineGraphView.yAxisMax = [NSNumber numberWithInt:7];
+                self.lineGraphView.yAxisMin = @2;
+                self.lineGraphView.yAxisMax = @7;
                 self.lineGraphView.paddingMax = 40;
                 self.lineGraphView.enableBezierCurve = NO;
             } else {
@@ -411,7 +411,7 @@
 
 - (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph
 {
-    return [self.yValues count]; // Number of points in the graph.
+    return (self.yValues).count; // Number of points in the graph.
 }
 
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index
@@ -426,12 +426,12 @@
 
 - (CGFloat)maxValueForLineGraph:(BEMSimpleLineGraphView *)graph
 {
-    return graph.yAxisMax == nil ? [[self calculateMaximumPointValue] floatValue] : [graph.yAxisMax floatValue];
+    return graph.yAxisMax == nil ? [self calculateMaximumPointValue].floatValue : (graph.yAxisMax).floatValue;
 }
 
 - (CGFloat)minValueForLineGraph:(BEMSimpleLineGraphView *)graph
 {
-    return graph.yAxisMin == nil ? [[self calculateMinimumPointValue] floatValue] : [graph.yAxisMin floatValue];
+    return graph.yAxisMin == nil ? [self calculateMinimumPointValue].floatValue : (graph.yAxisMin).floatValue;
 }
 
 - (NSInteger)numberOfYAxisLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph
@@ -474,7 +474,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.dataSrc count];
+    return (self.dataSrc).count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -483,10 +483,10 @@
     NSString *cellID = @"Property Cell";
     cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
-    cell.labelPropertyName.text = [self.dataSrc[indexPath.row] objectForKey:kTitleKey];
-    NSNumber *number = [self.session valueForKey:[NSString stringWithFormat:@"%@%@", @"average", [[self.dataSrc[indexPath.row] objectForKey:kValueKey] capitalizedString]]];
+    cell.labelPropertyName.text = (self.dataSrc[indexPath.row])[kTitleKey];
+    NSNumber *number = [self.session valueForKey:[NSString stringWithFormat:@"%@%@", @"average", [(self.dataSrc[indexPath.row])[kValueKey] capitalizedString]]];
     
-    cell.labelPropertyValue.text = [NSString stringWithFormat:@"%.1f ⍉", [number doubleValue]];
+    cell.labelPropertyValue.text = [NSString stringWithFormat:@"%.1f ⍉", number.doubleValue];
     
     cell.color = self.appDelegate.colors[indexPath.row % (self.appDelegate.colors.count + 1)];
     
