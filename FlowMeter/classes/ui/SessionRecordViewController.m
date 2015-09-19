@@ -60,10 +60,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *firstUnitStopWatchLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondUnitStopWatchLabel;
 @property (weak, nonatomic) IBOutlet UILabel *selfReportCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *skinTempaturLabel;
+@property (weak, nonatomic) IBOutlet UILabel *skinTemperatureLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postureLabel;
 @property (weak, nonatomic) IBOutlet UILabel *activityLevelLabel;
 @property (weak, nonatomic) IBOutlet UILabel *breathRateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *activityLevelSignLabel;
+@property (weak, nonatomic) IBOutlet UILabel *postureSignLabel;
+@property (weak, nonatomic) IBOutlet UILabel *skinTemperatureSignLabel;
+@property (weak, nonatomic) IBOutlet UILabel *breathRateSignLabel;
 
 @end
 
@@ -177,9 +181,9 @@
     self.secondUnitStopWatchLabel.text = NSLocalizedString(@"S", @"Sekunden Einheit Label im SessionViewController");
     self.heartRateLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
     self.breathRateLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
-    self.skinTempaturLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
+    self.skinTemperatureLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
     self.postureLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
-    self.skinTempaturLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
+    self.skinTemperatureLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
     self.selfReportCountLabel.text = @"0";
 }
 
@@ -452,7 +456,7 @@ didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
     self.heartRateLabel.text = NSLocalizedString(@"ERR", "Fehleranzeige - HR Monitor wurde getrennt");
     self.breathRateLabel.text = NSLocalizedString(@"ERR", "Fehleranzeige - HR Monitor wurde getrennt");
     self.postureLabel.text = NSLocalizedString(@"ERR", "Fehleranzeige - HR Monitor wurde getrennt");
-    self.skinTempaturLabel.text = NSLocalizedString(@"ERR", "Fehleranzeige - HR Monitor wurde getrennt");
+    self.skinTemperatureLabel.text = NSLocalizedString(@"ERR", "Fehleranzeige - HR Monitor wurde getrennt");
     self.activityLevelLabel.text = NSLocalizedString(@"ERR", "Fehleranzeige - HR Monitor wurde getrennt");
 }
 
@@ -463,9 +467,21 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 }
 
 - (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager didReceiveBioHarnessData:(BioharnessData *)data fromHeartRateMonitorDevice:(HeartRateMonitorDevice *)device {
+    if (self.breathRateLabel.hidden) {
+        self.breathRateLabel.hidden = NO;
+        self.breathRateSignLabel.hidden = NO;
+        self.postureLabel.hidden = NO;
+        self.postureSignLabel.hidden = NO;
+        self.skinTemperatureLabel.hidden = NO;
+        self.skinTemperatureSignLabel.hidden = NO;
+        self.activityLevelLabel.hidden = NO;
+        self.activityLevelSignLabel.hidden = NO;
+    }
+    
+    
     self.breathRateLabel.text = [NSString stringWithFormat:@"%.1f", data.breathRate];
     self.postureLabel.text = [NSString stringWithFormat:@"%d", data.posture];
-    self.skinTempaturLabel.text = [NSString stringWithFormat:@"%.1f", data.skinTemperatur];
+    self.skinTemperatureLabel.text = [NSString stringWithFormat:@"%.1f", data.skinTemperature];
     self.activityLevelLabel.text = [NSString stringWithFormat:@"%.2f", data.activityLevel];
 }
 

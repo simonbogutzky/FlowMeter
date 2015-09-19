@@ -124,52 +124,46 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHd-sM-G0v">
                                 <rect key="frame" x="68" y="27" width="240" height="180"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="⌳" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPR-2x-z6H">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="⌳" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPR-2x-z6H">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                         <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMK-Ka-tCH">
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMK-Ka-tCH" userLabel="Posture Label">
                                         <rect key="frame" x="60" y="0.0" width="60" height="60"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                                         <color key="textColor" red="0.1728159215" green="0.51933166060000002" blue="0.76862745099999996" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" tag="105" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="⚡︎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUr-nn-BoH">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="105" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="⚡︎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUr-nn-BoH">
                                         <rect key="frame" x="120" y="0.0" width="60" height="60"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                         <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TuV-gR-NLI">
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TuV-gR-NLI">
                                         <rect key="frame" x="180" y="0.0" width="60" height="60"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                                         <color key="textColor" red="0.1728159215" green="0.51933166060000002" blue="0.76862745099999996" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rje-VK-wjx">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rje-VK-wjx">
                                         <rect key="frame" x="0.0" y="60" width="60" height="60"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                         <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zft-2U-BoQ">
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zft-2U-BoQ">
                                         <rect key="frame" x="60" y="60" width="60" height="60"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                                         <color key="textColor" red="0.1728159215" green="0.51933166060000002" blue="0.76862745099999996" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" tag="105" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="♒︎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZa-gl-XPF">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="105" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="♒︎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZa-gl-XPF">
                                         <rect key="frame" x="120" y="60" width="60" height="60"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                         <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="deviceRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14q-O8-j30">
-                                        <rect key="frame" x="180" y="60" width="60" height="60"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
-                                        <color key="textColor" red="0.1728159215" green="0.51933166060000002" blue="0.76862745099999996" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="✎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="744-6J-0ve">
@@ -194,6 +188,12 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                         <rect key="frame" x="180" y="120" width="60" height="60"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
                                         <color key="textColor" red="0.17281592153284672" green="0.51933166058394165" blue="0.76862745098038943" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14q-O8-j30">
+                                        <rect key="frame" x="180" y="60" width="60" height="60"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.1728159215" green="0.51933166060000002" blue="0.76862745099999996" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -243,8 +243,8 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                                     <outlet property="delegate" destination="2" id="w6v-os-nuT"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="No8-XL-3qD" userLabel="Start Countdown View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="No8-XL-3qD" userLabel="Start Countdown View">
+                                <rect key="frame" x="0.0" y="240" width="375" height="667"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfM-7K-tdj" userLabel="Start Countdown Label">
                                         <rect key="frame" x="160" y="275" width="56" height="117"/>
@@ -284,16 +284,20 @@ Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
-                        <outlet property="activityLevelLabel" destination="14q-O8-j30" id="rzo-9W-iCV"/>
-                        <outlet property="breathRateLabel" destination="Zft-2U-BoQ" id="osZ-Zn-XAS"/>
+                        <outlet property="activityLevelLabel" destination="TuV-gR-NLI" id="CsZ-Lq-yLH"/>
+                        <outlet property="activityLevelSignLabel" destination="wUr-nn-BoH" id="VYS-Ml-hEC"/>
+                        <outlet property="breathRateLabel" destination="14q-O8-j30" id="kyM-Xl-iub"/>
+                        <outlet property="breathRateSignLabel" destination="mZa-gl-XPF" id="nqA-ZO-q40"/>
                         <outlet property="countdownBackgroundView" destination="No8-XL-3qD" id="5HO-RR-bdj"/>
                         <outlet property="countdownLabel" destination="kfM-7K-tdj" id="CBw-bj-z6h"/>
                         <outlet property="firstUnitStopWatchLabel" destination="mlH-m3-f8i" id="3mf-0s-SQQ"/>
                         <outlet property="heartRateLabel" destination="uLq-37-zr6" id="kg6-ul-S1A"/>
-                        <outlet property="postureLabel" destination="TuV-gR-NLI" id="Sf0-zH-Pct"/>
+                        <outlet property="postureLabel" destination="fMK-Ka-tCH" id="OYm-qd-s17"/>
+                        <outlet property="postureSignLabel" destination="CPR-2x-z6H" id="XTu-TL-jic"/>
                         <outlet property="secondUnitStopWatchLabel" destination="Cs9-qS-JfL" id="5Hf-BT-Kfo"/>
                         <outlet property="selfReportCountLabel" destination="HbQ-sv-eTH" id="9If-xX-Fu8"/>
-                        <outlet property="skinTempaturLabel" destination="fMK-Ka-tCH" id="NDc-o5-Og3"/>
+                        <outlet property="skinTemperatureLabel" destination="Zft-2U-BoQ" id="M4w-YX-ZI1"/>
+                        <outlet property="skinTemperatureSignLabel" destination="rje-VK-wjx" id="htg-pC-nR3"/>
                         <outlet property="stopButton" destination="BVo-zC-PCh" id="WBl-1j-0bs"/>
                         <outlet property="stopWatchLabel" destination="JBd-iU-TgT" id="pAF-Qq-XWc"/>
                     </connections>
