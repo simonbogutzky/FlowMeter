@@ -99,7 +99,7 @@
         [self.locationManager stopUpdatingLocation];
     }
     
-    NSLog(@"%d", self.heartRateMonitorManager.state);
+    NSLog(@"%lu", (long)self.heartRateMonitorManager.state);
     return YES;
 }
 							
