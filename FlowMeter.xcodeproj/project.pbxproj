@@ -12,6 +12,7 @@
 		604CCD8F16A6F31000E87194 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604CCD8E16A6F31000E87194 /* UIKit.framework */; };
 		604CCD9116A6F31000E87194 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604CCD9016A6F31000E87194 /* Foundation.framework */; };
 		604CCD9316A6F31000E87194 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604CCD9216A6F31000E87194 /* CoreGraphics.framework */; };
+		608CC3B31BAD434E0032D549 /* UIFont+SystemFontOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = 608CC3B21BAD434E0032D549 /* UIFont+SystemFontOverride.m */; settings = {ASSET_TAGS = (); }; };
 		60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60AA4F7216A829100026DE8D /* CoreMotion.framework */; };
 		D310FCE51A6F9DBE008E4EE6 /* MotionRecord+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D310FCE41A6F9DBE008E4EE6 /* MotionRecord+Description.m */; };
 		D311D9161A7242F700A254DB /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D311D9141A7242F700A254DB /* LaunchViewController.m */; };
@@ -149,6 +150,8 @@
 		604CCD8E16A6F31000E87194 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		604CCD9016A6F31000E87194 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		604CCD9216A6F31000E87194 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		608CC3B11BAD434E0032D549 /* UIFont+SystemFontOverride.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+SystemFontOverride.h"; path = "classes/UIFont+SystemFontOverride.h"; sourceTree = "<group>"; };
+		608CC3B21BAD434E0032D549 /* UIFont+SystemFontOverride.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+SystemFontOverride.m"; path = "classes/UIFont+SystemFontOverride.m"; sourceTree = "<group>"; };
 		60AA4F7216A829100026DE8D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		D310FCE31A6F9DBE008E4EE6 /* MotionRecord+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MotionRecord+Description.h"; path = "classes/model/MotionRecord+Description.h"; sourceTree = "<group>"; };
 		D310FCE41A6F9DBE008E4EE6 /* MotionRecord+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MotionRecord+Description.m"; path = "classes/model/MotionRecord+Description.m"; sourceTree = "<group>"; };
@@ -373,6 +376,8 @@
 				D329ACDF197A98CC00B144B5 /* Model */,
 				D3C7ADD6171FCCC6000A7D34 /* UI */,
 				604CCD9516A6F31000E87194 /* Supporting Files */,
+				608CC3B11BAD434E0032D549 /* UIFont+SystemFontOverride.h */,
+				608CC3B21BAD434E0032D549 /* UIFont+SystemFontOverride.m */,
 			);
 			path = FlowMeter;
 			sourceTree = "<group>";
@@ -763,6 +768,7 @@
 				D39736C819B0C11D005D643D /* SelfReport.m in Sources */,
 				D3EB072419BB9552005F0333 /* SessionPrefsViewController.m in Sources */,
 				D310FCE51A6F9DBE008E4EE6 /* MotionRecord+Description.m in Sources */,
+				608CC3B31BAD434E0032D549 /* UIFont+SystemFontOverride.m in Sources */,
 				D37067D71733F41300F86BBD /* EditViewController.m in Sources */,
 				D3E092F11AA7051900B10EE1 /* MotionRecord.m in Sources */,
 				D32EF03E1A17A60500E9D60B /* AcknowledgementViewController.m in Sources */,
