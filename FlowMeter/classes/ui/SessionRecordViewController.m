@@ -183,7 +183,7 @@
     self.breathRateLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
     self.skinTemperatureLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
     self.postureLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
-    self.skinTemperatureLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
+    self.activityLevelLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
     self.selfReportCountLabel.text = @"0";
 }
 
