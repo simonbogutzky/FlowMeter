@@ -45,7 +45,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="304" id="pI8-V2-2jP"/>
                                 </constraints>
-                                <string key="text">Die App "FlowMeter" ist ein Arbeitsergebnis des BMBF-Projekts "Flow-Maschinen: Körperbewegung und Klang", insofern sie aus dem Kontext des Projekts entstanden ist. 
+                                <string key="text">Die App "FlowMeter" ist ein Arbeitsergebnis des BMBF-Projekts "Flow-Maschinen: Körperbewegung und Klang", insofern sie im Kontext des Projekts entstanden ist. 
 
 Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-Forschung zur Verfügung gestellt.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
