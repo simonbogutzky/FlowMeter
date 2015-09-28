@@ -283,7 +283,7 @@
     
     // Start location updates
     if ([(self.sessionData[3][0])[kValueKey] boolValue]) {
-        if ([CLLocationManager authorizationStatus] == CBPeripheralManagerAuthorizationStatusAuthorized && [CLLocationManager locationServicesEnabled]) {
+        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways && [CLLocationManager locationServicesEnabled]) {
             self.appDelegate.locationManager.delegate = self;
             [self.appDelegate.locationManager startUpdatingLocation];
         }
@@ -324,8 +324,8 @@
         [self.appDelegate.heartRateMonitorManager stopMonitoring];
     }
     
-    // Start location updates
-    if ([CLLocationManager authorizationStatus] == CBPeripheralManagerAuthorizationStatusAuthorized && [CLLocationManager locationServicesEnabled]) {
+    // Stop location updates
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways && [CLLocationManager locationServicesEnabled]) {
         [self.appDelegate.locationManager stopUpdatingLocation];
     }
     

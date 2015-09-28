@@ -94,7 +94,7 @@
     
     [[UITabBar appearance] setTintColor:UIColorFromRGB(0x1D70B7)];
     
-    if ([CLLocationManager authorizationStatus] == CBPeripheralManagerAuthorizationStatusNotDetermined) {
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager startUpdatingLocation];
         [self.locationManager stopUpdatingLocation];
     }
