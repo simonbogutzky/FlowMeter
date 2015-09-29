@@ -38,6 +38,8 @@
         _locationManager = [[CLLocationManager alloc] init];
         [_locationManager requestAlwaysAuthorization];
         _locationManager.distanceFilter = 50.f;
+        _locationManager.pausesLocationUpdatesAutomatically = YES;
+        _locationManager.allowsBackgroundLocationUpdates = YES;
     }
     return _locationManager;
 }
