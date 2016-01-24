@@ -12,7 +12,7 @@
 		604CCD8F16A6F31000E87194 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604CCD8E16A6F31000E87194 /* UIKit.framework */; };
 		604CCD9116A6F31000E87194 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604CCD9016A6F31000E87194 /* Foundation.framework */; };
 		604CCD9316A6F31000E87194 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604CCD9216A6F31000E87194 /* CoreGraphics.framework */; };
-		608CC3B31BAD434E0032D549 /* UIFont+SystemFontOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = 608CC3B21BAD434E0032D549 /* UIFont+SystemFontOverride.m */; settings = {ASSET_TAGS = (); }; };
+		608CC3B31BAD434E0032D549 /* UIFont+SystemFontOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = 608CC3B21BAD434E0032D549 /* UIFont+SystemFontOverride.m */; };
 		60AA4F7316A829100026DE8D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60AA4F7216A829100026DE8D /* CoreMotion.framework */; };
 		D310FCE51A6F9DBE008E4EE6 /* MotionRecord+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = D310FCE41A6F9DBE008E4EE6 /* MotionRecord+Description.m */; };
 		D311D9161A7242F700A254DB /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D311D9141A7242F700A254DB /* LaunchViewController.m */; };
@@ -646,7 +646,7 @@
 				ORGANIZATIONNAME = "Simon Bogutzky";
 				TargetAttributes = {
 					604CCD8916A6F31000E87194 = {
-						DevelopmentTeam = 8936XLC29N;
+						DevelopmentTeam = K2X8834C2C;
 						SystemCapabilities = {
 							com.apple.WAC = {
 								enabled = 1;
@@ -923,8 +923,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = FlowMeter/FlowMeter.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Simon Bogutzky (3G74VT8VX3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon Bogutzky (3G74VT8VX3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -946,7 +946,7 @@
 					"-lstdc++",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.bogutzky.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = de.bogutzky.FlowMeterPersonal;
 				PRODUCT_NAME = FlowMeter;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -963,8 +963,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = FlowMeter/FlowMeter.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: out there/ communication (8936XLC29N)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: out there/ communication (8936XLC29N)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -986,9 +986,9 @@
 					"-lstdc++",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.bogutzky.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = de.bogutzky.FlowMeterPersonal;
 				PRODUCT_NAME = FlowMeter;
-				PROVISIONING_PROFILE = "340da41a-06e3-4f97-8d14-c09dd25585f0";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "340da41a-06e3-4f97-8d14-c09dd25585f0";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = ./ZipKit;

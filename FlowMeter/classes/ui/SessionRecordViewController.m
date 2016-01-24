@@ -294,7 +294,7 @@
         self.firstMotionTimestamp = nil;
         
         if ((self.motionManager).deviceMotionAvailable == YES) {
-            (self.motionManager).deviceMotionUpdateInterval = 1/72.0;
+            (self.motionManager).deviceMotionUpdateInterval = 1/102.4;
             [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
                 if(self.isCollecting) {
                     if (error == nil) {
