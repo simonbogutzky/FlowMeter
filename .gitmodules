@@ -9,10 +9,10 @@
 	url = https://github.com/kolpanic/ZipKit.git
 [submodule "HeartRateMonitorFramework"]
 	path = HeartRateMonitorFramework
-	url = https://sbogutzky@bitbucket.org/sbogutzky/heartratemonitorframework.git
+	url = https://sbogutzky@bitbucket.org/sbogutzky/fm-heartratemonitorframework.git
 [submodule "BEMSimpeLineGraphFlowMeter"]
 	path = BEMSimpeLineGraphFlowMeter
-	url = https://sbogutzky@bitbucket.org/sbogutzky/bemsimplelinegraph.git
+	url = https://sbogutzky@bitbucket.org/sbogutzky/fm-bemsimplelinegraph.git
 [submodule "ABFillButton"]
 	path = ABFillButton
 	url = https://github.com/andresbrun/ABFillButton.git
