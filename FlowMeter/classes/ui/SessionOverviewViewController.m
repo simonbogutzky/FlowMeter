@@ -371,7 +371,7 @@
     if (buttonIndex == 0)
     {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.tabBarController.view animated:YES];
-        hud.dimBackground = YES;
+        hud.backgroundColor = [UIColor colorWithRed:33.0/255.0 green:33.0/255.0 blue:33.0/255.0 alpha:0.5];
         [self performSelector:@selector(deleteData) withObject:nil afterDelay:0.1];
     }
 }

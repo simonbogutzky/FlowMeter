@@ -292,7 +292,7 @@
     
     // Initialize MBProgressHUD - AnnularDeterminate
     self.hud = [MBProgressHUD showHUDAddedTo:self.tabBarController.view animated:YES];
-    self.hud.dimBackground = YES;
+    self.hud.backgroundColor = [UIColor colorWithRed:33.0/255.0 green:33.0/255.0 blue:33.0/255.0 alpha:0.5];
     self.hud.delegate = self;
     self.hud.mode = MBProgressHUDModeAnnularDeterminate;
 }
@@ -368,7 +368,7 @@
     // Change MBProgressHUD mode - CustomView
     self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark"]];
     self.hud.mode = MBProgressHUDModeCustomView;
-    [self.hud hide:YES afterDelay:2];
+    [self.hud hideAnimated:YES afterDelay:2];
     
     self.filename = nil;
     
@@ -378,7 +378,7 @@
 - (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
 {
     NSLog(@"# File upload failed with error - %@", error);
-    [self.hud hide:YES];
+    [self.hud hideAnimated:YES];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
