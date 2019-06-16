@@ -1,64 +1,67 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="igm-5b-K0b">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TinyTraveler" translatesAutoresizingMaskIntoConstraints="NO" id="mII-VS-1X6">
-                    <rect key="frame" x="0.0" y="619" width="39" height="48"/>
+                    <rect key="frame" x="20" y="814" width="39" height="48"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="HVf-km-jsP"/>
-                        <constraint firstAttribute="width" constant="39" id="Sc4-G7-pA5"/>
+                        <constraint firstAttribute="height" constant="48" id="0DG-nB-Kyx"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="39" id="QCS-p3-sRW"/>
+                        <constraint firstAttribute="width" constant="39" id="fgU-Cq-XtG"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iog-VP-uWv">
-                    <rect key="frame" x="36" y="487" width="304" height="112"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2014 Simon Bogutzky. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Pof-t4-WLi">
+                    <rect key="frame" x="67" y="831" width="302" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="304" id="chE-y0-770"/>
+                        <constraint firstAttribute="height" constant="14" id="gmJ-GN-xqO"/>
                     </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppImage" translatesAutoresizingMaskIntoConstraints="NO" id="3RN-DW-2Zk">
+                    <rect key="frame" x="100" y="341" width="214" height="214"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iog-VP-uWv">
+                    <rect key="frame" x="55" y="739" width="312.5" height="84"/>
                     <string key="text">Die App "FlowMeter" ist ein Arbeitsergebnis des BMBF-Projekts "Flow-Maschinen: Körperbewegung und Klang", insofern sie im Kontext des Projekts entstanden ist. 
 
 Sie wurde von Simon Bogutzky außerhalb der Arbeitszeit entwickelt und der Flow-Forschung zur Verfügung gestellt.</string>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2014 Simon Bogutzky. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Pof-t4-WLi">
-                    <rect key="frame" x="32" y="645" width="281" height="14"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="281" id="A02-Ud-C9g"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppImage" translatesAutoresizingMaskIntoConstraints="NO" id="3RN-DW-2Zk">
-                    <rect key="frame" x="28" y="20" width="320" height="320"/>
-                </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Pof-t4-WLi" firstAttribute="leading" secondItem="igm-5b-K0b" secondAttribute="leading" constant="32" id="4Ql-x3-ml0"/>
-                <constraint firstItem="mII-VS-1X6" firstAttribute="leading" secondItem="igm-5b-K0b" secondAttribute="leading" id="4xy-2z-JwB"/>
-                <constraint firstAttribute="centerX" secondItem="3RN-DW-2Zk" secondAttribute="centerX" id="8wD-d3-sff"/>
-                <constraint firstItem="mII-VS-1X6" firstAttribute="bottom" secondItem="igm-5b-K0b" secondAttribute="bottom" id="LMf-8r-baS"/>
-                <constraint firstItem="mII-VS-1X6" firstAttribute="top" secondItem="iog-VP-uWv" secondAttribute="bottom" constant="20" id="W4H-Hy-9kF"/>
-                <constraint firstItem="3RN-DW-2Zk" firstAttribute="top" secondItem="igm-5b-K0b" secondAttribute="top" constant="20" id="dMI-eX-pTk"/>
-                <constraint firstAttribute="centerX" secondItem="iog-VP-uWv" secondAttribute="centerX" id="liC-MV-Gdz"/>
-                <constraint firstAttribute="bottom" secondItem="Pof-t4-WLi" secondAttribute="bottom" constant="8" id="vVy-Gz-okM"/>
+                <constraint firstItem="mII-VS-1X6" firstAttribute="leading" secondItem="igm-5b-K0b" secondAttribute="leading" constant="20" id="AWD-an-2oa"/>
+                <constraint firstItem="Pof-t4-WLi" firstAttribute="centerY" secondItem="mII-VS-1X6" secondAttribute="centerY" id="LTA-gP-Zfy"/>
+                <constraint firstItem="3RN-DW-2Zk" firstAttribute="centerX" secondItem="igm-5b-K0b" secondAttribute="centerX" id="Qt6-J8-knd"/>
+                <constraint firstAttribute="bottom" secondItem="mII-VS-1X6" secondAttribute="bottom" constant="34" id="Rfw-3Q-Gah"/>
+                <constraint firstItem="iog-VP-uWv" firstAttribute="leading" secondItem="igm-5b-K0b" secondAttribute="leading" constant="55" id="SFX-y6-toX"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iog-VP-uWv" secondAttribute="trailing" constant="20" symbolic="YES" id="U3U-PL-dy0"/>
+                <constraint firstItem="3RN-DW-2Zk" firstAttribute="centerY" secondItem="igm-5b-K0b" secondAttribute="centerY" id="XzC-ar-pUJ"/>
+                <constraint firstItem="Pof-t4-WLi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mII-VS-1X6" secondAttribute="trailing" symbolic="YES" id="azN-Nm-qad"/>
+                <constraint firstAttribute="trailing" secondItem="Pof-t4-WLi" secondAttribute="trailing" constant="45" id="jeC-wg-SXt"/>
+                <constraint firstItem="Pof-t4-WLi" firstAttribute="top" secondItem="iog-VP-uWv" secondAttribute="bottom" constant="8" id="sfg-TG-cm1"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>
     <resources>
-        <image name="AppImage" width="320" height="320"/>
+        <image name="AppImage" width="213.5" height="213.5"/>
         <image name="TinyTraveler" width="78" height="96"/>
     </resources>
 </document>

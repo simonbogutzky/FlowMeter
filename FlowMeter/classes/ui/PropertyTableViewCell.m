@@ -37,6 +37,7 @@
     
     self.viewCircleSelectionIndicator.layer.cornerRadius = 14;
     self.viewCircleSelectionIndicator.backgroundColor = [UIColor clearColor];
+    [super awakeFromNib];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

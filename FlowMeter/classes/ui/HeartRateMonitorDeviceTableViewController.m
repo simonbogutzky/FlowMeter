@@ -71,7 +71,7 @@
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         HeartRateMonitorDevice *heartRateMonitorDevice = (self.heartRateMonitorDevices)[indexPath.row];
-        [_appDelegate.heartRateMonitorManager connectHeartRateMonitorDevice:heartRateMonitorDevice];
+        [self->_appDelegate.heartRateMonitorManager connectHeartRateMonitorDevice:heartRateMonitorDevice];
         
     });
     
