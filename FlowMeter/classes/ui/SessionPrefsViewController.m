@@ -57,7 +57,6 @@ static NSString *kSwitchCellID = @"switchCell";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self checkHeartRateMonitorConnection];
 }
@@ -67,6 +66,10 @@ static NSString *kSwitchCellID = @"switchCell";
 {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+}
+
+- (bool)prefersStatusBarHidden {
+    return YES;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -93,13 +96,17 @@ static NSString *kSwitchCellID = @"switchCell";
         if ([(self.dataArray[0][0])[kValueKey] isEqualToString:@" "] || [(self.dataArray[0][1])[kValueKey] isEqualToString:@" "] || [(self.dataArray[1][0])[kValueKey] isEqualToString:@" "]) {
             canStartRecording = NO;
         }
-        if (!canStartRecording) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Start nicht möglich", @"Start nicht möglich")
-                                                                message:NSLocalizedString(@"Vorname, Nachname und Aktivität müssen ausgefüllt werden", @"Vorname, Nachname und Aktivität müssen ausgefüllt werden")
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-            [alertView show];
+        if (!canStartRecording) {            
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:NSLocalizedString(@"Start nicht möglich", @"Start nicht möglich")
+                                         message:NSLocalizedString(@"Vorname, Nachname und Aktivität müssen ausgefüllt werden", @"Vorname, Nachname und Aktivität müssen ausgefüllt werden")
+                                         preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* okButton = [UIAlertAction
+                                        actionWithTitle:@"OK"
+                                        style:UIAlertActionStyleDefault
+                                       handler:nil];
+            [alert addAction:okButton];
+            [self presentViewController:alert animated:YES completion:nil];
         }
         return canStartRecording;
     }

@@ -162,8 +162,6 @@
        [self startCountdown];
     }
     
-    // Hide status bar
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     
     //If we want to add shadows and a grow up effect when user press the button
@@ -185,6 +183,10 @@
     self.postureLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
     self.activityLevelLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
     self.selfReportCountLabel.text = @"0";
+}
+
+- (bool)prefersStatusBarHidden {
+    return YES;
 }
 
 #pragma mark -
