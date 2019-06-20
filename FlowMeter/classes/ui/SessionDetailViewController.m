@@ -317,12 +317,33 @@
                         [self showUploadIndicator];
                         [self performSelector:@selector(zipAndUploadData) withObject:nil afterDelay:.1];
                     } else {
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?", @"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") otherButtonTitles:NSLocalizedString(@"OK", @"OK"), nil];
-                        [alertView show];
+                        UIAlertController * alert = [UIAlertController
+                                                     alertControllerWithTitle:NSLocalizedString(@"Information", @"Information")
+                                                     message:NSLocalizedString(@"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?", @"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?")
+                                                     preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertAction* cancelButton = [UIAlertAction
+                                                   actionWithTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen")
+                                                   style:UIAlertActionStyleDefault
+                                                   handler:nil];
+                        UIAlertAction* okButton = [UIAlertAction
+                                                   actionWithTitle:@"OK"
+                                                   style:UIAlertActionStyleDefault
+                                                   handler:nil];
+                        [alert addAction:okButton];
+                        [alert addAction:cancelButton];
+                        [self presentViewController:alert animated:YES completion:nil];
                     }
                 } else {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", @"Information") message:NSLocalizedString(@"Du hast zurzeit keine Internetverbindung", @"Du hast zurzeit keine Internetverbindung") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
-                    [alertView show];
+                    UIAlertController * alert = [UIAlertController
+                                                 alertControllerWithTitle:NSLocalizedString(@"Information", @"Information")
+                                                 message:NSLocalizedString(@"Du hast zurzeit keine Internetverbindung", @"Du hast zurzeit keine Internetverbindung")
+                                                 preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction* okButton = [UIAlertAction
+                                               actionWithTitle:@"OK"
+                                               style:UIAlertActionStyleDefault
+                                               handler:nil]; // TODO: Handler
+                    [alert addAction:okButton];
+                    [self presentViewController:alert animated:YES completion:nil];
                 }
             }
         }

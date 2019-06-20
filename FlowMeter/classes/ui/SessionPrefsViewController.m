@@ -377,8 +377,17 @@ static NSString *kSwitchCellID = @"switchCell";
             cell.detailTextLabel.text = [self stringFromTimeInterval:variabilityLimit];
             
             if (!self.varibilityAlertAlreadyShown) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", @"Information") message:NSLocalizedString(@"Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen.", @"Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen.") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
-                [alertView show];
+                UIAlertController * alert = [UIAlertController
+                                             alertControllerWithTitle:NSLocalizedString(@"Information", @"Information")
+                                             message:NSLocalizedString(@"Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen.", @"Der Wert der Variabilität kann höchsten die Hälfe des Intervallwerts annehmen.")
+                                             preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction* okButton = [UIAlertAction
+                                           actionWithTitle:@"OK"
+                                           style:UIAlertActionStyleDefault
+                                           handler:nil];
+                [alert addAction:okButton];
+                [self presentViewController:alert animated:YES completion:nil];
+
                 self.varibilityAlertAlreadyShown = YES;
             }
             
@@ -523,12 +532,16 @@ static NSString *kSwitchCellID = @"switchCell";
     }
     
     if (self.appDelegate.heartRateMonitorManager.state != HeartRateMonitorManagerStatePoweredOn && self.appDelegate.heartRateMonitorManager.state != HeartRateMonitorManagerStatePoweredOff) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Keine Bluetooth Verbindung möglich", @"Keine Bluetooth Verbindung möglich")
-                                                            message:cause
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:NSLocalizedString(@"Keine Bluetooth Verbindung möglich", @"Keine Bluetooth Verbindung möglich")
+                                     message:cause
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* okButton = [UIAlertAction
+                                   actionWithTitle:@"OK"
+                                   style:UIAlertActionStyleDefault
+                                   handler:nil];
+        [alert addAction:okButton];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -553,25 +566,33 @@ didDisconnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                           error:(NSError *)error
 {
     if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Verbindung wurde getrennt", @"Titel der Fehlermeldung: Verbindung wurde getrennt")
-                                                            message:NSLocalizedString(@"Die Verbindung zum HR-Brustgurt wurde unerwartet getrennt.", @"Beschreibung der Fehlermeldung: Verbindung wurde getrennt")
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Ok", @"Bestätigung der Fehlermeldung: Verbindung wurde getrennt")
-                                                  otherButtonTitles:nil];
-        [alertView show];
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:NSLocalizedString(@"Verbindung wurde getrennt", @"Titel der Fehlermeldung: Verbindung wurde getrennt")
+                                     message:NSLocalizedString(@"Die Verbindung zum HR-Brustgurt wurde unerwartet getrennt.", @"Beschreibung der Fehlermeldung: Verbindung wurde getrennt")
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* okButton = [UIAlertAction
+                                   actionWithTitle:@"OK"
+                                   style:UIAlertActionStyleDefault
+                                   handler:nil];
+        [alert addAction:okButton];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
 - (void)heartRateMonitorManager:(HeartRateMonitorManager *)manager
 didFailToConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
                           error:(NSError *)error
-{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Fehler beim Verbinden", @"Titel der Fehlermeldung: Fehler beim Verbinden")
-                                                        message:NSLocalizedString(@"Es konnte keine Verbindung zum HR-Brustgurt hergestellt werden.", @"Beschreibung der Fehlermeldung: Fehler beim Verbinden")
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"Ok", @"Bestätigung der Fehlermeldung: Fehler beim Verbinden")
-                                              otherButtonTitles:nil];
-    [alertView show];
+{    
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:NSLocalizedString(@"Fehler beim Verbinden", @"Titel der Fehlermeldung: Fehler beim Verbinden")
+                                 message:NSLocalizedString(@"Es konnte keine Verbindung zum HR-Brustgurt hergestellt werden.", @"Beschreibung der Fehlermeldung: Fehler beim Verbinden")
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* okButton = [UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:nil];
+    [alert addAction:okButton];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)checkHeartRateMonitorConnection
