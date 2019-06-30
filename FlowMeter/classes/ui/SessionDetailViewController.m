@@ -104,13 +104,35 @@
 
 - (IBAction)actionTouched:(UIBarButtonItem *)sender
 {
+    UIAlertController *actionSheet = [UIAlertController
+                                      alertControllerWithTitle:NSLocalizedString(@"Aktionen", @"Aktionen")
+                                      message:@""
+                                      preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction* cancelButton = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Abbrechen", @"Cancel")
+                                   style:UIAlertActionStyleCancel
+                                   handler:nil];
+    UIAlertAction* saveButton = [UIAlertAction
+                                 actionWithTitle:NSLocalizedString(@"Auf Gerät speichern", @"Datei auf dem Gerät speichern")
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action) {
+                                     [self performSaveAction];
+                                 }];
+    [actionSheet addAction:cancelButton];
+    [actionSheet addAction:saveButton];
     if ([[DBSession sharedSession] isLinked]) {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Aktionen", @"Aktionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern", @"Datei auf dem Gerät speichern"), NSLocalizedString(@"In die Dropbox laden", @"Datei in die Dropbox laden"), nil];
-        [actionSheet showFromTabBar:self.tabBarController.tabBar];
-    } else {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Aktionen", @"Aktionen") delegate:self cancelButtonTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Auf Gerät speichern", @"Datei auf dem Gerät speichern"), nil];
-        [actionSheet showFromTabBar:self.tabBarController.tabBar];
+        UIAlertAction* uploadButton = [UIAlertAction
+                                       actionWithTitle:NSLocalizedString(@"In die Dropbox laden", @"Datei in die Dropbox laden")
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction * action) {
+                                           [self performUploadAction];
+                                       }];
+        
+        [actionSheet addAction:uploadButton];
     }
+    
+    
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 #pragma mark -
@@ -297,77 +319,55 @@
     self.hud.mode = MBProgressHUDModeAnnularDeterminate;
 }
 
-#pragma mark -
-#pragma mark - UIAlertSheetDelegate implementation
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0:{
+- (void)performSaveAction {
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSLog(@"### %@", [self.session writeOutArchive]);
             });
         }
-            break;
-            
-        case 1: {
-            if ([[DBSession sharedSession] isLinked]) {
-                if (self.appDelegate.reachability.isReachable) {
-                    if (self.appDelegate.reachability.isReachableViaWiFi) {
-                        [self showUploadIndicator];
-                        [self performSelector:@selector(zipAndUploadData) withObject:nil afterDelay:.1];
-                    } else {
-                        UIAlertController * alert = [UIAlertController
-                                                     alertControllerWithTitle:NSLocalizedString(@"Information", @"Information")
-                                                     message:NSLocalizedString(@"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?", @"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?")
-                                                     preferredStyle:UIAlertControllerStyleAlert];
-                        UIAlertAction* cancelButton = [UIAlertAction
-                                                   actionWithTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen")
-                                                   style:UIAlertActionStyleDefault
-                                                   handler:nil];
-                        UIAlertAction* okButton = [UIAlertAction
-                                                   actionWithTitle:@"OK"
-                                                   style:UIAlertActionStyleDefault
-                                                   handler:nil];
-                        [alert addAction:okButton];
-                        [alert addAction:cancelButton];
-                        [self presentViewController:alert animated:YES completion:nil];
-                    }
-                } else {
-                    UIAlertController * alert = [UIAlertController
-                                                 alertControllerWithTitle:NSLocalizedString(@"Information", @"Information")
-                                                 message:NSLocalizedString(@"Du hast zurzeit keine Internetverbindung", @"Du hast zurzeit keine Internetverbindung")
-                                                 preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction* okButton = [UIAlertAction
-                                               actionWithTitle:@"OK"
-                                               style:UIAlertActionStyleDefault
-                                               handler:nil]; // TODO: Handler
-                    [alert addAction:okButton];
-                    [self presentViewController:alert animated:YES completion:nil];
-                }
+- (void)performUploadAction {
+    if ([[DBSession sharedSession] isLinked]) {
+        if (self.appDelegate.reachability.isReachable) {
+            if (self.appDelegate.reachability.isReachableViaWiFi) {
+                [self showUploadIndicator];
+                [self performSelector:@selector(zipAndUploadData) withObject:nil afterDelay:.1];
+            } else {
+                UIAlertController * alert = [UIAlertController
+                                             alertControllerWithTitle:NSLocalizedString(@"Information", @"Information")
+                                             message:NSLocalizedString(@"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?", @"Du hast zurzeit keine WLAN Internetverbindung. Möchtest du trotzdem die Daten hochladen?")
+                                             preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction* cancelButton = [UIAlertAction
+                                               actionWithTitle:NSLocalizedString(@"Abbrechen", @"Abbrechen")
+                                               style:UIAlertActionStyleCancel
+                                               handler:nil];
+                UIAlertAction* okButton = [UIAlertAction
+                                           actionWithTitle:@"OK"
+                                           style:UIAlertActionStyleDefault
+                                           handler:^(UIAlertAction * action) {
+                                               [self performZipAndUploadAction];
+                                           }];
+                [alert addAction:okButton];
+                [alert addAction:cancelButton];
+                [self presentViewController:alert animated:YES completion:nil];
             }
+        } else {
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:NSLocalizedString(@"Information", @"Information")
+                                         message:NSLocalizedString(@"Du hast zurzeit keine Internetverbindung", @"Du hast zurzeit keine Internetverbindung")
+                                         preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* okButton = [UIAlertAction
+                                       actionWithTitle:@"OK"
+                                       style:UIAlertActionStyleDefault
+                                       handler:nil];
+            [alert addAction:okButton];
+            [self presentViewController:alert animated:YES completion:nil];
         }
-            break;
-            
-        default:
-            break;
     }
 }
 
-#pragma mark -
-#pragma mark - UIAlertViewDelegate implementation
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)performZipAndUploadAction
 {
-    switch (buttonIndex) {
-        case 1: {
-            [self showUploadIndicator];
-            [self performSelector:@selector(zipAndUploadData) withObject:nil afterDelay:.1];
-            break;
-        }
-        default:
-            break;
-    }
+    [self showUploadIndicator];
+    [self performSelector:@selector(zipAndUploadData) withObject:nil afterDelay:.1];
     self.filename = nil;
 }
 

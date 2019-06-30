@@ -88,8 +88,7 @@
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     tabBarController.selectedIndex = 1;
     tabBarController.tabBar.translucent = NO;
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     [self initAVPlayer];
@@ -195,7 +194,7 @@
     if (!coordinator) {
         return nil;
     }
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     _managedObjectContext.persistentStoreCoordinator = coordinator;
     _managedObjectContext.undoManager = nil;
     return _managedObjectContext;
@@ -248,7 +247,7 @@
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
     AVPlayerItem *playerItem = notification.object;
-    [playerItem seekToTime:kCMTimeZero];
+    [playerItem seekToTime:kCMTimeZero completionHandler:nil];
 }
 
 #pragma mark -
@@ -262,7 +261,9 @@
 #pragma mark -
 #pragma mark - DBRestClientDelegate methods
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
     if ([[DBSession sharedSession] handleOpenURL:url]) {
         if ([[DBSession sharedSession] isLinked]) {
             NSLog(@"### App linked successfully with Dropbox");
