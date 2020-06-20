@@ -77,5 +77,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Um deine Herzfrequenz zu messen benötigt der FlowMeter Bluetooth</string>
 </dict>
 </plist>
