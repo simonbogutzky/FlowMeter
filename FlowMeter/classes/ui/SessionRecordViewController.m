@@ -162,8 +162,6 @@
        [self startCountdown];
     }
     
-    // Hide status bar
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     
     //If we want to add shadows and a grow up effect when user press the button
@@ -185,6 +183,10 @@
     self.postureLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
     self.activityLevelLabel.text = NSLocalizedString(@"NA", @"Anfangs-Label im SessionViewController");
     self.selfReportCountLabel.text = @"0";
+}
+
+- (bool)prefersStatusBarHidden {
+    return YES;
 }
 
 #pragma mark -
@@ -662,11 +664,9 @@ didConnectHeartrateMonitorDevice:(CBPeripheral *)heartRateMonitorDevice
 #pragma mark -
 #pragma mark - CLLocationManagerDelegate implementation
 
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation
-{
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     if (self.isCollecting) {
+        CLLocation *newLocation = locations.firstObject;
         NSString *query = [NSString stringWithFormat:@"INSERT INTO ZLOCATIONRECORD VALUES(NULL, 3, 1, %ld, %d, %f, %f, %f, %f, %f, %f, %f, %f)", (long)newLocation.floor.level, self.sessionPK, newLocation.altitude, newLocation.course, (newLocation.timestamp).timeIntervalSinceReferenceDate, newLocation.horizontalAccuracy, newLocation.coordinate.latitude, newLocation.coordinate.longitude, newLocation.speed, newLocation.verticalAccuracy];
         
         [self.dbManager executeQuery:query];

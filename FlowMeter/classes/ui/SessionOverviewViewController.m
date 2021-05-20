@@ -180,18 +180,24 @@
         actionTitle = NSLocalizedString(@"Bist du sicher, dass du diese Flow-Messungen entfernen willst?", @"");
     }
     
-    NSString *cancelTitle = NSLocalizedString(@"Abbrechen", @"Cancel title for item removal action");
-    NSString *OKTitle = NSLocalizedString(@"OK", @"OK title for item removal action");
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:actionTitle
-                                                             delegate:self
-                                                    cancelButtonTitle:cancelTitle
-                                               destructiveButtonTitle:OKTitle
-                                                    otherButtonTitles:nil];
-    
-    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-    
-    // Show from our table view (pops up in the middle of the table).
-    [actionSheet showInView:self.view];
+    UIAlertController *actionSheet = [UIAlertController
+                                 alertControllerWithTitle:actionTitle
+                                 message:@""
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction* cancelButton = [UIAlertAction
+                               actionWithTitle:NSLocalizedString(@"Abbrechen", @"Cancel title for item removal action")
+                               style:UIAlertActionStyleCancel
+                                   handler:nil];
+    UIAlertAction* okButton = [UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   [self performDeleteAction];
+                               }];
+    [actionSheet addAction:okButton];
+    [actionSheet addAction:cancelButton];
+    [self presentViewController:actionSheet animated:YES completion:nil];
+
 }
 
 #pragma mark -
@@ -363,17 +369,13 @@
 }
 
 #pragma mark -
-#pragma mark - UIActionSheetDelegate implementation
+#pragma mark - Convenient methods
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)performDeleteAction
 {
-    // The user tapped one of the OK/Cancel buttons.
-    if (buttonIndex == 0)
-    {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.tabBarController.view animated:YES];
-        hud.dimBackground = YES;
-        [self performSelector:@selector(deleteData) withObject:nil afterDelay:0.1];
-    }
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.tabBarController.view animated:YES];
+    hud.backgroundColor = [UIColor colorWithRed:33.0/255.0 green:33.0/255.0 blue:33.0/255.0 alpha:0.5];
+    [self performSelector:@selector(deleteData) withObject:nil afterDelay:0.1];
 }
 
 - (void)deleteData
@@ -405,9 +407,6 @@
         abort();
     }
 }
-
-#pragma mark -
-#pragma mark - Convenient methods
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
